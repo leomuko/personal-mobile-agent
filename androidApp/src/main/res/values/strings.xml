@@ -1,0 +1,30 @@
+<resources>
+    <string name="photo_attachment">Camera photo.jpg</string>
+    <string name="voice_attachment">Voice recording.wav</string>
+    <string name="discard_recording">Discard this recording?</string>
+    <string name="discard">Discard</string>
+    <string name="app_name">Assistant</string>
+    <string name="camera">Camera</string>
+    <string name="close">Close</string>
+    <string name="camera_required">Camera access required</string>
+    <string name="camera_permission_explanation">Camera access was not granted. Try Camera again, or enable access in app settings.</string>
+    <string name="app_settings">App settings</string>
+    <string name="return_to_chat">Return to chat</string>
+    <string name="capture_failed">Capture failed</string>
+    <string name="capture">Capture</string>
+    <string name="microphone_unavailable">Microphone unavailable</string>
+    <string name="mascot_start_failed">Floating mascot could not start</string>
+    <string name="drawer_open_failed">Conversation could not open</string>
+    <string name="mascot_channel">Floating assistant</string>
+    <string name="mascot_available">Assistant is available</string>
+    <string name="mascot_active">Floating mascot active</string>
+    <string name="stop">Stop</string>
+    <string name="mascot_open">Open Assistant</string>
+    <string name="mascot_stop">Stop floating mascot</string>
+    <string name="notifications_unavailable">Notification controls unavailable</string>
+    <string name="notifications_explanation">Notifications are disabled. Continue without notification controls?</string>
+    <string name="continue_without_notifications">Continue without notifications</string>
+    <string name="notification_settings">Notification settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="device_summary">%1$s %2$s\nAndroid %3$s (API %4$d)\n%5$s GiB RAM\nPhase 0 · %6$s</string>
+</resources>
