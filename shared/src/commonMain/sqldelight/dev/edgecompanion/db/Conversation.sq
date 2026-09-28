@@ -1,0 +1,39 @@
+CREATE TABLE message (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  text TEXT NOT NULL,
+  created_at INTEGER NOT NULL
+);
+
+CREATE TABLE draft (
+  id INTEGER NOT NULL PRIMARY KEY CHECK (id = 1),
+  text TEXT NOT NULL
+);
+
+CREATE VIRTUAL TABLE message_search USING fts4(text TEXT);
+
+CREATE INDEX message_created_at ON message(created_at);
+
+allMessages:
+SELECT * FROM message ORDER BY id;
+
+insertMessage:
+INSERT INTO message(text, created_at) VALUES (?, ?);
+
+indexMessage:
+INSERT INTO message_search(docid, text) VALUES (last_insert_rowid(), ?);
+
+search:
+SELECT message.* FROM message JOIN message_search ON message.id = message_search.docid
+WHERE message_search.text MATCH ? ORDER BY message.id;
+
+readDraft:
+SELECT text FROM draft WHERE id = 1;
+
+writeDraft:
+INSERT OR REPLACE INTO draft(id, text) VALUES (1, ?);
+
+clearMessages:
+DELETE FROM message;
+
+clearSearch:
+DELETE FROM message_search;

@@ -1,0 +1,13 @@
+CREATE TABLE attachment (
+  position INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  id TEXT NOT NULL UNIQUE,
+  name TEXT NOT NULL,
+  mime_type TEXT NOT NULL,
+  size INTEGER NOT NULL DEFAULT 0,
+  status TEXT NOT NULL,
+  message_id INTEGER REFERENCES message(id)
+);
+CREATE TABLE draft_epoch (
+  id INTEGER NOT NULL PRIMARY KEY CHECK (id = 1),
+  epoch INTEGER NOT NULL
+);
