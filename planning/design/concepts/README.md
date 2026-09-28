@@ -1,0 +1,41 @@
+# UI Concepts: Historical Exploration
+
+These images were generated for the earlier note-and-reminder scope, which the user rejected. They are retained as historical visual explorations, not the current UI specification or screenshots of an implemented application. Created with the built-in image generation tool on 24 September 2026.
+
+The [current product direction](../../MVP_PLAN.md) centers on a mascot, an ongoing local conversation, personal memory, authorized information access, and a full-app view of the same conversation. The next concept set should explore those experiences. The robot icon and green palette below are unapproved options, not fixed design decisions.
+
+| Image | Flow |
+| --- | --- |
+| [01-floating-avatar.png](01-floating-avatar.png) | Discreet assistant button over an unrelated notes app; no screen reading |
+| [02-note-preview.png](02-note-preview.png) | Text request and editable note preview before saving |
+| [03-reminder-confirmation.png](03-reminder-confirmation.png) | Confirm title, full date, time, and timezone; disclose approximate delivery |
+
+## Design Review
+
+The primary text, approval controls, and delivery disclosure are readable with no visible overlap in the generated concepts. The imagery establishes a white/charcoal interface with green actions and a small coral avatar detail.
+
+The images are directional: avatar styling, phone proportions, bubble shapes, and drawer heights vary slightly. Normalize these into one Compose component system during implementation. Keyboard-open layouts, large fonts, permission denial, and failure states still need interactive validation. Keep production touch targets at least 48dp and review the amber disclosure's contrast. The date/time in the reminder is an editable suggestion awaiting explicit confirmation, not a silent resolution of AM/PM ambiguity.
+
+The notes app behind the overlay is illustrative background only; its content is not an input to the assistant. No unavailable voice, web, camera, or screen-reading controls are shown.
+
+## Generation Prompts
+
+The exact prompt set used with the built-in tool follows.
+
+### 1. Floating avatar
+
+```text
+Use case: ui-mockup. Asset type: high-fidelity Android mobile app concept for a small local AI assistant MVP. Create a polished portrait bitmap mockup, one complete front-facing Android phone screen, narrow charcoal hardware bezel, centered against a flat light gray background, no perspective, no surrounding marketing text. Crisp readable UI with generous but practical spacing, realistic Android status bar and bottom gesture bar. Consistent design across concepts: white surfaces, charcoal text, emerald action accent, small coral mascot detail. Simple small rounded-square robot face avatar, two eyes, no elaborate character. Modern native Android sans-serif typography, conventional outline icons, mostly 8px or less component radii except circular floating assistant button and native bottom sheet. Screen title 'Assistant' when showing the assistant. Restrained utility design, no gradients, no decorative orbs, no purple theme, no nested cards. No voice, microphone, photo, web, device toggles, or automatic screen-reading controls. This is a concept image, not an implemented app. State 1: collapsed floating assistant. Underlying screen is an ordinary separate notes app, titled 'Notes', showing a plain editable shopping note titled 'Weekend groceries' with six list items: 'Tomatoes', 'Rice', 'Coffee', 'Spinach', 'Olive oil', 'Lemons'. Modest toolbar with back arrow and overflow menu. The assistant is ONLY a small 56dp circular floating button near the lower right edge, above bottom navigation, containing the little robot face, with a subtle shadow. No assistant speech, no extracted data, no suggestion bubbles, no implication that it can see the note. Underlying note occupies the screen. Make the floating mascot recognizable but discreet.
+```
+
+### 2. Note preview
+
+```text
+Use case: ui-mockup. Asset type: high-fidelity Android mobile app concept for a small local AI assistant MVP. Create a polished portrait bitmap mockup, one complete front-facing Android phone screen, narrow charcoal hardware bezel, centered against a flat light gray background, no perspective, no surrounding marketing text. Crisp readable UI with generous but practical spacing, realistic Android status bar and bottom gesture bar. Consistent design across concepts: white surfaces, charcoal text, emerald action accent, small coral mascot detail. Simple small rounded-square robot face avatar, two eyes, no elaborate character. Modern native Android sans-serif typography, conventional outline icons, mostly 8px or less component radii except circular floating assistant button and native bottom sheet. Screen title 'Assistant' when showing the assistant. Restrained utility design, no gradients, no decorative orbs, no purple theme, no nested cards. No voice, microphone, photo, web, device toggles, or automatic screen-reading controls. This is a concept image, not an implemented app. State 2: expanded assistant drawer for saving a note. Upper quarter of screen shows a dimmed ordinary notes app with title 'Notes'; foreground is an opaque white bottom sheet occupying lower three quarters, clear drag handle, compact header with small robot avatar, 'Assistant', tiny 'On device' status with device icon, close X at right. Conversation uses plain aligned text rows, no excessive chat bubbles. User text exactly: 'Save a note: Try the new coffee shop on Saturday.' Assistant text exactly: 'Ready to save.' Below a thin divider, editable note preview with small field labels 'Title' and 'Note', values 'Coffee shop' and 'Try the new coffee shop on Saturday.' Only one preview region, no nested cards. Bottom of preview has outlined edit pencil icon and a compact emerald 'Save note' button with check icon. Bottom composer has placeholder 'Type a message' and circular arrow-up send icon. Keyboard hidden. Fit every line professionally and leave comfortable touch targets. This is pending approval, do not show saved success yet.
+```
+
+### 3. Reminder confirmation
+
+```text
+Use case: ui-mockup. Asset type: high-fidelity Android mobile app concept for a small local AI assistant MVP. Create a polished portrait bitmap mockup, one complete front-facing Android phone screen, narrow charcoal hardware bezel, centered against a flat light gray background, no perspective, no surrounding marketing text. Crisp readable UI with generous but practical spacing, realistic Android status bar and bottom gesture bar. Consistent design across concepts: white surfaces, charcoal text, emerald action accent, small coral mascot detail. Simple small rounded-square robot face avatar, two eyes, no elaborate character. Modern native Android sans-serif typography, conventional outline icons, mostly 8px or less component radii except circular floating assistant button and native bottom sheet. Screen title 'Assistant' when showing the assistant. Restrained utility design, no gradients, no decorative orbs, no purple theme, no nested cards. No voice, microphone, photo, web, device toggles, or automatic screen-reading controls. This is a concept image, not an implemented app. State 3: expanded assistant drawer for reminder confirmation. Upper quarter shows dimmed ordinary notes app. Opaque white bottom sheet in lower three quarters. Header: small robot face, 'Assistant', small 'On device' with device icon, close X. User text exactly 'Remind me to call Sam tomorrow at 9.' Assistant text exactly 'Check the time before saving.' Then an unboxed structured form separated by thin rules: field label 'Reminder', value 'Call Sam'; calendar icon with 'Fri, 25 Sep 2026'; clock icon with '9:00 AM'; timezone text 'Africa/Kampala'. Clear compact choice link 'Edit' with pencil icon. A small amber clock-status line reads exactly 'May arrive later to save battery.' Then an emerald button 'Create reminder' with check icon and a plain secondary 'Cancel'. Bottom composer 'Type a message' with arrow-up icon. No success checkmark outside the pending create button, no implied system calendar access, no exact-time guarantee. Keyboard hidden. Keep date, time, caution and confirmation visible without clipping.
+```
