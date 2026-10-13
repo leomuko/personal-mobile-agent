@@ -8,7 +8,7 @@ local.properties
 benchmarks/results/
 models/*.gguf
 models/*.bin
+*.litertlm
 *.hprof
 *.jks
 *.keystore
-
