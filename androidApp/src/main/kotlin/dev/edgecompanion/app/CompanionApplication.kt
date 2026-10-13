@@ -1,6 +1,9 @@
 package dev.edgecompanion.app
 
 import dev.edgecompanion.app.di.appModule
+import dev.edgecompanion.app.di.modelModule
+import dev.edgecompanion.app.inference.ModelRuntimeLifecycle
+import dev.edgecompanion.core.inference.ModelManager
 import dev.edgecompanion.app.overlay.PresenceCoordinator
 
 import android.app.Application
@@ -20,7 +23,7 @@ class CompanionApplication : Application() {
         val koin = startKoin {
             androidContext(this@CompanionApplication)
             allowOverride(false)
-            modules(sharedModule(), androidStorageModule(this@CompanionApplication), appModule())
+            modules(sharedModule(), androidStorageModule(this@CompanionApplication), appModule(), modelModule(this@CompanionApplication))
         }.koin
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             override fun onActivityStarted(activity: Activity) { presence.started(System.identityHashCode(activity)) }
@@ -34,5 +37,10 @@ class CompanionApplication : Application() {
             override fun onActivitySaveInstanceState(activity: Activity, state: Bundle) = Unit
         })
         koin.get<ConversationSession>().start()
+        if (BuildConfig.DEBUG) {
+            val models = koin.get<ModelManager>()
+            registerActivityLifecycleCallbacks(ModelRuntimeLifecycle(models))
+            models.verify()
+        }
     }
 }
