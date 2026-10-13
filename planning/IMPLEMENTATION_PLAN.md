@@ -1,6 +1,6 @@
 # Personal AI Companion: Implementation Plan
 
-Created 26 September 2026; updated 28 September 2026. Status: foundation implementation exists; this document describes the target release, not completed functionality. Core inline recording and durable attachment composer behavior is implemented and emulator-tested; see [implementation results](../docs/COMPOSER_IMPLEMENTATION_RESULTS.md). Physical-device acceptance and local model integration remain pending.
+Created 26 September 2026; updated 1 October 2026. Status: foundation implementation exists; this document describes the target release, not completed functionality. Core inline recording and durable attachment composer behavior is implemented; see [implementation results](../docs/COMPOSER_IMPLEMENTATION_RESULTS.md). Local model integration and its physical-device acceptance remain pending. The [Phase 1 plan](PHASE_1_PLAN.md) defines emulator-first development followed by a dedicated S24 acceptance session.
 
 Primary test device: the user's Samsung Galaxy S24 Ultra. Record its actual RAM, Android/One UI version, free storage, and thermal baseline during setup. Do not infer these from the model name.
 
@@ -60,8 +60,8 @@ Additional required screens/states: model installation and repair; missing permi
 | --- | --- | --- |
 | Shared application | Kotlin Multiplatform, coroutines, StateFlow, kotlinx.serialization and kotlinx.datetime | Shared orchestration/data contracts; platform APIs remain in adapters |
 | UI | Compose Multiplatform components with an Android host | Android-first delivery; retain reusable UI without assuming all surfaces port to iOS |
-| Model runtime | llama.cpp via a small JNI/C++ adapter; pinned revision | CPU baseline, then Vulkan benchmark; LiteRT-LM is a timeboxed alternative if the chosen path fails |
-| Conversation model | Quantized instruction model in approximately the 1B-4B class | Compare two candidates on the S24 Ultra; pin exact model/hash/license after quality and resource tests |
+| Model runtime | LiteRT-LM 0.17.1 compatibility spike behind LocalLlmEngine | Emulator CPU first if ABI-compatible, then separate S24 GPU/CPU tests; llama.cpp is a fallback experiment only; see [ADR](../docs/decisions/0003-gemma4-litert-lm.md) |
+| Conversation model | Pinned Gemma 4 E2B mobile artifact, text enabled only | 2048 configured context / 512 output initially; E4B benchmark-only; exact hash and configuration in the [manifest](models/gemma-4-e2b-it.json); no runtime acceptance claimed |
 | Speech | whisper.cpp, initially compare tiny/base-sized speech models | Separate transcription from language generation; test accents, noise, dates, and names |
 | OCR | CameraX + bundled ML Kit text recognition | Bundle required recognition assets for offline first use; start with Latin receipts/documents |
 | Persistence | SQLDelight over SQLite; validate an encrypted Android driver backed by SQLCipher | Prove driver, migrations, FTS, and encryption together before personal data integration |
@@ -70,7 +70,7 @@ Additional required screens/states: model installation and repair; missing permi
 | Actions | Typed requests and platform adapters | No model-generated arbitrary intents, SQL, shell commands, or accessibility scripts |
 | Background jobs | Persistent import/index jobs and Android WorkManager where appropriate | Not a precision timer or permanent inference loop |
 
-Compose's shared UI relationship is documented in the [KMP documentation](https://kotlinlang.org/docs/multiplatform/compose-multiplatform-and-jetpack-compose.html). Engine capabilities and build entry points come from [llama.cpp](https://github.com/ggml-org/llama.cpp) and [whisper.cpp](https://github.com/ggml-org/whisper.cpp). [SQLDelight](https://sqldelight.github.io/sqldelight/2.1.0/) and [SQLCipher for Android](https://www.zetetic.net/sqlcipher/sqlcipher-for-android/) are separate layers; compatibility is an early deliverable, not an assumption.
+Compose's shared UI relationship is documented in the [KMP documentation](https://kotlinlang.org/docs/multiplatform/compose-multiplatform-and-jetpack-compose.html). Engine capabilities and build entry points come from [LiteRT-LM](https://github.com/google-ai-edge/LiteRT-LM) and [whisper.cpp](https://github.com/ggml-org/whisper.cpp); [llama.cpp](https://github.com/ggml-org/llama.cpp) remains an alternative experiment. [SQLDelight](https://sqldelight.github.io/sqldelight/2.1.0/) and [SQLCipher for Android](https://www.zetetic.net/sqlcipher/sqlcipher-for-android/) are separate layers; compatibility is an early deliverable, not an assumption.
 
 Record stable dependency versions, Android target SDK, NDK, ABI and native-library page-size compatibility at project setup. Do not use floating native revisions or assume an NPU backend exists for every model. Verify license and redistribution conditions for every model and native library before packaging.
 
@@ -78,7 +78,6 @@ Record stable dependency versions, Android target SDK, NDK, ABI and native-libra
 
 ```text
 androidApp/                  Android launcher, overlay/capture hosts, permissions
-  src/main/cpp/              JNI bridge and pinned native build integration
 shared/                      KMP domain, orchestration, persistence contracts
   src/commonMain/kotlin/
     conversation/            sessions, generation, context assembly
@@ -268,8 +267,8 @@ Estimates assume an experienced full-time mobile engineer with native-inference 
 
 | Milestone | Effort | Dependency | Concrete exit demonstration |
 | --- | --- | --- | --- |
-| P0: Foundation and feasibility | 1-2 weeks | None | Pinned KMP project, S24 benchmarks, model shortlist decision, encrypted DB proof, overlay keyboard and foreground capture prototype |
-| P1: Mascot and persistent chat | 2-3 weeks | P0 | Actual local conversation from mascot, follow-up, full-app expansion, restart recovery, model setup/cancel |
+| P0: Foundation and feasibility | 1-2 weeks | None | Pinned KMP project, device baseline, encrypted DB proof, overlay keyboard and foreground capture prototype; outstanding native model feasibility is explicitly carried into P1A |
+| P1: Runtime and persistent chat | Re-estimate after P1A spike; original chat estimate 2-3 weeks | P0 shell/storage foundation | P1A: verified and benchmarked runtime; P1B: actual local conversation from mascot, follow-up, full-app expansion, restart recovery, model setup/cancel |
 | P2: Memory and source library | 2-3 weeks | P1 | Import text/text-based PDF, semantic recall, citations, source inspection, explicit memory correction/forgetting; scanned pages gain OCR in P5 |
 | P3: Voice and recording | 2-3 weeks | P1; integrates with P2 | Inline recording bubble, review/corrected transcript, voice conversation, saved recording and timestamp playback |
 | P4: Actions and device controls | 2-3 weeks | P1; integrates with P3 | S1 combined action, S4 timer, capability-aware DND/brightness/torch, recovery from partial actions |
@@ -278,6 +277,8 @@ Estimates assume an experienced full-time mobile engineer with native-inference 
 | P7: Integrated hardening | 2-3 weeks | P1-P6 | All reference scenarios offline on S24 Ultra, lifecycle/resource/privacy evidence, signed internal APK and tester feedback |
 
 P2/P3/P4/P6 can partly overlap after the shared conversation contract stabilizes. P5 depends on actual source and action foundations. Include unit, integration, and UI checks in each milestone; P7 handles cross-feature validation, not the first testing effort.
+
+The [Phase 1 contracts](PHASE_1_PLAN.md) are authoritative for P1A Runtime Foundation and P1B Conversation Integration. Work packages R01-R08 live inside P1A. Develop on the emulator, then validate on the S24; neither emulator measurements nor the runtime-only smoke complete the real-device or assistant-chat gates. The original P0 comparative-model work is now E2B acceptance in P1A, optional E4B comparison, and separate speech/embedding evaluation at their integration milestones. This sequencing does not mark unmeasured work as passed.
 
 The composer work is sequenced as C00-C06 in [COMPOSER_INPUT_PLAN.md](COMPOSER_INPUT_PLAN.md): package organization, shared draft/storage and restoration, attachment UI, file/gallery imports, camera return, inline recording, then integrated QA. These are work packages within the existing roadmap, not additional numbered phases. The roadmap remains eight phases, P0-P7; file selection and capture can ship before model-based analysis is ready. Reopen/restart preview restoration is a required gate, not a later enhancement.
 
@@ -289,9 +290,9 @@ The composer work is sequenced as C00-C06 in [COMPOSER_INPUT_PLAN.md](COMPOSER_I
 | F02 | Prepare the S24 Ultra test record | OS/One UI/RAM/storage recorded; installed debug app and repeatable profiling workflow |
 | F03 | Rebuild approved design components | Mascot/drawer/full-app mock-data screens render with keyboard, large text, and TalkBack labels |
 | F04 | Validate overlay and capture lifecycle | Tap-to-open, type, record, rotate, lock/unlock, stop, and revoked permission exercised on device |
-| F05 | Benchmark model pipelines | Two LLM candidates, speech and embedding candidates measured with documented workloads and licenses |
+| F05 | Benchmark model pipelines | P1A E2B passes documented S24 gates; E4B measured or deferred with a reason; speech/embedding evaluations remain required before their integrations |
 | F06 | Prove encrypted SQLDelight storage | Migration, FTS query, file protection, reopen/key-error behavior, and deletion test pass |
-| F07 | Implement ModelManager and resource scheduler | Interrupted download recovers; corrupt asset is rejected; cancel/release cannot race native generation |
+| F07 | Implement ModelManager and resource scheduler | P1A interrupted local import recovers; corrupt asset is rejected; out-of-band cancel and native-completion-aware release are tested; public downloads come later |
 | F08 | Implement conversation repository/controller | Same conversation ID in both hosts; streaming and interrupted-state persistence work |
 | F09 | Integrate the first real local response | Ask, follow up, expand, dismiss, reopen and resume in airplane mode |
 

@@ -1,6 +1,6 @@
 # personal-mobile-agent
 
-Phase 0 foundation for the mascot-based local personal assistant. Plans and screenshot references live separately under [planning/](planning/IMPLEMENTATION_PLAN.md).
+Mascot-based local personal assistant: Phase 0 shell with a Phase 1 internal runtime foundation in progress. Plans and screenshot references live separately under [planning/](planning/IMPLEMENTATION_PLAN.md).
 
 ## Build
 
@@ -37,14 +37,23 @@ The mascot is hidden while an assistant screen is visible. Go Home or to another
 - Inline microphone waveform, timer, cancel/stop and unsent WAV playback; CameraX capture returning to chat. Capture stops when backgrounded; no automatic sending or transcription.
 - Feature-first packages for conversation screens/components/ViewModels, storage, capture, platform bridges and dependency injection. Existing module boundaries and application-scoped session are preserved.
 - Common tests, SQL tests, Android encryption tests, inference contracts and device-report tooling.
+- Internal Models panel with pinned Gemma 4 E2B import/hash verification, explicit CPU/GPU controls, a LiteRT-LM adapter, application-scoped runtime management, and opt-in synthetic benchmark tooling. CPU emulator and S24 CPU/GPU native smoke are verified; 20-sample S24 GPU latency and one supervised 20-minute synthetic workload passed. Full Phase 1 acceptance and ordinary assistant chat remain pending. See [Phase 1 implementation evidence](docs/PHASE_1_IMPLEMENTATION_RESULTS.md).
 
 ## Not implemented yet
 
-The local language/speech/embedding engines are not connected. Chat saves your message; it does not produce an AI reply. The UI explicitly shows model-unavailable states. Memory and Sources are empty states. OCR, document parsing/analysis, retrieval, calendar writes, timers, model installation, and Gmail are subsequent work. Attaching a file stores it; it does not imply the model can understand it. No fake answers, transcripts, benchmark numbers or service results are presented.
+The language runtime adapter is connected only to internal synthetic tests; full S24/resource acceptance is still pending despite passing GPU measurements. Chat saves your message; it does not produce an AI reply. The UI explicitly shows chat-unavailable states independently of installed test assets. Speech/embedding engines, OCR, document parsing/analysis, retrieval, calendar writes, timers, public model downloads, and Gmail remain subsequent work. Memory and Sources are empty states. Attaching a file stores it; it does not imply the model can understand it. No fake answers, transcripts, benchmark numbers or service results are presented.
 
-Phase 0 has started; it is not complete until the device/runtime feasibility gates are measured. See [foundation decisions](docs/decisions/0001-phase0-foundation.md) and [benchmark instructions](benchmarks/README.md).
+The current slice is [P1A: Runtime Foundation](planning/PHASE_1_PLAN.md), followed by P1B: Conversation Integration. Development began on the emulator and continued on the connected S24. Several native viability gates have passed, but P1A is not fully accepted. See the [Gemma 4 / LiteRT-LM decision](docs/decisions/0003-gemma4-litert-lm.md), [historical foundation decisions](docs/decisions/0001-phase0-foundation.md), and [benchmark instructions](benchmarks/README.md).
+
+The 2026-10-13 S24 GPU smoke passed after the runtime QA revisions. Full S24 instrumentation still has camera-permission/accessibility and notification harness failures, and the revised monitor needs sustained validation. The unsigned release APK currently includes LiteRT-LM native libraries despite disabled runtime controls; isolate that dependency before distribution. See [QA revision results](docs/PHASE_1_QA_REVISIONS.md).
 
 ## Device tests
+
+The shared Android host tests use Java 21 to load the pinned LiteRT-LM classes; compilation and shared JVM tests keep their Java 17 toolchain. Android Studio's bundled Java 21 runtime can supply the test launcher:
+
+```sh
+JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home" ./gradlew :shared:testAndroidHostTest
+```
 
 On a connected emulator or dedicated test device:
 
