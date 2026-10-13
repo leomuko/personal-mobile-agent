@@ -3,7 +3,8 @@ kotlin = "2.4.20"
 agp = "9.2.1"
 compose = "1.12.1"
 material3 = "1.9.0"
-coroutines = "1.10.2"
+coroutines = "1.11.0"
+litert-lm = "0.17.1"
 sqldelight = "2.1.0"
 sqlcipher = "4.10.0"
 activity = "1.13.0"
@@ -22,6 +23,7 @@ compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 
 [libraries]
+litert-lm = { module = "com.google.ai.edge.litertlm:litertlm-android", version.ref = "litert-lm" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
