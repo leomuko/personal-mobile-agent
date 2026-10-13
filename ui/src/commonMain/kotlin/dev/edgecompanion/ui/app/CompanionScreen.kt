@@ -51,6 +51,7 @@ import org.jetbrains.compose.resources.stringResource
     recording: RecordingState = RecordingState(),
     onStopRecording: () -> Unit = {},
     onCancelRecording: () -> Unit = {},
+    modelsContent: (@Composable () -> Unit)? = null,
 ) {
     var confirmClear by remember { mutableStateOf(false) }
     AssistantNavigation(drawer, conversationRequest) { destination, openMenu, chatList ->
@@ -77,7 +78,7 @@ import org.jetbrains.compose.resources.stringResource
         HorizontalDivider(color = Color(0xFFE9EEEB))
         when {
             settings -> {
-                SettingsScreen(overlayEnabled, notificationsAvailable, deviceSummary, state.ready, onOverlay, onNotificationSettings, { confirmClear = true }, Modifier.weight(1f))
+                SettingsScreen(overlayEnabled, notificationsAvailable, deviceSummary, state.ready, onOverlay, onNotificationSettings, { confirmClear = true }, Modifier.weight(1f), modelsContent)
             }
             destination == AssistantDestination.CHAT -> {
                 if (drawer && overlayEnabled) {

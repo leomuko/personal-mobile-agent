@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import dev.edgecompanion.ui.resources.*
 import org.jetbrains.compose.resources.stringResource
 
-@Composable internal fun SettingsScreen(overlayEnabled: Boolean, notificationsAvailable: Boolean, deviceSummary: String, ready: Boolean, onOverlay: (Boolean) -> Unit, onNotificationSettings: () -> Unit, onClearRequested: () -> Unit, modifier: Modifier = Modifier) {
+@Composable internal fun SettingsScreen(overlayEnabled: Boolean, notificationsAvailable: Boolean, deviceSummary: String, ready: Boolean, onOverlay: (Boolean) -> Unit, onNotificationSettings: () -> Unit, onClearRequested: () -> Unit, modifier: Modifier = Modifier, modelsContent: (@Composable () -> Unit)? = null) {
                 Column(modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(20.dp)) {
                     Text(stringResource(Res.string.presence), style = MaterialTheme.typography.titleMedium)
                     Row(Modifier.fillMaxWidth().padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -27,9 +27,11 @@ import org.jetbrains.compose.resources.stringResource
                     HorizontalDivider()
                     Text(stringResource(Res.string.device), Modifier.padding(top = 24.dp), style = MaterialTheme.typography.titleMedium)
                     Text(deviceSummary, Modifier.padding(vertical = 12.dp), style = MaterialTheme.typography.bodyMedium)
+                    if (modelsContent != null) modelsContent() else {
                     Text(stringResource(Res.string.models), Modifier.padding(top = 12.dp), style = MaterialTheme.typography.titleMedium)
                     Text(stringResource(Res.string.models_missing), Modifier.padding(vertical = 12.dp),
                         style = MaterialTheme.typography.bodyMedium)
+                    }
                     HorizontalDivider()
                     TextButton(onClick = onClearRequested, enabled = ready, modifier = Modifier.padding(top = 12.dp)) {
                         Icon(Icons.Outlined.DeleteOutline, null)

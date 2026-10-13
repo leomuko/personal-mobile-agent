@@ -1,6 +1,9 @@
 package dev.edgecompanion.app
 
 import androidx.activity.compose.BackHandler
+import dev.edgecompanion.app.inference.modelDocumentSource
+import dev.edgecompanion.ui.settings.viewmodel.ModelsViewModel
+import dev.edgecompanion.ui.settings.screen.ModelsPanel
 import dev.edgecompanion.app.attachments.*
 import dev.edgecompanion.app.capture.audio.AndroidAudioRecorder
 import dev.edgecompanion.core.attachments.data.AttachmentFiles
@@ -52,6 +55,10 @@ import java.text.NumberFormat
 open class MainActivity : ComponentActivity() {
     protected open val drawer = false
     private val conversation: ConversationViewModel by viewModel()
+    private val models: ModelsViewModel by viewModel()
+    private val modelPicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        if (BuildConfig.DEBUG && uri != null) models.install(modelDocumentSource(applicationContext.contentResolver, uri))
+    }
     private val session: ConversationSession by inject()
     private val mediaFiles: AttachmentFiles by inject()
     private var cameraDenied by mutableStateOf(false)
@@ -118,7 +125,15 @@ open class MainActivity : ComponentActivity() {
                             onPreviewAttachment = { preview = it },
                             thumbnail = { item, modifier -> LocalThumbnail(item, mediaFiles, modifier) },
                             recording = recording,
-                            onStopRecording = { audio.stop() }, onCancelRecording = { audio.stop(cancel = true) })
+                            onStopRecording = { audio.stop() }, onCancelRecording = { audio.stop(cancel = true) },
+                            modelsContent = if (BuildConfig.DEBUG) ({
+                                val modelState by models.runtime.collectAsStateWithLifecycle()
+                                val assetState by models.asset.collectAsStateWithLifecycle()
+                                ModelsPanel(assetState, modelState, deviceSummary(),
+                                    onImport = { modelPicker.launch(arrayOf("*/*")) }, onVerify = models::verify,
+                                    onLoad = models::load, onTest = models::test, onCancelTest = models::cancellationPrompt,
+                                    onCancel = models::cancel, onRelease = models::release)
+                            }) else null)
                     }
                 }
                 preview?.let { AttachmentPreview(it, mediaFiles) { preview = null } }
