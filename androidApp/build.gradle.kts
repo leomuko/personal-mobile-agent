@@ -28,6 +28,7 @@ android {
         }
     }
     testBuildType = providers.gradleProperty("testBuildType").getOrElse("debug")
+    sourceSets.getByName("androidTest").assets.srcDir(rootProject.file("planning/models"))
     buildFeatures { compose = true; buildConfig = true }
     compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
     packaging { resources.excludes += "/META-INF/{AL2.0,LGPL2.1}" }
