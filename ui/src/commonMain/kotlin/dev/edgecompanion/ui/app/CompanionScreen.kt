@@ -7,8 +7,7 @@ import dev.edgecompanion.ui.sources.screen.SourcesScreen
 import dev.edgecompanion.ui.conversation.components.*
 
 import dev.edgecompanion.ui.settings.screen.SettingsScreen
-import dev.edgecompanion.ui.designsystem.theme.Forest
-import dev.edgecompanion.ui.designsystem.components.Mascot
+import dev.edgecompanion.ui.designsystem.components.AssistantTopBar
 import dev.edgecompanion.ui.designsystem.components.ToolButton
 import dev.edgecompanion.ui.navigation.AssistantNavigation
 import dev.edgecompanion.ui.navigation.AssistantDestination
@@ -22,7 +21,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.edgecompanion.core.conversation.model.ConversationState
 import dev.edgecompanion.ui.resources.*
@@ -58,26 +56,19 @@ import org.jetbrains.compose.resources.stringResource
     var confirmClear by remember { mutableStateOf(false) }
     AssistantNavigation(drawer, conversationRequest) { destination, openMenu, chatList ->
     val settings = destination == AssistantDestination.SETTINGS
-    Column(Modifier.fillMaxSize().background(Color.White)) {
+    Column(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
         if (drawer) Box(Modifier.fillMaxWidth().padding(top = 10.dp), contentAlignment = Alignment.Center) {
-            Box(Modifier.size(36.dp, 4.dp).background(Color(0xFFBBC3BF), RoundedCornerShape(2.dp)))
+            Box(Modifier.size(36.dp, 4.dp).background(MaterialTheme.colorScheme.outlineVariant, RoundedCornerShape(2.dp)))
         }
-        Row(Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-            if (!drawer) ToolButton(Icons.Outlined.Menu, stringResource(Res.string.open_navigation), openMenu, !recording.active)
-            Mascot(Modifier.size(if (drawer) 48.dp else 40.dp))
-            Column(Modifier.weight(1f).padding(start = 8.dp)) {
-                Text(stringResource(if (destination == AssistantDestination.CHAT) Res.string.assistant else destination.label), style = MaterialTheme.typography.titleLarge)
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Outlined.Shield, null, Modifier.size(14.dp), tint = Forest)
-                    Text(stringResource(Res.string.on_device), Modifier.padding(start = 4.dp), style = MaterialTheme.typography.labelMedium, color = Forest)
-                }
-            }
+        AssistantTopBar(
+            title = stringResource(if (destination == AssistantDestination.CHAT) Res.string.assistant else destination.label),
+            leading = if (drawer) null else ({ ToolButton(Icons.Outlined.Menu, stringResource(Res.string.open_navigation), openMenu, !recording.active) }),
+        ) {
             if (drawer) {
                 ToolButton(Icons.Outlined.OpenInFull, stringResource(Res.string.open_full_app), onExpand, !recording.active)
                 ToolButton(Icons.Outlined.Close, stringResource(Res.string.close_conversation), onClose, !recording.active)
             }
         }
-        HorizontalDivider(color = Color(0xFFE9EEEB))
         when {
             settings -> {
                 SettingsScreen(overlayEnabled, notificationsAvailable, deviceSummary, state.ready, onOverlay, onNotificationSettings, { confirmClear = true }, Modifier.weight(1f), modelsContent)
