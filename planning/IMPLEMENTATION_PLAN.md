@@ -280,6 +280,8 @@ P2/P3/P4/P6 can partly overlap after the shared conversation contract stabilizes
 
 The [Phase 1 contracts](PHASE_1_PLAN.md) are authoritative for P1A Runtime Foundation and P1B Conversation Integration. Work packages R01-R08 live inside P1A. Develop on the emulator, then validate on the S24; neither emulator measurements nor the runtime-only smoke complete the real-device or assistant-chat gates. The original P0 comparative-model work is now E2B acceptance in P1A, optional E4B comparison, and separate speech/embedding evaluation at their integration milestones. This sequencing does not mark unmeasured work as passed.
 
+The accepted [P1B conversation plan](P1B_CONVERSATION_PLAN.md) orders verified prompt budgeting, the request-specific runtime contract, persistence migration and shared state composition before UI generation. Assistant text is saved only on completion; durable attempt status supports interruption recovery and retry. Attachments remain preserved without model interpretation in this slice.
+
 The composer work is sequenced as C00-C06 in [COMPOSER_INPUT_PLAN.md](COMPOSER_INPUT_PLAN.md): package organization, shared draft/storage and restoration, attachment UI, file/gallery imports, camera return, inline recording, then integrated QA. These are work packages within the existing roadmap, not additional numbered phases. The roadmap remains eight phases, P0-P7; file selection and capture can ship before model-based analysis is ready. Reopen/restart preview restoration is a required gate, not a later enhancement.
 
 ### First implementation tickets

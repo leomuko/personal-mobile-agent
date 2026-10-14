@@ -161,7 +161,7 @@ Implementation deviations and remaining gates: the current internal panel and in
 5. Schedule the S24 session once emulator development is ready. Repeat the smoke with the same pins and run physical acceptance. A native-emulator limitation remains an explicit gap until this session.
 6. Proceed to P1B only after the runtime gate passes or a specific limitation is reviewed and accepted; do not silently bypass failed native safety gates.
 
-P1B preserves one durable assistant conversation across hosts, integrates generation through the existing session, budgets/trims structured context, persists partial/interrupted status, supports Stop/Retry, and reconstructs context after restart. It does not introduce retrieval, OCR reasoning, speech transcription, actions, Gmail, or E4B default support ahead of their milestones.
+The accepted [P1B conversation plan](P1B_CONVERSATION_PLAN.md) defines a request-specific pipeline through the existing shared session. Verified prompt budgeting, a correlated runtime API, separate user/assistant persistence transactions and state composition are mandatory before real chat reaches the UI. P1B persists assistant text only on completion, retains durable attempt status for cancellation/failure/process-death reconciliation, supports Stop/Retry without duplicate user turns, and reconstructs context after restart. Partial text remains transient. It does not introduce retrieval, OCR reasoning, speech transcription, attachment interpretation, actions, Gmail, or E4B default support ahead of their milestones.
 
 ## Sources
 
