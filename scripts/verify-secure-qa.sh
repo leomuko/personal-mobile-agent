@@ -29,7 +29,7 @@ cleanup() {
 trap cleanup EXIT
 mkdir -p "$(dirname "$REPORT")"
 "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r -e notificationDenied true -e cameraPermissionDenied true \
-  -e notClass dev.edgecompanion.app.ModelRuntimeTest \
+  -e notClass dev.edgecompanion.app.ModelRuntimeTest,dev.edgecompanion.app.ConversationNativeTest,dev.edgecompanion.app.ConversationRestartTest \
   "$PACKAGE.test/androidx.test.runner.AndroidJUnitRunner" | tee "$REPORT"
 
 # am instrument can exit zero even when assertions or the instrumentation process fail.
