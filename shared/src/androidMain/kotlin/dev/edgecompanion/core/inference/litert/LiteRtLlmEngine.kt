@@ -28,7 +28,7 @@ class LiteRtLlmEngine(private val enabled: Boolean) : LocalLlmEngine {
     }
 
     override suspend fun load(config: ModelConfig): Result<Unit> = lifecycle.withLock {
-        withContext(Dispatchers.IO) {
+        withContext(NonCancellable + Dispatchers.IO) {
             if (!enabled || poisoned) return@withContext Result.failure(ModelException(ModelError.RESTART_REQUIRED))
             if (engine != null) return@withContext Result.failure(ModelException(ModelError.BUSY))
             var candidate: Engine? = null
@@ -60,14 +60,24 @@ class LiteRtLlmEngine(private val enabled: Boolean) : LocalLlmEngine {
             if (poisoned) throw ModelException(ModelError.RESTART_REQUIRED)
             val current = config ?: throw ModelException(ModelError.NOT_INSTALLED)
             // This spike accepts only bounded synthetic fixtures. Free-form input waits for a verified preflight tokenizer.
-            if (request.prompt !in ModelTestPrompts.allowed || request.maxTokens !in 1..current.maxOutputTokens)
+            if (request.maxTokens !in 1..current.maxOutputTokens)
                 throw ModelException(ModelError.CONTEXT_LIMIT)
+            val chat = request.chat
+            if (chat == null && request.prompt !in ModelTestPrompts.allowed) throw ModelException(ModelError.CONTEXT_LIMIT)
+            if (chat != null) {
+                if (current.sha256 != ModelCatalog.gemma4.sha256 || current.contextTokens != chat.contextTokens ||
+                    request.maxTokens != chat.outputTokens) throw ModelException(ModelError.CONTEXT_LIMIT)
+                GemmaChatBudget.validate(chat)
+            }
             var owned: Running? = null
             try {
                 // Publish ownership before crossing a cancellable dispatcher boundary.
                 withContext(NonCancellable + Dispatchers.IO) {
                     val conversation = (engine ?: throw ModelException(ModelError.NOT_INSTALLED))
                         .createConversation(ConversationConfig(automaticToolCalling = false,
+                            initialMessages = chat?.messages?.dropLast(1)?.map {
+                                if (it.role == ChatRole.USER) Message.user(it.text) else Message.model(it.text)
+                            }.orEmpty(),
                             maxOutputToken = request.maxTokens, thinkingConfig = ThinkingConfig(enableThinking = false),
                             samplerConfig = SamplerConfig(topK = 1, topP = 1.0, temperature = 0.0, seed = 0)))
                     owned = Running(conversation)
@@ -83,7 +93,7 @@ class LiteRtLlmEngine(private val enabled: Boolean) : LocalLlmEngine {
                             running.events.close()
                         } else {
                             try {
-                                conversation.sendMessageAsync(request.prompt, object : MessageCallback {
+                                conversation.sendMessageAsync(chat?.messages?.last()?.text ?: request.prompt, object : MessageCallback {
                                     override fun onMessage(message: Message) {
                                         val text = extractText(message)
                                         if (text.isNotEmpty() && !running.cancelled.get() && active === running)
@@ -110,6 +120,8 @@ class LiteRtLlmEngine(private val enabled: Boolean) : LocalLlmEngine {
                 if (running.cancelled.get()) emit(GenerationEvent.Cancelled)
                 else if (!running.failed.get()) {
                     val info = withContext(Dispatchers.IO) { conversation.getBenchmarkInfo() }
+                    if (chat != null && info.lastPrefillTokenCount > GemmaChatBudget.validate(chat))
+                        throw ModelException(ModelError.CONTEXT_LIMIT)
                     emit(GenerationEvent.Finished(info.lastDecodeTokenCount, info.lastPrefillTokenCount,
                         info.lastDecodeTokensPerSecond.takeIf { it.isFinite() && it >= 0 }))
                 }

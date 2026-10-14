@@ -24,7 +24,8 @@ class ModelManagerTest {
         var releaseGate: CompletableDeferred<Unit>? = null
         var releaseFailure = false
         var cancelTimeout = false
-        override suspend fun load(config: ModelConfig): Result<Unit> { loads++; return Result.success(Unit) }
+        var loadGate: CompletableDeferred<Unit>? = null
+        override suspend fun load(config: ModelConfig): Result<Unit> { loads++; loadGate?.await(); return Result.success(Unit) }
         override fun generate(request: GenerationRequest) = flow {
             requests++
             nativeStopped = CompletableDeferred()
@@ -56,6 +57,48 @@ class ModelManagerTest {
         assertFailsWith<IllegalArgumentException> { manifest.copy(fileName = "../escape.litertlm") }
         assertFailsWith<IllegalArgumentException> { manifest.copy(sha256 = "bad") }
         assertFailsWith<IllegalArgumentException> { manifest.copy(bytes = Long.MAX_VALUE) }
+    }
+    @Test fun chatProducesCorrelatedTerminalAndRejectsConcurrentBenchmark() = runTest {
+        val engine = Engine(); val manager = manager(engine)
+        val request = ChatRequest("chat", listOf(ChatMessage(ChatRole.USER, "Hello")), ModelBackend.CPU)
+        val events = mutableListOf<ChatEvent>()
+        val chat = launch { manager.generateChat(request).collect { events += it } }
+        runCurrent()
+        manager.testPrompt().join()
+        assertEquals(ModelError.BUSY, manager.state.value.commandError)
+        assertEquals(1, engine.requests)
+        manager.cancelChat("chat")
+        chat.join()
+        assertEquals(ChatOutcome.CANCELLED, (events.last() as ChatEvent.Terminal).outcome)
+        assertTrue(events.all { it.id == "chat" })
+        manager.shutdown()
+    }
+    @Test fun chatSuccessIsExplicitAndOversizedInputNeverLoads() = runTest {
+        val engine = Engine().apply { hang = false }; val manager = manager(engine)
+        val oversized = manager.generateChat(ChatRequest("large", listOf(ChatMessage(ChatRole.USER, "x".repeat(500))))).toList()
+        assertEquals(ChatOutcome.REJECTED, (oversized.single() as ChatEvent.Terminal).outcome)
+        assertEquals(0, engine.loads)
+        val events = manager.generateChat(ChatRequest("valid", listOf(ChatMessage(ChatRole.USER, "Hello")), ModelBackend.CPU)).toList()
+        assertEquals(ChatOutcome.COMPLETED, (events.last() as ChatEvent.Terminal).outcome)
+        assertEquals(1, events.count { it is ChatEvent.Terminal })
+        manager.shutdown()
+    }
+    @Test fun cancelDuringLoadPublishesOwnershipAndNeverStartsGeneration() = runTest {
+        val engine = Engine().apply { loadGate = CompletableDeferred() }; val manager = manager(engine)
+        val events = mutableListOf<ChatEvent>()
+        val chat = launch { manager.generateChat(ChatRequest("loading", listOf(ChatMessage(ChatRole.USER, "Hello")), ModelBackend.CPU))
+            .collect { events += it } }
+        runCurrent()
+        assertEquals(RuntimeStatus.LOADING, manager.state.value.status)
+        manager.cancelChat("loading")
+        engine.loadGate!!.complete(Unit)
+        chat.join()
+        assertEquals(0, engine.requests)
+        assertEquals(ChatOutcome.CANCELLED, (events.last() as ChatEvent.Terminal).outcome)
+        manager.release().join()
+        assertEquals(1, engine.releases)
+        assertEquals(RuntimeStatus.UNLOADED, manager.state.value.status)
+        manager.shutdown()
     }
     @Test fun contextIncludesOutputAndCannotOverflow() {
         requireContextBudget(1536, 512, 2048)
