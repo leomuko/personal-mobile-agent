@@ -6,7 +6,7 @@ data class ModelConfig(val path: String, val sha256: String, val contextTokens: 
     val backend: ModelBackend = ModelBackend.CPU, val maxOutputTokens: Int = 512) {
     init { require(contextTokens > maxOutputTokens && maxOutputTokens > 0) }
 }
-data class GenerationRequest(val prompt: String, val maxTokens: Int = 512)
+data class GenerationRequest(val prompt: String, val maxTokens: Int = 512, val chat: ChatRequest? = null)
 sealed interface GenerationEvent {
     data class Token(val text: String) : GenerationEvent
     data class Finished(val tokens: Int? = null, val inputTokens: Int? = null,
