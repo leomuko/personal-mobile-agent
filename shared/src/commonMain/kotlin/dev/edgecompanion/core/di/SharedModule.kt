@@ -8,6 +8,7 @@ import dev.edgecompanion.core.conversation.data.ConversationStore
 import dev.edgecompanion.core.conversation.data.SqlConversationStore
 import dev.edgecompanion.core.conversation.session.ConversationController
 import dev.edgecompanion.core.conversation.session.ConversationSession
+import dev.edgecompanion.core.inference.ChatRuntime
 
 import dev.edgecompanion.core.*
 import kotlinx.coroutines.CoroutineDispatcher
@@ -26,6 +27,6 @@ fun sharedModule() = module {
         val storage = get<SessionDatabase>()
         ConversationSession(get<CoroutineDispatcher>(SessionDispatcher),
             controllerProvider = { get<ConversationController>() },
-            closeStorage = storage::close, attachmentFiles = getOrNull())
+            closeStorage = storage::close, attachmentFiles = getOrNull(), chatRuntime = getOrNull<ChatRuntime>())
     } onClose { it?.stop() }
 }

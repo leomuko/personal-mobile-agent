@@ -4,6 +4,9 @@ import dev.edgecompanion.core.attachments.model.*
 
 import dev.edgecompanion.core.conversation.model.ConversationError
 import dev.edgecompanion.core.conversation.model.ConversationState
+import dev.edgecompanion.core.conversation.model.Message
+import dev.edgecompanion.core.conversation.model.TurnStatus
+import dev.edgecompanion.core.inference.ModelError
 import dev.edgecompanion.core.conversation.data.ConversationStore
 
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,7 +25,7 @@ class ConversationController(private val store: ConversationStore, private val n
     }
 
     private fun snapshot() = ConversationState(store.messages(), store.draft(), ready = true,
-        attachments = store.attachments(), draftEpoch = store.epoch())
+        attachments = store.attachments(), draftEpoch = store.epoch(), attempts = store.attempts())
 
     suspend fun reserve(item: Attachment, epoch: Long): Boolean = mutex.withLock {
         try {
@@ -68,6 +71,7 @@ class ConversationController(private val store: ConversationStore, private val n
     suspend fun restore() = mutex.withLock {
         try {
             store.interruptImports()
+            store.reconcileAssistantTurns()
             mutable.value = snapshot()
         } catch (cancelled: CancellationException) { throw cancelled }
         catch (_: Exception) {
@@ -86,23 +90,40 @@ class ConversationController(private val store: ConversationStore, private val n
         }
     }
 
-    suspend fun submit() = mutex.withLock {
+    suspend fun submit(): Message? = mutex.withLock {
         val text = mutable.value.draft.trim()
         val attachments = mutable.value.attachments.filter { it.messageId == null }
         if (!mutable.value.ready || (text.isEmpty() && attachments.isEmpty()) ||
-            attachments.any { it.status != AttachmentStatus.READY }) return@withLock
+            attachments.any { it.status != AttachmentStatus.READY }) return@withLock null
         try {
             // A previous send may have committed before its UI refresh failed.
             if (store.epoch() != mutable.value.draftEpoch) {
                 mutable.value = snapshot()
-                return@withLock
+                return@withLock null
             }
-            store.append(text, now())
+            val submitted = store.submitUserMessage(text, now())
             mutable.value = snapshot()
+            submitted
         } catch (cancelled: CancellationException) { throw cancelled }
         catch (_: Exception) {
             mutable.value = mutable.value.copy(error = ConversationError.MESSAGE_SAVE)
+            null
         }
+    }
+
+    suspend fun startAssistant(id: String, userId: Long, epoch: Long): Boolean = mutex.withLock {
+        val started = store.startAssistantTurn(id, userId, epoch)
+        mutable.value = snapshot()
+        started
+    }
+    suspend fun completeAssistant(id: String, text: String): Boolean = mutex.withLock {
+        val saved = store.completeAssistantTurn(id, text, now())
+        mutable.value = snapshot()
+        saved
+    }
+    suspend fun finishAssistant(id: String, status: TurnStatus, error: ModelError?) = mutex.withLock {
+        store.finishAssistantTurn(id, status, error)
+        mutable.value = snapshot()
     }
 
     suspend fun clear() = mutex.withLock {
