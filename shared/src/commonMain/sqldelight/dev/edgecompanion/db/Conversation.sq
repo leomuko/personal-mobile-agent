@@ -1,7 +1,18 @@
 CREATE TABLE message (
   id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   text TEXT NOT NULL,
-  created_at INTEGER NOT NULL
+  created_at INTEGER NOT NULL,
+  role TEXT NOT NULL DEFAULT 'USER',
+  turn_id INTEGER,
+  generation_id TEXT UNIQUE
+);
+
+CREATE TABLE assistant_attempt (
+  id TEXT NOT NULL PRIMARY KEY,
+  user_id INTEGER NOT NULL REFERENCES message(id),
+  epoch INTEGER NOT NULL,
+  status TEXT NOT NULL,
+  error TEXT
 );
 
 CREATE TABLE draft (
@@ -18,6 +29,27 @@ SELECT * FROM message ORDER BY id;
 
 insertMessage:
 INSERT INTO message(text, created_at) VALUES (?, ?);
+
+linkUserTurn:
+UPDATE message SET turn_id = id WHERE id = ?;
+
+insertAssistant:
+INSERT INTO message(text, created_at, role, turn_id, generation_id) VALUES (?, ?, 'ASSISTANT', ?, ?);
+
+attempts:
+SELECT * FROM assistant_attempt ORDER BY user_id, rowid;
+
+startAttempt:
+INSERT INTO assistant_attempt(id, user_id, epoch, status) VALUES (?, ?, ?, 'PENDING');
+
+finishAttempt:
+UPDATE assistant_attempt SET status = ?, error = ? WHERE id = ? AND status = 'PENDING';
+
+reconcileAttempts:
+UPDATE assistant_attempt SET status = 'INTERRUPTED' WHERE status = 'PENDING';
+
+clearAttempts:
+DELETE FROM assistant_attempt;
 
 indexMessage:
 INSERT INTO message_search(docid, text) VALUES (last_insert_rowid(), ?);

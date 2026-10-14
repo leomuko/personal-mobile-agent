@@ -1,0 +1,12 @@
+ALTER TABLE message ADD COLUMN role TEXT NOT NULL DEFAULT 'USER';
+ALTER TABLE message ADD COLUMN turn_id INTEGER;
+ALTER TABLE message ADD COLUMN generation_id TEXT;
+UPDATE message SET turn_id = id;
+CREATE UNIQUE INDEX message_generation_id ON message(generation_id);
+CREATE TABLE assistant_attempt (
+  id TEXT NOT NULL PRIMARY KEY,
+  user_id INTEGER NOT NULL REFERENCES message(id),
+  epoch INTEGER NOT NULL,
+  status TEXT NOT NULL,
+  error TEXT
+);

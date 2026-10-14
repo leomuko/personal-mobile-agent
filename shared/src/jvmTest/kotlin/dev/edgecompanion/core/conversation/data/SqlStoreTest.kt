@@ -23,7 +23,7 @@ class SqlStoreTest {
         try {
             driver.execute(null, "CREATE TABLE message (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, text TEXT NOT NULL, created_at INTEGER NOT NULL)", 0)
             driver.execute(null, "INSERT INTO message(text, created_at) VALUES ('Keep this', 42)", 0)
-            CompanionDatabase.Schema.migrate(driver, 1, 2)
+            CompanionDatabase.Schema.migrate(driver, 1, CompanionDatabase.Schema.version)
             assertEquals("Keep this", CompanionDatabase(driver).conversationQueries.allMessages().executeAsOne().text)
         } finally { driver.close() }
     }
