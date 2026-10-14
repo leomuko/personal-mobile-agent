@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 import dev.edgecompanion.core.inference.ModelManager
+import dev.edgecompanion.app.MainActivity
 import kotlinx.coroutines.*
 
 class ModelRuntimeLifecycle(private val manager: ModelManager) : Application.ActivityLifecycleCallbacks {
@@ -11,10 +12,12 @@ class ModelRuntimeLifecycle(private val manager: ModelManager) : Application.Act
     private val started = mutableSetOf<Activity>()
     private var background: Job? = null
     override fun onActivityStarted(activity: Activity) {
+        if (activity !is MainActivity) return
         started += activity
         background?.cancel()
     }
     override fun onActivityStopped(activity: Activity) {
+        if (activity !is MainActivity) return
         started -= activity
         background?.cancel()
         if (started.isEmpty()) background = scope.launch {

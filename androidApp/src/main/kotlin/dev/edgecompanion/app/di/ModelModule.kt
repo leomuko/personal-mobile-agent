@@ -19,5 +19,6 @@ internal fun modelModule(context: Context) = module {
     single { AndroidModelResources(context) }
     single { ModelManager(get(), get(), Dispatchers.Default, get<AndroidModelResources>()::snapshot,
         SystemClock::elapsedRealtime, enabled = BuildConfig.DEBUG) }
+    single<ChatRuntime> { get<ModelManager>() }
     viewModel { ModelsViewModel(get()) }
 }
