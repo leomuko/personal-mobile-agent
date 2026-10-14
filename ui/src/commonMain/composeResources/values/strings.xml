@@ -1,4 +1,11 @@
 <resources>
+    <string name="assistant_stop">Stop response</string>
+    <string name="assistant_retry">Retry response</string>
+    <string name="assistant_cancelled">Response cancelled</string>
+    <string name="assistant_interrupted">Response not completed</string>
+    <string name="assistant_preparing">Preparing response</string>
+    <string name="assistant_attachments">Attachments saved. Their contents are not included in this response.</string>
+    <string name="assistant_save_failed">Could not save the response. Your message is saved.</string>
     <string name="close">Close</string>
     <string name="camera">Camera</string>
     <string name="error_attachment">Could not import attachment. Remove it and select it again to retry.</string>
@@ -91,7 +98,7 @@
     <string name="model_resource_error">Device resource status is unavailable.</string>
     <string name="model_load_error">The selected backend could not load this model.</string>
     <string name="model_generation_error">Generation failed. Unload the runtime before retrying.</string>
-    <string name="model_context_error">This request exceeds the supported test configuration.</string>
+    <string name="model_context_error">This message exceeds the current context limit or contains unsupported control text. Shorten or edit it and retry.</string>
     <string name="model_restart_error">Native cleanup could not be confirmed. Restart the app before using the model again.</string>
     <string name="model_load_ms">Load: %1$d ms</string>
     <string name="model_first_token_ms">First token: %1$d ms</string>

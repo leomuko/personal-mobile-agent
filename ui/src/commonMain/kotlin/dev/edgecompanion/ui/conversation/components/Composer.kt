@@ -34,7 +34,8 @@ enum class AttachmentSource { FILES, CAMERA, GALLERY }
 @OptIn(ExperimentalLayoutApi::class, ExperimentalComposeUiApi::class)
 @Composable internal fun Composer(state: ConversationState, onDraft: (String) -> Unit, onSend: () -> Unit,
     onMic: () -> Unit, onSource: (AttachmentSource) -> Unit, onRemove: (String) -> Unit, onPreview: (Attachment) -> Unit,
-    thumbnail: @Composable (Attachment, Modifier) -> Unit, recording: RecordingState, onStop: () -> Unit, onCancel: () -> Unit) {
+    thumbnail: @Composable (Attachment, Modifier) -> Unit, recording: RecordingState, onStop: () -> Unit, onCancel: () -> Unit,
+    onCancelAssistant: () -> Unit = {}) {
     var sources by remember { mutableStateOf(false) }
     var editing by remember { mutableStateOf(false) }
     var draft by remember(state.draftEpoch) { mutableStateOf(state.draft) }
@@ -62,7 +63,7 @@ enum class AttachmentSource { FILES, CAMERA, GALLERY }
         imeWasVisible = imeVisible
     }
     val attachments = state.attachments.filter { it.messageId == null }
-    val canSend = state.ready && draft == state.draft && (draft.isNotBlank() || attachments.isNotEmpty()) &&
+    val canSend = state.ready && !state.assistant.active && draft == state.draft && (draft.isNotBlank() || attachments.isNotEmpty()) &&
         attachments.all { it.status == AttachmentStatus.READY }
     val openSources = {
         endEditing()
@@ -110,11 +111,13 @@ enum class AttachmentSource { FILES, CAMERA, GALLERY }
                 mic = {
                     ToolButton(Icons.Outlined.Mic, stringResource(Res.string.start_voice), {
                         endEditing(); onMic()
-                    }, state.ready)
+                    }, state.ready && !state.assistant.active)
                 },
                 send = {
-                    FilledIconButton(onClick = onSend, enabled = canSend, modifier = Modifier.size(48.dp)) {
-                        Icon(Icons.Outlined.ArrowUpward, stringResource(Res.string.save_message))
+                    FilledIconButton(onClick = if (state.assistant.active) onCancelAssistant else onSend,
+                        enabled = state.assistant.active || canSend, modifier = Modifier.size(48.dp)) {
+                        Icon(if (state.assistant.active) Icons.Outlined.Stop else Icons.Outlined.ArrowUpward,
+                            stringResource(if (state.assistant.active) Res.string.assistant_stop else Res.string.save_message))
                     }
                 })
         }

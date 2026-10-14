@@ -52,6 +52,8 @@ import org.jetbrains.compose.resources.stringResource
     onStopRecording: () -> Unit = {},
     onCancelRecording: () -> Unit = {},
     modelsContent: (@Composable () -> Unit)? = null,
+    onCancelAssistant: () -> Unit = {},
+    onRetryAssistant: (Long) -> Unit = {},
 ) {
     var confirmClear by remember { mutableStateOf(false) }
     AssistantNavigation(drawer, conversationRequest) { destination, openMenu, chatList ->
@@ -88,7 +90,7 @@ import org.jetbrains.compose.resources.stringResource
                     }
                 }
                 ConversationScreen(state, chatList, Modifier.weight(1f), onDraft, onSend, onMicrophone, onAttachmentSource, onRemoveAttachment,
-                    onPreviewAttachment, thumbnail, recording, onStopRecording, onCancelRecording)
+                    onPreviewAttachment, thumbnail, recording, onStopRecording, onCancelRecording, onCancelAssistant, onRetryAssistant)
             }
             destination == AssistantDestination.MEMORY -> MemoryScreen(Modifier.weight(1f))
             else -> SourcesScreen(Modifier.weight(1f))

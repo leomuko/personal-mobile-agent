@@ -126,6 +126,7 @@ open class MainActivity : ComponentActivity() {
                             thumbnail = { item, modifier -> LocalThumbnail(item, mediaFiles, modifier) },
                             recording = recording,
                             onStopRecording = { audio.stop() }, onCancelRecording = { audio.stop(cancel = true) },
+                            onCancelAssistant = conversation::cancelAssistant, onRetryAssistant = conversation::retryAssistant,
                             modelsContent = if (BuildConfig.DEBUG) ({
                                 val modelState by models.runtime.collectAsStateWithLifecycle()
                                 val assetState by models.asset.collectAsStateWithLifecycle()

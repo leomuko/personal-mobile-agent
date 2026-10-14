@@ -11,9 +11,10 @@ import dev.edgecompanion.ui.conversation.components.*
 @Composable internal fun ConversationScreen(state: ConversationState, list: LazyListState, modifier: Modifier,
     onDraft: (String) -> Unit, onSend: () -> Unit, onMic: () -> Unit, onSource: (AttachmentSource) -> Unit,
     onRemove: (String) -> Unit, onPreview: (Attachment) -> Unit, thumbnail: @Composable (Attachment, Modifier) -> Unit,
-    recording: RecordingState, onStop: () -> Unit, onCancel: () -> Unit) {
+    recording: RecordingState, onStop: () -> Unit, onCancel: () -> Unit,
+    onCancelAssistant: () -> Unit = {}, onRetryAssistant: (Long) -> Unit = {}) {
     Column(modifier.fillMaxWidth()) {
-        Conversation(state, list, Modifier.weight(1f), onPreview, thumbnail)
-        Composer(state, onDraft, onSend, onMic, onSource, onRemove, onPreview, thumbnail, recording, onStop, onCancel)
+        Conversation(state, list, Modifier.weight(1f), onPreview, thumbnail, onRetryAssistant)
+        Composer(state, onDraft, onSend, onMic, onSource, onRemove, onPreview, thumbnail, recording, onStop, onCancel, onCancelAssistant)
     }
 }

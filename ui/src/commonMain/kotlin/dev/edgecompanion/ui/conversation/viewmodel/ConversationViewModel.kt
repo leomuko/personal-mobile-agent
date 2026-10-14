@@ -8,6 +8,8 @@ class ConversationViewModel(private val session: ConversationSession) : ViewMode
     val state = session.state
     fun editDraft(text: String) = session.editDraft(text)
     fun submit() = session.submit()
+    fun cancelAssistant() = session.cancelAssistant()
+    fun retryAssistant(userId: Long) = session.retryAssistant(userId)
     fun clearConversation() = session.clear()
     fun removeAttachment(id: String) = session.removeAttachment(id)
 }
