@@ -14,6 +14,7 @@ class ModelManager(
     override val enabled: Boolean,
     private val manifest: ModelManifest = ModelCatalog.gemma4,
     private val idleMs: Long = 60_000,
+    val memoryPolicy: MemoryPolicy = MemoryPolicies.Current,
 ) : ChatRuntime {
     private val scope = CoroutineScope(SupervisorJob() + dispatcher.limitedParallelism(1))
     private val operation = Mutex()
@@ -25,7 +26,6 @@ class ModelManager(
     private var ownsEngine = false
     private var releasing = 0
     private var assetWork: Job? = null
-    private val lowAvailableSamplesToCancel = 3
     private var chatId: String? = null
     private var chatCancellation = ChatOutcome.CANCELLED
 
@@ -49,7 +49,8 @@ class ModelManager(
                 }
                 if (ownsEngine && (state.value.status != RuntimeStatus.LOADED || state.value.backend != request.backend))
                     throw ModelException(ModelError.BUSY)
-                resources().blockedReason()?.let { throw ModelException(it) }
+                memoryPolicy.blockedReason(resources(), if (ownsEngine) MemoryAdmission.GENERATION else MemoryAdmission.LOADING)
+                    ?.let { throw ModelException(it) }
                 idle?.cancel()
                 chatId = request.id
                 chatCancellation = ChatOutcome.CANCELLED
@@ -64,7 +65,7 @@ class ModelManager(
                     }
                 }
                 currentCoroutineContext().ensureActive()
-                resources().blockedReason()?.let { throw ModelException(it) }
+                memoryPolicy.blockedReason(resources(), MemoryAdmission.GENERATION)?.let { throw ModelException(it) }
                 mutable.update { it.copy(status = RuntimeStatus.GENERATING, error = null, commandError = null) }
                 monitor = resourceMonitor()
                 var completed = false
@@ -119,15 +120,11 @@ class ModelManager(
     }
 
     private fun resourceMonitor(): Job = scope.launch {
-        var lowAvailableSamples = 0
+        val window = MemoryPressureWindow(memoryPolicy)
         while (isActive) {
-            delay(1_000)
-            val snapshot = resources()
-            val reason = snapshot.blockedReason()
-            lowAvailableSamples = if (reason == ModelError.LOW_MEMORY && !snapshot.lowMemory)
-                lowAvailableSamples + 1 else 0
-            if (reason != null && (reason != ModelError.LOW_MEMORY || snapshot.lowMemory ||
-                    lowAvailableSamples >= lowAvailableSamplesToCancel)) {
+            delay(memoryPolicy.sampleIntervalMs)
+            val reason = window.observe(resources())
+            if (reason != null) {
                 mutable.update { it.copy(error = reason) }
                 cancel(interrupted = true)
                 break
@@ -146,7 +143,7 @@ class ModelManager(
         if (poisoned) throw ModelException(ModelError.RESTART_REQUIRED)
         if (state.value.status == RuntimeStatus.LOADED) return@work
         if (ownsEngine) throw ModelException(ModelError.BUSY)
-        resources().blockedReason()?.let { error ->
+        memoryPolicy.blockedReason(resources(), MemoryAdmission.LOADING)?.let { error ->
             mutable.update { it.copy(status = RuntimeStatus.BLOCKED, error = error) }
             return@work
         }
@@ -175,29 +172,13 @@ class ModelManager(
             }
             mutable.update { it.copy(commandError = null) }
             require(prompt in ModelTestPrompts.allowed)
-            resources().blockedReason()?.let { throw ModelException(it) }
+            memoryPolicy.blockedReason(resources(), MemoryAdmission.GENERATION)?.let { throw ModelException(it) }
             idle?.cancel()
             generation = currentCoroutineContext()[Job]
             val started = nowMs()
             mutable.update { it.copy(status = RuntimeStatus.GENERATING, output = "", error = null,
                 firstTokenMs = null, generationMs = null, outputTokens = null, inputTokens = null, decodeTokensPerSecond = null) }
-            val monitor = scope.launch {
-                var lowAvailableSamples = 0
-                while (isActive) {
-                    delay(1_000)
-                    val snapshot = resources()
-                    val reason = snapshot.blockedReason()
-                    // Debounce available-RAM fluctuations; OS low-memory and other faults cancel immediately.
-                    lowAvailableSamples = if (reason == ModelError.LOW_MEMORY && !snapshot.lowMemory)
-                        lowAvailableSamples + 1 else 0
-                    if (reason != null && (reason != ModelError.LOW_MEMORY || snapshot.lowMemory ||
-                            lowAvailableSamples >= lowAvailableSamplesToCancel)) {
-                        mutable.update { it.copy(error = reason) }
-                        this@ModelManager.cancel()
-                        break
-                    }
-                }
-            }
+            val monitor = resourceMonitor()
             try {
                 engine.generate(GenerationRequest(prompt, manifest.maxOutputTokens)).collect { event ->
                     when (event) {

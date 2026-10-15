@@ -45,9 +45,10 @@ class ModelManagerTest {
         }
     }
     private fun TestScope.manager(engine: Engine = Engine(), assets: Assets = Assets(),
-        resources: () -> ResourceSnapshot = { healthy }, enabled: Boolean = true) =
+        resources: () -> ResourceSnapshot = { healthy }, enabled: Boolean = true,
+        policy: MemoryPolicy = MemoryPolicies.Current) =
         ModelManager(assets, engine, StandardTestDispatcher(testScheduler), resources,
-            { testScheduler.currentTime }, enabled, idleMs = 60_000)
+            { testScheduler.currentTime }, enabled, idleMs = 60_000, memoryPolicy = policy)
 
     @Test fun manifestUsesLongAndExplicitContext() {
         val manifest = ModelCatalog.gemma4

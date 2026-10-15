@@ -58,16 +58,11 @@ data class ModelRuntimeState(val status: RuntimeStatus = RuntimeStatus.UNLOADED,
     val outputTokens: Int? = null, val inputTokens: Int? = null, val decodeTokensPerSecond: Double? = null)
 
 data class ResourceSnapshot(val totalMemoryBytes: Long?, val availableMemoryBytes: Long?,
-    val lowMemory: Boolean, val thermalStatus: Int?) {
-    companion object { const val MIN_AVAILABLE_MEMORY_BYTES = 3L * 1024 * 1024 * 1024 }
+    val lowMemory: Boolean, val thermalStatus: Int?, val pressureThresholdBytes: Long? = null,
+    val appPssBytes: Long? = null, val appRssBytes: Long? = null) {
+    companion object { val MIN_AVAILABLE_MEMORY_BYTES get() = MemoryPolicies.Current.generationFloorBytes }
 
-    fun blockedReason(): ModelError? = when {
-        thermalStatus == null || totalMemoryBytes == null || availableMemoryBytes == null -> ModelError.RESOURCE_UNKNOWN
-        thermalStatus >= 3 -> ModelError.THERMAL
-        totalMemoryBytes < 7L * 1024 * 1024 * 1024 -> ModelError.UNSUPPORTED_DEVICE
-        lowMemory || availableMemoryBytes < MIN_AVAILABLE_MEMORY_BYTES -> ModelError.LOW_MEMORY
-        else -> null
-    }
+    fun blockedReason(): ModelError? = MemoryPolicies.Current.blockedReason(this, MemoryAdmission.GENERATION)
 }
 
 fun requireContextBudget(inputTokens: Int, outputTokens: Int, contextTokens: Int) {
