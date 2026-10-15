@@ -3,6 +3,9 @@ import { execFileSync } from 'node:child_process';
 import { appendFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { setTimeout as wait } from 'node:timers/promises';
+import { readMemoryPolicy } from './memory-policy.mjs';
+
+const policy = readMemoryPolicy();
 
 const serial = process.env.ANDROID_SERIAL;
 if (!serial || !/^[a-zA-Z0-9._:-]+$/.test(serial)) {
@@ -37,7 +40,7 @@ while (true) {
   try {
     const { status, skin } = snapshot();
     appendFileSync(samplePath, `${recordedAt},${status},${skin}\n`);
-    if (status >= 3 || skin >= 45) {
+    if (status >= policy.severeThermalStatus || skin >= policy.maxSkinCelsius) {
       stopQa('thermal_limit', { recordedAt, status, skin });
       process.exit(2);
     }
