@@ -58,22 +58,27 @@ class ModelManager(
                 generation = currentCoroutineContext().job
                 if (!ownsEngine) {
                     mutable.value = ModelRuntimeState(RuntimeStatus.LOADING, request.backend)
+                    recordMemory(MemoryStage.BASELINE, request.backend)
                     val path = assets.verify() ?: throw ModelException(ModelError.NOT_INSTALLED)
                     withContext(NonCancellable) {
+                        recordMemory(MemoryStage.LOADING, request.backend)
                         engine.load(ModelConfig(path, manifest.sha256, request.contextTokens, request.backend,
                             request.outputTokens)).getOrThrow()
                         ownsEngine = true
+                        recordMemory(MemoryStage.LOADED_IDLE, request.backend)
                     }
                 }
                 currentCoroutineContext().ensureActive()
                 memoryPolicy.blockedReason(resources(), MemoryAdmission.GENERATION)?.let { throw ModelException(it) }
                 mutable.update { it.copy(status = RuntimeStatus.GENERATING, error = null, commandError = null) }
                 monitor = resourceMonitor()
+                recordMemory(MemoryStage.PREFILL, request.backend)
                 var completed = false
                 var nonempty = false
                 engine.generate(GenerationRequest("", request.outputTokens, request)).collect { event ->
                     when (event) {
                         is GenerationEvent.Token -> if (event.text.isNotEmpty()) {
+                            if (!nonempty) recordMemory(MemoryStage.DECODING, request.backend)
                             nonempty = true
                             trySend(ChatEvent.Text(request.id, event.text))
                         }
@@ -102,6 +107,9 @@ class ModelManager(
                     terminal = ChatEvent.Terminal(request.id, ChatOutcome.FAILED, ModelError.RESTART_REQUIRED)
                 mutable.update { if (it.status in setOf(RuntimeStatus.GENERATING, RuntimeStatus.CANCELLING, RuntimeStatus.LOADING))
                     it.copy(status = if (ownsEngine) RuntimeStatus.LOADED else RuntimeStatus.UNLOADED) else it }
+                if (state.value.status == RuntimeStatus.LOADED) withContext(NonCancellable) {
+                    recordMemory(MemoryStage.LOADED_IDLE, state.value.backend)
+                }
                 operation.unlock()
                 scheduleIdle()
                 trySend(terminal)
@@ -151,12 +159,15 @@ class ModelManager(
             return@work
         }
         mutable.value = ModelRuntimeState(status = RuntimeStatus.LOADING, backend = backend)
+        recordMemory(MemoryStage.BASELINE, backend)
         val path = assets.verify() ?: throw ModelException(ModelError.NOT_INSTALLED)
         val started = nowMs()
         withContext(NonCancellable) {
+            recordMemory(MemoryStage.LOADING, backend)
             engine.load(ModelConfig(path, manifest.sha256, manifest.configuredContextTokens, backend,
                 manifest.maxOutputTokens)).getOrThrow()
             ownsEngine = true
+            recordMemory(MemoryStage.LOADED_IDLE, backend)
         }
         memoryPolicy.blockedReason(resources(), MemoryAdmission.GENERATION)?.let { throw ModelException(it) }
         mutable.update { it.copy(status = RuntimeStatus.LOADED, loadMs = nowMs() - started, error = null) }
@@ -187,9 +198,12 @@ class ModelManager(
                 recordMemory(MemoryStage.PREFILL, state.value.backend)
                 engine.generate(GenerationRequest(prompt, manifest.maxOutputTokens)).collect { event ->
                     when (event) {
-                        is GenerationEvent.Token -> mutable.update {
-                            if (it.status != RuntimeStatus.GENERATING) it else it.copy(
-                                output = it.output + event.text, firstTokenMs = it.firstTokenMs ?: (nowMs() - started))
+                        is GenerationEvent.Token -> {
+                            if (state.value.firstTokenMs == null) recordMemory(MemoryStage.DECODING, state.value.backend)
+                            mutable.update {
+                                if (it.status != RuntimeStatus.GENERATING) it else it.copy(
+                                    output = it.output + event.text, firstTokenMs = it.firstTokenMs ?: (nowMs() - started))
+                            }
                         }
                         is GenerationEvent.Finished -> mutable.update { it.copy(outputTokens = event.tokens,
                             inputTokens = event.inputTokens, decodeTokensPerSecond = event.decodeTokensPerSecond) }
@@ -207,6 +221,9 @@ class ModelManager(
             if (state.value.error in resourceErrors) cleanupOwnedEngine()
             mutable.update { if (it.status in setOf(RuntimeStatus.GENERATING, RuntimeStatus.CANCELLING))
                 it.copy(status = RuntimeStatus.LOADED) else it }
+            if (state.value.status == RuntimeStatus.LOADED) withContext(NonCancellable) {
+                recordMemory(MemoryStage.LOADED_IDLE, state.value.backend)
+            }
             operation.unlock()
             scheduleIdle()
         }
@@ -222,6 +239,7 @@ class ModelManager(
         mutable.update { if (it.status == RuntimeStatus.GENERATING) it.copy(status = RuntimeStatus.CANCELLING) else it }
         active.cancel()
         try { engine.cancel() } catch (failure: Exception) { fail(failure) }
+        recordMemory(MemoryStage.CANCELLING, state.value.backend)
     }
 
     fun release(): Job = scope.launch {
@@ -270,6 +288,7 @@ class ModelManager(
             withTimeout(5_000) { engine.release() }
             ownsEngine = false
             mutable.update { it.copy(status = RuntimeStatus.UNLOADED, cleanupError = null) }
+            recordMemory(MemoryStage.POST_RELEASE, state.value.backend)
             true
         } catch (failure: Exception) {
             poisoned = true

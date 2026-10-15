@@ -74,6 +74,23 @@ class ModelManagerTest {
         manager.shutdown()
         assertEquals(2, engine.releases)
     }
+    @Test fun memoryStagesCarryOwnershipAndTelemetryFailureCannotPoisonClosedEngine() = runTest {
+        val points = mutableListOf<MemoryTracePoint>()
+        val engine = Engine().apply { hang = false }
+        val manager = manager(engine, telemetry = {
+            points += it
+            if (it.stage == MemoryStage.POST_RELEASE) error("Synthetic diagnostic failure")
+        })
+        manager.generateChat(ChatRequest("trace", listOf(ChatMessage(ChatRole.USER, "Hello")))).toList()
+        manager.release().join()
+        assertEquals(listOf(MemoryStage.BASELINE, MemoryStage.LOADING, MemoryStage.LOADED_IDLE,
+            MemoryStage.PREFILL, MemoryStage.DECODING, MemoryStage.LOADED_IDLE, MemoryStage.POST_RELEASE), points.map { it.stage })
+        assertFalse(points.first().engineOwned); assertTrue(points[2].engineOwned); assertFalse(points.last().engineOwned)
+        assertTrue(points.all { it.policyId == MemoryPolicies.Current.id && it.backend == ModelBackend.GPU })
+        assertEquals(RuntimeStatus.UNLOADED, manager.state.value.status)
+        assertTrue(manager.state.value.telemetryFailed)
+        manager.shutdown(); assertEquals(1, engine.releases)
+    }
     @Test fun retryCannotEnterWhileRejectedLoadCleanupIsPending() = runTest {
         var snapshot = healthy
         val engine = Engine().apply { afterLoad = { snapshot = healthy.copy(lowMemory = true) }; releaseGate = CompletableDeferred() }
