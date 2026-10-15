@@ -25,7 +25,8 @@ class ModelManagerTest {
         var releaseFailure = false
         var cancelTimeout = false
         var loadGate: CompletableDeferred<Unit>? = null
-        override suspend fun load(config: ModelConfig): Result<Unit> { loads++; loadGate?.await(); return Result.success(Unit) }
+        var afterLoad: () -> Unit = {}
+        override suspend fun load(config: ModelConfig): Result<Unit> { loads++; loadGate?.await(); afterLoad(); return Result.success(Unit) }
         override fun generate(request: GenerationRequest) = flow {
             requests++
             nativeStopped = CompletableDeferred()
@@ -58,6 +59,67 @@ class ModelManagerTest {
         assertFailsWith<IllegalArgumentException> { manifest.copy(fileName = "../escape.litertlm") }
         assertFailsWith<IllegalArgumentException> { manifest.copy(sha256 = "bad") }
         assertFailsWith<IllegalArgumentException> { manifest.copy(bytes = Long.MAX_VALUE) }
+    }
+    @Test fun postLoadRejectionClosesBeforePublishingTerminalAndAllowsCleanRetry() = runTest {
+        var snapshot = healthy
+        val engine = Engine().apply { hang = false; afterLoad = { snapshot = healthy.copy(availableMemoryBytes = 2L shl 30) } }
+        val manager = manager(engine, resources = { snapshot })
+        val request = ChatRequest("memory", listOf(ChatMessage(ChatRole.USER, "Hello")), ModelBackend.GPU)
+        val terminal = manager.generateChat(request).toList().single() as ChatEvent.Terminal
+        assertEquals(ModelError.LOW_MEMORY, terminal.error)
+        assertEquals(1, engine.loads); assertEquals(1, engine.releases); assertEquals(0, engine.requests)
+        assertEquals(RuntimeStatus.UNLOADED, manager.state.value.status)
+        snapshot = healthy; engine.afterLoad = {}
+        assertEquals(ChatOutcome.COMPLETED, (manager.generateChat(request.copy(id = "retry")).toList().last() as ChatEvent.Terminal).outcome)
+        manager.shutdown()
+        assertEquals(2, engine.releases)
+    }
+    @Test fun retryCannotEnterWhileRejectedLoadCleanupIsPending() = runTest {
+        var snapshot = healthy
+        val engine = Engine().apply { afterLoad = { snapshot = healthy.copy(lowMemory = true) }; releaseGate = CompletableDeferred() }
+        val manager = manager(engine, resources = { snapshot })
+        val request = ChatRequest("first", listOf(ChatMessage(ChatRole.USER, "Hello")))
+        val first = async { manager.generateChat(request).toList() }
+        runCurrent()
+        assertEquals(RuntimeStatus.RELEASING, manager.state.value.status)
+        val retry = manager.generateChat(request.copy(id = "retry")).toList().single() as ChatEvent.Terminal
+        assertEquals(ModelError.BUSY, retry.error)
+        assertFalse(first.isCompleted); assertEquals(1, engine.loads)
+        engine.releaseGate!!.complete(Unit); first.await()
+        manager.shutdown(); assertEquals(1, engine.releases)
+    }
+    @Test fun failedOrTimedOutCleanupQuarantinesRuntimeWithoutDoubleClose() = runTest {
+        for (timeout in listOf(false, true)) {
+            var snapshot = healthy
+            val engine = Engine().apply {
+                afterLoad = { snapshot = healthy.copy(lowMemory = true) }
+                releaseFailure = !timeout
+                if (timeout) releaseGate = CompletableDeferred()
+            }
+            val manager = manager(engine, resources = { snapshot })
+            val result = async { manager.generateChat(ChatRequest("failed", listOf(ChatMessage(ChatRole.USER, "Hello")))).toList() }
+            runCurrent()
+            if (timeout) advanceTimeBy(5_001)
+            val terminal = result.await().last() as ChatEvent.Terminal
+            assertEquals(ModelError.RESTART_REQUIRED, terminal.error)
+            assertEquals(ModelError.RELEASE_FAILED, manager.state.value.cleanupError)
+            snapshot = healthy
+            manager.load(ModelBackend.GPU).join()
+            assertEquals(ModelError.RESTART_REQUIRED, manager.state.value.error)
+            manager.shutdown(); assertEquals(1, engine.loads); assertEquals(1, engine.releases)
+        }
+    }
+    @Test fun manualLoadRejectionAndConcurrentCancelReleaseCloseExactlyOnce() = runTest {
+        var snapshot = healthy
+        val engine = Engine().apply { afterLoad = { snapshot = healthy.copy(lowMemory = true) }; releaseGate = CompletableDeferred() }
+        val manager = manager(engine, resources = { snapshot })
+        val loading = manager.load(ModelBackend.GPU); runCurrent()
+        val releasing = manager.release(); manager.cancel().join(); runCurrent()
+        assertFalse(loading.isCompleted); assertFalse(releasing.isCompleted)
+        engine.releaseGate!!.complete(Unit)
+        loading.join(); releasing.join()
+        assertEquals(1, engine.releases); assertEquals(RuntimeStatus.UNLOADED, manager.state.value.status)
+        manager.shutdown(); assertEquals(1, engine.releases)
     }
     @Test fun chatProducesCorrelatedTerminalAndRejectsConcurrentBenchmark() = runTest {
         val engine = Engine(); val manager = manager(engine)

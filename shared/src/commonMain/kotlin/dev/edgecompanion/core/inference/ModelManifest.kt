@@ -54,6 +54,7 @@ enum class RuntimeStatus { UNLOADED, LOADING, LOADED, GENERATING, CANCELLING, RE
 data class ModelRuntimeState(val status: RuntimeStatus = RuntimeStatus.UNLOADED,
     val backend: ModelBackend = ModelBackend.CPU, val output: String = "", val error: ModelError? = null,
     val commandError: ModelError? = null,
+    val cleanupError: ModelError? = null,
     val loadMs: Long? = null, val firstTokenMs: Long? = null, val generationMs: Long? = null,
     val outputTokens: Int? = null, val inputTokens: Int? = null, val decodeTokensPerSecond: Double? = null)
 

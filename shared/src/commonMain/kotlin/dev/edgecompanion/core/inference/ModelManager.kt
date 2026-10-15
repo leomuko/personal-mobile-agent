@@ -45,7 +45,7 @@ class ModelManager(
                 GemmaChatBudget.validate(request)
                 if (poisoned) throw ModelException(ModelError.RESTART_REQUIRED)
                 if (ownsEngine && state.value.status == RuntimeStatus.FAILED) {
-                    withContext(NonCancellable) { engine.release(); ownsEngine = false }
+                    if (!cleanupOwnedEngine()) throw ModelException(ModelError.RESTART_REQUIRED)
                 }
                 if (ownsEngine && (state.value.status != RuntimeStatus.LOADED || state.value.backend != request.backend))
                     throw ModelException(ModelError.BUSY)
@@ -97,6 +97,8 @@ class ModelManager(
                 monitor?.cancel()
                 chatId = null
                 generation = null
+                if (state.value.error in resourceErrors && !cleanupOwnedEngine())
+                    terminal = ChatEvent.Terminal(request.id, ChatOutcome.FAILED, ModelError.RESTART_REQUIRED)
                 mutable.update { if (it.status in setOf(RuntimeStatus.GENERATING, RuntimeStatus.CANCELLING, RuntimeStatus.LOADING))
                     it.copy(status = if (ownsEngine) RuntimeStatus.LOADED else RuntimeStatus.UNLOADED) else it }
                 operation.unlock()
@@ -155,6 +157,7 @@ class ModelManager(
                 manifest.maxOutputTokens)).getOrThrow()
             ownsEngine = true
         }
+        memoryPolicy.blockedReason(resources(), MemoryAdmission.GENERATION)?.let { throw ModelException(it) }
         mutable.update { it.copy(status = RuntimeStatus.LOADED, loadMs = nowMs() - started, error = null) }
         scheduleIdle()
     }
@@ -199,6 +202,7 @@ class ModelManager(
         } catch (failure: Exception) { fail(failure) }
         finally {
             generation = null
+            if (state.value.error in resourceErrors) cleanupOwnedEngine()
             mutable.update { if (it.status in setOf(RuntimeStatus.GENERATING, RuntimeStatus.CANCELLING))
                 it.copy(status = RuntimeStatus.LOADED) else it }
             operation.unlock()
@@ -227,12 +231,7 @@ class ModelManager(
             this@ModelManager.cancel(interrupted = true).join()
             operation.withLock {
                 if (poisoned) return@withLock
-                mutable.update { it.copy(status = RuntimeStatus.RELEASING) }
-                try {
-                    engine.release()
-                    ownsEngine = false
-                    mutable.update { it.copy(status = RuntimeStatus.UNLOADED, error = null) }
-                } catch (failure: Exception) { poisoned = true; fail(failure) }
+                if (cleanupOwnedEngine()) mutable.update { it.copy(status = RuntimeStatus.UNLOADED, error = null) }
             }
         } finally { releasing-- }
     }
@@ -248,7 +247,10 @@ class ModelManager(
         catch (cancelled: CancellationException) { throw cancelled }
         catch (failure: Exception) {
             if ((failure as? ModelException)?.error == ModelError.BUSY) reject(ModelError.BUSY)
-            else fail(failure)
+            else {
+                fail(failure)
+                if (state.value.error in resourceErrors) cleanupOwnedEngine()
+            }
         }
         finally { operation.unlock() }
     }
@@ -256,6 +258,26 @@ class ModelManager(
     private fun reject(error: ModelError) {
         mutable.update { it.copy(commandError = error) }
     }
+
+    // Caller owns operation; never await public release() while holding that mutex.
+    private suspend fun cleanupOwnedEngine(): Boolean = withContext(NonCancellable) {
+        if (poisoned) return@withContext false
+        if (!ownsEngine) return@withContext true
+        mutable.update { it.copy(status = RuntimeStatus.RELEASING) }
+        try {
+            withTimeout(5_000) { engine.release() }
+            ownsEngine = false
+            mutable.update { it.copy(status = RuntimeStatus.UNLOADED, cleanupError = null) }
+            true
+        } catch (failure: Exception) {
+            poisoned = true
+            mutable.update { it.copy(status = RuntimeStatus.FAILED, error = ModelError.RESTART_REQUIRED,
+                cleanupError = (failure as? ModelException)?.error ?: ModelError.RELEASE_FAILED) }
+            false
+        }
+    }
+
+    private val resourceErrors = setOf(ModelError.LOW_MEMORY, ModelError.THERMAL, ModelError.RESOURCE_UNKNOWN)
 
     private fun fail(failure: Exception) {
         val error = (failure as? ModelException)?.error ?: ModelError.LOAD_FAILED
