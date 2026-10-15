@@ -15,6 +15,7 @@ class ModelManager(
     private val manifest: ModelManifest = ModelCatalog.gemma4,
     private val idleMs: Long = 60_000,
     val memoryPolicy: MemoryPolicy = MemoryPolicies.Current,
+    private val memoryTelemetry: suspend (MemoryTracePoint) -> Unit = {},
 ) : ChatRuntime {
     private val scope = CoroutineScope(SupervisorJob() + dispatcher.limitedParallelism(1))
     private val operation = Mutex()
@@ -183,6 +184,7 @@ class ModelManager(
                 firstTokenMs = null, generationMs = null, outputTokens = null, inputTokens = null, decodeTokensPerSecond = null) }
             val monitor = resourceMonitor()
             try {
+                recordMemory(MemoryStage.PREFILL, state.value.backend)
                 engine.generate(GenerationRequest(prompt, manifest.maxOutputTokens)).collect { event ->
                     when (event) {
                         is GenerationEvent.Token -> mutable.update {
@@ -278,6 +280,15 @@ class ModelManager(
     }
 
     private val resourceErrors = setOf(ModelError.LOW_MEMORY, ModelError.THERMAL, ModelError.RESOURCE_UNKNOWN)
+
+    private suspend fun recordMemory(stage: MemoryStage, backend: ModelBackend) {
+        try { memoryTelemetry(MemoryTracePoint(stage, backend, state.value.status, ownsEngine, nowMs(), memoryPolicy.id)) }
+        catch (_: CancellationException) {
+            currentCoroutineContext().ensureActive()
+            mutable.update { it.copy(telemetryFailed = true) }
+        }
+        catch (_: Exception) { mutable.update { it.copy(telemetryFailed = true) } }
+    }
 
     private fun fail(failure: Exception) {
         val error = (failure as? ModelException)?.error ?: ModelError.LOAD_FAILED

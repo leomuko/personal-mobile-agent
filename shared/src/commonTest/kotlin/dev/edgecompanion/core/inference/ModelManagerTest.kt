@@ -47,9 +47,9 @@ class ModelManagerTest {
     }
     private fun TestScope.manager(engine: Engine = Engine(), assets: Assets = Assets(),
         resources: () -> ResourceSnapshot = { healthy }, enabled: Boolean = true,
-        policy: MemoryPolicy = MemoryPolicies.Current) =
+        telemetry: suspend (MemoryTracePoint) -> Unit = {}, policy: MemoryPolicy = MemoryPolicies.Current) =
         ModelManager(assets, engine, StandardTestDispatcher(testScheduler), resources,
-            { testScheduler.currentTime }, enabled, idleMs = 60_000, memoryPolicy = policy)
+            { testScheduler.currentTime }, enabled, idleMs = 60_000, memoryTelemetry = telemetry, memoryPolicy = policy)
 
     @Test fun manifestUsesLongAndExplicitContext() {
         val manifest = ModelCatalog.gemma4
@@ -211,6 +211,37 @@ class ModelManagerTest {
         engine.hang = false
         manager.testPrompt().join()
         assertEquals(2, engine.requests)
+        manager.shutdown()
+    }
+    @Test fun cancellationDuringPrefillTelemetryStopsBenchmarkPressurePolling() = runTest {
+        var snapshot = healthy
+        var polls = 0
+        val prefillEntered = CompletableDeferred<Unit>()
+        val engine = Engine()
+        val manager = manager(engine, resources = { polls++; snapshot }, telemetry = {
+            if (it.stage == MemoryStage.PREFILL) {
+                prefillEntered.complete(Unit)
+                awaitCancellation()
+            }
+        })
+        manager.load(ModelBackend.GPU).join()
+        val generation = manager.testPrompt()
+        prefillEntered.await()
+        val pollsBeforeWait = polls
+        advanceTimeBy(1_001); runCurrent()
+        val pollsDuringPrefill = polls
+        assertTrue(pollsDuringPrefill > pollsBeforeWait)
+        manager.cancel().join(); generation.join()
+        manager.release().join()
+        assertEquals(0, engine.requests)
+        assertEquals(1, engine.releases)
+        assertEquals(RuntimeStatus.UNLOADED, manager.state.value.status)
+        val pollsAfterRelease = polls
+        snapshot = healthy.copy(lowMemory = true)
+        advanceTimeBy(5_001); runCurrent()
+        assertEquals(pollsAfterRelease, polls, "Cancelled benchmark must not retain its pressure monitor")
+        assertEquals(RuntimeStatus.UNLOADED, manager.state.value.status)
+        assertNull(manager.state.value.error)
         manager.shutdown()
     }
     @Test fun releaseWaitsForNativeCompletionAndCanReload() = runTest {
