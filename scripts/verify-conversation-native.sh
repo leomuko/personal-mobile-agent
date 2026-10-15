@@ -37,6 +37,22 @@ cleanup() {
     kill "$MONITOR_PID" 2>/dev/null || true
     wait "$MONITOR_PID" 2>/dev/null || true
   fi
+  if [[ "$STAGE" == instrumentation || "$STAGE" == validation || "$STAGE" == complete ]]; then
+    if [[ "${MEMORY_RELIABILITY:-false}" == true ]]; then
+      "$ADB" -s "$ANDROID_SERIAL" exec-out run-as "$PACKAGE" cat no_backup/memory-reliability.json > "$RESULTS/memory-reliability.json" 2> "$RESULTS/memory-report-export.txt" || true
+      "$ADB" -s "$ANDROID_SERIAL" exec-out run-as "$PACKAGE" cat no_backup/memory-samples.json > "$RESULTS/memory-samples.json" 2> "$RESULTS/memory-samples-export.txt" || true
+    fi
+    if ! bash scripts/collect-memory-exits.sh "$RESULTS"; then
+      if [[ "$STATUS" == passed ]]; then STATUS=failed; fi
+      if [[ "$code" == 0 ]]; then code=1; fi
+    fi
+    if [[ "${MEMORY_RELIABILITY:-false}" == true ]]; then
+      if ! node scripts/analyze-memory-reliability.mjs "$RESULTS" > "$RESULTS/memory-analysis.txt" 2>&1; then
+        if [[ "$STATUS" == passed ]]; then STATUS=failed; fi
+        if [[ "$code" == 0 ]]; then code=1; fi
+      fi
+    fi
+  fi
   RESULT_STAGE="$STAGE" RESULT_STATUS="$STATUS" RESULT_EXIT="$code" node --input-type=module - "$RESULTS/result.json" <<'JS'
 import { writeFileSync } from 'node:fs';
 writeFileSync(process.argv[2], JSON.stringify({ runId: process.env.MEMORY_RUN_ID, preflightMode: process.env.MEMORY_PREFLIGHT_MODE,
