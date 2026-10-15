@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
 }
+val androidPressureMemoryTest = providers.gradleProperty("androidPressureMemoryTest")
+    .map { it.toBooleanStrict() }.getOrElse(false)
 android {
     namespace = "dev.edgecompanion.app"
     compileSdk = 37
@@ -14,6 +16,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         ndk { abiFilters += listOf("arm64-v8a", "x86_64") }
         buildConfigField("boolean", "SECURE_WINDOWS", "true")
+        buildConfigField("boolean", "ANDROID_PRESSURE_MEMORY_TEST", "false")
     }
     buildTypes {
         getByName("debug") {
@@ -24,6 +27,7 @@ android {
             initWith(getByName("debug"))
             applicationIdSuffix = ".secureqa"
             buildConfigField("boolean", "SECURE_WINDOWS", "true")
+            buildConfigField("boolean", "ANDROID_PRESSURE_MEMORY_TEST", androidPressureMemoryTest.toString())
             matchingFallbacks += listOf("debug")
         }
     }

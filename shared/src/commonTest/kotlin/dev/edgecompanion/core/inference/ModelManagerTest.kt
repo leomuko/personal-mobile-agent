@@ -51,6 +51,44 @@ class ModelManagerTest {
         ModelManager(assets, engine, StandardTestDispatcher(testScheduler), resources,
             { testScheduler.currentTime }, enabled, idleMs = 60_000, memoryTelemetry = telemetry, memoryPolicy = policy)
 
+    @Test fun pressureExperimentAllowsLoadAndChatBelowBaselineFloor() = runTest {
+        var snapshot = healthy.copy(availableMemoryBytes = 2L shl 30, pressureThresholdBytes = 500L shl 20)
+        val engine = Engine().apply {
+            hang = false
+            afterLoad = { snapshot = snapshot.copy(availableMemoryBytes = 1L shl 30) }
+        }
+        val manager = manager(engine, resources = { snapshot }, policy = MemoryPolicies.AndroidPressureTest)
+        manager.load(ModelBackend.GPU).join()
+        assertEquals(RuntimeStatus.LOADED, manager.state.value.status)
+        manager.testPrompt().join()
+        assertEquals(1, engine.requests)
+        val terminal = manager.generateChat(ChatRequest("pressure", listOf(ChatMessage(ChatRole.USER, "Hello"))))
+            .toList().last() as ChatEvent.Terminal
+        assertEquals(ChatOutcome.COMPLETED, terminal.outcome)
+        manager.release().join()
+        assertEquals(RuntimeStatus.UNLOADED, manager.state.value.status)
+        assertEquals(1, engine.releases)
+        manager.shutdown()
+    }
+    @Test fun pressureExperimentImmediatelyInterruptsAndReleasesOnOsPressure() = runTest {
+        var snapshot = healthy.copy(availableMemoryBytes = 1L shl 30, pressureThresholdBytes = 500L shl 20)
+        val engine = Engine()
+        val manager = manager(engine, resources = { snapshot }, policy = MemoryPolicies.AndroidPressureTest)
+        val events = async { manager.generateChat(ChatRequest("pressure", listOf(ChatMessage(ChatRole.USER, "Hello")))).toList() }
+        runCurrent()
+        assertEquals(RuntimeStatus.GENERATING, manager.state.value.status)
+        advanceTimeBy(5_000); runCurrent()
+        assertFalse(events.isCompleted)
+        snapshot = snapshot.copy(lowMemory = true)
+        advanceTimeBy(1_000); runCurrent()
+        val terminal = events.await().last() as ChatEvent.Terminal
+        assertEquals(ChatOutcome.INTERRUPTED, terminal.outcome)
+        assertEquals(ModelError.LOW_MEMORY, terminal.error)
+        assertEquals(1, engine.cancels); assertEquals(1, engine.releases)
+        assertEquals(RuntimeStatus.UNLOADED, manager.state.value.status)
+        manager.shutdown()
+    }
+
     @Test fun manifestUsesLongAndExplicitContext() {
         val manifest = ModelCatalog.gemma4
         assertTrue(manifest.bytes > Int.MAX_VALUE)

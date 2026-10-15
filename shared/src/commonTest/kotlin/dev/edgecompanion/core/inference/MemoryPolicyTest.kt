@@ -19,6 +19,28 @@ class MemoryPolicyTest {
         assertEquals(policy.loadingFloorBytes, exported["loadingFloorBytes"])
         assertEquals(true, exported["enforceAvailableMemoryFloor"])
     }
+    @Test fun androidPressureExperimentSkipsFloorsButKeepsRequiredSignalsAndStops() {
+        val experimental = MemoryPolicies.AndroidPressureTest
+        assertNotEquals(policy.id, experimental.id)
+        assertEquals(false, experimental.exportFields()["enforceAvailableMemoryFloor"])
+        assertEquals(policy.loadingFloorBytes, experimental.loadingFloorBytes)
+        for (stage in MemoryAdmission.entries) {
+            val low = healthy.copy(availableMemoryBytes = 512L shl 20)
+            assertEquals(ModelError.LOW_MEMORY, policy.blockedReason(low, stage))
+            assertNull(experimental.blockedReason(low, stage))
+            assertEquals(ModelError.LOW_MEMORY, experimental.blockedReason(low.copy(lowMemory = true), stage))
+            assertEquals(ModelError.THERMAL, experimental.blockedReason(low.copy(thermalStatus = 3), stage))
+            assertEquals(ModelError.RESOURCE_UNKNOWN, experimental.blockedReason(low.copy(thermalStatus = null), stage))
+            assertEquals(ModelError.RESOURCE_UNKNOWN, experimental.blockedReason(low.copy(availableMemoryBytes = null), stage))
+            assertEquals(ModelError.RESOURCE_UNKNOWN, experimental.blockedReason(low.copy(pressureThresholdBytes = null), stage))
+            assertEquals(ModelError.RESOURCE_UNKNOWN, experimental.blockedReason(low.copy(pressureThresholdBytes = 0), stage))
+            assertEquals(ModelError.UNSUPPORTED_DEVICE, experimental.blockedReason(low.copy(totalMemoryBytes = 6L shl 30), stage))
+        }
+        val window = MemoryPressureWindow(experimental)
+        repeat(10) { assertNull(window.observe(healthy.copy(availableMemoryBytes = 1))) }
+        assertEquals(ModelError.LOW_MEMORY, window.observe(healthy.copy(lowMemory = true)))
+        assertNull(window.observe(healthy))
+    }
     @Test fun stagesAreExplicitAndPressureFlagsAreNotAllocationGuarantees() {
         val synthetic = policy.copy(id = "unit-test-only", generationFloorBytes = 2L shl 30)
         val loaded = healthy.copy(availableMemoryBytes = 2560L * 1024 * 1024)

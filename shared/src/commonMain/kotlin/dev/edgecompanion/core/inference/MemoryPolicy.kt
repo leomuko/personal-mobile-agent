@@ -57,6 +57,8 @@ object MemoryPolicies {
     val Current = MemoryPolicy("memory-baseline-v1", 3L shl 30, 3L shl 30,
         2560L * 1024 * 1024, 7L shl 30, 3, 1_000, 3, 45)
 
+    // Supervised QA experiment only; false OS pressure is not an allocation guarantee.
+    val AndroidPressureTest = Current.copy(id = "memory-android-pressure-test-v1", enforceAvailableMemoryFloor = false)
 }
 
 class MemoryPressureWindow(private val policy: MemoryPolicy) {
