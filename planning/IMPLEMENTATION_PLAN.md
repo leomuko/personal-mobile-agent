@@ -282,6 +282,8 @@ The [Phase 1 contracts](PHASE_1_PLAN.md) are authoritative for P1A Runtime Found
 
 The accepted [P1B conversation plan](P1B_CONVERSATION_PLAN.md) orders verified prompt budgeting, the request-specific runtime contract, persistence migration and shared state composition before UI generation. Assistant text is saved only on completion; durable attempt status supports interruption recovery and retry. Attachments remain preserved without model interpretation in this slice.
 
+Before P2, complete the [P1 memory-reliability work package](P1_MEMORY_RELIABILITY_PLAN.md): retained-engine cleanup, allocation-cycle telemetry, a versioned shared policy, then supervised S24 calibration. Existing thresholds remain unchanged until a measured replacement profile is reviewed. Its blocked or failed native gates do not become acceptance passes.
+
 The composer work is sequenced as C00-C06 in [COMPOSER_INPUT_PLAN.md](COMPOSER_INPUT_PLAN.md): package organization, shared draft/storage and restoration, attachment UI, file/gallery imports, camera return, inline recording, then integrated QA. These are work packages within the existing roadmap, not additional numbered phases. The roadmap remains eight phases, P0-P7; file selection and capture can ship before model-based analysis is ready. Reopen/restart preview restoration is a required gate, not a later enhancement.
 
 ### First implementation tickets

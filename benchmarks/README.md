@@ -13,13 +13,33 @@ node scripts/device-report.mjs DEVICE_ID
 adb -s DEVICE_ID install -r androidApp/build/outputs/apk/secureQa/androidApp-secureQa.apk
 ```
 
-Device reports omit device serial numbers and are stored in ignored `benchmarks/results/`. They distinguish emulators from hardware and mark model measurements `not_run`. Node.js is needed only for the optional report script, not to build the app.
+Device reports omit device serial numbers and are stored in ignored `benchmarks/results/`. They distinguish emulators from hardware and mark model measurements `not_run`. Node.js is used by host reporting/supervision scripts, not to build the app.
 
 Open the isolated QA app, then Settings > Local models (internal) > Import and select the pinned model. The importer enforces 2,588,147,712 bytes and the trusted SHA-256, with expected size plus 512 MiB free-space reserve. A provider-side copy needs its own storage too. The ignored host file `models/gemma-4-E2B-it.litertlm` matched the pin on 2026-10-02. Never commit model weights or personal app storage.
 
 Admission requires at least 7 GiB usable device RAM (allowing reservations on nominal 8 GB devices), at least 3 GiB available before load/generation, no low-memory signal and a known thermal state below SEVERE. These are provisional policies, not measured compatibility claims. The dedicated AVD was cold-booted with the user's approval into 8 GB RAM; its existing data partition remains about 6 GB despite the saved 16 GB setting. No data was wiped. Avoid keeping two full model copies on that partition; developer staging directly into the private immutable path is acceptable for the initial native spike, with startup hash verification still required.
 
 During generation the same 3 GiB available-memory floor is sampled once per second. Three consecutive below-floor samples cancel generation; recovery resets the counter. Android `lowMemory`, unknown resource signals and severe thermal pressure cancel on the first monitoring sample. This revised monitor needs new native evidence; earlier benchmark numbers were measured under the earlier policy.
+
+The [P1 memory-reliability work package](../planning/P1_MEMORY_RELIABILITY_PLAN.md) centralizes these unchanged values in `MemoryPolicies.Current` (`memory-baseline-v1`, not calibrated). The installed QA app exports the profile to the host; native-script thermal supervision now requires that export. Post-load memory rejection closes retained engines before retry. The allocation-cycle workbench records Android pressure thresholds separately from app PSS/RSS and system available RAM:
+
+```sh
+JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home" \
+  ANDROID_SERIAL=DEVICE_ID bash scripts/verify-memory-reliability.sh
+```
+
+Default workbench: GPU, 5 cycles and 20 sustained minutes. `MEMORY_SUSTAINED_MINUTES=0` is a smoke-only option. The default conversation/memory harness retains its 5.5 GiB supervised pre-load gate. Calibration needs a reviewed replacement profile; see [current evidence and blocked acceptance](../docs/P1_MEMORY_RELIABILITY_RESULTS.md).
+
+For the explicitly requested Android-pressure preflight experiment:
+
+```sh
+JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home" \
+  ANDROID_SERIAL=DEVICE_ID bash scripts/verify-memory-reliability.sh --android-pressure
+```
+
+This opt-in mode skips the host's available-RAM floor and load reserve only after three fresh Android probes report `lowMemory=false`. It also builds the isolated `secureQa` app with `-PandroidPressureMemoryTest=true`, selecting `memory-android-pressure-test-v1`. That test profile bypasses the app's available-RAM floors for loading, post-load admission and in-flight generation while Android reports `lowMemory=false`. OS pressure still cancels on the first monitor sample; missing pressure thresholds/resources, insufficient total RAM and unsafe thermal conditions still block/stop. No automatic fallback/retry is added. False OS pressure is not a guarantee that the next native allocation will succeed.
+
+The profile exports `enforceAvailableMemoryFloor=false`; every sample identifies its policy, and run/result metadata record `preflightMode=android-pressure`. Host preflight rejects a different installed admission mode. Regular debug/release builds cannot select this profile; the default harness explicitly builds `secureQa` with the experiment disabled. An experimental QA APK retains this profile until replaced by a default QA build, so use it only for supervised tests. Neither a workload pass nor this override approves normal-use calibration.
 
 ## Opt-In Native Harness
 

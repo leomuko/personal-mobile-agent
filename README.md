@@ -51,6 +51,8 @@ Verify the prompt bound with `bash scripts/verify-chat-budget.sh`. This creates 
 
 The internal [P1A runtime foundation](planning/PHASE_1_PLAN.md) and [P1B conversation integration](planning/P1B_CONVERSATION_PLAN.md) are implemented, with focused native evidence on the connected S24. Broader mobile and release acceptance remains open; this is not full Phase 1 acceptance. See the [Gemma 4 / LiteRT-LM decision](docs/decisions/0003-gemma4-litert-lm.md), [historical foundation decisions](docs/decisions/0001-phase0-foundation.md), and [benchmark instructions](benchmarks/README.md).
 
+Before P2, the [P1 memory-reliability work package](planning/P1_MEMORY_RELIABILITY_PLAN.md) fixes retained-engine cleanup and adds opt-in allocation telemetry plus an app-exported shared policy. Existing thresholds remain unchanged. Current S24 calibration is blocked by that baseline policy, not certified by prior native passes; see [memory-reliability results](docs/P1_MEMORY_RELIABILITY_RESULTS.md).
+
 The 2026-10-13 S24 GPU smoke passed after the runtime QA revisions. Full S24 instrumentation still has camera-permission/accessibility and notification harness failures, and the revised monitor needs sustained validation. The unsigned release APK currently includes LiteRT-LM native libraries despite disabled runtime controls; isolate that dependency before distribution. See [QA revision results](docs/PHASE_1_QA_REVISIONS.md).
 
 ## Device tests
