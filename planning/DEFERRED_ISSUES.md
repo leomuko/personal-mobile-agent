@@ -2,6 +2,22 @@
 
 Originally deferred on 2026-09-26, then authorized for implementation with the QA remediation. Updated 2026-09-27: both fixes are implemented with emulator regression evidence. Physical S24 Ultra acceptance remains open; see `docs/QA_REMEDIATION_RESULTS.md`.
 
+## BUILD-001: Isolate Native Runtime Dependencies Before Release Distribution
+
+- Status: explicitly deferred by the user on 2026-10-15 while development remains internal. Do not perform release packaging changes as part of P2 without authorization.
+- Current state: LiteRT-LM is an unconditional shared Android dependency, so native libraries can be packaged in release APKs even though inference entry points are disabled outside debug builds.
+- Future work: establish the intended internal/release dependency boundary, inspect merged manifests/native ABIs, retain required notices and verify release behavior without relying on hidden controls.
+- Revisit before distributing any release APK. Deferral is not distribution approval or evidence that release packaging is ready.
+
+## MODEL-001: Retain the Current QA Android-Pressure Policy
+
+- Decision: the user agreed on 2026-10-15 to keep the threshold experiment as currently implemented. No further threshold change or automatic promotion is authorized by this decision.
+- Scope: `memory-android-pressure-test-v1`, selected only by debug + `secureQa` + the explicit `androidPressureMemoryTest` build flag. The supervised `--android-pressure` harness enables that flag. Ordinary debug/release and default QA builds still use the baseline 3 GiB floors.
+- Behavior: bypass available-RAM floors while Android reports `lowMemory=false`; cancel on the first generation-monitor sample with `lowMemory=true`. Required signals, minimum total RAM, thermal stops, ownership/cleanup and quarantine remain enforced. False OS pressure is not an allocation guarantee.
+- Evidence: five GPU cycles and 20 sustained minutes passed on the S24, including observed generation below 3 GiB. See [memory reliability results](../docs/P1_MEMORY_RELIABILITY_RESULTS.md).
+- Later decision: review a default normal-use memory policy separately. Do not restore the QA floor, relax other safeguards, enlarge context, or apply this profile to ordinary builds implicitly during P2.
+- Host-disconnect protection and remaining lifecycle/recovery QA are still open work, not deferred by the release-packaging decision.
+
 ## UI-001: Mascot drawer brings the full app forward
 
 - Priority: P1. Status: implemented; separate drawer task, close/Back cleanup and main-task reuse verified on API 36. Broader device acceptance pending.
