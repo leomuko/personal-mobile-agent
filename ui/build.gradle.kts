@@ -9,6 +9,7 @@ kotlin {
     jvm()
     jvmToolchain(17)
     sourceSets {
+        commonTest.dependencies { implementation(kotlin("test")) }
         commonMain.dependencies {
             implementation(libs.navigation.compose)
             implementation(libs.lifecycle.viewmodel.compose)
