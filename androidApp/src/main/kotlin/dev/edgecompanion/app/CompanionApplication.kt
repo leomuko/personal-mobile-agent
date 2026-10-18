@@ -9,6 +9,7 @@ import dev.edgecompanion.app.overlay.PresenceCoordinator
 import android.app.Application
 import android.app.Activity
 import android.os.Bundle
+import dev.edgecompanion.core.appearance.AppearancePreferences
 import dev.edgecompanion.core.conversation.session.ConversationSession
 import dev.edgecompanion.core.di.androidStorageModule
 import dev.edgecompanion.core.di.sharedModule
@@ -25,6 +26,7 @@ class CompanionApplication : Application() {
             allowOverride(false)
             modules(sharedModule(), androidStorageModule(this@CompanionApplication), appModule(), modelModule(this@CompanionApplication))
         }.koin
+        koin.get<AppearancePreferences>()
         registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
             override fun onActivityStarted(activity: Activity) { presence.started(System.identityHashCode(activity)) }
             override fun onActivityStopped(activity: Activity) { presence.stopped(System.identityHashCode(activity), activity.isChangingConfigurations) }
