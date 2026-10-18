@@ -19,5 +19,8 @@ object ModelTestPrompts {
     const val SHORT = "List three colors, separated by commas."
     const val MEDIUM = """Summarize this fictional project update in three concise sentences. The Cedar team is building a small library kiosk for a community center. On Monday, the team tested the card scanner with twenty sample books and found that two labels were damaged. On Tuesday, they replaced those labels and repeated the scan with no errors. The kiosk display is ready, but the printed instructions still need a final review. Maya will check the instructions on Thursday. Omar will prepare the opening-day checklist on Friday. The team plans a practice session next week, using only sample records. No personal borrower information is part of this update."""
     const val CANCELLATION = "Write a numbered list of one hundred simple household objects, one per line."
-    val allowed = setOf(SHORT, MEDIUM, CANCELLATION)
+    // Synthetic benchmark only; the pinned tokenizer verifier checks its context budget.
+    val SUPERVISION_PREFILL = "Summarize the following synthetic number sequence in one sentence: " +
+        (1..384).joinToString(" ")
+    val allowed = setOf(SHORT, MEDIUM, CANCELLATION, SUPERVISION_PREFILL)
 }

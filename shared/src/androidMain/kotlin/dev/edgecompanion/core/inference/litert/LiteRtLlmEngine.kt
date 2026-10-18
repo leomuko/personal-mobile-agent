@@ -11,7 +11,10 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
 @OptIn(ExperimentalApi::class)
-class LiteRtLlmEngine(private val enabled: Boolean) : LocalLlmEngine {
+class LiteRtLlmEngine(
+    private val enabled: Boolean,
+    private val phaseObserver: ((LiteRtPhase) -> Unit)? = null,
+) : LocalLlmEngine {
     private val lifecycle = Mutex()
     private val handles = Any()
     private var engine: Engine? = null
@@ -24,6 +27,7 @@ class LiteRtLlmEngine(private val enabled: Boolean) : LocalLlmEngine {
         val events = Channel<GenerationEvent>(Channel.UNLIMITED)
         val cancelled = AtomicBoolean(false)
         val failed = AtomicBoolean(false)
+        val firstText = AtomicBoolean(false)
         var started = false
     }
 
@@ -41,9 +45,11 @@ class LiteRtLlmEngine(private val enabled: Boolean) : LocalLlmEngine {
                     visionBackend = null, audioBackend = null, maxNumTokens = config.contextTokens,
                     cacheDir = ":nocache"))
                 // No automatic backend retry: failed initialization cleanup must first be proved on this SDK/device.
+                phase(LiteRtPhase.INITIALIZING)
                 candidate.initialize()
                 engine = candidate
                 this@LiteRtLlmEngine.config = config
+                phase(LiteRtPhase.LOADED)
                 Result.success(Unit)
             } catch (cancelled: CancellationException) { throw cancelled }
             catch (_: LinkageError) { Result.failure(ModelException(ModelError.UNSUPPORTED_DEVICE)) }
@@ -93,14 +99,21 @@ class LiteRtLlmEngine(private val enabled: Boolean) : LocalLlmEngine {
                             running.events.close()
                         } else {
                             try {
+                                phase(LiteRtPhase.PREFILL)
                                 conversation.sendMessageAsync(chat?.messages?.last()?.text ?: request.prompt, object : MessageCallback {
                                     override fun onMessage(message: Message) {
                                         val text = extractText(message)
+                                        if (text.isNotEmpty() && running.firstText.compareAndSet(false, true))
+                                            phase(LiteRtPhase.DECODING)
                                         if (text.isNotEmpty() && !running.cancelled.get() && active === running)
                                             running.events.trySend(GenerationEvent.Token(text))
                                     }
-                                    override fun onDone() { running.done.complete(Unit); running.events.close() }
+                                    override fun onDone() {
+                                        phase(LiteRtPhase.TERMINAL)
+                                        running.done.complete(Unit); running.events.close()
+                                    }
                                     override fun onError(throwable: Throwable) {
+                                        phase(LiteRtPhase.TERMINAL)
                                         running.failed.set(true)
                                         if (throwable !is java.util.concurrent.CancellationException)
                                             running.events.trySend(GenerationEvent.Failed(ModelError.GENERATION_FAILED))
@@ -164,12 +177,20 @@ class LiteRtLlmEngine(private val enabled: Boolean) : LocalLlmEngine {
         lifecycle.withLock {
             withContext(Dispatchers.IO) {
                 if (poisoned) throw ModelException(ModelError.RESTART_REQUIRED)
-                try { engine?.close(); engine = null; config = null }
+                try { engine?.close(); engine = null; config = null; phase(LiteRtPhase.RELEASED) }
                 catch (_: Exception) { poisoned = true; throw ModelException(ModelError.RELEASE_FAILED) }
             }
         }
     }
+
+    // Optional metadata-only QA observation; never let diagnostics change native ownership.
+    private fun phase(value: LiteRtPhase) {
+        if (enabled) try { phaseObserver?.invoke(value) } catch (_: Exception) { }
+    }
 }
+
+/** PREFILL spans send submission to the first nonempty text callback; no artificial delay. */
+enum class LiteRtPhase { INITIALIZING, LOADED, PREFILL, DECODING, TERMINAL, RELEASED }
 
 internal fun extractText(message: Message): String = message.contents.contents
     .mapNotNull { (it as? Content.Text)?.text }

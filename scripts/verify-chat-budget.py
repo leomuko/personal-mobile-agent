@@ -72,8 +72,16 @@ def verify(model):
                     "<turn|>\n<|turn>user\n" + right.strip() + "<turn|>\n<|turn>model\n")
         bound = 128 + 3 * 96 + 3 * (2 + len(left.encode("utf-8")) + len(right.encode("utf-8")))
         check_budget(len(processor.encode(rendered)), bound, "history case " + str(case))
+    prefill = "Summarize the following synthetic number sequence in one sentence: " + " ".join(str(i) for i in range(1, 385))
+    prefill_hash = hashlib.sha256(prefill.encode("utf-8")).hexdigest()
+    verify_digest(prefill_hash, "e769e953b92ff0677b861257131627d3558d06de671c645fbfe08bee7bf13f5c", "supervision fixture")
+    rendered = "<bos><|turn>user\n" + prefill + "<turn|>\n<|turn>model\n"
+    prefill_tokens = len(processor.encode(rendered))
+    require(prefill_tokens + 64 + 512 <= 2048, "supervision fixture exceeds context including template allowance/output reserve")
     return {"status": "passed", "modelSha256": digest, "tokenizerSha256": tokenizer_digest,
-            "singleTurnCases": len(texts), "historyCases": 1000, "calculator": "gemma4-e2b-byte-bound-v1"}
+            "singleTurnCases": len(texts), "historyCases": 1000, "calculator": "gemma4-e2b-byte-bound-v1",
+            "supervisionPrefill": {"sha256": prefill_hash, "inputTokens": prefill_tokens,
+                                   "templateAllowance": 64, "outputReserve": 512, "contextTokens": 2048}}
 
 
 def main():
