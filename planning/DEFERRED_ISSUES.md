@@ -16,7 +16,7 @@ Originally deferred on 2026-09-26, then authorized for implementation with the Q
 - Behavior: bypass available-RAM floors while Android reports `lowMemory=false`; cancel on the first generation-monitor sample with `lowMemory=true`. Required signals, minimum total RAM, thermal stops, ownership/cleanup and quarantine remain enforced. False OS pressure is not an allocation guarantee.
 - Evidence: five GPU cycles and 20 sustained minutes passed on the S24, including observed generation below 3 GiB. See [memory reliability results](../docs/P1_MEMORY_RELIABILITY_RESULTS.md).
 - Later decision: review a default normal-use memory policy separately. Do not restore the QA floor, relax other safeguards, enlarge context, or apply this profile to ordinary builds implicitly during P2.
-- Host-disconnect protection and remaining lifecycle/recovery QA are still open work, not deferred by the release-packaging decision.
+- Host-disconnect protection is implemented in test-only QA supervision, with synthetic S24 heartbeat-loss/hung-cleanup checks and real native initialization/prefill/decoding loss plus fresh-process recovery under this explicitly authorized profile; see [supervision results](../docs/P2_SUPERVISION_RESULTS.md) and [native phase-loss scope](../docs/P2_NATIVE_SUPERVISION_RESULTS.md). Physical transport/host-failure and broader lifecycle QA remain open, not deferred by the release-packaging decision. No memory-profile decision changed.
 
 ## UI-001: Mascot drawer brings the full app forward
 

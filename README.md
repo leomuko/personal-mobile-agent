@@ -31,6 +31,8 @@ The mascot is hidden while an assistant screen is visible. Go Home or to another
 - KMP shared core, Compose Multiplatform UI, and Android application host.
 - Koin dependency modules, lifecycle-aware host ViewModels, and Navigation Compose side-drawer navigation. See [dependency and navigation architecture](docs/decisions/0002-koin-navigation-lifecycle.md).
 - Approved mascot asset, Chat/Memory/Sources shell, settings, drawer and floating service.
+- System/Light/Dark appearance with an app-scoped preference owner, themed conversation/capture hosts, and distinct amber `Assistant (QA)` launcher branding. See [P2 appearance evidence and remaining gates](docs/P2_APPEARANCE_RESULTS.md).
+- Test-only, run-correlated native QA supervision with device-local expiry and emergency process termination; synthetic S24 loss/hung-cleanup checks are documented in [P2 supervision results](docs/P2_SUPERVISION_RESULTS.md). This does not claim a new native acceptance pass.
 - Shared encrypted conversation/draft storage, full-text index, schema migration and clear-conversation control.
 - Durable encrypted draft and sent attachments, multiple document/image selection, image thumbnails and document tiles restored after reopening.
 - Unified compact/expanded composer with the microphone beside Send, mixed attachment tiles inside the input container, and a three-option attachment sheet. Dictation-first audio remains deferred; current audio review/playback is preserved.
