@@ -1,6 +1,8 @@
 package dev.edgecompanion.app
 
 import androidx.activity.compose.BackHandler
+import dev.edgecompanion.app.appearance.AssistantAppearance
+import dev.edgecompanion.core.appearance.AppearancePreferences
 import dev.edgecompanion.app.inference.modelDocumentSource
 import dev.edgecompanion.ui.settings.viewmodel.ModelsViewModel
 import dev.edgecompanion.ui.settings.screen.ModelsPanel
@@ -45,7 +47,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.edgecompanion.ui.app.CompanionScreen
-import dev.edgecompanion.ui.designsystem.theme.CompanionTheme
 import dev.edgecompanion.ui.conversation.viewmodel.ConversationViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.android.ext.android.inject
@@ -53,6 +54,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.NumberFormat
 
 open class MainActivity : ComponentActivity() {
+    private val appearance: AppearancePreferences by inject()
     protected open val drawer = false
     private val conversation: ConversationViewModel by viewModel()
     private val models: ModelsViewModel by viewModel()
@@ -100,12 +102,12 @@ open class MainActivity : ComponentActivity() {
         notificationDialog = savedInstanceState?.getBoolean("notificationDialog") ?: false
         if (drawer) onBackPressedDispatcher.addCallback(this) { closeDrawer() }
         setContent {
-            CompanionTheme {
+            AssistantAppearance(appearance, floating = drawer) { appearanceState ->
                 val state by conversation.state.collectAsStateWithLifecycle()
                 val recording by audio.state.collectAsStateWithLifecycle()
                 BackHandler(enabled = recording.active) { confirmDiscard = true }
                 val presenceState by presence.state.collectAsStateWithLifecycle()
-                Box(Modifier.fillMaxSize().background(if (drawer) Color.Transparent else Color.White)
+                Box(Modifier.fillMaxSize().background(if (drawer) Color.Transparent else MaterialTheme.colorScheme.background)
                     .statusBarsPadding().navigationBarsPadding().imePadding(), contentAlignment = Alignment.BottomCenter) {
                     Surface(modifier = Modifier.fillMaxWidth().then(if (drawer) Modifier.fillMaxHeight(0.86f) else Modifier.fillMaxHeight()),
                         shape = if (drawer) RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp) else RoundedCornerShape(0.dp)) {
@@ -127,6 +129,7 @@ open class MainActivity : ComponentActivity() {
                             recording = recording,
                             onStopRecording = { audio.stop() }, onCancelRecording = { audio.stop(cancel = true) },
                             onCancelAssistant = conversation::cancelAssistant, onRetryAssistant = conversation::retryAssistant,
+                            appearance = appearanceState, onThemeMode = { appearance.select(it) },
                             modelsContent = if (BuildConfig.DEBUG) ({
                                 val modelState by models.runtime.collectAsStateWithLifecycle()
                                 val assetState by models.asset.collectAsStateWithLifecycle()

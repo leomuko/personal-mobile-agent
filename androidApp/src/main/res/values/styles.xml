@@ -2,9 +2,13 @@
     <style name="Theme.Companion" parent="android:style/Theme.Material.Light.NoActionBar">
         <item name="android:fontFamily">sans</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowBackground">@color/assistant_window_background</item>
+        <item name="android:windowSplashScreenBackground">@color/assistant_window_background</item>
+        <item name="android:forceDarkAllowed">false</item>
         <item name="android:colorAccent">#16634D</item>
-        <item name="android:navigationBarColor">#FFFFFF</item>
-        <item name="android:statusBarColor">#FFFFFF</item>
+        <item name="android:navigationBarColor">@color/assistant_window_background</item>
+        <item name="android:statusBarColor">@color/assistant_window_background</item>
     </style>
     <style name="Theme.Companion.Drawer" parent="Theme.Companion">
         <item name="android:windowIsTranslucent">true</item>
