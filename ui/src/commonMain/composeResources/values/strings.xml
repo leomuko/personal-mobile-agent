@@ -1,4 +1,11 @@
 <resources>
+    <string name="appearance">Appearance</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="appearance_load_failed">Appearance could not be loaded. Choose a setting to try again.</string>
+    <string name="appearance_save_failed">Appearance could not be applied. Check the selected setting and try again.</string>
+    <string name="appearance_retry">Retry appearance</string>
     <string name="assistant_stop">Stop response</string>
     <string name="assistant_retry">Retry response</string>
     <string name="assistant_cancelled">Response cancelled</string>

@@ -11,16 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import dev.edgecompanion.ui.designsystem.theme.*
 import dev.edgecompanion.ui.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 data class RecordingState(val active: Boolean = false, val seconds: Int = 0, val levels: List<Float> = List(32) { 0f })
 
 @Composable internal fun RecordingBubble(state: RecordingState, onStop: () -> Unit, onCancel: () -> Unit) {
-    Surface(color = Mint, shape = RoundedCornerShape(8.dp), modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+    val waveColor = MaterialTheme.colorScheme.primary
+    Surface(color = MaterialTheme.colorScheme.primaryContainer, contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        shape = RoundedCornerShape(8.dp), modifier = Modifier.fillMaxWidth().padding(8.dp)) {
         Column(Modifier.padding(12.dp)) {
             Row {
                 Text(stringResource(Res.string.recording_inline), Modifier.weight(1f))
@@ -30,11 +30,12 @@ data class RecordingState(val active: Boolean = false, val seconds: Int = 0, val
                 state.levels.forEachIndexed { index, level ->
                     val x = size.width * (index + 0.5f) / state.levels.size
                     val height = (level.coerceIn(0f, 1f) * size.height).coerceAtLeast(3f)
-                    drawLine(Forest, Offset(x, (size.height - height) / 2), Offset(x, (size.height + height) / 2), 2.5.dp.toPx(), StrokeCap.Round)
+                    drawLine(waveColor, Offset(x, (size.height - height) / 2), Offset(x, (size.height + height) / 2), 2.5.dp.toPx(), StrokeCap.Round)
                 }
             }
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                FilledTonalIconButton(onClick = onCancel, colors = IconButtonDefaults.filledTonalIconButtonColors(containerColor = Color.White, contentColor = Forest)) {
+                FilledTonalIconButton(onClick = onCancel, colors = IconButtonDefaults.filledTonalIconButtonColors(
+                    containerColor = MaterialTheme.colorScheme.surface, contentColor = MaterialTheme.colorScheme.primary)) {
                     Icon(Icons.Outlined.Close, stringResource(Res.string.cancel_recording))
                 }
                 FilledIconButton(onClick = onStop) { Icon(Icons.Filled.Stop, stringResource(Res.string.stop_recording)) }

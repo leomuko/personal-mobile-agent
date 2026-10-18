@@ -2,7 +2,6 @@ package dev.edgecompanion.ui.conversation.components
 
 import dev.edgecompanion.core.attachments.model.Attachment
 
-import dev.edgecompanion.ui.designsystem.theme.Mint
 import dev.edgecompanion.ui.designsystem.components.Mascot
 import dev.edgecompanion.ui.conversation.presentation.stringResource
 
@@ -18,7 +17,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.edgecompanion.core.conversation.model.*
 import dev.edgecompanion.core.inference.ModelError
@@ -41,8 +39,8 @@ import org.jetbrains.compose.resources.stringResource
             list.animateScrollToItem(state.messages.size)
     }
     Column(modifier.fillMaxWidth()) {
-        if (!state.assistant.enabled) Text(stringResource(Res.string.model_missing), Modifier.fillMaxWidth().background(Color(0xFFF5F1EC)).padding(12.dp),
-            color = Color(0xFF735438), style = MaterialTheme.typography.labelMedium)
+        if (!state.assistant.enabled) Text(stringResource(Res.string.model_missing), Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.tertiaryContainer).padding(12.dp),
+            color = MaterialTheme.colorScheme.onTertiaryContainer, style = MaterialTheme.typography.labelMedium)
         val relevantAttachments = state.attachments.any {
             it.messageId == null || (state.assistant.active && it.messageId == state.assistant.userId)
         }
@@ -65,7 +63,8 @@ import org.jetbrains.compose.resources.stringResource
             items(state.messages, key = { it.id }) { message ->
                 Column(Modifier.fillMaxWidth(), horizontalAlignment = if (message.role == MessageRole.USER) Alignment.End else Alignment.Start) {
                     AttachmentStrip(state.attachments.filter { it.messageId == message.id }, onPreview = onPreview, thumbnail = thumbnail)
-                    if (message.text.isNotEmpty()) Surface(color = if (message.role == MessageRole.USER) Mint else MaterialTheme.colorScheme.surfaceContainer,
+                    if (message.text.isNotEmpty()) Surface(color = if (message.role == MessageRole.USER) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceContainer,
+                        contentColor = if (message.role == MessageRole.USER) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface,
                         shape = RoundedCornerShape(8.dp), modifier = Modifier.fillMaxWidth(0.9f).testTag("message-${message.role.name}-${message.id}")) {
                         Text(message.text, Modifier.padding(14.dp), style = MaterialTheme.typography.bodyLarge)
                     }

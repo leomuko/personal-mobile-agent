@@ -1,7 +1,5 @@
 package dev.edgecompanion.ui.navigation
 
-import dev.edgecompanion.ui.designsystem.theme.Forest
-import dev.edgecompanion.ui.designsystem.theme.Mint
 import dev.edgecompanion.ui.designsystem.components.Mascot
 import dev.edgecompanion.ui.designsystem.components.ToolButton
 
@@ -68,8 +66,8 @@ internal fun AssistantNavigation(
                 if (destination == AssistantDestination.SETTINGS) HorizontalDivider(Modifier.padding(vertical = 12.dp))
                 NavigationDrawerItem(
                     shape = RoundedCornerShape(8.dp),
-                    colors = NavigationDrawerItemDefaults.colors(selectedContainerColor = Mint,
-                        selectedIconColor = Forest, selectedTextColor = Forest),
+                    colors = NavigationDrawerItemDefaults.colors(selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                        selectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer, selectedTextColor = MaterialTheme.colorScheme.onPrimaryContainer),
                     label = { Text(stringResource(destination.label)) },
                     selected = (entry?.destination?.route ?: AssistantDestination.CHAT.route) == destination.route,
                     onClick = { select(destination) },

@@ -23,6 +23,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.edgecompanion.core.conversation.model.ConversationState
+import dev.edgecompanion.core.appearance.AppearanceState
+import dev.edgecompanion.core.appearance.ThemeMode
 import dev.edgecompanion.ui.resources.*
 import org.jetbrains.compose.resources.stringResource
 
@@ -52,6 +54,8 @@ import org.jetbrains.compose.resources.stringResource
     modelsContent: (@Composable () -> Unit)? = null,
     onCancelAssistant: () -> Unit = {},
     onRetryAssistant: (Long) -> Unit = {},
+    appearance: AppearanceState = AppearanceState(),
+    onThemeMode: (ThemeMode) -> Unit = {},
 ) {
     var confirmClear by remember { mutableStateOf(false) }
     AssistantNavigation(drawer, conversationRequest) { destination, openMenu, chatList ->
@@ -71,7 +75,8 @@ import org.jetbrains.compose.resources.stringResource
         }
         when {
             settings -> {
-                SettingsScreen(overlayEnabled, notificationsAvailable, deviceSummary, state.ready, onOverlay, onNotificationSettings, { confirmClear = true }, Modifier.weight(1f), modelsContent)
+                SettingsScreen(overlayEnabled, notificationsAvailable, deviceSummary, state.ready, onOverlay, onNotificationSettings,
+                    { confirmClear = true }, Modifier.weight(1f), modelsContent, appearance, onThemeMode)
             }
             destination == AssistantDestination.CHAT -> {
                 if (drawer && overlayEnabled) {
