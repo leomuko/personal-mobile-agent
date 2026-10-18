@@ -21,6 +21,8 @@ PACKAGE=dev.edgecompanion.app.secureqa
 mkdir -p "$ROOT/benchmarks/results"
 RESULTS="$(mktemp -d "$ROOT/benchmarks/results/chat-$(date -u +%Y%m%dT%H%M%SZ)-XXXXXX")"
 export MEMORY_RUN_ID="$(node -e 'process.stdout.write(require("node:crypto").randomUUID())')"
+export QA_SUPERVISION_RUN_ID="$MEMORY_RUN_ID"
+export QA_SUPERVISOR_PID=$$
 node --input-type=module - "$RESULTS/run-context.json" "$MEMORY_RUN_ID" <<'JS'
 import { writeFileSync } from 'node:fs';
 writeFileSync(process.argv[2], JSON.stringify({ runId: process.argv[3], preflightMode: process.env.MEMORY_PREFLIGHT_MODE }) + '\n');
@@ -38,6 +40,11 @@ cleanup() {
     wait "$MONITOR_PID" 2>/dev/null || true
   fi
   if [[ "$STAGE" == instrumentation || "$STAGE" == validation || "$STAGE" == complete ]]; then
+    if ! "$ADB" -s "$ANDROID_SERIAL" exec-out run-as "$PACKAGE" cat "no_backup/qa-supervision/$QA_SUPERVISION_RUN_ID/status.json" > "$RESULTS/supervision.json" ||
+        ! node scripts/verify-qa-supervision.mjs "$RESULTS/supervision.json" "$QA_SUPERVISION_RUN_ID"; then
+      STATUS=failed
+      if [[ "$code" == 0 ]]; then code=1; fi
+    fi
     if [[ "${MEMORY_RELIABILITY:-false}" == true ]]; then
       "$ADB" -s "$ANDROID_SERIAL" exec-out run-as "$PACKAGE" cat no_backup/memory-reliability.json > "$RESULTS/memory-reliability.json" 2> "$RESULTS/memory-report-export.txt" || true
       "$ADB" -s "$ANDROID_SERIAL" exec-out run-as "$PACKAGE" cat no_backup/memory-samples.json > "$RESULTS/memory-samples.json" 2> "$RESULTS/memory-samples-export.txt" || true
@@ -98,11 +105,13 @@ if [[ "${MEMORY_RELIABILITY:-false}" == true ]]; then
     -e nativeMemory true -e supervisedThermal true -e memoryCycles "${MEMORY_CYCLES:-5}" \
     -e memorySustainedMinutes "${MEMORY_SUSTAINED_MINUTES:-20}" \
     -e memoryRunId "$MEMORY_RUN_ID" \
+    -e supervisionRunId "$QA_SUPERVISION_RUN_ID" \
     -e memoryPreflightMode "$MEMORY_PREFLIGHT_MODE" \
     "$PACKAGE.test/androidx.test.runner.AndroidJUnitRunner" 2>&1 | tee "$RESULTS/instrumentation.txt"
 else
   "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r -e class dev.edgecompanion.app.ConversationNativeTest \
-    -e nativeChat true "$PACKAGE.test/androidx.test.runner.AndroidJUnitRunner" 2>&1 | tee "$RESULTS/instrumentation.txt"
+    -e nativeChat true -e supervisedThermal true -e supervisionRunId "$QA_SUPERVISION_RUN_ID" \
+    "$PACKAGE.test/androidx.test.runner.AndroidJUnitRunner" 2>&1 | tee "$RESULTS/instrumentation.txt"
 fi
 stage validation
 [[ ! -f "$THERMAL_REPORT_DIR/safety-stop.json" ]]

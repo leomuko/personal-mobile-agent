@@ -5,6 +5,13 @@ cd "$ROOT"
 : "${ANDROID_SERIAL:?Set ANDROID_SERIAL to the designated emulator or authorized S24}"
 ADB="${ADB:-${ANDROID_HOME:-$HOME/Library/Android/sdk}/platform-tools/adb}"
 export ADB
+if [[ "${SUPERVISED_THERMAL:-true}" != true ]]; then
+  printf 'Native runtime QA now requires supervised thermal monitoring and a device lease.\n' >&2
+  exit 2
+fi
+export SUPERVISED_THERMAL=true
+export QA_SUPERVISION_RUN_ID="$(node -e 'process.stdout.write(require("node:crypto").randomUUID())')"
+export QA_SUPERVISOR_PID=$$
 BACKEND="${MODEL_BACKEND:-CPU}"
 [[ "$BACKEND" == CPU || "$BACKEND" == GPU ]] || exit 2
 PACKAGE=dev.edgecompanion.app.secureqa
@@ -43,8 +50,11 @@ fi
   -e class dev.edgecompanion.app.ModelRuntimeTest -e nativeModel true \
   -e modelBackend "$BACKEND" -e modelRepetitions "${MODEL_REPETITIONS:-1}" \
   -e modelSustainedMinutes "${MODEL_SUSTAINED_MINUTES:-0}" -e supervisedThermal "${SUPERVISED_THERMAL:-false}" \
+  -e supervisionRunId "$QA_SUPERVISION_RUN_ID" \
   "$PACKAGE.test/androidx.test.runner.AndroidJUnitRunner" | tee "$RESULTS/instrumentation.txt"
 "$ADB" -s "$ANDROID_SERIAL" exec-out run-as "$PACKAGE" cat no_backup/model-benchmark.json > "$RESULTS/runtime.json"
+"$ADB" -s "$ANDROID_SERIAL" exec-out run-as "$PACKAGE" cat "no_backup/qa-supervision/$QA_SUPERVISION_RUN_ID/status.json" > "$RESULTS/supervision.json"
+node scripts/verify-qa-supervision.mjs "$RESULTS/supervision.json" "$QA_SUPERVISION_RUN_ID"
 if [[ -n "$MONITOR_PID" ]]; then
   kill -0 "$MONITOR_PID"
   [[ ! -f "$THERMAL_REPORT_DIR/safety-stop.json" ]]

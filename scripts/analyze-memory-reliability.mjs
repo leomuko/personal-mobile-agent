@@ -1,9 +1,11 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { validSupervision } from './verify-qa-supervision.mjs';
 
-export function summarizeMemoryRun(run, exits, profile, expectedRunId) {
+export function summarizeMemoryRun(run, exits, profile, expectedRunId, supervision) {
   const issues = [];
+  if (!validSupervision(supervision, expectedRunId, run.finishedAtMs)) issues.push('incomplete-supervision');
   if (run.status !== 'passed') issues.push('native-workload-did-not-pass');
   const keys = Object.keys(profile);
   if (!run.policy || Object.keys(run.policy).length !== keys.length || keys.some(key => run.policy[key] !== profile[key]))
@@ -47,7 +49,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const folder = process.argv[2];
   try {
     const read = name => JSON.parse(readFileSync(join(folder, name), 'utf8'));
-    const summary = summarizeMemoryRun(read('memory-reliability.json'), read('exits-after.json'), read('memory-policy.json'), read('run-context.json').runId);
+    const summary = summarizeMemoryRun(read('memory-reliability.json'), read('exits-after.json'), read('memory-policy.json'), read('run-context.json').runId, read('supervision.json'));
     writeFileSync(join(folder, 'memory-summary.json'), JSON.stringify(summary, null, 2) + '\n');
     if (!summary.workloadPassed) process.exitCode = 1;
   } catch (error) { console.error(`Incomplete memory evidence: ${error.message}`); process.exitCode = 1; }

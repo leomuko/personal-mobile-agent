@@ -7,6 +7,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import dev.edgecompanion.app.inference.MemoryTelemetryRecorder
 import dev.edgecompanion.app.inference.AndroidModelResources
 import dev.edgecompanion.app.navigation.AssistantIntents
+import dev.edgecompanion.app.support.DeviceSupervision
 import dev.edgecompanion.core.inference.*
 import java.io.File
 import kotlinx.coroutines.*
@@ -34,6 +35,7 @@ class MemoryReliabilityTest {
         val manager = koin.get<ModelManager>()
         val pressureMode = args.getString("memoryPreflightMode") == "android-pressure"
         check(manager.memoryPolicy.enforceAvailableMemoryFloor == !pressureMode) { "Workload/profile mode mismatch" }
+        DeviceSupervision.requireFor(manager, runId).use {
         val recorder = koin.get<MemoryTelemetryRecorder>()
         val resources = koin.get<AndroidModelResources>()
         val output = File(context.noBackupFilesDir, "memory-reliability.json")
@@ -151,6 +153,7 @@ class MemoryReliabilityTest {
                 check(!uncertain) { "Native cleanup is unconfirmed" }
                 check(!invalidTelemetry) { "Memory telemetry is incomplete" }
             }
+        }
         }
     }
 }

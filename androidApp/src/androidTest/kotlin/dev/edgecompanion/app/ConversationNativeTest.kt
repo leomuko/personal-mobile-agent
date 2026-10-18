@@ -6,6 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.platform.app.InstrumentationRegistry
 import dev.edgecompanion.app.navigation.AssistantIntents
 import dev.edgecompanion.app.inference.AndroidModelResources
+import dev.edgecompanion.app.support.DeviceSupervision
 import dev.edgecompanion.core.conversation.model.*
 import dev.edgecompanion.core.conversation.session.ConversationSession
 import dev.edgecompanion.core.inference.*
@@ -25,6 +26,7 @@ class ConversationNativeTest {
         val session = koin.get<ConversationSession>()
         val models = koin.get<ModelManager>()
         val resources = koin.get<AndroidModelResources>()
+        DeviceSupervision.requireFor(models).use {
         fun checkpoint(stage: String) {
             val sample = resources.snapshot()
             InstrumentationRegistry.getInstrumentation().sendStatus(2, Bundle().apply {
@@ -94,5 +96,6 @@ class ConversationNativeTest {
                 checkpoint("retry-complete")
             }
         } finally { withContext(NonCancellable) { models.release().join(); checkpoint("cleanup") } }
+        }
     }
 }

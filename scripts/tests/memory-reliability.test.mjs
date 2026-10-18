@@ -4,10 +4,13 @@ import { mkdtempSync, readFileSync, writeFileSync, existsSync, rmSync, mkdirSync
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { summarizeMemoryRun } from '../analyze-memory-reliability.mjs';
+import { summarizeMemoryRun as summarize } from '../analyze-memory-reliability.mjs';
 
 const profile = { id: 'unit-test-only', loadingFloorBytes: 100 };
 const runId = 'synthetic-run';
+const supervision = { schema: 2, runId, status: 'closed', reason: null, elapsedMs: 1000,
+  capturedAtMs: 201, leaseMs: 20000, pollMs: 500, cleanupMs: 5000 };
+const summarizeMemoryRun = (run, exits, profile, id, proof = supervision) => summarize(run, exits, profile, id, proof);
 const exits = { runId, phase: 'after', capturedAtMs: 201, entries: [], lowMemoryKillReportSupported: true };
 const run = { runId, finishedAtMs: 200, status: 'passed', policy: profile, backend: 'GPU', automaticFallback: false,
   requestedCycles: 3, completedCycles: 3, requestedSustainedMinutes: 20, completedSustainedMinutes: 20, startedAtMs: 100,
@@ -31,6 +34,14 @@ test('incomplete samples, mismatched profiles and unknown SIGKILL prevent a clea
 });
 test('historical exits before this run are not attributed to the current workload', () => {
   assert.equal(summarizeMemoryRun(run, { ...exits, entries: [{ timestampMs: 99, classification: 'confirmed-low-memory' }] }, profile, runId).workloadPassed, true);
+});
+test('memory results require fresh closed supervision, not merely a passed native report', () => {
+  for (const proof of [null, { ...supervision, status: 'active' }, { ...supervision, status: 'terminated' },
+    { ...supervision, runId: 'old' }, { ...supervision, capturedAtMs: 199 }]) {
+    const summary = summarizeMemoryRun(run, exits, profile, runId, proof);
+    assert.equal(summary.workloadPassed, false);
+    assert.ok(summary.issues.includes('incomplete-supervision'));
+  }
 });
 test('exit evidence must be captured after completion and correlated to this supervised run', () => {
   for (const invalid of [
@@ -85,7 +96,8 @@ test('supervised wrapper fails a passed workload when final probe fails with pre
     mkdirSync(join(root, 'scripts'));
     mkdirSync(join(root, 'bin'));
     for (const script of ['verify-conversation-native.sh', 'export-memory-policy.sh', 'collect-memory-exits.sh',
-      'analyze-memory-reliability.mjs', 'memory-policy.mjs', 'chat-resource-preflight.mjs', 'monitor-model-thermal.mjs'])
+      'analyze-memory-reliability.mjs', 'memory-policy.mjs', 'chat-resource-preflight.mjs', 'monitor-model-thermal.mjs',
+      'qa-supervision.mjs', 'verify-qa-supervision.mjs'])
       copyFileSync(new URL(`../${script}`, import.meta.url), join(root, 'scripts', script));
     const policy = { schema: 1, id: 'synthetic-wrapper', calibrated: false,
       enforceAvailableMemoryFloor: true,
@@ -124,9 +136,16 @@ if (args.includes('instrument')) {
     lowMemory: false, pressureThresholdBytes: 500, recordedAtMs: Date.now() }));
   else if (file.endsWith('memory-exits.json')) process.stdout.write(fs.readFileSync(process.env.REMOTE));
   else if (file.endsWith('memory-reliability.json')) process.stdout.write(fs.readFileSync(process.env.NATIVE_REPORT));
+  else if (file.endsWith('/status.json')) {
+    const report = JSON.parse(fs.readFileSync(process.env.NATIVE_REPORT));
+    console.log(JSON.stringify({ schema: 2, runId: report.runId, status: 'closed', reason: null, elapsedMs: 1000,
+      capturedAtMs: Date.now(), leaseMs: 20000, pollMs: 500, cleanupMs: 5000 }));
+  }
   else console.log('{}');
 } else if (args.includes('/proc/meminfo')) console.log('MemTotal: 12582912 kB\\nMemAvailable: 6291456 kB');
+else if (args.includes('/proc/uptime')) console.log('100.00 10.00');
 else if (args.includes('thermalservice')) console.log('Thermal Status: 0\\nCurrent temperatures from HAL:\\nTemperature{mValue=37, mType=3, mName=SKIN}');
+else if (args.some(value => value.includes('/heartbeat.tmp'))) process.exit(0);
 else if (!args.includes('rm')) process.exit(2);
 `, { mode: 0o700 });
     const result = spawnSync('bash', ['scripts/verify-conversation-native.sh'], {

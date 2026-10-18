@@ -4,8 +4,11 @@ import { appendFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { setTimeout as wait } from 'node:timers/promises';
 import { readMemoryPolicy } from './memory-policy.mjs';
+import { renewSupervision, stopSupervisedQa, supervisionIdentity } from './qa-supervision.mjs';
 
 const policy = readMemoryPolicy();
+const identity = supervisionIdentity();
+let sequence = 0;
 
 const serial = process.env.ANDROID_SERIAL;
 if (!serial || !/^[a-zA-Z0-9._:-]+$/.test(serial)) {
@@ -30,22 +33,23 @@ function snapshot() {
 }
 
 function stopQa(reason, sample) {
-  writeFileSync(join(folder, 'safety-stop.json'), JSON.stringify({ reason, ...sample }, null, 2));
-  execFileSync(adb, ['-s', serial, 'shell', 'am', 'force-stop', 'dev.edgecompanion.app.secureqa'],
-    { timeout: 10000 });
+  const report = { reason, ...sample, ...stopSupervisedQa({ adb, serial, runId: identity.runId }) };
+  writeFileSync(join(folder, 'safety-stop.json'), JSON.stringify(report, null, 2));
 }
 
 while (true) {
   const recordedAt = new Date().toISOString();
   try {
     const { status, skin } = snapshot();
-    appendFileSync(samplePath, `${recordedAt},${status},${skin}\n`);
     if (status >= policy.severeThermalStatus || skin >= policy.maxSkinCelsius) {
       stopQa('thermal_limit', { recordedAt, status, skin });
       process.exit(2);
     }
+    const heartbeat = renewSupervision({ adb, serial, ...identity, sequence: ++sequence });
+    appendFileSync(join(folder, 'supervision-heartbeats.jsonl'), JSON.stringify(heartbeat) + '\n');
+    appendFileSync(samplePath, `${recordedAt},${status},${skin}\n`);
   } catch (error) {
-    stopQa('thermal_signal_unavailable', { recordedAt, error: error.message });
+    stopQa('thermal_signal_unavailable', { recordedAt, error: error.name });
     process.exit(2);
   }
   await wait(5000);

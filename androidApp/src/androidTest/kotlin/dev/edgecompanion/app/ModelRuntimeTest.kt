@@ -11,6 +11,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.lifecycle.Lifecycle
 import dev.edgecompanion.app.navigation.AssistantIntents
 import dev.edgecompanion.app.inference.AndroidModelResources
+import dev.edgecompanion.app.support.DeviceSupervision
 import dev.edgecompanion.core.inference.*
 import java.io.File
 import kotlinx.coroutines.*
@@ -30,6 +31,7 @@ class ModelRuntimeTest {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val manager = (context.applicationContext as CompanionApplication).getKoin().get<ModelManager>()
         val backend = ModelBackend.valueOf(args.getString("modelBackend") ?: "CPU")
+        DeviceSupervision.requireFor(manager).use {
         manager.release().join()
         try {
             ActivityScenario.launch<MainActivity>(AssistantIntents.main(context)).use { main ->
@@ -53,6 +55,7 @@ class ModelRuntimeTest {
                 check(manager.state.value.outputTokens != null)
             }
         } finally { withContext(NonCancellable) { manager.release().join() } }
+        }
     }
 
     @Test fun nativeLoadStreamCancelReleaseReload(): Unit = runBlocking {
@@ -63,6 +66,7 @@ class ModelRuntimeTest {
         val koin = (context.applicationContext as CompanionApplication).getKoin()
         val manager = koin.get<ModelManager>()
         val resources = koin.get<AndroidModelResources>()
+        DeviceSupervision.requireFor(manager).use {
         val backend = ModelBackend.valueOf(args.getString("modelBackend") ?: "CPU")
         val repetitions = (args.getString("modelRepetitions") ?: "1").toInt().also { require(it in 1..100) }
         val sustainedMinutes = (args.getString("modelSustainedMinutes") ?: "0").toInt().also { require(it == 0 || it == 20) }
@@ -221,6 +225,7 @@ class ModelRuntimeTest {
                 persist() // Keep evidence even if native shutdown subsequently cannot finish.
                 manager.release().join()
             }
+        }
         }
     }
 
