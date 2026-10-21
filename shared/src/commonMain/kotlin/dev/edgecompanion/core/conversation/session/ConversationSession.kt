@@ -13,6 +13,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import dev.edgecompanion.core.inference.ChatRuntime
+import dev.edgecompanion.core.sources.data.SourcesRepository
+import dev.edgecompanion.core.sources.data.SourceLibrary
+import dev.edgecompanion.core.sources.model.*
 
 /** Process-lifetime session; UI hosts may come and go without cancelling writes. */
 class ConversationSession(
@@ -22,10 +25,13 @@ class ConversationSession(
     private val attachmentFiles: AttachmentFiles? = null,
     private val mediaDispatcher: CoroutineDispatcher = Dispatchers.Default,
     private val chatRuntime: ChatRuntime? = null,
-) {
+    private val sourcesProvider: (() -> SourcesRepository)? = null,
+) : SourceLibrary {
     private val scope = CoroutineScope(SupervisorJob() + dispatcher.limitedParallelism(1))
     private val mutable = MutableStateFlow(ConversationState())
     val state = mutable.asStateFlow()
+    private val sourceVersion = MutableStateFlow(0L)
+    override val sourceChanges = sourceVersion.asStateFlow()
     private var controller: ConversationController? = null
     private val available = CompletableDeferred<ConversationController?>()
     private val assistant = ConversationAssistant(scope, { available.await() }, chatRuntime)
@@ -60,6 +66,37 @@ class ConversationSession(
     fun submit() { assistant.submit() }
     fun retryAssistant(userId: Long) { assistant.submit(userId) }
     fun cancelAssistant() { assistant.cancel() }
+    private suspend fun <T> sources(block: suspend (SourcesRepository) -> T): T {
+        val caller = currentCoroutineContext()
+        caller.ensureActive()
+        val task = scope.async {
+            caller.ensureActive()
+            start()
+            val target = available.await()
+            if (target?.state?.value?.ready != true) throw SourceException(SourceError.STORAGE)
+            caller.ensureActive()
+            val repository = sourcesProvider?.invoke() ?: throw SourceException(SourceError.UNAVAILABLE)
+            block(repository)
+        }
+        try { return task.await() }
+        finally { if (!currentCoroutineContext().isActive) withContext(NonCancellable) { task.cancelAndJoin() } }
+    }
+    override suspend fun listSources(query: String, after: Long) = sources { it.list(query, after) }
+    override suspend fun sourceText(id: Long, after: Long) = sources { it.text(id, after) }
+    override suspend fun addTextSource(title: String, text: String) = sources {
+        it.importText(title, text, SourceKind.PASTED_TEXT).also { sourceVersion.value++ }
+    }
+    override suspend fun addUtf8Source(title: String, bytes: ByteArray) = sources {
+        it.importUtf8(title, bytes).also { sourceVersion.value++ }
+    }
+    override suspend fun renameSource(id: Long, title: String) = sources {
+        it.rename(id, title).also { sourceVersion.value++ }
+    }
+    override suspend fun deleteSource(id: Long) = sources { repository ->
+        assistant.mutateContext {
+            repository.delete(id).also { controller?.refresh(); sourceVersion.value++ }
+        }
+    }
     fun clear() { scope.launch { assistant.clear {
         val ids = controller?.state?.value?.attachments?.map { it.id }.orEmpty()
         controller?.clear()

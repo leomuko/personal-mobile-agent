@@ -9,6 +9,9 @@ import dev.edgecompanion.core.storage.database.EncryptedDatabaseFactory
 import org.koin.dsl.module
 
 fun androidStorageModule(context: Context) = module {
+    single<dev.edgecompanion.core.sources.model.LibraryCapacity> {
+        dev.edgecompanion.core.sources.storage.AndroidLibraryCapacity(context.applicationContext)
+    }
     single<dev.edgecompanion.core.attachments.data.AttachmentFiles> {
         dev.edgecompanion.core.storage.files.EncryptedAttachmentStore(context.applicationContext)
     }

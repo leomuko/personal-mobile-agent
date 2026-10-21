@@ -9,6 +9,7 @@ import dev.edgecompanion.core.conversation.data.SqlConversationStore
 import dev.edgecompanion.core.conversation.session.ConversationController
 import dev.edgecompanion.core.conversation.session.ConversationSession
 import dev.edgecompanion.core.inference.ChatRuntime
+import dev.edgecompanion.core.sources.data.SourcesRepository
 
 import dev.edgecompanion.core.*
 import kotlinx.coroutines.CoroutineDispatcher
@@ -23,10 +24,12 @@ fun sharedModule() = module {
     single { get<SessionDatabase>().database }
     single<ConversationStore> { SqlConversationStore(get()) }
     single { ConversationController(get(), get<Clock>()::now) }
+    single { SourcesRepository(get(), get(), get<Clock>()::now) }
     single {
         val storage = get<SessionDatabase>()
         ConversationSession(get<CoroutineDispatcher>(SessionDispatcher),
             controllerProvider = { get<ConversationController>() },
-            closeStorage = storage::close, attachmentFiles = getOrNull(), chatRuntime = getOrNull<ChatRuntime>())
+            closeStorage = storage::close, attachmentFiles = getOrNull(), chatRuntime = getOrNull<ChatRuntime>(),
+            sourcesProvider = { get<SourcesRepository>() })
     } onClose { it?.stop() }
 }
