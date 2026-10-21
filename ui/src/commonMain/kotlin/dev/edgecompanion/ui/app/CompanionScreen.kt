@@ -56,6 +56,7 @@ import org.jetbrains.compose.resources.stringResource
     onRetryAssistant: (Long) -> Unit = {},
     appearance: AppearanceState = AppearanceState(),
     onThemeMode: (ThemeMode) -> Unit = {},
+    sourcesContent: (@Composable (Modifier) -> Unit)? = null,
 ) {
     var confirmClear by remember { mutableStateOf(false) }
     AssistantNavigation(drawer, conversationRequest) { destination, openMenu, chatList ->
@@ -89,7 +90,7 @@ import org.jetbrains.compose.resources.stringResource
                     onPreviewAttachment, thumbnail, recording, onStopRecording, onCancelRecording, onCancelAssistant, onRetryAssistant)
             }
             destination == AssistantDestination.MEMORY -> MemoryScreen(Modifier.weight(1f))
-            else -> SourcesScreen(Modifier.weight(1f))
+            else -> sourcesContent?.invoke(Modifier.weight(1f)) ?: SourcesScreen(Modifier.weight(1f))
         }
     }
     }
