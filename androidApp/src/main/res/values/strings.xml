@@ -1,4 +1,5 @@
 <resources>
+    <string name="imported_text_source">Imported text</string>
     <string name="photo_attachment">Camera photo.jpg</string>
     <string name="voice_attachment">Voice recording.wav</string>
     <string name="discard_recording">Discard this recording?</string>

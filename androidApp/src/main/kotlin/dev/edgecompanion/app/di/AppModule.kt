@@ -22,4 +22,5 @@ internal fun appModule() = module {
     single<CoroutineDispatcher>(SessionDispatcher) { Dispatchers.IO.limitedParallelism(1) }
     single { PresenceCoordinator() }
     viewModel { ConversationViewModel(get()) }
+    viewModel { dev.edgecompanion.ui.sources.viewmodel.SourcesViewModel(get<dev.edgecompanion.core.conversation.session.ConversationSession>()) }
 }

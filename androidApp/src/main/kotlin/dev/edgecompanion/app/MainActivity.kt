@@ -57,6 +57,8 @@ open class MainActivity : ComponentActivity() {
     private val appearance: AppearancePreferences by inject()
     protected open val drawer = false
     private val conversation: ConversationViewModel by viewModel()
+    private val sources: dev.edgecompanion.ui.sources.viewmodel.SourcesViewModel by viewModel()
+    private val sourcePicker by lazy { dev.edgecompanion.app.sources.SourceTextPicker(this, sources) }
     private val models: ModelsViewModel by viewModel()
     private val modelPicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (BuildConfig.DEBUG && uri != null) models.install(modelDocumentSource(applicationContext.contentResolver, uri))
@@ -95,6 +97,7 @@ open class MainActivity : ComponentActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sourcePicker
         attachments.restore(savedInstanceState)
         window.applyPrivacyPolicy()
         enableEdgeToEdge()
@@ -130,6 +133,7 @@ open class MainActivity : ComponentActivity() {
                             onStopRecording = { audio.stop() }, onCancelRecording = { audio.stop(cancel = true) },
                             onCancelAssistant = conversation::cancelAssistant, onRetryAssistant = conversation::retryAssistant,
                             appearance = appearanceState, onThemeMode = { appearance.select(it) },
+                            sourcesContent = { modifier -> dev.edgecompanion.ui.sources.screen.SourcesRoute(sources, sourcePicker::launch, modifier) },
                             modelsContent = if (BuildConfig.DEBUG) ({
                                 val modelState by models.runtime.collectAsStateWithLifecycle()
                                 val assetState by models.asset.collectAsStateWithLifecycle()
