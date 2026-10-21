@@ -6,7 +6,7 @@ enum class ChatRole { USER, ASSISTANT }
 data class ChatMessage(val role: ChatRole, val text: String)
 data class ChatRequest(val id: String, val messages: List<ChatMessage>,
     val backend: ModelBackend = ModelBackend.GPU, val contextTokens: Int = 2048, val outputTokens: Int = 512)
-enum class ChatOutcome { COMPLETED, CANCELLED, INTERRUPTED, REJECTED, FAILED }
+enum class ChatOutcome { COMPLETED, CANCELLED, INTERRUPTED, REJECTED, TIMED_OUT, FAILED }
 sealed interface ChatEvent {
     val id: String
     data class Text(override val id: String, val delta: String) : ChatEvent

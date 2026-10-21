@@ -4,6 +4,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import dev.edgecompanion.core.inference.embedding.*
 
 class ModelManager(
     val assets: ModelAssets,
@@ -29,12 +30,32 @@ class ModelManager(
     private var assetWork: Job? = null
     private var chatId: String? = null
     private var chatCancellation = ChatOutcome.CANCELLED
+    private var foreground: ForegroundPreparation? = null
+    private val lifetimeEpoch = MutableStateFlow(0L)
 
     override fun generateChat(request: ChatRequest): Flow<ChatEvent> = chatFlow(request.copy(messages = request.messages.toList()))
 
-    private fun chatFlow(request: ChatRequest): Flow<ChatEvent> = channelFlow {
+    /** Internal prerequisite path only; the vector is not used as evidence or persisted. */
+    fun prepareChat(request: ChatRequest, input: EncoderInput, encoder: ForegroundEncoder,
+        capturedEpoch: Long, currentEpoch: () -> Long): ForegroundCall {
+        val capturedLifetime = lifetimeEpoch.value
+        val prepared = ForegroundPreparation(request.id, input, encoder, capturedEpoch, currentEpoch, nowMs) {
+            lifetimeEpoch.value == capturedLifetime
+        }
+        return ForegroundCall(chatFlow(request.copy(messages = request.messages.toList()), prepared), prepared.state) {
+            prepared.cancelByUser()
+            scope.launch { if (foreground === prepared) cancelActive(interrupted = false).join() }
+        }
+    }
+
+    private fun chatFlow(request: ChatRequest, prepared: ForegroundPreparation? = null): Flow<ChatEvent> = channelFlow {
         val worker = scope.launch {
+            if (prepared != null && !prepared.claim()) {
+                trySend(ChatEvent.Terminal(request.id, ChatOutcome.REJECTED, ModelError.BUSY))
+                close(); return@launch
+            }
             if (!enabled || releasing > 0 || !operation.tryLock()) {
+                prepared?.finished(if (!enabled) ModelError.NOT_INSTALLED else ModelError.BUSY)
                 trySend(ChatEvent.Terminal(request.id, ChatOutcome.REJECTED,
                     if (!enabled) ModelError.NOT_INSTALLED else ModelError.BUSY))
                 close()
@@ -42,9 +63,53 @@ class ModelManager(
             }
             var terminal = ChatEvent.Terminal(request.id, ChatOutcome.FAILED, ModelError.GENERATION_FAILED)
             var monitor: Job? = null
+            var preparationMonitor: Job? = null
             try {
+                foreground = prepared
+                chatId = request.id
+                generation = currentCoroutineContext().job
+                chatCancellation = ChatOutcome.CANCELLED
                 GemmaChatBudget.validate(request)
                 if (poisoned) throw ModelException(ModelError.RESTART_REQUIRED)
+                if (prepared != null && request.outputTokens != 512) throw ModelException(ModelError.CONTEXT_LIMIT)
+                mutable.update { it.copy(error = null, commandError = null) }
+                idle?.cancel()
+                if (prepared != null) {
+                    prepared.reclaiming()
+                    preparationMonitor = scope.launch {
+                        val window = MemoryPressureWindow(memoryPolicy)
+                        var lastSample = nowMs() - memoryPolicy.sampleIntervalMs
+                        while (isActive) {
+                            try {
+                                prepared.checkLive()
+                                if (nowMs() - lastSample >= memoryPolicy.sampleIntervalMs) {
+                                    lastSample = nowMs()
+                                    window.observe(resources())?.let { throw ModelException(it) }
+                                }
+                            } catch (failure: ModelException) {
+                                mutable.update { it.copy(error = failure.error) }
+                                prepared.invalidate(failure.error)
+                                cancelActive(interrupted = true)
+                                break
+                            } catch (_: Exception) {
+                                mutable.update { it.copy(error = ModelError.RESOURCE_UNKNOWN) }
+                                prepared.invalidate(ModelError.RESOURCE_UNKNOWN)
+                                cancelActive(interrupted = true)
+                                break
+                            }
+                            delay(100)
+                        }
+                    }
+                    if (!cleanupOwnedEngine()) throw ModelException(ModelError.RESTART_REQUIRED)
+                    prepared.checkLive()
+                    memoryPolicy.blockedReason(resources(), MemoryAdmission.LOADING)?.let { throw ModelException(it) }
+                    prepared.prepare()
+                    if (prepared.state.value.cleanup != EncoderCleanup.CONFIRMED) {
+                        poisoned = true
+                        throw ModelException(ModelError.RESTART_REQUIRED)
+                    }
+                    prepared.admitGemma()
+                }
                 if (ownsEngine && state.value.status == RuntimeStatus.FAILED) {
                     if (!cleanupOwnedEngine()) throw ModelException(ModelError.RESTART_REQUIRED)
                 }
@@ -62,6 +127,7 @@ class ModelManager(
                     val path = assets.verify() ?: throw ModelException(ModelError.NOT_INSTALLED)
                     withContext(NonCancellable) {
                         recordMemory(MemoryStage.LOADING, request.backend)
+                        prepared?.checkLive()
                         engine.load(ModelConfig(path, manifest.sha256, request.contextTokens, request.backend,
                             request.outputTokens)).getOrThrow()
                         ownsEngine = true
@@ -69,6 +135,7 @@ class ModelManager(
                     }
                 }
                 currentCoroutineContext().ensureActive()
+                prepared?.checkLive()
                 memoryPolicy.blockedReason(resources(), MemoryAdmission.GENERATION)?.let { throw ModelException(it) }
                 mutable.update { it.copy(status = RuntimeStatus.GENERATING, error = null, commandError = null) }
                 monitor = resourceMonitor()
@@ -82,7 +149,10 @@ class ModelManager(
                             nonempty = true
                             trySend(ChatEvent.Text(request.id, event.text))
                         }
-                        is GenerationEvent.Finished -> completed = true
+                        is GenerationEvent.Finished -> {
+                            completed = true
+                            if (prepared != null) mutable.update { it.copy(inputTokens = event.inputTokens, outputTokens = event.tokens) }
+                        }
                         is GenerationEvent.Failed -> throw ModelException(event.error)
                         GenerationEvent.Cancelled -> throw CancellationException()
                     }
@@ -90,17 +160,29 @@ class ModelManager(
                 terminal = if (completed && nonempty) ChatEvent.Terminal(request.id, ChatOutcome.COMPLETED)
                     else ChatEvent.Terminal(request.id, ChatOutcome.FAILED, ModelError.GENERATION_FAILED)
             } catch (_: CancellationException) {
-                terminal = ChatEvent.Terminal(request.id, chatCancellation, state.value.error)
+                terminal = ChatEvent.Terminal(request.id,
+                    if (prepared?.userCancelled == true) ChatOutcome.CANCELLED
+                    else if (state.value.error == ModelError.ENCODER_TIMEOUT) ChatOutcome.TIMED_OUT else chatCancellation,
+                    if (prepared?.userCancelled == true) null else state.value.error)
             } catch (failure: Exception) {
                 val error = (failure as? ModelException)?.error ?: ModelError.GENERATION_FAILED
-                if (error == ModelError.BUSY || error == ModelError.CONTEXT_LIMIT)
+                if (prepared?.userCancelled == true) terminal = ChatEvent.Terminal(request.id, ChatOutcome.CANCELLED)
+                else if (error == ModelError.ENCODER_TIMEOUT) terminal = ChatEvent.Terminal(request.id, ChatOutcome.TIMED_OUT, error)
+                else if (error in setOf(ModelError.BUSY, ModelError.CONTEXT_LIMIT, ModelError.ENCODER_REJECTED, ModelError.CONTEXT_INVALIDATED))
                     terminal = ChatEvent.Terminal(request.id, ChatOutcome.REJECTED, error)
                 else {
                     fail(failure)
                     terminal = ChatEvent.Terminal(request.id, ChatOutcome.FAILED, error)
                 }
             } finally {
+                preparationMonitor?.cancel()
+                if (prepared != null && !prepared.cleanup()) {
+                    poisoned = true
+                    terminal = ChatEvent.Terminal(request.id, ChatOutcome.FAILED, ModelError.RESTART_REQUIRED)
+                    mutable.update { it.copy(status = RuntimeStatus.FAILED, error = ModelError.RESTART_REQUIRED) }
+                }
                 monitor?.cancel()
+                foreground = null
                 chatId = null
                 generation = null
                 if (state.value.error in resourceErrors && !cleanupOwnedEngine())
@@ -110,23 +192,36 @@ class ModelManager(
                 if (state.value.status == RuntimeStatus.LOADED) withContext(NonCancellable) {
                     recordMemory(MemoryStage.LOADED_IDLE, state.value.backend)
                 }
+                prepared?.finished(terminal.error)
                 operation.unlock()
                 scheduleIdle()
                 trySend(terminal)
                 close()
             }
         }
-        try { worker.join() }
+        try {
+            worker.join()
+            // A cancelled manager scope can prevent the worker body from starting at all.
+            if (trySend(ChatEvent.Terminal(request.id, ChatOutcome.INTERRUPTED,
+                    ModelError.CONTEXT_INVALIDATED)).isSuccess) {
+                prepared?.finished(ModelError.CONTEXT_INVALIDATED)
+                close()
+            }
+        }
         finally { if (!worker.isCompleted) withContext(NonCancellable) {
             worker.cancel()
-            cancelChat(request.id, interrupted = true)
+            if (prepared == null) cancelChat(request.id, interrupted = true)
+            else withContext(scope.coroutineContext.minusKey(Job)) {
+                prepared.invalidate()
+                if (foreground === prepared) cancelActive(interrupted = true).join()
+            }
             worker.join()
         } }
     }
 
     override suspend fun cancelChat(id: String, interrupted: Boolean) {
         withContext(scope.coroutineContext.minusKey(Job)) {
-            if (chatId == id) cancel(interrupted).join()
+            if (foreground == null && chatId == id) cancelActive(interrupted).join()
         }
     }
 
@@ -137,7 +232,7 @@ class ModelManager(
             val reason = window.observe(resources())
             if (reason != null) {
                 mutable.update { it.copy(error = reason) }
-                cancel(interrupted = true)
+                cancelActive(interrupted = true)
                 break
             }
         }
@@ -231,24 +326,48 @@ class ModelManager(
 
     // Never acquire the operation mutex here: generation owns it until native completion.
     fun cancel(interrupted: Boolean = false): Job = scope.launch {
-        if (!enabled) return@launch
-        mutable.update { it.copy(commandError = null) }
-        assetWork?.cancel()
-        val active = generation ?: return@launch
-        chatCancellation = if (interrupted) ChatOutcome.INTERRUPTED else ChatOutcome.CANCELLED
-        mutable.update { if (it.status == RuntimeStatus.GENERATING) it.copy(status = RuntimeStatus.CANCELLING) else it }
-        active.cancel()
-        try { engine.cancel() } catch (failure: Exception) { fail(failure) }
-        recordMemory(MemoryStage.CANCELLING, state.value.backend)
+        if (chatId != null || foreground != null) { reject(ModelError.BUSY); return@launch }
+        cancelActive(interrupted).join()
     }
 
-    fun release(): Job = scope.launch {
+    private fun cancelActive(interrupted: Boolean = false): Job {
+        val targetGeneration = generation
+        val targetAsset = assetWork
+        val targetForeground = foreground
+        return scope.launch {
+            if (!enabled || generation !== targetGeneration || assetWork !== targetAsset || foreground !== targetForeground)
+                return@launch
+            targetAsset?.cancel()
+            val active = targetGeneration ?: return@launch
+            // The cancelled job may finish before the native signal returns. Do not admit
+            // another owner while that signal could still act on the engine.
+            releasing++
+            try {
+                mutable.update { it.copy(commandError = null) }
+                chatCancellation = if (interrupted) ChatOutcome.INTERRUPTED else ChatOutcome.CANCELLED
+                mutable.update { if (it.status == RuntimeStatus.GENERATING) it.copy(status = RuntimeStatus.CANCELLING) else it }
+                targetForeground?.invalidate()
+                active.cancel()
+                try { engine.cancel() } catch (failure: Exception) { fail(failure) }
+                recordMemory(MemoryStage.CANCELLING, state.value.backend)
+            } finally { releasing-- }
+        }
+    }
+
+    fun release(): Job = releaseOwned(privileged = false)
+    fun releaseForHostLoss(): Job {
+        lifetimeEpoch.update { it + 1 }
+        return releaseOwned(privileged = true)
+    }
+    private fun releaseOwned(privileged: Boolean): Job = scope.launch {
         if (!enabled) return@launch
+        if (!privileged && (chatId != null || foreground != null)) { reject(ModelError.BUSY); return@launch }
         releasing++
         try {
             mutable.update { it.copy(commandError = null) }
             idle?.cancel()
-            this@ModelManager.cancel(interrupted = true).join()
+            foreground?.invalidate()
+            cancelActive(interrupted = true).join()
             operation.withLock {
                 if (poisoned) return@withLock
                 if (cleanupOwnedEngine()) mutable.update { it.copy(status = RuntimeStatus.UNLOADED, error = null) }
@@ -320,5 +439,5 @@ class ModelManager(
         if (state.value.status == RuntimeStatus.LOADED) idle = scope.launch { delay(idleMs); release() }
     }
 
-    suspend fun shutdown() { release().join(); scope.cancel() }
+    suspend fun shutdown() { releaseForHostLoss().join(); scope.cancel() }
 }

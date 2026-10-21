@@ -97,7 +97,9 @@ private fun ModelError.label(): StringResource = when (this) {
     ModelError.THERMAL -> Res.string.model_thermal_error
     ModelError.RESOURCE_UNKNOWN -> Res.string.model_resource_error
     ModelError.LOAD_FAILED -> Res.string.model_load_error
-    ModelError.GENERATION_FAILED -> Res.string.model_generation_error
+    ModelError.GENERATION_FAILED, ModelError.ENCODER_FAILED -> Res.string.model_generation_error
+    ModelError.ENCODER_REJECTED -> Res.string.model_context_error
+    ModelError.ENCODER_TIMEOUT, ModelError.CONTEXT_INVALIDATED -> Res.string.model_busy
     ModelError.CONTEXT_LIMIT -> Res.string.model_context_error
     ModelError.CANCEL_TIMEOUT, ModelError.RELEASE_FAILED, ModelError.RESTART_REQUIRED -> Res.string.model_restart_error
 }

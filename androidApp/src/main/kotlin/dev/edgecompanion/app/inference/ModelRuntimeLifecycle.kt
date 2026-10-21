@@ -23,7 +23,7 @@ class ModelRuntimeLifecycle(private val manager: ModelManager) : Application.Act
         if (started.isEmpty()) background = scope.launch {
             // Allow configuration recreation and main/drawer handoff to establish the next host.
             delay(if (activity.isChangingConfigurations) 2_000 else 750)
-            if (started.isEmpty()) manager.release()
+            if (started.isEmpty()) manager.releaseForHostLoss()
         }
     }
     override fun onActivityCreated(activity: Activity, state: Bundle?) = Unit

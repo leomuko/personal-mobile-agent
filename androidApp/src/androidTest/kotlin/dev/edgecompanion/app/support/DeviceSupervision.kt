@@ -146,7 +146,7 @@ class DeviceSupervision private constructor(
             val id = requireNotNull(args.getString("supervisionRunId")) { "Supervision run ID is required" }
             require(expectedRunId == null || id == expectedRunId)
             return open(id) { runBlocking {
-                manager.release().join()
+                manager.releaseForHostLoss().join()
                 manager.state.value.status == RuntimeStatus.UNLOADED
             } }
         }
