@@ -1,0 +1,7 @@
+{
+  "schema": 1,
+  "fixture": "semantic-retrieval-v1.json",
+  "sha256": "32f9d6d231fb5f5acca593eb27e128bc0f09266e311375db82cff100b6325abe",
+  "frozenBeforeNativeEvaluation": true,
+  "policy": "Do not alter fixtures, judgments, thresholds, languages, head or formatting in response to evaluation results. A revised candidate requires independent held-out qualification."
+}
