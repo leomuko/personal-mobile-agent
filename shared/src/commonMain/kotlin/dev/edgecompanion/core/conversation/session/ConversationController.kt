@@ -25,7 +25,10 @@ class ConversationController(private val store: ConversationStore, private val n
     }
 
     private fun snapshot() = ConversationState(store.messages(), store.draft(), ready = true,
-        attachments = store.attachments(), draftEpoch = store.epoch(), attempts = store.attempts())
+        attachments = store.attachments(), draftEpoch = store.epoch(), attempts = store.attempts(),
+        contextEpoch = store.contextEpoch(), messageFence = store.messageFence())
+
+    suspend fun refresh() = mutex.withLock { mutable.value = snapshot() }
 
     suspend fun reserve(item: Attachment, epoch: Long): Boolean = mutex.withLock {
         try {
@@ -111,7 +114,8 @@ class ConversationController(private val store: ConversationStore, private val n
         }
     }
 
-    suspend fun startAssistant(id: String, userId: Long, epoch: Long): Boolean = mutex.withLock {
+    suspend fun startAssistant(id: String, userId: Long, epoch: Long, contextEpoch: Long = state.value.contextEpoch): Boolean = mutex.withLock {
+        if (store.contextEpoch() != contextEpoch) return@withLock false
         val started = store.startAssistantTurn(id, userId, epoch)
         mutable.value = snapshot()
         started

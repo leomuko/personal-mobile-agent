@@ -74,7 +74,7 @@ import org.jetbrains.compose.resources.stringResource
                     if (message.role == MessageRole.USER && attempt != null && attempt.status in setOf(TurnStatus.CANCELLED, TurnStatus.FAILED, TurnStatus.INTERRUPTED)) {
                         Text(stringResource(if (attempt.status == TurnStatus.CANCELLED) Res.string.assistant_cancelled else Res.string.assistant_interrupted),
                             style = MaterialTheme.typography.labelSmall)
-                        if (state.assistant.enabled) TextButton(onClick = { onRetryAssistant(message.id) }, enabled = !state.assistant.active) {
+                        if (state.assistant.enabled && message.id > state.messageFence) TextButton(onClick = { onRetryAssistant(message.id) }, enabled = !state.assistant.active) {
                             Icon(Icons.Outlined.Refresh, null); Text(stringResource(Res.string.assistant_retry))
                         }
                     }

@@ -36,12 +36,13 @@ internal class ConversationAssistant(private val scope: CoroutineScope,
                 target = controller() ?: return@launch
                 if (runtime?.enabled != true) { if (retryUserId == null) target.submit(); return@launch }
                 val snapshot = target.state.value
+                if (retryUserId != null && retryUserId <= snapshot.messageFence) return@launch
                 val current = if (retryUserId == null) snapshot.draft.trim() else
                     snapshot.messages.firstOrNull { it.id == retryUserId && it.role == MessageRole.USER }?.text ?: return@launch
                 if (current.isEmpty()) { if (retryUserId == null) target.submit(); return@launch }
                 if (retryUserId != null && snapshot.attempts.any { it.userId == retryUserId && it.status == TurnStatus.COMPLETED }) return@launch
                 id = Random.nextLong().toString(16) + Random.nextLong().toString(16)
-                val older = snapshot.messages.filter { retryUserId == null || it.id < retryUserId }
+                val older = snapshot.messages.filter { it.id > snapshot.messageFence && (retryUserId == null || it.id < retryUserId) }
                 val complete = older.filter { it.role == MessageRole.USER }.mapNotNull { user ->
                     older.lastOrNull { it.role == MessageRole.ASSISTANT && it.turnId == user.id }?.let { user.text to it.text }
                 }
@@ -50,7 +51,7 @@ internal class ConversationAssistant(private val scope: CoroutineScope,
                 if (user == null || user.text != current) return@launch
                 validId = id
                 mutable.value = AssistantState(true, AssistantPhase.LOADING, id, user.id)
-                if (!target.startAssistant(id, user.id, target.state.value.draftEpoch)) return@launch
+                if (!target.startAssistant(id, user.id, target.state.value.draftEpoch, snapshot.contextEpoch)) return@launch
                 pending = true
                 var terminalSeen = false
                 runtime.generateChat(request).collect { event ->

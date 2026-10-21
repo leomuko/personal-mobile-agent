@@ -10,6 +10,8 @@ import dev.edgecompanion.core.inference.ModelError
 interface ConversationStore {
     fun attachments(): List<Attachment> = emptyList()
     fun epoch(): Long = 0
+    fun contextEpoch(): Long = 0
+    fun messageFence(): Long = 0
     fun reserve(item: Attachment) { error("Attachments unavailable") }
     fun complete(id: String, size: Long) { error("Attachments unavailable") }
     fun fail(id: String) { error("Attachments unavailable") }

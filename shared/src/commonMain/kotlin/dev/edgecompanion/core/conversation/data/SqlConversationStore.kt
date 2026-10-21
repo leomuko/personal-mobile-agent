@@ -14,6 +14,8 @@ class SqlConversationStore(private val db: CompanionDatabase) : ConversationStor
         Attachment(it.id, it.name, it.mime_type, it.size, AttachmentStatus.valueOf(it.status), it.message_id)
     }
     override fun epoch() = db.attachmentQueries.readEpoch().executeAsOneOrNull() ?: 0L
+    override fun contextEpoch() = db.libraryQueries.readContext().executeAsOneOrNull()?.epoch ?: 0L
+    override fun messageFence() = db.libraryQueries.readContext().executeAsOneOrNull()?.message_fence ?: 0L
     override fun reserve(item: Attachment) { db.attachmentQueries.insertAttachment(item.id, item.name, item.mimeType) }
     override fun complete(id: String, size: Long) { db.attachmentQueries.completeAttachment(size, id) }
     override fun fail(id: String) { db.attachmentQueries.failAttachment(id) }
@@ -41,7 +43,7 @@ class SqlConversationStore(private val db: CompanionDatabase) : ConversationStor
         AssistantAttempt(it.id, it.user_id, it.epoch, TurnStatus.valueOf(it.status), it.error?.let(ModelError::valueOf))
     }
     override fun startAssistantTurn(id: String, userId: Long, expectedEpoch: Long): Boolean = db.transactionWithResult {
-        if (epoch() != expectedEpoch || messages().none { it.id == userId && it.role == MessageRole.USER }) return@transactionWithResult false
+        if (epoch() != expectedEpoch || userId <= messageFence() || messages().none { it.id == userId && it.role == MessageRole.USER }) return@transactionWithResult false
         val existing = attempts().firstOrNull { it.id == id }
         if (existing != null) return@transactionWithResult existing.status == TurnStatus.PENDING
         if (attempts().any { it.userId == userId && it.status == TurnStatus.COMPLETED }) return@transactionWithResult false
@@ -51,7 +53,8 @@ class SqlConversationStore(private val db: CompanionDatabase) : ConversationStor
     override fun completeAssistantTurn(id: String, text: String, timestamp: Long): Boolean = db.transactionWithResult {
         val attempt = attempts().firstOrNull { it.id == id } ?: return@transactionWithResult false
         if (attempt.status == TurnStatus.COMPLETED) return@transactionWithResult true
-        if (attempt.status != TurnStatus.PENDING || attempt.epoch != epoch()) return@transactionWithResult false
+        if (attempt.status != TurnStatus.PENDING || attempt.epoch != epoch() ||
+            db.conversationQueries.attemptContext(id).executeAsOne() != contextEpoch() || attempt.userId <= messageFence()) return@transactionWithResult false
         db.conversationQueries.insertAssistant(text, timestamp, attempt.userId, id)
         db.conversationQueries.indexMessage(text)
         db.conversationQueries.finishAttempt(TurnStatus.COMPLETED.name, null, id)

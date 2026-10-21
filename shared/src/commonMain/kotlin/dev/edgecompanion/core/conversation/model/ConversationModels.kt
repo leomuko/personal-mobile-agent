@@ -25,4 +25,6 @@ data class ConversationState(
     val draftEpoch: Long = 0,
     val attempts: List<AssistantAttempt> = emptyList(),
     val assistant: AssistantState = AssistantState(),
+    val contextEpoch: Long = 0,
+    val messageFence: Long = 0,
 )
