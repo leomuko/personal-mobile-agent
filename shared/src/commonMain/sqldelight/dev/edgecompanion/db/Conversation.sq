@@ -12,7 +12,8 @@ CREATE TABLE assistant_attempt (
   user_id INTEGER NOT NULL REFERENCES message(id),
   epoch INTEGER NOT NULL,
   status TEXT NOT NULL,
-  error TEXT
+  error TEXT,
+  context_epoch INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE draft (
@@ -40,7 +41,11 @@ attempts:
 SELECT * FROM assistant_attempt ORDER BY user_id, rowid;
 
 startAttempt:
-INSERT INTO assistant_attempt(id, user_id, epoch, status) VALUES (?, ?, ?, 'PENDING');
+INSERT INTO assistant_attempt(id, user_id, epoch, status, context_epoch)
+VALUES (?, ?, ?, 'PENDING', coalesce((SELECT epoch FROM context_eligibility WHERE id = 1), 0));
+
+attemptContext:
+SELECT context_epoch FROM assistant_attempt WHERE id = ?;
 
 finishAttempt:
 UPDATE assistant_attempt SET status = ?, error = ? WHERE id = ? AND status = 'PENDING';

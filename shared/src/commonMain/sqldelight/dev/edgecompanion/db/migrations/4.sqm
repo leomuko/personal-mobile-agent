@@ -1,0 +1,18 @@
+ALTER TABLE assistant_attempt ADD COLUMN context_epoch INTEGER NOT NULL DEFAULT 0;
+CREATE TABLE context_eligibility (
+  id INTEGER NOT NULL PRIMARY KEY CHECK(id = 1), epoch INTEGER NOT NULL, message_fence INTEGER NOT NULL
+);
+CREATE TABLE source (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, kind TEXT NOT NULL, created_at INTEGER NOT NULL
+);
+CREATE TABLE source_revision (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, source_id INTEGER NOT NULL UNIQUE REFERENCES source(id),
+  text TEXT NOT NULL, utf8_bytes INTEGER NOT NULL, normalization TEXT NOT NULL DEFAULT 'identity-utf16-v1',
+  status TEXT NOT NULL DEFAULT 'KEYWORD_READY'
+);
+CREATE TABLE source_chunk (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, revision_id INTEGER NOT NULL REFERENCES source_revision(id),
+  start_offset INTEGER NOT NULL, end_offset INTEGER NOT NULL, text TEXT NOT NULL
+);
+CREATE INDEX chunk_revision ON source_chunk(revision_id, id);
+CREATE VIRTUAL TABLE source_search USING fts4(title TEXT, text TEXT);

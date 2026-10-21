@@ -1,0 +1,95 @@
+CREATE TABLE context_eligibility (
+  id INTEGER NOT NULL PRIMARY KEY CHECK(id = 1),
+  epoch INTEGER NOT NULL,
+  message_fence INTEGER NOT NULL
+);
+
+CREATE TABLE source (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  kind TEXT NOT NULL,
+  created_at INTEGER NOT NULL
+);
+
+CREATE TABLE source_revision (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  source_id INTEGER NOT NULL UNIQUE REFERENCES source(id),
+  text TEXT NOT NULL,
+  utf8_bytes INTEGER NOT NULL,
+  normalization TEXT NOT NULL DEFAULT 'identity-utf16-v1',
+  status TEXT NOT NULL DEFAULT 'KEYWORD_READY'
+);
+
+CREATE TABLE source_chunk (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  revision_id INTEGER NOT NULL REFERENCES source_revision(id),
+  start_offset INTEGER NOT NULL,
+  end_offset INTEGER NOT NULL,
+  text TEXT NOT NULL
+);
+CREATE INDEX chunk_revision ON source_chunk(revision_id, id);
+CREATE VIRTUAL TABLE source_search USING fts4(title TEXT, text TEXT);
+
+readContext:
+SELECT epoch, message_fence FROM context_eligibility WHERE id = 1;
+
+advanceContext:
+INSERT OR REPLACE INTO context_eligibility(id, epoch, message_fence)
+VALUES (1, coalesce((SELECT epoch FROM context_eligibility WHERE id = 1), 0) + 1,
+  coalesce((SELECT max(id) FROM message), 0));
+
+sourceCount:
+SELECT count(*) FROM source;
+revisionCount:
+SELECT count(*) FROM source_revision;
+chunkCount:
+SELECT count(*) FROM source_chunk;
+
+insertSource:
+INSERT INTO source(title, kind, created_at) VALUES (?, ?, ?);
+lastId:
+SELECT last_insert_rowid();
+insertRevision:
+INSERT INTO source_revision(source_id, text, utf8_bytes) VALUES (?, ?, ?);
+insertChunk:
+INSERT INTO source_chunk(revision_id, start_offset, end_offset, text) VALUES (?, ?, ?, ?);
+indexSource:
+INSERT INTO source_search(docid, title, text) VALUES (?, ?, ?);
+renameSearch:
+UPDATE source_search SET title = ? WHERE docid = ?;
+
+listSources:
+SELECT source.id, source.title, source.kind, source.created_at, source_revision.id AS revision_id,
+  source_revision.utf8_bytes, source_revision.status
+FROM source JOIN source_revision ON source_revision.source_id = source.id
+WHERE source.id > :afterId ORDER BY source.id LIMIT :pageSize;
+
+searchSources:
+SELECT DISTINCT source.id, source.title, source.kind, source.created_at, source_revision.id AS revision_id,
+  source_revision.utf8_bytes, source_revision.status
+FROM source_search JOIN source ON source.id = source_search.docid
+JOIN source_revision ON source_revision.source_id = source.id
+WHERE source_search MATCH :query AND source.id > :afterId
+ORDER BY source.id LIMIT :pageSize;
+
+sourceById:
+SELECT source.id, source.title, source.kind, source.created_at, source_revision.id AS revision_id,
+  source_revision.utf8_bytes, source_revision.status
+FROM source JOIN source_revision ON source_revision.source_id = source.id WHERE source.id = ?;
+
+readChunks:
+SELECT source_chunk.id, start_offset, end_offset, source_chunk.text FROM source_chunk
+JOIN source_revision ON source_revision.id = source_chunk.revision_id
+WHERE source_revision.source_id = :sourceId AND source_chunk.id > :afterId
+ORDER BY source_chunk.id LIMIT :pageSize;
+
+renameSource:
+UPDATE source SET title = ? WHERE id = ?;
+deleteSearch:
+DELETE FROM source_search WHERE docid = ?;
+deleteChunks:
+DELETE FROM source_chunk WHERE revision_id IN (SELECT id FROM source_revision WHERE source_id = ?);
+deleteRevisions:
+DELETE FROM source_revision WHERE source_id = ?;
+deleteSource:
+DELETE FROM source WHERE id = ?;
