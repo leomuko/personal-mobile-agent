@@ -29,6 +29,9 @@ class ChatBudgetChecks(unittest.TestCase):
             spec.normalizer_spec.add_dummy_prefix = False
             spec.normalizer_spec.remove_extra_whitespaces = False
             spec.normalizer_spec.escape_whitespaces = True
+            piece = spec.pieces.add()
+            piece.piece = "\u2581"
+            piece.type = schema.ModelProto.SentencePiece.NORMAL
             return spec
         verifier["validate_tokenizer"](valid())
         for field, value, target in [
@@ -44,6 +47,10 @@ class ChatBudgetChecks(unittest.TestCase):
                 spec = valid()
                 setattr(getattr(spec, target), field, value)
                 verifier["validate_tokenizer"](spec)
+        with self.assertRaisesRegex(SystemExit, "NORMAL seed"):
+            spec = valid()
+            spec.pieces[0].type = schema.ModelProto.SentencePiece.UNUSED
+            verifier["validate_tokenizer"](spec)
 
     def test_budget_boundary_and_overflow(self):
         verifier["check_budget"](100, 100, "boundary")

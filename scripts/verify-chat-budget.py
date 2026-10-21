@@ -33,6 +33,8 @@ def validate_tokenizer(spec):
     require(not spec.normalizer_spec.add_dummy_prefix, "dummy prefix is enabled")
     require(not spec.normalizer_spec.remove_extra_whitespaces, "whitespace removal is enabled")
     require(spec.normalizer_spec.escape_whitespaces, "whitespace escaping is disabled")
+    require(any(piece.piece == "\u2581" and piece.type == sentencepiece_model_pb2.ModelProto.SentencePiece.NORMAL
+                for piece in spec.pieces), "metaspace is not a NORMAL seed token")
 
 
 def check_budget(count, bound, case):
@@ -65,12 +67,12 @@ def verify(model):
     for case, text in enumerate(texts):
         # Mirrors the audited text-only USER template; never used to construct app prompts.
         rendered = "<bos><|turn>user\n" + text.strip() + "<turn|>\n<|turn>model\n"
-        bound = 128 + 96 + 3 * len(text.encode("utf-8"))
+        bound = 128 + 96 + len(text.encode("utf-8"))
         check_budget(len(processor.encode(rendered)), bound, "single-turn case " + str(case))
     for case, (left, right) in enumerate(zip(texts[:1000], texts[1000:2000])):
         rendered = ("<bos><|turn>user\nHi<turn|>\n<|turn>model\n" + left.strip() +
                     "<turn|>\n<|turn>user\n" + right.strip() + "<turn|>\n<|turn>model\n")
-        bound = 128 + 3 * 96 + 3 * (2 + len(left.encode("utf-8")) + len(right.encode("utf-8")))
+        bound = 128 + 3 * 96 + 2 + len(left.encode("utf-8")) + len(right.encode("utf-8"))
         check_budget(len(processor.encode(rendered)), bound, "history case " + str(case))
     prefill = "Summarize the following synthetic number sequence in one sentence: " + " ".join(str(i) for i in range(1, 385))
     prefill_hash = hashlib.sha256(prefill.encode("utf-8")).hexdigest()
@@ -79,7 +81,7 @@ def verify(model):
     prefill_tokens = len(processor.encode(rendered))
     require(prefill_tokens + 64 + 512 <= 2048, "supervision fixture exceeds context including template allowance/output reserve")
     return {"status": "passed", "modelSha256": digest, "tokenizerSha256": tokenizer_digest,
-            "singleTurnCases": len(texts), "historyCases": 1000, "calculator": "gemma4-e2b-byte-bound-v1",
+            "singleTurnCases": len(texts), "historyCases": 1000, "calculator": "gemma4-e2b-byte-bound-v2",
             "supervisionPrefill": {"sha256": prefill_hash, "inputTokens": prefill_tokens,
                                    "templateAllowance": 64, "outputReserve": 512, "contextTokens": 2048}}
 

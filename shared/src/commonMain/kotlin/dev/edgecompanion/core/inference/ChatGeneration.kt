@@ -20,7 +20,7 @@ interface ChatRuntime {
 
 /** Bound for the pinned identity-normalized, byte-fallback BPE artifact; not a token estimate. */
 object GemmaChatBudget {
-    const val VERSION = "gemma4-e2b-byte-bound-v1"
+    const val VERSION = "gemma4-e2b-byte-bound-v2"
     fun inputBound(messages: List<ChatMessage>): Long {
         require(messages.isNotEmpty() && messages.last().role == ChatRole.USER)
         require(messages.size % 2 == 1 && messages.withIndex().all {
@@ -38,9 +38,10 @@ object GemmaChatBudget {
                     if (i == text.length || !text[i++].isLowSurrogate()) throw ModelException(ModelError.CONTEXT_LIMIT)
                 } else if (c.isLowSurrogate()) throw ModelException(ModelError.CONTEXT_LIMIT)
             }
-            // Identity normalization replaces each ASCII space with a three-byte metaspace.
-            // BPE merges cannot increase the initial byte-fallback token count.
-            bound += 96L + 3L * text.encodeToByteArray().size
+            // The pinned tokenizer has a NORMAL one-token metaspace, so replacing an
+            // ASCII space does not increase seed tokens. Other scalars cost at most
+            // their UTF-8 bytes; BPE merging/resegmentation cannot exceed those seeds.
+            bound += 96L + text.encodeToByteArray().size
         }
         return bound
     }

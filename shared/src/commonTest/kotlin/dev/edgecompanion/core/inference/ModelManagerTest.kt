@@ -193,7 +193,7 @@ class ModelManagerTest {
     }
     @Test fun chatSuccessIsExplicitAndOversizedInputNeverLoads() = runTest {
         val engine = Engine().apply { hang = false }; val manager = manager(engine)
-        val oversized = manager.generateChat(ChatRequest("large", listOf(ChatMessage(ChatRole.USER, "x".repeat(500))))).toList()
+        val oversized = manager.generateChat(ChatRequest("large", listOf(ChatMessage(ChatRole.USER, "x".repeat(1313))))).toList()
         assertEquals(ChatOutcome.REJECTED, (oversized.single() as ChatEvent.Terminal).outcome)
         assertEquals(0, engine.loads)
         val events = manager.generateChat(ChatRequest("valid", listOf(ChatMessage(ChatRole.USER, "Hello")), ModelBackend.CPU)).toList()

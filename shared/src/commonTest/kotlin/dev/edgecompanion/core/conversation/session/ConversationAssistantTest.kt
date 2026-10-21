@@ -128,7 +128,7 @@ class ConversationAssistantTest {
     @Test fun storageAndBudgetFailuresDoNotProduceFakeCompletedMessages() = runTest {
         val store = Store(); val runtime = Runtime(); val session = session(store, runtime)
         try {
-            session.editDraft("x".repeat(500)); runCurrent(); session.submit(); runCurrent()
+            session.editDraft("x".repeat(1313)); runCurrent(); session.submit(); runCurrent()
             assertTrue(runtime.requests.isEmpty()); assertTrue(store.rows.isEmpty())
             assertEquals(ModelError.CONTEXT_LIMIT, session.state.value.assistant.error)
             session.editDraft("Hello"); runCurrent(); store.failUser = true; session.submit(); runCurrent()
