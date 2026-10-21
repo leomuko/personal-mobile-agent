@@ -59,6 +59,7 @@ class MemoryTelemetryRecorder(private val resources: AndroidModelResources,
 
     suspend fun report(): JSONObject = lock.withLock {
         JSONObject().put("schema", 1).put("policy", JSONObject(policy.exportFields()))
+            .put("startedAtMonotonicMs", started)
             .put("samples", JSONArray(samples)).put("droppedSamples", dropped)
             .put("failedSamples", failedSamples)
             .put("elapsedMs", SystemClock.elapsedRealtime() - started)

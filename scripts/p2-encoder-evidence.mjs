@@ -30,3 +30,35 @@ export function validateEncoderEvidence(evidence, { runId, startedAtMs, modelSha
     return sample.dimensions === dimensions;
   });
 }
+
+export function validateForegroundEvidence(evidence, { runId, startedAtMs, modelSha256, policyId }) {
+  if (evidence?.schema !== 1 || evidence.runId !== runId || evidence.modelSha256 !== modelSha256 ||
+      evidence.runtime !== 'com.google.mediapipe:tasks-text:1.1.1' || evidence.passed !== true ||
+      evidence.contextTokens !== 2048 || evidence.outputReservation !== 512 || evidence.fullRetrievalVerified !== false ||
+      evidence.gemmaCleanup !== 'CONFIRMED' ||
+      !Number.isSafeInteger(evidence.startedAtMs) || evidence.startedAtMs < startedAtMs ||
+      !Number.isSafeInteger(evidence.finishedAtMs) || evidence.finishedAtMs < evidence.startedAtMs ||
+      !Array.isArray(evidence.cases) || evidence.cases.length !== 7) return false;
+  const modes = ['cold', 'resident-reclaim', 'cancel-counting', 'cancel-loading', 'cancel-encoding', 'timeout-before-handoff', 'fresh-worker-recovery'];
+  const instances = new Set();
+  return evidence.cases.every((sample, index) => {
+    if (sample.mode !== modes[index] || sample.passed !== true || sample.encoderCleanup !== 'CONFIRMED' ||
+        sample.backend !== 'GPU' || (sample.mode === 'cold' && sample.panelIsolationChecked !== true) ||
+        sample.policyId !== policyId || sample.lowMemory !== false ||
+        !Number.isSafeInteger(sample.thermalStatus) || sample.thermalStatus < 0 || sample.thermalStatus >= 3 ||
+        !Number.isSafeInteger(sample.totalMs) || sample.totalMs < 0 || sample.totalMs > 90000) return false;
+    if (sample.mode === 'cancel-counting') return sample.nativeEncoderInvoked === false && sample.outcome === 'CANCELLED';
+    if (typeof sample.workerInstance !== 'string' || instances.has(sample.workerInstance) || sample.confirmedDeath !== true ||
+        !Number.isSafeInteger(sample.encoderDeathAtMs) || !Array.isArray(sample.gemmaLoadStarts) ||
+        !Array.isArray(sample.workerEvents) || sample.workerEvents.length < 1 ||
+        sample.workerEvents.some(event => !Number.isSafeInteger(event.pssKb) || event.pssKb <= 0 || event.pssKb > 384 * 1024 ||
+          !Number.isSafeInteger(event.pid) || event.pid <= 0 || !Number.isSafeInteger(event.monotonicMs) || event.monotonicMs < 0)) return false;
+    instances.add(sample.workerInstance);
+    if (sample.mode.startsWith('cancel-')) return sample.outcome === 'CANCELLED' && sample.gemmaLoadStarts.length === 0;
+    if (sample.mode === 'timeout-before-handoff') return sample.error === 'ENCODER_TIMEOUT' && sample.outcome === 'TIMED_OUT' && sample.gemmaLoadStarts.length === 0;
+    return sample.outcome === 'COMPLETED' && Number.isSafeInteger(sample.preparationMs) && sample.preparationMs >= 0 && sample.preparationMs < 5000 &&
+      Number.isSafeInteger(sample.inputBound) && sample.inputBound + 512 <= 2048 &&
+      Number.isSafeInteger(sample.sdkInputTokens) && sample.sdkInputTokens >= 0 && sample.sdkInputTokens + 512 <= 2048 &&
+      sample.gemmaLoadStarts.length > 0 && sample.gemmaLoadStarts.every(time => Number.isSafeInteger(time) && time >= sample.encoderDeathAtMs);
+  });
+}
