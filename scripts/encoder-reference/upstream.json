@@ -1,0 +1,20 @@
+{
+  "revision": "0e152b35eeea3cc9e8b55886428982b82de5925b",
+  "license": "Apache-2.0",
+  "base": "https://raw.githubusercontent.com/google-ai-edge/mediapipe/0e152b35eeea3cc9e8b55886428982b82de5925b/",
+  "files": {
+    "mediapipe/tasks/cc/text/custom_ops/sentencepiece/optimized_encoder.cc": "ff9f35d345e8a928939fe194dbf36502f6c1239271d6b00b5e1cfba7fed8d797",
+    "mediapipe/tasks/cc/text/custom_ops/sentencepiece/optimized_encoder.h": "87d3583145c28b7e479c1b7ae3ed7d1d0adc4e8e4919e33fba05f85ca056561d",
+    "mediapipe/tasks/cc/text/custom_ops/sentencepiece/double_array_trie.h": "9185f484782b984d5e2fecb4505883ae664e1a0d9ebf6cde5710cd41ed1532d2",
+    "mediapipe/tasks/cc/text/custom_ops/sentencepiece/utils.h": "19473c0ec33b2813fe6a9c6675703c1e682965f69684b09eb88a448aa274a42c",
+    "mediapipe/tasks/cc/text/custom_ops/sentencepiece/config.fbs": "b4467a3bc791149362a05d970e4d16c8d30aac68a7abb1532243a19f0db2ae22",
+    "mediapipe/tasks/cc/text/custom_ops/sentencepiece/encoder_config.fbs": "b8382e4c0bcfa51168812b4c58fff0891b8d60f24acaefefb986bdafdb6e6b19",
+    "mediapipe/tasks/cc/text/custom_ops/sentencepiece/sentencepiece_tokenizer_tflite.cc": "1d68cdefb4d3064644ec5cbc0fc5702ddb1e7827c6f0136d4cf5b3f93a0f8b84",
+    "mediapipe/calculators/tensor/universal_sentence_encoder_preprocessor_calculator.cc": "7f6c1eb7fbc42b6d5401a04063de0d94176e5d15773e56859061ddb52d4f00fa"
+  },
+  "flatbuffers": {
+    "url": "https://codeload.github.com/google/flatbuffers/tar.gz/refs/tags/v25.9.23",
+    "sha256": "9102253214dea6ae10c2ac966ea1ed2155d22202390b532d1dea64935c518ada",
+    "directory": "flatbuffers-25.9.23"
+  }
+}
