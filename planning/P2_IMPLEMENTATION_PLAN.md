@@ -14,6 +14,33 @@ Proposed implementation plan, 2026-10-15; revised for forget/history eligibility
 
 Appearance/QA identity and targeted native supervision loss/recovery are already implemented; their remaining manual acceptance checks remain open. No new source, memory or retrieval feature is marked complete by this execution contract.
 
+### Encoder Slice Contract and Status (2026-10-21)
+
+- Exact final SDK packet bytes, all three graph branches and special tokens are
+  admitted with bounded preprocessing. Internally constructed immutable receipts
+  bind input, formatting, artifact, tokenizer, runtime, transport digest and limit
+  identities; worker rechecking rejects mismatches before native encoding.
+- Extend the existing ModelManager reservation, not a second scheduler. Opaque
+  owner identity covers chat preparation, panel commands, installation/repair,
+  benchmarks and idle/lifecycle release. Printable request IDs grant no authority;
+  public panel Cancel cannot stop a foreground owner. Privileged host shutdown is
+  separate; internal cleanup never recursively awaits public release under lock.
+- Exactly one terminal outcome is separate from pending/confirmed/uncertain
+  cleanup. Stop/timeout invalidates results immediately; ownership remains held
+  through confirmed cleanup, or quarantines admission on uncertainty. Use one
+  monotonic five-second preparation/retrieval deadline and recheck after encoder
+  cleanup immediately before Gemma admission. Gemma load/generation is excluded;
+  there is no silent text-only fallback.
+- Captured context epoch and active/lifetime validity span admission, encoding
+  and handoff. Context mutation or confirmed host loss prevents queued admission;
+  rotation and drawer/full-app continuity retain existing rules.
+- These prerequisites now have focused host/S24 evidence in [encoder handoff
+  results](../docs/P2_ENCODER_HANDOFF_RESULTS.md) and [ADR 0005](../docs/decisions/0005-verified-encoder-admission-and-handoff.md).
+  The QA-only pipeline discards vectors and is not wired into Sources or ordinary
+  conversation. Counting is no longer the unresolved gate for this pinned SDK
+  path. Semantic adoption, real fence/retrieval integration and the full retrieval
+  deadline remain open; context/output and baseline memory policy are unchanged.
+
 ## Outcome and Scope
 
 Make Memory and Sources usable: explicitly import text and text-based PDFs, inspect extracted evidence, search locally, ask source-grounded questions with resolvable citations, and create/correct/forget personal memories. Add consistent System/Light/Dark appearance across the app and both conversation hosts, plus a clearly distinguishable QA app icon and name.
@@ -27,9 +54,9 @@ No OCR, scanned-PDF interpretation, image understanding, speech transcription, e
 - System/Light/Dark appearance and distinct QA branding are implemented, with focused results recorded separately; remaining manual continuity/launch checks are not inferred from compilation.
 - The artifact-specific v2 chat bound now admits 1312 ASCII bytes for a single current message at the unchanged 2048 context/512 output. Host proof includes the pinned NORMAL metaspace token. Retained turns and all grounded instructions/evidence share this allowance; native grounded-chat acceptance remains open. See [prerequisite decisions](../docs/decisions/0004-p2-prerequisite-contracts.md).
 - SQLCipher-backed storage and encrypted attachment files exist. The current attachment file interface reads/writes byte arrays; it is not a bounded-streaming document ingestion API.
-- No embedding model or PDF text-extraction implementation is selected by this plan. Pin, license-check and verify each dependency before adopting it.
+- USE-QA is pinned for the QA-only admission/handoff prerequisite, not adopted for production semantic retrieval. No production PDF text-extraction implementation is selected. Pin, license-check and verify each dependency before adoption.
 
-### Current Prerequisite Status (2026-10-18)
+### Earlier Prerequisite Status (2026-10-18)
 
 Authenticated streaming storage and synthetic protected seekable PDF input have focused host/S24 evidence. They are not yet wired into Sources import. The QA-only USE encoder lifecycle spike passes cold/warm, active-batch cancellation and fresh recovery, but semantic adoption remains blocked: its graph limits input to 192 tokens, includes a normalization replacement map, and the SDK provides no exact-count API. Resolve a vetted counting bridge or a different fully verified encoder before embedding arbitrary queries/chunks; do not reuse Gemma's unrelated identity-normalizer proof, silently truncate, or enlarge the encoder limit. Details and retained failed attempts are in [P2 prerequisite results](../docs/P2_PREREQUISITE_RESULTS.md).
 

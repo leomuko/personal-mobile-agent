@@ -1,5 +1,10 @@
 # P2 Prerequisite Results
 
+Follow-up, 2026-10-21: the counting and request-owned handoff blockers described
+in this historical slice now have focused evidence in [encoder handoff results](P2_ENCODER_HANDOFF_RESULTS.md).
+Semantic retrieval and P2 acceptance remain incomplete; the original evidence
+and failed attempts below are preserved as recorded.
+
 Date: 2026-10-18. Branch: `dev`, implementation changes uncommitted above `ac0f24a`.
 
 **P2 is not complete.** This delivery implements prerequisite adapters and focused checks, not Sources/Memory/retrieval UI. Encoder adoption is blocked on verified preflight counting. The accepted gate-first contract is preserved; no context, output reservation, ordinary-app memory floor or deferred feature was relaxed to manufacture readiness.

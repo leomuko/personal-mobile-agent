@@ -1,5 +1,9 @@
 # P2 Prerequisite Contracts
 
+Follow-up: [ADR 0005](0005-verified-encoder-admission-and-handoff.md) records the
+implemented encoder counting/ownership prerequisite and its focused evidence.
+The original contracts and historical blockers below are retained.
+
 Date: 2026-10-18. Status: implementation in progress, not P2 acceptance.
 
 ## Prompt Budget V2
