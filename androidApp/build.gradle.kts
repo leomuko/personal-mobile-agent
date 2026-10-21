@@ -64,4 +64,5 @@ dependencies {
     "secureQaImplementation"(libs.compose.test.manifest)
     androidTestImplementation(libs.test.runner)
     androidTestImplementation(libs.test.junit)
+    androidTestImplementation(libs.tink)
 }
