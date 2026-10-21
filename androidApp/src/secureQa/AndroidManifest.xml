@@ -1,4 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove" />
     <application android:icon="@mipmap/ic_launcher_qa" android:roundIcon="@mipmap/ic_launcher_qa"
-        tools:replace="android:icon" />
+        tools:replace="android:icon">
+        <service android:name=".prerequisites.EmbeddingGateService" android:exported="false"
+            android:isolatedProcess="true" android:process=":embedding_gate" />
+    </application>
 </manifest>

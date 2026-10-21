@@ -21,6 +21,8 @@ class CompanionApplication : Application() {
     internal val presence: PresenceCoordinator by inject()
     override fun onCreate() {
         super.onCreate()
+        // Isolated prerequisite workers must never open the app database or runtime owner.
+        if (android.os.Process.isIsolated()) return
         val koin = startKoin {
             androidContext(this@CompanionApplication)
             allowOverride(false)
