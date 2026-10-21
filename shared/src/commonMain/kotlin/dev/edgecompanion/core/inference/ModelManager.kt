@@ -48,6 +48,113 @@ class ModelManager(
         }
     }
 
+    /** Internal encoder-only prerequisite. No synthetic chat prompt or Gemma generation. */
+    fun encode(id: String, input: EncoderInput, encoder: ForegroundEncoder,
+        capturedEpoch: Long, currentEpoch: () -> Long): EncodingCall {
+        val capturedLifetime = lifetimeEpoch.value
+        val prepared = ForegroundPreparation(id, input, encoder, capturedEpoch, currentEpoch, nowMs) {
+            lifetimeEpoch.value == capturedLifetime
+        }
+        val results = channelFlow {
+            val worker = scope.launch {
+                if (!prepared.claim()) {
+                    trySend(EncodingOutcome(EncodingStatus.REJECTED, ModelError.BUSY)); close(); return@launch
+                }
+                if (!enabled || releasing > 0 || !operation.tryLock()) {
+                    val error = if (!enabled) ModelError.NOT_INSTALLED else ModelError.BUSY
+                    prepared.finished(error)
+                    trySend(EncodingOutcome(if (!enabled) EncodingStatus.UNAVAILABLE else EncodingStatus.REJECTED, error)); close(); return@launch
+                }
+                var outcome = EncodingOutcome(EncodingStatus.FAILED, ModelError.ENCODER_FAILED)
+                var monitor: Job? = null
+                try {
+                    foreground = prepared
+                    generation = currentCoroutineContext().job
+                    chatCancellation = ChatOutcome.CANCELLED
+                    if (poisoned) throw ModelException(ModelError.RESTART_REQUIRED)
+                    mutable.update { it.copy(error = null, commandError = null) }
+                    idle?.cancel()
+                    prepared.reclaiming()
+                    monitor = monitorPreparation(prepared)
+                    if (!cleanupOwnedEngine()) throw ModelException(ModelError.RESTART_REQUIRED)
+                    prepared.checkLive()
+                    memoryPolicy.blockedReason(resources(), MemoryAdmission.LOADING)?.let { throw ModelException(it) }
+                    val values = prepared.prepare()
+                    prepared.checkLive()
+                    outcome = EncodingOutcome(EncodingStatus.COMPLETED, values = values)
+                } catch (_: CancellationException) {
+                    outcome = EncodingOutcome(if (prepared.userCancelled) EncodingStatus.CANCELLED
+                        else if (state.value.error == ModelError.ENCODER_TIMEOUT) EncodingStatus.TIMED_OUT
+                        else EncodingStatus.INTERRUPTED, if (prepared.userCancelled) null else state.value.error)
+                } catch (failure: Exception) {
+                    val error = (failure as? ModelException)?.error ?: ModelError.ENCODER_FAILED
+                    outcome = EncodingOutcome(when {
+                        prepared.userCancelled -> EncodingStatus.CANCELLED
+                        error == ModelError.ENCODER_TIMEOUT -> EncodingStatus.TIMED_OUT
+                        error == ModelError.ENCODER_REJECTED && prepared.state.value.admissionError == AdmissionError.UNAVAILABLE -> EncodingStatus.UNAVAILABLE
+                        error in setOf(ModelError.ENCODER_REJECTED, ModelError.CONTEXT_INVALIDATED) -> EncodingStatus.REJECTED
+                        else -> EncodingStatus.FAILED
+                    }, if (prepared.userCancelled) null else error)
+                } finally {
+                    monitor?.cancel()
+                    if (!prepared.cleanup()) {
+                        poisoned = true
+                        outcome = EncodingOutcome(EncodingStatus.FAILED, ModelError.RESTART_REQUIRED)
+                        mutable.update { it.copy(status = RuntimeStatus.FAILED, error = ModelError.RESTART_REQUIRED) }
+                    }
+                    prepared.finished(outcome.error)
+                    foreground = null; generation = null
+                    operation.unlock()
+                    trySend(outcome); close()
+                }
+            }
+            try {
+                worker.join()
+                if (trySend(EncodingOutcome(EncodingStatus.INTERRUPTED, ModelError.CONTEXT_INVALIDATED)).isSuccess) {
+                    prepared.finished(ModelError.CONTEXT_INVALIDATED); close()
+                }
+            } finally {
+                if (!worker.isCompleted) withContext(NonCancellable) {
+                    prepared.invalidate(); worker.cancel()
+                    withContext(scope.coroutineContext.minusKey(Job)) {
+                        if (foreground === prepared) cancelActive(interrupted = true).join()
+                    }
+                    worker.join()
+                }
+            }
+        }
+        return EncodingCall(results, prepared.state) {
+            prepared.cancelByUser()
+            scope.launch { if (foreground === prepared) cancelActive(interrupted = false).join() }
+        }
+    }
+
+    private fun monitorPreparation(prepared: ForegroundPreparation): Job = scope.launch {
+        val window = MemoryPressureWindow(memoryPolicy)
+        var lastSample = nowMs() - memoryPolicy.sampleIntervalMs
+        while (isActive) {
+            try {
+                prepared.checkLive()
+                if (nowMs() - lastSample >= memoryPolicy.sampleIntervalMs) {
+                    lastSample = nowMs()
+                    window.observe(resources())?.let { throw ModelException(it) }
+                }
+            } catch (failure: ModelException) {
+                mutable.update { it.copy(error = failure.error) }
+                prepared.invalidate(failure.error)
+                cancelActive(interrupted = true)
+                break
+            } catch (cancelled: CancellationException) { throw cancelled }
+            catch (_: Exception) {
+                mutable.update { it.copy(error = ModelError.RESOURCE_UNKNOWN) }
+                prepared.invalidate(ModelError.RESOURCE_UNKNOWN)
+                cancelActive(interrupted = true)
+                break
+            }
+            delay(100)
+        }
+    }
+
     private fun chatFlow(request: ChatRequest, prepared: ForegroundPreparation? = null): Flow<ChatEvent> = channelFlow {
         val worker = scope.launch {
             if (prepared != null && !prepared.claim()) {
@@ -76,30 +183,7 @@ class ModelManager(
                 idle?.cancel()
                 if (prepared != null) {
                     prepared.reclaiming()
-                    preparationMonitor = scope.launch {
-                        val window = MemoryPressureWindow(memoryPolicy)
-                        var lastSample = nowMs() - memoryPolicy.sampleIntervalMs
-                        while (isActive) {
-                            try {
-                                prepared.checkLive()
-                                if (nowMs() - lastSample >= memoryPolicy.sampleIntervalMs) {
-                                    lastSample = nowMs()
-                                    window.observe(resources())?.let { throw ModelException(it) }
-                                }
-                            } catch (failure: ModelException) {
-                                mutable.update { it.copy(error = failure.error) }
-                                prepared.invalidate(failure.error)
-                                cancelActive(interrupted = true)
-                                break
-                            } catch (_: Exception) {
-                                mutable.update { it.copy(error = ModelError.RESOURCE_UNKNOWN) }
-                                prepared.invalidate(ModelError.RESOURCE_UNKNOWN)
-                                cancelActive(interrupted = true)
-                                break
-                            }
-                            delay(100)
-                        }
-                    }
+                    preparationMonitor = monitorPreparation(prepared)
                     if (!cleanupOwnedEngine()) throw ModelException(ModelError.RESTART_REQUIRED)
                     prepared.checkLive()
                     memoryPolicy.blockedReason(resources(), MemoryAdmission.LOADING)?.let { throw ModelException(it) }

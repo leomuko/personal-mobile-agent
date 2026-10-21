@@ -28,11 +28,12 @@ class ForegroundHandoffTest {
         var cancels = 0
         var clean = true
         var reject = false
+        var admissionError = AdmissionError.TOKEN_LIMIT
         var foreignResult = false
         var resident = false
         override suspend fun admit(input: EncoderInput): EncoderAdmission {
             log += "count"; countGate?.await(); delay(countDelay)
-            return if (reject) EncoderAdmission.Rejected(AdmissionError.TOKEN_LIMIT, 193)
+            return if (reject) EncoderAdmission.Rejected(admissionError, 193)
                 else EncoderAdmission.Accepted(EncoderAdmissionReceipt(issuer, input, 4))
         }
         override fun accepts(receipt: EncoderAdmissionReceipt, input: EncoderInput) = receipt.issuer === issuer && receipt.input == input
@@ -79,10 +80,103 @@ class ForegroundHandoffTest {
         fun call(id: String = "synthetic") = manager.prepareChat(
             ChatRequest(id, listOf(ChatMessage(ChatRole.USER, "Answer this synthetic question."))),
             EncoderInput("Synthetic source input"), encoder, epoch) { epoch }
+        fun encode(id: String = "synthetic-encode") = manager.encode(id, EncoderInput("Synthetic source input"), encoder, epoch) { epoch }
     }
     private fun List<ChatEvent>.terminal(): ChatEvent.Terminal {
         assertEquals(1, count { it is ChatEvent.Terminal })
         return last() as ChatEvent.Terminal
+    }
+
+    @Test fun encoderOnlyReleasesResidentGemmaAndReturnsTransientCopyWithoutGeneration() = runTest {
+        val f = Fixture(this)
+        f.manager.load(ModelBackend.GPU).join()
+        val call = f.encode()
+        val result = call.results.single()
+        assertEquals(EncodingStatus.COMPLETED, result.status)
+        assertEquals(100, result.values!!.size)
+        assertNotSame(result.values, result.values)
+        assertEquals(listOf("load", "release", "count", "encode", "cleanup"), f.log)
+        assertEquals(RuntimeStatus.UNLOADED, f.manager.state.value.status)
+        assertEquals(EncoderCleanup.CONFIRMED, call.preparation.value.cleanup)
+        f.manager.shutdown()
+    }
+    @Test fun encoderOnlyCancellationRetainsReservationAndPanelCannotSignalItsOwner() = runTest {
+        val f = Fixture(this); f.encoder.encodeGate = CompletableDeferred(); f.encoder.cleanupGate = CompletableDeferred()
+        val call = f.encode()
+        val result = async { call.results.single() }; runCurrent()
+        f.manager.cancel().join(); f.manager.release().join(); f.manager.testPrompt().join()
+        assertEquals(ModelError.BUSY, f.manager.state.value.commandError)
+        assertEquals(0, f.encoder.cancels)
+        assertEquals(EncodingStatus.REJECTED, f.encode().results.single().status)
+        assertEquals(EncodingStatus.REJECTED, call.results.single().status)
+        call.cancel(); assertTrue(f.encoder.cancels > 0); runCurrent()
+        assertEquals(EncoderCleanup.PENDING, call.preparation.value.cleanup)
+        assertEquals(ModelError.BUSY, f.encode("retry").results.single().error)
+        assertFalse(result.isCompleted)
+        f.encoder.cleanupGate!!.complete(Unit)
+        assertEquals(EncodingStatus.CANCELLED, result.await().status)
+        assertEquals(0, f.engine.loads)
+        f.manager.shutdown()
+    }
+    @Test fun encoderOnlyLateEpochAndHostLossPreventAllocationAndOldStopCannotRetarget() = runTest {
+        val f = Fixture(this)
+        val queued = f.encode(); f.epoch++
+        assertEquals(ModelError.CONTEXT_INVALIDATED, queued.results.single().error)
+        val lost = f.encode(); f.manager.releaseForHostLoss().join()
+        assertEquals(ModelError.CONTEXT_INVALIDATED, lost.results.single().error)
+        assertEquals(0, f.encoder.encodes)
+        val old = f.encode("reused")
+        assertEquals(EncodingStatus.COMPLETED, old.results.single().status)
+        f.encoder.encodeGate = CompletableDeferred()
+        val fresh = f.encode("reused"); val active = async { fresh.results.single() }; runCurrent()
+        val before = f.encoder.cancels
+        old.cancel(); runCurrent()
+        assertEquals(before, f.encoder.cancels); assertFalse(active.isCompleted)
+        f.manager.releaseForHostLoss().join()
+        assertEquals(EncodingStatus.INTERRUPTED, active.await().status)
+        assertEquals(0, f.engine.loads)
+        f.manager.shutdown()
+    }
+    @Test fun encoderOnlyTimeoutRetainsCleanupAndNeverReturnsLateVector() = runTest {
+        val f = Fixture(this); f.encoder.encodeGate = CompletableDeferred(); f.encoder.cleanupGate = CompletableDeferred()
+        val call = f.encode(); val active = async { call.results.single() }; runCurrent()
+        advanceTimeBy(5_001); runCurrent()
+        assertEquals(EncoderCleanup.PENDING, call.preparation.value.cleanup)
+        assertFalse(active.isCompleted)
+        assertEquals(ModelError.BUSY, f.encode("retry").results.single().error)
+        f.encoder.cleanupGate!!.complete(Unit)
+        val result = active.await()
+        assertEquals(EncodingStatus.TIMED_OUT, result.status)
+        assertEquals(ModelError.ENCODER_TIMEOUT, result.error); assertNull(result.values)
+        assertEquals(0, f.engine.loads)
+        f.manager.shutdown()
+    }
+    @Test fun encoderOnlyUncertainCleanupQuarantinesUntilRestart() = runTest {
+        val f = Fixture(this); f.encoder.clean = false
+        val call = f.encode()
+        val result = call.results.single()
+        assertEquals(ModelError.RESTART_REQUIRED, result.error); assertNull(result.values)
+        assertEquals(EncoderCleanup.UNCERTAIN, call.preparation.value.cleanup)
+        assertEquals(ModelError.RESTART_REQUIRED, f.encode("retry").results.single().error)
+        assertEquals(1, f.encoder.encodes); assertEquals(0, f.engine.loads)
+        f.manager.shutdown()
+    }
+    @Test fun encoderOnlyClosedManagerAndOverflowHaveSingleTerminalWithoutNativeWork() = runTest {
+        val f = Fixture(this); f.encoder.reject = true
+        assertEquals(ModelError.ENCODER_REJECTED, f.encode().results.single().error)
+        assertEquals(0, f.encoder.encodes)
+        val queued = f.encode(); f.manager.shutdown()
+        assertEquals(EncodingStatus.INTERRUPTED, queued.results.single().status)
+        assertEquals(EncodingStatus.INTERRUPTED, f.encode("after-close").results.single().status)
+        assertEquals(0, f.engine.loads)
+    }
+    @Test fun encoderOnlyUnavailableDoesNotMasqueradeAsCompletedEmptyResults() = runTest {
+        val f = Fixture(this); f.encoder.reject = true; f.encoder.admissionError = AdmissionError.UNAVAILABLE
+        val call = f.encode(); val result = call.results.single()
+        assertEquals(EncodingStatus.UNAVAILABLE, result.status); assertNull(result.values)
+        assertEquals(AdmissionError.UNAVAILABLE, call.preparation.value.admissionError)
+        assertEquals(0, f.encoder.encodes); assertEquals(0, f.engine.loads)
+        f.manager.shutdown()
     }
 
     @Test fun residentGemmaReleasesAndEncoderCleanupCompletesBeforeGemmaAdmission() = runTest {

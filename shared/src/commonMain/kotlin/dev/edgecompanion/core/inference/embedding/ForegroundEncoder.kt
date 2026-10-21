@@ -75,9 +75,9 @@ internal class ForegroundPreparation(
     }
     fun reclaiming() { checkLive(); mutable.update { it.copy(stage = PreparationStage.RECLAIMING) } }
 
-    suspend fun prepare() {
+    suspend fun prepare(): List<Float> {
         checkLive()
-        try {
+        val vector = try {
             withTimeout((DEADLINE_MS - (nowMs() - entered)).coerceAtLeast(1)) {
                 mutable.update { it.copy(stage = PreparationStage.COUNTING) }
                 val admitted = encoder.admit(input)
@@ -96,12 +96,13 @@ internal class ForegroundPreparation(
                 checkLive()
                 startedEncoding = true
                 mutable.update { it.copy(stage = PreparationStage.ENCODING, cleanup = EncoderCleanup.PENDING) }
-                when (val result = encoder.encode(EncoderRequest(lease, receipt))) {
+                val values = when (val result = encoder.encode(EncoderRequest(lease, receipt))) {
                     is EncoderResult.Completed -> {
                         val values = result.values
                         val norm = kotlin.math.sqrt(values.sumOf { it.toDouble() * it })
                         if (result.lease !== lease || values.size != 100 || values.any { !it.isFinite() } || kotlin.math.abs(norm - 1) > 0.01)
                             throw ModelException(ModelError.ENCODER_FAILED)
+                        values
                     }
                     EncoderResult.Cancelled -> throw CancellationException("Encoder cancelled")
                     EncoderResult.TimedOut -> throw ModelException(ModelError.ENCODER_TIMEOUT)
@@ -112,10 +113,12 @@ internal class ForegroundPreparation(
                     EncoderResult.Failed -> throw ModelException(ModelError.ENCODER_FAILED)
                 }
                 checkLive()
+                values
             }
         } catch (_: TimeoutCancellationException) { invalidate(ModelError.ENCODER_TIMEOUT); throw ModelException(ModelError.ENCODER_TIMEOUT) }
         finally { cleanup() }
         checkLive()
+        return vector
     }
 
     suspend fun cleanup(): Boolean = withContext(NonCancellable) {
