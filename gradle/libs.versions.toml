@@ -13,6 +13,7 @@ camera = "1.5.1"
 koin = "4.2.2"
 navigation = "2.9.2"
 multiplatform-lifecycle = "2.10.0"
+tink = "1.18.0"
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -24,6 +25,7 @@ sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelight" }
 
 [libraries]
 litert-lm = { module = "com.google.ai.edge.litertlm:litertlm-android", version.ref = "litert-lm" }
+tink = { module = "com.google.crypto.tink:tink-android", version.ref = "tink" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }

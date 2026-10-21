@@ -10,7 +10,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies { implementation(libs.coroutines.core); implementation(libs.sqldelight.runtime); implementation(libs.koin.core) }
         commonTest.dependencies { implementation(kotlin("test")); implementation(libs.coroutines.test); implementation(libs.koin.test) }
-        androidMain.dependencies { implementation(libs.sqldelight.android); implementation(libs.sqlcipher); implementation(libs.sqlite); implementation(libs.litert.lm) }
+        androidMain.dependencies { implementation(libs.sqldelight.android); implementation(libs.sqlcipher); implementation(libs.sqlite); implementation(libs.litert.lm); implementation(libs.tink) }
         jvmTest.dependencies { implementation(libs.sqldelight.jdbc) }
     }
 }
