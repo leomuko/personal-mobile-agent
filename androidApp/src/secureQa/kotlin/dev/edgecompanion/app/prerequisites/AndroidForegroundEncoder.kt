@@ -87,7 +87,7 @@ class AndroidForegroundEncoder(private val context: Context, private val model: 
         private var attemptedBind = false
         private val replies = Messenger(object : Handler(thread.looper) {
             override fun handleMessage(message: Message) {
-                if (message.data.getString("id") != id) return
+                if (message.data.getString("id") != id || mutableEvidence.value.instance != id) return
                 mutableEvidence.update { old -> old.copy(events = (old.events + EncoderWorkerEvent(
                     message.data.getString("phase").orEmpty(), message.data.getLong("elapsedMs"),
                     message.data.getInt("pssKb"), message.data.getInt("pid"))).takeLast(32)) }
@@ -97,10 +97,11 @@ class AndroidForegroundEncoder(private val context: Context, private val model: 
         private val connection = object : ServiceConnection {
             override fun onServiceConnected(name: ComponentName, service: IBinder) {
                 try { service.linkToDeath({
-                    mutableEvidence.update { it.copy(confirmedDeath = true, deathAtMs = SystemClock.elapsedRealtime()) }
+                    mutableEvidence.update { if (it.instance == id)
+                        it.copy(confirmedDeath = true, deathAtMs = SystemClock.elapsedRealtime()) else it }
                     dead.complete(Unit)
                 }, 0) }
-                catch (failure: RemoteException) { dead.complete(Unit); connected.completeExceptionally(failure); return }
+                catch (failure: RemoteException) { connected.completeExceptionally(failure); return }
                 endpoint = Messenger(service)
                 connected.complete(requireNotNull(endpoint))
                 if (stopped.get()) stop()
@@ -148,7 +149,8 @@ class AndroidForegroundEncoder(private val context: Context, private val model: 
         fun stop() {
             stopped.set(true)
             try { endpoint?.send(Message.obtain().apply { what = 2; data = Bundle().apply { putString("id", id) } }) }
-            catch (_: DeadObjectException) { dead.complete(Unit) }
+            // A failed send is not the death observation used to release native ownership.
+            catch (_: DeadObjectException) { }
             catch (_: RemoteException) { }
         }
         suspend fun close(): Boolean = withContext(NonCancellable) {
