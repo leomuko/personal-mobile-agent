@@ -2,6 +2,18 @@
 
 Proposed implementation plan, 2026-10-15; revised for forget/history eligibility, library-wide limits and distinct QA identity. This document defines proposed work packages, not completed functionality or approval of unselected dependencies. Preserve the local-first mascot assistant and the existing shared drawer/full-app conversation. Release packaging and the current QA memory policy follow [recorded decisions](DEFERRED_ISSUES.md).
 
+## Accepted Execution Contract (2026-10-18)
+
+- Implement the remaining stages as one delivery without intermediate approval checkpoints. Existing permission and device-safety boundaries still apply; this does not authorize commits, pushes, data resets or weaker safeguards.
+- Prove tokenizer/budget viability, vetted authenticated streaming storage with protected PDF access, and embedding allocation/cancellation/handoff before dependent behavior. Failed gates block their dependents. Do not enlarge the 2048 context or reduce the 512 output reservation to bypass a gate.
+- Write and run focused prerequisite/regression tests during development, then run one consolidated final acceptance campaign over the completed experience. The additional standalone native smoke remains deferred to that campaign. Compilation alone is not runtime proof.
+- Query embedding belongs to the foreground reply. One generation ID and reservation spans eligible context, query embedding, retrieval, confirmed encoder release, Gemma admission and generation. Release resident Gemma before admitting the encoder unless concurrent residency has separately passed verification. Background indexing must not enter the reserved encoder-to-Gemma handoff.
+- Stop signals the active native owner out of band. Subsequent native work requires confirmed cleanup; uncertain cleanup quarantines the owner and requires restart. Models-panel load/unload/benchmark requests return BUSY during a foreground reservation; panel Cancel cannot cancel another owner's request.
+- The five-second retrieval deadline includes queueing, resource reclamation, cold encoder loading, query encoding, retrieval and encoder release, but excludes Gemma loading/generation. Timeout produces a typed error and initiates cleanup; it does not imply instantaneous native cleanup. Record cold/warm paths separately. Revise an unmet contract explicitly before enabling semantic retrieval.
+- Use a vetted authenticated-streaming implementation, not a new cryptographic protocol. Version the format and authenticate scheme/key version and document/revision binding. Bound read sizes, decrypted cache, open handles and cancellation. Complete a bounded-memory authentication pass before PDF parsing; subsequent seeks also authenticate their data. Never expose unauthenticated plaintext or write plaintext temporary PDFs. Corruption, truncation, wrong keys, reordered/duplicated chunks and cross-document/revision substitution prevent publication and remain recoverable storage errors, never a reason to reset data.
+
+Appearance/QA identity and targeted native supervision loss/recovery are already implemented; their remaining manual acceptance checks remain open. No new source, memory or retrieval feature is marked complete by this execution contract.
+
 ## Outcome and Scope
 
 Make Memory and Sources usable: explicitly import text and text-based PDFs, inspect extracted evidence, search locally, ask source-grounded questions with resolvable citations, and create/correct/forget personal memories. Add consistent System/Light/Dark appearance across the app and both conversation hosts, plus a clearly distinguishable QA app icon and name.
@@ -11,11 +23,24 @@ No OCR, scanned-PDF interpretation, image understanding, speech transcription, e
 ## Current Foundations
 
 - Existing modules remain `shared`, `ui` and `androidApp`; do not introduce a parallel app architecture or a second conversation database/runtime owner.
-- Shared conversation persistence, assistant attempts, bounded chat generation and the internal GPU runtime exist. Source/memory screens currently contain empty-state placeholders.
-- `CompanionTheme` always selects a light palette. Conversation bubbles, recording controls, navigation and empty-state icons still contain direct Mint/Forest/white colors; Android launch/window styles are also light-only.
-- The verified chat byte bound admits at most approximately 437 bytes for a single ASCII user message at 2048 context/512 output; retained turns reduce that allowance. It is not a practical general document-evidence budget. Do not append retrieved content outside the gate or silently increase context.
+- Shared conversation persistence, assistant attempts, bounded chat generation and the internal GPU runtime exist. Memory remains a placeholder. Sources now has a limited text-only pilot, described below; the complete library/retrieval outcome remains unfinished.
+- System/Light/Dark appearance and distinct QA branding are implemented, with focused results recorded separately; remaining manual continuity/launch checks are not inferred from compilation.
+- The artifact-specific v2 chat bound now admits 1312 ASCII bytes for a single current message at the unchanged 2048 context/512 output. Host proof includes the pinned NORMAL metaspace token. Retained turns and all grounded instructions/evidence share this allowance; native grounded-chat acceptance remains open. See [prerequisite decisions](../docs/decisions/0004-p2-prerequisite-contracts.md).
 - SQLCipher-backed storage and encrypted attachment files exist. The current attachment file interface reads/writes byte arrays; it is not a bounded-streaming document ingestion API.
 - No embedding model or PDF text-extraction implementation is selected by this plan. Pin, license-check and verify each dependency before adopting it.
+
+### Current Prerequisite Status (2026-10-18)
+
+Authenticated streaming storage and synthetic protected seekable PDF input have focused host/S24 evidence. They are not yet wired into Sources import. The QA-only USE encoder lifecycle spike passes cold/warm, active-batch cancellation and fresh recovery, but semantic adoption remains blocked: its graph limits input to 192 tokens, includes a normalization replacement map, and the SDK provides no exact-count API. Resolve a vetted counting bridge or a different fully verified encoder before embedding arbitrary queries/chunks; do not reuse Gemma's unrelated identity-normalizer proof, silently truncate, or enlarge the encoder limit. Details and retained failed attempts are in [P2 prerequisite results](../docs/P2_PREREQUISITE_RESULTS.md).
+
+### Independent Sources Slice (2026-10-21)
+
+- Schema v5 adds sources, immutable text revisions, UTF-16 inspection chunks, keyword FTS and a separate context epoch/message fence. Pasted text and strict UTF-8 intake, rename, inspection, keyset browsing/search and confirmed delete are implemented through the existing encrypted DB/session lane. Source text is not sent to Gemma.
+- This pilot deliberately admits at most 64 KiB UTF-8 per source and one revision per source, below the eventual capacities below. It creates no original/staging files or asynchronous indexing jobs: the complete bounded import commits or rolls back in one transaction. It does not enable the 20 MiB/PDF pipeline, replacement/deduplication, citation-pinned revisions, semantic indexing, memory CRUD or grounded answers.
+- Import/rename measure shared DB plus sidecars and protected-library files, retain 64 MiB transaction headroom within the 512 MiB library ceiling, and preserve the separate 512 MiB free-device reserve. Actual footprint is rechecked during writes; rolled-back/reclaimed pages remain physically charged. The full reservation/job/reconciliation design below is still required before staged or larger intake.
+- Delete revokes the active response identity before the transactional epoch/fence/index mutation, then cancels/joins the active request. Cleanup exceptions quarantine new chat requests until restart. Old history and unsent draft/attachments remain visible; pre-fence retries are rejected and hidden in chat. Confirmations explain the context reset.
+- Focused host and S24 checks are recorded in [Sources results](../docs/P2_SOURCES_RESULTS.md). Full P2 acceptance, encoder adoption, PDF isolation/API 31–34 and production encoder/Gemma scheduling remain open. Schema/CRUD/keyword work does not depend on adopting the blocked encoder.
+- Presentation/intake review follow-up: source/revision-bound detail prevents stale-body display during source switches or failed reads. File intake reserves the shared ViewModel write slot before provider reading, with explicit recoverable busy outcomes and cancellation-safe release. Eleven UI host tests and a seven-test S24 rerun passed; the initial locked-device UI failures are retained separately in the results document. This does not close the remaining P2 gates.
 
 ## Entry and Parallel Work
 

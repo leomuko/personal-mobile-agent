@@ -34,6 +34,7 @@ The mascot is hidden while an assistant screen is visible. Go Home or to another
 - System/Light/Dark appearance with an app-scoped preference owner, themed conversation/capture hosts, and distinct amber `Assistant (QA)` launcher branding. See [P2 appearance evidence and remaining gates](docs/P2_APPEARANCE_RESULTS.md).
 - Test-only, run-correlated native QA supervision with device-local expiry and emergency process termination; synthetic S24 loss/hung-cleanup checks are documented in [P2 supervision results](docs/P2_SUPERVISION_RESULTS.md). This does not claim a new native acceptance pass.
 - Shared encrypted conversation/draft storage, full-text index, schema migration and clear-conversation control.
+- Text-only Sources pilot: paste or explicitly import UTF-8 text (64 KiB/source), rename, inspect immutable text, paged keyword search and confirmed deletion. A persisted context fence prevents pre-delete chat and retries from re-entering model requests. See [scope and focused evidence](docs/P2_SOURCES_RESULTS.md).
 - Durable encrypted draft and sent attachments, multiple document/image selection, image thumbnails and document tiles restored after reopening.
 - Unified compact/expanded composer with the microphone beside Send, mixed attachment tiles inside the input container, and a three-option attachment sheet. Dictation-first audio remains deferred; current audio review/playback is preserved.
 - Inline microphone waveform, timer, cancel/stop and unsent WAV playback; CameraX capture returning to chat. Capture stops when backgrounded; no automatic sending or transcription.
@@ -43,11 +44,11 @@ The mascot is hidden while an assistant screen is visible. Go Home or to another
 
 ## Not implemented yet
 
-Speech/embedding engines, OCR, document parsing/analysis, retrieval, calendar writes, timers, public model downloads, and Gmail remain subsequent work. Memory and Sources are empty states. Full mobile/release acceptance remains open.
+Production speech/embedding engines, OCR, PDF ingestion, semantic retrieval/grounded answers, calendar writes, timers, public model downloads, and Gmail remain subsequent work. Memory is still an empty state; Sources supports the limited text-only pilot, not the complete P2 library. Full mobile/release acceptance remains open.
 
 ## Internal Text Chat
 
-Debug/secure-QA builds connect text chat to the local runtime through request-specific generation and conservative budgeting verified against the pinned tokenizer. With the model installed and sufficient resources, submission attempts a streamed reply; blocked or failed requests leave the saved user turn with a recoverable status. Stop, retry, host handoff and process-restoration checks are covered in [P1B results](docs/P1B_IMPLEMENTATION_RESULTS.md). The current bound admits up to 437 ASCII bytes of current input without history, and less for multibyte text or retained history. Attachments are preserved but not passed to inference. Release builds continue to save user messages without enabling generation.
+Debug/secure-QA builds connect text chat to the local runtime through request-specific generation and conservative budgeting verified against the pinned tokenizer. With the model installed and sufficient resources, submission attempts a streamed reply; blocked or failed requests leave the saved user turn with a recoverable status. Stop, retry, host handoff and process-restoration checks are covered in [P1B results](docs/P1B_IMPLEMENTATION_RESULTS.md). The artifact-specific v2 bound admits up to 1312 ASCII bytes of current input without history, and less for multibyte text or retained history; the 2048 context and 512 output reservation are unchanged. See the [revised proof](docs/decisions/0004-p2-prerequisite-contracts.md). Attachments are preserved but not passed to inference. Release builds continue to save user messages without enabling generation.
 
 Verify the prompt bound with `bash scripts/verify-chat-budget.sh`. This creates an isolated Python environment and installs pinned host dependencies; the approved model weights must already exist under `models/`, or be supplied with `--model PATH`. The setup does not download weights. Run native-wrapper regressions with `node --test scripts/tests/chat-resource-preflight.test.mjs`. The supervised native script retains stage/failure reports, waits briefly for stable resources, and keeps the app's 3 GiB safety floor unchanged. See the P1B results for prerequisites and remaining acceptance limits.
 
@@ -58,6 +59,8 @@ Before P2, the [P1 memory-reliability work package](planning/P1_MEMORY_RELIABILI
 The 2026-10-13 S24 GPU smoke passed after the runtime QA revisions. Full S24 instrumentation still has camera-permission/accessibility and notification harness failures, and the revised monitor needs sustained validation. The unsigned release APK currently includes LiteRT-LM native libraries despite disabled runtime controls; isolate that dependency before distribution. See [QA revision results](docs/PHASE_1_QA_REVISIONS.md).
 
 ## Device tests
+
+P2 prerequisite work is recorded in [P2 prerequisite results](docs/P2_PREREQUISITE_RESULTS.md): authenticated document storage/protected PDF access and an opt-in isolated encoder lifecycle spike. The independent [text Sources pilot](docs/P2_SOURCES_RESULTS.md) uses the existing encrypted database, not PDF parsing or embeddings. Encoder adoption is still blocked on verified preflight counting at its 192-token limit; the separate final P2 acceptance campaign has not run.
 
 The shared Android host tests use Java 21 to load the pinned LiteRT-LM classes; compilation and shared JVM tests keep their Java 17 toolchain. Android Studio's bundled Java 21 runtime can supply the test launcher:
 
