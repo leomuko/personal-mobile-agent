@@ -8,6 +8,8 @@ import com.google.mediapipe.tasks.text.textembedder.TextEmbedder
 import java.security.MessageDigest
 import java.util.concurrent.Executors
 import java.util.concurrent.atomic.AtomicBoolean
+import dev.edgecompanion.core.inference.embedding.*
+import kotlinx.coroutines.runBlocking
 
 /** QA-only candidate spike. A native call cannot outlive its isolated, request-owned process. */
 class EmbeddingGateService : Service() {
@@ -44,7 +46,8 @@ class EmbeddingGateService : Service() {
                 return
             }
             if (message.what == 2) {
-                if (message.data.getString("id") == owner) die()
+                // This Binder endpoint belongs to one private isolated instance, even before Start.
+                if (owner == null || message.data.getString("id") == owner) die()
                 return
             }
             if (message.what != 1 || !admitted.compareAndSet(false, true)) return
@@ -65,11 +68,17 @@ class EmbeddingGateService : Service() {
             report("CHECKING")
             guard.run()
             val cancelLoop = data.getBoolean("cancelLoop")
-            native.execute { run(descriptor, cancelLoop) }
+            val text = data.getString("text") ?: "Synthetic pilot launch on 6 October. John owns the contract."
+            if (text.length > 16_384) return die()
+            native.execute { run(descriptor, cancelLoop, text, data.getString("inputDigest"), data.getInt("expectedTokens")) }
         }
     })
 
     override fun onBind(intent: Intent): IBinder = endpoint.binder
+    override fun onCreate() {
+        super.onCreate()
+        main.postDelayed({ if (owner == null) die() }, 5_000)
+    }
     override fun onUnbind(intent: Intent): Boolean = die()
 
     private fun report(phase: String, extras: Bundle = Bundle()) {
@@ -77,11 +86,12 @@ class EmbeddingGateService : Service() {
         extras.putString("phase", phase)
         extras.putLong("elapsedMs", SystemClock.elapsedRealtime())
         extras.putInt("pssKb", maxOf(peakPssKb, Debug.getPss().toInt()))
+        extras.putInt("pid", Process.myPid())
         try { reply?.send(Message.obtain().apply { what = 3; data = extras }) }
         catch (_: Exception) { die() }
     }
 
-    private fun run(descriptor: ParcelFileDescriptor, cancelLoop: Boolean) {
+    private fun run(descriptor: ParcelFileDescriptor, cancelLoop: Boolean, text: String, expectedDigest: String?, expectedTokens: Int) {
         var encoder: TextEmbedder? = null
         try {
             check(Process.isIsolated())
@@ -99,6 +109,17 @@ class EmbeddingGateService : Service() {
             }
             check(digest.digest().joinToString("") { "%02x".format(it) } ==
                 "89ad3c74175dd8caa398cc22b657296d94302d20c525c12b58b29420f7249749")
+            val admitted = runBlocking {
+                AndroidUseAdmission.open(descriptor, internalBuild = true, SdkPacketTransport::bytes).admit(EncoderInput(text))
+            }
+            if (admitted !is EncoderAdmission.Accepted) {
+                report("REJECTED", Bundle().apply { putString("reason", (admitted as EncoderAdmission.Rejected).error.name) })
+                return
+            }
+            if (expectedDigest != null && (admitted.receipt.transportSha256 != expectedDigest || admitted.receipt.responseTokens != expectedTokens)) {
+                report("REJECTED", Bundle().apply { putString("reason", AdmissionError.MISMATCH.name) })
+                return
+            }
             android.system.Os.lseek(descriptor.fileDescriptor, 0, android.system.OsConstants.SEEK_SET)
             report("LOADING")
             val started = SystemClock.elapsedRealtime()
@@ -110,7 +131,7 @@ class EmbeddingGateService : Service() {
             var dimensions = 0
             repeat(if (cancelLoop) 10000 else 2) { index ->
                 val before = SystemClock.elapsedRealtime()
-                val result = encoder.embed("Synthetic pilot launch on 6 October. John owns the contract.")
+                val result = encoder.embed(text)
                 timings.add(SystemClock.elapsedRealtime() - before)
                 val heads = result.embeddingResult().embeddings()
                 check(heads.isNotEmpty())
@@ -121,6 +142,7 @@ class EmbeddingGateService : Service() {
                 check(kotlin.math.abs(norm - 1) < 0.01)
                 if (index == 0) report("ENCODING", Bundle().apply {
                     putInt("dimensions", dimensions); putInt("heads", heads.size)
+                    putFloatArray("vector", values)
                 })
             }
             report("RESULT", Bundle().apply {
