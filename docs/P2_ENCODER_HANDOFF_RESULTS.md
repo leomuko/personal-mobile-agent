@@ -4,6 +4,11 @@ Date: 2026-10-21. **Focused prerequisite PASS; P2 incomplete.** No semantic sear
 vector persistence, PDF expansion, grounded answers or indexing was enabled.
 The production conversation and Sources pilot remain on their existing paths.
 
+Subsequent prerequisite: [semantic qualification results](P2_SEMANTIC_QUALIFICATION_RESULTS.md)
+record an encoder-only owner API, stricter worker-death/release-quiescence fixes,
+current-source S24 handoff rerun and the failed frozen semantic-quality gate.
+Semantic search remains disabled; the earlier evidence below is preserved.
+
 Review follow-up: queued panel cancellation and pre-verification proof invalidation
 are now fixed with host regressions. The S24 evidence below predates this
 cancellation patch and is historical prerequisite evidence, not a native rerun

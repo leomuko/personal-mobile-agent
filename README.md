@@ -62,6 +62,8 @@ The 2026-10-13 S24 GPU smoke passed after the runtime QA revisions. Full S24 ins
 
 P2 prerequisite work is recorded in [P2 prerequisite results](docs/P2_PREREQUISITE_RESULTS.md): authenticated document storage/protected PDF access and an opt-in isolated encoder lifecycle spike. The independent [text Sources pilot](docs/P2_SOURCES_RESULTS.md) uses the existing encrypted database, not PDF parsing or embeddings. [Verified encoder admission and foreground handoff](docs/P2_ENCODER_HANDOFF_RESULTS.md) now have focused host/S24 evidence at the unchanged 192-token limit. This internal prerequisite is not wired into production conversation or Sources; semantic retrieval and the separate final P2 acceptance campaign remain open.
 
+The next [semantic-search execution contract](planning/P2_SEMANTIC_SEARCH_CONTRACT.md) is gate-first. Its frozen encoder qualification failed the required English relevance gates; [results and retained attempts](docs/P2_SEMANTIC_QUALIFICATION_RESULTS.md) record current-source runtime passes separately. Indexing/hybrid search remains unimplemented and disabled; keyword Sources is unchanged.
+
 The shared Android host tests use Java 21 to load the pinned LiteRT-LM classes; compilation and shared JVM tests keep their Java 17 toolchain. Android Studio's bundled Java 21 runtime can supply the test launcher:
 
 ```sh

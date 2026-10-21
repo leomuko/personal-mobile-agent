@@ -141,6 +141,16 @@ The following are proposed first-version ceilings, not verified capacity claims.
 
 ## P2-05: Local Embeddings and Hybrid Retrieval
 
+Next-slice execution is governed by [the accepted semantic search contract](P2_SEMANTIC_SEARCH_CONTRACT.md).
+Its frozen quality gate precedes dependent indexing/search enablement; proposed
+thresholds are not achieved results. Grounded answers and Memory remain later P2 work.
+
+2026-10-21 prerequisite outcome: [frozen semantic qualification failed](../docs/P2_SEMANTIC_QUALIFICATION_RESULTS.md)
+(English Recall@5 0.45, nDCG@10 0.45, false-match rate 0). Encoder-only ownership
+and current-source cancellation/handoff checks have focused evidence. No indexing,
+vector schema, embedding installer or hybrid-search UI is enabled by those passes;
+dependent implementation is blocked pending qualified retrieval configuration.
+
 - Select the embedding artifact/runtime in a separate spike. Pin exact bytes/hash/revision/license, tokenizer, pooling, dimensions, normalization and query/document formatting. Verify installation, repair, CPU/backend behavior, offline use, incremental peak allocation and cancellation on S24. Do not assume Gemma chat weights are an embedding encoder.
 - Preserve the existing runtime owner. Add only the shared resource arbitration needed for chat versus indexing: active capture/user reply outranks requested source processing, which outranks background indexing. Pause/release lower-priority native work before admitting higher-priority work; avoid simultaneously resident GPU sessions unless separately measured and approved.
 - Chunk by paragraph/page boundaries using the selected encoder's tokenizer limits. Store embedding identity on every vector; never compare mixed versions/dimensions. Model changes mark old vectors stale and trigger recoverable reindexing.
