@@ -27,6 +27,7 @@ class ModelManager(
     private var poisoned = false
     private var ownsEngine = false
     private var releasing = 0
+    private val cancellationSignals = mutableSetOf<Job>()
     private var assetWork: Job? = null
     private var chatId: String? = null
     private var chatCancellation = ChatOutcome.CANCELLED
@@ -426,6 +427,8 @@ class ModelManager(
             // The cancelled job may finish before the native signal returns. Do not admit
             // another owner while that signal could still act on the engine.
             releasing++
+            val signal = currentCoroutineContext().job
+            cancellationSignals += signal
             try {
                 mutable.update { it.copy(commandError = null) }
                 chatCancellation = if (interrupted) ChatOutcome.INTERRUPTED else ChatOutcome.CANCELLED
@@ -434,7 +437,7 @@ class ModelManager(
                 active.cancel()
                 try { engine.cancel() } catch (failure: Exception) { fail(failure) }
                 recordMemory(MemoryStage.CANCELLING, state.value.backend)
-            } finally { releasing-- }
+            } finally { cancellationSignals -= signal; releasing-- }
         }
     }
 
@@ -452,6 +455,9 @@ class ModelManager(
             idle?.cancel()
             foreground?.invalidate()
             cancelActive(interrupted = true).join()
+            // A previous generation can finish before its cancellation/telemetry job.
+            // Release is not quiescent until every already-owned signal has settled.
+            while (cancellationSignals.isNotEmpty()) cancellationSignals.toList().joinAll()
             operation.withLock {
                 if (poisoned) return@withLock
                 if (cleanupOwnedEngine()) mutable.update { it.copy(status = RuntimeStatus.UNLOADED, error = null) }

@@ -259,7 +259,10 @@ class ForegroundHandoffTest {
             assertTrue(retry.isCompleted, "Replacement entered native work during the old cancel signal")
             assertEquals(ModelError.BUSY, retry.await().terminal().error)
             assertEquals(0, f.encoder.encodes)
-            f.engine.cancelGate!!.complete(Unit); cancel.join()
+            val release = f.manager.releaseForHostLoss(); runCurrent()
+            assertFalse(release.isCompleted, "Privileged release returned while a native signal was pending")
+            f.engine.cancelGate!!.complete(Unit); cancel.join(); release.join()
+            assertEquals(RuntimeStatus.UNLOADED, f.manager.state.value.status)
             f.engine.generationGate = null
             assertEquals(ChatOutcome.COMPLETED, f.call("recovered").events.toList().terminal().outcome)
         } finally {
