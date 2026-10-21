@@ -8,11 +8,15 @@ import { parseResources, readFreshAndroidPressure, validatePreflightPolicy, wait
 import { stopSupervisedQa, supervisionDirectory } from './qa-supervision.mjs';
 import { validSupervision } from './verify-qa-supervision.mjs';
 import { validateEncoderEvidence, validateForegroundEvidence } from './p2-encoder-evidence.mjs';
+import { loadSemanticFixture, validateQualityCollection, evaluateSemantic } from './semantic-quality.mjs';
 
 // Focused prerequisite only; not the deferred standalone Gemma smoke or P2 acceptance campaign.
 const pressure = process.argv.includes('--android-pressure');
 const foreground = process.argv.includes('--foreground');
-if (process.argv.slice(2).some(arg => !['--android-pressure', '--foreground'].includes(arg))) throw new Error('Unknown argument');
+const semantic = process.argv.includes('--semantic-qualification');
+if (foreground && semantic) throw new Error('Choose one prerequisite workload');
+if (process.argv.slice(2).some(arg => !['--android-pressure', '--foreground', '--semantic-qualification'].includes(arg))) throw new Error('Unknown argument');
+const frozen = semantic ? loadSemanticFixture() : null;
 const serial = process.env.ANDROID_SERIAL;
 if (!/^[A-Za-z0-9._:-]+$/.test(serial || '')) throw new Error('Set ANDROID_SERIAL to the designated S24');
 const model = process.env.P2_ENCODER_MODEL;
@@ -26,17 +30,18 @@ const pkg = 'dev.edgecompanion.app.secureqa';
 const runId = randomUUID();
 const mode = pressure ? 'android-pressure' : 'baseline';
 mkdirSync('benchmarks/results', { recursive: true });
-const folder = mkdtempSync(`benchmarks/results/p2-${foreground ? 'foreground' : 'encoder'}-gate-`);
+const folder = mkdtempSync(`benchmarks/results/p2-${semantic ? 'semantic' : foreground ? 'foreground' : 'encoder'}-gate-`);
 const run = (...args) => execFileSync(adb, ['-s', serial, ...args], { encoding: 'utf8', timeout: 30000 });
 const report = { schema: 1, runId, mode, startedAtMs: Date.now(), passed: false, status: 'failed',
   nativeEncoder: true, gemmaWorkload: foreground, fullRetrievalVerified: false, sustainedWorkload: false, modelSha256: sha };
+if (semantic) { report.fixtureSha256 = frozen.sha256; report.semanticQualification = true; }
 let monitor; let instrument; let instrumentOutput = ''; let instrumentEnded = false;
 const environment = { ...process.env, ADB: adb, MEMORY_RUN_ID: runId,
   MEMORY_POLICY_REPORT: join(folder, 'memory-policy.json'), QA_SUPERVISION_RUN_ID: runId,
   QA_SUPERVISOR_PID: String(process.pid), THERMAL_REPORT_DIR: join(folder, 'thermal') };
 const save = () => writeFileSync(join(folder, 'result.json'), JSON.stringify(report, null, 2));
 save();
-console.log(`P2 ${foreground ? 'encoder-to-Gemma handoff' : 'encoder-only'} prerequisite: ${folder} (${mode})`);
+console.log(`P2 ${semantic ? 'frozen semantic qualification' : foreground ? 'encoder-to-Gemma handoff' : 'encoder-only'} prerequisite: ${folder} (${mode})`);
 try {
   for (const path of ['androidApp/build/outputs/apk/secureQa/androidApp-secureQa.apk',
     'androidApp/build/outputs/apk/androidTest/secureQa/androidApp-secureQa-androidTest.apk']) {
@@ -55,7 +60,7 @@ try {
     'scripts/qa-supervision.mjs', 'scripts/monitor-model-thermal.mjs',
     'scripts/p2-encoder-evidence.mjs', 'scripts/run-p2-embedding-gate.mjs',
   ];
-  if (foreground) sources.push(
+  if (foreground || semantic) sources.push(
     'shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/ModelManager.kt',
     'shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/embedding/UseTokenizer.kt',
     'shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/embedding/EncoderAdmission.kt',
@@ -66,6 +71,9 @@ try {
     'androidApp/src/main/kotlin/dev/edgecompanion/app/inference/MemoryTelemetryRecorder.kt',
     'androidApp/src/androidTest/kotlin/dev/edgecompanion/app/ForegroundHandoffNativeTest.kt',
   );
+  if (semantic) sources.push('shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/embedding/EncodingCall.kt',
+    'androidApp/src/androidTest/kotlin/dev/edgecompanion/app/SemanticQualificationTest.kt',
+    'scripts/semantic-quality.mjs', 'planning/fixtures/semantic-retrieval-v1.json', 'planning/fixtures/semantic-retrieval-v1.lock.json');
   writeFileSync(join(folder, 'source-sha256.json'), JSON.stringify(Object.fromEntries(sources.map(path =>
     [path, createHash('sha256').update(readFileSync(path)).digest('hex')])), null, 2));
   execFileSync('bash', ['scripts/export-memory-policy.sh'], { env: environment, stdio: 'pipe', timeout: 60000 });
@@ -96,6 +104,14 @@ try {
       run('shell', 'run-as', pkg, 'mv', '-n', staging, destination);
     } finally { run('shell', 'run-as', pkg, 'rm', '-f', staging); }
   }
+  if (semantic) {
+    const temporary = `/data/local/tmp/pma-semantic-${runId}.json`;
+    try {
+      run('push', 'planning/fixtures/semantic-retrieval-v1.json', temporary);
+      run('shell', 'run-as', pkg, 'cp', temporary, 'no_backup/qa-embedding/semantic-fixture.json');
+    } finally { run('shell', 'rm', '-f', temporary); }
+    writeFileSync(join(folder, 'fixture.lock.json'), readFileSync('planning/fixtures/semantic-retrieval-v1.lock.json'));
+  }
   monitor = spawn(process.execPath, ['scripts/monitor-model-thermal.mjs'], { env: environment });
   let monitorOutput = '';
   monitor.stdout.on('data', data => { monitorOutput += data; });
@@ -108,8 +124,8 @@ try {
   }
   if (!existsSync(ready)) throw new Error('Supervisor did not admit the run');
   instrument = spawn(adb, ['-s', serial, 'shell', 'am', 'instrument', '-w', '-r',
-    '-e', 'class', `dev.edgecompanion.app.${foreground ? 'ForegroundHandoffNativeTest' : 'EmbeddingPrerequisiteTest'}`,
-    '-e', foreground ? 'p2Foreground' : 'p2Embedding', 'true',
+    '-e', 'class', `dev.edgecompanion.app.${semantic ? 'SemanticQualificationTest' : foreground ? 'ForegroundHandoffNativeTest' : 'EmbeddingPrerequisiteTest'}`,
+    '-e', semantic ? 'p2Semantic' : foreground ? 'p2Foreground' : 'p2Embedding', 'true',
     '-e', 'supervisionRunId', runId, `${pkg}.test/androidx.test.runner.AndroidJUnitRunner`]);
   instrument.stdout.on('data', data => { instrumentOutput += data; });
   instrument.stderr.on('data', data => { instrumentOutput += data; });
@@ -117,21 +133,30 @@ try {
     instrument.once('error', reject);
     instrument.once('close', code => { instrumentEnded = true; resolve(code); });
   });
-  const timer = setTimeout(() => stopSupervisedQa({ adb, serial, runId }), foreground ? 180000 : 30000);
-  const timeout = setTimeout(() => { if (!instrumentEnded) instrument.kill(); }, foreground ? 195000 : 40000);
+  const timer = setTimeout(() => stopSupervisedQa({ adb, serial, runId }), foreground || semantic ? 180000 : 30000);
+  const timeout = setTimeout(() => { if (!instrumentEnded) instrument.kill(); }, foreground || semantic ? 195000 : 40000);
   let exit;
   try { exit = await completion; } finally { clearTimeout(timer); clearTimeout(timeout); }
   writeFileSync(join(folder, 'instrumentation.txt'), instrumentOutput);
-  const evidence = JSON.parse(run('exec-out', 'run-as', pkg, 'cat', `no_backup/p2-${foreground ? 'foreground' : 'embedding'}-gate.json`));
+  const evidence = JSON.parse(run('exec-out', 'run-as', pkg, 'cat', `no_backup/p2-${semantic ? 'semantic' : foreground ? 'foreground' : 'embedding'}-gate.json`));
   writeFileSync(join(folder, 'encoder.json'), JSON.stringify(evidence, null, 2));
   const supervision = JSON.parse(run('exec-out', 'run-as', pkg, 'cat', `${supervisionDirectory(runId)}/status.json`));
   writeFileSync(join(folder, 'supervision.json'), JSON.stringify(supervision, null, 2));
   if (exit !== 0 || !/^OK \(1 test\)\s*$/m.test(instrumentOutput) || !validSupervision(supervision, runId) ||
-      !(foreground ? validateForegroundEvidence : validateEncoderEvidence)(evidence,
-        { runId, startedAtMs: report.startedAtMs, modelSha256: sha, policyId: policy.id }) ||
+      (!semantic && !(foreground ? validateForegroundEvidence : validateEncoderEvidence)(evidence,
+        { runId, startedAtMs: report.startedAtMs, modelSha256: sha, policyId: policy.id })) ||
       monitor.exitCode !== null ||
       existsSync(join(environment.THERMAL_REPORT_DIR, 'safety-stop.json'))) throw new Error('No fresh supervised encoder pass');
-  report.passed = true; report.status = 'passed';
+  if (semantic) {
+    const vectors = validateQualityCollection(evidence, { runId, startedAtMs: report.startedAtMs,
+      fixtureSha256: frozen.sha256, policyId: policy.id }, frozen.fixture);
+    const quality = evaluateSemantic(frozen.fixture, vectors);
+    writeFileSync(join(folder, 'quality.json'), JSON.stringify({ ...quality, runId, fixtureSha256: frozen.sha256 }, null, 2));
+    report.collectionPassed = true;
+    report.passed = quality.passed;
+    report.status = quality.passed ? 'passed' : 'blocked';
+    if (!quality.passed) { report.blockingGate = 'SEMANTIC_QUALITY'; process.exitCode = 2; }
+  } else { report.passed = true; report.status = 'passed'; }
 } catch (error) {
   report.error = error.message; process.exitCode = report.status === 'blocked' ? 2 : 1;
   stopSupervisedQa({ adb, serial, runId });

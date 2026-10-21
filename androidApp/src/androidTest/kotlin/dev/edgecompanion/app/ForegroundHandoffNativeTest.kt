@@ -144,6 +144,23 @@ class ForegroundHandoffNativeTest {
                                 .put("pssKb", field(event, "getPssKb")).put("pid", field(event, "getPid")) }))
                         } else { assertEquals(previousInstance, field(worker, "getInstance")); sample.put("nativeEncoderInvoked", false) }
                         sample.put("passed", true)
+                    } catch (failure: Throwable) {
+                        sample.put("failureClass", failure.javaClass.simpleName)
+                            .put("runtimeStatus", manager.state.value.status.name)
+                            .put("runtimeError", manager.state.value.error?.name)
+                            .put("preparationStage", call.preparation.value.stage.name)
+                            .put("preparationError", call.preparation.value.error?.name)
+                            .put("cleanupAtFailure", call.preparation.value.cleanup.name)
+                        if (collection.isCompleted && !collection.isCancelled) {
+                            val failed = collection.await().lastOrNull() as? ChatEvent.Terminal
+                            sample.put("terminalAtFailure", failed?.outcome?.name).put("terminalError", failed?.error?.name)
+                        }
+                        val failedWorker = evidence.value
+                        @Suppress("UNCHECKED_CAST") val phases = field(failedWorker, "getEvents") as List<Any>
+                        sample.put("workerInstanceAtFailure", field(failedWorker, "getInstance"))
+                            .put("workerDeathAtFailure", field(failedWorker, "getConfirmedDeath"))
+                            .put("workerPhasesAtFailure", JSONArray(phases.map { field(it, "getPhase") }))
+                        throw failure
                     } finally {
                         call.cancel(); collection.cancelAndJoin(); telemetry.stop(); active = null
                         if (mode != "cold") {
