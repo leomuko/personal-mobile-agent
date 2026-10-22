@@ -1,0 +1,17 @@
+{
+  "schema": 4,
+  "protocolId": "serial-evidence-verification-v4-draft-1",
+  "approvedBy": "user",
+  "approvedOn": "2026-10-22",
+  "source": "Explicit approval in this project chat: approve ADR 0006 and V4 draft 1, implement, host QA, execution freeze; S24 tests later.",
+  "reviewedAdrSha256": "e540dc4af611f4cf5a9bd1613f658d4458abad8109c49df8c9a922e6ad497f8d",
+  "reviewedProtocolSha256": "d2722bb09a6507d195e80db9b52dc44acbfe3604ae46361efd5fc9fd3e20319c",
+  "deadlineMs": 30000,
+  "requests": 8,
+  "implementationApproved": true,
+  "hostQaApproved": true,
+  "executionFreezePreparationApproved": true,
+  "deviceExecutionAuthorized": false,
+  "productionLatencyTarget": false,
+  "semanticEnablement": false
+}

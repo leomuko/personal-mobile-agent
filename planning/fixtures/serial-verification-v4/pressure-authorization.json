@@ -1,0 +1,11 @@
+{
+  "schema": 4,
+  "profileId": "memory-android-pressure-test-v1",
+  "approvedBy": "user",
+  "source": "Explicit project-chat instruction after the second baseline block: let your only preload requirement be the check for if lowmemory=true.",
+  "scope": "V4 isolated secure-QA experiment using the existing Android-pressure profile; fixed available-RAM floors bypassed, lowMemory=true blocks immediately",
+  "ordinaryAppPolicyUnchanged": true,
+  "thermalSignalsOwnershipCleanupRetained": true,
+  "implementationApproved": true,
+  "deviceExecutionAuthorized": false
+}
