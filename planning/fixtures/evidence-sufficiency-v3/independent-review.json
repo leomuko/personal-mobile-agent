@@ -1,0 +1,87 @@
+{
+  "schema": 3,
+  "verdict": "PASS",
+  "scope": "protocol-rubric-full-corpus-and-delivered-pack-judgments",
+  "reviewer": "codex-independent-v3-corpus-judge-ba4a8b10-4bef-42cf-b3ce-9ac706639814",
+  "freezeSha256": "eef782b3c37ac39f21871712553e366cd5fe8a40a76ded585955bb5a38db8db9",
+  "files": [
+    {
+      "path": "planning/P2_V3_EVIDENCE_SUFFICIENCY_PROTOCOL.md",
+      "bytes": 11176,
+      "sha256": "8db352da50bf3878f7c811eb20a9a131c75310398db743950380442b25f9d569"
+    },
+    {
+      "path": "planning/P2_V3_JUDGMENT_RUBRIC.md",
+      "bytes": 6477,
+      "sha256": "5d154d2e679772f6c40ef04af578d2511d0e6e4d7576cebb74da32c2834bb399"
+    },
+    {
+      "path": "planning/fixtures/evidence-sufficiency-v3/calibration.json",
+      "bytes": 288891,
+      "sha256": "3f0a908e2a64ee82375d06a912690b6fcb39ec6ae97800341b3ac03d8a3cabeb"
+    },
+    {
+      "path": "planning/fixtures/evidence-sufficiency-v3/development.json",
+      "bytes": 288831,
+      "sha256": "3e4c21845e2ab5b59ab33c8877b5e7a2c2f2f43c3ae1bc3aadc3101d043d3b0c"
+    },
+    {
+      "path": "planning/fixtures/evidence-sufficiency-v3/heldout.json",
+      "bytes": 289032,
+      "sha256": "69b61dfe83817ebf74617de571129963d6c2d0eacb8eede315cf8a01c6cef55f"
+    },
+    {
+      "path": "planning/fixtures/evidence-sufficiency-v3/preserved-v1-v2.json",
+      "bytes": 56748,
+      "sha256": "d1da8f9ca5d649b8a9bc4e64271547ea9b746abd47d9117a68358940c13719dd"
+    },
+    {
+      "path": "planning/fixtures/evidence-sufficiency-v3/protocol.json",
+      "bytes": 14160,
+      "sha256": "b15e10a1981b15df3dde0b01a8d453c2935905e5bee7189b965960896e1ac4ad"
+    },
+    {
+      "path": "planning/fixtures/evidence-sufficiency-v3/rejected/2026-10-22-id-collision/calibration.json",
+      "bytes": 288831,
+      "sha256": "6efaeb2e2ec1d72a6ebcc105fbeaad5e61505e2d439f50fd14c754fe1a036d4d"
+    },
+    {
+      "path": "planning/fixtures/evidence-sufficiency-v3/rejected/2026-10-22-id-collision/development.json",
+      "bytes": 288771,
+      "sha256": "faf5274779cc069b5958eb7093840555d555d9cfd94382d7e0b59d35498d1ac8"
+    },
+    {
+      "path": "planning/fixtures/evidence-sufficiency-v3/rejected/2026-10-22-id-collision/freeze.json",
+      "bytes": 16972,
+      "sha256": "b65a5cc9700392a92681fba3665f3a4b39ef5bebb5a2be6743d2cb45f3163c67"
+    },
+    {
+      "path": "planning/fixtures/evidence-sufficiency-v3/rejected/2026-10-22-id-collision/heldout.json",
+      "bytes": 288972,
+      "sha256": "f46fcbaca5201a893850f2fb66f0db66c6550624aa34a6c6ac02981865fc2b7d"
+    },
+    {
+      "path": "planning/fixtures/evidence-sufficiency-v3/rejected/2026-10-22-id-collision/reason.md",
+      "bytes": 511,
+      "sha256": "90c2297e920fa171872b023cdadad1d014db7a66f37efa389a7b5a5a476c6e34"
+    },
+    {
+      "path": "planning/fixtures/evidence-sufficiency-v3/verifier-instructions.txt",
+      "bytes": 492,
+      "sha256": "59480fa7eb2363a61cf4553f04a1212bfd51a22b6ff97a50b49e2be96e49e972"
+    },
+    {
+      "path": "scripts/tests/v3-protocol.test.mjs",
+      "bytes": 8306,
+      "sha256": "c581e478927f0001fffa122311a3784e34a6b103f5e5dd670c96b58656f2d8f5"
+    },
+    {
+      "path": "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/ChatGeneration.kt",
+      "bytes": 3541,
+      "sha256": "237462c8f2886f2ead714097f0562455fb244ff89d6af30d845acfc60172b774"
+    }
+  ],
+  "nativeCollectionAuthorized": false,
+  "verifierImplementationAuthorized": false,
+  "semanticEnablement": false
+}

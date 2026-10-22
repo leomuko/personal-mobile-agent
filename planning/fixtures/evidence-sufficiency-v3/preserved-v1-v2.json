@@ -1,0 +1,1451 @@
+{
+  "schema": 1,
+  "purpose": "V3 preparation preservation; not new model evidence",
+  "files": [
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/app.sha256",
+      "bytes": 65,
+      "sha256": "85ebe0594df6b5266fbd92d2b90ee478dbb2fdb4aa70f44afcf99bb20290b085"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/attempt.json",
+      "bytes": 35254,
+      "sha256": "1f71d9cea0226255fcfe09ac43ad3f178d210e30832a4a0f1be1c16c6d5af345"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/batch.json",
+      "bytes": 1917,
+      "sha256": "8bb476e3dac4ae9fe1be6f4985bd371af91561faa51e7b6210caac38be8c6716"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/encoder.json",
+      "bytes": 31773,
+      "sha256": "d925b8ea548ebc092f8e46dde26cfd32718f714b78a366e366f0efe5675d8eb5"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/exits-before.json",
+      "bytes": 3190,
+      "sha256": "ddafdec24029602b0f4685564cfadcb9a7a16d5be4eac318443b4e252c570282"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/git-head.txt",
+      "bytes": 41,
+      "sha256": "1a37bd96687418009fa2aadd3775fffeebfa3e6c2ad61ff2f51f04ad23ea2cf2"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/instrumentation.txt",
+      "bytes": 806,
+      "sha256": "0f46ce820e864ec769b736caba0af79d8a9a6fa1abf941aa1295ec8593dfc2ea"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/memory-baseline.json",
+      "bytes": 284,
+      "sha256": "b65c1910f0e050e46efdc02fc49789640f49eece757a9e63cc256e67ae86e7de"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/memory-policy.json",
+      "bytes": 549,
+      "sha256": "1e3d7cae2a1ade640445a2cab084a2707050219157323057782cb5ee16152af3"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/monitor.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/policy-probe.txt",
+      "bytes": 1459,
+      "sha256": "706b3bdc77fa67cab6ff7e2124bafc017a56a41a41632574340c49b33e918532"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/preflight.json",
+      "bytes": 1571,
+      "sha256": "d96ae6adb9c9fb312c16422756e9140f3940ab89f27cfb1f57e07a6e6b712bf1"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/result.json",
+      "bytes": 552,
+      "sha256": "c30754f014b463132ad82336b83e9835284b548c3dd6d5aa5cdc6b2e55957bcd"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/source-sha256.json",
+      "bytes": 3622,
+      "sha256": "d303e64d7212c18f19d3c87de57aba564cbdf543a14e0d2826da454c79922ab7"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/supervision.json",
+      "bytes": 254,
+      "sha256": "f2d8f94f69eb72224768f71905c5d087331babe78fbf28dfb4822ae5cd15d5d9"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/tests.sha256",
+      "bytes": 65,
+      "sha256": "e475e2917004507681c72481d476f77fd0e71b6b106b771cf9afb01245bc226d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/thermal/samples.csv",
+      "bytes": 162,
+      "sha256": "ee1d59e1a7c5f5111e4ff9c892a9ac2607fe6abd05e5624ab0ec1d19d982a82e"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/thermal/supervision-heartbeats.jsonl",
+      "bytes": 380,
+      "sha256": "24916929d7ff3a0dedccc28e0122e83410bd2c7b1479d2ba237fe3aa6e40d21b"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-0Q3Moz/working-tree-stat.txt",
+      "bytes": 131,
+      "sha256": "72f1fc3c804e4f751cd97dd9d87cae11a68679567cf46d6f5bfdf4338892c495"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/app.sha256",
+      "bytes": 65,
+      "sha256": "85ebe0594df6b5266fbd92d2b90ee478dbb2fdb4aa70f44afcf99bb20290b085"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/attempt.json",
+      "bytes": 90042,
+      "sha256": "09152a40456b85165e2f562d8438eb42866c860068f1c776d7890717d9c95052"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/batch.json",
+      "bytes": 3781,
+      "sha256": "484f83a421bd6d1b70cc9ed352874dcc8c633997d983f821933254e9c8733541"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/encoder.json",
+      "bytes": 81961,
+      "sha256": "4ac4a12da17d832b278a723d2e53e4b01f04e3adee7489b3093db3dcae248074"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/exits-before.json",
+      "bytes": 3174,
+      "sha256": "b766a792607fe130fd16a94c719e1e629cafe0b1ffa9bcfccf4571649a7be7cb"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/git-head.txt",
+      "bytes": 41,
+      "sha256": "1a37bd96687418009fa2aadd3775fffeebfa3e6c2ad61ff2f51f04ad23ea2cf2"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/instrumentation.txt",
+      "bytes": 806,
+      "sha256": "8fbca2c14ce9dbaa7fea142d53d48743daf8722015e379ddccef68861f02c16c"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/memory-baseline.json",
+      "bytes": 284,
+      "sha256": "8a061fb54bfb3d55369564243597156a64918e4dbd829030d76311ceb8017093"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/memory-policy.json",
+      "bytes": 549,
+      "sha256": "1e3d7cae2a1ade640445a2cab084a2707050219157323057782cb5ee16152af3"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/monitor.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/policy-probe.txt",
+      "bytes": 1460,
+      "sha256": "960b3cc30d7898a2cd4bc7d176b17a63b36e9965ca4b002219e0e4aa381a87b1"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/preflight.json",
+      "bytes": 1571,
+      "sha256": "3421811f42f418cc88c43e2e38ccf19258ddb6106ff5d978b12195dfdaf223ca"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/result.json",
+      "bytes": 552,
+      "sha256": "27b8e189f182d98b124f30400bcf9d1ae8fbdf16250f4cb53cc39e7f5ea05f41"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/source-sha256.json",
+      "bytes": 3622,
+      "sha256": "d303e64d7212c18f19d3c87de57aba564cbdf543a14e0d2826da454c79922ab7"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/supervision.json",
+      "bytes": 254,
+      "sha256": "582608c5ee394d7d1a7141fea8be6e5533e1d0754b377485df8accc97c12202e"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/tests.sha256",
+      "bytes": 65,
+      "sha256": "e475e2917004507681c72481d476f77fd0e71b6b106b771cf9afb01245bc226d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/thermal/samples.csv",
+      "bytes": 318,
+      "sha256": "75b2fd9b4b08e3f01bea490ab32052edabda8c415bcf20f8a100db7f6ba0252c"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/thermal/supervision-heartbeats.jsonl",
+      "bytes": 855,
+      "sha256": "4b02aad56d8273b378be064bdc84a37c151f7e48fcac0d9c954fbd235b2fb262"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-9NpSlq/working-tree-stat.txt",
+      "bytes": 131,
+      "sha256": "72f1fc3c804e4f751cd97dd9d87cae11a68679567cf46d6f5bfdf4338892c495"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/app.sha256",
+      "bytes": 65,
+      "sha256": "85ebe0594df6b5266fbd92d2b90ee478dbb2fdb4aa70f44afcf99bb20290b085"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/attempt.json",
+      "bytes": 90101,
+      "sha256": "a8cac933f6d61958c234536759c03e28abb8a3fe546491034e299308fe8eb2eb"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/batch.json",
+      "bytes": 3674,
+      "sha256": "955a554c126d4cdf11e1ac458a7d35cfea5b6918213737f61e782170654dd755"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/encoder.json",
+      "bytes": 82020,
+      "sha256": "db7a9ad99a972a08ab67519692579d3b3bcbaa0ae05c60f8155be4d6973fa327"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/exits-before.json",
+      "bytes": 3190,
+      "sha256": "1b7416f2bd2223b4c39eda095220a4fa532af9f3047c17544cdef567c62678fd"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/git-head.txt",
+      "bytes": 41,
+      "sha256": "1a37bd96687418009fa2aadd3775fffeebfa3e6c2ad61ff2f51f04ad23ea2cf2"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/instrumentation.txt",
+      "bytes": 806,
+      "sha256": "af4a29da484b5794e27806f9dcc3d827b666477aeb996bf7f46288c9da40cc45"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/memory-baseline.json",
+      "bytes": 284,
+      "sha256": "6cef4d04cb386ef43abeef537d26aa0b4e0dc7699452eb5f797c5c906f7a642f"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/memory-policy.json",
+      "bytes": 549,
+      "sha256": "1e3d7cae2a1ade640445a2cab084a2707050219157323057782cb5ee16152af3"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/monitor.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/policy-probe.txt",
+      "bytes": 1460,
+      "sha256": "cd93279d5e854066926e52cb7ba951f67a0d752b3b5712594fb2c711e3540f12"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/preflight.json",
+      "bytes": 1571,
+      "sha256": "a3030eb5d623b63c18204aa98c6f3b8cf89525723dab21815c3c75b615fb3a65"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/result.json",
+      "bytes": 552,
+      "sha256": "08f4df27d717384365121d92fd1c43396190f5b56a640c4c01337601c29408e1"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/source-sha256.json",
+      "bytes": 3622,
+      "sha256": "d303e64d7212c18f19d3c87de57aba564cbdf543a14e0d2826da454c79922ab7"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/supervision.json",
+      "bytes": 254,
+      "sha256": "abfd22d5b679a057e0770f17013d45971fbf9f9057daad6daf667d11854b3cf2"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/tests.sha256",
+      "bytes": 65,
+      "sha256": "e475e2917004507681c72481d476f77fd0e71b6b106b771cf9afb01245bc226d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/thermal/samples.csv",
+      "bytes": 194,
+      "sha256": "accd1be8f801e565eb8b88f5f9ff9d370743cd61bad363872809d09a76cecd76"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/thermal/supervision-heartbeats.jsonl",
+      "bytes": 475,
+      "sha256": "ada321f4be2943970aff0ec477fd7b61d56c4c13a379351ddc05d33bcc91ac2f"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-dhx2wR/working-tree-stat.txt",
+      "bytes": 131,
+      "sha256": "72f1fc3c804e4f751cd97dd9d87cae11a68679567cf46d6f5bfdf4338892c495"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/app.sha256",
+      "bytes": 65,
+      "sha256": "85ebe0594df6b5266fbd92d2b90ee478dbb2fdb4aa70f44afcf99bb20290b085"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/attempt.json",
+      "bytes": 87346,
+      "sha256": "dce37326767e1f0ade4b4055d9a0c93ec80cd2e433296469a5b1e9e8ba5074c8"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/batch.json",
+      "bytes": 3616,
+      "sha256": "d7a08bbbbe463e91e202a74481f71c7bb944c09a27ea4b1c36765ad1b3f47aad"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/encoder.json",
+      "bytes": 79495,
+      "sha256": "4c5c7e4a2a04f55dee00e1634a0ab548074afe5bd98b3702d994eb5747a187f1"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/exits-before.json",
+      "bytes": 3179,
+      "sha256": "f744288c79de1ece26343fe0c28463c65da27abdfef62d32842c63c6e395883f"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/git-head.txt",
+      "bytes": 41,
+      "sha256": "1a37bd96687418009fa2aadd3775fffeebfa3e6c2ad61ff2f51f04ad23ea2cf2"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/instrumentation.txt",
+      "bytes": 806,
+      "sha256": "1395a22a67fa14f526eefe2dd54e33a007f364f59fc6b1537e28ede99a0f54e1"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/memory-baseline.json",
+      "bytes": 284,
+      "sha256": "63f2f9db217e66a2001510f2f0133a7bf0873cb7c8f17b72aa1a84563644902e"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/memory-policy.json",
+      "bytes": 549,
+      "sha256": "1e3d7cae2a1ade640445a2cab084a2707050219157323057782cb5ee16152af3"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/monitor.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/policy-probe.txt",
+      "bytes": 1460,
+      "sha256": "0d8c7be550f417cdc9ca91f49c8dbcaddeeb2d475e34828610c4b1c6c9968b61"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/preflight.json",
+      "bytes": 1571,
+      "sha256": "b17594d682ce0385dd2d05006cff71f9bdfecc52023c21e2d4692f77961b3e80"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/result.json",
+      "bytes": 552,
+      "sha256": "c66c219d053fa0c864c27e42fa42a6ed4ab624f8c6ad1cec4e39afda5009a441"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/source-sha256.json",
+      "bytes": 3622,
+      "sha256": "d303e64d7212c18f19d3c87de57aba564cbdf543a14e0d2826da454c79922ab7"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/supervision.json",
+      "bytes": 254,
+      "sha256": "4f6a9072712bc6bfcfcb08d5464116782c8d30ba9b2c6fd1bdfc7f1e269379dd"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/tests.sha256",
+      "bytes": 65,
+      "sha256": "e475e2917004507681c72481d476f77fd0e71b6b106b771cf9afb01245bc226d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/thermal/samples.csv",
+      "bytes": 190,
+      "sha256": "67bd73cc994686705e28276cfa61e3d87053f8bdc2fe5332559b5929dc72b563"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/thermal/supervision-heartbeats.jsonl",
+      "bytes": 475,
+      "sha256": "e42bb62e9d216d5b300956ec4ee048b031ee484c8c25147571ad99780e261d57"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-ELFT31/working-tree-stat.txt",
+      "bytes": 131,
+      "sha256": "72f1fc3c804e4f751cd97dd9d87cae11a68679567cf46d6f5bfdf4338892c495"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/app.sha256",
+      "bytes": 65,
+      "sha256": "85ebe0594df6b5266fbd92d2b90ee478dbb2fdb4aa70f44afcf99bb20290b085"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/attempt.json",
+      "bytes": 90241,
+      "sha256": "ff98c3e84cc1b6a3e2daad39967121a86411c1b4cccfd250b7c2dedab97824ac"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/batch.json",
+      "bytes": 6348,
+      "sha256": "5bd22dfbf37b67b7236146b3dc93cec34f6725939ef9583d2acacea9a373122c"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/encoder.json",
+      "bytes": 82160,
+      "sha256": "8a45c4791bb39c0e845fcab17835e07fa71ca3aa40b2d43eaab631dfb6fce315"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/exits-before.json",
+      "bytes": 3179,
+      "sha256": "18eb47623d0e80e5f2391bc89ec0e129df15007dd44ba4bbf6e1693a6692ce54"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/git-head.txt",
+      "bytes": 41,
+      "sha256": "1a37bd96687418009fa2aadd3775fffeebfa3e6c2ad61ff2f51f04ad23ea2cf2"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/instrumentation.txt",
+      "bytes": 806,
+      "sha256": "dc929553cefff06d69e9de613e8f4bc28a58a5f175254afd1c863fb0f62ffba0"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/memory-baseline.json",
+      "bytes": 284,
+      "sha256": "d3af6b5d5bb7e31594dc72b5273e762350032b93074777dc47b8a10339d46626"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/memory-policy.json",
+      "bytes": 549,
+      "sha256": "1e3d7cae2a1ade640445a2cab084a2707050219157323057782cb5ee16152af3"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/monitor.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/policy-probe.txt",
+      "bytes": 1460,
+      "sha256": "56a20d3ef9144f8655ed5fd021ce036e211724c9de503d9847a79002a1c158eb"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/preflight.json",
+      "bytes": 1571,
+      "sha256": "e6c7e18c42844b6806a408ab15f3f73c996516aaf93611a223310b6a3a290b73"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/result.json",
+      "bytes": 552,
+      "sha256": "cabc8f4444791136c1e73ef0f1fed2d163604e0079151ed4b34ab7fa55807b48"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/source-sha256.json",
+      "bytes": 3622,
+      "sha256": "d303e64d7212c18f19d3c87de57aba564cbdf543a14e0d2826da454c79922ab7"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/supervision.json",
+      "bytes": 254,
+      "sha256": "0e4baa7f313f2300151456ff0a1062089ad9806acb9cb7297dd80c74008a28a2"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/tests.sha256",
+      "bytes": 65,
+      "sha256": "e475e2917004507681c72481d476f77fd0e71b6b106b771cf9afb01245bc226d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/thermal/samples.csv",
+      "bytes": 194,
+      "sha256": "d78bf4d4f793892e4ada1b9ced1b32dd350605bef71c191f7ad3af5c6cf7509b"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/thermal/supervision-heartbeats.jsonl",
+      "bytes": 475,
+      "sha256": "76dae627d781580882026c52e59d2e0767de375ffb90a894051daf5846842261"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-IyLfyO/working-tree-stat.txt",
+      "bytes": 131,
+      "sha256": "72f1fc3c804e4f751cd97dd9d87cae11a68679567cf46d6f5bfdf4338892c495"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/app.sha256",
+      "bytes": 65,
+      "sha256": "85ebe0594df6b5266fbd92d2b90ee478dbb2fdb4aa70f44afcf99bb20290b085"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/attempt.json",
+      "bytes": 90241,
+      "sha256": "be9d99b2cf988afae1b0864435696edf27139ecbfc5d5d002045227ed909bf24"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/batch.json",
+      "bytes": 4459,
+      "sha256": "22348bd05c0cbea67d422a930e51a807e0d1c59a2a3ceaebe9d3aa4923a8ce04"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/encoder.json",
+      "bytes": 82160,
+      "sha256": "d1ac073337b7399ef28b061043901b89f41799663595507c2f80eae18ca228ba"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/exits-before.json",
+      "bytes": 3175,
+      "sha256": "9926cc4d4499b132985cd077d8149ef5e5a0384a8537082c44bb1dc20355c1a0"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/git-head.txt",
+      "bytes": 41,
+      "sha256": "1a37bd96687418009fa2aadd3775fffeebfa3e6c2ad61ff2f51f04ad23ea2cf2"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/instrumentation.txt",
+      "bytes": 806,
+      "sha256": "0069fa2e7ecf6a3739f574cc6a4b6d958d7eb00492fdd7b7bea47ea92c53eb26"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/memory-baseline.json",
+      "bytes": 284,
+      "sha256": "767e5a6debebbdc09bdbec3f532dab7ad0bf761715b84e43a00578371d637174"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/memory-policy.json",
+      "bytes": 549,
+      "sha256": "1e3d7cae2a1ade640445a2cab084a2707050219157323057782cb5ee16152af3"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/monitor.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/policy-probe.txt",
+      "bytes": 1460,
+      "sha256": "d31487d25b28d44a062898c7b50620dbf107c19607c6317c2c70389f9b061aed"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/preflight.json",
+      "bytes": 1571,
+      "sha256": "bc878840c0402c9e57f39a814c318101e1e720a8a9402549d2eae04660ce5800"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/result.json",
+      "bytes": 552,
+      "sha256": "296d46b1328721e1a42858a30c65f6f9187c249cb082d3c69e8aec05947f3bdf"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/source-sha256.json",
+      "bytes": 3622,
+      "sha256": "d303e64d7212c18f19d3c87de57aba564cbdf543a14e0d2826da454c79922ab7"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/supervision.json",
+      "bytes": 254,
+      "sha256": "dfdf4e111172e0bec30ba210190aa08f663325668beca0e4edce8dd33ea09aec"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/tests.sha256",
+      "bytes": 65,
+      "sha256": "e475e2917004507681c72481d476f77fd0e71b6b106b771cf9afb01245bc226d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/thermal/samples.csv",
+      "bytes": 322,
+      "sha256": "62aa147f7b0f3fc6d32d703c34f0cf2e9b3532c4357733359e3ca091369d71ee"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/thermal/supervision-heartbeats.jsonl",
+      "bytes": 855,
+      "sha256": "93cd5dc5437c401d02ba7704037e1caa319b1771fe0733df258b1ddd5e3faae1"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-KIRBjV/working-tree-stat.txt",
+      "bytes": 131,
+      "sha256": "72f1fc3c804e4f751cd97dd9d87cae11a68679567cf46d6f5bfdf4338892c495"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/app.sha256",
+      "bytes": 65,
+      "sha256": "85ebe0594df6b5266fbd92d2b90ee478dbb2fdb4aa70f44afcf99bb20290b085"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/attempt.json",
+      "bytes": 90209,
+      "sha256": "c6b26b77645736e7cc279416946e2371e7ed2a3f80e0343e5d3e290135ff73b4"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/batch.json",
+      "bytes": 6445,
+      "sha256": "5ffd2d9040b35559d1bf054435f71abbd83d824c308fc862e03429a6a5b0d953"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/encoder.json",
+      "bytes": 82128,
+      "sha256": "4b0dcfeed01ea7b4df19795b22cfd902af88256798596b7e71c8e7890f088c4d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/exits-before.json",
+      "bytes": 3176,
+      "sha256": "0462deb294a1a5d6582c9ba4ce4e6869a4edb790e1960b7c7a64b2133cb3d5c6"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/git-head.txt",
+      "bytes": 41,
+      "sha256": "1a37bd96687418009fa2aadd3775fffeebfa3e6c2ad61ff2f51f04ad23ea2cf2"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/instrumentation.txt",
+      "bytes": 806,
+      "sha256": "ae8d95a3e8dcaf1a510227cb918d9dfc4f3f9db773e9fdb917971f5bbf36e759"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/memory-baseline.json",
+      "bytes": 284,
+      "sha256": "79ce3428fcef1edab8607b729d087575fe271d7144b4ddccf8a4128edc1c01d3"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/memory-policy.json",
+      "bytes": 549,
+      "sha256": "1e3d7cae2a1ade640445a2cab084a2707050219157323057782cb5ee16152af3"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/monitor.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/policy-probe.txt",
+      "bytes": 1460,
+      "sha256": "1fafd13908f20b1dfcc034b07cbee2896ef3d28af99ead5eee869055d8a5fe88"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/preflight.json",
+      "bytes": 1571,
+      "sha256": "9481fc877516733f97720355f864b0a0769c99aa090099427683512a21643975"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/result.json",
+      "bytes": 552,
+      "sha256": "2ee81eb4710f0b6fbba32fd38031ee7c6d1faf5faa15daeefd311a957249793d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/source-sha256.json",
+      "bytes": 3622,
+      "sha256": "d303e64d7212c18f19d3c87de57aba564cbdf543a14e0d2826da454c79922ab7"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/supervision.json",
+      "bytes": 254,
+      "sha256": "5e6355298631934085ad78d2ae272b89e7f8edf88487b928f70488b327520d61"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/tests.sha256",
+      "bytes": 65,
+      "sha256": "e475e2917004507681c72481d476f77fd0e71b6b106b771cf9afb01245bc226d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/thermal/samples.csv",
+      "bytes": 318,
+      "sha256": "de29a47a1b7e015da1e7d7e7d694315465a0af71fdc7f8d6a6316b95e87fb197"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/thermal/supervision-heartbeats.jsonl",
+      "bytes": 855,
+      "sha256": "d4165d39a548694b2db8533cff31c86e2c92a303eb73de762a8fb896b298c6c6"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-nqsLVc/working-tree-stat.txt",
+      "bytes": 131,
+      "sha256": "72f1fc3c804e4f751cd97dd9d87cae11a68679567cf46d6f5bfdf4338892c495"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/app.sha256",
+      "bytes": 65,
+      "sha256": "85ebe0594df6b5266fbd92d2b90ee478dbb2fdb4aa70f44afcf99bb20290b085"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/batch.json",
+      "bytes": 3795,
+      "sha256": "ba344dfb7fe1de0b2341e200a02d27085d0ff6158db1b28aff114a9cd5aee502"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/encoder.json",
+      "bytes": 16652,
+      "sha256": "cb1742431f3640a9d2bdb0331c01770e82b4723a2404f1ca3579990c991e058a"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/exits-before.json",
+      "bytes": 3182,
+      "sha256": "c1394af1ff980cf97ff60f477c2de504053514cd3c6a70ba4132df0249af11ff"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/git-head.txt",
+      "bytes": 41,
+      "sha256": "1a37bd96687418009fa2aadd3775fffeebfa3e6c2ad61ff2f51f04ad23ea2cf2"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/instrumentation.txt",
+      "bytes": 384,
+      "sha256": "450eeffd6edc8813873525a65eb86aa0318c54641843b5fe0ffc900fa60e144a"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/memory-baseline.json",
+      "bytes": 284,
+      "sha256": "447f69376c86c341ab52821cdecda7c61d26ae27f11d5bef42cf3b2aa52c1cdb"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/memory-policy.json",
+      "bytes": 549,
+      "sha256": "1e3d7cae2a1ade640445a2cab084a2707050219157323057782cb5ee16152af3"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/monitor.txt",
+      "bytes": 1304,
+      "sha256": "9ba3cc3dd5ec16f1cd8f54223d845fa136784f8ec2db16906a52c315303785ab"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/policy-probe.txt",
+      "bytes": 1460,
+      "sha256": "cd9eb0893ddb421cc0627ab57d4d1a43c1601eadc7ae8b12380e433f1fa28110"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/preflight.json",
+      "bytes": 1571,
+      "sha256": "1bebf1645d038fd7ef2722c4f48f30ef2c3be2e08e8a6751984c590439e5af51"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/recovery.json",
+      "bytes": 596,
+      "sha256": "d9979cfa4a7c6db5ca415f1a65f9c59590b1da3010c8dfa5896fd333c0ab16df"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/result.json",
+      "bytes": 565,
+      "sha256": "c70a3fcec0443b5e24300a89222fc5556eba3880f01b219aeae3a8ef0c7fe205"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/source-sha256.json",
+      "bytes": 3622,
+      "sha256": "d303e64d7212c18f19d3c87de57aba564cbdf543a14e0d2826da454c79922ab7"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/tests.sha256",
+      "bytes": 65,
+      "sha256": "e475e2917004507681c72481d476f77fd0e71b6b106b771cf9afb01245bc226d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/thermal/safety-stop.json",
+      "bytes": 136,
+      "sha256": "f2a83e190a4f8360bad4981f94b8531a685b0d805e14d51136f3abe02da50a46"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/thermal/samples.csv",
+      "bytes": 130,
+      "sha256": "7b3640ff400e52ac2c6fa22386f7d002683503710d32e2ff88ea5d13f7ff83b6"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/thermal/supervision-heartbeats.jsonl",
+      "bytes": 285,
+      "sha256": "cc86365b34bec6cff20358ed75c0b50d20786381afb7093a7a9af00a0157923d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-QKeOtK/working-tree-stat.txt",
+      "bytes": 131,
+      "sha256": "72f1fc3c804e4f751cd97dd9d87cae11a68679567cf46d6f5bfdf4338892c495"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/app.sha256",
+      "bytes": 65,
+      "sha256": "85ebe0594df6b5266fbd92d2b90ee478dbb2fdb4aa70f44afcf99bb20290b085"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/attempt.json",
+      "bytes": 90117,
+      "sha256": "47628dd1d9929fc41dc404e8643ddd4ccffd6538593d3ac23a85fbe637857c34"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/batch.json",
+      "bytes": 3762,
+      "sha256": "c51c3564a1b9a313c57405daee586faef0186671458137b2cfe2bfe3d6eb9397"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/encoder.json",
+      "bytes": 82036,
+      "sha256": "320ebb6ec1fff88dc73087b38dca6a84efa82e0a69789eeceaf6e67b6bcfe07d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/exits-before.json",
+      "bytes": 3179,
+      "sha256": "0f7680d934d94537cc3d6bdc21ccc0015ec3b5fe5828f9c72b2f170a4b127456"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/git-head.txt",
+      "bytes": 41,
+      "sha256": "1a37bd96687418009fa2aadd3775fffeebfa3e6c2ad61ff2f51f04ad23ea2cf2"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/instrumentation.txt",
+      "bytes": 806,
+      "sha256": "5f27661d1f5c40167ca5805523d21ef847a1c9531738420bb718f73bb40a4775"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/memory-baseline.json",
+      "bytes": 284,
+      "sha256": "37dfb33ffea2b2f55bfecfb84f8edf4050ceb36b3e28212ad7a49ddc3bb3580c"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/memory-policy.json",
+      "bytes": 549,
+      "sha256": "1e3d7cae2a1ade640445a2cab084a2707050219157323057782cb5ee16152af3"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/monitor.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/policy-probe.txt",
+      "bytes": 1460,
+      "sha256": "4f2997febad65796f539e5f5ad1e683032fc071c4b38cc4132494ccbbc162d81"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/preflight.json",
+      "bytes": 1571,
+      "sha256": "f10f1ee453c2787ae4df497bafdaf2b91506b1fc9cc46a426abd29dfa5c9f605"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/result.json",
+      "bytes": 552,
+      "sha256": "921e9d1a559f798241bffe554eb9122552b8290da562a9d015ab7908f8de6822"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/source-sha256.json",
+      "bytes": 3622,
+      "sha256": "d303e64d7212c18f19d3c87de57aba564cbdf543a14e0d2826da454c79922ab7"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/supervision.json",
+      "bytes": 254,
+      "sha256": "970ae89f095466629094322f54ce46914176a09459caba5c5bb34d78318aaff4"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/tests.sha256",
+      "bytes": 65,
+      "sha256": "e475e2917004507681c72481d476f77fd0e71b6b106b771cf9afb01245bc226d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/thermal/samples.csv",
+      "bytes": 190,
+      "sha256": "b33fb0099a197047fc7703301b56f8483643a5b3ad85d8397e8862f7e10e37ce"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/thermal/supervision-heartbeats.jsonl",
+      "bytes": 475,
+      "sha256": "2f4cb2204ab4a04f9ca19fb84b31de9eb299e2b91dcf94dcfa1ce6f6b948cf05"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-xGFUEm/working-tree-stat.txt",
+      "bytes": 131,
+      "sha256": "72f1fc3c804e4f751cd97dd9d87cae11a68679567cf46d6f5bfdf4338892c495"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/app.sha256",
+      "bytes": 65,
+      "sha256": "85ebe0594df6b5266fbd92d2b90ee478dbb2fdb4aa70f44afcf99bb20290b085"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/attempt.json",
+      "bytes": 90064,
+      "sha256": "d274a1e293985679c317c1c5866e38dd8689ba607957c04f6379761c7de503c1"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/batch.json",
+      "bytes": 3795,
+      "sha256": "ba344dfb7fe1de0b2341e200a02d27085d0ff6158db1b28aff114a9cd5aee502"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/encoder.json",
+      "bytes": 81983,
+      "sha256": "123cc99ec2aa6e4e5328837396196499ed52b9b1a5f52677d38a3fa39f64448d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/exits-before.json",
+      "bytes": 3179,
+      "sha256": "816b243ec6da5d6d40a72568cd1a27750a66c014ec824053640957ded0c51873"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/git-head.txt",
+      "bytes": 41,
+      "sha256": "1a37bd96687418009fa2aadd3775fffeebfa3e6c2ad61ff2f51f04ad23ea2cf2"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/instrumentation.txt",
+      "bytes": 806,
+      "sha256": "030fe1871270131285da9742436f71430afd9cc5d64bbe7062a23371e9f519e1"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/memory-baseline.json",
+      "bytes": 284,
+      "sha256": "48eb29f18324e0a8f755aeeb3fc870216d9b1e4f68e7e21e0413cbddc738053a"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/memory-policy.json",
+      "bytes": 549,
+      "sha256": "1e3d7cae2a1ade640445a2cab084a2707050219157323057782cb5ee16152af3"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/monitor.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/policy-probe.txt",
+      "bytes": 1460,
+      "sha256": "12bb2a96f5cc6623deded3d959aad34d091b32e78076517bcb94ddc0f9b933b0"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/preflight.json",
+      "bytes": 1571,
+      "sha256": "cc685fe8c9531f5d5e451b8fc7e640d5e5d8c40989a31842bf7e3b8a957cf3c4"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/result.json",
+      "bytes": 552,
+      "sha256": "3df01d6210826b0a3ff8aabbc8bcebdd35015190715e8f1da2831fe9f7e6a437"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/source-sha256.json",
+      "bytes": 3622,
+      "sha256": "d303e64d7212c18f19d3c87de57aba564cbdf543a14e0d2826da454c79922ab7"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/supervision.json",
+      "bytes": 254,
+      "sha256": "90f27d99012999cbf986fcecfc25f54e87e616a0d2966ee09baf51b05918f78c"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/tests.sha256",
+      "bytes": 65,
+      "sha256": "e475e2917004507681c72481d476f77fd0e71b6b106b771cf9afb01245bc226d"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/thermal/samples.csv",
+      "bytes": 194,
+      "sha256": "0fdbcfd954a362b4ce44fe12975e52c2d39d6ef2467013a7979c963caf14c974"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/thermal/supervision-heartbeats.jsonl",
+      "bytes": 475,
+      "sha256": "96a379845e858f021df0295a32e3329af109daa037e06beccd34abb4c9808aa1"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-gate-XgFVwY/working-tree-stat.txt",
+      "bytes": 131,
+      "sha256": "72f1fc3c804e4f751cd97dd9d87cae11a68679567cf46d6f5bfdf4338892c495"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-policy-v2-ed4712c0/calibration.json",
+      "bytes": 523827,
+      "sha256": "8e4c1db6e9f4d0e7a5adab15558df3100954795289896ca565e9c250b24cab4e"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-policy-v2-ed4712c0/development-summary.json",
+      "bytes": 163992,
+      "sha256": "0698bd5fc6c9bf680322b326e48242c5d73e2f8ca1f79d1f9bf221a2319e97ce"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-policy-v2-ed4712c0/development.json",
+      "bytes": 357655,
+      "sha256": "90f66969e885a41b5fb060471a5abbf5d70288079e60a6fc2cbc1144a17de934"
+    },
+    {
+      "path": "benchmarks/results/p2-calibration-policy-v2-ed4712c0/selection/selection.json",
+      "bytes": 162288,
+      "sha256": "eb1744f10520a1d58241a885eca7d2f5a664398148f2f7df3ed26bb6a474aa60"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/app.sha256",
+      "bytes": 65,
+      "sha256": "b103c4ccd3522d026d4ea4de052932592167dbf3935edaf97a88d70fa94c68a7"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/encoder.json",
+      "bytes": 237311,
+      "sha256": "b905e11726b5f9e492a7211ddf941bf7f95586054b400ff17db9e978cf85d1bc"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/exits-before.json",
+      "bytes": 3175,
+      "sha256": "6bdf0db487a7622bcdb9464a02dce50d19d0fec892d6469f3262f40b417a29f8"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/fixture.lock.json",
+      "bytes": 372,
+      "sha256": "dfc664f8161befbc870961b1e68a2b9c481b73d77cf5b853062d05f720336600"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/git-head.txt",
+      "bytes": 41,
+      "sha256": "2137fcd425f97bc48fc804b3f3a33568150d7a5acc317e86510046e7b8f557e7"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/instrumentation.txt",
+      "bytes": 810,
+      "sha256": "5f1d431c06cbacbc2201eacdab942096804340e03c677e44d9c4a46ebbff5fdd"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/memory-baseline.json",
+      "bytes": 284,
+      "sha256": "c655fddf987c80e10a7accf7126d93005ed6b41be4333422f49d806e228db9b8"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/memory-policy.json",
+      "bytes": 549,
+      "sha256": "1e3d7cae2a1ade640445a2cab084a2707050219157323057782cb5ee16152af3"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/monitor.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/policy-probe.txt",
+      "bytes": 1460,
+      "sha256": "b51fc2575630e2bf6c3861c2df162abc8eac6381f1a2fb197c83ab29bb2c924a"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/preflight.json",
+      "bytes": 1571,
+      "sha256": "01df695555ba2e8749c5cddb96827354224b3ecbeb26bfe5a1b4d8d71035c53c"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/quality.json",
+      "bytes": 10695,
+      "sha256": "ab2d593180c91d9d092242989a5abe953788d8ef1dcb96b1bb2a9b4e124468f2"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/result.json",
+      "bytes": 591,
+      "sha256": "c16a217a14900fd9a80e884c89d6d8c000f2f89e715b7bf220ac878dab94023d"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/source-sha256.json",
+      "bytes": 3438,
+      "sha256": "ea95d083fc2d086c9366d8aab52d884f8a13819570d45e685df093f28f26c5e6"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/supervision.json",
+      "bytes": 254,
+      "sha256": "d81a10ccec01afc3ad1905d24ef1a8254873b239fb03d485aae20cea31a5f1d4"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/tests.sha256",
+      "bytes": 65,
+      "sha256": "ee8543e5e4057b5a3502da2a551c03bee1de93431e48882fd51ea88dfe07b5c6"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/thermal/samples.csv",
+      "bytes": 480,
+      "sha256": "27297459571c8f00873d46203fd1966d5bb6b00a974b7647760cd11cc427f572"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/thermal/supervision-heartbeats.jsonl",
+      "bytes": 1335,
+      "sha256": "d1aab7632b1f81bab7b2d22c69d6ae4767e9dc67a39d65ad8309ce23860ada63"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-4CUUK2/working-tree-stat.txt",
+      "bytes": 456,
+      "sha256": "59e2d235cf0a1900c2d13fa62368f43ca0772afa44cda81a3848421465649cce"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/app.sha256",
+      "bytes": 65,
+      "sha256": "fdc4cae2409146ffabfe2d05c748dc6c68359ac85a3ca780a02e5edbe3c01aed"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/encoder.json",
+      "bytes": 237312,
+      "sha256": "356e76e26fe0aa795c6dfe455a437c9ea0f35bdb61e56df79b3438ca0a5711a4"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/exits-before.json",
+      "bytes": 3184,
+      "sha256": "6e14089f072414369998c1dcb9a1db0a4c3450a7b12c75e4bb75a76a7dfcb90b"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/fixture.lock.json",
+      "bytes": 372,
+      "sha256": "dfc664f8161befbc870961b1e68a2b9c481b73d77cf5b853062d05f720336600"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/git-head.txt",
+      "bytes": 41,
+      "sha256": "2137fcd425f97bc48fc804b3f3a33568150d7a5acc317e86510046e7b8f557e7"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/instrumentation.txt",
+      "bytes": 810,
+      "sha256": "449487b5ceb74ded943b3a8cede87b9a0a7d85c218c2b553f652a7fe6f15902f"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/memory-baseline.json",
+      "bytes": 284,
+      "sha256": "aab6f5eefb574357d4a51bbf178353ebf78795431a6355b3f87b5e8d9da1bd0a"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/memory-policy.json",
+      "bytes": 549,
+      "sha256": "1e3d7cae2a1ade640445a2cab084a2707050219157323057782cb5ee16152af3"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/monitor.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/policy-probe.txt",
+      "bytes": 1459,
+      "sha256": "6e568671a0d59e11a0c158f4ad8e175ed6d44ca011628837d16f0d0c82424bb3"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/preflight.json",
+      "bytes": 1565,
+      "sha256": "dd6120b71fc4056d6dc36be4b5d1b63f011521fff9cc7d92dbb735b4a204a180"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/quality.json",
+      "bytes": 10695,
+      "sha256": "8bea0201d297117dfb6de341e388d548d0c756d4caa251422e3298a1aa8c682f"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/result.json",
+      "bytes": 591,
+      "sha256": "fd9b4ddfaddd904e32aff6ad3026d71a85ddb651c4ffea7030eab6db6fa3346e"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/source-sha256.json",
+      "bytes": 3438,
+      "sha256": "93694ca067e7ab399fa68a99e94667f7bdbb642c50e115db1712110e79ca51a7"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/supervision.json",
+      "bytes": 254,
+      "sha256": "79532e7e682fda10416b17ea245b840c3b5ee89a6aafc72541040c9286ca87e4"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/tests.sha256",
+      "bytes": 65,
+      "sha256": "a41bc88746428b62f1820ecc9eedfcd1fbea0e9d4cf63bb6ce4efe39de4e4704"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/thermal/samples.csv",
+      "bytes": 572,
+      "sha256": "c801e4a81fa1fbb20d18f1febb17972e3f40fd87da591616ccf82b21a5510a05"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/thermal/supervision-heartbeats.jsonl",
+      "bytes": 1623,
+      "sha256": "f2977a352cb32878b16b5df78782342681bac4e743f662ec9ded7348a158b9e4"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-8SCUVh/working-tree-stat.txt",
+      "bytes": 518,
+      "sha256": "93c47a20b83a84176d719063ca176189e46c99a7213f8515115268db85423c84"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/app.sha256",
+      "bytes": 65,
+      "sha256": "89f443bdaf3932fd8f4d27bfe1e8ca19bad5361a36677d982c967f32ed7acb01"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/encoder.json",
+      "bytes": 1323,
+      "sha256": "583eb6af5a572bfa2e8652a2ab0e6b02511e0f881cf7b12a3e94474e99b2dad4"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/exits-before.json",
+      "bytes": 3175,
+      "sha256": "81d097618c735f53b8a8f72394d7cbf54e17dddc967a8040ad053fe61d558db1"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/fixture.lock.json",
+      "bytes": 372,
+      "sha256": "dfc664f8161befbc870961b1e68a2b9c481b73d77cf5b853062d05f720336600"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/git-head.txt",
+      "bytes": 41,
+      "sha256": "2137fcd425f97bc48fc804b3f3a33568150d7a5acc317e86510046e7b8f557e7"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/instrumentation.txt",
+      "bytes": 6150,
+      "sha256": "33d13d7ac0fd9dce10b309c260b9e317cc5be1457c00845155388fea7bfb7d97"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/memory-baseline.json",
+      "bytes": 284,
+      "sha256": "636d6ec37e540d265a1992279fc03604c352b09f6d333b0002b6e27f13ffcd90"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/memory-policy.json",
+      "bytes": 549,
+      "sha256": "1e3d7cae2a1ade640445a2cab084a2707050219157323057782cb5ee16152af3"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/monitor.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/policy-probe.txt",
+      "bytes": 1460,
+      "sha256": "811c9017059b8ccbb0c8f311e7cc59d82f3429e7be159daff2a106fb79c2f0fd"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/preflight.json",
+      "bytes": 1571,
+      "sha256": "4db580b26c65a98532f3ccf0dc5f682f09d1632d0f12ad2e7e0cf13ffd7bcc3e"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/result.json",
+      "bytes": 571,
+      "sha256": "7971ad9dbbe0a8d5cec0d060ca2d6d9d09ac0991a67d8650a9b0ef06316cb5e4"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/source-sha256.json",
+      "bytes": 3438,
+      "sha256": "d1e25b8a6d534a660f269436ebe2a730ec8fab2a56f184031648cc67883cfd10"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/supervision.json",
+      "bytes": 254,
+      "sha256": "953290cab2f68be19ead850cadab0681d14144d6c03b4894579e236cfcda91b0"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/tests.sha256",
+      "bytes": 65,
+      "sha256": "ee8543e5e4057b5a3502da2a551c03bee1de93431e48882fd51ea88dfe07b5c6"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/thermal/samples.csv",
+      "bytes": 98,
+      "sha256": "9dc9d822bef000161212c660a29d6281eabece563f685c6433ae14437ca6039e"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/thermal/supervision-heartbeats.jsonl",
+      "bytes": 190,
+      "sha256": "3cbaff8626bc4f2d3454243c17307fd0633ac57d874a8a8c93f70c3762e17f4f"
+    },
+    {
+      "path": "benchmarks/results/p2-semantic-gate-WNZYQm/working-tree-stat.txt",
+      "bytes": 395,
+      "sha256": "e084915c4765b81dc552a66f51182dc8018ffba5a67fd7a3b78707de5699202b"
+    },
+    {
+      "path": "docs/P2_CALIBRATION_JUDGMENT_REAPPROVAL.md",
+      "bytes": 14091,
+      "sha256": "2cda31db59b09143c6cfe3c8e415b51e270707e04bcf1bf29e5d2137ac54e3f4"
+    },
+    {
+      "path": "docs/P2_CALIBRATION_JUDGMENT_REVIEW.md",
+      "bytes": 7487,
+      "sha256": "bdf91fb64964b236648ddd140710e8eb1932f238ea59c0b062ba407028c81374"
+    },
+    {
+      "path": "docs/P2_CALIBRATION_POLICY_RESULTS.md",
+      "bytes": 10267,
+      "sha256": "82ee639bf08f483be6f6ac19865c112c08753998b1a3c44de6b1764af32c37b9"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/.collection/calibration-0-accepted.json",
+      "bytes": 471,
+      "sha256": "90bdda45b2657f73cdcf0a2906f315bfa8107d0155bcc4d9de72b0a82a5cbaf1"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/.collection/calibration-1-accepted.json",
+      "bytes": 471,
+      "sha256": "cc36704d14174110fdd97cf7abede3b622687de85055059cdb85d632150982fc"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/.collection/calibration-2-accepted.json",
+      "bytes": 471,
+      "sha256": "0aa9d19ea8c4bee80077c8691438284cb4b83d5b1a24e32ad79d2ebdb9290c71"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/.collection/calibration-3-accepted.json",
+      "bytes": 471,
+      "sha256": "c408b12bc4a86a325cace5baa265e27c5662a2e4cdb2090b990b4d455bf080bc"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/.collection/calibration-4-accepted.json",
+      "bytes": 471,
+      "sha256": "57e6f124c66f16f05b6717028e14b85272b905f59eee21c94a6b588fd934927a"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/.collection/development-0-accepted.json",
+      "bytes": 471,
+      "sha256": "a0f2d573693e9b0ca28bec186a1f53e7f3c616ed6ca7bacf5bf59190d093d45c"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/.collection/development-1-accepted.json",
+      "bytes": 471,
+      "sha256": "777fee036a25f43c91a433227bdf7128058e23c419621911185f1bbfae2311fc"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/.collection/development-2-accepted.json",
+      "bytes": 471,
+      "sha256": "5a761f31e8040f418899c8b0ac8e9c654bfdf654ef9c4734cda29de202b482c2"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/.collection/development-3-accepted.json",
+      "bytes": 471,
+      "sha256": "18637cafa97f180f9ef9c9c8d745565ac8f79b80d50432b7eff6b9554f61446f"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/calibration.json",
+      "bytes": 142076,
+      "sha256": "241af22ac34423e241133bae04773c8565d78f0f7a2245648e94382853765757"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/correction.json",
+      "bytes": 1193,
+      "sha256": "2fb3ee2c6fc2536df3b927c2c522cf90107e667fa7bd97b64eebeee556881de5"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/development.json",
+      "bytes": 79574,
+      "sha256": "0d171bafc54aaeead2c59e1e6dd187494a8994a55c86d60bf050856019b2698a"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/execution.json",
+      "bytes": 224,
+      "sha256": "cdfd1b331696995f8060b3ca9cb2011481be78018313dc5ed4d10b5789bb78b3"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/heldout.json",
+      "bytes": 165586,
+      "sha256": "599cad04ff2f444842def1c2d249e0f8d5188320e4897514072d8e96ba0c99a6"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/independent-review.json",
+      "bytes": 657,
+      "sha256": "66c9f57972880e38974e36588cd7edcd7ed16d72c6f574c3f56d7212d367a3d7"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/lock.json",
+      "bytes": 3336,
+      "sha256": "ed4712c0cb6261b83591f3e6678c71c1565a6270e1388dda529583218872d8d1"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/locks/2026-10-22-before-qa-fixes.lock.json",
+      "bytes": 3336,
+      "sha256": "23df57042b155e0ccec3efb7978087d2f74d306f862cf11e61e9a6a0d8117d36"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/protocol.json",
+      "bytes": 3150,
+      "sha256": "537f34bcc80506bc68c150c1563689b51107e093e53f03a33658ccd06134b55a"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/rejected/2026-10-22-depth-ambiguity/calibration.json",
+      "bytes": 142076,
+      "sha256": "241af22ac34423e241133bae04773c8565d78f0f7a2245648e94382853765757"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/rejected/2026-10-22-depth-ambiguity/development.json",
+      "bytes": 79559,
+      "sha256": "58ac01fc24908da5fbd02ad6e6b049b06cf96d7ea7ac120bc50811b1f97ef7fe"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/rejected/2026-10-22-depth-ambiguity/heldout.json",
+      "bytes": 165586,
+      "sha256": "599cad04ff2f444842def1c2d249e0f8d5188320e4897514072d8e96ba0c99a6"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/rejected/2026-10-22-depth-ambiguity/lock.json",
+      "bytes": 3336,
+      "sha256": "683c371622fa303de564448127341332a9be870fe99abd63ef6e50fe4e4a8140"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/rejected/2026-10-22-depth-ambiguity/protocol.json",
+      "bytes": 3150,
+      "sha256": "537f34bcc80506bc68c150c1563689b51107e093e53f03a33658ccd06134b55a"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/rejected/2026-10-22-depth-ambiguity/review.md",
+      "bytes": 7487,
+      "sha256": "bdf91fb64964b236648ddd140710e8eb1932f238ea59c0b062ba407028c81374"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/rejected/2026-10-22-depth-ambiguity/snapshot.json",
+      "bytes": 744,
+      "sha256": "5e78a9bece3fc27c7c6096a14edca8a403b609cbe02065a6e294745878f09483"
+    },
+    {
+      "path": "planning/fixtures/calibration-policy-v2/selection-seal.json",
+      "bytes": 191,
+      "sha256": "85e121fb17968410d016b13f92e9685f4bdacd01564d9725a1153fdeb634a44e"
+    },
+    {
+      "path": "planning/fixtures/semantic-retrieval-v1.json",
+      "bytes": 13397,
+      "sha256": "32f9d6d231fb5f5acca593eb27e128bc0f09266e311375db82cff100b6325abe"
+    },
+    {
+      "path": "planning/fixtures/semantic-retrieval-v1.lock.json",
+      "bytes": 372,
+      "sha256": "dfc664f8161befbc870961b1e68a2b9c481b73d77cf5b853062d05f720336600"
+    },
+    {
+      "path": "planning/P2_CALIBRATION_POLICY_QUALIFICATION.md",
+      "bytes": 13929,
+      "sha256": "dc75797363427f59960ec300f97559852b0b5960d5b382b03eb1a2dad2a17c1f"
+    },
+    {
+      "path": "scripts/calibration-collection.mjs",
+      "bytes": 2151,
+      "sha256": "807a24184d6c28b5b36be31460ba71eda9fa542346d38cda3e3d9613089db75c"
+    },
+    {
+      "path": "scripts/calibration-data.mjs",
+      "bytes": 8041,
+      "sha256": "9e03827d1baf410d64a2291daa7665db98c85e090ccba4cae4580b5e253538fe"
+    },
+    {
+      "path": "scripts/calibration-investigation.mjs",
+      "bytes": 13050,
+      "sha256": "2383e9858259236298b08c81ffebb126eced0117b52c2681ae068a3852578a96"
+    },
+    {
+      "path": "scripts/calibration-policy.mjs",
+      "bytes": 7322,
+      "sha256": "21e7bf378a6795a6f36d8e9a05337b59d20571ab350231abc87b1713116f6622"
+    },
+    {
+      "path": "scripts/semantic-quality.mjs",
+      "bytes": 11012,
+      "sha256": "a073e7995e887621b38f355274fe1c86b4d60c9666dc5514468aebf95891f299"
+    },
+    {
+      "path": "scripts/tests/calibration-policy.test.mjs",
+      "bytes": 20148,
+      "sha256": "35720368cb2999ea192fbca48d398dd563d261171fa36f29a5adea75ebb0240c"
+    },
+    {
+      "path": "scripts/tests/semantic-quality.test.mjs",
+      "bytes": 5849,
+      "sha256": "069480e2feeb3dba1b5153af398ff417e324937654e29564216c4b4d544e6e13"
+    }
+  ]
+}

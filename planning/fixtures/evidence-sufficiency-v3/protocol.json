@@ -1,0 +1,309 @@
+{
+  "schema": 3,
+  "id": "evidence-sufficiency-v3",
+  "scope": "protocol-rubric-datasets-only",
+  "nativeCollectionAuthorized": false,
+  "verifierImplementationAuthorized": false,
+  "semanticEnablement": false,
+  "languages": {
+    "en": "required"
+  },
+  "splitPopulations": {
+    "calibration": {
+      "S": 20,
+      "C": 10,
+      "M": 20,
+      "U": 10
+    },
+    "development": {
+      "S": 20,
+      "C": 10,
+      "M": 20,
+      "U": 10
+    },
+    "heldout": {
+      "S": 20,
+      "C": 10,
+      "M": 20,
+      "U": 10
+    }
+  },
+  "encoder": {
+    "artifactSha256": "89ad3c74175dd8caa398cc22b657296d94302d20c525c12b58b29420f7249749",
+    "tokenizerSha256": "ab32418a9a7f2c0c95e3db6233f2fbd8243e2929a84cd5feec9c1b1ca615c420",
+    "runtime": "com.google.mediapipe:tasks-text:1.1.1",
+    "headIndex": 0,
+    "dimensions": 100,
+    "normalization": "SDK_L2",
+    "format": "USE_RESPONSE_TEXT_SDK_BYTES_V1",
+    "tokenLimit": 192
+  },
+  "verifier": {
+    "modelId": "gemma-4-e2b-it-mobile-text",
+    "artifactSha256": "181938105e0eefd105961417e8da75903eacda102c4fce9ce90f50b97139a63c",
+    "runtime": "com.google.ai.edge.litertlm:litertlm:0.17.1",
+    "backend": "GPU-only-no-fallback",
+    "contextTokens": 2048,
+    "reservedOutputTokens": 512,
+    "budgetIdentity": "gemma4-e2b-byte-bound-v2",
+    "temperature": 0,
+    "topK": 1,
+    "seed": 0,
+    "unsupportedSettings": "block-before-native-do-not-substitute",
+    "historyMessages": 0
+  },
+  "labels": {
+    "detailOrder": "question.requestedDetails",
+    "passageStates": {
+      "S": "explicit same-entity/attribute/cycle value with required units",
+      "C": "explicitly disputes a same-scope alternative; retain asserted replacement value and conflict edges",
+      "M": "same requested subject but detail missing, partial, unit/date ambiguous",
+      "U": "wrong entity or no requested subject; wrong cycle alone cannot answer"
+    },
+    "setPrecedence": [
+      "C",
+      "S",
+      "M",
+      "U"
+    ],
+    "conflict": "requires two distinct in-scope records with incompatible values and no authoritative supersession",
+    "supported": "all requested details supported, no in-scope conflict",
+    "missing": "relevant evidence but any requested detail lacks support",
+    "unrelated": "no passage concerns the requested entity/subject"
+  },
+  "relevanceGrades": {
+    "0": "unrelated entity/subject",
+    "1": "same entity but wrong cycle or only general context",
+    "2": "correct entity/cycle but requested detail absent or unit ambiguous",
+    "3": "correct subject and explicit requested detail, including same-scope conflicting claims"
+  },
+  "approaches": [
+    {
+      "id": "retrieval-only",
+      "candidateCount": 3,
+      "cutoff": null,
+      "role": "diagnostic comparator; never invent sufficiency labels",
+      "selectionEligible": false
+    },
+    {
+      "id": "retrieval-plus-gemma",
+      "candidateCount": 3,
+      "promptVariants": 1,
+      "confidenceThreshold": null,
+      "selectionEligible": true
+    }
+  ],
+  "candidateOrder": "cosine-descending-then-immutable-passage-id-ascending",
+  "componentCandidates": "frozen query.componentCandidates; never selected using a model score",
+  "poolMaximumPassages": 60,
+  "packing": {
+    "singleMessageRole": "USER",
+    "prefix": "verifier-instructions.txt without final LF",
+    "dataDelimiter": "\nDATA\n",
+    "suffix": "\nEND DATA",
+    "serialization": "ECMAScript JSON.stringify compact UTF-8, key order q,d,p; d key order i,e,a,c,u; p key order p,r,b,t",
+    "questionMaximumUtf8Bytes": 180,
+    "maximumRequestedDetails": 2,
+    "maximumCandidates": 3,
+    "excerptMaximumUtf8Bytes": 160,
+    "excerptSelection": "longest Unicode-scalar prefix within 160 UTF-8 bytes from original offset 0; no normalization or ellipsis",
+    "fit": "render; drop only the last candidate until UTF-8 bytes <=1312; never reorder or alter question/instructions; if none fits return PACK_REJECTED",
+    "payloadMaximumUtf8Bytes": 1312,
+    "tokenBound": "128+96+UTF8(payload); plus 512 output <=2048",
+    "reservedSequencePolicy": "reject existing GemmaChatBudget reserved markers and malformed surrogates; no escaping workaround",
+    "gold": "fixedPackLabels and witnesses use only delivered excerpts; fullEvidenceLabel retained independently",
+    "packIdentity": "SHA256 of exact UTF-8 payload; record exact payload and delivered source intervals",
+    "decomposition": "requested details are fixture-authored from question only, never inferred from answers; this experiment does not qualify automatic question decomposition",
+    "combinedGold": "derive delivered labels from frozen detail assertions/conflict edges and actual delivered spans, with independent judgment adjudication before exposing model decisions; full-corpus denominators never relabeled"
+  },
+  "output": {
+    "envelopeKeys": [
+      "o",
+      "d"
+    ],
+    "detailKeys": [
+      "i",
+      "s",
+      "e"
+    ],
+    "evidenceKeys": [
+      "p",
+      "r",
+      "b",
+      "e",
+      "q"
+    ],
+    "states": [
+      "S",
+      "C",
+      "M",
+      "U"
+    ],
+    "maxReferencesPerDetail": 2,
+    "maxReferencesTotal": 4,
+    "maxQuoteUtf8Bytes": 96,
+    "maxJsonUtf8Bytes": 1536,
+    "maxGeneratedTokens": 512,
+    "parser": "one JSON object; no markdown, extra keys, duplicate keys, nonfinite numbers, unknown/missing/duplicate details or trailing data",
+    "order": "requested detail order; citations by passage ID then start",
+    "nonSupporting": "M/U details have empty e; a top-level M may retain S evidence for its supported detail",
+    "conflict": "each C detail requires both conflicting records, not a chosen value",
+    "answerTextAllowed": false
+  },
+  "spans": {
+    "coordinates": "half-open UTF-16 code units in immutable original passage revision",
+    "reference": "exact passage ID plus revision; must have been delivered in pack",
+    "bounds": "0<=b<e<=original.length; entire interval inside a delivered source interval",
+    "unicode": "no surrogate-pair split or unpaired surrogate; no normalization; combining boundaries retain exact code units",
+    "quotation": "original.slice(b,e) equals q exactly; compare decoded JSON string",
+    "semantic": "structural match never proves support; compare entity/attribute/cycle/unit semantics against reviewed gold"
+  },
+  "conversions": {
+    "numeric": "base-10 exact integers or terminating decimals; no tolerance or rounding",
+    "allowedUnits": [
+      {
+        "from": "cm",
+        "to": "mm",
+        "factor": "10"
+      },
+      {
+        "from": "mm",
+        "to": "cm",
+        "factor": "0.1"
+      },
+      {
+        "from": "s",
+        "to": "min",
+        "factor": "1/60",
+        "onlyIf": "result terminates exactly"
+      }
+    ],
+    "otherUnits": "identity only; unsupported conversions reject support",
+    "unitInference": "forbidden",
+    "dates": "YYYY-MM-DD only for day questions; ambiguous slashed dates are missing-detail",
+    "instants": "RFC3339 with explicit Z or numeric offset only; no assumed time zone",
+    "names": "exact scoped entity IDs; only aliases explicitly declared by the question are permitted"
+  },
+  "metrics": {
+    "relevance": {
+      "recallAt5Minimum": 0.9,
+      "ndcgAt10Minimum": 0.8,
+      "population": "Recall: queries with grade3; nDCG: queries with positive grades; U separately reported",
+      "gains": "2^grade-1",
+      "topKDiagnostic": 5,
+      "recall": "macro fraction of grade3 requested-fact passages retrieved at5; queries without grade3 excluded and separately reported (M partial may have grade3); nDCG uses all positive grades"
+    },
+    "component": {
+      "supportedRecoveryMinimum": 0.9,
+      "supportPrecisionMinimum": 0.95,
+      "falseSupportRateMaximum": 0.05,
+      "conflictRecoveryMinimum": 0.9,
+      "missingDetailCorrectAbstentionMinimum": 0.95,
+      "unrelatedCorrectAbstentionMinimum": 0.95,
+      "validCompletionMinimum": 0.95,
+      "invalidReferenceAcceptedMaximum": 0,
+      "denominators": "recovery/abstention use fixedPack S/C/M/U populations; precision denominator is valid predictions of that state plus every invalid/failed request as incorrect; zero denominator gives zero; false support denominator fixedPack C/M/U",
+      "emptyPredictionPrecision": "zero when no S claims; cannot vacuously pass",
+      "falseSupport": "incorrect valid S claim OR any invalid/failed request in fixedPack C/M/U; both count as unsafe, not successful abstention",
+      "conflictPrecisionMinimum": 0.95,
+      "semanticAssessment": "review exact emitted spans against detail assertions; any alternate valid span must retain entity/cycle/attribute linkage in delivered text; no model judge or post-hoc label changes"
+    },
+    "coverage": {
+      "completeRequiredEvidenceMinimum": 0.9,
+      "population": "fullEvidence S/C queries; evaluated against actual delivered intervals and required witness sets"
+    },
+    "endToEnd": {
+      "recallAt5Minimum": 0.9,
+      "ndcgAt10Minimum": 0.8,
+      "falseMatchRateMaximum": 0.05,
+      "answerable": "fullEvidence S or C; correct conflict reports are safe answers",
+      "unanswerable": "fullEvidence M or U",
+      "recall": "normal macro gold-witness recall at5, but zero on incorrect overall outcome, required-detail error, invalid output, timeout or incomplete request",
+      "ndcg": "graded witness relevance (2^grade-1) at10, using grade3 for explicit same-scope requested facts and grade2 for relevant missing-detail; zero on incorrect outcome/detail, invalid output, timeout or incomplete request",
+      "falseMatch": "valid top-level S/C claim OR any invalid/failed request on fullEvidence M/U; correct valid M with partial S-detail citations is not a false match"
+    },
+    "errors": "timeouts, malformed output, rejected packs, cancellation not initiated by evaluator, unavailable resources and failed native work remain separate failures in fixed denominators; none earns correct abstention",
+    "supportedCorrectness": "overall outcome plus every requested detail and exact semantic witnesses must be correct; cannot receive S credit from label alone"
+  },
+  "uncertainty": {
+    "confidence": 0.95,
+    "bootstrapSamples": 10000,
+    "seed": 20261022,
+    "generator": "xorshift32 unsigned: x ^= x << 13; x ^= x >>> 17; x ^= x << 5; x >>>= 0; draw=floor((x/4294967296)*N)",
+    "sampling": "query-level with replacement within each frozen metric population; no removal of failed requests",
+    "paired": "same sampled indices for approach comparisons",
+    "quantile": "nearest-rank at .025/.975",
+    "proportions": "two-sided Wilson z=1.959963984540054 without continuity correction",
+    "role": "descriptive; do not replace point-estimate gates",
+    "order": "query ID ASCII ascending; reset seed 20261022 per metric/population; 10000 replicates each of population size N; paired approaches reuse indices"
+  },
+  "selection": {
+    "calibration": "format validation and diagnostics only; no threshold, prompt or parameter fitting in this protocol",
+    "development": "both components and pack coverage must pass before combined evaluation; combined must pass all end-to-end and performance gates",
+    "eligibleApproaches": [
+      "retrieval-plus-gemma"
+    ],
+    "ties": [
+      "higher end-to-end recall",
+      "higher end-to-end ndcg",
+      "lower false matches",
+      "lower complete-pipeline p95",
+      "approach-id ASCII ascending"
+    ],
+    "baseline": "reported but ineligible because it supplies no sufficiency decisions",
+    "heldout": "successful sealed development selection before planning or collecting; evaluate locked approach once; independent reviewed labels required before any collection",
+    "sealing": "selection manifest binds protocol, rubric, template, datasets, reviewed freeze, collectors, runner code, collection attempts and dev results; no heldout planning/collection without successful seal"
+  },
+  "timing": {
+    "wholePipelineHardDeadlineMs": 5000,
+    "start": "foreground submission monotonic time",
+    "included": [
+      "queueing",
+      "Gemma reclamation",
+      "pack selection and construction",
+      "encoder counting/loading/encoding",
+      "encoder confirmed cleanup",
+      "verifier loading",
+      "prefill/inference",
+      "output validation"
+    ],
+    "scope": "deadline independent of existing preparation-only timeout; no reset at Gemma admission",
+    "p95KeywordMs": 1000,
+    "p95CompleteHybridMs": 2000,
+    "timeout": "invalidate result immediately, signal active owner out-of-band; no abstention credit",
+    "cleanup": "separately pending->confirmed/uncertain; reservation retained until confirmed; uncertainty quarantines",
+    "report": [
+      "cold/warm encoder",
+      "verifier loading",
+      "prefill/inference",
+      "cancel signal/terminal",
+      "cleanup",
+      "packing/validation",
+      "complete pipeline incl failures"
+    ],
+    "feasibility": {
+      "after": "independent artifact approval plus separate runtime implementation authorization",
+      "queriesPerState": 4,
+      "states": [
+        "cold-all-unloaded",
+        "encoder-fresh-Gemma-unloaded"
+      ],
+      "sustainedOrLargeCampaignAllowed": false,
+      "failure": "any >5s completes as timeout and blocks combined campaign; report architecture/performance decision for review, never silently exclude verifier or raise deadline"
+    }
+  },
+  "ownership": {
+    "owner": "existing ModelManager only",
+    "reservation": "one opaque foreground lease through encoder, confirmed encoder cleanup, Gemma, validation and confirmed cleanup",
+    "concurrentResidency": false,
+    "tools": false,
+    "memoryWrites": false,
+    "productionIntegration": false
+  },
+  "preservation": {
+    "v1": "unchanged",
+    "v2": "unchanged including unused heldout",
+    "newData": "disjoint source families/entities; exclude old examples and close paraphrases; independent full judgments/pack review before collection"
+  },
+  "rankingArithmetic": "host IEEE754 binary64 cosine; accumulate dot and squared norms in dimension order, no score rounding; reject nonfinite/zero vectors; SDK float components serialized round-trip; sort exact score desc then ID ASCII"
+}
