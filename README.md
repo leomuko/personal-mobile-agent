@@ -58,6 +58,28 @@ Before P2, the [P1 memory-reliability work package](planning/P1_MEMORY_RELIABILI
 
 The 2026-10-13 S24 GPU smoke passed after the runtime QA revisions. Full S24 instrumentation still has camera-permission/accessibility and notification harness failures, and the revised monitor needs sustained validation. The unsigned release APK currently includes LiteRT-LM native libraries despite disabled runtime controls; isolate that dependency before distribution. See [QA revision results](docs/PHASE_1_QA_REVISIONS.md).
 
+## Host Tooling Tests
+
+**Reviewed checkpoint: P2 remains incomplete, native feasibility is blocked, and
+semantic search is disabled.** The wrapper race is closed; output adherence is
+unresolved. See the [checkpoint scope](docs/P2_REVIEWED_CHECKPOINT.md). Raw local
+evidence and model binaries are not part of the Git checkpoint.
+
+Run `node scripts/host-test-suite.mjs` from the repository root for the current
+complete Node suite. It discovers all host test modules and visibly substitutes
+one audited archival-V2 migration, retaining all 16 original checks plus an
+explicit stale-runtime rejection. The original module stays byte-identical because
+it belongs to the V3 preservation freeze. The old `scripts/tests/*.test.mjs` glob
+is a historical route, not the current complete-suite command; it still runs the
+known historical-lock assumption. See [migration details](docs/HOST_TEST_ARCHIVAL_V2_MIGRATION.md).
+
+The [V3 native feasibility block](docs/P2_V3_FEASIBILITY_RESULTS.md) is unchanged.
+[ADR 0006](docs/decisions/0006-evidence-verification-latency.md) and the
+[V4 draft](planning/P2_V4_SERIAL_VERIFICATION_FEASIBILITY.md) retain their reviewed
+proposal bytes. The user's later limited approval, isolated implementation and
+execution gates are recorded in [V4 status](docs/P2_V4_IMPLEMENTATION_STATUS.md).
+Thirty seconds is an experimental ceiling, not a production search target.
+
 ## Device tests
 
 P2 prerequisite work is recorded in [P2 prerequisite results](docs/P2_PREREQUISITE_RESULTS.md): authenticated document storage/protected PDF access and an opt-in isolated encoder lifecycle spike. The independent [text Sources pilot](docs/P2_SOURCES_RESULTS.md) uses the existing encrypted database, not PDF parsing or embeddings. [Verified encoder admission and foreground handoff](docs/P2_ENCODER_HANDOFF_RESULTS.md) now have focused host/S24 evidence at the unchanged 192-token limit. This internal prerequisite is not wired into production conversation or Sources; semantic retrieval and the separate final P2 acceptance campaign remain open.
