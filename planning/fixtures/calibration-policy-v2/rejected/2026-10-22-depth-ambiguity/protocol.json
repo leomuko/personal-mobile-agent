@@ -1,0 +1,108 @@
+{
+  "schema": 2,
+  "id": "calibration-policy-qualification-v2",
+  "author": "implementation-agent",
+  "candidate": {
+    "artifactSha256": "89ad3c74175dd8caa398cc22b657296d94302d20c525c12b58b29420f7249749",
+    "tokenizerSha256": "ab32418a9a7f2c0c95e3db6233f2fbd8243e2929a84cd5feec9c1b1ca615c420",
+    "runtime": "com.google.mediapipe:tasks-text:1.1.1",
+    "format": "USE_RESPONSE_TEXT_SDK_BYTES_V1",
+    "transport": "mediapipe-packet-bytes-v1",
+    "headIndex": 0,
+    "dimensions": 100,
+    "normalization": "SDK_L2",
+    "tokenLimit": 192
+  },
+  "gates": {
+    "recallAt5": 0.9,
+    "ndcgAt10": 0.8,
+    "falseMatchRate": 0.05
+  },
+  "splits": {
+    "calibration": 60,
+    "development": 40,
+    "heldout": 60
+  },
+  "requiredLanguage": "en",
+  "diagnostics": [],
+  "maxBatchEntries": 32,
+  "ranking": "cosine-descending-passage-id-ascending",
+  "acceptance": "score>=cutoff",
+  "equivalentCutoffs": "stable-candidate-order-all-then-ascending-score-then-none",
+  "equivalentCutoffs": "stable-candidate-order-all-then-ascending-score-then-none",
+  "judgments": "complete-0..3-positive-if-grade>0",
+  "recall": "cutoff-filtered-macro-at-5",
+  "ndcg": "cutoff-filtered-at-10-gain-2^grade-1-log2(rank+1)",
+  "policies": {
+    "answerability-f1": {
+      "candidates": "distinct-top-one-scores-plus-all-none",
+      "objective": "2TP/(2TP+FN+FP)",
+      "zeroDenominator": 0,
+      "ties": [
+        "fewer-false-matches",
+        "higher-cutoff"
+      ]
+    },
+    "answerability-f2": {
+      "candidates": "distinct-top-one-scores-plus-all-none",
+      "objective": "5TP/(5TP+4FN+FP)",
+      "zeroDenominator": 0,
+      "ties": [
+        "fewer-false-matches",
+        "higher-cutoff"
+      ]
+    },
+    "constrained-recall": {
+      "candidates": "all-distinct-query-passage-scores-plus-all-none",
+      "falseMatchRate": 0.05,
+      "objective": "macro-recall-at-5",
+      "ties": [
+        "ndcg-at-10",
+        "fewer-false-matches",
+        "higher-cutoff"
+      ]
+    }
+  },
+  "selection": {
+    "eligible": "all-three-development-gates",
+    "ties": [
+      "recall-at-5",
+      "ndcg-at-10",
+      "lower-false-match-rate",
+      "answerability-f1",
+      "answerability-f2",
+      "constrained-recall"
+    ]
+  },
+  "cutoffRepresentation": {
+    "all": {
+      "kind": "all"
+    },
+    "none": {
+      "kind": "none"
+    },
+    "score": {
+      "kind": "score",
+      "value": "finite-number-in-[-1,1]"
+    }
+  },
+  "uncertainty": {
+    "confidence": 0.95,
+    "bootstrapSamples": 10000,
+    "seed": 20261021,
+    "generator": "xorshift32",
+    "quantile": "nearest-rank",
+    "population": "answerable-queries",
+    "sampling": "n-draws-with-replacement-floor(u*n);same-draws-for-both-metrics",
+    "seedReset": "each-language-report",
+    "intervalProbabilities": [
+      0.025,
+      0.975
+    ],
+    "proportion": "two-sided-Wilson-without-continuity-correction",
+    "z": 1.959963984540054
+  },
+  "collection": "independent-review-before-first-vector;immutable-attempts;complete-disjoint-batches",
+  "heldout": "lock-selection-before-access;exposure-record-before-evaluation;one-result-no-overwrite",
+  "productionEnablement": false
+}

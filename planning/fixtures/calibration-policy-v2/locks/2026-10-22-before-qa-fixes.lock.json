@@ -1,0 +1,34 @@
+{
+  "schema": 2,
+  "protocolId": "calibration-policy-qualification-v2",
+  "protocolSha256": "537f34bcc80506bc68c150c1563689b51107e093e53f03a33658ccd06134b55a",
+  "datasets": {
+    "calibration": "241af22ac34423e241133bae04773c8565d78f0f7a2245648e94382853765757",
+    "development": "58ac01fc24908da5fbd02ad6e6b049b06cf96d7ea7ac120bc50811b1f97ef7fe",
+    "heldout": "599cad04ff2f444842def1c2d249e0f8d5188320e4897514072d8e96ba0c99a6"
+  },
+  "code": {
+    "scripts/calibration-policy.mjs": "ac64c63cd583ae00b249a69eaec1c48cbe14663d1bd82c555fac318acaacfaf4",
+    "scripts/calibration-data.mjs": "9e03827d1baf410d64a2291daa7665db98c85e090ccba4cae4580b5e253538fe",
+    "scripts/calibration-investigation.mjs": "f7d18fdf1614c97502f161260649ab5659cd098f4fe3ca7ef001b475b5a961a2",
+    "scripts/calibration-collection.mjs": "807a24184d6c28b5b36be31460ba71eda9fa542346d38cda3e3d9613089db75c",
+    "scripts/semantic-quality.mjs": "a073e7995e887621b38f355274fe1c86b4d60c9666dc5514468aebf95891f299",
+    "scripts/run-p2-embedding-gate.mjs": "1f165513ea6f13cd107705228873c446e3e45f855455f079ed00f75bc5bb8f37",
+    "androidApp/src/androidTest/kotlin/dev/edgecompanion/app/CalibrationCollectionTest.kt": "f2e3d56f82af934cf4b62455d1e006ddd33448cc087e29f5f66621b1427b57a6",
+    "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/ModelManager.kt": "2debfc3013abecf87cd9729a4f9cafe8e4f845c74b22187b55ac3332b78dad06",
+    "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/MemoryPolicy.kt": "a7e6f26248be395642808d8c54a82d3c528dd6bd185150c6647ffbf74a01c6e5",
+    "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/embedding/EncodingCall.kt": "0d9e630df292589d3faef9d5aeb8b77192c66af5ebbb40582409e4d947f39435",
+    "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/embedding/ForegroundEncoder.kt": "e95bff3fb5d471fc22944d20efdba06d445d8c8ed2c3870fbd4cad201470a503",
+    "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/embedding/EncoderAdmission.kt": "94d4a7ba7345e5c8991ff769cba1d703ccaa2a96f197d810e2b8600a994674b5",
+    "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/embedding/UseTokenizer.kt": "5ade61789b3766bb03329a8e2c37fc929e99284070a8cfe23bd9c46968be22d8",
+    "shared/src/androidMain/kotlin/dev/edgecompanion/core/inference/embedding/AndroidUseAdmission.kt": "87a2be582477d9eff4f3522b8f29e5fa6f37e5f1f4d08a0fbb587fee57af2f03",
+    "androidApp/src/secureQa/kotlin/dev/edgecompanion/app/prerequisites/AndroidForegroundEncoder.kt": "c9776a6a7d2632d033fbe303436ceb020fe24f6551053afced948215a062cf3a",
+    "androidApp/src/secureQa/kotlin/dev/edgecompanion/app/prerequisites/EmbeddingGateService.kt": "984782fe31f62894e8193195c49fbef82b48bd01dc5715af75b8bda60842ceff",
+    "androidApp/src/secureQa/kotlin/dev/edgecompanion/app/prerequisites/SdkPacketTransport.kt": "dedbb5ec79ae343d37a58032f02eeb05b90c1e5c65836929e38177889b369e9f",
+    "androidApp/src/androidTest/kotlin/dev/edgecompanion/app/support/DeviceSupervision.kt": "624a90c5e08c7d396639cb7c82bdf7e4edf743df6214cae59d9efde35f6fad62",
+    "scripts/qa-supervision.mjs": "ebafec1cd4b6de9b033050c57f5953b17c65b15727ef3c394a37e89b521e8145",
+    "scripts/monitor-model-thermal.mjs": "1ac73ad477de2f3574909b97635ab54f4ab7bf3e78e1933dd4af5cdf77bf019c"
+  },
+  "frozenBeforeScores": true,
+  "independentReviewRequired": true
+}

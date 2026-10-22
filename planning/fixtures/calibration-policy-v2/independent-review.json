@@ -1,0 +1,16 @@
+{
+  "schema": 2,
+  "protocolId": "calibration-policy-qualification-v2",
+  "lockSha256": "ed4712c0cb6261b83591f3e6678c71c1565a6270e1388dda529583218872d8d1",
+  "datasets": {
+    "calibration": "241af22ac34423e241133bae04773c8565d78f0f7a2245648e94382853765757",
+    "development": "0d171bafc54aaeead2c59e1e6dd187494a8994a55c86d60bf050856019b2698a",
+    "heldout": "599cad04ff2f444842def1c2d249e0f8d5188320e4897514072d8e96ba0c99a6"
+  },
+  "independent": true,
+  "reviewer": "separate-independent-qa-corpus-reapproval-reviewer-2026-10-22",
+  "judgmentsReviewed": true,
+  "separationReviewed": true,
+  "noScoresInspected": true,
+  "reviewedAtMs": 1792618667814
+}

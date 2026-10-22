@@ -1,0 +1,14 @@
+{
+  "schema": 2,
+  "status": "rejected-before-collection",
+  "reason": "dev020n1-qualitative-depth-ambiguity",
+  "lockSha256": "683c371622fa303de564448127341332a9be870fe99abd63ef6e50fe4e4a8140",
+  "files": {
+    "calibration.json": "241af22ac34423e241133bae04773c8565d78f0f7a2245648e94382853765757",
+    "development.json": "58ac01fc24908da5fbd02ad6e6b049b06cf96d7ea7ac120bc50811b1f97ef7fe",
+    "heldout.json": "599cad04ff2f444842def1c2d249e0f8d5188320e4897514072d8e96ba0c99a6",
+    "protocol.json": "537f34bcc80506bc68c150c1563689b51107e093e53f03a33658ccd06134b55a",
+    "lock.json": "683c371622fa303de564448127341332a9be870fe99abd63ef6e50fe4e4a8140",
+    "review.md": "bdf91fb64964b236648ddd140710e8eb1932f238ea59c0b062ba407028c81374"
+  }
+}

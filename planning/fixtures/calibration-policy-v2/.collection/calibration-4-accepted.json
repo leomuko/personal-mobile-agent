@@ -1,0 +1,8 @@
+{
+  "schema": 2,
+  "runId": "7a4a15ba-fd98-4685-82a4-f5576ed6af44",
+  "batchSha256": "d7a08bbbbe463e91e202a74481f71c7bb944c09a27ea4b1c36765ad1b3f47aad",
+  "attemptSha256": "dce37326767e1f0ade4b4055d9a0c93ec80cd2e433296469a5b1e9e8ba5074c8",
+  "attemptPath": "/Users/kezileo/Desktop/personal_mobile_agent/benchmarks/results/p2-calibration-gate-ELFT31/attempt.json",
+  "folder": "/Users/kezileo/Desktop/personal_mobile_agent/benchmarks/results/p2-calibration-gate-ELFT31"
+}
