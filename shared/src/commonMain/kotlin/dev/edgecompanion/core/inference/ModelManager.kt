@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import dev.edgecompanion.core.inference.embedding.*
+import dev.edgecompanion.core.inference.verification.*
 
 class ModelManager(
     val assets: ModelAssets,
@@ -35,6 +36,46 @@ class ModelManager(
     private val lifetimeEpoch = MutableStateFlow(0L)
 
     override fun generateChat(request: ChatRequest): Flow<ChatEvent> = chatFlow(request.copy(messages = request.messages.toList()))
+
+    /** Internal investigation only. No source writes, semantic acceptance or UI integration. */
+    fun verifyEvidence(id: String, payload: String, context: EvidenceContext, input: EncoderInput,
+        encoder: ForegroundEncoder, submittedAtMs: Long, capturedEpoch: Long, currentEpoch: () -> Long): VerificationCall =
+        verificationCall(id, payload, context, input, encoder, submittedAtMs, capturedEpoch, currentEpoch, VerificationPolicy.V3)
+
+    /** Opt-in V4 feasibility only. No production caller or implicit V3 deadline change. */
+    fun verifyEvidenceV4(id: String, payload: String, context: EvidenceContext, input: EncoderInput,
+        encoder: ForegroundEncoder, submittedAtMs: Long, capturedEpoch: Long, currentEpoch: () -> Long): VerificationCall =
+        verificationCall(id, payload, context, input, encoder, submittedAtMs, capturedEpoch, currentEpoch, VerificationPolicy.V4)
+
+    private fun verificationCall(id: String, payload: String, context: EvidenceContext, input: EncoderInput,
+        encoder: ForegroundEncoder, submittedAtMs: Long, capturedEpoch: Long, currentEpoch: () -> Long,
+        policy: VerificationPolicy): VerificationCall {
+        val request = ChatRequest(id, listOf(ChatMessage(ChatRole.USER, payload)))
+        val capturedLifetime = lifetimeEpoch.value
+        val verification = VerificationRun(context, nowMs, submittedAtMs, policy)
+        val prepared = ForegroundPreparation(id, input, encoder, capturedEpoch, currentEpoch, nowMs,
+            wholePipeline = true, onInvalidated = verification::invalidate,
+            enteredAtMs = submittedAtMs, deadlineMs = policy.deadlineMs) { lifetimeEpoch.value == capturedLifetime }
+        val consumed = MutableStateFlow(false)
+        val events = flow {
+            if (!consumed.compareAndSet(false, true)) {
+                emit(VerificationProgress(outcome = VerificationOutcome.REJECTED, cleanup = EncoderCleanup.CONFIRMED,
+                    error = ModelError.BUSY))
+                return@flow
+            }
+            chatFlow(request, prepared, verification).collect { event -> if (event is ChatEvent.Terminal) {
+                verification.terminal(event)
+                // Rejected admission/closed scope never allocated this request's resources.
+                if (verification.state.value.cleanup == EncoderCleanup.PENDING) verification.cleaned(true, 0)
+                verification.publish(prepared.eligibleForPublication())
+                emit(verification.state.value)
+            } }
+        }
+        return VerificationCall(events, verification.state, prepared.state) {
+            verification.cancel(); prepared.cancelByUser()
+            scope.launch { if (foreground === prepared) cancelActive(interrupted = false).join() }
+        }
+    }
 
     /** Internal prerequisite path only; the vector is not used as evidence or persisted. */
     fun prepareChat(request: ChatRequest, input: EncoderInput, encoder: ForegroundEncoder,
@@ -156,7 +197,8 @@ class ModelManager(
         }
     }
 
-    private fun chatFlow(request: ChatRequest, prepared: ForegroundPreparation? = null): Flow<ChatEvent> = channelFlow {
+    private fun chatFlow(request: ChatRequest, prepared: ForegroundPreparation? = null,
+        verification: VerificationRun? = null): Flow<ChatEvent> = channelFlow {
         val worker = scope.launch {
             if (prepared != null && !prepared.claim()) {
                 trySend(ChatEvent.Terminal(request.id, ChatOutcome.REJECTED, ModelError.BUSY))
@@ -232,7 +274,9 @@ class ModelManager(
                         is GenerationEvent.Token -> if (event.text.isNotEmpty()) {
                             if (!nonempty) recordMemory(MemoryStage.DECODING, request.backend)
                             nonempty = true
-                            trySend(ChatEvent.Text(request.id, event.text))
+                            prepared?.checkLive()
+                            if (verification == null) trySend(ChatEvent.Text(request.id, event.text))
+                            else verification.append(event.text)
                         }
                         is GenerationEvent.Finished -> {
                             completed = true
@@ -241,6 +285,12 @@ class ModelManager(
                         is GenerationEvent.Failed -> throw ModelException(event.error)
                         GenerationEvent.Cancelled -> throw CancellationException()
                     }
+                }
+                if (completed && nonempty && verification != null) {
+                    prepared?.checkLive()
+                    verification.validate(state.value.outputTokens)
+                    if (verification.state.value.outcome == VerificationOutcome.INVALID_OUTPUT)
+                        throw ModelException(ModelError.GENERATION_FAILED)
                 }
                 terminal = if (completed && nonempty) ChatEvent.Terminal(request.id, ChatOutcome.COMPLETED)
                     else ChatEvent.Terminal(request.id, ChatOutcome.FAILED, ModelError.GENERATION_FAILED)
@@ -267,15 +317,27 @@ class ModelManager(
                     mutable.update { it.copy(status = RuntimeStatus.FAILED, error = ModelError.RESTART_REQUIRED) }
                 }
                 monitor?.cancel()
-                foreground = null
-                chatId = null
-                generation = null
+                if (verification == null) {
+                    foreground = null
+                    chatId = null
+                    generation = null
+                }
                 if (state.value.error in resourceErrors && !cleanupOwnedEngine())
                     terminal = ChatEvent.Terminal(request.id, ChatOutcome.FAILED, ModelError.RESTART_REQUIRED)
                 mutable.update { if (it.status in setOf(RuntimeStatus.GENERATING, RuntimeStatus.CANCELLING, RuntimeStatus.LOADING))
                     it.copy(status = if (ownsEngine) RuntimeStatus.LOADED else RuntimeStatus.UNLOADED) else it }
                 if (state.value.status == RuntimeStatus.LOADED) withContext(NonCancellable) {
                     recordMemory(MemoryStage.LOADED_IDLE, state.value.backend)
+                }
+                if (verification != null) {
+                    verification.terminal(terminal)
+                    val cleanupStarted = nowMs()
+                    val clean = cleanupOwnedEngine() && prepared?.state?.value?.cleanup == EncoderCleanup.CONFIRMED
+                    verification.cleaned(clean, nowMs() - cleanupStarted)
+                    verification.publish(prepared?.eligibleForPublication() == true)
+                    foreground = null
+                    chatId = null
+                    generation = null
                 }
                 prepared?.finished(terminal.error)
                 operation.unlock()

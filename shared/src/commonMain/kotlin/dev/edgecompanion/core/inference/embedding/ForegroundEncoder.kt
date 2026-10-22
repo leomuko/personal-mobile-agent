@@ -40,9 +40,14 @@ class ForegroundCall internal constructor(val events: Flow<ChatEvent>, val prepa
 internal class ForegroundPreparation(
     id: String, private val input: EncoderInput, private val encoder: ForegroundEncoder,
     private val epoch: Long, private val currentEpoch: () -> Long, private val nowMs: () -> Long,
+    private val wholePipeline: Boolean = false,
+    private val onInvalidated: (ModelError) -> Unit = {},
+    enteredAtMs: Long = nowMs(),
+    private val deadlineMs: Long = DEADLINE_MS,
     private val lifetimeValid: () -> Boolean,
 ) {
-    private val entered = nowMs()
+    init { require(deadlineMs == DEADLINE_MS || (wholePipeline && deadlineMs == 30_000L)) }
+    private val entered = enteredAtMs
     private data class StopCause(val error: ModelError?, val user: Boolean = false)
     private val stopCause = MutableStateFlow<StopCause?>(null)
     private val lease = EncoderLease(id)
@@ -57,18 +62,25 @@ internal class ForegroundPreparation(
     fun cancelByUser() { stopCause.compareAndSet(null, StopCause(null, user = true)); signalNative() }
 
     fun invalidate(reason: ModelError? = null) {
-        if (stopCause.compareAndSet(null, StopCause(reason ?: ModelError.CONTEXT_INVALIDATED)) && reason != null)
-            mutable.update { it.copy(error = reason) }
+        val error = reason ?: ModelError.CONTEXT_INVALIDATED
+        if (stopCause.compareAndSet(null, StopCause(error))) {
+            onInvalidated(error)
+            if (reason != null) mutable.update { it.copy(error = reason) }
+        }
         signalNative()
     }
     private fun signalNative() {
         // Scope cancellation/reconciliation happens separately; the native signal is immediate.
         if (state.value.cleanup == EncoderCleanup.PENDING) try { encoder.cancel(lease) } catch (_: Exception) { }
     }
+    fun eligibleForPublication(): Boolean {
+        if (!lifetimeValid() || currentEpoch() != epoch) invalidate(ModelError.CONTEXT_INVALIDATED)
+        return stopCause.value == null
+    }
     fun checkLive() {
         if (!lifetimeValid() || currentEpoch() != epoch) invalidate(ModelError.CONTEXT_INVALIDATED)
         stopCause.value?.let { throw ModelException(it.error ?: ModelError.CONTEXT_INVALIDATED) }
-        if (!handoff && (nowMs() - entered < 0 || nowMs() - entered >= DEADLINE_MS)) {
+        if ((!handoff || wholePipeline) && (nowMs() - entered < 0 || nowMs() - entered >= deadlineMs)) {
             invalidate(ModelError.ENCODER_TIMEOUT)
             throw ModelException(ModelError.ENCODER_TIMEOUT)
         }
@@ -78,7 +90,7 @@ internal class ForegroundPreparation(
     suspend fun prepare(): List<Float> {
         checkLive()
         val vector = try {
-            withTimeout((DEADLINE_MS - (nowMs() - entered)).coerceAtLeast(1)) {
+            withTimeout((deadlineMs - (nowMs() - entered)).coerceAtLeast(1)) {
                 mutable.update { it.copy(stage = PreparationStage.COUNTING) }
                 val admitted = encoder.admit(input)
                 checkLive()

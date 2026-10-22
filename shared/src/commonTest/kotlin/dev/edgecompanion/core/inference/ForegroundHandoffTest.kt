@@ -1,6 +1,7 @@
 package dev.edgecompanion.core.inference
 
 import dev.edgecompanion.core.inference.embedding.*
+import dev.edgecompanion.core.inference.verification.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.test.*
@@ -53,17 +54,21 @@ class ForegroundHandoffTest {
         var cancels = 0
         var cancelGate: CompletableDeferred<Unit>? = null
         var generationGate: CompletableDeferred<Unit>? = null
+        var loadDelay = 0L
+        var releaseGate: CompletableDeferred<Unit>? = null
+        var releaseFails = false
+        var response = "Synthetic plain answer"
         override suspend fun load(config: ModelConfig): Result<Unit> {
             assertFalse(encoder.resident, "Native allocations overlapped")
             assertEquals(2048, config.contextTokens); assertEquals(512, config.maxOutputTokens)
-            loads++; log += "load"; return Result.success(Unit)
+            loads++; log += "load"; delay(loadDelay); return Result.success(Unit)
         }
         override fun generate(request: GenerationRequest) = flow {
-            log += "generate"; emit(GenerationEvent.Token("Synthetic plain answer"))
-            generationGate?.await(); emit(GenerationEvent.Finished())
+            log += "generate"; emit(GenerationEvent.Token(response))
+            generationGate?.await(); emit(GenerationEvent.Finished(tokens = 30))
         }
         override suspend fun cancel() { cancels++; cancelGate?.await() }
-        override suspend fun release() { log += "release" }
+        override suspend fun release() { log += "release"; releaseGate?.await(); if (releaseFails) throw ModelException(ModelError.RELEASE_FAILED) }
     }
     private class Assets : ModelAssets {
         override val state = MutableStateFlow(ModelAssetState(AssetStatus.INSTALLED))
@@ -81,10 +86,196 @@ class ForegroundHandoffTest {
             ChatRequest(id, listOf(ChatMessage(ChatRole.USER, "Answer this synthetic question."))),
             EncoderInput("Synthetic source input"), encoder, epoch) { epoch }
         fun encode(id: String = "synthetic-encode") = manager.encode(id, EncoderInput("Synthetic source input"), encoder, epoch) { epoch }
+        fun verify(submitted: Long = 0L, v4: Boolean = false) = (if (v4) manager::verifyEvidenceV4 else manager::verifyEvidence)("synthetic-verifier", "Bounded synthetic verification input",
+            EvidenceContext(listOf("a"), listOf(DeliveredPassage("p", "1", "Synthetic", 0, 9))),
+            EncoderInput("Synthetic source input"), encoder, submitted, epoch) { epoch }
     }
     private fun List<ChatEvent>.terminal(): ChatEvent.Terminal {
         assertEquals(1, count { it is ChatEvent.Terminal })
         return last() as ChatEvent.Terminal
+    }
+
+    @Test fun verificationValidatesBeforePublishingAndReleasesBothRuntimes() = runTest {
+        val f = Fixture(this); f.engine.response = "{\"o\":\"U\",\"d\":[{\"i\":\"a\",\"s\":\"U\",\"e\":[]}]}"
+        val call = f.verify()
+        val result = call.events.single()
+        assertEquals(VerificationOutcome.STRUCTURALLY_VALID, result.outcome)
+        assertEquals(VerificationDelivery.ELIGIBLE, result.delivery)
+        assertIs<OutputValidation.StructurallyValid>(result.validation)
+        assertEquals(EncoderCleanup.CONFIRMED, result.cleanup)
+        assertEquals(RuntimeStatus.UNLOADED, f.manager.state.value.status)
+        assertEquals(listOf("count", "encode", "cleanup", "load", "generate", "release"), f.log)
+        f.manager.shutdown()
+    }
+    @Test fun verifierTimeoutDuringNoncancellableLoadInvalidatesImmediatelyButHoldsCleanup() = runTest {
+        val f = Fixture(this); f.engine.loadDelay = 7_000
+        val call = f.verify(); val result = async { call.events.single() }; runCurrent()
+        advanceTimeBy(5_100); runCurrent()
+        assertEquals(VerificationOutcome.TIMED_OUT, call.state.value.outcome)
+        assertEquals(EncoderCleanup.PENDING, call.state.value.cleanup)
+        assertFalse(result.isCompleted)
+        assertEquals(ModelError.BUSY, f.call("competing").events.toList().terminal().error)
+        advanceTimeBy(2_000); runCurrent()
+        assertEquals(VerificationOutcome.TIMED_OUT, result.await().outcome)
+        assertEquals(EncoderCleanup.CONFIRMED, call.state.value.cleanup)
+        assertFalse("generate" in f.log); assertEquals(RuntimeStatus.UNLOADED, f.manager.state.value.status)
+        f.manager.shutdown()
+    }
+    @Test fun verifierTimeoutDuringDecodingSignalsCancelAndPreventsLatePublication() = runTest {
+        val f = Fixture(this); f.engine.generationGate = CompletableDeferred()
+        val call = f.verify(); val result = async { call.events.single() }; runCurrent()
+        advanceTimeBy(5_100); runCurrent()
+        assertEquals(VerificationOutcome.TIMED_OUT, result.await().outcome)
+        assertTrue(f.engine.cancels > 0); assertNull(call.state.value.validation)
+        assertEquals(EncoderCleanup.CONFIRMED, call.state.value.cleanup)
+        f.manager.shutdown()
+    }
+    @Test fun verifierCleanupUncertaintyCannotBecomeASuccessfulTimeoutOrAdmitRetry() = runTest {
+        val f = Fixture(this); f.engine.generationGate = CompletableDeferred(); f.engine.releaseFails = true
+        val call = f.verify(); val result = async { call.events.single() }; runCurrent()
+        advanceTimeBy(5_100); runCurrent()
+        val terminal = result.await()
+        assertEquals(VerificationOutcome.TIMED_OUT, terminal.outcome)
+        assertEquals(EncoderCleanup.UNCERTAIN, terminal.cleanup)
+        assertEquals(ModelError.RESTART_REQUIRED, terminal.error)
+        assertEquals(ModelError.RESTART_REQUIRED, f.call("retry").events.toList().terminal().error)
+        f.manager.shutdown()
+    }
+    @Test fun verifierDeadlineIncludesCallerPackingAndQueueingBeforeCollection() = runTest {
+        val f = Fixture(this); advanceTimeBy(5_001)
+        val call = f.verify(submitted = 0)
+        assertEquals(VerificationOutcome.TIMED_OUT, call.events.single().outcome)
+        assertEquals(0, f.encoder.encodes); assertEquals(0, f.engine.loads)
+        f.manager.shutdown()
+    }
+    @Test fun invalidVerifierOutputIsNeverPresentedAsASuccessfulAnswer() = runTest {
+        val f = Fixture(this)
+        val call = f.verify()
+        assertEquals(VerificationOutcome.INVALID_OUTPUT, call.events.single().outcome)
+        assertIs<OutputValidation.Rejected>(call.state.value.validation)
+        assertEquals(EncoderCleanup.CONFIRMED, call.state.value.cleanup)
+        f.manager.shutdown()
+    }
+    @Test fun verifierDuplicateCollectorsAndPanelCancelCannotChangeFirstOwner() = runTest {
+        val f = Fixture(this); f.encoder.encodeGate = CompletableDeferred()
+        val call = f.verify(); val result = async { call.events.single() }; runCurrent()
+        assertEquals(VerificationOutcome.REJECTED, call.events.single().outcome)
+        assertNull(call.state.value.outcome)
+        f.manager.cancel().join(); f.manager.release().join(); f.manager.load(ModelBackend.GPU).join()
+        assertEquals(ModelError.BUSY, f.manager.state.value.commandError)
+        assertEquals(0, f.encoder.cancels)
+        call.cancel(); runCurrent()
+        assertEquals(VerificationOutcome.CANCELLED, result.await().outcome)
+        assertEquals(EncoderCleanup.CONFIRMED, call.state.value.cleanup)
+        f.manager.shutdown()
+    }
+    @Test fun verifierContextMutationAndHostLossInvalidateBeforeGemma() = runTest {
+        val f = Fixture(this); f.encoder.countGate = CompletableDeferred()
+        val call = f.verify(); val result = async { call.events.single() }; runCurrent(); f.epoch++
+        advanceTimeBy(100); runCurrent()
+        assertEquals(VerificationOutcome.INTERRUPTED, result.await().outcome)
+        assertEquals(0, f.engine.loads)
+        val queued = f.verify(); f.manager.releaseForHostLoss().join()
+        assertEquals(VerificationOutcome.INTERRUPTED, queued.events.single().outcome)
+        assertEquals(0, f.engine.loads)
+        f.manager.shutdown()
+    }
+    private suspend fun TestScope.verifyCleanupRevocation(mode: String) {
+        val f = Fixture(this)
+        f.engine.response = "{\"o\":\"U\",\"d\":[{\"i\":\"a\",\"s\":\"U\",\"e\":[]}]}"
+        f.engine.releaseGate = CompletableDeferred()
+        val call = f.verify(); val results = async { call.events.toList() }; runCurrent()
+        assertEquals(VerificationOutcome.STRUCTURALLY_VALID, call.state.value.outcome)
+        assertEquals(VerificationDelivery.PENDING, call.state.value.delivery)
+        assertNull(call.state.value.validation); assertFalse(results.isCompleted)
+        val hostLoss = when (mode) {
+            "stop" -> { call.cancel(); null }
+            "epoch" -> { f.epoch++; null }
+            else -> f.manager.releaseForHostLoss()
+        }
+        runCurrent()
+        assertEquals(ModelError.BUSY, f.call("competing").events.toList().terminal().error)
+        f.engine.releaseGate!!.complete(Unit); runCurrent(); hostLoss?.join()
+        val values = results.await(); assertEquals(1, values.size)
+        assertEquals(VerificationOutcome.STRUCTURALLY_VALID, values.single().outcome)
+        assertEquals(VerificationDelivery.REVOKED, values.single().delivery)
+        assertNull(values.single().validation)
+        assertEquals(EncoderCleanup.CONFIRMED, values.single().cleanup)
+        f.manager.shutdown()
+    }
+    @Test fun verifierStopDuringCleanupRevokesDeliveryWithoutReplacingDecision() = runTest { verifyCleanupRevocation("stop") }
+    @Test fun verifierEpochChangeDuringCleanupRevokesDeliveryWithoutReplacingDecision() = runTest { verifyCleanupRevocation("epoch") }
+    @Test fun verifierHostLossDuringCleanupRevokesDeliveryWithoutReplacingDecision() = runTest { verifyCleanupRevocation("host") }
+
+    @Test fun v4AllowsSlowLoadWithoutChangingFiveSecondSearchOrV3() = runTest {
+        val f = Fixture(this); f.engine.loadDelay = 6_000
+        f.engine.response = "{\"o\":\"U\",\"d\":[{\"i\":\"a\",\"s\":\"U\",\"e\":[]}]}"
+        val result = f.verify(v4 = true).events.single()
+        assertEquals(VerificationOutcome.STRUCTURALLY_VALID, result.outcome)
+        assertEquals(VerificationDelivery.ELIGIBLE, result.delivery)
+        assertEquals(f.engine.response, result.diagnosticOutput)
+        f.encoder.countDelay = 5_001
+        assertEquals(ChatOutcome.TIMED_OUT, f.call().events.toList().terminal().outcome)
+        f.encoder.countDelay = 0
+        assertEquals(VerificationOutcome.TIMED_OUT, f.verify(testScheduler.currentTime).events.single().outcome)
+        f.manager.shutdown()
+    }
+    @Test fun v4DeadlineAtExactBoundaryIncludesQueueTimeAndAllocatesNothing() = runTest {
+        val f = Fixture(this); advanceTimeBy(30_000)
+        assertEquals(VerificationOutcome.TIMED_OUT, f.verify(0, true).events.single().outcome)
+        assertEquals(0, f.encoder.encodes); assertEquals(0, f.engine.loads)
+        f.manager.shutdown()
+    }
+    @Test fun v4TimeoutDuringLoadKeepsOwnershipUntilCleanupAndBlocksPanel() = runTest {
+        val f = Fixture(this); f.engine.loadDelay = 32_000
+        val call = f.verify(v4 = true); val result = async { call.events.single() }; runCurrent()
+        advanceTimeBy(30_000); runCurrent()
+        assertEquals(VerificationOutcome.TIMED_OUT, call.state.value.outcome)
+        assertFalse(result.isCompleted)
+        assertEquals(ModelError.BUSY, f.call().events.toList().terminal().error)
+        f.manager.cancel().join(); f.manager.load(ModelBackend.CPU).join()
+        assertEquals(ModelError.BUSY, f.manager.state.value.commandError)
+        advanceTimeBy(2_001); runCurrent()
+        assertEquals(VerificationOutcome.TIMED_OUT, result.await().outcome)
+        assertEquals(EncoderCleanup.CONFIRMED, call.state.value.cleanup)
+        assertFalse("generate" in f.log)
+        f.manager.shutdown()
+    }
+    @Test fun v4TimelyValidationCannotPublishAfterCleanupCeiling() = runTest {
+        val f = Fixture(this)
+        f.engine.loadDelay = 26_000
+        f.engine.response = "{\"o\":\"U\",\"d\":[{\"i\":\"a\",\"s\":\"U\",\"e\":[]}]}"
+        f.engine.releaseGate = CompletableDeferred()
+        val call = f.verify(v4 = true); val result = async { call.events.single() }; runCurrent()
+        advanceTimeBy(26_000); runCurrent()
+        assertEquals(VerificationOutcome.STRUCTURALLY_VALID, call.state.value.outcome)
+        advanceTimeBy(4_000); f.engine.releaseGate!!.complete(Unit); runCurrent()
+        assertEquals(VerificationOutcome.STRUCTURALLY_VALID, result.await().outcome)
+        assertEquals(VerificationDelivery.REVOKED, call.state.value.delivery)
+        assertEquals(ModelError.ENCODER_TIMEOUT, call.state.value.error)
+        assertNull(call.state.value.validation)
+        f.manager.shutdown()
+    }
+    @Test fun v4StopContextLossAndUncertainCleanupNeverPublishOrAdmitReplacement() = runTest {
+        for (mode in listOf("stop", "epoch", "host", "uncertain")) {
+            val f = Fixture(this); f.encoder.encodeGate = CompletableDeferred()
+            val call = f.verify(testScheduler.currentTime, true)
+            val result = async { call.events.single() }; runCurrent()
+            val host = when (mode) {
+                "stop" -> { call.cancel(); null }
+                "epoch" -> { f.epoch++; null }
+                "uncertain" -> { f.encoder.clean = false; call.cancel(); null }
+                else -> f.manager.releaseForHostLoss()
+            }
+            advanceTimeBy(101); runCurrent(); host?.join()
+            assertEquals(VerificationDelivery.REVOKED, result.await().delivery)
+            assertEquals(0, f.engine.loads)
+            if (mode == "uncertain") {
+                assertEquals(EncoderCleanup.UNCERTAIN, call.preparation.value.cleanup)
+                assertEquals(ModelError.RESTART_REQUIRED, f.call().events.toList().terminal().error)
+            }
+            f.manager.shutdown()
+        }
     }
 
     @Test fun encoderOnlyReleasesResidentGemmaAndReturnsTransientCopyWithoutGeneration() = runTest {
