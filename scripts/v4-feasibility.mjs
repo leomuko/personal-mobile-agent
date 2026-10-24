@@ -26,26 +26,32 @@ export function loadV4Plan(base = '.') {
 }
 
 export function classifyV4(evidence, expected) {
+  return classifySerialVerification(evidence, expected, { schema: 4, protocolId: V4_ID, requests: 8,
+    sourceFreeze: V3_FREEZE, requestPrefix: 'v4', coldAdmissionCount: 4 });
+}
+
+/** Shared lifecycle/telemetry checks; protocol entry points supply fixed contracts, never input-selected limits. */
+export function classifySerialVerification(evidence, expected, contract) {
   requireV4(expected.plan.policyId === expected.policyId &&
     expected.plan.androidPressure === (expected.policyId === 'memory-android-pressure-test-v1'), 'V4 profile/plan mismatch');
   const integer = x => Number.isSafeInteger(x) && x >= 0;
-  requireV4(evidence?.schema === 4 && evidence.protocolId === V4_ID && evidence.runId === expected.runId &&
+  requireV4(evidence?.schema === contract.schema && evidence.protocolId === contract.protocolId && evidence.runId === expected.runId &&
     evidence.planSha256 === expected.planSha256 && evidence.executionFreezeSha256 === expected.freezeSha256 &&
-    evidence.freezeSha256 === V3_FREEZE && evidence.policyId === expected.policyId &&
+    evidence.freezeSha256 === contract.sourceFreeze && evidence.policyId === expected.policyId &&
     evidence.semanticEnablement === false && evidence.largeCampaignAllowed === false &&
     evidence.finalCleanup === 'CONFIRMED' && integer(evidence.startedAtMs) && evidence.startedAtMs >= expected.startedAtMs &&
     integer(evidence.finishedAtMs) && evidence.finishedAtMs >= evidence.startedAtMs &&
     integer(evidence.startedAtMonotonicMs) && integer(evidence.finishedAtMonotonicMs) &&
     evidence.finishedAtMonotonicMs >= evidence.startedAtMonotonicMs &&
-    Array.isArray(evidence.cases) && evidence.cases.length >= 1 && evidence.cases.length <= 8,
+    Array.isArray(evidence.cases) && evidence.cases.length >= 1 && evidence.cases.length <= contract.requests,
   'Uncorrelated/incomplete V4 evidence');
   const workers = new Set(), requests = new Set(); let blocked = false;
   for (const [i, c] of evidence.cases.entries()) {
     const entry = expected.plan.entries[i];
     requireV4(c.id === entry.id && c.state === entry.state && c.packSha256 === entry.packSha256 &&
-      c.requestId === `${expected.runId}-v4-${i}` && !requests.has(c.requestId) &&
+      c.requestId === `${expected.runId}-${contract.requestPrefix}-${i}` && !requests.has(c.requestId) &&
       c.backend === 'GPU' && c.gemmaInitialState === 'UNLOADED' && c.nativeEncoderInitialState === 'no-resident-worker' &&
-      c.tokenizerInitialState === (i < 4 ? 'cold' : 'cached-admission') &&
+      c.tokenizerInitialState === (i < contract.coldAdmissionCount ? 'cold' : 'cached-admission') &&
       integer(c.startedAtMonotonicMs) && integer(c.finishedAtMonotonicMs) &&
       c.finishedAtMonotonicMs >= c.startedAtMonotonicMs && c.wallMs === c.finishedAtMonotonicMs - c.startedAtMonotonicMs &&
       c.startedAtMonotonicMs >= evidence.startedAtMonotonicMs && c.finishedAtMonotonicMs <= evidence.finishedAtMonotonicMs &&
@@ -103,7 +109,7 @@ export function classifyV4(evidence, expected) {
       blocked = true;
     }
   }
-  requireV4(blocked || evidence.cases.length === 8, 'V4 missing planned requests');
+  requireV4(blocked || evidence.cases.length === contract.requests, 'V4 missing planned requests');
   return { status: blocked ? 'blocked' : 'passed', completedRequests: evidence.cases.length,
-    notRunRequests: 8 - evidence.cases.length, largeCampaignAllowed: false, semanticEnablement: false };
+    notRunRequests: contract.requests - evidence.cases.length, largeCampaignAllowed: false, semanticEnablement: false };
 }
