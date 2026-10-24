@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "protocolId": "evidence-output-adherence-v1-draft-1",
+  "verdict": "PASS",
+  "scope": "output-adherence-corpus-and-exact-packs",
+  "preparationLockSha256": "88a985300cd4cc0c100f6541214328e68759558393fa25b86f8fea8a13b888a2",
+  "preparedSha256": "ca7f71bed8a91c3c3a05f369f7ef1b9e085c3dac97c906bc9f624fc65766e068",
+  "files": {
+    "planning/P2_OUTPUT_ADHERENCE_PROTOCOL_V1.md": "09e1e633cccbb5696316f297f16e2aa7fbed99493ed372c0ab700e678ed8b209",
+    "planning/fixtures/output-adherence-v1/controls.json": "354888bdeffe6182a5be9c970e54ef57d096b9a7e82f1e67b287b8031cdbff2d",
+    "planning/fixtures/output-adherence-v1/verifier-instructions.txt": "7591a7c37a749173de7f013c028e29248996c39559b41e355e71c53b464bd8e6",
+    "scripts/output-adherence-preparation.mjs": "da98c2890be2d4b58054c5e369a85ac7a7d99e96eded2ed47cd7fdd6f2cf92d0",
+    "scripts/tests/output-adherence-preparation.test.mjs": "8c71c1de55a35b4e1446d376907276b250d84098d6e9cc6f4634996add519af7",
+    "shared/src/jvmTest/kotlin/dev/edgecompanion/core/inference/verification/OutputAdherenceFixtureTest.kt": "b8d82e107907fa06602f41779664c26633c10e74411cb16529db784eee1d2e9a",
+    "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/verification/EvidenceOutputValidator.kt": "10be77c8586f0ee9931c9c33b965acd3608fe379010afde75e27b1dfd5526000",
+    "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/ChatGeneration.kt": "237462c8f2886f2ead714097f0562455fb244ff89d6af30d845acfc60172b774",
+    "planning/fixtures/evidence-sufficiency-v3/protocol.json": "b15e10a1981b15df3dde0b01a8d453c2935905e5bee7189b965960896e1ac4ad",
+    "planning/fixtures/evidence-sufficiency-v3/freeze.json": "eef782b3c37ac39f21871712553e366cd5fe8a40a76ded585955bb5a38db8db9",
+    "gradle/libs.versions.toml": "335334a90cd3e2e02d7b4a3b97912e5b8d116df2107aa43e1a047f5399d5b8ce",
+    "planning/fixtures/output-adherence-v1/prepared.json": "ca7f71bed8a91c3c3a05f369f7ef1b9e085c3dac97c906bc9f624fc65766e068",
+    "planning/fixtures/output-adherence-v1/validator-cases.tsv": "bfab256a64bf3ef83470ea107d45cb4bc4b1b3c4547c7fb0c559c622eb0baafc",
+    "planning/fixtures/output-adherence-v1/validator-cases.sha256": "27b75840367e64300678e10082e0f33f26dd6ce6c62101becde7b9104ce598ad"
+  },
+  "controls": ["oa01", "oa02", "oa03", "oa04", "oa05", "oa06"],
+  "reviewer": "OpenAI Codex, separately authorized independent corpus/pack QA reviewer in this review session; no delegation",
+  "reviewedOn": "2026-10-24",
+  "nativeIntegrationAuthorized": false,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false
+}

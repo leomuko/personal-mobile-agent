@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "protocolId": "evidence-output-adherence-v1-draft-1",
+  "approvedBy": "user",
+  "approvedOn": "2026-10-24",
+  "source": "Explicit project-chat answers: Approve this integration scope; Use a separate QA agent.",
+  "preparationLockSha256": "88a985300cd4cc0c100f6541214328e68759558393fa25b86f8fea8a13b888a2",
+  "protocolSha256": "09e1e633cccbb5696316f297f16e2aa7fbed99493ed372c0ab700e678ed8b209",
+  "requests": 6,
+  "deadlineMs": 30000,
+  "cleanupWithinDeadline": true,
+  "profileId": "memory-android-pressure-test-v1",
+  "integrationApproved": true,
+  "hostQaApproved": true,
+  "corpusAttestationRequired": true,
+  "implementationReviewRequired": true,
+  "executionFreezeRequired": true,
+  "separateDeviceAuthorizationRequired": true,
+  "deviceExecutionAuthorized": false,
+  "productionLatencyTarget": false,
+  "semanticEnablement": false
+}
