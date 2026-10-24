@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "protocolId": "evidence-output-adherence-v1-draft-1",
+  "verdict": "PASS",
+  "scope": "output-adherence-execution-freeze-correspondence",
+  "reviewer": "OpenAI Codex, retained user-authorized primary independent QA reviewer; no delegation",
+  "reviewedOn": "2026-10-24",
+  "freezePath": "benchmarks/results/p2-output-adherence-execution-freeze-20261024-1/execution-freeze.json",
+  "freezeSha256": "e90c8492826ed045d5c902cc4755d2c718d7d3e94022bca97ca316f176e1b747",
+  "snapshotSha256": "4672d0caf4206a026dbcea7f9f6f71c30fef49df29234a1bd59194cc497486d5",
+  "profileSha256": "83c6e3f2ac535be423bfd0e359546098c51743be3bbf52353ca065d87ff85113",
+  "implementationReviewSha256": "b33194c7382925643b275ef833734a44edf6837f98164352463fdf35f1988c87",
+  "planSha256": "e47385ee9c4a8b6d602656e33d40299393ef7fc1d22b216c88afad15e8f406e8",
+  "oraclesSha256": "4de0eb0ef2c0af2de99128ede3edf8e2a527e6dcaebbee1226f5ff3042393591",
+  "preparationLockSha256": "88a985300cd4cc0c100f6541214328e68759558393fa25b86f8fea8a13b888a2",
+  "findings": [],
+  "sourceFilesVerified": 309,
+  "frozenFilesVerified": 311,
+  "apks": {
+    "androidApp/build/outputs/apk/secureQa/androidApp-secureQa.apk": "5a1003525e9856e7853aa36c6b4c5ef88ff1c4f2633d757bb152e14999ee628a",
+    "androidApp/build/outputs/apk/androidTest/secureQa/androidApp-secureQa-androidTest.apk": "edf219a2fe5cf2f7c5fd8567ad76807606fc226cb8c74a8e95217de412dbdd83"
+  },
+  "buildEvidence": {
+    "appPackage": "dev.edgecompanion.app.secureqa",
+    "testPackage": "dev.edgecompanion.app.secureqa.test",
+    "instrumentationRunner": "androidx.test.runner.AndroidJUnitRunner",
+    "instrumentationTarget": "dev.edgecompanion.app.secureqa",
+    "variant": "secureQa",
+    "testBuildType": "secureQa",
+    "debug": true,
+    "secureWindows": true,
+    "androidPressureMemoryTest": true,
+    "outputAdherenceEntrypointPresent": true,
+    "compiledHarnessIdentityAndScopeMatch": true,
+    "signaturesVerified": true,
+    "signingCertificateSha256": "141f567bca4935a9e5b80196dcac6d7fcf5515d5cc79622d903c415fdae003c2"
+  },
+  "experiment": {
+    "controls": ["oa01", "oa02", "oa03", "oa04", "oa05", "oa06"],
+    "requests": 6,
+    "deadlineMs": 30000,
+    "cleanupWithinDeadline": true,
+    "profileId": "memory-android-pressure-test-v1",
+    "contextTokens": 2048,
+    "outputTokens": 512,
+    "encoderTokenLimit": 192,
+    "stopAtFirstBlock": true,
+    "largeCampaignAllowed": false
+  },
+  "privateCopyPreparation": {
+    "status": "PASSED",
+    "directoryMode": "0700",
+    "fileMode": "0400",
+    "copies": 2,
+    "hashesMatchFrozenApks": true,
+    "recordingOnlyInstallCallbacks": 2,
+    "privateCopiesRemoved": true,
+    "actualInstallCalls": 0,
+    "adbCalls": 0,
+    "attemptLedgerReserved": false
+  },
+  "verification": [
+    {
+      "check": "Actual freeze, implementation-review binding, source snapshot, all frozen/current files, plan/oracle/profile and exact scope",
+      "status": "PASSED"
+    },
+    {
+      "check": "Static frozen APK manifests, BuildConfig flags, targeted OA harness bytecode and signature verification",
+      "status": "PASSED"
+    },
+    {
+      "check": "Private-copy preparation with recording-only install callbacks, cleanup and missing authorization rejection",
+      "status": "PASSED"
+    },
+    {
+      "check": "node scripts/output-adherence-preparation.mjs check",
+      "status": "PASSED",
+      "exitCode": 0,
+      "boundFiles": 14
+    },
+    {
+      "check": "Original reviews/locks and historical V4 raw-output/freeze preservation plus V1/V2 preservation map",
+      "status": "PASSED",
+      "historicalFrozenSources": 288,
+      "historicalFrozenApks": 2,
+      "preservedV1V2Files": 289
+    }
+  ],
+  "limitations": [
+    "Artifact identity and packaged-build correspondence only; no broad code review, fresh build or reproducible-build proof.",
+    "No ADB, device readiness verification, native model execution, SDK native counting, actual installation or device permission was performed or granted."
+  ],
+  "report": "docs/P2_OUTPUT_ADHERENCE_EXECUTION_FREEZE_REVIEW.md",
+  "separateFreezeBoundDeviceAuthorizationRequired": true,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false
+}
