@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "protocolId": "evidence-output-adherence-v1-draft-1",
+  "verdict": "PASS",
+  "scope": "output-adherence-native-integration-and-host-qa",
+  "snapshotSha256": "4672d0caf4206a026dbcea7f9f6f71c30fef49df29234a1bd59194cc497486d5",
+  "snapshotFileCount": 309,
+  "reviewer": "OpenAI Codex, user-authorized primary independent QA reviewer; same reviewer as the corpus and initial implementation reviews; no delegation",
+  "reviewedOn": "2026-10-24",
+  "branch": "dev",
+  "sourceHead": "57ebf3653578c48cc5670b9c95f8f11b7594b2aa",
+  "findings": [],
+  "resolvedFindings": [
+    {
+      "priority": "P2",
+      "title": "Require runtime eligibility before accepting final delivery",
+      "status": "RESOLVED",
+      "file": "scripts/output-adherence-evidence.mjs",
+      "evidence": "Original REVOKED/PENDING promotion probes now reject; delivery-only, gate-only and both-claim combinations reject; legitimate runtime ELIGIBLE to final REVOKED stays blocked with latched outcome and evidence unchanged."
+    }
+  ],
+  "previousReview": {
+    "path": "docs/P2_OUTPUT_ADHERENCE_IMPLEMENTATION_REVIEW.md",
+    "verdict": "FAIL",
+    "snapshotSha256": "c1204345a41b0e2af30f4ec20a0de395d8203979484bb26ac2095faef6e366b7",
+    "reportSha256": "708bceabd0537e1493d4f3bb3174c0e0002f730c9941ff45bdda7583afabce31",
+    "preservedUnchanged": true
+  },
+  "changedSnapshotFiles": {
+    "scripts/output-adherence-evidence.mjs": "ed5ce3268a14c33eeee2f44176d53b7ba65f28a9831ace456223bfe56dc2ee33",
+    "scripts/tests/output-adherence-evidence.test.mjs": "95445ed0c736c942e1bb4b23798551cbf1e92e6c757292e99d9885a9ab0c7fd3"
+  },
+  "preparationLockSha256": "88a985300cd4cc0c100f6541214328e68759558393fa25b86f8fea8a13b888a2",
+  "verification": [
+    {
+      "command": "node --test scripts/tests/output-adherence-evidence.test.mjs scripts/tests/output-adherence-freeze.test.mjs scripts/tests/output-adherence-gates.test.mjs",
+      "status": "PASSED",
+      "exitCode": 0,
+      "tests": 16,
+      "failures": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    {
+      "command": "node scripts/host-test-suite.mjs",
+      "status": "PASSED",
+      "exitCode": 0,
+      "tests": 115,
+      "failures": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    {
+      "command": "Independent in-memory original failure probes, six-case delivery/gate matrix, last-case probes and legitimate revocation check",
+      "status": "PASSED",
+      "exitCode": 0,
+      "evidencePreserved": true,
+      "healthyBaselinePasses": true,
+      "legitimateRevocationBlocks": true
+    },
+    {
+      "command": "node scripts/output-adherence-preparation.mjs check",
+      "status": "PASSED",
+      "exitCode": 0,
+      "controls": 6,
+      "boundFiles": 14
+    },
+    {
+      "command": "git diff --check",
+      "status": "PASSED",
+      "exitCode": 0
+    },
+    {
+      "command": "SHA-256(JSON.stringify(adherenceSnapshot('.'))) and prior snapshot/report comparison",
+      "status": "PASSED",
+      "snapshotFiles": 309,
+      "changedFiles": 2,
+      "addedFiles": 0,
+      "removedFiles": 0,
+      "originalFailReportUnchanged": true
+    }
+  ],
+  "limitations": [
+    "Focused re-review of the classifier correction and regressions against the previously reviewed unchanged native integration.",
+    "Earlier Gradle, host JVM, lint and instrumentation compilation evidence is retained in the original report; those checks were not rerun or represented as fresh in this follow-up.",
+    "APK assembly, frozen APK/source/plan/oracle/profile correspondence, ADB and native/device execution were not performed by this reviewer."
+  ],
+  "report": "docs/P2_OUTPUT_ADHERENCE_IMPLEMENTATION_FOLLOWUP.md",
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false
+}
