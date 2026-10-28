@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "protocolId": "grammar-progress-host-v1",
+  "candidate": {
+    "x-guidance": {
+      "whitespace_flexible": false
+    }
+  },
+  "nativeModelExecution": false,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false,
+  "contextTokens": 2048,
+  "reservedOutputTokens": 512,
+  "eos": 1,
+  "vocabulary": "raw-faithful; decoded-comparison-only",
+  "dependencySource": "same pinned six patches and Cargo.lock",
+  "numericBoundaryWatch": [
+    107,
+    108,
+    236771,
+    236770,
+    236743,
+    1
+  ],
+  "newlineCheckpoints": [
+    0,
+    1,
+    2,
+    16,
+    187,
+    228
+  ],
+  "malformedOptionChecks": [
+    {
+      "id": "unsupported-key",
+      "value": {
+        "unsupported_key": true
+      },
+      "errorContains": "unknown field"
+    },
+    {
+      "id": "wrong-boolean-type",
+      "value": {
+        "whitespace_flexible": "false"
+      },
+      "errorContains": "invalid type"
+    },
+    {
+      "id": "invalid-option-type",
+      "value": 17,
+      "errorContains": "invalid type"
+    }
+  ],
+  "acceptance": "newline/double-newline/space forbidden, zero allowed and consumable, wrong digit/EOS forbidden at tested compact numeric boundary; valid witnesses complete; strict validator unchanged",
+  "historicalStrictValidatorSha256": "10be77c8586f0ee9931c9c33b965acd3608fe379010afde75e27b1dfd5526000"
+}

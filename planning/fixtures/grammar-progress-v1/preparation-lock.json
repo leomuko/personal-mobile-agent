@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "protocolId": "grammar-progress-host-v1",
+  "files": {
+    "compact-prefix.txt": "83c529ea2b2087a42b77b2150671d303101307fbfa08a937c8428cd60f48cb5f",
+    "evidence-output.no-whitespace.schema.json": "9a67c6a8e9a57e64f92772d0e735d29eb70147a5193d6d2077e8d3ad53814373",
+    "keyword-sentinel.no-whitespace.schema.json": "195b5bff023f8872a55224630685c91da947a3d6a8d788fa5c02dd5bbef4ce2f",
+    "protocol.json": "e275160603849861da73032f24fe28d9e322c47ce33d088712cd8e16bb56416f",
+    "witnesses.json": "4092c4404e5377347b0ec6c9f772017100187e61168b0f04a3ee59aa4fcda8fa"
+  },
+  "baselineSchemas": {
+    "keyword-sentinel.schema.json": "e10adc86c84b6615df190205cf94b1baae0c0d1ef228dda2b5c5fe999ca5be53",
+    "evidence-output.schema.json": "36232d7c46e2343ad0a5b40c6328e1ff3ff10b6ef76d457a93b245052390e691"
+  },
+  "observedPrefixSha256": "7ab3c6996fb13937b14cb259151970aac90d1da16dda7b1a9b0aed4b026d9498"
+}

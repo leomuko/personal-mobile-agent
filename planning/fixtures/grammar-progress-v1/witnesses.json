@@ -1,0 +1,293 @@
+{
+  "schema": 1,
+  "scope": "synthetic structural witnesses, not model outputs or semantic judgments",
+  "witnesses": [
+    {
+      "id": "supported",
+      "output": "{\"o\":\"S\",\"d\":[{\"i\":\"a\",\"s\":\"S\",\"e\":[{\"p\":\"sentinel-p\",\"r\":\"1\",\"b\":0,\"e\":1,\"q\":\"X\"}]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "sentinel-p",
+            "r": "1",
+            "original": "X",
+            "b": 0,
+            "e": 1
+          }
+        ]
+      },
+      "strictAccepted": true,
+      "outputTokens": 42
+    },
+    {
+      "id": "conflicting",
+      "output": "{\"o\":\"C\",\"d\":[{\"i\":\"a\",\"s\":\"C\",\"e\":[{\"p\":\"left\",\"r\":\"1\",\"b\":0,\"e\":4,\"q\":\"1 mm\"},{\"p\":\"right\",\"r\":\"1\",\"b\":0,\"e\":4,\"q\":\"2 mm\"}]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "left",
+            "r": "1",
+            "original": "1 mm",
+            "b": 0,
+            "e": 4
+          },
+          {
+            "p": "right",
+            "r": "1",
+            "original": "2 mm",
+            "b": 0,
+            "e": 4
+          }
+        ]
+      },
+      "strictAccepted": true,
+      "outputTokens": 61
+    },
+    {
+      "id": "missing-detail",
+      "output": "{\"o\":\"M\",\"d\":[{\"i\":\"a\",\"s\":\"M\",\"e\":[]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "sentinel-p",
+            "r": "1",
+            "original": "X",
+            "b": 0,
+            "e": 1
+          }
+        ]
+      },
+      "strictAccepted": true,
+      "outputTokens": 19
+    },
+    {
+      "id": "unrelated",
+      "output": "{\"o\":\"U\",\"d\":[{\"i\":\"a\",\"s\":\"U\",\"e\":[]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "sentinel-p",
+            "r": "1",
+            "original": "X",
+            "b": 0,
+            "e": 1
+          }
+        ]
+      },
+      "strictAccepted": true,
+      "outputTokens": 19
+    },
+    {
+      "id": "space-in-quotation",
+      "output": "{\"o\":\"S\",\"d\":[{\"i\":\"a\",\"s\":\"S\",\"e\":[{\"p\":\"quote-p\",\"r\":\"1\",\"b\":0,\"e\":13,\"q\":\"  two words  \"}]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "quote-p",
+            "r": "1",
+            "original": "  two words  ",
+            "b": 0,
+            "e": 13
+          }
+        ]
+      },
+      "strictAccepted": true,
+      "outputTokens": 45
+    },
+    {
+      "id": "escaped-quotation",
+      "output": "{\"o\":\"S\",\"d\":[{\"i\":\"a\",\"s\":\"S\",\"e\":[{\"p\":\"quote-p\",\"r\":\"1\",\"b\":0,\"e\":35,\"q\":\"quote \\\" and slash / and backslash \\\\\"}]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "quote-p",
+            "r": "1",
+            "original": "quote \" and slash / and backslash \\",
+            "b": 0,
+            "e": 35
+          }
+        ]
+      },
+      "strictAccepted": true,
+      "outputTokens": 50
+    },
+    {
+      "id": "escaped-controls",
+      "output": "{\"o\":\"S\",\"d\":[{\"i\":\"a\",\"s\":\"S\",\"e\":[{\"p\":\"quote-p\",\"r\":\"1\",\"b\":0,\"e\":21,\"q\":\"tab\\t newline\\n return\\r\"}]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "quote-p",
+            "r": "1",
+            "original": "tab\t newline\n return\r",
+            "b": 0,
+            "e": 21
+          }
+        ]
+      },
+      "strictAccepted": true,
+      "outputTokens": 50
+    },
+    {
+      "id": "unicode-literal",
+      "output": "{\"o\":\"S\",\"d\":[{\"i\":\"a\",\"s\":\"S\",\"e\":[{\"p\":\"quote-p\",\"r\":\"1\",\"b\":0,\"e\":6,\"q\":\"青🙂 é\"}]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "quote-p",
+            "r": "1",
+            "original": "青🙂 é",
+            "b": 0,
+            "e": 6
+          }
+        ]
+      },
+      "strictAccepted": true,
+      "outputTokens": 44
+    },
+    {
+      "id": "unicode-escaped",
+      "output": "{\"o\":\"S\",\"d\":[{\"i\":\"a\",\"s\":\"S\",\"e\":[{\"p\":\"quote-p\",\"r\":\"1\",\"b\":0,\"e\":6,\"q\":\"\\u9752\\ud83d\\ude42 e\\u0301\"}]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "quote-p",
+            "r": "1",
+            "original": "青🙂 é",
+            "b": 0,
+            "e": 6
+          }
+        ]
+      },
+      "strictAccepted": true,
+      "outputTokens": 62
+    },
+    {
+      "id": "strict-wrong-quotation",
+      "output": "{\"o\":\"S\",\"d\":[{\"i\":\"a\",\"s\":\"S\",\"e\":[{\"p\":\"sentinel-p\",\"r\":\"1\",\"b\":0,\"e\":1,\"q\":\"Y\"}]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "sentinel-p",
+            "r": "1",
+            "original": "X",
+            "b": 0,
+            "e": 1
+          }
+        ]
+      },
+      "strictAccepted": false,
+      "outputTokens": 42
+    },
+    {
+      "id": "strict-wrong-revision",
+      "output": "{\"o\":\"S\",\"d\":[{\"i\":\"a\",\"s\":\"S\",\"e\":[{\"p\":\"sentinel-p\",\"r\":\"2\",\"b\":0,\"e\":1,\"q\":\"X\"}]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "sentinel-p",
+            "r": "1",
+            "original": "X",
+            "b": 0,
+            "e": 1
+          }
+        ]
+      },
+      "strictAccepted": false,
+      "outputTokens": 42
+    },
+    {
+      "id": "strict-outside-span",
+      "output": "{\"o\":\"S\",\"d\":[{\"i\":\"a\",\"s\":\"S\",\"e\":[{\"p\":\"sentinel-p\",\"r\":\"1\",\"b\":0,\"e\":2,\"q\":\"X\"}]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "sentinel-p",
+            "r": "1",
+            "original": "X",
+            "b": 0,
+            "e": 1
+          }
+        ]
+      },
+      "strictAccepted": false,
+      "outputTokens": 42
+    },
+    {
+      "id": "strict-surrogate-split",
+      "output": "{\"o\":\"S\",\"d\":[{\"i\":\"a\",\"s\":\"S\",\"e\":[{\"p\":\"quote-p\",\"r\":\"1\",\"b\":1,\"e\":2,\"q\":\"X\"}]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "quote-p",
+            "r": "1",
+            "original": "🙂X",
+            "b": 0,
+            "e": 3
+          }
+        ]
+      },
+      "strictAccepted": false,
+      "outputTokens": 41
+    },
+    {
+      "id": "strict-wrong-aggregate",
+      "output": "{\"o\":\"M\",\"d\":[{\"i\":\"a\",\"s\":\"S\",\"e\":[{\"p\":\"sentinel-p\",\"r\":\"1\",\"b\":0,\"e\":1,\"q\":\"X\"}]}]}",
+      "context": {
+        "detailIds": [
+          "a"
+        ],
+        "passages": [
+          {
+            "p": "sentinel-p",
+            "r": "1",
+            "original": "X",
+            "b": 0,
+            "e": 1
+          }
+        ]
+      },
+      "strictAccepted": false,
+      "outputTokens": 42
+    }
+  ]
+}
