@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "protocolId": "evidence-constrained-decoding-v2-draft-1",
+  "verdict": "PASS",
+  "scope": "constrained-decoding-v2-integration-and-host-qa",
+  "snapshotSha256": "158630554bae1071105b3b50d24bed342d142178b51a71780601b983da4f9d9b",
+  "snapshotFiles": 341,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false,
+  "reviewedOn": "2026-10-26",
+  "reviewer": {
+    "identity": "OpenAI Codex",
+    "role": "Retained user-authorized primary independent QA reviewer",
+    "independent": true,
+    "delegated": false
+  },
+  "reviewKind": "focused-follow-up-for-CD-IMPL-001-and-CD-IMPL-002",
+  "branch": "dev",
+  "baseHead": "ae678b7ecd3760ba3739bf89127ac5cb8bae2fa1",
+  "preparationLockSha256": "5e8edd23535d26c9985a28fd59e51c29b60974561580c0f807fec0f5b297e1d9",
+  "snapshotMap": {
+    "path": "build/constrained-decoding/review-snapshot-followup.json",
+    "sha256": "d64f1b3929509d3fee62badacc2c282d92a73cae68bdbe83ad82f2a5a6dd3c20"
+  },
+  "priorReview": {
+    "path": "docs/P2_CONSTRAINED_DECODING_IMPLEMENTATION_REVIEW.md",
+    "verdict": "FAIL",
+    "sha256": "d2bee3f6ac09da4c3da69770df5628c6593b58a72925f8c3b6fe9d5ab6cba098",
+    "snapshotSha256": "7c9026d54501e9a7e2a4d316e7c83cbd986018abbe8d4c38420eaaac67a63374",
+    "preserved": true
+  },
+  "reviewReport": {
+    "path": "docs/P2_CONSTRAINED_DECODING_FOLLOWUP_REVIEW.md",
+    "sha256": "9c46828f735110781a60bdd59cf358dc1c3bff76909b636f279f6c3ed015569c"
+  },
+  "resolvedFindings": [
+    "CD-IMPL-001",
+    "CD-IMPL-002"
+  ],
+  "findings": [],
+  "delta": {
+    "modifiedFiles": 11,
+    "addedFiles": 2,
+    "removedFiles": 0,
+    "unchangedFiles": 328,
+    "changedFiles": {
+      "androidApp/src/androidTest/kotlin/dev/edgecompanion/app/ConstrainedDecodingNativeTest.kt": "80f0295d749e1d5d9d0207423301fa05a063af41303060ca1e5142ec92e6f82b",
+      "androidApp/src/test/kotlin/dev/edgecompanion/app/QaJsonDiagnosticsTest.kt": "cdf1b59adca54e1cfd8ce525dda07b33af97383dfab95d0b0d731668dc200061",
+      "androidApp/src/testSupport/kotlin/dev/edgecompanion/app/support/QaJsonDiagnostics.kt": "1f101183e910b3bb5c32272a2223678c9669fe4160349e48fcb3aac0b6ec759d",
+      "scripts/constrained-decoding-evidence.mjs": "223569b24d3032adf6f64926baca3c9ce293cf230a2fce3d0275b07d9f742eda",
+      "scripts/tests/constrained-decoding.test.mjs": "815b2311625390b189c3dee33d4b20dbc11fec8169bb29a57c8cc861b8d01b34",
+      "shared/src/androidHostTest/kotlin/dev/edgecompanion/core/inference/litert/ConstrainedSessionTest.kt": "79beb0d029a6efd6ffc20af95b5b0f45eeb75096dacaaeda8ba37a18b017bcc1",
+      "shared/src/androidMain/kotlin/dev/edgecompanion/core/inference/litert/ConstrainedSession.kt": "34b9802c7196c89ae16a870d58438d8e50566dc7ac985281d510c5b702ac40e1",
+      "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/ModelManager.kt": "4152d93a6850f1ec6aacd0b0b0fd7b58722157dbd98a3b877088352b25e942ad",
+      "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/verification/ConstrainedDecoding.kt": "624e5541edfc03ad4fd66eb43e6b639194e23ab376a0e133c9c0aff4bcc85644",
+      "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/verification/ConstrainedGuard.kt": "451ad9d5ec19767cca9dcf88889e7bcace07742c5c1404dbf7a955f53c058b8a",
+      "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/verification/VerificationCall.kt": "9d861c2157edb9f835d8fb9a92ce21acc444dc39113cf5f019e46ba7ba8c2c7d",
+      "shared/src/commonTest/kotlin/dev/edgecompanion/core/inference/ForegroundHandoffTest.kt": "354957d5ef09ed09c405fcf9c086cb3cfd97019cbef5a7e35a63e2557e2a56b7",
+      "shared/src/commonTest/kotlin/dev/edgecompanion/core/inference/verification/ConstrainedGuardTest.kt": "2ada13d20d3e6e38da9e42f552393dc9e34a2111e14a8e6d11db2fbff7890c1d"
+    }
+  },
+  "verification": {
+    "independent": [
+      {
+        "command": "node --test scripts/tests/constrained-decoding.test.mjs",
+        "exitCode": 0,
+        "tests": 14,
+        "passed": 14,
+        "failures": 0,
+        "skipped": 0
+      },
+      {
+        "command": "node scripts/host-test-suite.mjs",
+        "exitCode": 0,
+        "tests": 129,
+        "passed": 129,
+        "failures": 0,
+        "skipped": 0,
+        "note": "Includes the 14 focused cases; not additional unique tests."
+      },
+      {
+        "command": "./gradlew :shared:jvmTest --tests '*ConstrainedGuardTest' --tests '*ForegroundHandoffTest' :shared:testAndroidHostTest --tests '*ConstrainedSessionTest' :androidApp:testSecureQaUnitTest --tests '*QaJsonDiagnosticsTest' -PtestBuildType=secureQa -PandroidPressureMemoryTest=true --offline --rerun-tasks",
+        "exitCode": 0,
+        "jvm": {
+          "tests": 52,
+          "passed": 52,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "androidHost": {
+          "tests": 11,
+          "passed": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "secureQaAppHost": {
+          "tests": 1,
+          "passed": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "note": "Fresh focused runs; saved XML reports now contain these selections, not full suites."
+      }
+    ],
+    "independentProbes": {
+      "callbackRawBeforeCancelPreserved": true,
+      "deliveryRemainsCancelled": true,
+      "postCloseSnapshotImmutable": true,
+      "sharedGuardRejectsOriginalCd06PhaseCounterexample": true,
+      "hostGuardRejectsBothOriginalPhaseCounterexamples": true,
+      "synchronousTerminalBeforeSendReturnRemainsAllowed": true
+    },
+    "snapshotAndPreparationBindingsRecomputed": true,
+    "originalFailReportPreserved": true,
+    "diffCheckPassed": true,
+    "suppliedLogsRead": [
+      "build/constrained-decoding/followup-gradle-qa-final.txt",
+      "build/constrained-decoding/followup-baseline.txt",
+      "build/constrained-decoding/followup-host-suite.txt"
+    ],
+    "suppliedBuildsAreNotFreshReviewerRuns": true
+  },
+  "limitations": [
+    "Host-only implementation and focused correction review; no device/ADB access, installation, model inference, native SDK initialization or native enforcement verification.",
+    "No actual execution freeze or APK/source/profile correspondence attested; separate independent freeze review is required.",
+    "This PASS permits freeze preparation only and never grants device execution permission. Any human execution authorization must separately bind the final reviewed freeze.",
+    "Previously reproduced Draft-07/vocabulary prerequisites are unchanged and hash-admitted, not freshly rerun during this follow-up.",
+    "Broader Gradle suites, APK builds and lint were read from supplied logs, not independently rerun in this focused follow-up.",
+    "No semantic enablement, P2 completion or whole-product/release approval."
+  ]
+}
