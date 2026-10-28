@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "auditId": "litert-lm-0.17.1-response-format-host-audit-v1",
+  "date": "2026-10-24",
+  "checkpoint": "ae678b7",
+  "scope": "host-only-api-bytecode-and-pinned-source-audit",
+  "artifact": {
+    "coordinate": "com.google.ai.edge.litertlm:litertlm-android:0.17.1",
+    "aarSha256": "a8aeaa6b128e9b0f1c7fe5e620932a7030cfff1ac9c0dc133d8c79711de5cf4d",
+    "members": {
+      "classes.jar": "47c0de5858be5e068f4784bee22c523e8acbd8aa00033154f78dc09138453ac5",
+      "jni/arm64-v8a/liblitertlm_jni.so": "44f900f3ea6c5224f3395c1548dfa7e825f4412ba3833f994c5c306831a57086",
+      "jni/x86_64/liblitertlm_jni.so": "9b0a908ba8ef5e54b3191de963acd4272e1f10aee1df61d9912bb586a35a5d4a"
+    }
+  },
+  "upstream": {
+    "repository": "https://github.com/google-ai-edge/LiteRT-LM",
+    "tag": "v0.17.1",
+    "commit": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+    "files": {
+      "kotlin/java/com/google/ai/edge/litertlm/Config.kt": "a84a641961cfcb0c56050f1c876c095a75db78549f4bafb221200e76b2ee3931",
+      "kotlin/java/com/google/ai/edge/litertlm/ResponseFormat.kt": "a23087172e0f891d9731ce2a977ca8186f4c63956b93abd0e92ab3e177a8f53d",
+      "kotlin/java/com/google/ai/edge/litertlm/Engine.kt": "e2848c6f296e646ab42dbcc32b5d6c258074a004bd5c093761284b0f19cbcccc",
+      "kotlin/java/com/google/ai/edge/litertlm/Conversation.kt": "188ceb90cbc5a0d35de27440fe06ef58805e778b79495c6fa9a77998ad9fdc45",
+      "kotlin/java/com/google/ai/edge/litertlm/LiteRtLmJni.kt": "f661e45dc6fde7dbc3da8d6b6cfabd7046f8e9ec5471e6c217f538a7bd549253",
+      "kotlin/java/com/google/ai/edge/litertlm/jni/litertlm.cc": "3c1ae3c631c18d42d0a130ccfc8c4a53fdacb8133eeb97a58a72a28029d52f15",
+      "runtime/conversation/conversation.cc": "4eb86ec4fd3d529a3ed981920cd00e60c84548550ba2b430f2bf7d20e8c49e01",
+      "runtime/components/constrained_decoding/constraint_provider_factory.cc": "d6ba4c40b9730284a59b43c72415143b43c7643b4aa42d8691c42034a74ab9be",
+      "runtime/components/constrained_decoding/llg_constraint_provider.cc": "1a503a7e69992def8fd461c108e08d743eaa2209f3c1be27e9665c6de556e3df",
+      "runtime/components/constrained_decoding/llg_constraint.cc": "7fb350dc835c8a8a22ce8d32ed6809e126be8b64695fc22b1f20790fe80838f5",
+      "runtime/components/constrained_decoding/constrained_decoder.cc": "5db6c126eb3ae2813fd80fa2bc96ad5e7fa7b9a300b1f2f00be732a2f9afd48d",
+      "runtime/components/constrained_decoding/logit_mask.cc": "a2864ac572e5adbac6b45ef864660524c3cdc187aa7f4b9aa132d429c15193fa",
+      "docs/api/cpp/constrained-decoding.md": "3d5b073ff0b68c97e102d31f03a619e57d260e73c0173d3b48ca3495c14095ac"
+    }
+  },
+  "capabilities": {
+    "publicJsonSchemaApiPresent": true,
+    "publicRegexApiPresent": true,
+    "explicitConversationOptInRequired": true,
+    "callbackStreamingAcceptsResponseFormat": true,
+    "sourceTracesJsonSchemaToLlGuidance": true,
+    "arm64BinaryContainsLlGuidanceDiagnosticStrings": true,
+    "currentAppAdapterEnablesOrPassesResponseFormat": false,
+    "schemaFactoryAloneProvesEnforcement": false,
+    "exactSchemaKeywordsQualified": false,
+    "androidGpuEnforcementVerified": false,
+    "constrainedCancellationAndCleanupVerified": false,
+    "semanticAccuracyQualified": false
+  },
+  "historicalValidatorSha256": "10be77c8586f0ee9931c9c33b965acd3608fe379010afde75e27b1dfd5526000",
+  "nativeExecution": false,
+  "deviceAuthorization": false,
+  "semanticEnablement": false
+}
