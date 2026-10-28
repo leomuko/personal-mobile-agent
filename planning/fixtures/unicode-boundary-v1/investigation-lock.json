@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "protocolId": "escaped-unicode-boundary-host-v1",
+  "files": {
+    "cases.json": "c24e856a6e5cc2966e9eb4c81653ea135097bdd9e0b34eefdc2bf3b0e99f5ec7",
+    "minimal-string.schema.json": "d9b3b4cd148aff6322bcecd4dafd533ca32d430aba7050c694f562408c96b9da",
+    "protocol.json": "be0eeba52c9810a88c6e4fc52d81a21f29ed31d4d567344b2afe8bcfa86f13d7"
+  },
+  "retainedCandidateLockSha256": "ac08cdab90f90b959681002270114f35d4e5bfdfa94b89aa167d5b334a9a6749"
+}

@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "protocolId": "escaped-unicode-boundary-host-v1",
+  "hostOnly": true,
+  "nativeModelExecution": false,
+  "deviceExecution": false,
+  "semanticEnablement": false,
+  "preserveCandidateFailure": true,
+  "changeAcceptanceCriteria": false,
+  "contextTokens": 2048,
+  "outputReservation": 512,
+  "eos": 1,
+  "tokenizerSha256": "e594c8a90eb08d8bda498ff4747977dc827ae0c3c56b5c0d41a605a22d02ef03",
+  "derivre": {
+    "version": "0.3.8",
+    "crateSha256": "786c7c65c4ef0c7deb05de3005e01991612a8f09fe0844fc0969c68b90468ba8"
+  },
+  "quoteExpression": "(?s:.{1,96})",
+  "allowedEscapes": "nrbtf\\\"u",
+  "rawMode": false,
+  "vocabularies": [
+    "raw",
+    "decoded-comparison-only"
+  ],
+  "tokenizations": [
+    "canonical",
+    "literal-ascii-where-declared"
+  ],
+  "scopeLimit": "source-build diagnosis; no inference about unavailable native token history, packaged JNI/GPU, or Gemma choice"
+}

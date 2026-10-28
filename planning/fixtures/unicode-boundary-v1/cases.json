@@ -1,0 +1,155 @@
+{
+  "schema": 1,
+  "scope": "boundary diagnosis; predicted observations are not acceptance criteria replacements",
+  "cases": [
+    {
+      "id": "literal-ascii",
+      "jsonText": "\"A\"",
+      "referenceValue": "A",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": true,
+      "literalAsciiAlternative": false
+    },
+    {
+      "id": "escaped-ascii",
+      "jsonText": "\"\\u0041\"",
+      "referenceValue": "A",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": false,
+      "literalAsciiAlternative": true
+    },
+    {
+      "id": "literal-bmp",
+      "jsonText": "\"青\"",
+      "referenceValue": "青",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": true,
+      "literalAsciiAlternative": false
+    },
+    {
+      "id": "escaped-bmp",
+      "jsonText": "\"\\u9752\"",
+      "referenceValue": "青",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": false,
+      "literalAsciiAlternative": true
+    },
+    {
+      "id": "literal-euro",
+      "jsonText": "\"€\"",
+      "referenceValue": "€",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": true,
+      "literalAsciiAlternative": false
+    },
+    {
+      "id": "escaped-euro",
+      "jsonText": "\"\\u20ac\"",
+      "referenceValue": "€",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": false,
+      "literalAsciiAlternative": true
+    },
+    {
+      "id": "literal-astral",
+      "jsonText": "\"🙂\"",
+      "referenceValue": "🙂",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": true,
+      "literalAsciiAlternative": false
+    },
+    {
+      "id": "escaped-surrogate-pair",
+      "jsonText": "\"\\ud83d\\ude42\"",
+      "referenceValue": "🙂",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": false,
+      "literalAsciiAlternative": true
+    },
+    {
+      "id": "literal-combining",
+      "jsonText": "\"é\"",
+      "referenceValue": "é",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": true,
+      "literalAsciiAlternative": false
+    },
+    {
+      "id": "escaped-combining",
+      "jsonText": "\"e\\u0301\"",
+      "referenceValue": "é",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": false,
+      "literalAsciiAlternative": true
+    },
+    {
+      "id": "escaped-nul",
+      "jsonText": "\"\\u0000\"",
+      "referenceValue": "\u0000",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": true,
+      "literalAsciiAlternative": true
+    },
+    {
+      "id": "escaped-newline-upper",
+      "jsonText": "\"\\u000A\"",
+      "referenceValue": "\n",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": true,
+      "literalAsciiAlternative": true
+    },
+    {
+      "id": "escaped-newline-lower",
+      "jsonText": "\"\\u000a\"",
+      "referenceValue": "\n",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": true,
+      "literalAsciiAlternative": false
+    },
+    {
+      "id": "symbolic-newline",
+      "jsonText": "\"\\n\"",
+      "referenceValue": "\n",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": true,
+      "literalAsciiAlternative": false
+    },
+    {
+      "id": "escaped-del-lower",
+      "jsonText": "\"\\u007f\"",
+      "referenceValue": "",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": true,
+      "literalAsciiAlternative": false
+    },
+    {
+      "id": "escaped-del-upper",
+      "jsonText": "\"\\u007F\"",
+      "referenceValue": "",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": true,
+      "literalAsciiAlternative": false
+    },
+    {
+      "id": "escaped-quote",
+      "jsonText": "\"\\\"\"",
+      "referenceValue": "\"",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": true,
+      "literalAsciiAlternative": false
+    },
+    {
+      "id": "literal-space",
+      "jsonText": "\" \"",
+      "referenceValue": " ",
+      "referenceValid": true,
+      "sourcePredictedByteAcceptance": true,
+      "literalAsciiAlternative": false
+    }
+  ],
+  "prefixes": [
+    "\"\\u",
+    "\"\\u0",
+    "\"\\u00"
+  ]
+}
