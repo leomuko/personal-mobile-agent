@@ -1,0 +1,11 @@
+{
+  "docs/P2_ESCAPED_UNICODE_BOUNDARY_RESULTS.md": "d7601dc7131b712fbe1e83889e24aad8d8b68c0ecb97c369a871498247ffb9a3",
+  "planning/fixtures/unicode-boundary-v1/cases.json": "c24e856a6e5cc2966e9eb4c81653ea135097bdd9e0b34eefdc2bf3b0e99f5ec7",
+  "planning/fixtures/unicode-boundary-v1/investigation-lock.json": "50d7cb52f88c1b5187582c45c0207167c1a5e712beaf316746c373da0362a575",
+  "planning/fixtures/unicode-boundary-v1/minimal-string.schema.json": "d9b3b4cd148aff6322bcecd4dafd533ca32d430aba7050c694f562408c96b9da",
+  "planning/fixtures/unicode-boundary-v1/protocol.json": "be0eeba52c9810a88c6e4fc52d81a21f29ed31d4d567344b2afe8bcfa86f13d7",
+  "scripts/diagnostics/unicode_boundary/README.md": "97f29beda5f1cbe1c15f616abe612c58850fdf4691d8fd59adf7ddc523fcf336",
+  "scripts/diagnostics/unicode_boundary/byte_probe.rs": "c9589b9b49462d6789d05d8fad0e9ef0828e328d2096a977c7cd59672e1aaf8d",
+  "scripts/diagnostics/unicode_boundary/investigate.py": "d0ca7ad4356e3a8b9b9c9b62ba65cbf0e8b763c6872e900b4726f2d2b33baafc",
+  "scripts/tests/test_unicode_boundary.py": "b7ba2f21a3601d15f0a055129876b0b473223bd3f1acbb2b25b918bd866307a0"
+}
