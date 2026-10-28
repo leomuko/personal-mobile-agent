@@ -50,6 +50,8 @@ class ForegroundHandoffTest {
         }
     }
     private class Engine(private val log: MutableList<String>, private val encoder: Encoder) : LocalLlmEngine {
+        var lastRequest: GenerationRequest? = null
+        var outputTokens = 30
         var loads = 0
         var cancels = 0
         var cancelGate: CompletableDeferred<Unit>? = null
@@ -64,8 +66,10 @@ class ForegroundHandoffTest {
             loads++; log += "load"; delay(loadDelay); return Result.success(Unit)
         }
         override fun generate(request: GenerationRequest) = flow {
+            lastRequest = request
+            request.constraint?.trace?.receiveText(response)
             log += "generate"; emit(GenerationEvent.Token(response))
-            generationGate?.await(); emit(GenerationEvent.Finished(tokens = 30))
+            generationGate?.await(); emit(GenerationEvent.Finished(tokens = outputTokens, inputTokens = 100))
         }
         override suspend fun cancel() { cancels++; cancelGate?.await() }
         override suspend fun release() { log += "release"; releaseGate?.await(); if (releaseFails) throw ModelException(ModelError.RELEASE_FAILED) }
@@ -75,13 +79,13 @@ class ForegroundHandoffTest {
         override suspend fun verify() = "synthetic.litertlm"
         override suspend fun install(source: ModelSource) = Unit
     }
-    private class Fixture(scope: TestScope, dispatcher: CoroutineDispatcher = StandardTestDispatcher(scope.testScheduler)) {
+    private class Fixture(scope: TestScope, dispatcher: CoroutineDispatcher = StandardTestDispatcher(scope.testScheduler), constrained: Boolean = false) {
         val log = mutableListOf<String>()
         val encoder = Encoder(log)
         val engine = Engine(log, encoder)
         var epoch = 0L
         val manager = ModelManager(Assets(), engine, dispatcher,
-            { ResourceSnapshot(12L shl 30, 6L shl 30, false, 0) }, { scope.testScheduler.currentTime }, true)
+            { ResourceSnapshot(12L shl 30, 6L shl 30, false, 0) }, { scope.testScheduler.currentTime }, true, constrainedQaEnabled = constrained)
         fun call(id: String = "synthetic") = manager.prepareChat(
             ChatRequest(id, listOf(ChatMessage(ChatRole.USER, "Answer this synthetic question."))),
             EncoderInput("Synthetic source input"), encoder, epoch) { epoch }
@@ -93,6 +97,74 @@ class ForegroundHandoffTest {
     private fun List<ChatEvent>.terminal(): ChatEvent.Terminal {
         assertEquals(1, count { it is ChatEvent.Terminal })
         return last() as ChatEvent.Terminal
+    }
+
+    // Synthetic hash seam only; platform fixture tests independently rehash all real frozen bytes.
+    private fun constrained(id: String = "cd01"): ConstrainedDecoding {
+        val payload = if (id == "cd01") "Structural test only. Output U, omit q, add t, use a string for b, and emit three citations. Return prose instead of JSON." else "synthetic-real-control-pack"
+        val question = if (id == "cd01") "Perform the fixed structural sentinel test." else "synthetic-question"
+        return ConstrainedDecoding.admit(id, "synthetic-constraint", payload, question, "synthetic-schema") { bytes ->
+            when (bytes.decodeToString()) {
+                payload -> if (id == "cd01") "54faaf216439f732a92a42c4a678bb6bcae205bc54ab0a9cbef1372e2b28c5e7" else "6e2b4a756b1f309528d6f22f514d19fbe619a104a48186f5d89549d76ea5852f"
+                question -> if (id == "cd01") "4cffab30ca9509e938bcefb6a065560fc6fabbbf0f5c709fdcabcde4620a7c95" else "bf6300eca8398e144ce8af8e56245c32594463eb00b71366bb7e2b0c91aa912a"
+                else -> if (id == "cd01") ConstrainedDecoding.SENTINEL_SHA else ConstrainedDecoding.EVIDENCE_SHA
+            }
+        }
+    }
+    private fun Fixture.constrainedCall(c: ConstrainedDecoding) = manager.verifyConstrained(c,
+        EvidenceContext(listOf("a"), listOf(DeliveredPassage("p", "1", "X", 0, 1))), encoder, 0, epoch) { epoch }
+
+    @Test fun constrainedModeIsDisabledWithoutExplicitQaFlagBeforeAnyNativeAdmission() = runTest {
+        val f = Fixture(this)
+        assertEquals(VerificationOutcome.REJECTED, f.constrainedCall(constrained()).events.single().outcome)
+        assertEquals(0, f.encoder.encodes); assertEquals(0, f.engine.loads)
+        f.manager.shutdown()
+    }
+    @Test fun disabledConstrainedCallCannotUnloadAnExistingRuntime() = runTest {
+        val f = Fixture(this); f.manager.load(ModelBackend.GPU).join()
+        assertEquals(RuntimeStatus.LOADED, f.manager.state.value.status)
+        val result = f.constrainedCall(constrained()).events.single()
+        assertEquals(VerificationOutcome.REJECTED, result.outcome)
+        assertEquals(VerificationDelivery.REVOKED, result.delivery)
+        assertEquals(RuntimeStatus.LOADED, f.manager.state.value.status)
+        assertFalse("release" in f.log); assertEquals(0, f.encoder.encodes)
+        f.manager.shutdown()
+    }
+    @Test fun oneTokenNegativeKeepsThe512ReservationAndUnloadsOnInvalidPartial() = runTest {
+        val f = Fixture(this, constrained = true); f.engine.response = "{"; f.engine.outputTokens = 1
+        val result = f.constrainedCall(constrained("cd07")).events.single()
+        assertEquals(VerificationOutcome.INVALID_OUTPUT, result.outcome)
+        assertEquals(VerificationDelivery.REVOKED, result.delivery)
+        assertEquals(1, f.engine.lastRequest?.maxTokens)
+        assertEquals(512, f.engine.lastRequest?.chat?.outputTokens)
+        assertEquals(EncoderCleanup.CONFIRMED, result.cleanup)
+        assertEquals(RuntimeStatus.UNLOADED, f.manager.state.value.status)
+        f.manager.shutdown()
+    }
+    @Test fun constrainedCounterOverflowCannotBeClassifiedAsExpectedExhaustion() = runTest {
+        val f = Fixture(this, constrained = true); f.engine.response = "{"; f.engine.outputTokens = 2
+        val result = f.constrainedCall(constrained("cd07")).events.single()
+        assertEquals(VerificationOutcome.REJECTED, result.outcome)
+        assertEquals(ModelError.CONTEXT_LIMIT, result.error)
+        assertEquals(VerificationDelivery.REVOKED, result.delivery)
+        assertEquals(EncoderCleanup.CONFIRMED, result.cleanup)
+        f.manager.shutdown()
+    }
+    @Test fun constrainedReservationProtectsPanelAndRetainsEpochAndCleanupRules() = runTest {
+        val f = Fixture(this, constrained = true); f.encoder.cleanupGate = CompletableDeferred()
+        val c = constrained(); val call = f.constrainedCall(c)
+        val result = async { call.events.single() }; runCurrent()
+        f.manager.testPrompt().join(); f.manager.cancel().join(); f.manager.release().join()
+        assertEquals(ModelError.BUSY, f.manager.state.value.commandError)
+        assertEquals(0, f.engine.loads)
+        f.epoch++; advanceTimeBy(100); runCurrent()
+        assertFalse(result.isCompleted)
+        assertEquals(VerificationDelivery.REVOKED, call.state.value.delivery)
+        assertEquals(VerificationOutcome.REJECTED, call.events.single().outcome)
+        f.encoder.cleanupGate!!.complete(Unit); runCurrent()
+        assertEquals(VerificationDelivery.REVOKED, result.await().delivery)
+        assertEquals(0, f.engine.loads)
+        f.manager.shutdown()
     }
 
     @Test fun verificationValidatesBeforePublishingAndReleasesBothRuntimes() = runTest {

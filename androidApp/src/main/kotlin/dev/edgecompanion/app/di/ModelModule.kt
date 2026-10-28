@@ -17,13 +17,16 @@ import org.koin.dsl.module
 
 internal fun modelModule(context: Context) = module {
     single<ModelAssets> { PrivateModelAssets(File(context.noBackupFilesDir, "models")) }
-    single<LocalLlmEngine> { LiteRtLlmEngine(enabled = BuildConfig.DEBUG) }
+    single<LocalLlmEngine> { LiteRtLlmEngine(enabled = BuildConfig.DEBUG,
+        constrainedQaEnabled = BuildConfig.DEBUG && BuildConfig.BUILD_TYPE == "secureQa" && BuildConfig.ANDROID_PRESSURE_MEMORY_TEST,
+        monotonicMs = SystemClock::elapsedRealtime) }
     single { AndroidModelResources(context) }
     single { selectMemoryPolicy(BuildConfig.DEBUG, BuildConfig.BUILD_TYPE, BuildConfig.ANDROID_PRESSURE_MEMORY_TEST) }
     single { MemoryTelemetryRecorder(get(), get()) }
     single { ModelManager(get(), get(), Dispatchers.Default, get<AndroidModelResources>()::snapshot,
         SystemClock::elapsedRealtime, enabled = BuildConfig.DEBUG,
         memoryPolicy = get(),
+        constrainedQaEnabled = BuildConfig.DEBUG && BuildConfig.BUILD_TYPE == "secureQa" && BuildConfig.ANDROID_PRESSURE_MEMORY_TEST,
         memoryTelemetry = get<MemoryTelemetryRecorder>()::recordStage) }
     single<ChatRuntime> { get<ModelManager>() }
     viewModel { ModelsViewModel(get()) }

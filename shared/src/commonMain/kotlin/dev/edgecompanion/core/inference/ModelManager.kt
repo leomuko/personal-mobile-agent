@@ -18,6 +18,7 @@ class ModelManager(
     private val idleMs: Long = 60_000,
     val memoryPolicy: MemoryPolicy = MemoryPolicies.Current,
     private val memoryTelemetry: suspend (MemoryTracePoint) -> Unit = {},
+    private val constrainedQaEnabled: Boolean = false,
 ) : ChatRuntime {
     private val scope = CoroutineScope(SupervisorJob() + dispatcher.limitedParallelism(1))
     private val operation = Mutex()
@@ -47,9 +48,15 @@ class ModelManager(
         encoder: ForegroundEncoder, submittedAtMs: Long, capturedEpoch: Long, currentEpoch: () -> Long): VerificationCall =
         verificationCall(id, payload, context, input, encoder, submittedAtMs, capturedEpoch, currentEpoch, VerificationPolicy.V4)
 
+    /** Separately approved synthetic QA path only. Ordinary chat never opts into response constraints. */
+    fun verifyConstrained(constraint: ConstrainedDecoding, context: EvidenceContext, encoder: ForegroundEncoder,
+        submittedAtMs: Long, capturedEpoch: Long, currentEpoch: () -> Long): VerificationCall =
+        verificationCall(constraint.generationId, constraint.payload, context, EncoderInput(constraint.question), encoder,
+            submittedAtMs, capturedEpoch, currentEpoch, VerificationPolicy.V4, constraint)
+
     private fun verificationCall(id: String, payload: String, context: EvidenceContext, input: EncoderInput,
         encoder: ForegroundEncoder, submittedAtMs: Long, capturedEpoch: Long, currentEpoch: () -> Long,
-        policy: VerificationPolicy): VerificationCall {
+        policy: VerificationPolicy, constraint: ConstrainedDecoding? = null): VerificationCall {
         val request = ChatRequest(id, listOf(ChatMessage(ChatRole.USER, payload)))
         val capturedLifetime = lifetimeEpoch.value
         val verification = VerificationRun(context, nowMs, submittedAtMs, policy)
@@ -63,10 +70,16 @@ class ModelManager(
                     error = ModelError.BUSY))
                 return@flow
             }
-            chatFlow(request, prepared, verification).collect { event -> if (event is ChatEvent.Terminal) {
+            if (constraint != null && !constrainedQaEnabled) {
+                verification.terminal(ChatEvent.Terminal(id, ChatOutcome.REJECTED, ModelError.CONTEXT_LIMIT))
+                verification.cleaned(true, 0, constraint.trace.seal())
+                emit(verification.state.value)
+                return@flow
+            }
+            chatFlow(request, prepared, verification, constraint).collect { event -> if (event is ChatEvent.Terminal) {
                 verification.terminal(event)
                 // Rejected admission/closed scope never allocated this request's resources.
-                if (verification.state.value.cleanup == EncoderCleanup.PENDING) verification.cleaned(true, 0)
+                if (verification.state.value.cleanup == EncoderCleanup.PENDING) verification.cleaned(true, 0, constraint?.trace?.seal())
                 verification.publish(prepared.eligibleForPublication())
                 emit(verification.state.value)
             } }
@@ -198,7 +211,7 @@ class ModelManager(
     }
 
     private fun chatFlow(request: ChatRequest, prepared: ForegroundPreparation? = null,
-        verification: VerificationRun? = null): Flow<ChatEvent> = channelFlow {
+        verification: VerificationRun? = null, constraint: ConstrainedDecoding? = null): Flow<ChatEvent> = channelFlow {
         val worker = scope.launch {
             if (prepared != null && !prepared.claim()) {
                 trySend(ChatEvent.Terminal(request.id, ChatOutcome.REJECTED, ModelError.BUSY))
@@ -220,6 +233,11 @@ class ModelManager(
                 generation = currentCoroutineContext().job
                 chatCancellation = ChatOutcome.CANCELLED
                 GemmaChatBudget.validate(request)
+                if (constraint != null) {
+                    if (!constrainedQaEnabled || verification == null || prepared == null)
+                        throw ModelException(ModelError.CONTEXT_LIMIT)
+                    constraint.check(request)
+                }
                 if (poisoned) throw ModelException(ModelError.RESTART_REQUIRED)
                 if (prepared != null && request.outputTokens != 512) throw ModelException(ModelError.CONTEXT_LIMIT)
                 mutable.update { it.copy(error = null, commandError = null) }
@@ -269,7 +287,8 @@ class ModelManager(
                 recordMemory(MemoryStage.PREFILL, request.backend)
                 var completed = false
                 var nonempty = false
-                engine.generate(GenerationRequest("", request.outputTokens, request)).collect { event ->
+                engine.generate(GenerationRequest("", constraint?.decodeTokenCap ?: request.outputTokens, request, constraint,
+                    if (constraint != null) ({ checkNotNull(prepared).checkLive() }) else null)).collect { event ->
                     when (event) {
                         is GenerationEvent.Token -> if (event.text.isNotEmpty()) {
                             if (!nonempty) recordMemory(MemoryStage.DECODING, request.backend)
@@ -279,6 +298,9 @@ class ModelManager(
                             else verification.append(event.text)
                         }
                         is GenerationEvent.Finished -> {
+                            if (constraint != null && (event.tokens !in 1..constraint.decodeTokenCap ||
+                                    event.inputTokens == null || event.inputTokens !in 1..GemmaChatBudget.validate(request)))
+                                throw ModelException(ModelError.CONTEXT_LIMIT)
                             completed = true
                             if (prepared != null) mutable.update { it.copy(inputTokens = event.inputTokens, outputTokens = event.tokens) }
                         }
@@ -333,7 +355,7 @@ class ModelManager(
                     verification.terminal(terminal)
                     val cleanupStarted = nowMs()
                     val clean = cleanupOwnedEngine() && prepared?.state?.value?.cleanup == EncoderCleanup.CONFIRMED
-                    verification.cleaned(clean, nowMs() - cleanupStarted)
+                    verification.cleaned(clean, nowMs() - cleanupStarted, constraint?.trace?.seal())
                     verification.publish(prepared?.eligibleForPublication() == true)
                     foreground = null
                     chatId = null
