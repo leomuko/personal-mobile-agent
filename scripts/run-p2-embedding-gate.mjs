@@ -18,6 +18,8 @@ import { classifyV4 } from './v4-feasibility.mjs';
 import { admitV4Execution, prepareV4Apks, installV4Apks, reserveV4Attempt } from './v4-execution-freeze.mjs';
 import { admitAdherenceExecution, reserveAdherenceAttempt } from './output-adherence-freeze.mjs';
 import { classifyAdherence } from './output-adherence-evidence.mjs';
+import { admitConstrainedExecution, reserveConstrainedAttempt } from './constrained-decoding-freeze.mjs';
+import { classifyConstrained, validateConstrainedDeadline } from './constrained-decoding-evidence.mjs';
 
 // Focused prerequisite only; not the deferred standalone Gemma smoke or P2 acceptance campaign.
 const pressure = process.argv.includes('--android-pressure');
@@ -26,13 +28,20 @@ const semantic = process.argv.includes('--semantic-qualification');
 const v3 = process.argv.includes('--v3-feasibility');
 const v4 = process.argv.includes('--v4-feasibility');
 const adherence = process.argv.includes('--output-adherence');
+const constrained = process.argv.includes('--constrained-decoding');
 const options = process.argv.slice(2);
 let calibrationRoot; let calibrationPath;
 let v4FreezePath; let v4AuthorizationPath;
 let adherenceFreezePath; let adherenceAuthorizationPath;
+let constrainedFreezePath; let constrainedAuthorizationPath;
 for (let index = 0; index < options.length; index++) {
   const arg = options[index];
-  if (arg === '--adherence-freeze' || arg === '--adherence-authorization') {
+  if (arg === '--constrained-freeze' || arg === '--constrained-authorization') {
+    const value = options[++index];
+    if (!value || value.startsWith('--')) throw new Error('Missing constrained argument');
+    if (arg === '--constrained-freeze') { if (constrainedFreezePath) throw new Error('Duplicate constrained freeze'); constrainedFreezePath = value; }
+    else { if (constrainedAuthorizationPath) throw new Error('Duplicate constrained authorization'); constrainedAuthorizationPath = value; }
+  } else if (arg === '--adherence-freeze' || arg === '--adherence-authorization') {
     const value = options[++index];
     if (!value || value.startsWith('--')) throw new Error('Missing output-adherence argument');
     if (arg === '--adherence-freeze') { if (adherenceFreezePath) throw new Error('Duplicate adherence freeze'); adherenceFreezePath = value; }
@@ -47,16 +56,22 @@ for (let index = 0; index < options.length; index++) {
     if (!value || value.startsWith('--')) throw new Error('Missing calibration argument');
     if (arg === '--calibration-root') { if (calibrationRoot) throw new Error('Duplicate root'); calibrationRoot = value; }
     else { if (calibrationPath) throw new Error('Duplicate batch'); calibrationPath = value; }
-  } else if (!['--android-pressure', '--foreground', '--semantic-qualification', '--v3-feasibility', '--v4-feasibility', '--output-adherence'].includes(arg)) throw new Error('Unknown argument');
+  } else if (!['--android-pressure', '--foreground', '--semantic-qualification', '--v3-feasibility', '--v4-feasibility', '--output-adherence', '--constrained-decoding'].includes(arg)) throw new Error('Unknown argument');
 }
 const calibration = Boolean(calibrationPath);
-if (Boolean(calibrationRoot) !== calibration || [foreground, semantic, calibration, v3, v4, adherence].filter(Boolean).length > 1 ||
-    (!v4 && (v4FreezePath || v4AuthorizationPath)) || (!adherence && (adherenceFreezePath || adherenceAuthorizationPath)))
+if (Boolean(calibrationRoot) !== calibration || [foreground, semantic, calibration, v3, v4, adherence, constrained].filter(Boolean).length > 1 ||
+    (!v4 && (v4FreezePath || v4AuthorizationPath)) || (!adherence && (adherenceFreezePath || adherenceAuthorizationPath)) ||
+    (!constrained && (constrainedFreezePath || constrainedAuthorizationPath)))
   throw new Error('Choose one prerequisite workload and its frozen profile');
 // This preflight is deliberately before all ADB/model access. No authorization file is created here.
 const v4Admission = v4 ? admitV4Execution(v4FreezePath, v4AuthorizationPath, process.env.ANDROID_SERIAL) : null;
 const adherenceAdmission = adherence ? admitAdherenceExecution(adherenceFreezePath, adherenceAuthorizationPath, process.env.ANDROID_SERIAL) : null;
-const frozenAdmission = v4Admission || adherenceAdmission;
+const constrainedAdmission = constrained ? admitConstrainedExecution(constrainedFreezePath, constrainedAuthorizationPath, process.env.ANDROID_SERIAL) : null;
+const frozenAdmission = v4Admission || adherenceAdmission || constrainedAdmission;
+const frozenPath = constrained ? constrainedFreezePath : adherence ? adherenceFreezePath : v4FreezePath;
+const authorizationPath = constrained ? constrainedAuthorizationPath : adherence ? adherenceAuthorizationPath : v4AuthorizationPath;
+const constrainedPlan = constrainedAdmission?.frozen.plan;
+const constrainedPlanSha = constrainedAdmission?.frozen.planSha256;
 if (frozenAdmission && pressure !== !frozenAdmission.frozen.profile.enforceAvailableMemoryFloor) throw new Error('Command must select exactly the frozen resource profile');
 const adherencePlan = adherenceAdmission?.frozen.plan;
 const adherencePlanBytes = adherence ? JSON.stringify(adherencePlan) : null;
@@ -86,10 +101,12 @@ const pkg = 'dev.edgecompanion.app.secureqa';
 const runId = randomUUID();
 const mode = pressure ? 'android-pressure' : 'baseline';
 mkdirSync('benchmarks/results', { recursive: true });
-const folder = mkdtempSync(`benchmarks/results/p2-${adherence ? 'output-adherence' : v4 ? 'v4-feasibility' : v3 ? 'v3-feasibility' : calibration ? 'calibration' : semantic ? 'semantic' : foreground ? 'foreground' : 'encoder'}-gate-`);
+const folder = mkdtempSync(`benchmarks/results/p2-${constrained ? 'constrained-decoding' : adherence ? 'output-adherence' : v4 ? 'v4-feasibility' : v3 ? 'v3-feasibility' : calibration ? 'calibration' : semantic ? 'semantic' : foreground ? 'foreground' : 'encoder'}-gate-`);
 const run = (...args) => execFileSync(adb, ['-s', serial, ...args], { encoding: 'utf8', timeout: 30000 });
 const report = { schema: 1, runId, mode, startedAtMs: Date.now(), passed: false, status: 'failed',
-  nativeEncoder: true, gemmaWorkload: foreground || v3 || v4 || adherence, fullRetrievalVerified: false, sustainedWorkload: false, modelSha256: sha };
+  nativeEncoder: true, gemmaWorkload: foreground || v3 || v4 || adherence || constrained, fullRetrievalVerified: false, sustainedWorkload: false, modelSha256: sha };
+if (constrained) Object.assign(report, { planSha256: constrainedPlanSha, executionFreezeSha256: constrainedAdmission.freezeSha256,
+  protocolId: constrainedPlan.protocolId, plannedRequests: 9, largeCampaignAllowed: false, semanticEnablement: false });
 if (adherence) Object.assign(report, { planSha256: adherencePlanSha, executionFreezeSha256: adherenceAdmission.freezeSha256,
   protocolId: adherencePlan.protocolId, plannedRequests: 6, largeCampaignAllowed: false, semanticEnablement: false });
 if (v4) { report.planSha256 = v4PlanSha; report.executionFreezeSha256 = v4Admission.freezeSha256; report.largeCampaignAllowed = false; report.semanticEnablement = false; }
@@ -105,21 +122,22 @@ const save = () => writeFileSync(join(folder, 'result.json'), JSON.stringify(rep
 save();
 // Outside the device try/catch: corrupt bundles and duplicate attempts must not reach even a scoped ADB stop.
 try {
-  if (frozenAdmission) frozenApks = prepareV4Apks(frozenAdmission, adherence ? adherenceFreezePath : v4FreezePath);
+  if (frozenAdmission) frozenApks = prepareV4Apks(frozenAdmission, frozenPath);
   if (!model || !existsSync(model)) throw new Error('Set P2_ENCODER_MODEL to the public pinned encoder candidate');
   bytes = readFileSync(model);
   if (bytes.length !== 6120274 || createHash('sha256').update(bytes).digest('hex') !== sha)
     throw new Error('Encoder candidate size/hash mismatch');
   if (v4) reserveV4Attempt(v4Admission, runId, folder);
   if (adherence) reserveAdherenceAttempt(adherenceAdmission, runId, folder);
+  if (constrained) reserveConstrainedAttempt(constrainedAdmission, runId, folder);
 } catch (error) { frozenApks?.close(); throw error; }
-console.log(`P2 ${adherence ? 'output-adherence feasibility' : v4 ? 'V4 explicit verifier feasibility' : v3 ? 'V3 bounded verifier feasibility' : semantic ? 'frozen semantic qualification' : foreground ? 'encoder-to-Gemma handoff' : 'encoder-only'} prerequisite: ${folder} (${mode})`);
+console.log(`P2 ${constrained ? 'constrained-decoding guard checks' : adherence ? 'output-adherence feasibility' : v4 ? 'V4 explicit verifier feasibility' : v3 ? 'V3 bounded verifier feasibility' : semantic ? 'frozen semantic qualification' : foreground ? 'encoder-to-Gemma handoff' : 'encoder-only'} prerequisite: ${folder} (${mode})`);
 try {
   if (frozenAdmission) {
     if (run('shell', 'getprop', 'ro.product.model').trim() !== 'SM-S928B') throw new Error('Verification requires the authorized S24 Ultra');
     installV4Apks(frozenApks, run);
-    writeFileSync(join(folder, 'execution-freeze.json'), readFileSync(adherence ? adherenceFreezePath : v4FreezePath));
-    writeFileSync(join(folder, 'execution-authorization.json'), readFileSync(adherence ? adherenceAuthorizationPath : v4AuthorizationPath));
+    writeFileSync(join(folder, 'execution-freeze.json'), readFileSync(frozenPath));
+    writeFileSync(join(folder, 'execution-authorization.json'), readFileSync(authorizationPath));
   }
   if (calibration) calibrationLease = reserveBatch(calibrationRoot, calibrationBatch.plan, runId, folder);
   if (frozenAdmission) {
@@ -175,6 +193,7 @@ try {
   if (adherence) sources.push('scripts/output-adherence-gates.mjs', 'scripts/output-adherence-freeze.mjs',
     'scripts/output-adherence-evidence.mjs', 'androidApp/src/androidTest/kotlin/dev/edgecompanion/app/OutputAdherenceNativeTest.kt',
     'androidApp/src/testSupport/kotlin/dev/edgecompanion/app/support/OutputAdherenceShape.kt');
+  if (constrained) sources.push(...Object.keys(constrainedAdmission.frozen.sources));
   writeFileSync(join(folder, 'source-sha256.json'), JSON.stringify(Object.fromEntries(sources.map(path =>
     [path, createHash('sha256').update(readFileSync(path)).digest('hex')])), null, 2));
   execFileSync('bash', ['scripts/export-memory-policy.sh'], { env: environment, stdio: 'pipe', timeout: 60000 });
@@ -250,6 +269,17 @@ try {
       } finally { run('shell', 'rm', '-f', temporary); }
     }
   }
+  if (constrained) {
+    for (const [name, content] of [['constrained-decoding.json', JSON.stringify(constrainedPlan)],
+      ['constrained-decoding-oracles.json', JSON.stringify(constrainedAdmission.frozen.oracles)]]) {
+      const local = join(folder, name); writeFileSync(local, content);
+      const temporary = `/data/local/tmp/pma-${runId}-${name}`;
+      try {
+        run('push', local, temporary);
+        run('shell', 'run-as', pkg, 'cp', temporary, `no_backup/qa-embedding/${name}`);
+      } finally { run('shell', 'rm', '-f', temporary); }
+    }
+  }
   monitor = spawn(process.execPath, ['scripts/monitor-model-thermal.mjs'], { env: environment });
   let monitorOutput = '';
   monitor.stdout.on('data', data => { monitorOutput += data; });
@@ -262,14 +292,16 @@ try {
   }
   if (!existsSync(ready)) throw new Error('Supervisor did not admit the run');
   instrument = spawn(adb, ['-s', serial, 'shell', 'am', 'instrument', '-w', '-r',
-    '-e', 'class', `dev.edgecompanion.app.${adherence ? 'OutputAdherenceNativeTest' : v4 ? 'V4FeasibilityTest' : v3 ? 'V3FeasibilityTest' : calibration ? 'CalibrationCollectionTest' : semantic ? 'SemanticQualificationTest' : foreground ? 'ForegroundHandoffNativeTest' : 'EmbeddingPrerequisiteTest'}`,
-    '-e', adherence ? 'p2OutputAdherence' : v4 ? 'p2V4' : v3 ? 'p2V3' : calibration ? 'p2Calibration' : semantic ? 'p2Semantic' : foreground ? 'p2Foreground' : 'p2Embedding', 'true',
+    '-e', 'class', `dev.edgecompanion.app.${constrained ? 'ConstrainedDecodingNativeTest' : adherence ? 'OutputAdherenceNativeTest' : v4 ? 'V4FeasibilityTest' : v3 ? 'V3FeasibilityTest' : calibration ? 'CalibrationCollectionTest' : semantic ? 'SemanticQualificationTest' : foreground ? 'ForegroundHandoffNativeTest' : 'EmbeddingPrerequisiteTest'}`,
+    '-e', constrained ? 'p2ConstrainedDecoding' : adherence ? 'p2OutputAdherence' : v4 ? 'p2V4' : v3 ? 'p2V3' : calibration ? 'p2Calibration' : semantic ? 'p2Semantic' : foreground ? 'p2Foreground' : 'p2Embedding', 'true',
     ...(calibration ? ['-e', 'calibrationBatchSha256', calibrationBatch.sha256] : []),
     ...(v3 ? ['-e', 'v3PlanSha256', v3PlanSha] : []),
     ...(v4 ? ['-e', 'v4PlanSha256', v4PlanSha, '-e', 'v4DeviceAuthorized', 'true',
       '-e', 'v4ExecutionFreezeSha256', v4Admission.freezeSha256] : []),
     ...(adherence ? ['-e', 'oaPlanSha256', adherencePlanSha, '-e', 'oaDeviceAuthorized', 'true',
       '-e', 'oaExecutionFreezeSha256', adherenceAdmission.freezeSha256] : []),
+    ...(constrained ? ['-e', 'cdPlanSha256', constrainedPlanSha, '-e', 'cdDeviceAuthorized', 'true',
+      '-e', 'cdExecutionFreezeSha256', constrainedAdmission.freezeSha256] : []),
     '-e', 'supervisionRunId', runId, `${pkg}.test/androidx.test.runner.AndroidJUnitRunner`]);
   instrument.stdout.on('data', data => { instrumentOutput += data; });
   instrument.stderr.on('data', data => { instrumentOutput += data; });
@@ -277,22 +309,29 @@ try {
     instrument.once('error', reject);
     instrument.once('close', code => { instrumentEnded = true; resolve(code); });
   });
-  const overallMs = adherence ? 300000 : v4 ? 360000 : v3 ? 120000 : foreground || semantic || calibration ? 180000 : 30000;
+  const overallMs = constrained ? 360000 : adherence ? 300000 : v4 ? 360000 : v3 ? 120000 : foreground || semantic || calibration ? 180000 : 30000;
   const timer = setTimeout(() => stopSupervisedQa({ adb, serial, runId }), overallMs);
   const timeout = setTimeout(() => { if (!instrumentEnded) instrument.kill(); }, overallMs + 15000);
   let exit;
   try { exit = await completion; } finally { clearTimeout(timer); clearTimeout(timeout); }
   writeFileSync(join(folder, 'instrumentation.txt'), instrumentOutput);
-  const evidence = JSON.parse(run('exec-out', 'run-as', pkg, 'cat', adherence ? 'no_backup/p2-output-adherence.json' : v4 ? 'no_backup/p2-v4-feasibility.json' : v3 ? 'no_backup/p2-v3-feasibility.json' : `no_backup/p2-${calibration ? 'calibration' : semantic ? 'semantic' : foreground ? 'foreground' : 'embedding'}-gate.json`));
+  const evidence = JSON.parse(run('exec-out', 'run-as', pkg, 'cat', constrained ? 'no_backup/p2-constrained-decoding.json' : adherence ? 'no_backup/p2-output-adherence.json' : v4 ? 'no_backup/p2-v4-feasibility.json' : v3 ? 'no_backup/p2-v3-feasibility.json' : `no_backup/p2-${calibration ? 'calibration' : semantic ? 'semantic' : foreground ? 'foreground' : 'embedding'}-gate.json`));
   writeFileSync(join(folder, 'encoder.json'), JSON.stringify(evidence, null, 2));
   const supervision = JSON.parse(run('exec-out', 'run-as', pkg, 'cat', `${supervisionDirectory(runId)}/status.json`));
   writeFileSync(join(folder, 'supervision.json'), JSON.stringify(supervision, null, 2));
   if (exit !== 0 || !/^OK \(1 test\)\s*$/m.test(instrumentOutput) || !validSupervision(supervision, runId) ||
-      (!semantic && !calibration && !v3 && !v4 && !adherence && !(foreground ? validateForegroundEvidence : validateEncoderEvidence)(evidence,
+      (!semantic && !calibration && !v3 && !v4 && !adherence && !constrained && !(foreground ? validateForegroundEvidence : validateEncoderEvidence)(evidence,
         { runId, startedAtMs: report.startedAtMs, modelSha256: sha, policyId: policy.id })) ||
       monitor.exitCode !== null ||
       existsSync(join(environment.THERMAL_REPORT_DIR, 'safety-stop.json'))) throw new Error('No fresh supervised encoder pass');
-  if (adherence) {
+  if (constrained) {
+    if (!validSupervision(supervision, runId, report.startedAtMs)) throw new Error('Stale constrained supervision');
+    const result = classifyConstrained(evidence, { runId, startedAtMs: report.startedAtMs, planSha256: constrainedPlanSha,
+      freezeSha256: constrainedAdmission.freezeSha256, plan: constrainedPlan, oracles: constrainedAdmission.frozen.oracles,
+      sentinel: constrainedAdmission.frozen.sentinel });
+    Object.assign(report, result, { passed: result.status === 'passed' });
+    if (result.status === 'blocked') { report.blockingGate = 'CONSTRAINED_DECODING'; process.exitCode = 2; }
+  } else if (adherence) {
     if (!validSupervision(supervision, runId, report.startedAtMs)) throw new Error('Stale output-adherence supervision');
     const result = classifyAdherence(evidence, { runId, startedAtMs: report.startedAtMs, planSha256: adherencePlanSha,
       freezeSha256: adherenceAdmission.freezeSha256, policyId: policy.id, plan: adherencePlan, oracles: adherenceAdmission.frozen.oracles });
@@ -344,6 +383,19 @@ try {
       monitor.kill(); await closed;
     }
     writeFileSync(join(folder, 'instrumentation.txt'), instrumentOutput);
+    if (constrained && instrument) {
+      // Separate immutable diagnostic survives a later generic scoped stop message.
+      try {
+        const path = `${supervisionDirectory(runId)}/constrained-deadline.json`;
+        const value = JSON.parse(run('shell', `run-as ${pkg} sh -c 'if [ -f ${path} ]; then cat ${path}; else printf null; fi'`));
+        const emergency = validateConstrainedDeadline(value, runId);
+        if (emergency) {
+          writeFileSync(join(folder, 'device-emergency.json'), JSON.stringify(emergency, null, 2));
+          report.deviceEmergency = emergency; report.passed = false; report.status = 'failed';
+          report.blockingGate = 'EMERGENCY_CLEANUP'; process.exitCode = 1;
+        }
+      } catch (error) { if (report.passed) { report.status = 'failed'; report.passed = false; report.error = error.message; process.exitCode = 1; } }
+    }
     report.finishedAtMs = Date.now(); save();
     if (calibrationLease) releaseBatch(calibrationLease);
   } finally { frozenApks?.close(); }
