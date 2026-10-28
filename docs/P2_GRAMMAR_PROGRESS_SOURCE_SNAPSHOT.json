@@ -1,0 +1,22 @@
+{
+  "AGENTS.md": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5",
+  "docs/DIAGNOSTIC_SKILLS_PROVENANCE.json": "83de546432011afa9e398f35369cc59aad1504632237bfcaf771a1b58016c540",
+  "docs/DIAGNOSTIC_SKILLS_PROVENANCE.md": "acc83a815496d83bf48e1868cb7a54fd8b7dadf1d32b6b0b531d04b3ba6b2668",
+  "docs/P2_GRAMMAR_PROGRESS_BOUNDARY_REVIEW.md": "852eaa6e6fce2745a9048ad7449f367385c151849e1e017401276ed1bf8ab078",
+  "planning/fixtures/grammar-progress-v1/compact-prefix.txt": "83c529ea2b2087a42b77b2150671d303101307fbfa08a937c8428cd60f48cb5f",
+  "planning/fixtures/grammar-progress-v1/evidence-output.no-whitespace.schema.json": "9a67c6a8e9a57e64f92772d0e735d29eb70147a5193d6d2077e8d3ad53814373",
+  "planning/fixtures/grammar-progress-v1/keyword-sentinel.no-whitespace.schema.json": "195b5bff023f8872a55224630685c91da947a3d6a8d788fa5c02dd5bbef4ce2f",
+  "planning/fixtures/grammar-progress-v1/preparation-lock.json": "ac08cdab90f90b959681002270114f35d4e5bfdfa94b89aa167d5b334a9a6749",
+  "planning/fixtures/grammar-progress-v1/protocol.json": "e275160603849861da73032f24fe28d9e322c47ce33d088712cd8e16bb56416f",
+  "planning/fixtures/grammar-progress-v1/witnesses.json": "4092c4404e5377347b0ec6c9f772017100187e61168b0f04a3ee59aa4fcda8fa",
+  "scripts/diagnostics/mask_replay/Cargo.lock": "27dba748a19e0a33336c00870f028e2a4e5d515482f72a42e7a5bff2c845c219",
+  "scripts/diagnostics/mask_replay/Cargo.toml": "37b35850d58a5f8685fc301476e1e565b17be61b62929f3dde4278a8df9d372a",
+  "scripts/diagnostics/mask_replay/README.md": "927a23c527981d840bec7f390107b6adb6d4ba4ed5a57be644d9071d44483151",
+  "scripts/diagnostics/mask_replay/grammar_progress.py": "d7bdd545127a00d373904c7d9f46f28bab7d13a2fa78ab09e5a06980d862ee57",
+  "scripts/diagnostics/mask_replay/prepare.py": "e2f21cffaa683d275536c4bff69e2abaaa918e06f6e86f50cd14c4b5f44ed785",
+  "scripts/diagnostics/mask_replay/run.py": "94acaefaa1a7a694c5e5143238bd14e764ce7758b1a867f54e2a583290d4cc47",
+  "scripts/diagnostics/mask_replay/src/main.rs": "a4cc6fdace9ac7a35bb5d3f1fb62000487497cf7fc8f6622ba2380b0b30cd762",
+  "scripts/tests/test_mask_replay.py": "7f37ce1995857ebc5128c53b66e050f93722111283c292bc3a942613368f5095",
+  "scripts/verify-grammar-progress.sh": "09171decbccb0cbabc5ddcd0ab4a63d1ad8b85a045a0a4d8d828e9750efa5eee",
+  "shared/src/androidHostTest/kotlin/dev/edgecompanion/core/inference/litert/GrammarProgressFixturesTest.kt": "ec8fcaf29ad5e83774330e48d2ea9a1c150a1d6aa8aa922c96771d4a12f6cd18"
+}
