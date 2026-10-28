@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-28",
+  "installer": "Codex skill-installer/install-skill-from-github.py --method download",
+  "skills": [
+    {
+      "repository": "ytakano/rust_skills",
+      "revision": "9692ab77d916cb5aeb7f190651b76861c8a876f0",
+      "sourcePath": "skills/rust-c-ffi-safety",
+      "installedPath": "/Users/kezileo/.codex/skills/rust-c-ffi-safety",
+      "files": {
+        "EvaluationCatalog.md": "98202a736bce02092697f406eee48c7c887789334fd7a6f29fe2e627d5b55feb",
+        "SKILL.md": "ff007eaa4ae7c76d338c69ae345fdf9a90aa5b446720446f5dc70d1ec3c1790a"
+      }
+    },
+    {
+      "repository": "wshobson/agents",
+      "revision": "0874a27b17a22e2b7c2e2bcd725768e0803cad06",
+      "sourcePath": "plugins/shell-scripting/skills/bash-defensive-patterns",
+      "installedPath": "/Users/kezileo/.codex/skills/bash-defensive-patterns",
+      "files": {
+        "SKILL.md": "741b42d1fa3167f2131a17f3e0fe891e93be4fc87aa3c19e1de5fd26d763f711",
+        "references/details.md": "63397f4a2e167b44154c067164f4cc1a0127f3a52fc2963d330d5b761f991d1e",
+        "LICENSE": "f89abb55d9f073f38f1703e4518f0613c788c6174be7f13b8dfe48a1c076c746"
+      }
+    }
+  ],
+  "rustHardening": "reviewed, not installed or adopted"
+}

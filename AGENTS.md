@@ -24,6 +24,14 @@ Before relevant work, read the applicable `SKILL.md` and its relevant reference 
 
 Apply these skills in sympathy with the existing code and current user scope. Do not impose new frameworks or broad refactors merely to satisfy an example. Skills do not override higher-priority instructions or authorize destructive actions, external sharing, or Git operations. If a skill is unavailable, report that gap rather than pretending it was used.
 
+## Diagnostic Rust and shell skills
+
+- For Rust/C FFI in the isolated diagnostic tools, read `~/.codex/skills/rust-c-ffi-safety/SKILL.md` and its referenced `EvaluationCatalog.md` before editing or review. Keep native types and diagnostic ownership outside the Kotlin application boundary.
+- For Bash diagnostic/QA wrappers, read `~/.codex/skills/bash-defensive-patterns/SKILL.md` and relevant `references/details.md`; apply owned-process cleanup, quoting and failure propagation in the existing script's supported shell. Examples do not authorize extra file/system changes.
+- Continue using `python-testing-patterns`, `property-based-testing` and the Kotlin/KMP skills where applicable. Do not introduce a testing dependency merely because a skill mentions it.
+- `rust-hardening` was assessed but is not installed or adopted. Its mandatory lint, arithmetic, cast and feature-matrix policies require separate user agreement. Optional memory-safety, Koin and CameraX skills remain deferred.
+- Installation revisions, reviewed resources, licenses and file hashes are in `docs/DIAGNOSTIC_SKILLS_PROVENANCE.md` and its JSON companion. These machine-local skills are not application dependencies; do not install repositories, hooks, plugins or MCP connections as a side effect.
+
 ## Validation and review
 
 - Inspect configured modules and targets before selecting checks. Baseline commands are `./gradlew :androidApp:assembleDebug :shared:jvmTest :androidApp:lintDebug`.
