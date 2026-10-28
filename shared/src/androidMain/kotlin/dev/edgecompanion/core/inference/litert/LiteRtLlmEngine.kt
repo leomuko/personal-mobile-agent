@@ -7,12 +7,17 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.emitAll
+import dev.edgecompanion.core.inference.verification.ConstrainedDecoding
+import java.security.MessageDigest
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
 @OptIn(ExperimentalApi::class)
 class LiteRtLlmEngine(
     private val enabled: Boolean,
+    private val constrainedQaEnabled: Boolean = false,
+    private val monotonicMs: () -> Long = { System.nanoTime() / 1_000_000 },
     private val phaseObserver: ((LiteRtPhase) -> Unit)? = null,
 ) : LocalLlmEngine {
     private val lifecycle = Mutex()
@@ -21,6 +26,7 @@ class LiteRtLlmEngine(
     private var config: ModelConfig? = null
     @Volatile private var active: Running? = null
     @Volatile private var poisoned = false
+    @Volatile private var activeConstraint: ConstrainedSession? = null
 
     private class Running(val conversation: Conversation) {
         val done = CompletableDeferred<Unit>()
@@ -65,6 +71,47 @@ class LiteRtLlmEngine(
         lifecycle.withLock {
             if (poisoned) throw ModelException(ModelError.RESTART_REQUIRED)
             val current = config ?: throw ModelException(ModelError.NOT_INSTALLED)
+            val constraint = request.constraint
+            if (constraint != null) {
+                if (!enabled || !constrainedQaEnabled) throw ModelException(ModelError.CONTEXT_LIMIT)
+                val chat = request.chat ?: throw ModelException(ModelError.CONTEXT_LIMIT)
+                val checkLive = request.constraintEligibility ?: throw ModelException(ModelError.CONTEXT_LIMIT)
+                constraint.check(chat)
+                // Rehash independently at the platform boundary; no injectable hash can authorize native work.
+                ConstrainedDecoding.admit(constraint.caseId, chat.id, constraint.payload, constraint.question,
+                    constraint.schema) { bytes -> MessageDigest.getInstance("SHA-256").digest(bytes).joinToString("") { "%02x".format(it) } }
+                if (current.sha256 != ModelCatalog.gemma4.sha256 || current.backend != ModelBackend.GPU ||
+                    current.contextTokens != 2048 || current.maxOutputTokens != 512 || request.maxTokens != constraint.decodeTokenCap)
+                    throw ModelException(ModelError.CONTEXT_LIMIT)
+                val bound = GemmaChatBudget.validate(chat)
+                val session = ConstrainedSession(constraint, monotonicMs, Dispatchers.IO, create = {
+                    val conversation = checkNotNull(engine).createConversation(ConversationConfig(
+                        automaticToolCalling = false, enableResponseFormat = true,
+                        maxOutputToken = constraint.decodeTokenCap, thinkingConfig = ThinkingConfig(enableThinking = false),
+                        samplerConfig = SamplerConfig(topK = 1, topP = 1.0, temperature = 0.0, seed = 0)))
+                    object : ConstraintHandle {
+                        override fun send(callback: ConstraintCallback) {
+                            conversation.sendMessageAsync(constraint.payload, object : MessageCallback {
+                                override fun onMessage(message: Message) = callback.text(extractText(message))
+                                override fun onDone() = callback.done()
+                                override fun onError(throwable: Throwable) = callback.error(throwable)
+                            }, responseFormat = ResponseFormat.json(constraint.schema))
+                        }
+                        override fun statistics(): GenerationEvent.Finished {
+                            val info = conversation.getBenchmarkInfo()
+                            if (info.lastPrefillTokenCount > bound || info.lastDecodeTokenCount > constraint.decodeTokenCap)
+                                throw ModelException(ModelError.CONTEXT_LIMIT)
+                            return GenerationEvent.Finished(info.lastDecodeTokenCount, info.lastPrefillTokenCount,
+                                info.lastDecodeTokensPerSecond.takeIf { it.isFinite() && it >= 0 })
+                        }
+                        override fun cancel() = conversation.cancelProcess()
+                        override fun close() = conversation.close()
+                    }
+                }, uncertain = { poisoned = true }, checkLive = checkLive)
+                activeConstraint = session
+                try { emitAll(session.events()) } finally { activeConstraint = null }
+                return@withLock
+            }
             // This spike accepts only bounded synthetic fixtures. Free-form input waits for a verified preflight tokenizer.
             if (request.maxTokens !in 1..current.maxOutputTokens)
                 throw ModelException(ModelError.CONTEXT_LIMIT)
@@ -157,6 +204,7 @@ class LiteRtLlmEngine(
     }
 
     override suspend fun cancel() = withContext(Dispatchers.IO) {
+        activeConstraint?.cancel()
         active?.let { signalCancel(it) }
         Unit
     }
