@@ -16,6 +16,8 @@ data class VerificationProgress(val outcome: VerificationOutcome? = null, val va
     val cleanup: EncoderCleanup = EncoderCleanup.PENDING, val cleanupMs: Long? = null,
     val delivery: VerificationDelivery = VerificationDelivery.PENDING,
     val diagnosticOutput: String? = null,
+    val diagnosticTruncated: Boolean = false, val diagnosticReceivedUtf16Units: Long? = null,
+    val diagnosticUtf16Hex: String? = null,
     val error: ModelError? = null)
 class VerificationCall internal constructor(val events: Flow<VerificationProgress>, val state: StateFlow<VerificationProgress>,
     val preparation: StateFlow<ForegroundState>, private val stop: () -> Unit) {
@@ -86,10 +88,15 @@ internal class VerificationRun(private val context: EvidenceContext, private val
         }
         decide(outcome, error = event.error)
     }
-    fun cleaned(confirmed: Boolean, durationMs: Long) {
+    fun cleaned(confirmed: Boolean, durationMs: Long, diagnostics: ConstraintDiagnostics? = null) {
         if (!confirmed) revoke(ModelError.RESTART_REQUIRED)
+        if (diagnostics != null && (diagnostics.truncated ||
+                (state.value.outcome == VerificationOutcome.STRUCTURALLY_VALID && diagnostics.text != text.toString())))
+            revoke(ModelError.GENERATION_FAILED)
         mutable.update { it.copy(cleanup = if (confirmed) EncoderCleanup.CONFIRMED else EncoderCleanup.UNCERTAIN,
-            cleanupMs = durationMs, diagnosticOutput = if (policy == VerificationPolicy.V4) text.toString() else null,
+            cleanupMs = durationMs, diagnosticOutput = if (policy == VerificationPolicy.V4) diagnostics?.text ?: text.toString() else null,
+            diagnosticTruncated = diagnostics?.truncated ?: false, diagnosticReceivedUtf16Units = diagnostics?.receivedUtf16Units,
+            diagnosticUtf16Hex = diagnostics?.utf16Hex,
             error = if (confirmed) it.error else ModelError.RESTART_REQUIRED) }
     }
     private fun decide(outcome: VerificationOutcome, validation: OutputValidation? = null, error: ModelError? = null) {
