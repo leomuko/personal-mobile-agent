@@ -1,0 +1,532 @@
+{
+  "schema": 1,
+  "protocolId": "evidence-constrained-decoding-v2-draft-1",
+  "scope": "host-reference-and-strict-validator-checks-not-model-input",
+  "status": "reference-validation-pending",
+  "generatedTokens": 128,
+  "context": {
+    "detailIds": [
+      "a"
+    ],
+    "passages": [
+      {
+        "p": "sentinel-p",
+        "r": "1",
+        "original": "X",
+        "b": 0,
+        "e": 1
+      }
+    ]
+  },
+  "baseOutput": {
+    "o": "S",
+    "d": [
+      {
+        "i": "a",
+        "s": "S",
+        "e": [
+          {
+            "p": "sentinel-p",
+            "r": "1",
+            "b": 0,
+            "e": 1,
+            "q": "X"
+          }
+        ]
+      }
+    ]
+  },
+  "mutationSemantics": "Apply each single JSON-Pointer add/remove/replace to a fresh baseOutput; preserve rawOutput text when present. Use a vetted implementation, not these descriptors as a validator.",
+  "cases": [
+    {
+      "id": "missing-required-1",
+      "mutation": {
+        "op": "remove",
+        "path": "/o"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "missing-required-2",
+      "mutation": {
+        "op": "remove",
+        "path": "/d"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "missing-required-3",
+      "mutation": {
+        "op": "remove",
+        "path": "/d/0/i"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "missing-required-4",
+      "mutation": {
+        "op": "remove",
+        "path": "/d/0/s"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "missing-required-5",
+      "mutation": {
+        "op": "remove",
+        "path": "/d/0/e"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "missing-required-6",
+      "mutation": {
+        "op": "remove",
+        "path": "/d/0/e/0/p"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "missing-required-7",
+      "mutation": {
+        "op": "remove",
+        "path": "/d/0/e/0/r"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "missing-required-8",
+      "mutation": {
+        "op": "remove",
+        "path": "/d/0/e/0/b"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "missing-required-9",
+      "mutation": {
+        "op": "remove",
+        "path": "/d/0/e/0/e"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "missing-required-10",
+      "mutation": {
+        "op": "remove",
+        "path": "/d/0/e/0/q"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "extra-root",
+      "mutation": {
+        "op": "add",
+        "path": "/t",
+        "value": "unexpected"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "extra-detail",
+      "mutation": {
+        "op": "add",
+        "path": "/d/0/t",
+        "value": "unexpected"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "extra-span",
+      "mutation": {
+        "op": "add",
+        "path": "/d/0/e/0/t",
+        "value": "unexpected"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "wrong-root-type",
+      "mutation": {
+        "op": "replace",
+        "path": "",
+        "value": []
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "wrong-root-state",
+      "mutation": {
+        "op": "replace",
+        "path": "/o",
+        "value": "Q"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "wrong-detail-state",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/s",
+        "value": "Q"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "string-offset",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e/0/b",
+        "value": "0"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "fractional-offset",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e/0/b",
+        "value": 0.5
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "boolean-offset",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e/0/b",
+        "value": false
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "null-offset",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e/0/b",
+        "value": null
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "negative-offset",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e/0/b",
+        "value": -1
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "overflow-offset",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e/0/e",
+        "value": 65537
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "empty-details",
+      "mutation": {
+        "op": "replace",
+        "path": "/d",
+        "value": []
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "excess-details",
+      "mutation": {
+        "op": "replace",
+        "path": "/d",
+        "value": [
+          {
+            "i": "a",
+            "s": "S",
+            "e": [
+              {
+                "p": "sentinel-p",
+                "r": "1",
+                "b": 0,
+                "e": 1,
+                "q": "X"
+              }
+            ]
+          },
+          {
+            "i": "a",
+            "s": "S",
+            "e": [
+              {
+                "p": "sentinel-p",
+                "r": "1",
+                "b": 0,
+                "e": 1,
+                "q": "X"
+              }
+            ]
+          },
+          {
+            "i": "a",
+            "s": "S",
+            "e": [
+              {
+                "p": "sentinel-p",
+                "r": "1",
+                "b": 0,
+                "e": 1,
+                "q": "X"
+              }
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "excess-spans",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e",
+        "value": [
+          {
+            "p": "sentinel-p",
+            "r": "1",
+            "b": 0,
+            "e": 1,
+            "q": "X"
+          },
+          {
+            "p": "sentinel-p",
+            "r": "1",
+            "b": 0,
+            "e": 1,
+            "q": "X"
+          },
+          {
+            "p": "sentinel-p",
+            "r": "1",
+            "b": 0,
+            "e": 1,
+            "q": "X"
+          }
+        ]
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "empty-supported-spans",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e",
+        "value": []
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": true,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "empty-detail-id",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/i",
+        "value": ""
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "oversized-passage-id",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e/0/p",
+        "value": "PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "wrong-reference",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e/0/p",
+        "value": "other"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": true,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "wrong-revision",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e/0/r",
+        "value": "2"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": true,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "wrong-quotation",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e/0/q",
+        "value": "Y"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": true,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "oversized-ascii-quotation",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e/0/q",
+        "value": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": false,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "unicode-byte-overflow",
+      "mutation": {
+        "op": "replace",
+        "path": "/d/0/e/0/q",
+        "value": "😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀😀"
+      },
+      "expected": {
+        "sentinelSchemaValid": false,
+        "evidenceSchemaValid": true,
+        "strictAccepted": false
+      }
+    },
+    {
+      "id": "integral-decimal-is-an-integer",
+      "rawOutput": "{\"o\":\"S\",\"d\":[{\"i\":\"a\",\"s\":\"S\",\"e\":[{\"p\":\"sentinel-p\",\"r\":\"1\",\"b\":0,\"e\":1.0,\"q\":\"X\"}]}]}",
+      "expected": {
+        "sentinelSchemaValid": true,
+        "evidenceSchemaValid": true,
+        "strictAccepted": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "protocolId": "evidence-constrained-decoding-v2-draft-1",
+  "scope": "proposal-bytes-not-execution-freeze",
+  "status": "awaiting-independent-protocol-review",
+  "proposedRequests": 9,
+  "proposedDeadlineMs": 30000,
+  "cleanupWithinDeadline": true,
+  "reservedOutputTokens": 512,
+  "negativeDecodeTokenCap": 1,
+  "integrationApproved": false,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false,
+  "referenceSchemaValidationCompleted": false,
+  "files": {
+    "planning/P2_CONSTRAINED_DECODING_PROTOCOL_V2.md": "c59b6706b5cd390b569d10d99931f0fa93237f36c99584ff133dd730e4dd90b5",
+    "planning/fixtures/constrained-decoding-v2/evidence-output.schema.json": "36232d7c46e2343ad0a5b40c6328e1ff3ff10b6ef76d457a93b245052390e691",
+    "planning/fixtures/constrained-decoding-v2/keyword-sentinel.schema.json": "e10adc86c84b6615df190205cf94b1baae0c0d1ef228dda2b5c5fe999ca5be53",
+    "planning/fixtures/constrained-decoding-v2/invalid-type.schema.json": "041bb8c53280f55f249550a741e5493789a5d49c11d25a69eb00cf9eaccc06ab",
+    "planning/fixtures/constrained-decoding-v2/cases.json": "c7eceaf6fc6f7d56ddcbc881e2378713d242438fafc1f2b857275b49dd0ead11",
+    "docs/decisions/0007-constrain-evidence-output-before-changing-citations.md": "7ed5dde2fe45d2ad5155e54aeb168fae2363a8f6896fbb6cf70e1a4fdb0fdfc3",
+    "docs/P2_STRUCTURED_OUTPUT_CAPABILITY_AUDIT.json": "3e8a69006fa6816c6bd9167890dab5388f81af2a8f6c6a40dff74beed510c2a3",
+    "docs/P2_STRUCTURED_OUTPUT_AUDIT_REVIEW.md": "d99b225d10f570271a081364992d2a5fbb854845ca6e5d4c5a9c5662ff4ae46b",
+    "planning/fixtures/output-adherence-v1/prepared.json": "ca7f71bed8a91c3c3a05f369f7ef1b9e085c3dac97c906bc9f624fc65766e068",
+    "planning/fixtures/output-adherence-v1/preparation-lock.json": "88a985300cd4cc0c100f6541214328e68759558393fa25b86f8fea8a13b888a2",
+    "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/verification/EvidenceOutputValidator.kt": "10be77c8586f0ee9931c9c33b965acd3608fe379010afde75e27b1dfd5526000",
+    "planning/fixtures/constrained-decoding-v2/host-keyword-checks.json": "033d6fbd4544cbedf7b80450a29a00c066766c099cf8f8018ce90ecf1af227de",
+    "planning/fixtures/output-adherence-v1/validator-cases.tsv": "bfab256a64bf3ef83470ea107d45cb4bc4b1b3c4547c7fb0c559c622eb0baafc",
+    "planning/fixtures/output-adherence-v1/validator-cases.sha256": "27b75840367e64300678e10082e0f33f26dd6ce6c62101becde7b9104ce598ad"
+  }
+}
