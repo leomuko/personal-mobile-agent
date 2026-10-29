@@ -1,0 +1,397 @@
+{
+  "schema": 1,
+  "scope": "source-only-build-prerequisite-audit-not-execution-freeze",
+  "sdkRevision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+  "litertRevision": "9fe5be45564c868408e6514c8aabb83e211a0911",
+  "decisionLockSha256": "c9185f2fa377a5813c935df49a557554f29e86336d8c0c8d05df63c1c80014c7",
+  "abis": [
+    "arm64-v8a",
+    "x86_64"
+  ],
+  "files": [
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": ".bazelrc",
+      "gitBlob": "5dfe25e799e2418f16d6688727a113f16a8c75d7",
+      "sha256": "6e00c6071ef32a41be2a5424711a7622eaf5e4f4be43299a5e28fe08f45361b7",
+      "bytes": 23500
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": ".bazelversion",
+      "gitBlob": "e8be68404bcb3074fc73efd48f88e3c1ec59fd3b",
+      "sha256": "ecdac2d3f13898bc2fb0538911463dfe7411e3428c8f4587b944d4f2a80d9cae",
+      "bytes": 6
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": ".gitattributes",
+      "gitBlob": "efbe086aaf4c30a189760edcc4f04db1bb19de21",
+      "sha256": "5d45d05249ba7291de181a2d6fa5c9168beba9faf57986bc4559077a1493cd54",
+      "bytes": 348
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": ".github/workflows/ml-ci-build-android.yml",
+      "gitBlob": "95aabb3c00171994a16ed863209114f28c46a95c",
+      "sha256": "61013cabb8f51c2ae2613fbc3fc9e19096b314dc44fb5f363dd1b5ffd5980723",
+      "bytes": 10360
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "BUILD",
+      "gitBlob": "153d548166bdd3aecda70baf85b105f058375778",
+      "sha256": "47de8ccd82a4bdfb836a2f605894a21beba0759c602bfebffd07358552f5cf4f",
+      "bytes": 582
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "BUILD.llguidance",
+      "gitBlob": "d8330d53fc29f47e24530b04e8da19501b3969a9",
+      "sha256": "cbb3a5922e2a944f9890a4d518ea2482a1f9d77cbb1362478ca4d658621a7cda",
+      "bytes": 141
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "Cargo.lock",
+      "gitBlob": "8422d6d8d105c6710395ff539c19692566ee5820",
+      "sha256": "b95103f9b316784814f1e39cc0124cbc134e61d3f0f27c7ef514408e65b7916a",
+      "bytes": 33833
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "Cargo.toml",
+      "gitBlob": "0e60f7b8c9cc2fa9d4c0b5ae63ae42a2ce0cb3c2",
+      "sha256": "982e741fd284d75dbcca41d5d118225fc97cf80be85adad1800c95f35102af70",
+      "bytes": 1051
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "LICENSE",
+      "gitBlob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bytes": 11357
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "PATCH.rules_rust",
+      "gitBlob": "281f053524e5890127b9d451a6b8d043675a405a",
+      "sha256": "3df78ef3074aea8548c923b8fe683cbb6126667c491d37ab08f453ef8d617702",
+      "bytes": 469
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "WORKSPACE",
+      "gitBlob": "38663f534cbb7e9c268994e55f366ce551f5c667",
+      "sha256": "dee68de49f5212a0b12d47d80fb59f63314e74c1655a60e3f11a055d20d0507a",
+      "bytes": 20633
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "agents/skills/create-litert-lm-android-demo-app/references/dependency_source_build.md",
+      "gitBlob": "c3b8ae23684f3da2b6e2faae73c36d47b2998950",
+      "sha256": "c4e66e857fa35feb9baeab48a4127ef32609d1f913f548b546cf5e4f41eeda83",
+      "bytes": 6258
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "android_ndk_env.bzl",
+      "gitBlob": "1a9b7a48a71684aa774ec374037836c0d5cffb77",
+      "sha256": "2f6a8e7295bb482e1cd3b28b04185706ebbc37f8ba757e7312d4707b35396a23",
+      "bytes": 774
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "build_config/BUILD",
+      "gitBlob": "64d020f3f9d5ba8b70a01477e7d125f56bc9ef7a",
+      "sha256": "65f31e6686270374eec2c7789bdf3cde4e384439b36255163eef920d959b16be",
+      "bytes": 1770
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "c/BUILD",
+      "gitBlob": "f185806db900651d3a6ed11c7a7005868fbf7bf9",
+      "sha256": "043cd8c98ea7f3fdd278c779a8b12828bd3507fa7708a7b7ba727052f8837b0e",
+      "bytes": 13058
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "cargo-bazel-lock.json",
+      "gitBlob": "db751ed73e8f492bf1bb084c1e48248e134bcce8",
+      "sha256": "5ba69a1641a462bf8fa04d0d8742fc5561f4c41c15d1ceb6abd4630132df2304",
+      "bytes": 224611
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "cmake/packages/litert_lm/CMakeLists.txt",
+      "gitBlob": "c5214b76386c2c3fe3b979e3969f6d5666ededf4",
+      "sha256": "fa744f7d34b7af3569c2675992b892bcedcb543a91f7ed701b783c06da04a8d8",
+      "bytes": 13721
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "cmake/patches/stubs/gemma_model_constraint_provider.cc",
+      "gitBlob": "1b44dd4c4bc52924b26d3c77f2d7de95546a11b5",
+      "sha256": "265d2efc2a231eeef5af53020c6b2cfc621134ba3d92dcc980571a998d942285",
+      "bytes": 1261
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "docs/getting-started/build-and-run.md",
+      "gitBlob": "42186db746bee03c9e9f1b41810bacb6bce18753",
+      "sha256": "bed069f743490bdb0626878e8af31ccc1ca43feb07001ac16f4bf21a4b761d94",
+      "bytes": 15499
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "kotlin/java/com/google/ai/edge/litertlm/BUILD",
+      "gitBlob": "bfe625b2377258b3a72793042879bb0a5f5c2004",
+      "sha256": "fcf0524fd71a9998b3774a65a6b45867059fd8b75944514e08284804d68f512d",
+      "bytes": 1481
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "kotlin/java/com/google/ai/edge/litertlm/jni/BUILD",
+      "gitBlob": "d064a446642006ff18d7931b22dfc641e5cca1df",
+      "sha256": "49f6ea591e79952c19fbb922adaa341755ca5ef28543b07877acaa3d43bc7aee",
+      "bytes": 3426
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "prebuilt/android_arm64/BUILD",
+      "gitBlob": "99ac1acde9865618a02b77679f4f29142650f606",
+      "sha256": "88f3f986032f2af80e0888b36a6de6c80a10319bbc68150ac760428374db820b",
+      "bytes": 736
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "prebuilt/android_x86_64/BUILD",
+      "gitBlob": "99ac1acde9865618a02b77679f4f29142650f606",
+      "sha256": "88f3f986032f2af80e0888b36a6de6c80a10319bbc68150ac760428374db820b",
+      "bytes": 736
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "runtime/components/BUILD",
+      "gitBlob": "0397734c6d25ff92572131fb9320a19ecaaa7391",
+      "sha256": "e46c8b982a1692bee4cf3c024344a2a29e33f7550d35c48a589cb24bff36390b",
+      "bytes": 16497
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "runtime/components/constrained_decoding/BUILD",
+      "gitBlob": "ef0e48d66295629e65cda4bdf0f1486e2ffbeb57",
+      "sha256": "4a41bae3fa36e15910b4e1e3e773bf7610957c83c148823dc3d10516a0b10e19",
+      "bytes": 20356
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "runtime/components/constrained_decoding/constraint_provider_factory.cc",
+      "gitBlob": "e2a3187a0a76113ceddc4d4f50ee0e10ffa9e3b1",
+      "sha256": "d6ba4c40b9730284a59b43c72415143b43c7643b4aa42d8691c42034a74ab9be",
+      "bytes": 2692
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "runtime/components/constrained_decoding/gemma_model_constraint_provider.h",
+      "gitBlob": "b9de8b41d4b3650e6a45bd96ab30895eb63bab29",
+      "sha256": "72ba416326bbc569d940d8b84192547bba4de9809b9b751e76d649d0628f7c66",
+      "bytes": 7271
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "runtime/components/constrained_decoding/llg_constraint_provider.cc",
+      "gitBlob": "6c3157440a7569ca022959ea2ed90e10305d23fe",
+      "sha256": "1a503a7e69992def8fd461c108e08d743eaa2209f3c1be27e9665c6de556e3df",
+      "bytes": 5831
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "runtime/components/constrained_decoding/llguidance_schema_utils.cc",
+      "gitBlob": "2423a083bd3411e5c04b88d882aa0d6d544cb288",
+      "sha256": "617201fa576b87569070752bc2bfcfb824b4c8f2902c08847a85e1a7d003c692",
+      "bytes": 1501
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "runtime/components/sampler_factory.cc",
+      "gitBlob": "4fcd56369f6492cd35a2d665814db84ebaa30b8e",
+      "sha256": "b6052002d6252720a30ae7076656841ae74bf906991c2003fdc54f28164bffa5",
+      "bytes": 35639
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "runtime/conversation/BUILD",
+      "gitBlob": "8b5db29315dc19adb61ae661f569b7f78057867b",
+      "sha256": "526d6799cea295471286c28ae3dc9a2fad27727b91a19be062856d5c3f0d2834",
+      "bytes": 8099
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "runtime/core/BUILD",
+      "gitBlob": "04b28015e1fb493319433efd07ad349747463a81",
+      "sha256": "6b1065607891670886b94fcaf2507d84ef97b022624cbfa7d05ebef6a206e2d7",
+      "bytes": 24093
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "runtime/engine/BUILD",
+      "gitBlob": "7d5aa09bce87894b3af0a7855ca95efc6ca341f9",
+      "sha256": "e1a412f7a74aa3b9e2d6cc5303dd21651ea50f4e5281239c64fb7b0595cf7cd0",
+      "bytes": 16682
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "runtime/executor/BUILD",
+      "gitBlob": "65b95eb20b62efed97293437c17db4da1344c692",
+      "sha256": "3d20b58f3e77946ef7bcdd779184324f498829a3743831ddf660e7cb68e3700e",
+      "bytes": 45891
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "runtime/executor/litert/BUILD",
+      "gitBlob": "832f7de669ab01b8d1caa168247863dcba3f953b",
+      "sha256": "e90778862495c1e5489e79f9c3310258a46001ae733ad5588e28b58478097ca6",
+      "bytes": 3248
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "runtime/executor/llm_litert_compiled_model_executor.cc",
+      "gitBlob": "56ed20af5635bbee43db166e2d61a4a6f0fa28ce",
+      "sha256": "7ced94dfa3e3938c1644f235dd35d68cda2e8b03e113fa5b945d8f1156feb6e5",
+      "bytes": 92361
+    },
+    {
+      "repository": "LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "support/tokenizer/BUILD",
+      "gitBlob": "5be49e085ab92ab0d7c917b0f2786ba089717857",
+      "sha256": "32032ff8eaea872f4dc77145d3140960b02f42a81ba305500a94387550dd6b15",
+      "bytes": 5325
+    },
+    {
+      "repository": "LiteRT",
+      "revision": "9fe5be45564c868408e6514c8aabb83e211a0911",
+      "path": "WORKSPACE",
+      "gitBlob": "65194ce2f0012d3a7200bf5843339a423dcbff85",
+      "sha256": "61bb5a7949ad9013450c40b4e47a6800a12ff3a82159b625bc9389d09933164e",
+      "bytes": 14567
+    },
+    {
+      "repository": "LiteRT",
+      "revision": "9fe5be45564c868408e6514c8aabb83e211a0911",
+      "path": "litert/BUILD",
+      "gitBlob": "1209ffe5b81586bd274ef030024da7fe45603190",
+      "sha256": "69b16b5fabc0ae082bb8da368aa3fd258645cf8ef225ed6e86d8b184d347d90e",
+      "bytes": 10203
+    },
+    {
+      "repository": "LiteRT",
+      "revision": "9fe5be45564c868408e6514c8aabb83e211a0911",
+      "path": "litert/runtime/BUILD",
+      "gitBlob": "ffce4167204f36466573c330ad3d64cc90e2872d",
+      "sha256": "92c11c16f4dc0d2da72dc15f4e9e234e162b9c502a8634daeb6743c41da85976",
+      "bytes": 35124
+    },
+    {
+      "repository": "LiteRT",
+      "revision": "9fe5be45564c868408e6514c8aabb83e211a0911",
+      "path": "litert/runtime/accelerators/BUILD",
+      "gitBlob": "4d0c349cf62ee177ee6ad66fa6e3b5f81f532242",
+      "sha256": "a8f9734f7bfb76e13f772b3fd342c230199f4aef871615d96387404ac13ca295",
+      "bytes": 4748
+    },
+    {
+      "repository": "LiteRT",
+      "revision": "9fe5be45564c868408e6514c8aabb83e211a0911",
+      "path": "litert/runtime/accelerators/gpu/BUILD",
+      "gitBlob": "e3deb569a84c0a6d6ce274bd28be2b1cfb55ae41",
+      "sha256": "d960e99c034897af6c7527f474a643261a23c0d2c39f1d21ea7241f815821897",
+      "bytes": 16348
+    },
+    {
+      "repository": "LiteRT",
+      "revision": "9fe5be45564c868408e6514c8aabb83e211a0911",
+      "path": "litert/runtime/accelerators/gpu/ml_drift_cl_gl_accelerator.cc",
+      "gitBlob": "f0fe4cb7a18b3bdeac4e720716f9c9891c392717",
+      "sha256": "4515d5efe08911c12f97a566bdc7006a2f3b7fe88d31c03711a07aa05dbb1663",
+      "bytes": 7710
+    },
+    {
+      "repository": "LiteRT",
+      "revision": "9fe5be45564c868408e6514c8aabb83e211a0911",
+      "path": "ml_drift_delegate/delegate/BUILD",
+      "gitBlob": "830940c3f58e63ae62a23e9ac5289ffc4b7cde67",
+      "sha256": "cbb5e99feb3dca60002e64cad038e74cbc0b2d4dbe86edd962e082fea6ad68ed",
+      "bytes": 47435
+    },
+    {
+      "repository": "LiteRT",
+      "revision": "9fe5be45564c868408e6514c8aabb83e211a0911",
+      "path": "third_party/litert_gpu/litert_gpu.BUILD",
+      "gitBlob": "864ef68040a7e295f2900c68f469cdf552868592",
+      "sha256": "f8a2161705ebc14e9fe29b99a8630c210a1ba169461ca031524f9ab3df68084d",
+      "bytes": 687
+    },
+    {
+      "repository": "LiteRT",
+      "revision": "9fe5be45564c868408e6514c8aabb83e211a0911",
+      "path": "third_party/litert_gpu/workspace.bzl",
+      "gitBlob": "ed5b471b7439fd83a2caccac6a033c01a90b9bef",
+      "sha256": "b0cb2b886a29b211915cc3e7a4968f1af89bc8d744b20e8eed08cf86be666583",
+      "bytes": 969
+    },
+    {
+      "repository": "LiteRT",
+      "revision": "9fe5be45564c868408e6514c8aabb83e211a0911",
+      "path": "third_party/litert_prebuilts/litert_prebuilts.BUILD",
+      "gitBlob": "db31e30dd6f788d06fc441764c29d57c6a97c81e",
+      "sha256": "e264bc8d4d40ce45d119ad0400f326f405c0da359e4ff94d18feffaae7cc3bce",
+      "bytes": 684
+    },
+    {
+      "repository": "LiteRT",
+      "revision": "9fe5be45564c868408e6514c8aabb83e211a0911",
+      "path": "third_party/litert_prebuilts/workspace.bzl",
+      "gitBlob": "7ff9016a15681747a8c9156f08feb90a0227c5fe",
+      "sha256": "012bda7e5a86b1742371dec976d82de2002b774dffe6d3f4dcc0fbee2b4b944f",
+      "bytes": 983
+    }
+  ]
+}
