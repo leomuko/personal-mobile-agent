@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "id": "android-runtime-source-prerequisites-v1",
+  "scope": "source-audit-only-not-build-or-device-execution-freeze",
+  "decisionLockSha256": "c9185f2fa377a5813c935df49a557554f29e86336d8c0c8d05df63c1c80014c7",
+  "files": {
+    "scripts/diagnostics/android_runtime_recipe/audit.py": "8bfb0174994fee39e23e91c9acfe7fed9c5c3c755fada74f9e3e5caa19235715",
+    "scripts/diagnostics/android_runtime_recipe/README.md": "4cc2dd3488d5e0c4c320d61c6d3aa20f11fdaf25c8f2128397fc3613d690e413",
+    "scripts/tests/test_android_runtime_recipe.py": "6c817be0d4cf8990efffb3e802405c314d208546945c02251d5de9c124eae0eb",
+    "planning/fixtures/android-runtime-build-v1/source-inputs.json": "57145ce62d14f232d202f79919b0e841deec4c14df7382296330760fda7ebd81",
+    "docs/P2_ANDROID_RUNTIME_BUILD_PREREQUISITES.md": "590803f53d45169c3ad3d5557996b087f42a605ca30946f3739b91162e06e60d"
+  },
+  "completeBuildRecipeFrozen": false,
+  "artifactBuildAdmission": false,
+  "deviceExecutionAuthorized": false,
+  "semanticSearchEnabled": false
+}
