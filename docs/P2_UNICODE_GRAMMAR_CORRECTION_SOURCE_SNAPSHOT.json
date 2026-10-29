@@ -1,0 +1,19 @@
+{
+  "docs/P2_UNICODE_GRAMMAR_CORRECTION_PROPOSAL_V1_REVIEW.md": "af3750f72a44bb36877221f51d885f55e153bd41c415741aa63d57470f681ce0",
+  "docs/P2_UNICODE_GRAMMAR_CORRECTION_RESULTS.md": "8f8e0685ad8369b4b79bdf53509f13008bd0a48cbcb6003b0b974e081e8a84e2",
+  "planning/P2_UNICODE_GRAMMAR_CORRECTION_PROPOSAL_V1.md": "e11725b559cd4973288e27bbb24688dac558795f35a0b0a0dcbbce943ad7d727",
+  "planning/fixtures/grammar-progress-v2-unicode/compiler-cases.json": "7b056183748a5a0a9ffe8d3530603e850633c4682b6579671c80a9d93b4c51c2",
+  "planning/fixtures/grammar-progress-v2-unicode/evidence-output.schema.json": "ecb21f35e6604bc4da2c6c58eb5cc486f42225bdd81ce05c37c28112f4d3c769",
+  "planning/fixtures/grammar-progress-v2-unicode/keyword-sentinel.schema.json": "3753fc9a5393a7e66de59a49c75febb795bb8a5653fb427ab8add82782c50a3b",
+  "planning/fixtures/grammar-progress-v2-unicode/preparation-lock.json": "4e5dd4b9bad7e93bdc300363c7d5000b73d14df7ffdf6c548c0f42ea2bbe9277",
+  "planning/fixtures/grammar-progress-v2-unicode/protocol.json": "9ba23cd6fcbcf88b19e08f775d9334ee83dde8974a6f615e269053cf408bdd30",
+  "planning/fixtures/unicode-correction-proposal-v1/proposal-lock.json": "099cd96d97ac4646b86e7916fc1db1ee7e09ae9e956d3a97e1dfffaa60edf29c",
+  "planning/fixtures/unicode-correction-proposal-v1/upstream-audit.json": "7cdaa75f4dfc3a56a2a50f446963cb5fe53266e4e257d91154cd7fd286d00faf",
+  "scripts/diagnostics/unicode_correction/LICENSE.upstream": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+  "scripts/diagnostics/unicode_correction/PATCH.unicode-value-strings": "a83792c7c0232d05bcb2d3459d281979a21cf3547faac0d1d4298529d89173cf",
+  "scripts/diagnostics/unicode_correction/README.md": "6bfbb27b4ec8140520ddbdd8973820260106a980d550b4a3a4d0df73c6ce1442",
+  "scripts/diagnostics/unicode_correction/compiler_probe.rs": "d625a885882d05eb2a8519438779225854522469ce30f29c894c6ce7680ce23b",
+  "scripts/diagnostics/unicode_correction/fixtures.py": "6261a915c2d6fa248726a95f08e18b30b48d03c308fa3d00356c1c712e6f51e3",
+  "scripts/diagnostics/unicode_correction/run.py": "517ffd3aa58f0ad3c6382f8362aec8e24a7adb62e15eabaa9aa662cc38e0cc4d",
+  "scripts/tests/test_unicode_correction.py": "fb1b3950d4ca84b14239cc856707342146b9b23bd3b90ec1934dd2cba70f301b"
+}
