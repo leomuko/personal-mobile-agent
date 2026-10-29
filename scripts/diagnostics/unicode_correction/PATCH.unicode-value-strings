@@ -1,0 +1,119 @@
+--- vendor/llguidance-1.3.0/src/json/compiler.rs
++++ vendor/llguidance-1.3.0/src/json/compiler.rs
+@@ -3,7 +3,7 @@
+ use crate::json::schema::{NumberSchema, StringSchema};
+ use crate::{regex_to_lark, HashMap};
+ use anyhow::{anyhow, bail, Context, Result};
+-use derivre::{JsonQuoteOptions, RegexAst};
++use derivre::{ExprRef, JsonQuoteOptions, RegexAst};
+ use indexmap::{IndexMap, IndexSet};
+ use serde::{Deserialize, Serialize};
+ use serde_json::{json, Value};
+@@ -28,6 +28,8 @@
+     pub whitespace_pattern: Option<String>,
+     pub coerce_one_of: bool,
+     pub lenient: bool,
++    /// Host-candidate opt-in for regex-free value strings; false preserves the pinned path.
++    pub json_allow_general_unicode_escapes: bool,
+     #[serde(skip)]
+     pub retriever: Option<RetrieveWrapper>,
+ }
+@@ -58,6 +60,8 @@
+ 
+     any_cache: Option<NodeRef>,
+     string_cache: Option<NodeRef>,
++    unicode_scalar_cache: Option<ExprRef>,
++    unicode_string_cache: HashMap<(usize, Option<usize>), ExprRef>,
+     item_separator_cache: Option<NodeRef>,
+     key_separator_cache: Option<NodeRef>,
+ }
+@@ -80,6 +84,7 @@
+             whitespace_flexible: true,
+             coerce_one_of: false,
+             lenient: false,
++            json_allow_general_unicode_escapes: false,
+             retriever: None,
+         }
+     }
+@@ -138,6 +143,8 @@
+             pending_definitions: vec![],
+             any_cache: None,
+             string_cache: None,
++            unicode_scalar_cache: None,
++            unicode_string_cache: HashMap::default(),
+             item_separator_cache: None,
+             key_separator_cache: None,
+             pattern_cache: PatternPropertyCache::default(),
+@@ -725,7 +732,7 @@
+         Ok(r)
+     }
+ 
+-    fn gen_json_string(&self, opts: StringSchema) -> Result<RegexAst> {
++    fn gen_json_string(&mut self, opts: StringSchema) -> Result<RegexAst> {
+         let min_length = opts.min_length;
+         let max_length = opts.max_length;
+         if let Some(max_length) = max_length {
+@@ -736,6 +743,9 @@
+                     ),
+                 }));
+             }
++        }
++        if opts.regex.is_none() && self.options.json_allow_general_unicode_escapes {
++            return self.json_unicode_value_string(min_length, max_length);
+         }
+         if min_length == 0 && max_length.is_none() && opts.regex.is_none() {
+             return Ok(self.json_quote(RegexAst::Regex("(?s:.*)".to_string())));
+@@ -811,6 +821,53 @@
+                 max_length.map_or("".to_string(), |v| v.to_string())
+             ))))
+         }
++    }
++
++    /// Adapted from guidance-ai/llguidance commit 7aa1c3b67ec97cee62dc23123204a4351e9d40d4.
++    /// MIT, Copyright (c) Microsoft Corporation; see retained upstream license/provenance.
++    /// Only regex-free string values enter here. A surrogate pair is one scalar.
++    /// Unlike the upstream helper, literal DEL remains a valid JSON scalar.
++    fn json_unicode_value_string(
++        &mut self,
++        min_length: usize,
++        max_length: Option<usize>,
++    ) -> Result<RegexAst> {
++        let key = (min_length, max_length);
++        if let Some(expr) = self.unicode_string_cache.get(&key) {
++            return Ok(RegexAst::ExprRef(*expr));
++        }
++        let min = u32::try_from(min_length)
++            .with_context(|| format!("minLength ({min_length}) exceeds the supported range"))?;
++        let max = max_length
++            .map(|value| {
++                u32::try_from(value)
++                    .with_context(|| format!("maxLength ({value}) exceeds the supported range"))
++            })
++            .transpose()?
++            .unwrap_or(u32::MAX);
++        let scalar = if let Some(expr) = self.unicode_scalar_cache {
++            expr
++        } else {
++            // Same fixed named-escape policy as the pinned JsonQuote path. No new policy API.
++            // First two Unicode alternatives exclude the surrogate range. Third binds a pair.
++            let expression = concat!(
++                r#"[^"\\\x00-\x1F]|\\["\\bfnrt]|"#,
++                r"\\u(?:[0-9a-ce-fA-CE-F][0-9a-fA-F]{3}",
++                r"|[dD][0-7][0-9a-fA-F]{2}",
++                r"|[dD][89aAbB][0-9a-fA-F]{2}\\u[dD][c-fC-F][0-9a-fA-F]{2})"
++            );
++            let expr = self.builder.regex.regex(expression)?;
++            self.unicode_scalar_cache = Some(expr);
++            expr
++        };
++        let ast = RegexAst::Concat(vec![
++            RegexAst::Literal("\"".to_string()),
++            RegexAst::Repeat(Box::new(RegexAst::ExprRef(scalar)), min, max),
++            RegexAst::Literal("\"".to_string()),
++        ]);
++        let expr = self.builder.regex.add_ast(ast)?;
++        self.unicode_string_cache.insert(key, expr);
++        Ok(RegexAst::ExprRef(expr))
+     }
+ 
+     fn gen_json_array(&mut self, arr: &ArraySchema) -> Result<NodeRef> {
