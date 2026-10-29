@@ -1,0 +1,134 @@
+{
+  "schema": 1,
+  "decisionId": "android-unicode-runtime-integration-v1-draft-1",
+  "scope": "read-only-deployment-architecture-assessment",
+  "source": {
+    "repository": "google-ai-edge/LiteRT-LM",
+    "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+    "files": {
+      "docs/getting-started/build-and-run.md": "bed069f743490bdb0626878e8af31ccc1ca43feb07001ac16f4bf21a4b761d94",
+      "kotlin/java/com/google/ai/edge/litertlm/BUILD": "fcf0524fd71a9998b3774a65a6b45867059fd8b75944514e08284804d68f512d",
+      "kotlin/java/com/google/ai/edge/litertlm/jni/BUILD": "49f6ea591e79952c19fbb922adaa341755ca5ef28543b07877acaa3d43bc7aee",
+      "BUILD.llguidance": "cbb3a5922e2a944f9890a4d518ea2482a1f9d77cbb1362478ca4d658621a7cda",
+      "BUILD": "47de8ccd82a4bdfb836a2f605894a21beba0759c602bfebffd07358552f5cf4f",
+      "WORKSPACE": "dee68de49f5212a0b12d47d80fb59f63314e74c1655a60e3f11a055d20d0507a",
+      ".bazelrc": "6e00c6071ef32a41be2a5424711a7622eaf5e4f4be43299a5e28fe08f45361b7",
+      ".bazelversion": "ecdac2d3f13898bc2fb0538911463dfe7411e3428c8f4587b944d4f2a80d9cae",
+      "Cargo.toml": "982e741fd284d75dbcca41d5d118225fc97cf80be85adad1800c95f35102af70",
+      "Cargo.lock": "b95103f9b316784814f1e39cc0124cbc134e61d3f0f27c7ef514408e65b7916a",
+      "android_ndk_env.bzl": "2f6a8e7295bb482e1cd3b28b04185706ebbc37f8ba757e7312d4707b35396a23",
+      ".github/workflows/ml-ci-build-android.yml": "61013cabb8f51c2ae2613fbc3fc9e19096b314dc44fb5f363dd1b5ffd5980723",
+      "cmake/packages/litert_lm/CMakeLists.txt": "fa744f7d34b7af3569c2675992b892bcedcb543a91f7ed701b783c06da04a8d8",
+      "cmake/patches/stubs/gemma_model_constraint_provider.cc": "265d2efc2a231eeef5af53020c6b2cfc621134ba3d92dcc980571a998d942285",
+      "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    "gitTreeSha256": "6db88fee911e43c21e396725fd0a339ca8e612b0dc8cfee351fceef8239bb464",
+    "all15FilesMatchRetainedGitBlobIds": true
+  },
+  "publishedSdk": {
+    "coordinate": "com.google.ai.edge.litertlm:litertlm-android:0.17.1",
+    "aarSha256": "a8aeaa6b128e9b0f1c7fe5e620932a7030cfff1ac9c0dc133d8c79711de5cf4d",
+    "members": {
+      "classes.jar": "47c0de5858be5e068f4784bee22c523e8acbd8aa00033154f78dc09138453ac5",
+      "jni/arm64-v8a/liblitertlm_jni.so": "44f900f3ea6c5224f3395c1548dfa7e825f4412ba3833f994c5c306831a57086",
+      "jni/x86_64/liblitertlm_jni.so": "9b0a908ba8ef5e54b3191de963acd4272e1f10aee1df61d9912bb586a35a5d4a"
+    },
+    "nativeEntries": [
+      "jni/arm64-v8a/liblitertlm_jni.so",
+      "jni/x86_64/liblitertlm_jni.so"
+    ],
+    "cachedArtifactReverified": true
+  },
+  "hostCorrection": {
+    "patchPath": "scripts/diagnostics/unicode_correction/PATCH.unicode-value-strings",
+    "patchSha256": "a83792c7c0232d05bcb2d3459d281979a21cf3547faac0d1d4298529d89173cf",
+    "compilerBefore": "bcae5ae216a14848b2d1c5a9a1b7636aabf734d1adf7df07cc7b47b339980751",
+    "compilerAfter": "5a8f39a3688800ec86a80be4eeeca518991b905a1a3bf8435266cfbb1c12ef5c",
+    "hostGate": {
+      "compilerChecks": 910,
+      "originalChecks": 41,
+      "retainedQaEvidence": [
+        {
+          "path": "build/unicode-correction-v1/qa-independent-1/qa-summary.json",
+          "sha256": "8d34530ec862624085ea0a6e9ed456ef18428455b8a9fae07b7a87d815155aa1",
+          "scope": "independent-host-only-compiler-and-original-gate-replay",
+          "compilerChecks": 910,
+          "originalGateChecks": 41
+        },
+        {
+          "path": "build/unicode-correction-v1/qa-current-review-d4_h787v/qa-summary.json",
+          "sha256": "c8a6b8e3690e0fcb27e952427f03fac2fd7f2e34fe5df8724be35d3a80804dd6",
+          "scope": "latest user-supplied QA replay",
+          "compilerChecks": 910,
+          "originalGateChecks": 41
+        }
+      ]
+    },
+    "registrySubsetLockSha256": "27dba748a19e0a33336c00870f028e2a4e5d515482f72a42e7a5bff2c845c219",
+    "fullSdkCargoLockSha256": "b95103f9b316784814f1e39cc0124cbc134e61d3f0f27c7ef514408e65b7916a"
+  },
+  "currentProjectInputs": {
+    "settings.gradle.kts": "19e437f878ceb3da619e41ea30302623057be40cb8737b56fa58f72ae1dcb4b7",
+    "gradle/libs.versions.toml": "335334a90cd3e2e02d7b4a3b97912e5b8d116df2107aa43e1a047f5399d5b8ce",
+    "shared/build.gradle.kts": "4d5ef2d31b1c5d308346a77d3f83bda4bcc44181016025f235a1645cc49c6a9e",
+    "androidApp/build.gradle.kts": "9f0caafebc626e8413532d6fcf2e28a3856f9851d7fc6166346031a61f35a3d8",
+    "planning/DEFERRED_ISSUES.md": "c493ae78b6dcbea62111322339e3bfe7c62210e2982ba09fccec0b1d6850d003"
+  },
+  "retainedSnapshots": {
+    "docs/P2_GRAMMAR_PROGRESS_SOURCE_SNAPSHOT.json": "20a167d9d1de9cbb3e825efbdd3557415e6b5bc08f561305b93d6c82309c8ee0",
+    "docs/P2_ESCAPED_UNICODE_BOUNDARY_SOURCE_SNAPSHOT.json": "92bc5cb8fa39d43b561d8dc6dcf8206c8cd3afc756c5393f156c3a71e2f5fcb1",
+    "docs/P2_UNICODE_GRAMMAR_CORRECTION_SOURCE_SNAPSHOT.json": "e89df35d7df61dce3366486eeb5ba77cd7655aa23a71ee1cebe25591584ba8f7"
+  },
+  "selectedRoute": "recommended-pinned-source-control-and-candidate-AARs-in-secureQa-only",
+  "buildFacts": {
+    "bazel": "7.6.1",
+    "hostQualifiedRustCandidate": "1.87.0",
+    "sourceDocumentedNdk": "r28b or newer; CI r28b; exact package/hash still to freeze",
+    "sourceSentencePiece": "0.2.2",
+    "hostReferenceSentencePiece": "0.2.0",
+    "sourceKotlinTarget": "//kotlin/java/com/google/ai/edge/litertlm:litertlm-android",
+    "sourceJniTarget": "//kotlin/java/com/google/ai/edge/litertlm/jni:litertlm_jni",
+    "targetAbis": [
+      "arm64-v8a",
+      "x86_64"
+    ],
+    "aarAssemblyRecipeProven": false,
+    "rustFullSdkCompatibilityProven": false,
+    "publishedBinarySourceEquivalenceProven": false,
+    "cmakeFallbackStubInspected": true
+  },
+  "rollback": "explicit immutable published-SDK APK selection with confirmed cleanup and fresh process; no data wipe or hot-swap",
+  "decisionApproved": false,
+  "implementationAuthorized": false,
+  "androidBuildPerformed": false,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false,
+  "retainedPackaging": {
+    "application": {
+      "path": "androidApp/build/outputs/apk/secureQa/androidApp-secureQa.apk",
+      "sha256": "cdd57923977f25bb335a54b679e05be6ea29b396d1c178d0c54f7c210a0670fe",
+      "nativeEntries": [
+        "lib/arm64-v8a/libandroidx.graphics.path.so",
+        "lib/arm64-v8a/libimage_processing_util_jni.so",
+        "lib/arm64-v8a/liblitertlm_jni.so",
+        "lib/arm64-v8a/libmediapipe_tasks_jni.so",
+        "lib/arm64-v8a/libmediapipe_tasks_textgenai_jni.so",
+        "lib/arm64-v8a/libsqlcipher.so",
+        "lib/arm64-v8a/libsurface_util_jni.so",
+        "lib/x86_64/libandroidx.graphics.path.so",
+        "lib/x86_64/libimage_processing_util_jni.so",
+        "lib/x86_64/liblitertlm_jni.so",
+        "lib/x86_64/libmediapipe_tasks_jni.so",
+        "lib/x86_64/libmediapipe_tasks_textgenai_jni.so",
+        "lib/x86_64/libsqlcipher.so",
+        "lib/x86_64/libsurface_util_jni.so"
+      ]
+    },
+    "instrumentation": {
+      "path": "androidApp/build/outputs/apk/androidTest/secureQa/androidApp-secureQa-androidTest.apk",
+      "sha256": "57da1c7fdd5e706065c02b451e1c6adff21a93c904a368c14aa34ae728848403",
+      "nativeEntries": []
+    }
+  },
+  "reviewRevision": 2
+}

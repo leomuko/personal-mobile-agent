@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "decisionId": "android-unicode-runtime-integration-v1-draft-1",
+  "scope": "architecture-review-only-not-build-or-execution-freeze",
+  "files": {
+    "docs/decisions/0008-isolated-android-runtime-for-unicode-grammar.md": "4570f2506052ee300e7a6061d15ba116efe94b4a19a799ed11c5fa450df6e3ac",
+    "planning/fixtures/android-runtime-integration-v1/source-audit.json": "f06a3d583a0ce681e9e2ca1c02e7d8781ff502bded6bb825a9f6733e8589c9df"
+  },
+  "decisionApproved": false,
+  "implementationAuthorized": false,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false,
+  "reviewRevision": 2,
+  "previousDecisionLockSha256": "857a7cd2cf073f96ed1368eb7107490823d4890d0205dd883aa742bc2f280cca"
+}
