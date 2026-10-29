@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "protocolId": "unicode-grammar-correction-host-v1-draft-1",
+  "scope": "proposal-review-only",
+  "files": {
+    "planning/P2_UNICODE_GRAMMAR_CORRECTION_PROPOSAL_V1.md": "e11725b559cd4973288e27bbb24688dac558795f35a0b0a0dcbbce943ad7d727",
+    "planning/fixtures/unicode-correction-proposal-v1/upstream-audit.json": "7cdaa75f4dfc3a56a2a50f446963cb5fe53266e4e257d91154cd7fd286d00faf"
+  },
+  "implementationAuthorized": false,
+  "deviceExecutionAuthorized": false,
+  "candidateAcceptance": "historical-failed-39-of-41",
+  "semanticEnablement": false
+}

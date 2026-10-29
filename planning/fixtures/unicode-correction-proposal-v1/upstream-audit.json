@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "protocolId": "unicode-grammar-correction-host-v1-draft-1",
+  "scope": "read-only-source-assessment-not-implementation-or-execution",
+  "baselineCommit": "b35e172eb121c347c5251d58bde80cad4f46bfb2",
+  "upstream": {
+    "repository": "guidance-ai/llguidance",
+    "revision": "7aa1c3b67ec97cee62dc23123204a4351e9d40d4",
+    "parent": "8e8b13c277323523de7bfdf371e343c1bc78a962",
+    "pullRequest": 374,
+    "commitUrl": "https://github.com/guidance-ai/llguidance/commit/7aa1c3b67ec97cee62dc23123204a4351e9d40d4",
+    "sourcePackageVersion": "1.7.6",
+    "sourceDerivreVersion": "0.3.12",
+    "license": "MIT",
+    "inspectedFiles": {
+      "Cargo.toml": "ea41bdff02ac7da75ee85cbde705caf7d0a704d275ca10e62a879a40da630aab",
+      "LICENSE": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+      "commit.json": "b9b427065fe964ea257b62c2a8380156670a75a512458a474131c27182072247",
+      "docs/json_schema.md": "4fb2d3a4516e76527a19d8a722a76e45563b4e37f0d1bacb16e525a11db1cbe5",
+      "parser/Cargo.toml": "fddad3176c50ca840064a57a7cafa296fd7009d2a841f7aa82eeed642d1190cc",
+      "parser/src/json/compiler.rs": "6cf07b58da4ca15f96b95ca796d372e9a5dc020b0a3ea7d6caa31bba1c80bb18",
+      "parser/src/json/schema.rs": "3b043d701153560437e423f28b1924779323ea960c5e80761e3a461dd39001bb"
+    },
+    "changedPaths": [
+      {
+        "filename": "docs/json_schema.md",
+        "status": "modified",
+        "additions": 4,
+        "deletions": 0
+      },
+      {
+        "filename": "json_stats/expected_maskbench.json",
+        "status": "modified",
+        "additions": 3,
+        "deletions": 3
+      },
+      {
+        "filename": "parser/src/json/compiler.rs",
+        "status": "modified",
+        "additions": 205,
+        "deletions": 54
+      },
+      {
+        "filename": "parser/tests/test_lark.rs",
+        "status": "modified",
+        "additions": 201,
+        "deletions": 0
+      },
+      {
+        "filename": "python/llguidance/_lib.pyi",
+        "status": "modified",
+        "additions": 6,
+        "deletions": 0
+      },
+      {
+        "filename": "python_ext/src/py.rs",
+        "status": "modified",
+        "additions": 5,
+        "deletions": 1
+      }
+    ]
+  },
+  "proposedApproach": "adapt-plain-string-compiler-algorithm-to-pinned-host-copy",
+  "currentPins": {
+    "llguidance": "1.3.0",
+    "toktrie": "1.5.0",
+    "derivre": "0.3.8",
+    "rust": "1.87.0",
+    "existingPatches": 6,
+    "cargoLockSha256": "27dba748a19e0a33336c00870f028e2a4e5d515482f72a42e7a5bff2c845c219"
+  },
+  "preservedIdentities": {
+    "docs/P2_GRAMMAR_PROGRESS_SOURCE_SNAPSHOT.json": "20a167d9d1de9cbb3e825efbdd3557415e6b5bc08f561305b93d6c82309c8ee0",
+    "docs/P2_ESCAPED_UNICODE_BOUNDARY_SOURCE_SNAPSHOT.json": "92bc5cb8fa39d43b561d8dc6dcf8206c8cd3afc756c5393f156c3a71e2f5fcb1",
+    "planning/fixtures/grammar-progress-v1/preparation-lock.json": "ac08cdab90f90b959681002270114f35d4e5bfdfa94b89aa167d5b334a9a6749",
+    "planning/fixtures/unicode-boundary-v1/investigation-lock.json": "50d7cb52f88c1b5187582c45c0207167c1a5e712beaf316746c373da0362a575",
+    "shared/src/commonMain/kotlin/dev/edgecompanion/core/inference/verification/EvidenceOutputValidator.kt": "10be77c8586f0ee9931c9c33b965acd3608fe379010afde75e27b1dfd5526000"
+  },
+  "backportCompatibilityVerified": false,
+  "implementationAuthorized": false,
+  "nativeModelExecution": false,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false
+}
