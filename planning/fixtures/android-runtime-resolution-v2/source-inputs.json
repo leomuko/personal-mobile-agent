@@ -1,0 +1,136 @@
+{
+  "schema": 1,
+  "scope": "root-resolution-and-unadopted-alternative-not-build-freeze",
+  "previousPrerequisiteLockSha256": "2e1168f6f0b33ee0410fdf50b35cf635e41da37acefc2343b439ae2ef57583c3",
+  "files": [
+    {
+      "repository": "google-ai-edge/LiteRT-LM",
+      "revision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+      "path": "PATCH.tensorflow",
+      "sha256": "0e883bf54172971c1d4de0b63e05de397ef7555fe297b60d52482ceec00c8c6e",
+      "gitBlob": "ca7564c5705524e0ae071d76ffcc863e9a87ea09",
+      "bytes": 2710
+    },
+    {
+      "repository": "tensorflow/tensorflow",
+      "revision": "d9a8da74b4c3de28a39ab34ad007838d6bc30c67",
+      "path": "tensorflow/workspace3.bzl",
+      "sha256": "ce4e6ac5be440290ff78e6d5edaa9b580281420006cfa223cd897e1861361a6d",
+      "gitBlob": "68dd7e9ad16d6324dd6e7997fad4fe60dd69ef22",
+      "bytes": 4183
+    },
+    {
+      "repository": "tensorflow/tensorflow",
+      "revision": "d9a8da74b4c3de28a39ab34ad007838d6bc30c67",
+      "path": "tensorflow/workspace2.bzl",
+      "sha256": "69df1c6455a92bd2b5ca41c883e475f0cf0d374f019c4cd784a26ddece64766c",
+      "gitBlob": "426b560e863033e290c1f4bd320e76fb4ec06406",
+      "bytes": 30876
+    },
+    {
+      "repository": "tensorflow/tensorflow",
+      "revision": "d9a8da74b4c3de28a39ab34ad007838d6bc30c67",
+      "path": "tensorflow/workspace1.bzl",
+      "sha256": "163ec2b6d59eb6914b9098f7d6b6e80f820539c6b6503212ee29e1f5eca60015",
+      "gitBlob": "a058028e255b0ee69ebf2aa9f23449bba6f7a7a1",
+      "bytes": 2260
+    },
+    {
+      "repository": "tensorflow/tensorflow",
+      "revision": "d9a8da74b4c3de28a39ab34ad007838d6bc30c67",
+      "path": "tensorflow/workspace0.bzl",
+      "sha256": "b57cc91159b5465773fcb8f2fcb3740721cb15600b5433e349639060a9329850",
+      "gitBlob": "dec1ab868435eee91b95d82c0d7e77782c9d3ab3",
+      "bytes": 3241
+    },
+    {
+      "repository": "tensorflow/tensorflow",
+      "revision": "d9a8da74b4c3de28a39ab34ad007838d6bc30c67",
+      "path": "third_party/repo.bzl",
+      "sha256": "5c74d420c4f13d8d05281fedff48986f0569f97dfb9a0c204103f4f757f09eb5",
+      "gitBlob": "9920af0e65a8cdd7a1187074f8f863e514e1afb9",
+      "bytes": 6012
+    },
+    {
+      "repository": "tensorflow/tensorflow",
+      "revision": "d9a8da74b4c3de28a39ab34ad007838d6bc30c67",
+      "path": "third_party/xla/workspace0.bzl",
+      "sha256": "3c541c71e2333d364d471d74379429661c951cb73e25e1addd04ecc5a213e832",
+      "gitBlob": "7484822c1e16db65df4ae3e202785dd301e898fd",
+      "bytes": 5451
+    },
+    {
+      "repository": "tensorflow/tensorflow",
+      "revision": "d9a8da74b4c3de28a39ab34ad007838d6bc30c67",
+      "path": "third_party/xla/workspace1.bzl",
+      "sha256": "b5f00c27061109d42a3431eaa2b427c1f55b4fda95d590cdac890568595e2656",
+      "gitBlob": "54b16631be4f720299b0287adbf6b305b004459e",
+      "bytes": 1928
+    },
+    {
+      "repository": "tensorflow/tensorflow",
+      "revision": "d9a8da74b4c3de28a39ab34ad007838d6bc30c67",
+      "path": "third_party/xla/workspace2.bzl",
+      "sha256": "a24429ccdf1537912a9692c7ea70f35f63e958a0edf8118d4506c3efa9d4a76d",
+      "gitBlob": "0f49a1db57c2843f0da2d32c6a5a21feda369896",
+      "bytes": 31360
+    },
+    {
+      "repository": "tensorflow/tensorflow",
+      "revision": "d9a8da74b4c3de28a39ab34ad007838d6bc30c67",
+      "path": "third_party/xla/workspace3.bzl",
+      "sha256": "0ff96add5d2ff9b7d6c9cd7a20849f632a364795abbcfd479f55c3f66c57152d",
+      "gitBlob": "b326a9bc4a79385fdc15ef76346c85af810babe6",
+      "bytes": 4818
+    },
+    {
+      "repository": "google-ai-edge/ml-drift",
+      "revision": "2d7fbbd45d8940b5fc7cea1f79e59d9d796164e2",
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "gitBlob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "bytes": 11357
+    },
+    {
+      "repository": "google-ai-edge/ml-drift",
+      "revision": "2d7fbbd45d8940b5fc7cea1f79e59d9d796164e2",
+      "path": "README.md",
+      "sha256": "3f126462f87edeee8576380e684da007abf02c1bf85d22c112bf61a6ce0c079a",
+      "gitBlob": "fe2b7c98d2f39406ea64315e212c63a04129c0e6",
+      "bytes": 4713
+    },
+    {
+      "repository": "google-ai-edge/ml-drift",
+      "revision": "2d7fbbd45d8940b5fc7cea1f79e59d9d796164e2",
+      "path": "MODULE.bazel",
+      "sha256": "d43a7729a262d6efab1ea5fee5614bfd5388d906adee1a5cbe6d46b83efb6ffc",
+      "gitBlob": "6e6a055b977f813419a9b1fa29d323889dcd731a",
+      "bytes": 9263
+    },
+    {
+      "repository": "google-ai-edge/ml-drift",
+      "revision": "2d7fbbd45d8940b5fc7cea1f79e59d9d796164e2",
+      "path": ".bazelversion",
+      "sha256": "462c9aaa608fb2014cd9649af1c5c009485c60b9c8b15b89401fdc10cf6161c6",
+      "gitBlob": "ae9a76b9249ada6741bd54810f9e944f1c7aaf74",
+      "bytes": 6
+    },
+    {
+      "repository": "google-ai-edge/ml-drift",
+      "revision": "2d7fbbd45d8940b5fc7cea1f79e59d9d796164e2",
+      "path": "ml_drift/cl/BUILD",
+      "sha256": "41a380dfdf9afa654431a02a92dd9276d7c95d063597424bf847f46c31f8b185",
+      "gitBlob": "ac331301c71ad6a390a4fdd8f5f9eb64064f8162",
+      "bytes": 21051
+    },
+    {
+      "repository": "google-ai-edge/ml-drift",
+      "revision": "2d7fbbd45d8940b5fc7cea1f79e59d9d796164e2",
+      "path": "ml_drift/common/BUILD",
+      "sha256": "8db39e0ee876b47d4bad3739ff3612a828938733bfaa933ea0767356527917ef",
+      "gitBlob": "9af47da5ad6229f736b18194d4e79d26e32571c4",
+      "bytes": 22945
+    }
+  ],
+  "observedAlternativeAdopted": false
+}
