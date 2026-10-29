@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "id": "android-runtime-root-resolution-v2",
+  "scope": "route-rejection-and-proposed-emulator-first-amendment-not-build-freeze",
+  "previousPrerequisiteLockSha256": "2e1168f6f0b33ee0410fdf50b35cf635e41da37acefc2343b439ae2ef57583c3",
+  "files": {
+    "scripts/diagnostics/android_runtime_resolution/trace.py": "ad1c4ec2acf37036e8cbed87ae2c879c852f29c5e7d1ee8b815390b5a84b9ca2",
+    "scripts/tests/test_android_runtime_resolution.py": "5cbd00997dbb01caac112e53e5846115f739bc258e5cd5a6ff7a25a8cd8166f9",
+    "planning/fixtures/android-runtime-resolution-v2/source-inputs.json": "36e91508af20749e48500e69f76d0849963f69bb10f610d864b23bfd6b0af090",
+    "planning/P2_ANDROID_RUNTIME_EMULATOR_FIRST_AMENDMENT_V1.md": "129339cf53aecd5092171ebbb4cf7612949d1021c95af6326b6538ea98567bae",
+    "planning/P2_ANDROID_RUNTIME_EMULATOR_CAMPAIGN_V1.md": "5395e68880f6542fdf9eb881d9cd81ccb03f5f5e51eb2d481e668faf69812b6a",
+    "docs/P2_ANDROID_RUNTIME_ROOT_RESOLUTION_V2.md": "164d2a520cdd2191576bc73ac55aa9cc520ed48778323bed7a8399e7c0cbaad2"
+  },
+  "completeBuildRecipeReady": false,
+  "alternativeAdopted": false,
+  "emulatorExecutionAuthorized": false,
+  "s24Deferred": true,
+  "semanticSearchEnabled": false,
+  "previousResolutionLockSha256": "c0ee6137fd8a17c36f3f08f1cbd10507b494482bb87126b5258a7e7c5fc49fe9",
+  "reviewRevision": 2
+}
