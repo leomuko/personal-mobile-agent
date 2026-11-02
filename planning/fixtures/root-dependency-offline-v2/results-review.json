@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "verdict": "PASS",
+  "scope": "root-dependency-offline-v2-executed-source-and-metadata-results-review",
+  "reviewer": "Codex, retained sole primary independent QA reviewer; no delegation",
+  "reviewedOn": "2026-11-02",
+  "headBoundByResultLock": "e47e61b8ccdd400498b4d50cada22fc4176b2176",
+  "resultLockPath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/result-lock.json",
+  "resultLockSha256": "9975de2d24da236eb83657c91e79c4b8d7b4658ef998f8d82a68cbf792b1fc8c",
+  "executedFreezeSha256": "933b2a16ba6666b297e5e0fbb92b616e829f3a65182e378e2fe8fbe45b8557de",
+  "snapshotPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-results-review-1/snapshot.json",
+  "snapshotSha256": "0c8b2a60774030ce0c875dd06a3797c548166ab229f19a5dfdcab1c557076bc3",
+  "findings": [],
+  "qualification": {
+    "campaignIntegrity": "PASS",
+    "completeBoundedSourceValidation": "PASS",
+    "advertisedWheelMetadata": "PASS",
+    "wheelBytesVerified": false,
+    "generatorInterpreterOrABIQualified": false,
+    "patchSemanticsApproved": false,
+    "completeDependencyRecipeReady": false,
+    "rootAdoptionApproved": false,
+    "artifactOrRuntimeReady": false
+  },
+  "verification": {
+    "bindings": {
+      "status": "PASS",
+      "resultFiles": 19,
+      "resultEvidence": 186,
+      "executedFreezeInputs": 31,
+      "nestedDerivedManifestBindings": true,
+      "ownerAcceptanceAndFixtureCopiesMatched": true
+    },
+    "executionCorrespondence": {
+      "status": "PASS",
+      "exactFrozenWorkerArgv": true,
+      "exitCode": 0,
+      "classification": "ANALYSIS_COMMAND_SUCCEEDED",
+      "recordedCleanupConfirmed": true,
+      "ownedWorkerIncludingCleanupSeconds": 4.53266125,
+      "logsEmpty": true,
+      "acceptedPendingAndFinalShareInode": true,
+      "acceptReadOnlyValidationMatchedRecordedAcceptance": true,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-results-review-1/execution-and-resource-audit.json"
+    },
+    "completeSourceReplay": {
+      "status": "PASS",
+      "networkOrWorkerInvoked": false,
+      "inventorySha256": "feebeca8fadcf2b8ebed70485bd17dddc2b0f080332602e8d00d07d5b4adaf50",
+      "headers": 101388,
+      "files": 99113,
+      "directories": 2095,
+      "symlinks": 1,
+      "globalPAX": 1,
+      "localPAX": 178,
+      "decodedBytes": 366325760,
+      "filePayloadBytes": 287917300,
+      "selectedFiles": 105,
+      "selectedBytes": 966916,
+      "allDeterministicReceiptFieldsMatched": true,
+      "gzipEOFAndCRC": true,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-results-review-1/complete-source-replay.json"
+    },
+    "materializedData": "PASS:105 selected files hash-match, have mode0600 and no source links are created. Temporary replay copies were confined to a disposable QA directory and removed.",
+    "packageMetadata": {
+      "status": "PASS_OFFLINE_RESPONSE_VALIDATION",
+      "responseCount": 2,
+      "URLsAndResponseBytesHashesMatched": true,
+      "advertisedCandidatesRevalidatedFromUniqueNonYankedRows": true,
+      "wheelBytesDownloadedOrVerified": false,
+      "freshMetadataGETsByReviewer": 0
+    },
+    "derivedPatchAndPlan": {
+      "status": "PASS_STATIC_ONLY",
+      "counts": [
+        1,
+        1,
+        4,
+        1,
+        1,
+        1
+      ],
+      "allPrePostimagesAndFinalTextHashMatchOldProposal": true,
+      "qualifiedTemplateHashMatchesPriorSubset": true,
+      "oldFP16PlanUnchanged": true,
+      "wheelActualByteHashesRemainNull": true,
+      "semanticsRemainUnapproved": true,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-results-review-1/metadata-patch-preservation.json"
+    },
+    "preservation": {
+      "status": "PASS",
+      "previousRepositoryCacheFileBindings": 177,
+      "previousAmendmentFileBindings": 141,
+      "oldFailedSubsetFilesMatchingNewQualifiedSource": 89,
+      "oldFailureNotPromotedToSuccess": true,
+      "oldFullToolchainTreeInventoriesReplayed": false
+    },
+    "bounds": {
+      "status": "PASS_WITH_CAPTURE_LIMITATIONS",
+      "fixedTableBytes": 33816576,
+      "framedBytes": 29623797,
+      "metadataHashBytes": 88346516,
+      "selectedDataBytes": 966916,
+      "distinctAttemptOutputBytes": 1071536,
+      "sourcePhaseRecordedPeakRssBytes": 64241664,
+      "wholeJobFinalRssSamplePersisted": false,
+      "parentPreflightTimingPersisted": false
+    },
+    "tests": "No fresh suite rerun: scanner/protocol/tests remain frozen since R2 PASS. Recorded197-test host log is hash-bound; independent results checks focused on actual input/output correspondence and local source replay."
+  },
+  "claimAssessment": "Results document accurately separates source validation, retained metadata advertisements, actual artifact bytes and future runtime/API gates. Reported4.53266125 seconds is owned worker plus cleanup, excluding parent preflight/publication. Source-phase peak RSS is not promoted to separately measured whole-worker final peak.",
+  "gapsAndLimitations": [
+    "Cleanup is corroborated from recorded confirmations and reviewed owner code; historical OS process state is not reconstructed. Successful acceptance and recorded outcome match the frozen publication path.",
+    "Exactly two successful metadata GETs are corroborated by frozen no-redirect/no-retry code and the two retained response records; no independent packet trace was recorded or requested.",
+    "No parent preflight/publication timing, source-vs-metadata-vs-cleanup timing split, final post-metadata RSS value or actual preflight free-space sample was persisted. These are disclosed rather than inferred.",
+    "Replay RSS/timing belong to this reviewer process and were not compared with or substituted for original worker telemetry. All deterministic inventory/content/counter fields were compared.",
+    "Complete archive replay was local/read-only to original inputs; it briefly wrote selected data copies only under disposable QA output, then removed them. No external process/CLI worker, network, upstream generator/patch command, wheel install, Bazel/Java/compiler, device/model or Git operation occurred.",
+    "System Python runtime remains explicitly non-hermetic with selected module bindings. Source and advertised metadata qualification do not certify wheel bytes, Python/generator ABI, C++ patch semantics, FP16 numeric/Android behavior, configured graphs, adoption or runtime artifacts."
+  ],
+  "deviceExecutionAuthorized": false,
+  "rootAdoptionApproved": false,
+  "semanticEnablement": false,
+  "nextGate": "This source/metadata results gate is complete. Preserve the checkpoint; wheel-byte/runtime qualification, patch/interface semantics, root amendment adoption/implementation, capacity and future freeze/execution remain separate gates."
+}

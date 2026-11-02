@@ -1,0 +1,164 @@
+{
+  "status": "QUALIFIED_SOURCE_STATIC_RECONSTRUCTION_ONLY_NOT_SEMANTICALLY_APPROVED",
+  "adopted": false,
+  "upstreamMacro": {
+    "path": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/litert/third_party/dawn/workspace.bzl",
+    "bytes": 2979,
+    "sha256": "0197c74622569e0c10506bf5b0a3553e6335f4e76cf7a550cdb4b360285fdd01"
+  },
+  "upstreamBUILD": {
+    "path": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/litert/third_party/dawn/dawn.BUILD",
+    "bytes": 3295,
+    "sha256": "4a9aca53c2c532b4a71eb291c977c7bb59ea6f5f67537670399482d59038323e"
+  },
+  "sourceInspectionPassed": true,
+  "sourceTemplate": {
+    "path": "build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/api_cpp.h",
+    "bytes": 57465,
+    "sha256": "e45fcbe135a35310238df2f8ac310b295e6c8d5d5c7933895dab90340b6e799a"
+  },
+  "commandsExecuted": false,
+  "literalStringOperationsOnly": true,
+  "commands": [
+    {
+      "index": 1,
+      "literalCommand": "python3 -c 'p=\"generator/templates/api_cpp.h\"; c=open(p).read().replace(\"#include <span>\", \"#if __cplusplus >= 202002L\\n#include <span>\\n#else\\n#include \\\"absl/types/span.h\\\"\\nnamespace std { template <typename T> using span = absl::Span<T>; }\\n#endif\"); open(p,\"w\").write(c)'",
+      "commandSha256": "87019b75fac2eb7c1d44bcd602e78acbcf5f0bd0d4fc867327873152592ddf39",
+      "programSha256": "8141ff0531e8926b8bcd6db58528479edd68951ca303d06bed662c529f66574f",
+      "operations": [
+        {
+          "old": "#include <span>",
+          "new": "#if __cplusplus >= 202002L\n#include <span>\n#else\n#include \"absl/types/span.h\"\nnamespace std { template <typename T> using span = absl::Span<T>; }\n#endif",
+          "observedMatches": 1,
+          "proposedExpectedMatches": 1,
+          "preimageSha256": "e45fcbe135a35310238df2f8ac310b295e6c8d5d5c7933895dab90340b6e799a",
+          "postimageSha256": "92007acd3d1f9a04f89239ede729a865e86dac3f196f7f1499409f32f058c43c",
+          "matchContexts": [
+            {
+              "line": 50,
+              "context": "PI}}_CPP_H_\n#define {{PREFIX}}{{API}}_CPP_H_\n\n#include <cassert>\n#include <cmath>\n#include <cstddef>\n#include <cstdint>\n#include <memory>\n#include <optional>\n#include <functional>\n#include <span>\n#include <string_view>\n#include <type_traits>\n#include <utility>\n\n#include \"{{c_header}}\"\n#include \"{{api}}/{{api}}_cpp_chained_struct.h\"\n#include \"{{api}}/{{api}}_enum_class_bitm"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "literalCommand": "python3 -c 'p=\"generator/templates/api_cpp.h\"; c=open(p).read().replace(\"template <typename CppFT, typename CppFPtr, typename T>\\nstruct CppFTraitsImpl;\", \"template <size_t N, typename Tuple, typename Seq = std::make_index_sequence<N>>\\nstruct take_tuple;\\ntemplate <size_t N, typename... Args, size_t... Is>\\nstruct take_tuple<N, std::tuple<Args...>, std::index_sequence<Is...>> {\\n    using type = std::tuple<std::tuple_element_t<Is, std::tuple<Args...>>...>;\\n};\\ntemplate <size_t N, typename... Args>\\nusing take_tuple_t = typename take_tuple<N, std::tuple<Args...>>::type;\\n\\ntemplate <typename CppFT, typename CppFPtr, typename T>\\nstruct CppFTraitsImpl;\").replace(\"    using BaseArgsTuple = decltype([]<std::size_t... Is>(std::index_sequence<Is...>) {\\n        return std::type_identity<std::tuple<std::tuple_element_t<Is, std::tuple<CppArgs...>>...>>{};\\n    }(std::make_index_sequence<std::is_same_v<T, Untyped> ? NumCppArgs : NumCppArgs - 1>{})\\n    )::type;\", \"    using BaseArgsTuple = take_tuple_t<std::is_same_v<T, Untyped> ? NumCppArgs : NumCppArgs - 1, CppArgs...>;\"); open(p,\"w\").write(c)'",
+      "commandSha256": "d4c60a722806c4a1971b6a51e986f2a3ffa233d4d907208dd4fbbd469a8a4e3b",
+      "programSha256": "0d2264eea8ee406bef27c9ca12572936e21563c6461141611d7f92fe05836781",
+      "operations": [
+        {
+          "old": "template <typename CppFT, typename CppFPtr, typename T>\nstruct CppFTraitsImpl;",
+          "new": "template <size_t N, typename Tuple, typename Seq = std::make_index_sequence<N>>\nstruct take_tuple;\ntemplate <size_t N, typename... Args, size_t... Is>\nstruct take_tuple<N, std::tuple<Args...>, std::index_sequence<Is...>> {\n    using type = std::tuple<std::tuple_element_t<Is, std::tuple<Args...>>...>;\n};\ntemplate <size_t N, typename... Args>\nusing take_tuple_t = typename take_tuple<N, std::tuple<Args...>>::type;\n\ntemplate <typename CppFT, typename CppFPtr, typename T>\nstruct CppFTraitsImpl;",
+          "observedMatches": 1,
+          "proposedExpectedMatches": 1,
+          "preimageSha256": "92007acd3d1f9a04f89239ede729a865e86dac3f196f7f1499409f32f058c43c",
+          "postimageSha256": "cf74ba4a70e8486efc72d709bb6258b28502137a5402e01ca1dbb2460c11c9a9",
+          "matchContexts": [
+            {
+              "line": 743,
+              "context": "is only used to differentiate whether |T| is a user specified type\n//     in which case we need to strip the type from the callback arguments for speecialization\n//     deduction.\ntemplate <typename CppFT, typename CppFPtr, typename T>\nstruct CppFTraitsImpl;\n// Specialization for raw function pointers.\ntemplate <typename CppFT, typename R, typename... CppArgs, typename T>\nstruct CppFTraitsImpl<CppFT, R(*)(CppArgs...), T> {\n    using P"
+            }
+          ]
+        },
+        {
+          "old": "    using BaseArgsTuple = decltype([]<std::size_t... Is>(std::index_sequence<Is...>) {\n        return std::type_identity<std::tuple<std::tuple_element_t<Is, std::tuple<CppArgs...>>...>>{};\n    }(std::make_index_sequence<std::is_same_v<T, Untyped> ? NumCppArgs : NumCppArgs - 1>{})\n    )::type;",
+          "new": "    using BaseArgsTuple = take_tuple_t<std::is_same_v<T, Untyped> ? NumCppArgs : NumCppArgs - 1, CppArgs...>;",
+          "observedMatches": 4,
+          "proposedExpectedMatches": 4,
+          "preimageSha256": "cf74ba4a70e8486efc72d709bb6258b28502137a5402e01ca1dbb2460c11c9a9",
+          "postimageSha256": "e75aaaab8678d6d85b23fe99b2ec7cca5c3df9c516761c3af5757fcaadb8bb37",
+          "matchContexts": [
+            {
+              "line": 762,
+              "context": "Args...), T> {\n    using PtrT = R(*)(CppArgs...);\n    using ReturnT = R;\n    static constexpr bool capturing = false;\n\n    static constexpr size_t NumCppArgs = sizeof...(CppArgs);\n    using BaseArgsTuple = decltype([]<std::size_t... Is>(std::index_sequence<Is...>) {\n        return std::type_identity<std::tuple<std::tuple_element_t<Is, std::tuple<CppArgs...>>...>>{};\n    }(std::make_index_sequence<std::is_same_v<T, Untyped> ? NumCppArgs : NumCppArgs - 1>{})\n    )::type;\n};\n// Specialization for noexcept raw function pointers.\ntemplate <typename CppFT, typename R, typename... CppArgs, typename T>\nstruct CppFTraitsImpl<CppFT, R(*)(CppArgs...) noexc"
+            },
+            {
+              "line": 775,
+              "context": " T> {\n    using PtrT = R(*)(CppArgs...) noexcept;\n    using ReturnT = R;\n    static constexpr bool capturing = false;\n\n    static constexpr size_t NumCppArgs = sizeof...(CppArgs);\n    using BaseArgsTuple = decltype([]<std::size_t... Is>(std::index_sequence<Is...>) {\n        return std::type_identity<std::tuple<std::tuple_element_t<Is, std::tuple<CppArgs...>>...>>{};\n    }(std::make_index_sequence<std::is_same_v<T, Untyped> ? NumCppArgs : NumCppArgs - 1>{})\n    )::type;\n};\n// Specialization for member function pointers (lambdas);\ntemplate <typename CppFT, typename R, typename C, typename... CppArgs, typename T>\nstruct CppFTraitsImpl<CppFT, R(C::*"
+            },
+            {
+              "line": 788,
+              "context": "= R(*)(CppArgs...);\n    using ReturnT = R;\n    static constexpr bool capturing = !std::is_convertible_v<CppFT, PtrT>;\n\n    static constexpr size_t NumCppArgs = sizeof...(CppArgs);\n    using BaseArgsTuple = decltype([]<std::size_t... Is>(std::index_sequence<Is...>) {\n        return std::type_identity<std::tuple<std::tuple_element_t<Is, std::tuple<CppArgs...>>...>>{};\n    }(std::make_index_sequence<std::is_same_v<T, Untyped> ? NumCppArgs : NumCppArgs - 1>{})\n    )::type;\n};\n// Specialization for noexcept member function pointers (noexcept lambdas);\ntemplate <typename CppFT, typename R, typename C, typename... CppArgs, typename T>\nstruct CppFTraits"
+            },
+            {
+              "line": 801,
+              "context": "pArgs...) noexcept;\n    using ReturnT = R;\n    static constexpr bool capturing = !std::is_convertible_v<CppFT, PtrT>;\n\n    static constexpr size_t NumCppArgs = sizeof...(CppArgs);\n    using BaseArgsTuple = decltype([]<std::size_t... Is>(std::index_sequence<Is...>) {\n        return std::type_identity<std::tuple<std::tuple_element_t<Is, std::tuple<CppArgs...>>...>>{};\n    }(std::make_index_sequence<std::is_same_v<T, Untyped> ? NumCppArgs : NumCppArgs - 1>{})\n    )::type;\n};\ntemplate <typename CppFT, typename T = Untyped>\nstruct CppFTraits : CppFTraitsImpl<CppFT, decltype(&CppFT::operator()), T> {};\ntemplate <typename R, typename... CppArgs, typena"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "literalCommand": "python3 -c 'p=\"generator/templates/api_cpp.h\"; c=open(p).read().replace(\"if constexpr (requires(CInfoT x) { x.mode; }) {\", \"if constexpr (has_mode<CInfoT>::value) {\").replace(\"template <typename CInfoT, typename F>\\nstruct CallbackInfoHelper {\", \"template <typename T, typename = void>\\nstruct has_mode : std::false_type {};\\ntemplate <typename T>\\nstruct has_mode<T, std::void_t<decltype(std::declval<T>().mode)>> : std::true_type {};\\ntemplate <typename CInfoT, typename F>\\nstruct CallbackInfoHelper {\").replace(\"    template <typename T>\\n    requires (!CppFTraits<F>::capturing)\\n    static CInfoT Create(F lambda, T userdata) {\", \"    template <typename T, typename F_ = F, typename = std::enable_if_t<!CppFTraits<F_>::capturing>>\\n    static CInfoT Create(F lambda, T userdata) {\"); open(p,\"w\").write(c)'",
+      "commandSha256": "ed2223a39486e1a7a636fafcf018bf147e21f8e015e9fa3306fb939a4463d3ff",
+      "programSha256": "0f46b0f8a6b00eec1217842773619f2d228f59e2e1cd31f2aa2a25a886b148fc",
+      "operations": [
+        {
+          "old": "if constexpr (requires(CInfoT x) { x.mode; }) {",
+          "new": "if constexpr (has_mode<CInfoT>::value) {",
+          "observedMatches": 1,
+          "proposedExpectedMatches": 1,
+          "preimageSha256": "e75aaaab8678d6d85b23fe99b2ec7cca5c3df9c516761c3af5757fcaadb8bb37",
+          "postimageSha256": "28ee67bc70252943ec131d713378245c41094b39ca138e603d924f95457d3b00",
+          "matchContexts": [
+            {
+              "line": 962,
+              "context": "pename CInfoT, typename F>\nstruct CallbackInfoHelper {\n    static CInfoT Create(F lambda) {\n        CInfoT info = {};\n        if constexpr (CppFTraits<F>::capturing) {\n            if constexpr (requires(CInfoT x) { x.mode; }) {\n                // If we have a mode argument, then the callback is guaranteed to be called only\n                // once so we can support it by moving it and making an allocation"
+            }
+          ]
+        },
+        {
+          "old": "template <typename CInfoT, typename F>\nstruct CallbackInfoHelper {",
+          "new": "template <typename T, typename = void>\nstruct has_mode : std::false_type {};\ntemplate <typename T>\nstruct has_mode<T, std::void_t<decltype(std::declval<T>().mode)>> : std::true_type {};\ntemplate <typename CInfoT, typename F>\nstruct CallbackInfoHelper {",
+          "observedMatches": 1,
+          "proposedExpectedMatches": 1,
+          "preimageSha256": "28ee67bc70252943ec131d713378245c41094b39ca138e603d924f95457d3b00",
+          "postimageSha256": "b64b8754466dbd47fd87ff5df1e8d03915d5abfbb53aee8ff7af787042adddd2",
+          "matchContexts": [
+            {
+              "line": 957,
+              "context": "uct type from a C++\n// callback. This allows us to de-duplicates the logic used for WebGPU structs that have\n// CallbackInfo members and WebGPU API functions that return a Future.\ntemplate <typename CInfoT, typename F>\nstruct CallbackInfoHelper {\n    static CInfoT Create(F lambda) {\n        CInfoT info = {};\n        if constexpr (CppFTraits<F>::capturing) {\n            if constexpr (has_mode<CInfoT>::value) {\n             "
+            }
+          ]
+        },
+        {
+          "old": "    template <typename T>\n    requires (!CppFTraits<F>::capturing)\n    static CInfoT Create(F lambda, T userdata) {",
+          "new": "    template <typename T, typename F_ = F, typename = std::enable_if_t<!CppFTraits<F_>::capturing>>\n    static CInfoT Create(F lambda, T userdata) {",
+          "observedMatches": 1,
+          "proposedExpectedMatches": 1,
+          "preimageSha256": "b64b8754466dbd47fd87ff5df1e8d03915d5abfbb53aee8ff7af787042adddd2",
+          "postimageSha256": "160001ac2245ddec19c7965014a5cdb9da86937754cfdc2d2719208c4f3f31a4",
+          "matchContexts": [
+            {
+              "line": 989,
+              "context": "_cast<void*>(+lambda);\n        }\n        info.callback = CallbackHelper<CInfoT, F, decltype(CInfoT::callback)>::Call;\n        info.userdata2 = nullptr;\n        return info;\n    }\n\n    template <typename T>\n    requires (!CppFTraits<F>::capturing)\n    static CInfoT Create(F lambda, T userdata) {\n        CInfoT info = {};\n        info.callback = CallbackHelper<CInfoT, F, decltype(CInfoT::callback)>::template Call<T>;\n        info.userdata1 = reinterpret_cast<void*>(+lambda"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "resultingTextSha256": "160001ac2245ddec19c7965014a5cdb9da86937754cfdc2d2719208c4f3f31a4",
+  "diff": {
+    "path": "planning/fixtures/root-dependency-amendment-v1/dawn-api-cpp.upstream-operations.proposed.patch",
+    "bytes": 5401,
+    "sha256": "39b8e3e04f27d7a52e616c76060c2a3683ba43084ce7c7245f93014b1b3824d0"
+  },
+  "semanticReviewRequired": [
+    "command2 replacement2 matches FOUR distinct callback-trait sites; semantic review pending",
+    "actual generator/Python/API/Android compilation checks remain blocked"
+  ],
+  "derivedFrom": {
+    "path": "planning/fixtures/root-dependency-amendment-v1/patch-manifest.json",
+    "bytes": 14251,
+    "sha256": "ee4fd8ef866b9bcca3c5951c3d88319cfacee274c62342de28fa7019d279c5f2"
+  },
+  "sourceReceipt": {
+    "path": "build/root-dependency-offline-v2/attempts/offline-1/source-validation.json",
+    "bytes": 16047,
+    "sha256": "c917d13d567da4e79758499916194c894190cf04430d6899a106a6c2a8f4ccdf"
+  }
+}
