@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "verdict": "PASS",
+  "scope": "root-dependency-source-inspection-v1-pre-acquisition-r4-followup",
+  "reviewer": "Codex, retained sole primary independent QA reviewer; no delegation",
+  "reviewedOn": "2026-11-02",
+  "inspectionFreezePath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-amendment-v1/inspection-freeze-r4.json",
+  "inspectionFreezeSha256": "227fa78297627071ef9d6d8e474b7ed9627e10b462c1b7d2f4fecdc043b819e1",
+  "snapshotPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/qa-source-inspection-review-4/snapshot.json",
+  "snapshotSha256": "c60ba93e3ad37097ee86da723a9288d38b2b98acde26a8cc84a3ee4c5fecc55b",
+  "findings": [],
+  "closedFindings": [
+    {
+      "id": "RDI-001",
+      "status": "CLOSED",
+      "evidence": "Original accepted 12011-byte-name archive is now rejected. Shared 512MiB-minus-reserves worker ByteBudget charges fetched blocks, selected files and receipt before writes; member/link names are capped1024 bytes and aggregate name metadata4MiB; receipt serialization capped32MiB. Independent shared-fetch and receipt prewrite probes passed."
+    },
+    {
+      "id": "RDI-002",
+      "status": "CLOSED",
+      "evidence": "Original owner interruption now persists outcome.json. Independent signal-interruption, spawn-error, cleanup-uncertainty and KeyboardInterrupt cases all exit1 with OWNER_FAILED_OR_INTERRUPTED, freeze binding and cleanupConfirmed:null, with raw logs retained and no network."
+    }
+  ],
+  "verification": {
+    "exactFreezeAndDelta": {
+      "status": "PASS",
+      "directInputs": 14,
+      "changedBoundPaths": [
+        "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/root_dependency_amendment_v1/inspect_dawn.py",
+        "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_root_dependency_inspection.py"
+      ],
+      "otherInputRowsUnchanged": 12,
+      "previousR3FreezeMatched": true,
+      "workerEnvironmentAddsPYTHONDONTWRITEBYTECODE1": true
+    },
+    "focusedTests": {
+      "status": "PASS",
+      "count": 13,
+      "log": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/qa-source-inspection-review-4/focused-tests.log",
+      "command": "PYTHONDONTWRITEBYTECODE=1 build/constrained-decoding-reference/bin/python -B -W error::ResourceWarning -m unittest discover -s scripts/tests -p test_root_dependency_inspection.py -v"
+    },
+    "originalBudgetProbeAndAggregateMetadata": {
+      "status": "PASS",
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/qa-source-inspection-review-4/budget-probe-replay.json",
+      "originalLongNamesRejected": true,
+      "aggregateMetadataOver4MiBRejected": true,
+      "sharedFetchBudgetRejectsBeforeWrite": true,
+      "receiptBudgetRejectsBeforeFileCreation": true
+    },
+    "ownerFailureProbe": {
+      "status": "PASS",
+      "cases": 4,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/qa-source-inspection-review-4/owner-failure-probe-replay.json",
+      "ownerMocked": true,
+      "cleanupNotPositivelyClaimed": true
+    },
+    "sharedWorkerBudget": {
+      "status": "PASS",
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/qa-source-inspection-review-4/shared-worker-budget.json",
+      "transportMocked": true,
+      "actualSyntheticFileBytesEqualChargedBytes": true,
+      "existingVersionPyPIMetadataOnly": true,
+      "wheelDownload": false,
+      "upstreamSourceExecution": false
+    },
+    "gzipAndArchiveGuards": "PASS: EOF drain/truncated-gzip regression and existing traversal/duplicate/prefix/read-bound checks pass. Retained source is never executed and archive symlinks are never followed.",
+    "scopeAndProvenance": "PASS: exact google/dawn tag v20260720.160313, maximum two annotated dereferences, immutable resolved commit archive, two existing-version PyPI metadata GETs, HTTPS hosts limited to api.github.com/codeload.github.com/pypi.org. Source/patch/package adoption remains absent.",
+    "preservation": {
+      "status": "PASS",
+      "previousFailSummaryUnchanged": true,
+      "archivedR3CodeAndTestsMatchOldFreeze": true,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/qa-source-inspection-review-4/preservation.json"
+    },
+    "finalSnapshotRecheck": "PASS: all22 snapshot bindings unchanged at report creation."
+  },
+  "reviewedLimits": {
+    "workerDecisionSeconds": 300,
+    "cleanupCeilingSeconds": 15,
+    "workerCombinedLogBytes": 2097152,
+    "minimumFreeBytes": 1073741824,
+    "archiveCompressedBytes": 268435456,
+    "metadataResponsesMax": 5,
+    "metadataBytesEach": 1048576,
+    "decodedTarBytes": 2147483648,
+    "membersMax": 60000,
+    "selectedSourceBytes": 33554432,
+    "pathOrLinkBytesEach": 1024,
+    "aggregateNameLinkBytes": 4194304,
+    "receiptJSONBytes": 33554432,
+    "wholeAttemptRetainedFileBytes": 536870912,
+    "parentOutcomeReservedBytes": 65536,
+    "workerOutputBudgetBytes": 534708224
+  },
+  "limitations": [
+    "Synthetic/read-only review only. No real acquisition, network request, actual owned inspection process, generator/source execution, wheel download/install, Java/Bazel, native/model/device workload, source edits or Git mutation occurred.",
+    "No actual Dawn archive/commit checksum, patch-preimage applicability, generator transitive closure, Python ABI/runtime selection, FP16 API compatibility or complete dependency recipe is certified by this verdict.",
+    "Python root provider remains system python3 while actual generator runtime is unproved; metadata selection for ordinary CPython3.13 macOSARM64 MarkupSafe is not ABI-compatibility evidence or adoption permission.",
+    "PASS covers the exact bounded source-data acquisition tooling/scope only. Acquired evidence must receive separate review before any compatibility amendment adoption or later analysis/build execution.",
+    "Original R3 FAIL and probes remain preserved; no claim is made that previously blocked configured dependency graphs are now resolved."
+  ],
+  "preAcquisitionReviewPassed": true,
+  "sourceAcquisitionExecuted": false,
+  "adoptionApproved": false,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false,
+  "nextGate": "One bounded source-data inspection under the existing user authorization; preserve all outputs and submit the source/metadata evidence for review before completing or adopting the compatibility amendment."
+}

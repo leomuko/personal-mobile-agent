@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "verdict": "PASS",
+  "scope": "root-dependency-amendment-v1-incomplete-proposal-and-retained-failed-inspection-evidence",
+  "reviewer": "Codex, retained sole primary independent QA reviewer; no delegation",
+  "reviewedOn": "2026-11-02",
+  "branch": "dev",
+  "head": "e47e61b8ccdd400498b4d50cada22fc4176b2176",
+  "proposalLockPath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-amendment-v1/proposal-lock.json",
+  "proposalLockSha256": "d0b4bcae9a430defa7cdde02af2d69bec96a9c6b9fb58c3a9d39bb0f2d756920",
+  "snapshotPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/qa-amendment-review-1/snapshot.json",
+  "snapshotSha256": "b5f6c39997a130d7d8ae7a8b808a4f11d55102cb8c1735e930f94dfbd527dea3",
+  "findings": [],
+  "outcomes": {
+    "proposalReview": "PASS_AS_EXPLICITLY_INCOMPLETE_PROPOSAL",
+    "retainedEvidenceIntegrity": "PASS",
+    "sourceInspection": "FAILED_MEMBER_CAP_CLEANUP_RECORDED_CONFIRMED",
+    "completeSourceReceipt": false,
+    "completeImmutableDawnRecipe": false,
+    "implementationReady": false,
+    "adopted": false,
+    "runtimeArtifactReady": false
+  },
+  "verification": {
+    "bindings": {
+      "status": "PASS",
+      "proposalFiles": 17,
+      "evidenceFiles": 124,
+      "nestedDependencyAndPatchManifestByteBindings": true,
+      "executedR4InputsUnchanged": 14,
+      "snapshotBindings": 144,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/qa-amendment-review-1/evidence-audit.json"
+    },
+    "actualFailure": {
+      "status": "PASS_CORRESPONDENCE",
+      "freezeSha256": "227fa78297627071ef9d6d8e474b7ed9627e10b462c1b7d2f4fecdc043b819e1",
+      "classification": "ANALYSIS_COMMAND_FAILED",
+      "workerExitCode": 1,
+      "elapsedSecondsIncludingCleanup": 67.870962333,
+      "recordedCleanupConfirmed": true,
+      "exactFrozenPythonAndWorkerArgv": true,
+      "receiptAbsent": true,
+      "PyPIMetadataResponsesAbsent": true,
+      "selectedUnqualifiedFiles": 89
+    },
+    "boundedCapConfirmation": {
+      "status": "PASS",
+      "acceptedNames": 60000,
+      "firstRejectedNameAlreadyPresent": false,
+      "archiveEntriesVisitedIncludingRoot": 60002,
+      "decodedBytesConsumed": 207063040,
+      "readOnlyScanElapsedSeconds": 1.2861015,
+      "stoppedAtOriginalCap": true,
+      "expandedCap": false,
+      "fullArchiveOrEOFQualified": false,
+      "selectedFilesMatchedArchivePrefix": 89,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/qa-amendment-review-1/bounded-cap-audit.json"
+    },
+    "literalPatchReconstruction": {
+      "status": "PASS_STATIC_ONLY",
+      "commands": 3,
+      "orderedReplacements": 6,
+      "literalCounts": [
+        1,
+        1,
+        4,
+        1,
+        1,
+        1
+      ],
+      "allPreAndPostimageHashesMatch": true,
+      "proposedDiffExact": true,
+      "resultTextSha256": "160001ac2245ddec19c7965014a5cdb9da86937754cfdc2d2719208c4f3f31a4",
+      "arbitraryCommandsOrVendorCodeExecuted": false,
+      "patchAppliedOnDisk": false,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/qa-amendment-review-1/static-patch-audit.json"
+    },
+    "FP16Proposal": "PASS as candidate: public default-label bridge aliases to the retained @FP16//:FP16 provider, with ML-Drift-only mapping. Consumed static signatures match; numerical equivalence/native/fallback Android ABI and include/provider behavior remain untested gates.",
+    "DawnProposal": "PASS as incomplete candidate: qualified @litert//third_party/dawn:dawn.BUILD is exported, generated outputs/labels and retained direct generator imports match. Whole source, three-command/four-site semantics, Python wheel/tool/runtime closure and actual interfaces remain blocked.",
+    "storageAndExecutionPlan": "PASS as proposal: retains18GiB analysis floor and300/15/16MiB limits, plans full input/staging/cache/three-root reserve, prohibits automatic deletion/relocation and does not reuse the failed v1 acquisition as a continuation.",
+    "offlineV2Proposal": "PASS for limited proposal coherence only: same candidate archive, streamed inventory, conservative duplicate rejection and explicit new300000-member cap are described as future review/authorization gates. Exact encoding/resource bounds/code/freeze and execution are not approved by this verdict.",
+    "preservation": {
+      "status": "PASS",
+      "previousRepositoryCacheFileBindingsReverified": 177,
+      "priorR4ReviewSnapshotUnchanged": 22,
+      "R4ReviewFixtureExactIndependentSummary": true,
+      "fullOldTreeInventoriesRepeated": false,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/qa-amendment-review-1/proposal-and-preservation-audit.json"
+    },
+    "hostTests": {
+      "status": "RECORDED_PASS_LOG_VERIFIED_NOT_RERUN",
+      "count": 172,
+      "log": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/host-tests-1.log",
+      "freshReviewChecks": "Read-only hashes, AST/literal checks, bounded archive prefix and preservation only; no broad suites needed."
+    }
+  },
+  "explicitBlockingGates": [
+    "Whole Dawn source inventory and gzip EOF/CRC qualification under a separately reviewed/authorized protocol; current candidate archive remains unqualified.",
+    "Same-version Jinja2/MarkupSafe wheel hashes and actual patch/generator interpreter/stdlib/toolchain identities and ABI.",
+    "Semantic/generated-header/interface review of all three commands and all four callback-trait replacements; string-match counts do not certify correctness.",
+    "FP16 independent numeric/reference tests and both Android native/fallback compile/ABI probes.",
+    "Complete amendment review/adoption, authorized isolated implementation and guard QA, capacity resolution, and a new reviewed analysis freeze before any new configured analysis."
+  ],
+  "limitations": [
+    "PASS applies to proposal/evidence coherence with explicit blockers, not completion of the immutable dependency recipe or adoption/build/execution readiness.",
+    "The bounded read-only archive check stopped at the original60000-name gate and confirmed cap rather than duplicate. It neither increased the cap nor completed a v2/full inspection or qualified EOF.",
+    "The89 retained files and static template reconstruction are explicitly unqualified subset evidence. The candidate archive hash identifies retained bytes, not an approved source receipt.",
+    "Cleanup is from the retained owner outcome and previously reviewed supervisor, not a newly observed historical OS process state.",
+    "No downloaded source/generator/patch command, Bazel, Java, compiler, package install, device/model, new acquisition, v2 implementation or execution occurred. Project source, old freezes and Git were unchanged.",
+    "One scratch alias checker initially assumed per-alias visibility; corrected to account for the proposed public package default. No proposal/source defect was involved."
+  ],
+  "sourceAcquisitionAuthorized": false,
+  "offlineV2ImplementationAuthorized": false,
+  "offlineV2ExecutionAuthorized": false,
+  "adoptionApproved": false,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false,
+  "nextAction": "Proposal-preparation task is complete for this limited gate. Preserve the failed attempt and report the complete recipe/adoption as BLOCKED. Any offline-v2 implementation/execution requires its separate concrete design/freeze review and human authorization."
+}

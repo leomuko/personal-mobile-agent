@@ -1,0 +1,88 @@
+{
+  "protocol": "root-dependency-source-inspection-v1",
+  "inspectorSha256": "d5d26f38af6d73e9ceee9d12559447a9809fc15255393d2ae5abb3848145d8fb",
+  "inputs": [
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/root_dependency_amendment_v1/inspect_dawn.py",
+      "bytes": 9086,
+      "sha256": "d5d26f38af6d73e9ceee9d12559447a9809fc15255393d2ae5abb3848145d8fb"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_root_dependency_inspection.py",
+      "bytes": 4028,
+      "sha256": "80849b343cfc10b99139ecf37ddbb426e98d065bcc0d3ab1d614a15524ac12d7"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/ml_drift_compatibility/analyze.py",
+      "bytes": 18796,
+      "sha256": "01706ddb5533fd0ccd8198518257034a86144b972aaab923c70a102fe74e5c59"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_ROOT_DEPENDENCY_SOURCE_INSPECTION_V1.md",
+      "bytes": 3637,
+      "sha256": "d0ed547cab2960530284b44f9195de7f868408d153dc0584e4852c0595d31ca0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/result-lock.json",
+      "bytes": 27714,
+      "sha256": "556f45ecef751287b7f3e1def4c8c24cf67328520ac743d00562acd89937cd68"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/results-review.json",
+      "bytes": 7205,
+      "sha256": "94c5c636058f811bf27c997827818aaa8275c7270f5bff0245243bbb4806c039"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/litert/third_party/dawn/workspace.bzl",
+      "bytes": 2979,
+      "sha256": "0197c74622569e0c10506bf5b0a3553e6335f4e76cf7a550cdb4b360285fdd01"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/litert/third_party/dawn/dawn.BUILD",
+      "bytes": 3295,
+      "sha256": "4a9aca53c2c532b4a71eb291c977c7bb59ea6f5f67537670399482d59038323e"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/ml_drift/ml_drift/common/types.h",
+      "bytes": 5111,
+      "sha256": "b9682c91d44cc67a94b04be23e85d667a6601d60e86b628fe09dbb71391d8c52"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/ml_drift/ml_drift/common/BUILD",
+      "bytes": 22945,
+      "sha256": "8db39e0ee876b47d4bad3739ff3612a828938733bfaa933ea0767356527917ef"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/FP16/BUILD.bazel",
+      "bytes": 1026,
+      "sha256": "9e2b951239290f3ccdd2ec1dc6c27efd9f5600675bb4d11064ef9fd4633079c9"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/FP16/include/fp16.h",
+      "bytes": 141,
+      "sha256": "13c1ccb165c81a121233abfd8de21ae4ade7703c55fdc7136d28559fe6c499bf"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/FP16/include/fp16/fp16.h",
+      "bytes": 22002,
+      "sha256": "bce580937179093ab855fa49907c7a1b258556db3ea147ce31f60476aadbf8c5"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+      "bytes": 102352,
+      "sha256": "271143990bc83af0fb2404a255038f5faafb96df1584ed7f085e5018c0f33ffb"
+    }
+  ],
+  "python": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+  "pythonVersion": "3.9.6 (default, May 22 2026, 11:13:45) \n[Clang 21.0.0 (clang-2100.1.1.101)]",
+  "attemptParent": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/inspection-attempts",
+  "environment": {
+    "PATH": "/usr/bin:/bin",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PYTHONPYCACHEPREFIX": "/tmp/edge-root-amendment-pycache"
+  },
+  "scope": "source-data-only-no-adoption-no-Bazel-no-generator-execution",
+  "tag": "v20260720.160313",
+  "previousFreezeSha256": "903339d88ba754c918a66e9acb17e802a8b6d819a16170b73dea2afc08e1185b"
+}
