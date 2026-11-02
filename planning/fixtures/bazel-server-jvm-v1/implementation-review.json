@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "verdict": "PASS",
+  "scope": "bazel-server-jvm-v1-implementation-and-exact-analysis-freeze-preexecution-review",
+  "reviewer": "retained sole primary independent QA reviewer (Codex)",
+  "reviewedOn": "2026-10-30",
+  "freezeSha256": "c9787682569fb8d694c8e68a714439333b75ca055404fed09540c12cf96bd9a7",
+  "previousAnalysisFreezeSha256": "5da08299b99c822ffcfcb3b9b5eae85594a782fc0f6d66b7621ca5d3c582b4aa",
+  "snapshot": {
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/bazel_server_jvm_v1/analyze.py": "e2711e987c6c0984d8d65a48bac12ab6f8e11975dc8cde54fc4dd08d2483c29e",
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/bazel_server_jvm_v1/server_jvm.py": "cd1fdd03a728aed8828d2627c19ab1a2941cb9e442ef455403f144a3fda561d8",
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/bazel_server_jvm_v1/freeze.py": "cadf7c072e8d88000be60daaf0b00a2e0ecd67ad85b260099e8902cc49c44d5a",
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/bazel_server_jvm_v1/README.md": "0d9a5918a0c82fcdfca1363af04ea609af33ceef8bbf871abdf3f785c0adbbd1",
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_bazel_server_jvm.py": "29d391e25c0c8a57de35b6c79323ba067f7338b02d614db113b175b58b85486b",
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_BAZEL_SERVER_JVM_CORRECTION_EXECUTION_V1.md": "2d0c44e096781ffe1c5f27c38a9fd17a7408ed67344ffa13cb542b3bf9235ef6",
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/bazel-server-jvm-v1/previous-results-review.json": "2d5fc7a202306294e1f1a5e06bee3f8f6be95a3d1d36764233b1b5eedafb06b3",
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/bazel-server-jvm-v1/server-jdk-provenance.json": "2b3468a193c7cc9a2b5c96168cd5f47f87ddf7f56dfb47c7ded34ad2085057ef",
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/bazel-server-jvm-v1/analysis-freeze.json": "c9787682569fb8d694c8e68a714439333b75ca055404fed09540c12cf96bd9a7"
+  },
+  "findings": [],
+  "verification": {
+    "focusedSyntheticTestsPassed": 15,
+    "independentGuardProbesPassed": 4,
+    "boundInputFilesRehashed": 99,
+    "preparedTreeEntriesRehashed": 77377,
+    "serverJdkCompleteProvenanceEntryCounts": {
+      "file": 102,
+      "directory": 26,
+      "symlink": 0
+    },
+    "previous87InputBindingsUnchanged": true,
+    "compilationEnvironmentUnchanged": true,
+    "previousAcceptedReviewRecordMatches": true,
+    "historicalResultBindingsVerified": 17,
+    "classMajor": 65,
+    "serverJava": "21.0.5",
+    "missingUnknownTamperedIncompleteAndIncompatibleAdmission": "rejects before launch",
+    "betweenCommandMutation": "preserves baseline evidence, stops further launches, marks both ABIs NOT_RUN",
+    "commandsAndBounds": "query plus two ABI cqueries; 300-second decisions, shared15-second cleanup, combined16MiB retained logs"
+  },
+  "limitations": [
+    "Synthetic tests and byte/provenance inspections do not prove Bazel startup or configured dependency resolution.",
+    "JAVA_HOME/PATH retain Java17; resolved compilation toolchains remain unproved pending graph review.",
+    "Full136 host-suite result is implementer evidence, not an independent full-suite rerun.",
+    "LFS payloads, artifact closure, ML Drift compatibility and runtime feasibility remain unqualified."
+  ],
+  "evidence": {
+    "build/bazel-server-jvm-v1/qa-implementation-freeze-review-1/rehash-results.json": "9b9b5f6c417ec6becc1755afac5079920b23591e1c951e96ca47c31fcf7ab200",
+    "build/bazel-server-jvm-v1/qa-implementation-freeze-review-1/independent-guard-probes.json": "79cf9d9b56cfbcef9c15066a3179281b2beab8c848a8d54a76b3228a08982873"
+  },
+  "bazelExecuted": false,
+  "javaExecuted": false,
+  "artifactBuilds": false,
+  "deviceExecutionAuthorized": false,
+  "sourceEdited": false,
+  "gitMutated": false,
+  "reviewIsHumanAuthorization": false
+}

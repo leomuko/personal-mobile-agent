@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "scope": "server-launch-correction-and-bounded-configured-analysis",
+  "freezeSha256": "c9787682569fb8d694c8e68a714439333b75ca055404fed09540c12cf96bd9a7",
+  "launchCorrection": "PASSED_WORKSPACE_EVALUATION_REACHED",
+  "dependencyResolution": "BLOCKED_REPOSITORY_SETUP_TIMEOUT",
+  "compatibility": "UNPROVED",
+  "resolvedJavaCompilationToolchains": "UNRESOLVED_NO_CONFIGURED_GRAPH",
+  "MLDriftRepositorySupplier": "UNESTABLISHED",
+  "repositoryReceiptProduced": false,
+  "commands": [
+    {
+      "request": "inventory",
+      "classification": "TIMED_OUT",
+      "exitCode": 143,
+      "totalElapsedIncludingCleanupSeconds": 300.483236667,
+      "cleanupConfirmed": true,
+      "configuredGraphPresent": false,
+      "repositorySupplierEstablished": false,
+      "interfacesChecked": false,
+      "guardedOverlaySelected": false
+    },
+    {
+      "request": "arm64-v8a",
+      "classification": "TIMED_OUT",
+      "exitCode": 143,
+      "totalElapsedIncludingCleanupSeconds": 300.465537542,
+      "cleanupConfirmed": true,
+      "configuredGraphPresent": false,
+      "repositorySupplierEstablished": false,
+      "interfacesChecked": false,
+      "guardedOverlaySelected": false
+    },
+    {
+      "request": "x86_64",
+      "classification": "TIMED_OUT",
+      "exitCode": 143,
+      "totalElapsedIncludingCleanupSeconds": 300.481839208,
+      "cleanupConfirmed": true,
+      "configuredGraphPresent": false,
+      "repositorySupplierEstablished": false,
+      "interfacesChecked": false,
+      "guardedOverlaySelected": false
+    }
+  ],
+  "evidence": {
+    "build/bazel-server-jvm-v1/attempts/configured-1/report.json": "8ff5738fadd6571802be66af59d0d311b3f117f2424bfdca0f715bc2025a0fb4",
+    "build/bazel-server-jvm-v1/attempts/configured-1/inventory.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/bazel-server-jvm-v1/attempts/configured-1/inventory.stderr.log": "b23d0358f63e39a67befeeb4a5db1c3b82e7270a1403db11758549a440d50cd9",
+    "build/bazel-server-jvm-v1/attempts/configured-1/arm64-v8a.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/bazel-server-jvm-v1/attempts/configured-1/arm64-v8a.stderr.log": "283b662c25acbe715460fee79db5f21bfc0be1565dd289596fefc2ed5e7c8e7e",
+    "build/bazel-server-jvm-v1/attempts/configured-1/x86_64.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/bazel-server-jvm-v1/attempts/configured-1/x86_64.stderr.log": "bf8b5d708da186229829142a81c608a255c768192c83efabff788be0022bd126"
+  },
+  "postAttemptUnmarkedRepositoryDirectories": {
+    "inventory": [
+      {
+        "repositoryDirectory": "rules_ml_toolchain",
+        "topLevelEntries": [
+          "temp17795368536416115734"
+        ],
+        "completionNotEstablished": true
+      }
+    ],
+    "arm64-v8a": [
+      {
+        "repositoryDirectory": "llvm-raw",
+        "topLevelEntries": [
+          "temp13363915263059667863"
+        ],
+        "completionNotEstablished": true
+      }
+    ],
+    "x86_64": [
+      {
+        "repositoryDirectory": "crate_index",
+        "topLevelEntries": [
+          "cargo-bazel",
+          "cargo-bazel.json"
+        ],
+        "completionNotEstablished": true
+      },
+      {
+        "repositoryDirectory": "rust_macos_aarch64__aarch64-apple-darwin__stable_tools",
+        "topLevelEntries": [
+          "bin",
+          "etc",
+          "lib",
+          "libexec",
+          "manifest.in",
+          "share",
+          "temp8734766212508782078"
+        ],
+        "completionNotEstablished": true
+      }
+    ]
+  },
+  "unmarkedDirectoriesAreNotProofOfFetchFailure": true,
+  "wrapperExitCode": 2,
+  "artifactBuilds": false,
+  "devicesAccessed": false,
+  "globalJavaChanged": false,
+  "semanticSearchEnabled": false
+}

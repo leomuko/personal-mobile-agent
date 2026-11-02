@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "reviewDate": "2026-10-30",
+  "reviewer": "retained sole primary independent QA reviewer (Codex)",
+  "scope": "bazel-server-jvm-v1-executed-results-and-preservation-review",
+  "verdict": "PASS",
+  "findings": [],
+  "resultLockSha256": "9fc3e8c9f3d8ca32b117b9f22876b6e73d80680a8bc845fd67f7d1c0fb89867c",
+  "executedFreezeSha256": "c9787682569fb8d694c8e68a714439333b75ca055404fed09540c12cf96bd9a7",
+  "campaignIntegrity": "PASS",
+  "launchCorrection": "PASS_WORKSPACE_EVALUATION_REACHED",
+  "dependencyResolution": "BLOCKED_REPOSITORY_SETUP_TIMEOUT",
+  "MLDriftCompatibility": "UNPROVED",
+  "resolvedJavaCompilationToolchains": "UNRESOLVED_NO_CONFIGURED_GRAPH",
+  "verification": {
+    "resultFileBindingsVerified": 13,
+    "evidenceBindingsVerified": 14,
+    "exactCommandArgvMatches": 3,
+    "classifications": [
+      "TIMED_OUT",
+      "TIMED_OUT",
+      "TIMED_OUT"
+    ],
+    "exits": [
+      143,
+      143,
+      143
+    ],
+    "elapsedIncludingCleanupSeconds": [
+      300.483236667,
+      300.465537542,
+      300.481839208
+    ],
+    "cleanupReportedConfirmed": [
+      true,
+      true,
+      true
+    ],
+    "recordedTotalsWithin300Plus15Envelope": true,
+    "repositoryReceiptProduced": false,
+    "guardedOverlaySelected": false,
+    "configuredGraphsProduced": 0,
+    "postExecutionInputsIndependentlyRehashed": 99,
+    "preparedTreeEntriesIndependentlyRehashed": 77377,
+    "stagedSourceBindingsVerified": 1355,
+    "historicalSourceBindingsVerified": 46,
+    "oldResultBindingsVerified": 17,
+    "partialRepositoryDirectoryObservationsCorroborated": 4,
+    "host136PassingLogVerified": true,
+    "hostTestsRerunByReviewer": false
+  },
+  "routeDecision": "Stop artifact builds; separately pin/trace unfinished root repository setup and review bounded isolated preparation/cache strategy. No deadline, JVM, dependency or ABI scope changes or retries are approved by this result review.",
+  "limitations": [
+    "No separate decision or cleanup duration statistic was instrumented; total elapsed values include cleanup.",
+    "Historical group cleanup is corroborated by recorded confirmations and reviewed supervisor logic; no historical OS process state is reconstructed.",
+    "Unmarked repository directories do not identify whether download, extraction, repository evaluation or subprocess work caused a timeout.",
+    "Server launch success does not establish selected Java compilation toolchains, configured dependency suppliers, ML Drift interfaces, native feasibility or runtime artifacts."
+  ],
+  "evidence": {
+    "build/bazel-server-jvm-v1/qa-results-review-1/evidence-audit.json": "325af8596957bc6cb7fe45b217a559badf730d8ff1a9c6fea8867c08082068c7",
+    "build/bazel-server-jvm-v1/qa-results-review-1/post-preservation-rehash.json": "4be36818b6ce8058632f62e4bb9eacdfcc2fa2652c2198e8249a37e8dec0d5bb",
+    "build/bazel-server-jvm-v1/qa-results-review-1/partial-directory-observations.json": "749d541f9bc53b19ec8abd3dfb5e4311f7ea2a63810e57ca59cabbc98f11b301"
+  },
+  "snapshotSha256": "6e95203218ef1d726c2904a54aac0d135c517448da74eec4589b769ee8cd29fb",
+  "bazelRerun": false,
+  "javaExecuted": false,
+  "deviceExecutionAuthorized": false,
+  "artifactBuilds": false,
+  "sourceEdits": false,
+  "gitMutated": false,
+  "semanticSearchEnabled": false
+}
