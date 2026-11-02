@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "reviewerAgent": "01a16d6c-1a21-7923-af3d-18ec99667728",
+  "verdict": "PASS",
+  "reviewedAmendmentLockSha256": "92b575a850fb0f4c00070fd1e32361363d145bccbfadcda3280233c3cc5acc05",
+  "scope": "analysis-amendment-not-compatibility-or-build-readiness",
+  "sourceArchiveVerifiedBlobs": 883,
+  "targetsVerified": 7,
+  "analysisBeforeExactFreezeAllowed": false,
+  "runtimeArtifactBuildAllowed": false,
+  "deviceAllowed": false,
+  "record": "Implementer transcription of returned independent QA verdict, not self-issued approval."
+}

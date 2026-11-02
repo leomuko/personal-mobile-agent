@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "id": "ml-drift-source-compatibility-analysis-v1",
+  "scope": "amendment-review-not-analysis-execution-freeze",
+  "files": {
+    "planning/P2_ML_DRIFT_COMPATIBILITY_AMENDMENT_V1.md": "26bc9dd10339a5fb28f0f1684d08a5d93f9c51f0ed8124f0510bbd0aa80e0de2",
+    "planning/fixtures/ml-drift-compatibility-v1/candidate.json": "38e9e0b2202533c9747f7782f07c06cf09d9fbfbc3ae1131ffdf381a6e2238d1"
+  },
+  "artifactBuildAuthorized": false,
+  "deviceExecutionAuthorized": false,
+  "previousAmendmentLockSha256": "92b575a850fb0f4c00070fd1e32361363d145bccbfadcda3280233c3cc5acc05",
+  "reviewRevision": 2
+}

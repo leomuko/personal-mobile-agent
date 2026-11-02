@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "candidate": "google-ai-edge/ml-drift@2d7fbbd45d8940b5fc7cea1f79e59d9d796164e2",
+  "archive": {
+    "url": "https://codeload.github.com/google-ai-edge/ml-drift/tar.gz/2d7fbbd45d8940b5fc7cea1f79e59d9d796164e2",
+    "sha256": "074ba94182ba04c7fbdba3f76faea1370417e49f0397552ea6e3344d90d5d77f",
+    "bytes": 1651213,
+    "stripPrefix": "ml-drift-2d7fbbd45d8940b5fc7cea1f79e59d9d796164e2",
+    "type": "tar.gz"
+  },
+  "license": "Apache-2.0",
+  "licenseSha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+  "repositoryMapping": {
+    "@fp16": "@FP16"
+  },
+  "otherMappingsAllowed": false,
+  "standaloneModuleImported": false,
+  "sdkRevision": "5e58e9a0aef7abf7091207a8b1d1063a1c800f08",
+  "bazelVersion": "7.6.1",
+  "abis": [
+    "arm64-v8a",
+    "x86_64"
+  ],
+  "analysisTargets": [
+    "//kotlin/java/com/google/ai/edge/litertlm:litertlm-android",
+    "//kotlin/java/com/google/ai/edge/litertlm/jni:litertlm_jni",
+    "@litert//litert/runtime/accelerators/gpu:ml_drift_gpu_accelerator",
+    "@ml_drift//ml_drift/cl:opencl_wrapper",
+    "@ml_drift//ml_drift/common:gpu_info",
+    "@ml_drift//ml_drift/common:gpu_model",
+    "@ml_drift//ml_drift/common:gpu_model_builder"
+  ],
+  "runtimeArtifactBuildAllowed": false,
+  "deviceAllowed": false
+}
