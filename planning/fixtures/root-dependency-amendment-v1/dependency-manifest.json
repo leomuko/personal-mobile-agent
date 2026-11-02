@@ -1,0 +1,200 @@
+{
+  "protocol": "root-dependency-compatibility-amendment-v1",
+  "adopted": false,
+  "implementationReady": false,
+  "FP16": {
+    "provider": "@FP16//:FP16",
+    "revision": "4dfe081cf6bcd15db339cf2680b9281b8451eeb3",
+    "archiveSha256": "d973501a40c55126b31accc2d9f08d931ec3cc190c0430309a5e341d3c0ce32a",
+    "proposedBridge": "@edge_fp16_bridge_v1//:fp16",
+    "bridgeBuild": {
+      "path": "planning/fixtures/root-dependency-amendment-v1/fp16-bridge.BUILD.proposed",
+      "bytes": 112,
+      "sha256": "6aa77ba0aad84cd5471f7babaa177fa96ae99385a8323d243e6b4e5cd631938c"
+    },
+    "mappingBefore": {
+      "@fp16": "@FP16"
+    },
+    "mappingProposed": {
+      "@fp16": "@edge_fp16_bridge_v1"
+    },
+    "consumer": {
+      "path": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/ml_drift/ml_drift/common/types.h",
+      "bytes": 5111,
+      "sha256": "b9682c91d44cc67a94b04be23e85d667a6601d60e86b628fe09dbb71391d8c52"
+    },
+    "headers": [
+      {
+        "path": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/FP16/include/fp16.h",
+        "bytes": 141,
+        "sha256": "13c1ccb165c81a121233abfd8de21ae4ade7703c55fdc7136d28559fe6c499bf"
+      },
+      {
+        "path": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/FP16/include/fp16/fp16.h",
+        "bytes": 22002,
+        "sha256": "bce580937179093ab855fa49907c7a1b258556db3ea147ce31f60476aadbf8c5"
+      },
+      {
+        "path": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/FP16/include/fp16/bitcasts.h",
+        "bytes": 2153,
+        "sha256": "f871c44bbf7850f571b0a0496452305af18d2afeaecb5705c9f98803f3d55871"
+      }
+    ],
+    "consumedFunctions": [
+      "fp16_ieee_from_fp32_value(float)->uint16_t",
+      "fp16_ieee_to_fp32_value(uint16_t)->float"
+    ],
+    "staticSignatureMatch": true,
+    "numericAndABIQualification": "NOT_RUN"
+  },
+  "Dawn": {
+    "sourceInspectionOutcome": {
+      "exitCode": 1,
+      "classification": "ANALYSIS_COMMAND_FAILED",
+      "elapsedSeconds": 67.870962333,
+      "cleanupConfirmed": true,
+      "stdout": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/inspection-attempts/source-1/worker.stdout.log",
+      "stderr": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/inspection-attempts/source-1/worker.stderr.log",
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+        "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/root_dependency_amendment_v1/inspect_dawn.py",
+        "--worker",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/inspection-attempts/source-1"
+      ],
+      "freezeSha256": "227fa78297627071ef9d6d8e474b7ed9627e10b462c1b7d2f4fecdc043b819e1"
+    },
+    "tag": "v20260720.160313",
+    "observedCommit": "466163dc7bf94146ac9a921b86cc3ed08184ebb8",
+    "observedCandidateArchive": {
+      "path": "build/root-dependency-amendment-v1/inspection-attempts/source-1/dawn-source.tar.gz.part",
+      "bytes": 28737866,
+      "sha256": "4ee2687c6f4b2b1f30e70028763201c898a763989f7aafcb284e197ab0a4735b"
+    },
+    "archiveQualification": "BLOCKED_60000_MEMBER_LIMIT_NO_COMPLETE_SOURCE_RECEIPT",
+    "proposedImmutableURL": "https://codeload.github.com/google/dawn/tar.gz/466163dc7bf94146ac9a921b86cc3ed08184ebb8",
+    "proposedStripPrefix": "dawn-466163dc7bf94146ac9a921b86cc3ed08184ebb8",
+    "upstreamMacro": {
+      "path": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/litert/third_party/dawn/workspace.bzl",
+      "bytes": 2979,
+      "sha256": "0197c74622569e0c10506bf5b0a3553e6335f4e76cf7a550cdb4b360285fdd01"
+    },
+    "qualifiedBUILDLabel": "@litert//third_party/dawn:dawn.BUILD",
+    "buildPackage": {
+      "path": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/litert/third_party/dawn/BUILD",
+      "bytes": 84,
+      "sha256": "9dfdcb7b4872f0f1b4e519af5cca8dc34f5b1193d05dd1ab53aadeb258dd56ab"
+    },
+    "BUILD": {
+      "path": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/litert/third_party/dawn/dawn.BUILD",
+      "bytes": 3295,
+      "sha256": "4a9aca53c2c532b4a71eb291c977c7bb59ea6f5f67537670399482d59038323e"
+    },
+    "upstreamMacroHasArchiveSha256": false,
+    "retainedSubsetFiles": 89,
+    "generatedOutputs": [
+      "include/dawn/webgpu.h",
+      "include/dawn/dawn_proc_table.h",
+      "include/dawn/webgpu_cpp.h",
+      "include/dawn/webgpu_cpp_print.h",
+      "include/webgpu/webgpu_cpp_chained_struct.h"
+    ],
+    "requiredLabels": [
+      "@xla//third_party/rules_python/python:defs.bzl",
+      "@com_google_absl//absl/types:span",
+      "@jinja2"
+    ],
+    "directGeneratorImports": {
+      "generator/dawn_json_generator.py": [
+        "collections",
+        "copy",
+        "generator_lib",
+        "json",
+        "os",
+        "sys",
+        "webgpu_docs_utility"
+      ],
+      "generator/generator_lib.py": [
+        "argparse",
+        "collections",
+        "fnmatch",
+        "jinja2",
+        "json",
+        "os",
+        "re",
+        "sys"
+      ],
+      "generator/webgpu_docs_utility.py": [
+        "collections",
+        "json",
+        "re"
+      ]
+    },
+    "pythonProviders": {
+      "existingCustomPipInterpreter": "python3",
+      "generatorRuntimeCandidate": "@python_3_13_host//:python",
+      "generatorRuntimeSelected": "NOT_ESTABLISHED",
+      "privateProviderProposal": "isolated same-version wheel hub, explicit existing hermetic interpreter; no changes to existing providers",
+      "jinja2": {
+        "version": "3.1.6",
+        "wheelSha256": null,
+        "status": "BLOCKED_METADATA_NOT_COLLECTED_AFTER_SOURCE_FAILURE"
+      },
+      "markupsafe": {
+        "version": "3.0.3",
+        "wheelSha256": null,
+        "ABI": "cp313 ordinary macOS arm64 candidate; selection/bytes not qualified",
+        "status": "BLOCKED_METADATA_NOT_COLLECTED_AFTER_SOURCE_FAILURE"
+      },
+      "rootRequirementsSource": {
+        "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full/requirements.txt",
+        "bytes": 1448,
+        "sha256": "ea80047cd9152665e9d7cd30271510f4d7d46fcecc1a3e1fc2bde0da3c837adb"
+      }
+    },
+    "toolIdentities": {
+      "patchLauncherCandidate": {
+        "path": "/usr/bin/python3",
+        "bytes": 118640,
+        "sha256": "b8763cf250e607a778bb4603cecb5b90338814d0a3dfcba0d57b1de242f610e9"
+      },
+      "patchInterpreterFromInspectionFreeze": {
+        "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+        "bytes": 102352,
+        "sha256": "271143990bc83af0fb2404a255038f5faafb96df1584ed7f085e5018c0f33ffb"
+      },
+      "generationRuntimeAliasBuild": {
+        "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/python_3_13_host/BUILD.bazel",
+        "bytes": 115,
+        "sha256": "cf97d5763b728ce5ba8fdc3243350b967658ba4e3879734504aee002cec0d2b3"
+      },
+      "generationRuntimeCandidate": {
+        "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/python_3_13_aarch64-apple-darwin/bin/python3.13",
+        "bytes": 50264,
+        "sha256": "f0fd0547c66270ae10593aaf1b0d8c6297cad70a52cf31e0e148362b099178c0"
+      },
+      "generationRuntimeCandidateLink": {
+        "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/python_3_13_host/python",
+        "target": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/python_3_13_aarch64-apple-darwin/python"
+      },
+      "generationRuntimeSelected": "NOT_PROVED",
+      "XlaPythonWrapper": {
+        "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/xla/third_party/rules_python/python/py_binary.bzl",
+        "bytes": 998,
+        "sha256": "5e23a952e95a57e9447f6df3971f4bb468c0b68a9cf0b31fae0db40eaa75d3ad"
+      },
+      "rulesPythonVersionSource": {
+        "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/rules_python/WORKSPACE",
+        "bytes": 5567,
+        "sha256": "ee9b244a98371fdc9fd89aa33cd084d3232eced0033e2e9c3cf31b2dfd03eadd"
+      }
+    }
+  },
+  "blockingGates": [
+    "independently reviewed offline full-source inspection",
+    "wheel metadata/checksums and actual generator Python ABI",
+    "four-site patch semantic review and qualified pre/postimages",
+    "FP16 numeric/Android interfaces",
+    "repository conflict guards + complete configured graphs",
+    "free capacity >=18GiB before any analysis"
+  ]
+}
