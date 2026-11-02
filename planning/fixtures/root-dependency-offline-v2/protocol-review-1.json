@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "verdict": "FAIL",
+  "scope": "offline-dawn-inspection-v2-new-protocol-only",
+  "reviewer": "Codex, retained sole primary independent QA reviewer; no delegation",
+  "reviewedOn": "2026-11-02",
+  "protocolPath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_ROOT_DEPENDENCY_OFFLINE_INSPECTION_V2.md",
+  "protocolSha256": "df72825eefac81d9aea15410ccd55261fb2ec17c731eff21cec422c1a0169451",
+  "snapshotPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-protocol-review-1/snapshot.json",
+  "snapshotSha256": "a1fc07a5bc17e7228dd0aff61d65570fe5c4dec319628575c2da572a5f442020",
+  "findings": [
+    {
+      "id": "V2-P01",
+      "priority": "P2",
+      "confidence": "high",
+      "title": "Specify bounded link-kind storage and final ancestry validation",
+      "file": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_ROOT_DEPENDENCY_OFFLINE_INSPECTION_V2.md",
+      "line": 56,
+      "relatedLine": 104,
+      "problem": "The protocol prohibits materializing selected files under any source link, including later links, but retains only path SHA256 duplicate keys and selected-file records. It does not specify how link kind survives scanning or how all source parents are checked before acceptance. The fixed parser-memory inventory omits that state.",
+      "impact": "Implementation may miss a link seen before or after its selected descendant, or add unreviewed state/pass behavior to meet the rule. The current fixed-memory contract is not complete.",
+      "minimalRevision": "Freeze a bounded link-kind/ancestry strategy. The proposed one-bit-per-slot link bitset adds131072 bytes, for33816576 bytes of duplicate/occupancy/link storage. Define lookup/probe failure behavior and selected-parent validation after the complete scan but before acceptance. Clarify whether earlier selected output is provisional staging, since a future source link is not knowable before that write.",
+      "requiredCases": [
+        "link before selected descendant",
+        "link after selected descendant",
+        "parent lookup collision/probe exhaustion",
+        "root/direct-parent links",
+        "no acceptance after ancestry failure"
+      ]
+    },
+    {
+      "id": "V2-P02",
+      "priority": "P2",
+      "confidence": "high",
+      "title": "Freeze reserved PAX override validation for the custom parser",
+      "file": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_ROOT_DEPENDENCY_OFFLINE_INSPECTION_V2.md",
+      "line": 40,
+      "problem": "The allowlist, UTF8/path limits and ban on global path/link/size are specified. Exact reserved-value acceptance remains incomplete: PAX size numeric grammar/range, type-compatible local size/linkpath use, empty-value/deletion behavior, allowed hdrcharset spelling(s), and application/precedence rules are not frozen.",
+      "impact": "A custom parser could accept inconsistent encodings or apply reserved overrides differently while satisfying the current prose. This is a protocol-specification gap, not a claim that an implementation or retained source has failed.",
+      "minimalRevision": "Define reserved PAX values before implementation: size as bounded unsigned byte-count syntax, allowed member kinds and nonregular payload policy, validation of effective paths/links after overrides, explicit empty-value rules and hdrcharset vocabulary. State global/local handling and fail-closed behavior for incompatible overrides.",
+      "requiredCases": [
+        "signed/fractional/exponent/oversized PAX size",
+        "linkpath on nonlink",
+        "nonzero nonregular size",
+        "empty reserved value",
+        "forbidden global reserved override",
+        "invalid charset or ambiguous application"
+      ]
+    }
+  ],
+  "checks": {
+    "existingTableArithmetic": "PASS:33685504 bytes is correct for32-byte keys plus occupancy only. With the proposed link bitset,33816576 bytes.",
+    "numericalCaps": "The300000 headers fit1048576 slots;4096-probe exhaustion must fail. Name/frame/PAX/decoded/selected/receipt/output caps are explicit acceptance ceilings; no actual archive feasibility is certified.",
+    "tailAndCRC": "Coherent: two zero end blocks, zero-only decoded tail, all decoded padding/tail counted against2GiB, then gzip EOF/CRC. No scan or execution performed.",
+    "publicationAndInputSafety": "Direction is coherent: no-follow input, same-descriptor before/after identity checks, provisional worker outputs and owner-only acceptance after exit0/confirmed cleanup. Link ancestry and reserved PAX rules need the revisions above.",
+    "metadataScope": "Two fixed release metadata URLs after source validation; advertised wheel hashes remain distinct from wheel bytes and ABI. No wheel download/install/adoption.",
+    "evidenceReviewed": "Only the new protocol and arithmetic. No old source/evidence inventory repeated."
+  },
+  "limitations": [
+    "Protocol-only review; no implementation, archive/source scan, network, Bazel/Java/compiler, package, device/model or Git operation.",
+    "No statement that the retained archive satisfies new300k/resource limits or that source/wheel/toolchain/interface qualification is complete.",
+    "Old locked v1/proposal bytes were not edited. The reviewed new protocol copy is preserved under this QA directory."
+  ],
+  "protocolReviewPassed": false,
+  "implementationReviewPassed": false,
+  "executionAuthorizedByReview": false,
+  "rootAdoptionApproved": false,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false,
+  "nextAction": "Revise the new protocol for V2-P01/V2-P02 and provide its new exact hash for focused review. Existing user authorization remains in effect, but the required protocol gate has not passed."
+}

@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "verdict": "PASS",
+  "scope": "offline-dawn-inspection-v2-protocol-focused-followup",
+  "reviewer": "Codex, retained sole primary independent QA reviewer; no delegation",
+  "reviewedOn": "2026-11-02",
+  "protocolPath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_ROOT_DEPENDENCY_OFFLINE_INSPECTION_V2.md",
+  "protocolSha256": "7c71b860750f9dc9636a06bb5a3862b65398a71b484c78dfaef0dced0f86ca1e",
+  "snapshotPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-protocol-review-2/snapshot.json",
+  "snapshotSha256": "fbec231d5def3c5ac6962e13d54105b18e8cb9ead5380e013c52456bf45d203d",
+  "findings": [],
+  "closedFindings": [
+    {
+      "id": "V2-P01",
+      "status": "CLOSED",
+      "evidence": "Protocol now fixes an additional131072-byte link-kind bitset; total33816576 bytes verified. Both insertions and final ancestry lookups reject on4096-probe exhaustion. Selected parents including root are checked after all headers and before source receipt/acceptance. Early writes are private provisional staging; no source links are materialized. This covers links appearing before or after descendants."
+    },
+    {
+      "id": "V2-P02",
+      "status": "CLOSED",
+      "evidence": "Protocol now freezes unsigned decimal size grammar/length/range and regular-file-only application, zero raw/effective payloads for nonregular kinds, linkpath only on links, effective path/link revalidation, exact UTF-8 charset, empty-value rejection, uid/gid/time grammar and limits, global overwrite/local-once rules and rejection of global headers while local state is pending. Existing bans on global path/link/size and unknown/GNU semantics remain."
+    }
+  ],
+  "checks": {
+    "focusedDelta": "PASS: changes directly resolve the two reported specification gaps; prior encoding/resource/publication scope retained.",
+    "numericalCaps": "PASS as a bounded design: fixed table arithmetic33816576 bytes; selected record/PAX/path/frame/decoded/output/RSS/time ceilings remain explicit fail-closed gates, not measured feasibility claims.",
+    "tailCRC": "Unchanged coherent rule: two zero end blocks, zero-only bounded decoded tail, gzip EOF/CRC; no archive scan performed.",
+    "publication": "Source data stays provisional until complete scan/ancestry checks, permitted metadata collection, input identity recheck and owner acceptance after exit0 plus confirmed cleanup. Failure leaves no accepted receipt.",
+    "failurePreservation": "Original FAIL protocol copy/report/snapshot remain unchanged and are bound in this follow-up snapshot.",
+    "execution": "NOT_RUN: no implementation, scan, network, code/generator/vendor execution, Bazel/Java/compiler, package/device/model or Git operation."
+  },
+  "limitations": [
+    "PASS is for the revised protocol only, not implementation correctness or an execution freeze.",
+    "No assertion that the retained archive fits the new limits, that a complete inventory/CRC receipt exists, or that advertised wheel identities/runtime ABI are qualified.",
+    "Complete Dawn/FP16 recipe, patch semantics, generated/consumed interfaces, configured graphs, capacity for analysis, root adoption and runtime readiness remain separately gated."
+  ],
+  "protocolGatePassed": true,
+  "implementationReviewed": false,
+  "executionFreezeApproved": false,
+  "executionAuthorizedByReview": false,
+  "rootAdoptionApproved": false,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false,
+  "nextAuthorizedStep": "Implement the bounded scanner under the existing user authorization, then submit implementation and exact freeze for independent review before execution; no redundant permission request is needed for that approved scope."
+}
