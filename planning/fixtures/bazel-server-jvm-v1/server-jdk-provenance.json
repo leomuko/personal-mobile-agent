@@ -1,0 +1,726 @@
+{
+  "schema": 1,
+  "bazelSha256": "45cca81a839d7495258b19ee8371c7b891f350586ef37b9940f7b531eb654cc8",
+  "serverJarSha256": "50e9295e57eebfea7fe0e487e6aae2aaf7e131a6055c1ed12863f4b668a1d249",
+  "serverClassMajor": 65,
+  "javaVersion": "21.0.5",
+  "releaseSha256": "2aeb383501a09146b53d47ee743734cc73be197f07dbe911074cc795c9964bb5",
+  "entries": {
+    ".": {
+      "type": "directory",
+      "mode": 493
+    },
+    "ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "DISCLAIMER": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2765,
+      "sha256": "d83d865ecf5cdbc8fe11c279a7f00876027f0f1eb8b521c76075480496db4ffb"
+    },
+    "bin": {
+      "type": "directory",
+      "mode": 493
+    },
+    "bin/java": {
+      "type": "file",
+      "mode": 493,
+      "bytes": 69936,
+      "sha256": "d4142a93afc46a95d2ec08b5334b861662ac3aea502359870c6625f497fe27a4"
+    },
+    "bin/keytool": {
+      "type": "file",
+      "mode": 493,
+      "bytes": 69872,
+      "sha256": "fbdaa415a2b8eccbf279e4d0b4654dfdc6f66ac82da0627655999440d4954e64"
+    },
+    "conf": {
+      "type": "directory",
+      "mode": 493
+    },
+    "conf/jaxp.properties": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 7302,
+      "sha256": "7d95c49465d0c836d608d02856d3b097934dfb5dc4bd2279affaf337d045b708"
+    },
+    "conf/logging.properties": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2732,
+      "sha256": "b62d2733ab99556b108a1951d894c5a8d76b1ac7a00c02c388f9eb9be046c56f"
+    },
+    "conf/net.properties": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 7441,
+      "sha256": "2e070ed1d97052f0ce8771ed2ef74a38d7c260a45fde7a3682c8844e5fdf58a4"
+    },
+    "conf/security": {
+      "type": "directory",
+      "mode": 493
+    },
+    "conf/security/java.policy": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2294,
+      "sha256": "d51bcab7ed301caeff3779a5e777e6019864cecee5e2abc102ef991b0de77af2"
+    },
+    "conf/security/java.security": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 64412,
+      "sha256": "0eff8510ea877947a3685a063cfe199a742068b46167aba9359ca74b3da82bff"
+    },
+    "conf/security/policy": {
+      "type": "directory",
+      "mode": 493
+    },
+    "conf/security/policy/README.txt": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2390,
+      "sha256": "6da0747334b0fea7592fd92614b2bbc8b126535e129b1fee483774d914e98eb5"
+    },
+    "conf/security/policy/limited": {
+      "type": "directory",
+      "mode": 493
+    },
+    "conf/security/policy/limited/default_US_export.policy": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 146,
+      "sha256": "758b930a526fc670ab7537f8c26321527050a31f5f42149a2dda623c56a0a1a9"
+    },
+    "conf/security/policy/limited/default_local.policy": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 647,
+      "sha256": "2b2627548e61316150d47ffc3e6cad465ca05b3cccd4785eb7d21aa7baa0f441"
+    },
+    "conf/security/policy/limited/exempt_local.policy": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 566,
+      "sha256": "8c3d7648abcd95a272ce12db870082937f4d7f6878d730d83cb7fbb31eb8b2c9"
+    },
+    "conf/security/policy/unlimited": {
+      "type": "directory",
+      "mode": 493
+    },
+    "conf/security/policy/unlimited/default_US_export.policy": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 146,
+      "sha256": "758b930a526fc670ab7537f8c26321527050a31f5f42149a2dda623c56a0a1a9"
+    },
+    "conf/security/policy/unlimited/default_local.policy": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 193,
+      "sha256": "8d8a318e6d90dfd7e26612d2b6385aa704f686ca6134c551f8928418d92b851a"
+    },
+    "include": {
+      "type": "directory",
+      "mode": 493
+    },
+    "include/classfile_constants.h": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 22155,
+      "sha256": "7056263197c68eb8493f53d88020aa550985e64816afd776e509d6bf8cf0b4a0"
+    },
+    "include/darwin": {
+      "type": "directory",
+      "mode": 493
+    },
+    "include/darwin/jni_md.h": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2208,
+      "sha256": "88cb5c33e306900dd35a78d5a439087123b8e91b0986bb5acb42cc9bd2fcc42e"
+    },
+    "include/jni.h": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 76018,
+      "sha256": "99e64ebbe749e6df284f852f11b3c73f6ea97baf15120428f40f887fe0616e61"
+    },
+    "include/jvmti.h": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 83067,
+      "sha256": "78dcca2689f42937c3b5e54eaf7ed2e4674cd808d1d6fd5fbd10f83829e577e8"
+    },
+    "include/jvmticmlr.h": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 4771,
+      "sha256": "6ee3e52d24bdb4f4d0312dfbab3d47bd524cbdac5540a4d790cac0620c59b3c8"
+    },
+    "legal": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/java.base": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/java.base/ADDITIONAL_LICENSE_INFO": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "legal/java.base/ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "legal/java.base/LICENSE": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "legal/java.base/aes.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1444,
+      "sha256": "45c6d4da48325edfbff3dcf71c704e504c057904435ed23c6d57046d551eb69d"
+    },
+    "legal/java.base/asm.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1582,
+      "sha256": "683be15695bd248272d60f5b7fbe5e126a935ea6bf231a624a9aa164733e1d1d"
+    },
+    "legal/java.base/c-libutl.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1556,
+      "sha256": "bef40679922d6fdfb7e4ddb223ad6722300f6054ba737bbf6188d60fcec517f9"
+    },
+    "legal/java.base/cldr.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 9601,
+      "sha256": "19515e14a240e022640e95b61b5095127fa9690755950b4a2b0a02e783e08163"
+    },
+    "legal/java.base/icu.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 30197,
+      "sha256": "1bf28459c6e0af9f3429f4f8becd1668d6544055f8df240277456bc4b3d8a752"
+    },
+    "legal/java.base/public_suffix.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 17783,
+      "sha256": "f49e02a2cb50c97deec24d9208d2238ede628876b9298587af7e8963557de803"
+    },
+    "legal/java.base/siphash.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 8256,
+      "sha256": "5a792b5a74ad2a5f3d6a7ad8b7a841116e58a772c18bc6e392320a365b222c76"
+    },
+    "legal/java.base/unicode.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 9078,
+      "sha256": "6f72f10d166b2c2e8a395e03e734c5afc852b59aeca73ced124f6b9c96268d53"
+    },
+    "legal/java.base/zlib.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1010,
+      "sha256": "809b62ba648e02302f7d9ea6b6886c10d5253ac86ad528038a50c73eada5fce2"
+    },
+    "legal/java.compiler": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/java.compiler/ADDITIONAL_LICENSE_INFO": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "legal/java.compiler/ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "legal/java.compiler/LICENSE": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "legal/java.instrument": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/java.instrument/ADDITIONAL_LICENSE_INFO": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "legal/java.instrument/ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "legal/java.instrument/LICENSE": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "legal/java.logging": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/java.logging/ADDITIONAL_LICENSE_INFO": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "legal/java.logging/ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "legal/java.logging/LICENSE": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "legal/java.management": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/java.management/ADDITIONAL_LICENSE_INFO": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "legal/java.management/ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "legal/java.management/LICENSE": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "legal/java.naming": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/java.naming/ADDITIONAL_LICENSE_INFO": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "legal/java.naming/ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "legal/java.naming/LICENSE": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "legal/java.security.sasl": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/java.security.sasl/ADDITIONAL_LICENSE_INFO": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "legal/java.security.sasl/ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "legal/java.security.sasl/LICENSE": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "legal/java.sql": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/java.sql/ADDITIONAL_LICENSE_INFO": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "legal/java.sql/ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "legal/java.sql/LICENSE": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "legal/java.transaction.xa": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/java.transaction.xa/ADDITIONAL_LICENSE_INFO": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "legal/java.transaction.xa/ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "legal/java.transaction.xa/LICENSE": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "legal/java.xml": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/java.xml/ADDITIONAL_LICENSE_INFO": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "legal/java.xml/ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "legal/java.xml/LICENSE": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "legal/java.xml/bcel.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 11195,
+      "sha256": "853a1e7ce397bb10de0e2b3bde0844bcc651f17d983decd07d2d003c0304c311"
+    },
+    "legal/java.xml/dom.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 3761,
+      "sha256": "6686e8877667584a3a7c07344baadca1a03e29f677162d87c3c0811e990d1148"
+    },
+    "legal/java.xml/jcup.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1448,
+      "sha256": "8d5dcfdf50455a3c34c753a98f21e953248af200415a9084e3f102cb6c43b8bf"
+    },
+    "legal/java.xml/xalan.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 13477,
+      "sha256": "c27eb875da4be683d4d7422be986e5e30f636ede31958ff1d39f9cd6109e7a00"
+    },
+    "legal/java.xml/xerces.md": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 11848,
+      "sha256": "4a6bf6b367193ee68681cb2d9fed30ffc5d62dd2d477bd62e0271707d71b3244"
+    },
+    "legal/jdk.crypto.ec": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/jdk.crypto.ec/ADDITIONAL_LICENSE_INFO": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "legal/jdk.crypto.ec/ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "legal/jdk.crypto.ec/LICENSE": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "legal/jdk.management": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/jdk.management/ADDITIONAL_LICENSE_INFO": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "legal/jdk.management/ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "legal/jdk.management/LICENSE": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "legal/jdk.unsupported": {
+      "type": "directory",
+      "mode": 493
+    },
+    "legal/jdk.unsupported/ADDITIONAL_LICENSE_INFO": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2114,
+      "sha256": "a69bce275ba7a3570af6579cb0f55682cd75fedfcd49e0e8e9022270c447c916"
+    },
+    "legal/jdk.unsupported/ASSEMBLY_EXCEPTION": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 1514,
+      "sha256": "75292f03bf23d3db7c985aecc191029b93883200721ed23ed34a2e601463df33"
+    },
+    "legal/jdk.unsupported/LICENSE": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 19274,
+      "sha256": "4b9abebc4338048a7c2dc184e9f800deb349366bdf28eb23c2677a77b4c87726"
+    },
+    "lib": {
+      "type": "directory",
+      "mode": 493
+    },
+    "lib/classlist": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 77889,
+      "sha256": "d66ffb5e7ce10f20a5207ffb66cb709b62843e961da5b3939c78cfd18b37496a"
+    },
+    "lib/jrt-fs.jar": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 110123,
+      "sha256": "1bfb6c1f0ed060b0ed90c51dfe0b3f26f8a50eb114e65cb2ec4905f776143e2f"
+    },
+    "lib/jspawnhelper": {
+      "type": "file",
+      "mode": 493,
+      "bytes": 71408,
+      "sha256": "e8d8db1dc2d27494715c70035cf04f33adf9d058b6610a7210d718c19ad3395e"
+    },
+    "lib/jvm.cfg": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 14,
+      "sha256": "91e6531363501d02f9abc6522d440891b096313a6e45aa3d18fdd923da0561b0"
+    },
+    "lib/libdt_socket.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 73184,
+      "sha256": "cdfca699f507b7323e7467b56018ccfb653cd94e878c92b8f7aab3ee3b76da94"
+    },
+    "lib/libinstrument.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 91808,
+      "sha256": "aca7e18ecd3b2815e876bbabb67538d726a304e4215dee2fd1ee190032543420"
+    },
+    "lib/libjava.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 187584,
+      "sha256": "ee7150f83d8bf277c937c6e158672d736a53612af4e91c8b2120fa53b3032b83"
+    },
+    "lib/libjdwp.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 294768,
+      "sha256": "9bc9fa2b7cde4773a86d8453941739cfa9706114466ce3e00178ddea327687ab"
+    },
+    "lib/libjimage.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 77008,
+      "sha256": "e33b57eb65faacb2fad918fb133fbaef3a230dc9bf30c9d5b51b02f3c8a3b133"
+    },
+    "lib/libjli.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 148096,
+      "sha256": "583a5dcd3ae7e3992e7b9d63eb5b11839187dd6d03e33e03c3d6c7cb82a6672a"
+    },
+    "lib/libjsig.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 70112,
+      "sha256": "199d50a8299d6732fe42b8fb9e84dd219f290fae7752831706615df0b083bced"
+    },
+    "lib/libmanagement.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 76112,
+      "sha256": "e5e1c554b8481b1db244e1f3286e8b105cac09f30637429ade6fedc91734d38e"
+    },
+    "lib/libmanagement_ext.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 74624,
+      "sha256": "c145583cdd1c75807509900066d1b45e4cc16ca3045d0254bc1009d70b3f72c3"
+    },
+    "lib/libnet.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 113632,
+      "sha256": "b1892ab299e7de7383512d3fefe726f434ce65dbe2ffa61795f4261d9532a2b4"
+    },
+    "lib/libnio.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 126048,
+      "sha256": "a4a37505ba0bd07f2fe384ad87e5e8d0badb594fb8195db00b3018d39c201a72"
+    },
+    "lib/libosxsecurity.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 74416,
+      "sha256": "554ff80d9d92721ba661fc518caf552569df373040b38aac9143414091885cdd"
+    },
+    "lib/libsyslookup.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 35680,
+      "sha256": "b328db458a16bda8c63bdb3fdd5b270d93fa334d7af573fe8dc3195dedec3b40"
+    },
+    "lib/libverify.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 106160,
+      "sha256": "1ed69797500a0e5efb6b3f1bf75a4ca68f32a4801772846590aff67800fcd8ca"
+    },
+    "lib/libzip.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 161936,
+      "sha256": "7defd6916bb48a8c819fd7c91ad54f89a4776e528d470fd036150a33ef39aa58"
+    },
+    "lib/modules": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 38685377,
+      "sha256": "453f0ed62a44a9644171f903466d253ffa02022fa9caf30db3b3644882e9d37d"
+    },
+    "lib/security": {
+      "type": "directory",
+      "mode": 493
+    },
+    "lib/security/blocked.certs": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 2488,
+      "sha256": "96572f243f31c2ef81a6e627542e596f6a9295cff3c7ae095c1b595cb1457ded"
+    },
+    "lib/security/cacerts": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 211309,
+      "sha256": "5de22986b5c79c25b943c44a3a8ad22d477b4452bc178a650e1552025b9992d3"
+    },
+    "lib/security/default.policy": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 12228,
+      "sha256": "5cee7b3975556e1c522de300600d226c664f80feae69eab5e1d4ffbf2f6fbb10"
+    },
+    "lib/security/public_suffix_list.dat": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 228598,
+      "sha256": "aa50b28ce6a41e7b9fa9db8cb80983d1d1df3582dd03f4486b2f64459b4af150"
+    },
+    "lib/server": {
+      "type": "directory",
+      "mode": 493
+    },
+    "lib/server/libjsig.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 70112,
+      "sha256": "5e5451cb3bf30dfc06ac71fb73e99f3dff88be58044f5b38b4a8a49ed62a3f7f"
+    },
+    "lib/server/libjvm.dylib": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 18164208,
+      "sha256": "f8f4c7f654baac09d30549b971bd1158a95d683781326a02f36c440db387cab3"
+    },
+    "lib/tzdb.dat": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 104163,
+      "sha256": "108a63fb316b1eaa8949f3ff7265c2af0402c9ff13f360578e658caaafc40faf"
+    },
+    "readme.txt": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 863,
+      "sha256": "e2152de7ac6cd1ee1348d8621140e6a84478823bb72160514e47121d8b28614f"
+    },
+    "release": {
+      "type": "file",
+      "mode": 420,
+      "bytes": 215,
+      "sha256": "2aeb383501a09146b53d47ee743734cc73be197f07dbe911074cc795c9964bb5"
+    }
+  }
+}
