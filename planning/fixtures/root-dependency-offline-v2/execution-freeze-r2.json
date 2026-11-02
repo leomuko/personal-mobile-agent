@@ -1,0 +1,205 @@
+{
+  "protocol": "root-dependency-offline-inspection-v2",
+  "inputs": [
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/Python3",
+      "bytes": 5864880,
+      "sha256": "e631cdd2553d2c52fa9df3da34b7b751a47369428da9ef2b7625de0085c74ffe"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+      "bytes": 102352,
+      "sha256": "271143990bc83af0fb2404a255038f5faafb96df1584ed7f085e5018c0f33ffb"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/gzip.py",
+      "bytes": 21772,
+      "sha256": "e1287cead7a16d31bacb1498e3847467f672056d5b0b8d5fa7f2ba4e0c5d3cba"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/__init__.py",
+      "bytes": 14017,
+      "sha256": "332fabb72a4a1ed02c9207a7619ab339dac8f0b6862e16f6499147121b302a27"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/decoder.py",
+      "bytes": 12472,
+      "sha256": "079f7a25863c18fc9a9abc59735d684535b9deaafc08acda416997784b78e9c5"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/json/encoder.py",
+      "bytes": 16072,
+      "sha256": "cdb1eb54c453f672c56caf00c02ace80c97fb48121c4af734b7c4123ceb1fb3d"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_hashlib.cpython-39-darwin.so",
+      "bytes": 172560,
+      "sha256": "d00d130c7b21fa32ccee05b92101e37e90d03b4c42e8fe70c3cbdbfdcc952652"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/_ssl.cpython-39-darwin.so",
+      "bytes": 368576,
+      "sha256": "63b4f5ffcae93366614877b682462f6d240402c2d7216dfc905e62d1b5ef9905"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/resource.cpython-39-darwin.so",
+      "bytes": 135472,
+      "sha256": "d533ed6dd0591f670b774256475e1a2b46b84ce849e18065d77a807a6ecd2c05"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/lib-dynload/zlib.cpython-39-darwin.so",
+      "bytes": 170768,
+      "sha256": "c0185e3d615e40a665b88284a6e8b83e454e53fb937bc2c3d145fb0c0ef2d991"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py",
+      "bytes": 50751,
+      "sha256": "955eb00ea314832cc9d8db71729c434d0a10c293303634daa5688d3eef755e82"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py",
+      "bytes": 101280,
+      "sha256": "8d1a5f86334c468df202969a87df233dc25c1449f8696f24a986e922b2cfdefd"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/inspection-attempts/source-1/dawn-source.tar.gz.part",
+      "bytes": 28737866,
+      "sha256": "4ee2687c6f4b2b1f30e70028763201c898a763989f7aafcb284e197ab0a4735b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/inspection-attempts/source-1/outcome.json",
+      "bytes": 878,
+      "sha256": "c9086721d32c1f3668db03f38083d0a7ec726dcafe6899a7e5119880dc32e1dc"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-implementation-review-1/qa-summary.json",
+      "bytes": 7275,
+      "sha256": "5811873eb1fb871f0f39097fb4ae5c19bbfa2b0699e348700b6844b6a9a2c352"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-implementation-review-1/snapshot.json",
+      "bytes": 5255,
+      "sha256": "d007a9d907dae0e1db85d50595611b42f56de5981edd035508def85817e6ead1"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-protocol-review-1/qa-summary.json",
+      "bytes": 5734,
+      "sha256": "56a3fcb932eaf0427fb5f1d5e7790df49ceea3b2668ba0bd05525a8798889f5f"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-protocol-review-2/qa-summary.json",
+      "bytes": 3732,
+      "sha256": "ca96a282b91131bc0e0122213560a2de621d49ed73114967d8dcc8e7da07e18a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_ROOT_DEPENDENCY_OFFLINE_INSPECTION_V2.md",
+      "bytes": 10669,
+      "sha256": "c37f697961c07282472d4c69346c40b12659a78f6790e3926df023d395a84830"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-amendment-v1/amendment-review.json",
+      "bytes": 7579,
+      "sha256": "9cdf728852733aaf465df0ab94b4268aae06a7b8c9abca54739ae3b4f044b860"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-amendment-v1/inspection-freeze-r4.json",
+      "bytes": 4789,
+      "sha256": "227fa78297627071ef9d6d8e474b7ed9627e10b462c1b7d2f4fecdc043b819e1"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-amendment-v1/proposal-lock.json",
+      "bytes": 26443,
+      "sha256": "d0b4bcae9a430defa7cdde02af2d69bec96a9c6b9fb58c3a9d39bb0f2d756920"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/execution-freeze-r1.json",
+      "bytes": 8553,
+      "sha256": "79e3c6c49ac9050887cb1192b744c29aa3c5f53d43d9feaa711dd45c2d6a2466"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/implementation-review-1.json",
+      "bytes": 7275,
+      "sha256": "5811873eb1fb871f0f39097fb4ae5c19bbfa2b0699e348700b6844b6a9a2c352"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/protocol-review-1.json",
+      "bytes": 5734,
+      "sha256": "56a3fcb932eaf0427fb5f1d5e7790df49ceea3b2668ba0bd05525a8798889f5f"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/protocol-review-2.json",
+      "bytes": 3732,
+      "sha256": "ca96a282b91131bc0e0122213560a2de621d49ed73114967d8dcc8e7da07e18a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/ml_drift_compatibility/analyze.py",
+      "bytes": 18796,
+      "sha256": "01706ddb5533fd0ccd8198518257034a86144b972aaab923c70a102fe74e5c59"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/root_dependency_offline_v2/README.md",
+      "bytes": 1611,
+      "sha256": "1b14cd9b35bc533a99f37f4dfd6f4fcaf92893b97b6c0e2576d49f15ef78f541"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/root_dependency_offline_v2/inspect.py",
+      "bytes": 23725,
+      "sha256": "3acfc58714dda2d104e31c12680adb412b4e082ab52d9adf84c23ddd3947e615"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_root_dependency_offline_v2.py",
+      "bytes": 17787,
+      "sha256": "197099acf7fc29a1af411d4291d99d3d9d46aebe08e73e0209c70d77b303580d"
+    },
+    {
+      "path": "/private/etc/ssl/cert.pem",
+      "bytes": 333483,
+      "sha256": "9dae8d76e55cb08991f2b672d58999ea15560d910759c16b544f843bdffbb994"
+    }
+  ],
+  "python": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+  "pythonVersion": "3.9.6 (default, May 22 2026, 11:13:45) \n[Clang 21.0.0 (clang-2100.1.1.101)]",
+  "archive": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-amendment-v1/inspection-attempts/source-1/dawn-source.tar.gz.part",
+  "archiveSha256": "4ee2687c6f4b2b1f30e70028763201c898a763989f7aafcb284e197ab0a4735b",
+  "archiveBytes": 28737866,
+  "attemptParent": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts",
+  "limits": {
+    "headers": 300000,
+    "names": 134217728,
+    "frames": 268435456,
+    "pax": 65536,
+    "all_pax": 8388608,
+    "decoded": 2147483648,
+    "selected": 33554432,
+    "records": 4096,
+    "rss": 268435456,
+    "receipt": 33554432,
+    "hashing": 805306368
+  },
+  "inspectionSeconds": 300,
+  "cleanupSeconds": 15,
+  "logBytes": 2097152,
+  "protocolSha256": "c37f697961c07282472d4c69346c40b12659a78f6790e3926df023d395a84830",
+  "environment": {
+    "PATH": "/usr/bin:/bin",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1"
+  },
+  "runtimeFacts": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "zlibRuntime": "1.2.12",
+    "openssl": "LibreSSL 2.8.3",
+    "nonHermeticSystemRuntime": true,
+    "libraryBindings": "selected runtime module files, not a complete macOS dynamic-library closure"
+  },
+  "scope": "retained-archive-full-validation-then-two-exact-PyPI-metadata-GETs-no-wheel-bytes-no-adoption",
+  "rootFixesAllowed": false,
+  "bazelAllowed": false,
+  "deviceAllowed": false,
+  "commitAllowed": false,
+  "inspectionStatus": "FROZEN_PENDING_IMPLEMENTATION_REVIEW",
+  "previousFreezeSha256": "79e3c6c49ac9050887cb1192b744c29aa3c5f53d43d9feaa711dd45c2d6a2466",
+  "revision": 2
+}

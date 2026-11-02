@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "verdict": "PASS",
+  "scope": "root-dependency-offline-v2-focused-implementation-followup-and-exact-r2-execution-freeze",
+  "reviewer": "Codex, retained sole primary independent QA reviewer; no delegation",
+  "reviewedOn": "2026-11-02",
+  "executionFreezePath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/execution-freeze-r2.json",
+  "executionFreezeSha256": "933b2a16ba6666b297e5e0fbb92b616e829f3a65182e378e2fe8fbe45b8557de",
+  "freezeSha256": "933b2a16ba6666b297e5e0fbb92b616e829f3a65182e378e2fe8fbe45b8557de",
+  "protocolSha256": "c37f697961c07282472d4c69346c40b12659a78f6790e3926df023d395a84830",
+  "snapshotPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-implementation-review-2/snapshot.json",
+  "snapshotSha256": "22c2831f1e80d78eab8b681e185d1b9a37fc8a890678c71c2aaebcd3251b1c06",
+  "findings": [],
+  "closedFindings": [
+    {
+      "id": "OV2-IMPL-001",
+      "status": "CLOSED",
+      "evidence": "Actual urllib redirect machinery with synthetic HTTPS returns the same302 as R1. R2 raises on the first redirect after exactly1 GET with0 extra GETs. Positive direct metadata case still uses exactly2 GETs; no wheel bytes verified."
+    },
+    {
+      "id": "OV2-IMPL-002",
+      "status": "CLOSED",
+      "evidence": "Both original tiny regular-file-parent archives now raise non-directory ancestor before scan returns. Directory-parent positive passes; fixed duplicate/kind table remains33816576 bytes. Existing link order tests pass."
+    }
+  ],
+  "verification": {
+    "focusedHostTests": {
+      "status": "PASS",
+      "count": 25,
+      "log": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-implementation-review-2/focused-tests.log",
+      "command": "PYTHONDONTWRITEBYTECODE=1 build/constrained-decoding-reference/bin/python -B -W error::ResourceWarning -m unittest discover -s scripts/tests -p test_root_dependency_offline_v2.py -v"
+    },
+    "originalProbeReplay": {
+      "status": "PASS",
+      "redirect": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-implementation-review-2/same-url-redirect-replay.json",
+      "fileParent": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-implementation-review-2/non-directory-parent-replay.json",
+      "positiveMetadata": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-implementation-review-2/two-direct-GETs-positive.json",
+      "syntheticOnly": true
+    },
+    "exactFreezeAdmission": {
+      "status": "PASS",
+      "inputBindings": 31,
+      "realPythonLoaderUsed": true,
+      "retainedArchiveUse": "Compressed-file checksum only, not scanned or parsed",
+      "realAttemptAbsent": true,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-implementation-review-2/freeze-audit.json"
+    },
+    "deltaAndPreservation": {
+      "status": "PASS",
+      "changedPriorInputFiles": 3,
+      "unchangedPriorInputFiles": 24,
+      "additionalHistoryBindings": 4,
+      "otherLimitsRuntimeAndScopeUnchanged": true,
+      "R1FailAndFrozenSourcesPreserved": true,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-implementation-review-2/preservation.json"
+    },
+    "protocol": "PASS follow-up: rejects every redirect; fixed kind bit includes all non-directories and selected-parent validation.768MiB metadata hash ceiling and all previously reviewed parsing/publication bounds retained.",
+    "fullHostSuite": {
+      "status": "RECORDED_PASS_LOG_VERIFIED_NOT_RERUN_BY_REVIEWER",
+      "count": 197,
+      "log": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/host-tests-2.log"
+    }
+  },
+  "reviewedExecutionScope": {
+    "retainedArchiveOnly": true,
+    "newDawnDownload": false,
+    "sourceValidationRequiredBeforeMetadata": true,
+    "permittedMetadataURLs": [
+      "https://pypi.org/pypi/Jinja2/3.1.6/json",
+      "https://pypi.org/pypi/MarkupSafe/3.0.3/json"
+    ],
+    "rejectAllRedirects": true,
+    "retryAllowed": false,
+    "wheelDownloadOrInstall": false,
+    "decisionSeconds": 300,
+    "cleanupSeconds": 15,
+    "combinedLogBytes": 2097152,
+    "attemptWriteBytes": 536870912,
+    "minimumFreeBytes": 1073741824,
+    "fixedDuplicateKindTableBytes": 33816576,
+    "metadataHashBytes": 805306368
+  },
+  "limitations": [
+    "PASS is for this exact source-data task implementation/freeze only; no complete-source execution result or receipt exists yet.",
+    "No retained archive scan, network/acquisition, real owned inspection process, upstream source/generator, Java/Bazel/compiler, package install, device/model, Git operation or project source edit occurred during QA.",
+    "Retained compressed archive bytes were rehashed solely for frozen input correspondence. Adversarial scanner/HTTP cases used tiny synthetic inputs and an in-memory HTTPS handler.",
+    "No wheel-byte/ABI/interpreter compatibility, root dependency fixes/adoption, consumed interfaces, SDK artifact or runtime readiness is qualified. Advertised wheel metadata stays distinct from actual artifact verification.",
+    "System Python selected runtime bindings remain explicitly non-hermetic. Future actual storage/time/RSS/source-size feasibility still must satisfy the frozen guards; this review does not promise completion."
+  ],
+  "implementationReviewPassed": true,
+  "executionFreezeApproved": true,
+  "readyForBoundedExecutionUnderExistingUserAuthorization": true,
+  "rootAdoptionApproved": false,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false,
+  "nextGate": "Run only the one already-authorized frozen source-data task, retain success/failure evidence and obtain independent results review. No retries, scope/limit changes, root fixes, wheel bytes or downstream execution are admitted."
+}

@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "verdict": "FAIL",
+  "scope": "root-dependency-offline-v2-implementation-and-exact-execution-freeze-review",
+  "reviewer": "Codex, retained sole primary independent QA reviewer; no delegation",
+  "reviewedOn": "2026-11-02",
+  "executionFreezePath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/execution-freeze.json",
+  "executionFreezeSha256": "79e3c6c49ac9050887cb1192b744c29aa3c5f53d43d9feaa711dd45c2d6a2466",
+  "freezeSha256": "79e3c6c49ac9050887cb1192b744c29aa3c5f53d43d9feaa711dd45c2d6a2466",
+  "protocolSha256": "b8fcea1a0a73643fa56ee920b7e7661ed9ad1b924e9a4852a3db074190fc753b",
+  "snapshotPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-implementation-review-1/snapshot.json",
+  "snapshotSha256": "d007a9d907dae0e1db85d50595611b42f56de5981edd035508def85817e6ead1",
+  "findings": [
+    {
+      "id": "OV2-IMPL-001",
+      "priority": "P2",
+      "confidence": "high",
+      "title": "Reject all metadata redirects to enforce exactly two GETs",
+      "file": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/root_dependency_offline_v2/inspect.py",
+      "line": 301,
+      "endLine": 304,
+      "scenario": "PyPI returns302 with Location equal to the original exact metadata URL. MetadataOnly permits it and urllib repeats the GET.",
+      "evidence": "The real urllib redirect machinery with an in-memory HTTPS handler makes three successful GETs overall: Jinja2 twice, MarkupSafe once. package_metadata returns successfully and records only two final response records. No network was used.",
+      "impact": "The accepted acquisition can exceed the exact-two-GET/no-retry scope while receipts conceal the additional request.",
+      "minimalFix": "Reject every redirect, including same-URL redirects; align the protocol wording and regression expectations with the exact-two-GET contract.",
+      "missingRegression": "Same-URL redirect must fail on the first redirect without a second GET; retain cross-URL/host/downgrade failures.",
+      "probe": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-implementation-review-1/same-url-redirect-probe.json"
+    },
+    {
+      "id": "OV2-IMPL-002",
+      "priority": "P2",
+      "confidence": "high",
+      "title": "Reject selected descendants of any non-directory source ancestor",
+      "file": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/root_dependency_offline_v2/inspect.py",
+      "line": 251,
+      "relatedLines": [
+        285,
+        286,
+        287
+      ],
+      "scenario": "A regular source file named generator appears before or after required generator/... files. It is not selected/materialized, so private staging creates a directory in its place. The fixed bitset marks only links; final ancestor lookup treats that file as harmless.",
+      "evidence": "Two tiny synthetic archives, one per order, return completeSourceValidated=true. With synthetic receipt inputs, accept() also returns sourceQualified=true even though the source parent is a regular file and staged parent is a directory.",
+      "impact": "The qualified source/staged recipe has an inconsistent parent layout. The current protocol only names links; it should explicitly exclude all non-directory ancestors rather than accepting an impossible source directory structure.",
+      "minimalFix": "Use the existing fixed bitset as a non-directory marker for files and both link kinds, and reject any selected ancestor so marked, in either archive order. Update protocol wording while preserving the33816576-byte table budget.",
+      "missingRegression": "Ordinary-file ancestors before and after selected descendants fail before source receipt/metadata/acceptance. Valid directory parents and existing link ancestry cases still pass.",
+      "probe": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-implementation-review-1/non-directory-parent-probe.json",
+      "probeLimit": "Owner input verification used an empty synthetic input list; no retained archive was parsed or real process/network executed."
+    }
+  ],
+  "additionalBlockingProbesPending": false,
+  "verification": {
+    "exactFreeze": {
+      "status": "PASS_IDENTITY_ONLY",
+      "inputsRehashed": 27,
+      "snapshotBindings": 28,
+      "archiveHandling": "Compressed bytes hashed only for freeze identity; no retained-source parser scan."
+    },
+    "focusedHostTests": {
+      "status": "PASS",
+      "count": 24,
+      "log": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/qa-implementation-review-1/focused-tests.log",
+      "command": "PYTHONDONTWRITEBYTECODE=1 build/constrained-decoding-reference/bin/python -B -W error::ResourceWarning -m unittest discover -s scripts/tests -p test_root_dependency_offline_v2.py -v"
+    },
+    "independentAdversarialCases": {
+      "status": "FINDINGS_REPRODUCED",
+      "redirectActualGETs": 3,
+      "ordinaryFileAncestorOrdersAccepted": [
+        "before",
+        "after"
+      ],
+      "networkOrRealSourceScan": false
+    },
+    "metadataHashCeiling": "The added768MiB ceiling is coherent with the protocol: code charges raw header bytes, PAX payload, framed inventory prefix/records and every duplicate/ancestry name hash. It is enforced independently of256MiB framed bytes and128MiB name accounting.",
+    "parserAndOwnershipInspection": "Reviewed all415 scanner lines and272 test lines, explicit USTAR/PAX parsing, fixed table arithmetic, bounds/tail/CRC, same-descriptor validation, resource accounting, provisional metadata and owner no-overwrite hardlink publication. Existing positive/negative tests pass; the two gaps prevent implementation/freeze approval.",
+    "preservation": "Original protocol FAIL/PASS summaries, amendment proposal lock/review and v1 failure/freezes are present with the frozen hashes; no old full-tree inventories replayed and no historical bytes rewritten.",
+    "fullHostSuite": "NOT_RERUN. User reported195 passing tests before the final focused test addition; that is not claimed as a fresh full-suite result for this snapshot. Targeted24 tests and independent probes were freshly run."
+  },
+  "limitations": [
+    "No retained Dawn archive scan, acquisition/network, upstream code/generator, Java/Bazel/compiler, wheel/package installation, device/model, Git operation or project source edit occurred.",
+    "Only tiny synthetic archives and in-memory HTTPS responses were used for adversarial checks. Input byte hashing is not complete source qualification.",
+    "System Python3.9 and selected module/library bindings remain explicitly non-hermetic; no stronger runtime-closure claim is made.",
+    "No complete source/wheel-byte/interpreter/interface/root-adoption/build readiness is established."
+  ],
+  "implementationReviewPassed": false,
+  "executionFreezeApproved": false,
+  "rootAdoptionApproved": false,
+  "deviceExecutionAuthorized": false,
+  "semanticEnablement": false,
+  "nextAction": "Preserve this R1 FAIL, source/test/protocol snapshot and freeze; fix OV2-IMPL-001/002 with focused regressions and a new exact freeze. Existing human scope remains authorized, but execution is gated on the required follow-up review."
+}
