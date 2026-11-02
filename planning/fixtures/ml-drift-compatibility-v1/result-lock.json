@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "scope": "slice-results-not-artifact-or-device-freeze",
+  "files": {
+    "planning/P2_ML_DRIFT_COMPATIBILITY_AMENDMENT_V1.md": "26bc9dd10339a5fb28f0f1684d08a5d93f9c51f0ed8124f0510bbd0aa80e0de2",
+    "planning/P2_ML_DRIFT_EMULATOR_PREREQUISITES_V1.md": "46e556c153e3ed5b1291074c93959e3ceafe41e5099a975c1054367925c8cf12",
+    "planning/P2_BAZEL_SERVER_JVM_CORRECTION_PROPOSAL_V1.md": "dd1cc17f8d730fb1056fad15107f00da876dff83efd6d00d44b1617bf4fa3190",
+    "docs/P2_ML_DRIFT_COMPATIBILITY_RESULTS_V1.md": "fbac7a6721ca19ec13313a553202cb809a45c1f3cc65391a78739e40aa5bcd6b",
+    "docs/P2_ML_DRIFT_COMPATIBILITY_REVIEW_STATUS.md": "b23b450880a612516ad2433f77d928f329add0a7a58c4f019270eb59e501c1ad",
+    "scripts/diagnostics/ml_drift_compatibility/analyze.py": "01706ddb5533fd0ccd8198518257034a86144b972aaab923c70a102fe74e5c59",
+    "scripts/diagnostics/ml_drift_compatibility/prepare.py": "411f50131c123fb97f4bc67f10eee9a1afa4bfcdee813b230ca542e9ad9d9c57",
+    "scripts/diagnostics/ml_drift_compatibility/README.md": "acc56777d1f1d121c996edaf3bd66541a175cbb14884bfd471e5b91ffb847528",
+    "scripts/tests/test_ml_drift_compatibility.py": "1a9ed4227acfed239e0dab91c66619ccecd39aa80f5d69e9ca3dbfc709d0aace",
+    "planning/fixtures/ml-drift-compatibility-v1/candidate.json": "38e9e0b2202533c9747f7782f07c06cf09d9fbfbc3ae1131ffdf381a6e2238d1",
+    "planning/fixtures/ml-drift-compatibility-v1/source-toolchain-catalog.json": "4c6b8d0e3b9f9c529f441f7e9e5b694833a629d28179edfe95552a2973e123fb",
+    "planning/fixtures/ml-drift-compatibility-v1/amendment-lock.json": "f65b253e2a404ab3967d0503d30f3141174e24a3ceb4323c73b7bb1afbb2b3a8",
+    "planning/fixtures/ml-drift-compatibility-v1/amendment-review.json": "6d606034e474ac0c16547aa2fe06e568d91ed0615e9d5ebbb9ac39d2281b615a",
+    "planning/fixtures/ml-drift-compatibility-v1/amendment-review-r2.json": "9ec8472118d7dff4f13fb163a7f27b36abca7224f3c16cdd8981bfa68453f4da",
+    "planning/fixtures/ml-drift-compatibility-v1/analysis-freeze.json": "8214f94feb8d2591da396ae103f87d76438ed1c2657b92bde2e74a27be57d031",
+    "planning/fixtures/ml-drift-compatibility-v1/analysis-freeze-v2.json": "5da08299b99c822ffcfcb3b9b5eae85594a782fc0f6d66b7621ca5d3c582b4aa",
+    "planning/fixtures/ml-drift-compatibility-v1/configured-outcomes.json": "34e24e8ede5fac4249852d7494fbfcde1f970793d05f58e519a9ea7af934d244"
+  },
+  "executedAnalysisFreezeSha256": "5da08299b99c822ffcfcb3b9b5eae85594a782fc0f6d66b7621ca5d3c582b4aa",
+  "analysisProfileDecision": "REJECT_JAVA17_SERVER_PROFILE",
+  "MLDriftCompatibility": "UNPROVED",
+  "configuredGraphsProduced": 0,
+  "independentExecutedResultsReview": "BLOCKED_QA_USAGE_LIMIT",
+  "serverJvmCorrectionAdopted": false,
+  "runtimeArtifactBuildReady": false,
+  "devicesAllowed": false,
+  "semanticSearchEnabled": false
+}

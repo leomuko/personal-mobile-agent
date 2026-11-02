@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "scope": "failed-analysis-launches-not-configured-dependency-graphs",
+  "analysisFreezeSha256": "5da08299b99c822ffcfcb3b9b5eae85594a782fc0f6d66b7621ca5d3c582b4aa",
+  "baseline": {
+    "exitCode": 1,
+    "rootRepositorySelectionEvaluated": false,
+    "cleanupConfirmed": true
+  },
+  "abis": {
+    "arm64-v8a": {
+      "requestedConfiguration": "android_arm64",
+      "exitCode": 1,
+      "elapsedSecondsIncludingCleanup": 0.5643948750000014,
+      "classification": "BLOCKED_SERVER_JVM_STARTUP",
+      "configuredGraphPresent": false,
+      "guardedOverlaySelected": false,
+      "cleanupConfirmed": true,
+      "repositorySupplierEstablished": false,
+      "interfacesChecked": false
+    },
+    "x86_64": {
+      "requestedConfiguration": "android_x86_64",
+      "exitCode": 1,
+      "elapsedSecondsIncludingCleanup": 0.46860983300000214,
+      "classification": "BLOCKED_SERVER_JVM_STARTUP",
+      "configuredGraphPresent": false,
+      "guardedOverlaySelected": false,
+      "cleanupConfirmed": true,
+      "repositorySupplierEstablished": false,
+      "interfacesChecked": false
+    }
+  },
+  "reason": "Bazel server class major65 cannot run on frozenJava17 major61",
+  "MLDriftCompatibility": "UNPROVED",
+  "runtimeArtifactBuilds": false,
+  "deviceWorkloads": false,
+  "independentResultsReview": "BLOCKED_QA_USAGE_LIMIT",
+  "retainedEvidence": {
+    "build/ml-drift-compatibility-v1/attempts/configured-1/report.json": "9fca0d5491e179810f09f4765995b66a4539f3762313af5be7308c7600cc4dea",
+    "build/ml-drift-compatibility-v1/attempts/configured-1/inventory.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/ml-drift-compatibility-v1/attempts/configured-1/inventory.stderr.log": "63c4e097a976ff828789fafac4c4882cae9e2d22f185f0261fdd449612365bb3",
+    "build/ml-drift-compatibility-v1/attempts/configured-1/arm64-v8a.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/ml-drift-compatibility-v1/attempts/configured-1/arm64-v8a.stderr.log": "63c4e097a976ff828789fafac4c4882cae9e2d22f185f0261fdd449612365bb3",
+    "build/ml-drift-compatibility-v1/attempts/configured-1/x86_64.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/ml-drift-compatibility-v1/attempts/configured-1/x86_64.stderr.log": "63c4e097a976ff828789fafac4c4882cae9e2d22f185f0261fdd449612365bb3"
+  }
+}
