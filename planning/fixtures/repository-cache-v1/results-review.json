@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "verdict": "PASS",
+  "scope": "repository-cache-v1-final-executed-results-evidence-and-stop-route-review",
+  "reviewer": "Codex, retained sole primary independent QA reviewer; no delegation",
+  "reviewedOn": "2026-11-02",
+  "branch": "dev",
+  "head": "e47e61b8ccdd400498b4d50cada22fc4176b2176",
+  "resultLockPath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/result-lock.json",
+  "resultLockSha256": "556f45ecef751287b7f3e1def4c8c24cf67328520ac743d00562acd89937cd68",
+  "analysisFreezeSha256": "afb82c30dfd4eed60f9b84610327b22e426806aef1eeb9742432f8a876bd2070",
+  "rawReportSha256": "4b4dcf018cdfc0c27db20f87d966267baaa57a7e65adc7f43642ae8c96fef34f",
+  "snapshotPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-final-results-review-1/snapshot.json",
+  "snapshotSha256": "64ee4fe3379c29159ff650c83ffc95ab41ec57aedc007181b5f8da2e25591af8",
+  "findings": [],
+  "outcomes": {
+    "campaignIntegrity": "PASS",
+    "documentationAndStopRoute": "PASS",
+    "rootInventory": "PASS_VALID_ABSENT_RECEIPT",
+    "repositoryPolicy": "INSERT_AFTER_ROOT",
+    "configuredAnalysis": "BLOCKED_DAWN_UNDEFINED_AND_FP16_DEFAULT_TARGET_MISMATCH",
+    "completeConfiguredGraphs": 0,
+    "resolvedJavaCompilationToolchains": "UNRESOLVED",
+    "runtimeArtifactBuildReady": false,
+    "wrapperExitCode": 2,
+    "wrapperExitIsQualificationPass": false
+  },
+  "verification": {
+    "allBindings": {
+      "status": "PASS",
+      "lockedFiles": 22,
+      "lockedEvidence": 155,
+      "sourceEvidenceFiles": 11,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-final-results-review-1/bindings.json"
+    },
+    "frozenInputsAndTrees": {
+      "status": "PASS",
+      "realReadOnlyLoaderUsed": true,
+      "inputFiles": 110,
+      "preparedTrees": 5,
+      "treeEntries": 77377,
+      "noJavaOrBazelInvoked": true
+    },
+    "commandsAndReceipt": {
+      "status": "PASS",
+      "exactArgvMatchesFreeze": true,
+      "invocations": 3,
+      "recordedExitCodes": [
+        0,
+        1,
+        1
+      ],
+      "elapsedSecondsIncludingCleanup": [
+        298.254264542,
+        99.03403374999999,
+        95.94880512499998
+      ],
+      "recordedCleanupAllConfirmed": true,
+      "noTimeouts": true,
+      "inventoryStdoutBytes": 3247442,
+      "abiStdoutEmpty": true,
+      "allCombinedLogsBelow16MiB": true,
+      "receipt": {
+        "identity": null,
+        "present": false
+      },
+      "bothABIWorkspacesGuarded": true,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-final-results-review-1/command-and-receipt-audit.json"
+    },
+    "sourceCorrespondence": {
+      "status": "PASS",
+      "SDKOriginalFilesPerStagedWorkspace": 1355,
+      "stagedWorkspaceCount": 2,
+      "onlyOriginalChange": "Exact reviewed WORKSPACE suffix; helper bytes match reviewed baseline/guarded generation. Full Cargo locks unchanged.",
+      "archiveBoundMLDriftFilesPerABI": 883,
+      "MLDriftRevision": "2d7fbbd45d8940b5fc7cea1f79e59d9d796164e2",
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-final-results-review-1/source-and-cache-audit.json"
+    },
+    "blockerTrace": {
+      "arm64-v8a": "Raw error: repository dawn undefined, referenced by @litert//ml_drift_delegate/delegate:buffer_handler_webgpu at BUILD:1026; dependency @dawn//:webgpu_headers at BUILD:1041. Retained macro has v20260720.160313, no SHA256 and three Python patch commands; no active root dawn declaration.",
+      "x86_64": "Raw error: @FP16//:fp16 absent; @ml_drift//ml_drift/common:types uses @fp16 shorthand. Mapping changes repository only. Supplied BUILD exports FP16. Root FP16 revision 4dfe081cf6bcd15db339cf2680b9281b8451eeb3/hash d973501a40c55126b31accc2d9f08d931ec3cc190c0430309a5e341d3c0ce32a differs from standalone MODULE declaration 0.0.0-20210320-0a92994.",
+      "ABIExclusiveOrAPICompatibilityClaimMade": false
+    },
+    "cacheIntegrity": {
+      "status": "PASS",
+      "acceptedSeedPayloads": 42,
+      "acceptedSeedPayloadBytes": 721042126,
+      "workingCachePayloads": 53,
+      "workingCachePayloadBytes": 893727521,
+      "allPayloadHashesVerified": true,
+      "seedUnchanged": true,
+      "seedAndWritableCacheHaveDistinctFileInodes": true,
+      "cacheCopyDuration": "NOT_SEPARATELY_TIMED"
+    },
+    "preservation": {
+      "status": "PASS",
+      "historicalSourceBindings": 46,
+      "priorSnapshotBindingCounts": [
+        174,
+        273,
+        28
+      ],
+      "oldCacheAndFailureEvidenceUnchanged": true,
+      "analysisReviewFixtureExactPriorSummary": true,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-final-results-review-1/preservation-audit.json"
+    },
+    "claimBounds": "PASS: report distinguishes inventory success from failed configured queries, partial progress from complete graphs, first errors from ABI exclusivity, and archive/source correspondence from interface/runtime compatibility. Wrapper exit 2 is not promoted to PASS.",
+    "reviewWorkloads": "No reruns, preparation, download, Bazel/Java, build, device/model or package execution; no source or Git changes."
+  },
+  "routeAssessment": {
+    "supported": "Stop before SDK artifacts. A separately reviewed root-closure amendment may investigate the FP16 target bridge and a complete pinned Dawn recipe.",
+    "notApprovedByThisReview": "No target/repository alias, Dawn dependency/patch adoption, version/JVM/backend/ABI/deadline changes, extra command, retry, cleanup/deletion or artifact/device execution.",
+    "interfaceCertificationRequiredNow": false,
+    "storage": "About 2.8 GiB free remains, below the unchanged 18 GiB fresh-analysis preflight. No cleanup performed."
+  },
+  "gapsAndLimitations": [
+    "Consumed interfaces, complete ABI/configuration graphs, resolved Java compilation tools and runtime artifact readiness are explicitly blocked and were not certified. This does not prevent an evidence-integrity PASS.",
+    "Cleanup is corroborated from recorded confirmations and previously reviewed ownership logic; historical OS process state is not reconstructed. Wrapper exit 2 is recorded in outcomes/user handoff and consistent with reviewed wrapper behavior.",
+    "Per-command elapsed includes owned cleanup. Admission/cache-copy duration and decision-versus-cleanup subdurations were not separately instrumented; no inferred timing split is claimed.",
+    "Bazel error logs report zero build processes for the failed cqueries; ordinary repository setup may run its existing host tools. This is not native runtime execution evidence.",
+    "Only the retained three-command campaign is audited; no claim is made about an external system-wide execution history. No broad re-review or implementation of Dawn/FP16 fixes was performed."
+  ],
+  "deviceExecutionAuthorized": false,
+  "artifactBuildAuthorized": false,
+  "semanticEnablement": false,
+  "nextAction": "Finish this bounded slice with preserved evidence and BLOCKED configured-analysis status. Any root-closure correction requires a separately requested and reviewed amendment before implementation/new execution."
+}

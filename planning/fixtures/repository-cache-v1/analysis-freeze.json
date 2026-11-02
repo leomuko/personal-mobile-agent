@@ -1,0 +1,658 @@
+{
+  "schema": 1,
+  "scope": "configured-analysis-only",
+  "bazelVersion": "7.6.1",
+  "bazelPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/bazel-7.6.1-darwin-arm64",
+  "javaHome": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/server-jdk-21.0.5",
+  "sdkRoot": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full",
+  "abis": [
+    "arm64-v8a",
+    "x86_64"
+  ],
+  "targets": [
+    "//kotlin/java/com/google/ai/edge/litertlm:litertlm-android",
+    "//kotlin/java/com/google/ai/edge/litertlm/jni:litertlm_jni",
+    "@litert//litert/runtime/accelerators/gpu:ml_drift_gpu_accelerator",
+    "@ml_drift//ml_drift/cl:opencl_wrapper",
+    "@ml_drift//ml_drift/common:gpu_info",
+    "@ml_drift//ml_drift/common:gpu_model",
+    "@ml_drift//ml_drift/common:gpu_model_builder"
+  ],
+  "inputs": [
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/ToolchainInfo.plist",
+      "bytes": 95,
+      "sha256": "b2e3b746c87ddfd6d2145656d87569054807e2196d6f46ef09dec3923ed31541"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+      "bytes": 141373024,
+      "sha256": "7def90dd8829726686213a747fc5bff1583df933dae5edc55d755479e0bfe00a"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Info.plist",
+      "bytes": 33286,
+      "sha256": "224c27a718df1d8b4e785d29d06259e0a9326c424e70d30efab9c587463f719a"
+    },
+    {
+      "path": "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home/bin/java",
+      "bytes": 70464,
+      "sha256": "af8b122943345320b179c75c3404d56a981017739746b75f9caf583632f0bea0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/AGENTS.md",
+      "bytes": 4233,
+      "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/server-jdk-21.0.5/bin/java",
+      "bytes": 69936,
+      "sha256": "d4142a93afc46a95d2ec08b5334b861662ac3aea502359870c6625f497fe27a4"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/server-jdk-tree.json",
+      "bytes": 17189,
+      "sha256": "8af834a7129e36df8f45b53e0dbeac2aa9e5d9931dce426f04f0a49bd713d4ba"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/android-sdk-freeze-tree.json",
+      "bytes": 14097046,
+      "sha256": "5468ab1e9bf37f86b619c18e62ca74994b9f8604967a36a67f2ce76b3805a2d8"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/bazel-7.6.1-darwin-arm64",
+      "bytes": 52859106,
+      "sha256": "45cca81a839d7495258b19ee8371c7b891f350586ef37b9940f7b531eb654cc8"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/bazel.sha256",
+      "bytes": 91,
+      "sha256": "f6519bf25205c59c5b24711521b91dc85e458953c328a2a616893b65927ae77b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/java-freeze-tree.json",
+      "bytes": 77312,
+      "sha256": "a5c002bd93bb0326ce2faeaeb3579068493c788b002720be2507e20b6c378077"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/ml-drift.tar.gz",
+      "bytes": 1651213,
+      "sha256": "074ba94182ba04c7fbdba3f76faea1370417e49f0397552ea6e3344d90d5d77f"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/ndk-freeze-tree.json",
+      "bytes": 1890733,
+      "sha256": "5b254d0300196e39262dbef0b0901c52c66365b4571f38c6ea203d2e4ef06445"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/ndk-r28b-darwin.zip",
+      "bytes": 949590256,
+      "sha256": "76d33f698302dce31f59b86e9ed82e87b530f10cc52cbaeb44207473689be309"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/ndk-r28b-package.xml",
+      "bytes": 1278,
+      "sha256": "1e0079d14bf9d676cb4efa33cb625fae7c0fc2a124a8a2915af7b895e1d9a57e"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-freeze-tree.json",
+      "bytes": 246386,
+      "sha256": "07bd375b770f77353268ae762d95eac7f34fb7bc179cecbfc47a34a07fab02d1"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full-canonical.tar.gz",
+      "bytes": 296177328,
+      "sha256": "912c0330e29469c17c404e18b536c43aa2940bc7308ef548d5a0381180ee49fc"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/preparation-attempts/prepared-1/receipt.json",
+      "bytes": 10496,
+      "sha256": "d85008af90134b3a85d43b59f4f6375442e3b84599054d36b21cdf79ba29fb91"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/preparation-attempts/prepared-1/report.json",
+      "bytes": 66930,
+      "sha256": "fb16afd8888c98f77c9c4a0c1c00f3fc87826a2965c20c6a088962259e2d444a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/DIAGNOSTIC_SKILLS_PROVENANCE.json",
+      "bytes": 1211,
+      "sha256": "83de546432011afa9e398f35369cc59aad1504632237bfcaf771a1b58016c540"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/DIAGNOSTIC_SKILLS_PROVENANCE.md",
+      "bytes": 3522,
+      "sha256": "acc83a815496d83bf48e1868cb7a54fd8b7dadf1d32b6b0b531d04b3ba6b2668"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/P2_ANDROID_RUNTIME_BUILD_PREREQUISITES.md",
+      "bytes": 8636,
+      "sha256": "590803f53d45169c3ad3d5557996b087f42a605ca30946f3739b91162e06e60d"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/P2_ANDROID_RUNTIME_ROOT_RESOLUTION_V2.md",
+      "bytes": 8363,
+      "sha256": "164d2a520cdd2191576bc73ac55aa9cc520ed48778323bed7a8399e7c0cbaad2"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/P2_ESCAPED_UNICODE_BOUNDARY_RESULTS.md",
+      "bytes": 7449,
+      "sha256": "d7601dc7131b712fbe1e83889e24aad8d8b68c0ecb97c369a871498247ffb9a3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/P2_ESCAPED_UNICODE_BOUNDARY_SOURCE_SNAPSHOT.json",
+      "bytes": 1121,
+      "sha256": "92bc5cb8fa39d43b561d8dc6dcf8206c8cd3afc756c5393f156c3a71e2f5fcb1"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/P2_GRAMMAR_PROGRESS_BOUNDARY_REVIEW.md",
+      "bytes": 7705,
+      "sha256": "852eaa6e6fce2745a9048ad7449f367385c151849e1e017401276ed1bf8ab078"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/P2_GRAMMAR_PROGRESS_SOURCE_SNAPSHOT.json",
+      "bytes": 2456,
+      "sha256": "20a167d9d1de9cbb3e825efbdd3557415e6b5bc08f561305b93d6c82309c8ee0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/P2_UNICODE_GRAMMAR_CORRECTION_PROPOSAL_V1_REVIEW.md",
+      "bytes": 1333,
+      "sha256": "af3750f72a44bb36877221f51d885f55e153bd41c415741aa63d57470f681ce0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/P2_UNICODE_GRAMMAR_CORRECTION_RESULTS.md",
+      "bytes": 10449,
+      "sha256": "8f8e0685ad8369b4b79bdf53509f13008bd0a48cbcb6003b0b974e081e8a84e2"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/P2_UNICODE_GRAMMAR_CORRECTION_SOURCE_SNAPSHOT.json",
+      "bytes": 2248,
+      "sha256": "e89df35d7df61dce3366486eeb5ba77cd7655aa23a71ee1cebe25591584ba8f7"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_ANDROID_RUNTIME_EMULATOR_CAMPAIGN_V1.md",
+      "bytes": 4141,
+      "sha256": "5395e68880f6542fdf9eb881d9cd81ccb03f5f5e51eb2d481e668faf69812b6a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_ANDROID_RUNTIME_EMULATOR_FIRST_AMENDMENT_V1.md",
+      "bytes": 5306,
+      "sha256": "129339cf53aecd5092171ebbb4cf7612949d1021c95af6326b6538ea98567bae"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_BAZEL_SERVER_JVM_CORRECTION_EXECUTION_V1.md",
+      "bytes": 3450,
+      "sha256": "2d0c44e096781ffe1c5f27c38a9fd17a7408ed67344ffa13cb542b3bf9235ef6"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_BAZEL_SERVER_JVM_CORRECTION_PROPOSAL_V1.md",
+      "bytes": 3965,
+      "sha256": "dd1cc17f8d730fb1056fad15107f00da876dff83efd6d00d44b1617bf4fa3190"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_ML_DRIFT_COMPATIBILITY_AMENDMENT_V1.md",
+      "bytes": 7252,
+      "sha256": "26bc9dd10339a5fb28f0f1684d08a5d93f9c51f0ed8124f0510bbd0aa80e0de2"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_UNICODE_GRAMMAR_CORRECTION_PROPOSAL_V1.md",
+      "bytes": 13112,
+      "sha256": "e11725b559cd4973288e27bbb24688dac558795f35a0b0a0dcbbce943ad7d727"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/android-runtime-build-v1/prerequisite-lock.json",
+      "bytes": 1026,
+      "sha256": "2e1168f6f0b33ee0410fdf50b35cf635e41da37acefc2343b439ae2ef57583c3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/android-runtime-build-v1/source-inputs.json",
+      "bytes": 15839,
+      "sha256": "57145ce62d14f232d202f79919b0e841deec4c14df7382296330760fda7ebd81"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/android-runtime-resolution-v2/resolution-lock.json",
+      "bytes": 1339,
+      "sha256": "305a88e4731855fec95bbc2c165111926582864a24d9b4cdfa953c26baed6076"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/android-runtime-resolution-v2/source-inputs.json",
+      "bytes": 5451,
+      "sha256": "36e91508af20749e48500e69f76d0849963f69bb10f610d864b23bfd6b0af090"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/bazel-server-jvm-v1/analysis-freeze.json",
+      "bytes": 27984,
+      "sha256": "c9787682569fb8d694c8e68a714439333b75ca055404fed09540c12cf96bd9a7"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/bazel-server-jvm-v1/previous-results-review.json",
+      "bytes": 3823,
+      "sha256": "2d5fc7a202306294e1f1a5e06bee3f8f6be95a3d1d36764233b1b5eedafb06b3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/bazel-server-jvm-v1/server-jdk-provenance.json",
+      "bytes": 21774,
+      "sha256": "2b3468a193c7cc9a2b5c96168cd5f47f87ddf7f56dfb47c7ded34ad2085057ef"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/grammar-progress-v1/compact-prefix.txt",
+      "bytes": 66,
+      "sha256": "83c529ea2b2087a42b77b2150671d303101307fbfa08a937c8428cd60f48cb5f"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/grammar-progress-v1/evidence-output.no-whitespace.schema.json",
+      "bytes": 2066,
+      "sha256": "9a67c6a8e9a57e64f92772d0e735d29eb70147a5193d6d2077e8d3ad53814373"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/grammar-progress-v1/keyword-sentinel.no-whitespace.schema.json",
+      "bytes": 1981,
+      "sha256": "195b5bff023f8872a55224630685c91da947a3d6a8d788fa5c02dd5bbef4ce2f"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/grammar-progress-v1/preparation-lock.json",
+      "bytes": 915,
+      "sha256": "ac08cdab90f90b959681002270114f35d4e5bfdfa94b89aa167d5b334a9a6749"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/grammar-progress-v1/protocol.json",
+      "bytes": 1343,
+      "sha256": "e275160603849861da73032f24fe28d9e322c47ce33d088712cd8e16bb56416f"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/grammar-progress-v1/witnesses.json",
+      "bytes": 7267,
+      "sha256": "4092c4404e5377347b0ec6c9f772017100187e61168b0f04a3ee59aa4fcda8fa"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/grammar-progress-v2-unicode/compiler-cases.json",
+      "bytes": 434462,
+      "sha256": "7b056183748a5a0a9ffe8d3530603e850633c4682b6579671c80a9d93b4c51c2"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/grammar-progress-v2-unicode/evidence-output.schema.json",
+      "bytes": 2114,
+      "sha256": "ecb21f35e6604bc4da2c6c58eb5cc486f42225bdd81ce05c37c28112f4d3c769"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/grammar-progress-v2-unicode/keyword-sentinel.schema.json",
+      "bytes": 2029,
+      "sha256": "3753fc9a5393a7e66de59a49c75febb795bb8a5653fb427ab8add82782c50a3b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/grammar-progress-v2-unicode/preparation-lock.json",
+      "bytes": 1830,
+      "sha256": "4e5dd4b9bad7e93bdc300363c7d5000b73d14df7ffdf6c548c0f42ea2bbe9277"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/grammar-progress-v2-unicode/protocol.json",
+      "bytes": 2719,
+      "sha256": "9ba23cd6fcbcf88b19e08f775d9334ee83dde8974a6f615e269053cf408bdd30"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/ml-drift-compatibility-v1/amendment-lock.json",
+      "bytes": 607,
+      "sha256": "f65b253e2a404ab3967d0503d30f3141174e24a3ceb4323c73b7bb1afbb2b3a8"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/ml-drift-compatibility-v1/amendment-review-r2.json",
+      "bytes": 390,
+      "sha256": "9ec8472118d7dff4f13fb163a7f27b36abca7224f3c16cdd8981bfa68453f4da"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/ml-drift-compatibility-v1/amendment-review.json",
+      "bytes": 544,
+      "sha256": "6d606034e474ac0c16547aa2fe06e568d91ed0615e9d5ebbb9ac39d2281b615a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/ml-drift-compatibility-v1/analysis-freeze-v2.json",
+      "bytes": 24008,
+      "sha256": "5da08299b99c822ffcfcb3b9b5eae85594a782fc0f6d66b7621ca5d3c582b4aa"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/ml-drift-compatibility-v1/candidate.json",
+      "bytes": 1284,
+      "sha256": "38e9e0b2202533c9747f7782f07c06cf09d9fbfbc3ae1131ffdf381a6e2238d1"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/ml-drift-compatibility-v1/result-lock.json",
+      "bytes": 2793,
+      "sha256": "5a273d38fd83f777b8d3890e4c067609278d26681f6e10933caad6e8cb098029"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/ml-drift-compatibility-v1/source-toolchain-catalog.json",
+      "bytes": 369741,
+      "sha256": "4c6b8d0e3b9f9c529f441f7e9e5b694833a629d28179edfe95552a2973e123fb"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/inputs.json",
+      "bytes": 42790,
+      "sha256": "a4b36b6c733044d651362fe2b37b2daf9b31220e90a1e28fc378a0d73b71d0f7"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/preparation-freeze-r4.json",
+      "bytes": 10216,
+      "sha256": "4423d511ecd52e2cbcb7b7d09189657dded12993db3e6f05e529bc573b602d58"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/preparation-results-review.json",
+      "bytes": 6411,
+      "sha256": "3cddba1bac3710cfe0cba5e9faa2222112e12d5abea7e5ff3a97f7e1b21ec221"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/preparation-review.json",
+      "bytes": 6881,
+      "sha256": "c2522b660be84d58d2388b233d11a05663887d2c0673e2dfb670380311e50508"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/unicode-boundary-v1/cases.json",
+      "bytes": 4155,
+      "sha256": "c24e856a6e5cc2966e9eb4c81653ea135097bdd9e0b34eefdc2bf3b0e99f5ec7"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/unicode-boundary-v1/investigation-lock.json",
+      "bytes": 465,
+      "sha256": "50d7cb52f88c1b5187582c45c0207167c1a5e712beaf316746c373da0362a575"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/unicode-boundary-v1/minimal-string.schema.json",
+      "bytes": 60,
+      "sha256": "d9b3b4cd148aff6322bcecd4dafd533ca32d430aba7050c694f562408c96b9da"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/unicode-boundary-v1/protocol.json",
+      "bytes": 904,
+      "sha256": "be0eeba52c9810a88c6e4fc52d81a21f29ed31d4d567344b2afe8bcfa86f13d7"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/unicode-correction-proposal-v1/proposal-lock.json",
+      "bytes": 566,
+      "sha256": "099cd96d97ac4646b86e7916fc1db1ee7e09ae9e956d3a97e1dfffaa60edf29c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/unicode-correction-proposal-v1/upstream-audit.json",
+      "bytes": 3446,
+      "sha256": "7cdaa75f4dfc3a56a2a50f446963cb5fe53266e4e257d91154cd7fd286d00faf"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/android_runtime_recipe/README.md",
+      "bytes": 3031,
+      "sha256": "4cc2dd3488d5e0c4c320d61c6d3aa20f11fdaf25c8f2128397fc3613d690e413"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/android_runtime_recipe/audit.py",
+      "bytes": 8522,
+      "sha256": "8bfb0174994fee39e23e91c9acfe7fed9c5c3c755fada74f9e3e5caa19235715"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/android_runtime_resolution/trace.py",
+      "bytes": 9447,
+      "sha256": "ad1c4ec2acf37036e8cbed87ae2c879c852f29c5e7d1ee8b815390b5a84b9ca2"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/bazel_server_jvm_v1/analyze.py",
+      "bytes": 7321,
+      "sha256": "e2711e987c6c0984d8d65a48bac12ab6f8e11975dc8cde54fc4dd08d2483c29e"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/bazel_server_jvm_v1/freeze.py",
+      "bytes": 2833,
+      "sha256": "cadf7c072e8d88000be60daaf0b00a2e0ecd67ad85b260099e8902cc49c44d5a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/bazel_server_jvm_v1/server_jvm.py",
+      "bytes": 7475,
+      "sha256": "cd1fdd03a728aed8828d2627c19ab1a2941cb9e442ef455403f144a3fda561d8"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/mask_replay/Cargo.lock",
+      "bytes": 9434,
+      "sha256": "27dba748a19e0a33336c00870f028e2a4e5d515482f72a42e7a5bff2c845c219"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/mask_replay/Cargo.toml",
+      "bytes": 423,
+      "sha256": "37b35850d58a5f8685fc301476e1e565b17be61b62929f3dde4278a8df9d372a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/mask_replay/README.md",
+      "bytes": 5207,
+      "sha256": "927a23c527981d840bec7f390107b6adb6d4ba4ed5a57be644d9071d44483151"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/mask_replay/grammar_progress.py",
+      "bytes": 9122,
+      "sha256": "d7bdd545127a00d373904c7d9f46f28bab7d13a2fa78ab09e5a06980d862ee57"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/mask_replay/prepare.py",
+      "bytes": 7065,
+      "sha256": "e2f21cffaa683d275536c4bff69e2abaaa918e06f6e86f50cd14c4b5f44ed785"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/mask_replay/run.py",
+      "bytes": 13110,
+      "sha256": "94acaefaa1a7a694c5e5143238bd14e764ce7758b1a867f54e2a583290d4cc47"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/mask_replay/src/main.rs",
+      "bytes": 13222,
+      "sha256": "a4cc6fdace9ac7a35bb5d3f1fb62000487497cf7fc8f6622ba2380b0b30cd762"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/ml_drift_compatibility/analyze.py",
+      "bytes": 18796,
+      "sha256": "01706ddb5533fd0ccd8198518257034a86144b972aaab923c70a102fe74e5c59"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/ml_drift_compatibility/prepare.py",
+      "bytes": 7921,
+      "sha256": "411f50131c123fb97f4bc67f10eee9a1afa4bfcdee813b230ca542e9ad9d9c57"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/repository_cache_v1/analyze.py",
+      "bytes": 4092,
+      "sha256": "0ad5c38fd8278133f2a077d9a45758817b952c5f166b758654d0b4ec20e4cb88"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/repository_cache_v1/freeze.py",
+      "bytes": 7741,
+      "sha256": "5e2f401d6a1669dad8a8c97e86baa6538068175a52f0f6bcfb586cce08efeec0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/repository_cache_v1/prepare.py",
+      "bytes": 11411,
+      "sha256": "9af313c1719e64a8cc9bde1923e3fe9eb0609bd37a0bc6c97352ef2e7df7ea17"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/unicode_boundary/README.md",
+      "bytes": 3853,
+      "sha256": "97f29beda5f1cbe1c15f616abe612c58850fdf4691d8fd59adf7ddc523fcf336"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/unicode_boundary/byte_probe.rs",
+      "bytes": 4677,
+      "sha256": "c9589b9b49462d6789d05d8fad0e9ef0828e328d2096a977c7cd59672e1aaf8d"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/unicode_boundary/investigate.py",
+      "bytes": 14113,
+      "sha256": "d0ca7ad4356e3a8b9b9c9b62ba65cbf0e8b763c6872e900b4726f2d2b33baafc"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/unicode_correction/LICENSE.upstream",
+      "bytes": 1141,
+      "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/unicode_correction/PATCH.unicode-value-strings",
+      "bytes": 4829,
+      "sha256": "a83792c7c0232d05bcb2d3459d281979a21cf3547faac0d1d4298529d89173cf"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/unicode_correction/README.md",
+      "bytes": 6086,
+      "sha256": "6bfbb27b4ec8140520ddbdd8973820260106a980d550b4a3a4d0df73c6ce1442"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/unicode_correction/compiler_probe.rs",
+      "bytes": 4795,
+      "sha256": "d625a885882d05eb2a8519438779225854522469ce30f29c894c6ce7680ce23b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/unicode_correction/fixtures.py",
+      "bytes": 5187,
+      "sha256": "6261a915c2d6fa248726a95f08e18b30b48d03c308fa3d00356c1c712e6f51e3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/unicode_correction/run.py",
+      "bytes": 19428,
+      "sha256": "517ffd3aa58f0ad3c6382f8362aec8e24a7adb62e15eabaa9aa662cc38e0cc4d"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_android_runtime_recipe.py",
+      "bytes": 7967,
+      "sha256": "6c817be0d4cf8990efffb3e802405c314d208546945c02251d5de9c124eae0eb"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_android_runtime_resolution.py",
+      "bytes": 6377,
+      "sha256": "5cbd00997dbb01caac112e53e5846115f739bc258e5cd5a6ff7a25a8cd8166f9"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_bazel_server_jvm.py",
+      "bytes": 7616,
+      "sha256": "29d391e25c0c8a57de35b6c79323ba067f7338b02d614db113b175b58b85486b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_mask_replay.py",
+      "bytes": 11735,
+      "sha256": "7f37ce1995857ebc5128c53b66e050f93722111283c292bc3a942613368f5095"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_ml_drift_compatibility.py",
+      "bytes": 16571,
+      "sha256": "1a9ed4227acfed239e0dab91c66619ccecd39aa80f5d69e9ca3dbfc709d0aace"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_repository_cache.py",
+      "bytes": 14399,
+      "sha256": "5014cd0ef625c3f11959532e09a9a42d3222cb1a90afe33bd80f672f1f150749"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_unicode_boundary.py",
+      "bytes": 6584,
+      "sha256": "b7ba2f21a3601d15f0a055129876b0b473223bd3f1acbb2b25b918bd866307a0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_unicode_correction.py",
+      "bytes": 4668,
+      "sha256": "fb1b3950d4ca84b14239cc856707342146b9b23bd3b90ec1934dd2cba70f301b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/verify-grammar-progress.sh",
+      "bytes": 2335,
+      "sha256": "09171decbccb0cbabc5ddcd0ab4a63d1ad8b85a045a0a4d8d828e9750efa5eee"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/shared/src/androidHostTest/kotlin/dev/edgecompanion/core/inference/litert/GrammarProgressFixturesTest.kt",
+      "bytes": 2261,
+      "sha256": "ec8fcaf29ad5e83774330e48d2ea9a1c150a1d6aa8aa922c96771d4a12f6cd18"
+    },
+    {
+      "path": "/usr/bin/clang",
+      "bytes": 118640,
+      "sha256": "b8763cf250e607a778bb4603cecb5b90338814d0a3dfcba0d57b1de242f610e9"
+    },
+    {
+      "path": "/usr/bin/clang++",
+      "bytes": 118640,
+      "sha256": "b8763cf250e607a778bb4603cecb5b90338814d0a3dfcba0d57b1de242f610e9"
+    }
+  ],
+  "trees": [
+    {
+      "root": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full",
+      "manifest": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-freeze-tree.json"
+    },
+    {
+      "root": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/ndk-prepared/android-ndk-r28b",
+      "manifest": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/ndk-freeze-tree.json"
+    },
+    {
+      "root": "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home",
+      "manifest": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/java-freeze-tree.json"
+    },
+    {
+      "root": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/android-sdk-private-2",
+      "manifest": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/android-sdk-freeze-tree.json"
+    },
+    {
+      "root": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/server-jdk-21.0.5",
+      "manifest": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/server-jdk-tree.json"
+    }
+  ],
+  "environment": {
+    "PATH": "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "JAVA_HOME": "/Library/Java/JavaVirtualMachines/temurin-17.jdk/Contents/Home",
+    "ANDROID_NDK_HOME": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/ndk-prepared/android-ndk-r28b",
+    "ANDROID_HOME": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/android-sdk-private-2",
+    "ANDROID_SDK_ROOT": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/android-sdk-private-2",
+    "HERMETIC_PYTHON_VERSION": "3.13",
+    "TMPDIR": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/tmp",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "DEVELOPER_DIR": "/Applications/Xcode.app/Contents/Developer"
+  },
+  "repositoryCache": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-working-cache-1",
+  "attemptParent": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts",
+  "perInvocationSeconds": 300,
+  "logLimitBytes": 16777216,
+  "cleanupCeilingSeconds": 15,
+  "maximumInvocations": 3,
+  "implementationSha256": "01706ddb5533fd0ccd8198518257034a86144b972aaab923c70a102fe74e5c59",
+  "amendmentLockSha256": "f65b253e2a404ab3967d0503d30f3141174e24a3ceb4323c73b7bb1afbb2b3a8",
+  "artifactBuildAllowed": false,
+  "deviceAllowed": false,
+  "toolchainFacts": {
+    "host": {
+      "system": "Darwin",
+      "release": "25.6.0",
+      "machine": "arm64"
+    },
+    "java": "compilation environment retains Temurin-17.0.20.1+1; resolved tools unproved",
+    "ndk": "28.1.13356709",
+    "sdkSelection": "unchanged installed platforms/build-tools/platform-tools copied to private root",
+    "SDKPython": "3.13 per source bazelrc",
+    "bazel": "7.6.1",
+    "RustKotlinDeclarations": "unchanged pinned SDK WORKSPACE; no standalone ML MODULE graph imported",
+    "SDKLfsObjectsMaterialized": false,
+    "SDKGitBlobs": 1355,
+    "serverJava": "bundled Java 21.0.5, archive-bound private tree"
+  },
+  "previousAnalysisFreezeSha256": "5da08299b99c822ffcfcb3b9b5eae85594a782fc0f6d66b7621ca5d3c582b4aa",
+  "reviewRevision": 1,
+  "serverJvmProtocol": "bazel-761-private-server-jvm-v1",
+  "serverJavaHome": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/server-jdk-21.0.5",
+  "serverJdkReceipt": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/bazel-server-jvm-v1/server-jdk-provenance.json",
+  "serverRunnerSha256": "e2711e987c6c0984d8d65a48bac12ab6f8e11975dc8cde54fc4dd08d2483c29e",
+  "javaInspectionFields": [
+    "java_language_version",
+    "tool_java_language_version",
+    "java_runtime_version",
+    "tool_java_runtime_version",
+    "javabase",
+    "host_javabase",
+    "java_toolchain",
+    "host_java_toolchain"
+  ],
+  "previousAnalysisFreezePath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/ml-drift-compatibility-v1/analysis-freeze-v2.json",
+  "cacheAnalysisProtocol": "repository-archive-cache-v1",
+  "cacheRunnerSha256": "0ad5c38fd8278133f2a077d9a45758817b952c5f166b758654d0b4ec20e4cb88",
+  "cacheSeed": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/preparation-attempts/prepared-1/accepted-cache",
+  "cacheReceipt": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/preparation-attempts/prepared-1/receipt.json",
+  "cacheManifest": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/inputs.json",
+  "preparationReport": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/preparation-attempts/prepared-1/report.json",
+  "preparationFreeze": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/preparation-freeze-r4.json",
+  "minimumFreeBytes": 19327352832
+}
