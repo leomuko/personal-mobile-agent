@@ -1,0 +1,183 @@
+{
+  "protocol": "repository-archive-cache-v1",
+  "manifest": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/inputs.json",
+  "manifestSha256": "a4b36b6c733044d651362fe2b37b2daf9b31220e90a1e28fc378a0d73b71d0f7",
+  "inputs": [
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full/WORKSPACE",
+      "bytes": 20633,
+      "sha256": "dee68de49f5212a0b12d47d80fb59f63314e74c1655a60e3f11a055d20d0507a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/com_envoyproxy_protoc_gen_validate/bazel/repositories.bzl",
+      "bytes": 4782,
+      "sha256": "5027e9bf562d03158bd5228a43bf4e74e71abcca7abc44736adbfc1b01669a0c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/com_google_protobuf/protobuf_deps.bzl",
+      "bytes": 8699,
+      "sha256": "f935c3f877922973dfc9e97a3be0d5e1853756ff99dbe91494e0fa24c8964a97"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/google_cloud_cpp/bazel/workspace0.bzl",
+      "bytes": 9297,
+      "sha256": "a1155db10587729f7898507f6d5d607edd2ce63cee9bb76a65eeb79bf24129f0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/grpc/bazel/grpc_deps.bzl",
+      "bytes": 22278,
+      "sha256": "528fce62b4fdb591358889689aa185e49100efd169155f4e29417452b2c4d1b0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/tensorflow/workspace1.bzl",
+      "bytes": 2260,
+      "sha256": "163ec2b6d59eb6914b9098f7d6b6e80f820539c6b6503212ee29e1f5eca60015"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/tensorflow/workspace2.bzl",
+      "bytes": 30876,
+      "sha256": "69df1c6455a92bd2b5ca41c883e475f0cf0d374f019c4cd784a26ddece64766c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/tensorflow/workspace3.bzl",
+      "bytes": 4183,
+      "sha256": "ce4e6ac5be440290ff78e6d5edaa9b580281420006cfa223cd897e1861361a6d"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/third_party/googleapis/workspace.bzl",
+      "bytes": 1246,
+      "sha256": "6f8c528d69861aba784fb2117c630317c3e03d81b2f7ffd36aea155edebfface"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/third_party/py/python_init_rules.bzl",
+      "bytes": 1666,
+      "sha256": "f64ff13e256a0dac1b113c552750f70bbcd880bdd7e4cf35363a0188f3306fa8"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/third_party/tf_runtime/workspace.bzl",
+      "bytes": 1638,
+      "sha256": "fe72ee90f0e191912aafb0d35abb35a3b667dfd42d9d41ec86eb9c9e26d880f6"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/third_party/xla/third_party/benchmark/workspace.bzl",
+      "bytes": 1283,
+      "sha256": "1e79424b5ac874280111ca39dafdd4f04b6bade1cab246b8a459c1061dc3f8b0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/third_party/xla/third_party/llvm/workspace.bzl",
+      "bytes": 1911,
+      "sha256": "6cc647edf86d3e6c0b172dba65d386a2b1f2625d5a009ea9f994c08cae77287a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_python/internal_dev_deps.bzl",
+      "bytes": 11133,
+      "sha256": "6dad738c8e5d59bf6c1532aed1472d0f695404cad235db61d4d687a0993acd3c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_python/python/private/runtimes_manifest_workspace.bzl",
+      "bytes": 91231,
+      "sha256": "0bc4c9f2e313d8fcc4bd417c9fc615947a7c9c7581806529cdb6b2621acca85e"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_rust/crate_universe/private/urls.bzl",
+      "bytes": 3077,
+      "sha256": "619b2b10e9ab892f0533a90ba6219892d9d636410614bcd9c8edb5b818889621"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_rust/rust/known_shas.bzl",
+      "bytes": 2231610,
+      "sha256": "9a397d1bc3b39a6cf0d580a9ec304e83da88f205a0fb23ac5128e4af930bd7a9"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/repository_cache_v1/analyze.py",
+      "bytes": 4092,
+      "sha256": "0ad5c38fd8278133f2a077d9a45758817b952c5f166b758654d0b4ec20e4cb88"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/repository_cache_v1/freeze.py",
+      "bytes": 7741,
+      "sha256": "5e2f401d6a1669dad8a8c97e86baa6538068175a52f0f6bcfb586cce08efeec0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/repository_cache_v1/prepare.py",
+      "bytes": 11411,
+      "sha256": "9af313c1719e64a8cc9bde1923e3fe9eb0609bd37a0bc6c97352ef2e7df7ea17"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_repository_cache.py",
+      "bytes": 14399,
+      "sha256": "5014cd0ef625c3f11959532e09a9a42d3222cb1a90afe33bd80f672f1f150749"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/ml_drift_compatibility/analyze.py",
+      "bytes": 18796,
+      "sha256": "01706ddb5533fd0ccd8198518257034a86144b972aaab923c70a102fe74e5c59"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_REPOSITORY_CACHE_PREPARATION_V1.md",
+      "bytes": 5274,
+      "sha256": "f23530845f2a34ae8f726f0930e826030434088d1a4b01e58eac108811ed3ba5"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/P2_REPOSITORY_SETUP_FINDINGS_V1.md",
+      "bytes": 4615,
+      "sha256": "af670035021646a37ff87a90a95feb9a217207afe2d76ed79aa7600127623101"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/inputs.json",
+      "bytes": 42790,
+      "sha256": "a4b36b6c733044d651362fe2b37b2daf9b31220e90a1e28fc378a0d73b71d0f7"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+      "bytes": 102352,
+      "sha256": "271143990bc83af0fb2404a255038f5faafb96df1584ed7f085e5018c0f33ffb"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/bazel-server-jvm-v1/result-lock.json",
+      "bytes": 4217,
+      "sha256": "9fc3e8c9f3d8ca32b117b9f22876b6e73d80680a8bc845fd67f7d1c0fb89867c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/bazel-server-jvm-v1/analysis-freeze.json",
+      "bytes": 27984,
+      "sha256": "c9787682569fb8d694c8e68a714439333b75ca055404fed09540c12cf96bd9a7"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/bazel-server-jvm-v1/results-review.json",
+      "bytes": 3288,
+      "sha256": "cb17d21e757282a8aa10342ab5cf7f308708a63ae2e65892f37a022ca704bf59"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/preparation-freeze.json",
+      "bytes": 9237,
+      "sha256": "b8b42fae01f810dbe5540e09b04706495adc4d3126c6485645d7fda191cfffe3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/preparation-freeze-r2.json",
+      "bytes": 9725,
+      "sha256": "ed5cb7520a2311d82bf3d9ab689068a53ab30a6a7977a699fa5d96c0858290be"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/preparation-freeze-r3.json",
+      "bytes": 9972,
+      "sha256": "5e5183d67be518b0ba3052e0bdf1d68cb751b92dc648c83a45020eadd5863a31"
+    }
+  ],
+  "implementationSha256": "9af313c1719e64a8cc9bde1923e3fe9eb0609bd37a0bc6c97352ef2e7df7ea17",
+  "python": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+  "pythonVersion": "3.9.6 (default, May 22 2026, 11:13:45) \n[Clang 21.0.0 (clang-2100.1.1.101)]",
+  "perEntrySeconds": 180,
+  "totalSeconds": 900,
+  "cleanupSeconds": 15,
+  "logLimitBytes": 2097152,
+  "attemptParent": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/preparation-attempts",
+  "environment": {
+    "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PYTHONPYCACHEPREFIX": "/tmp/edge-repository-cache-pycache"
+  },
+  "previousPreparationFreezeSha256": "5e5183d67be518b0ba3052e0bdf1d68cb751b92dc648c83a45020eadd5863a31",
+  "previousPreparationFreeze": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/preparation-freeze-r3.json"
+}

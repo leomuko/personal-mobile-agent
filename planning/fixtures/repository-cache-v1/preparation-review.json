@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "verdict": "PASS",
+  "scope": "repository-cache-v1-preparation-strategy-manifest-implementation-and-r4-freeze",
+  "reviewer": "Codex, retained sole primary independent QA reviewer; no delegation",
+  "reviewedOn": "2026-11-02",
+  "branch": "dev",
+  "head": "e47e61b8ccdd400498b4d50cada22fc4176b2176",
+  "preparationFreezePath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/preparation-freeze-r4.json",
+  "preparationFreezeSha256": "4423d511ecd52e2cbcb7b7d09189657dded12993db3e6f05e529bc573b602d58",
+  "snapshotPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-preparation-review-4/snapshot.json",
+  "snapshotSha256": "65444f8e01ced9c3f90100fc200c693c75c080a5425eeec9a0106397895ad29f",
+  "findings": [],
+  "closedFindings": [
+    {
+      "id": "RC-PREP-001",
+      "status": "CLOSED",
+      "evidence": "Original receipt-open clock injection and delayed final-report closure now raise finalization-deadline errors and persist completed=false at 1000 seconds. Consumer rejects the old completed=true/elapsed=1000 evidence before execution."
+    }
+  ],
+  "verification": {
+    "focusedHostTests": {
+      "status": "PASS",
+      "count": 23,
+      "log": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-preparation-review-4/focused-tests.log",
+      "command": "PYTHONDONTWRITEBYTECODE=1 build/constrained-decoding-reference/bin/python -B -W error::ResourceWarning -m unittest discover -s scripts/tests -p test_repository_cache.py -v"
+    },
+    "originalProbeAndReportFinalization": {
+      "status": "PASS",
+      "cases": 2,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-preparation-review-4/original-probe-replay.json",
+      "syntheticClock": true,
+      "workerMocked": true
+    },
+    "consumerTimingAdmission": {
+      "status": "PASS",
+      "cases": 10,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-preparation-review-4/consumer-timing-probes.json",
+      "parentFreezeLoaderMocked": true,
+      "analysisExecuted": false
+    },
+    "preflightClock": {
+      "status": "PASS",
+      "cases": 2,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-preparation-review-4/preflight-clock-probes.json",
+      "result": "100 seconds of synthetic admission time remains in successful elapsed time; 1000-second admission blocks before output creation and worker launch."
+    },
+    "exactFreezeAndManifest": {
+      "status": "PASS",
+      "directFrozenInputs": 32,
+      "snapshotBindings": 34,
+      "manifestEntries": 42,
+      "retainedPayloads": 37,
+      "retainedPayloadBytes": 588050410,
+      "plannedDownloads": 5,
+      "emptyCanonicalMarkers": 17,
+      "manifestSha256": "a4b36b6c733044d651362fe2b37b2daf9b31220e90a1e28fc378a0d73b71d0f7",
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-preparation-review-4/input-audit.json"
+    },
+    "r3Delta": "PASS: only prepare.py and test_repository_cache.py existing input hashes changed; R3 freeze added as preserved predecessor. Analysis consumer and all other R3 frozen inputs unchanged. README clarification captured separately outside freeze.",
+    "preservation": {
+      "status": "PASS",
+      "priorResultsSnapshotBindings": 28,
+      "archivedR2R3CodeBindings": 8,
+      "r2FailReportKnownHashMatched": true,
+      "r2SnapshotKnownHashMatched": true,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-preparation-review-4/preservation.json"
+    },
+    "implementerFullHostSuite": {
+      "status": "PASS_LOG_VERIFIED_NOT_RERUN_BY_REVIEWER",
+      "count": 159,
+      "log": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/host-tests-4.log"
+    }
+  },
+  "reviewedContract": {
+    "entryCount": 42,
+    "retainedCachePayloadCount": 37,
+    "downloadCount": 5,
+    "rustVersion": "1.86.0",
+    "rulesRustVersion": "0.61.0",
+    "payloadTransformations": "NONE",
+    "wholePreparationDecisionSeconds": 900,
+    "perEntryDecisionSeconds": 180,
+    "cleanupCeilingSeconds": 15,
+    "workerCombinedLogLimitBytes": 2097152,
+    "maximumEntryBytes": 536870912,
+    "maximumAcceptedTotalBytes": 1610612736,
+    "minimumPreparationFreeBytes": 5368709120,
+    "analysisMinimumFreeBytes": 19327352832,
+    "analysisCommands": "Separate future freeze/review: original three commands, 300s decision + 15s cleanup, 16MiB logs; Java21 server/Java17 environment unchanged."
+  },
+  "scopeNotes": [
+    "R2 strategy, manifest, archive provenance, canonical cache semantics, conflict isolation, owned worker handling and downstream copy-not-hardlink design were retained; this follow-up rechecked frozen identities and affected deadline callers.",
+    "All 37 retained payloads, declaration hashes/line references and 17 canonical markers revalidated; five network payloads remain planned and unexecuted. No extracted repository trees are imported.",
+    "Late receipts are retained as failure evidence and are not eligible for admission; successful preparation requires final completed report after the process exits and separate results review.",
+    "Repository-stage findings remain bounded observations, not proof of configured root closure, generator stall, network cause or ML Drift compatibility.",
+    "R1 and R2 rejected freezes, original FAIL report and probe, and unexecuted R3 intermediate evidence remain preserved."
+  ],
+  "limitations": [
+    "Host synthetic checks only: no real preparation/download, Java/Bazel, archive extraction, SDK/AAR/APK build, package installation, device/model access, Git mutation or source edits.",
+    "The 159-test implementer suite was verified from its log and was not independently rerun in full; 23 targeted tests and independent synthetic probes were freshly run.",
+    "Preparation results require separate independent review. A new exact analysis freeze must be reviewed before any original three-command analysis attempt.",
+    "No configured dependency graph, Java compilation-toolchain resolution, runtime compatibility, artifact readiness, native feasibility, semantic enablement or P2 completion is established.",
+    "Previously reviewed full toolchain tree manifests were not rehashed anew in this focused follow-up; current direct inputs, manifest payloads/markers and prior 28-file results snapshot were checked."
+  ],
+  "preparationReviewPassed": true,
+  "analysisExecutionAuthorized": false,
+  "deviceExecutionAuthorized": false,
+  "artifactBuildAuthorized": false,
+  "semanticEnablement": false,
+  "nextGate": "One bounded preparation under existing human authorization; preserve outputs and submit preparation results for independent review, followed by a separately reviewed analysis freeze before any analysis execution."
+}

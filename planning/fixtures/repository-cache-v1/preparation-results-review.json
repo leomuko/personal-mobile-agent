@@ -1,0 +1,106 @@
+{
+  "schema": 1,
+  "verdict": "PASS",
+  "scope": "repository-cache-v1-executed-preparation-results",
+  "reviewer": "Codex, retained sole primary independent QA reviewer; no delegation",
+  "reviewedOn": "2026-11-02",
+  "branch": "dev",
+  "head": "e47e61b8ccdd400498b4d50cada22fc4176b2176",
+  "preparationResultLockPath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/repository-cache-v1/preparation-result-lock.json",
+  "preparationResultLockSha256": "28c69a9073bc1704cb5d677820487adf39da72bbfeb1aee19935da5a3dcec88b",
+  "preparationFreezeSha256": "4423d511ecd52e2cbcb7b7d09189657dded12993db3e6f05e529bc573b602d58",
+  "preparationReportPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/preparation-attempts/prepared-1/report.json",
+  "preparationReportSha256": "fb16afd8888c98f77c9c4a0c1c00f3fc87826a2965c20c6a088962259e2d444a",
+  "preparationReceiptSha256": "d85008af90134b3a85d43b59f4f6375442e3b84599054d36b21cdf79ba29fb91",
+  "snapshotPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-preparation-results-review-1/snapshot.json",
+  "snapshotSha256": "b7a1363a0c8c381addeb76794f620be26ec2d4008011650f64ea8cb772fc54ab",
+  "findings": [],
+  "outcome": {
+    "campaignIntegrity": "PASS",
+    "preparedSeedIntegrity": "PASS",
+    "reportAccuracy": "PASS",
+    "dependencyResolution": "UNPROVED",
+    "configuredCompatibility": "UNPROVED",
+    "runtimeArtifactReadiness": false
+  },
+  "verification": {
+    "resultLock": {
+      "status": "PASS",
+      "files": 14,
+      "evidence": 128,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-preparation-results-review-1/lock-audit.json"
+    },
+    "reviewedExecutionCorrespondence": {
+      "status": "PASS",
+      "r4DirectInputsRehashed": 32,
+      "privateWorkerRequests": 42,
+      "argvMatchesFrozenPythonAndWorkerOnly": true,
+      "rawLogs": 84,
+      "rawLogsAllEmpty": true,
+      "recordedWorkerExitCodesAllZero": true,
+      "recordedWorkerCleanupAllConfirmed": true,
+      "manifestOrderAndReceiptOrderExact": true
+    },
+    "seedAndPartials": {
+      "status": "PASS",
+      "payloadCount": 42,
+      "emptyCanonicalMarkers": 17,
+      "payloadBytes": 721042126,
+      "retainedPayloadBytes": 588050410,
+      "newDownloadBytes": 132991716,
+      "partialPayloadCount": 42,
+      "allHashesAndSeedModesVerified": true,
+      "noExtractedTreeAdopted": true,
+      "noHardlinksToOldSourcesOrPartials": true,
+      "onlyOneRetainedAttemptDirectory": true,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-preparation-results-review-1/worker-and-cache-audit.json"
+    },
+    "resourceAndTiming": {
+      "status": "PASS_WITH_STATED_CAPTURE_LIMITS",
+      "reportedElapsedSeconds": 156.466964083,
+      "workerElapsedSumIncludingCleanup": 154.92891492200005,
+      "allWorkerElapsedSecondsBelow180": true,
+      "wholeDecisionBudgetSeconds": 900,
+      "cleanupCeilingSeconds": 15,
+      "combinedWorkerLogLimitBytes": 2097152,
+      "perPayloadCeilingBytes": 536870912,
+      "totalPayloadCeilingBytes": 1610612736,
+      "preparationFreeSpaceGuardBytes": 5368709120,
+      "finalReportWriteAndPostCheckSeparatelyTimed": false,
+      "actualDiskFreeSampleRetained": false
+    },
+    "rustTransferPrefix": {
+      "status": "PASS",
+      "oldBytes": 40016824,
+      "verifiedBytes": 49487232,
+      "missingBytes": 9470408,
+      "exactPrefixIndependentlyCompared": true
+    },
+    "preservation": {
+      "status": "PASS",
+      "priorR4SnapshotBindings": 34,
+      "priorServerResultsSnapshotBindings": 28,
+      "oldCacheFilesAndMarkersRehashed": 54,
+      "initialResultDraftAndLockBindingsVerified": true,
+      "preparationReviewFixtureExactPriorQASummary": true,
+      "audit": "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/qa-preparation-results-review-1/preservation-audit.json"
+    },
+    "documentation": "PASS: current document discloses metric capture before final report persistence, preserves prior draft, separates preparation from configured dependency selection and does not claim generator/network causality or artifact/runtime qualification.",
+    "tests": "No tests rerun: source remains exactly reviewed R4. The earlier independent 23 focused checks and finalization/admission probes remain bound; the implementer 159-test log was checked previously and is hashed in this snapshot.",
+    "newWorkloads": "NOT_RUN: no preparation, download, Java/Bazel, SDK/native/model or device execution."
+  },
+  "limitations": [
+    "Worker cleanup is corroborated from recorded confirmations and the previously reviewed owned-process supervisor; past OS group state is not independently reconstructed.",
+    "Parent exit 0 is recorded in outcomes and the user handoff and is consistent with the completed report. No separate raw parent exit receipt is retained.",
+    "156.466964083 seconds is the elapsed statistic before final report save. The reviewed source checks the same 900-second deadline after save, but final-write duration is not separately measured. Do not infer exact phase durations from the difference between worker sum and reported elapsed.",
+    "Successful guarded source execution supports the storage preflight, but no actual free-space measurement was retained. No independent disk telemetry claim is made.",
+    "The parent revalidation record reports 99 inputs and 5 trees matched; this focused review did not independently rehash all 77377 historical toolchain-tree entries. It independently rehashed current direct inputs, prior bounded snapshots, old cache payloads/markers, complete new seed and partials.",
+    "Only the retained single attempt is audited; this does not reconstruct an external system-wide execution history or independently observe historical network traffic.",
+    "No analysis freeze is approved by this verdict. Configured graphs, actual ABI/features/Java toolchains, interface compatibility and artifact/runtime readiness remain unproved."
+  ],
+  "analysisExecutionAuthorized": false,
+  "deviceExecutionAuthorized": false,
+  "artifactBuildAuthorized": false,
+  "semanticEnablement": false,
+  "nextGate": "Generate a new exact analysis freeze binding these reviewed preparation results and the immutable seed, then request independent correspondence review before the original three bounded analysis commands."
+}
