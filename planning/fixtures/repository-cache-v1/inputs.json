@@ -1,0 +1,756 @@
+{
+  "protocol": "repository-archive-cache-v1",
+  "entries": [
+    {
+      "sha256": "0e5c64a2599a6e26c6a03d6162242d231ecc0de219534c38cb4402171def21e8",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/0e5c64a2599a6e26c6a03d6162242d231ecc0de219534c38cb4402171def21e8/file",
+      "maxBytes": 48590,
+      "markers": [
+        {
+          "name": "id-5638dfb7cbc1e162c33fa9170d3fb45983c69c1f23dfae679854464afc8487e0",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/0e5c64a2599a6e26c6a03d6162242d231ecc0de219534c38cb4402171def21e8/id-5638dfb7cbc1e162c33fa9170d3fb45983c69c1f23dfae679854464afc8487e0",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/grpc/bazel/grpc_deps.bzl",
+          "sha256": "528fce62b4fdb591358889689aa185e49100efd169155f4e29417452b2c4d1b0",
+          "line": 244,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "16e9fca53ed6bd4ff4ad76facc9b7b651a89db1689a2877d6fd7b82aa824e366",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/16e9fca53ed6bd4ff4ad76facc9b7b651a89db1689a2877d6fd7b82aa824e366/file",
+      "maxBytes": 1210403,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/tensorflow/workspace2.bzl",
+          "sha256": "69df1c6455a92bd2b5ca41c883e475f0cf0d374f019c4cd784a26ddece64766c",
+          "line": 571,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "239fa3a604b124f0312f2af08537874a1227dba63385484b468cca62e7c4f2f2",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/239fa3a604b124f0312f2af08537874a1227dba63385484b468cca62e7c4f2f2/file",
+      "maxBytes": 2578284,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_rust/rust/known_shas.bzl",
+          "sha256": "9a397d1bc3b39a6cf0d580a9ec304e83da88f205a0fb23ac5128e4af930bd7a9",
+          "line": 10248,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "23b8f52102249a47ab5bc859d54c9a3cb588a3259ba3f00f557d50edeca4fde9",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/23b8f52102249a47ab5bc859d54c9a3cb588a3259ba3f00f557d50edeca4fde9/file",
+      "maxBytes": 60743244,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_rust/rust/known_shas.bzl",
+          "sha256": "9a397d1bc3b39a6cf0d580a9ec304e83da88f205a0fb23ac5128e4af930bd7a9",
+          "line": 16604,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "249d83abc5d50bf372c35c49d77f900bff022b2c21eb73aa8da1458b6ac401fc",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/249d83abc5d50bf372c35c49d77f900bff022b2c21eb73aa8da1458b6ac401fc/file",
+      "maxBytes": 6091152,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/third_party/googleapis/workspace.bzl",
+          "sha256": "6f8c528d69861aba784fb2117c630317c3e03d81b2f7ffd36aea155edebfface",
+          "line": 24,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "294cdd859e57fcaf101d4301978c408c88683fbc46fbc1a3829da92afbea55fb",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/294cdd859e57fcaf101d4301978c408c88683fbc46fbc1a3829da92afbea55fb/file",
+      "maxBytes": 80728,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/tensorflow/workspace1.bzl",
+          "sha256": "163ec2b6d59eb6914b9098f7d6b6e80f820539c6b6503212ee29e1f5eca60015",
+          "line": 41,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "3b05687842427041c65d1bc2f4aeda3a3079557120f5be8c34690087a88c5de5",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/3b05687842427041c65d1bc2f4aeda3a3079557120f5be8c34690087a88c5de5/file",
+      "maxBytes": 526324,
+      "markers": [
+        {
+          "name": "id-6bcc39e8d6c44200e46729ae6c997f4115c312133108c63503fe5b521b61ea9f",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/3b05687842427041c65d1bc2f4aeda3a3079557120f5be8c34690087a88c5de5/id-6bcc39e8d6c44200e46729ae6c997f4115c312133108c63503fe5b521b61ea9f",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full/WORKSPACE",
+          "sha256": "dee68de49f5212a0b12d47d80fb59f63314e74c1655a60e3f11a055d20d0507a",
+          "line": 100,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "3b772976fec7bdcda1d84b9d39b176589424c047eb2175bed09aac630e50af43",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/3b772976fec7bdcda1d84b9d39b176589424c047eb2175bed09aac630e50af43/file",
+      "maxBytes": 23089629,
+      "markers": [
+        {
+          "name": "id-f251f313da01ded1627a44d756b161a49df9074c0cb1623806325cf0eab48253",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/3b772976fec7bdcda1d84b9d39b176589424c047eb2175bed09aac630e50af43/id-f251f313da01ded1627a44d756b161a49df9074c0cb1623806325cf0eab48253",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/com_google_protobuf/protobuf_deps.bzl",
+          "sha256": "f935c3f877922973dfc9e97a3be0d5e1853756ff99dbe91494e0fa24c8964a97",
+          "line": 180,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "3cb13873d48c3e1e4cc684d42c245226a11fba52af6b047c3346ed654e7a05c0",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/3cb13873d48c3e1e4cc684d42c245226a11fba52af6b047c3346ed654e7a05c0/file",
+      "maxBytes": 6815656,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_rust/rust/known_shas.bzl",
+          "sha256": "9a397d1bc3b39a6cf0d580a9ec304e83da88f205a0fb23ac5128e4af930bd7a9",
+          "line": 9282,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "41b695614b26652ff9e97ce50cfd4a6c7a3d45a9fe598d1454407746499bbf2c",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/41b695614b26652ff9e97ce50cfd4a6c7a3d45a9fe598d1454407746499bbf2c/file",
+      "maxBytes": 15840050,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/tensorflow/workspace2.bzl",
+          "sha256": "69df1c6455a92bd2b5ca41c883e475f0cf0d374f019c4cd784a26ddece64766c",
+          "line": 434,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "451e08a4d78988c06fa3f9306ec813b836b1d076d0f055595444ba4ff22b867f",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/451e08a4d78988c06fa3f9306ec813b836b1d076d0f055595444ba4ff22b867f/file",
+      "maxBytes": 77334,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/tensorflow/workspace3.bzl",
+          "sha256": "ce4e6ac5be440290ff78e6d5edaa9b580281420006cfa223cd897e1861361a6d",
+          "line": 58,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "476303bd0f1b04cc311fc258f1708a5f6ef82d3091e53fd1977fa20383425a6a",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/476303bd0f1b04cc311fc258f1708a5f6ef82d3091e53fd1977fa20383425a6a/file",
+      "maxBytes": 252777,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/tensorflow/workspace2.bzl",
+          "sha256": "69df1c6455a92bd2b5ca41c883e475f0cf0d374f019c4cd784a26ddece64766c",
+          "line": 327,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "52e7e729422369382a32a29ab3b208dfe79027d83416e136c100ab31bed74caf",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/52e7e729422369382a32a29ab3b208dfe79027d83416e136c100ab31bed74caf/file",
+      "maxBytes": 1591244,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_rust/rust/known_shas.bzl",
+          "sha256": "9a397d1bc3b39a6cf0d580a9ec304e83da88f205a0fb23ac5128e4af930bd7a9",
+          "line": 8316,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "53c1bac7ec48f7ce48c4c1c6aa006f27515add2aeb05725937224e6e00ec7cea",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/53c1bac7ec48f7ce48c4c1c6aa006f27515add2aeb05725937224e6e00ec7cea/file",
+      "maxBytes": 2674507,
+      "markers": [
+        {
+          "name": "id-2d05b27f0618626cde086578fe07bccc8bd0430352b914cd32b71fa295eef695",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/53c1bac7ec48f7ce48c4c1c6aa006f27515add2aeb05725937224e6e00ec7cea/id-2d05b27f0618626cde086578fe07bccc8bd0430352b914cd32b71fa295eef695",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full/WORKSPACE",
+          "sha256": "dee68de49f5212a0b12d47d80fb59f63314e74c1655a60e3f11a055d20d0507a",
+          "line": 279,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "5449ed36d61269579dd9f4b0e532cd131840f285b389b3795ae8b4d717387dd8",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/5449ed36d61269579dd9f4b0e532cd131840f285b389b3795ae8b4d717387dd8/file",
+      "maxBytes": 112619,
+      "markers": [
+        {
+          "name": "id-b20328fd5001a8c3bfc5b3e7f8720721667eb262e6018323b08f76af170d00b2",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/5449ed36d61269579dd9f4b0e532cd131840f285b389b3795ae8b4d717387dd8/id-b20328fd5001a8c3bfc5b3e7f8720721667eb262e6018323b08f76af170d00b2",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/grpc/bazel/grpc_deps.bzl",
+          "sha256": "528fce62b4fdb591358889689aa185e49100efd169155f4e29417452b2c4d1b0",
+          "line": 266,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "552ca3d4d1af4beeb1907980f7096315aa24150d6baf5ac1e5ad90f04846c670",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/552ca3d4d1af4beeb1907980f7096315aa24150d6baf5ac1e5ad90f04846c670/file",
+      "maxBytes": 204856,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/third_party/xla/third_party/benchmark/workspace.bzl",
+          "sha256": "1e79424b5ac874280111ca39dafdd4f04b6bade1cab246b8a459c1061dc3f8b0",
+          "line": 23,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "5b00383d08dd71f28503736db0500b6fb4dda47489ff5fc6bed42557c07c6ba9",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/5b00383d08dd71f28503736db0500b6fb4dda47489ff5fc6bed42557c07c6ba9/file",
+      "maxBytes": 464906,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/tensorflow/workspace3.bzl",
+          "sha256": "ce4e6ac5be440290ff78e6d5edaa9b580281420006cfa223cd897e1861361a6d",
+          "line": 27,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "5e81d70f9534340f7ef8e63ec43bdd5971135e48183079be50ecb3f74b1fed66",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/5e81d70f9534340f7ef8e63ec43bdd5971135e48183079be50ecb3f74b1fed66/file",
+      "maxBytes": 797332,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/third_party/tf_runtime/workspace.bzl",
+          "sha256": "fe72ee90f0e191912aafb0d35abb35a3b667dfd42d9d41ec86eb9c9e26d880f6",
+          "line": 25,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "6274687f6fc5783b589f56a2f1ed60de3ce1f99bc4e8f9edef3de43bdf7c6e74",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/6274687f6fc5783b589f56a2f1ed60de3ce1f99bc4e8f9edef3de43bdf7c6e74/file",
+      "maxBytes": 3998031,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/tensorflow/workspace3.bzl",
+          "sha256": "ce4e6ac5be440290ff78e6d5edaa9b580281420006cfa223cd897e1861361a6d",
+          "line": 86,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "6e09bbc950ba60c3a7b30280210cd285af8d7d8ed5e0a6ed101c72aff22e8d88",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/6e09bbc950ba60c3a7b30280210cd285af8d7d8ed5e0a6ed101c72aff22e8d88/file",
+      "maxBytes": 11437914,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/third_party/py/python_init_rules.bzl",
+          "sha256": "f64ff13e256a0dac1b113c552750f70bbcd880bdd7e4cf35363a0188f3306fa8",
+          "line": 19,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "81ea28cf9e5bb032d356b0187409f30b1035f8ea5b530675ea248c8a6c0070aa",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/81ea28cf9e5bb032d356b0187409f30b1035f8ea5b530675ea248c8a6c0070aa/file",
+      "maxBytes": 15773128,
+      "markers": [
+        {
+          "name": "id-74187c1cc07ff29b8f2e46614586f796646b2279a458c0fc63dfffd65f982653",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/81ea28cf9e5bb032d356b0187409f30b1035f8ea5b530675ea248c8a6c0070aa/id-74187c1cc07ff29b8f2e46614586f796646b2279a458c0fc63dfffd65f982653",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/grpc/bazel/grpc_deps.bzl",
+          "sha256": "528fce62b4fdb591358889689aa185e49100efd169155f4e29417452b2c4d1b0",
+          "line": 441,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "a04d79154fabd906d816324314cb71c959458265eef90af18fbfe465b096a1db",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/a04d79154fabd906d816324314cb71c959458265eef90af18fbfe465b096a1db/file",
+      "maxBytes": 15762656,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_rust/crate_universe/private/urls.bzl",
+          "sha256": "619b2b10e9ab892f0533a90ba6219892d9d636410614bcd9c8edb5b818889621",
+          "line": 32,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "a4cb11930215b071168811982dfbebc82a2bb0f90db0e8713245931eb742ea46",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/a4cb11930215b071168811982dfbebc82a2bb0f90db0e8713245931eb742ea46/file",
+      "maxBytes": 1140157,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/tensorflow/workspace2.bzl",
+          "sha256": "69df1c6455a92bd2b5ca41c883e475f0cf0d374f019c4cd784a26ddece64766c",
+          "line": 383,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "a78f26c22ac8d6e3f3fcaad50eace4d9c767688bd7254b75bdf4a6735b299f6a",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/a78f26c22ac8d6e3f3fcaad50eace4d9c767688bd7254b75bdf4a6735b299f6a/file",
+      "maxBytes": 2422364,
+      "markers": [
+        {
+          "name": "id-8a766cd674ae5177f713f6ed5c4861263d6583c9af1ff60b60b86aa4533a54a2",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/a78f26c22ac8d6e3f3fcaad50eace4d9c767688bd7254b75bdf4a6735b299f6a/id-8a766cd674ae5177f713f6ed5c4861263d6583c9af1ff60b60b86aa4533a54a2",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full/WORKSPACE",
+          "sha256": "dee68de49f5212a0b12d47d80fb59f63314e74c1655a60e3f11a055d20d0507a",
+          "line": 50,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "ab51e978326b87e06be7a12fc6496f3ff6586339043557dbbd31f622332a5d45",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/ab51e978326b87e06be7a12fc6496f3ff6586339043557dbbd31f622332a5d45/file",
+      "maxBytes": 306941,
+      "markers": [
+        {
+          "name": "id-4b8442659992ce0d9d638391739380317640fbe9ff51403df9bbcbe0394f76a6",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/ab51e978326b87e06be7a12fc6496f3ff6586339043557dbbd31f622332a5d45/id-4b8442659992ce0d9d638391739380317640fbe9ff51403df9bbcbe0394f76a6",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/grpc/bazel/grpc_deps.bzl",
+          "sha256": "528fce62b4fdb591358889689aa185e49100efd169155f4e29417452b2c4d1b0",
+          "line": 343,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "b8b918a85f9144c01f6cfe0f45e4f2838c7413961a8ff23bc0c6cdf8bb07a3b6",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/b8b918a85f9144c01f6cfe0f45e4f2838c7413961a8ff23bc0c6cdf8bb07a3b6/file",
+      "maxBytes": 187517,
+      "markers": [
+        {
+          "name": "id-9e22576cf0da22cde0a0e21217122852135f227fafe57a0886e7fda4a9d23412",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/b8b918a85f9144c01f6cfe0f45e4f2838c7413961a8ff23bc0c6cdf8bb07a3b6/id-9e22576cf0da22cde0a0e21217122852135f227fafe57a0886e7fda4a9d23412",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_python/internal_dev_deps.bzl",
+          "sha256": "6dad738c8e5d59bf6c1532aed1472d0f695404cad235db61d4d687a0993acd3c",
+          "line": 249,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "bc283cdfcd526a52c3201279cda4bc298652efa898b10b4db0837dc51652756f",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/bc283cdfcd526a52c3201279cda4bc298652efa898b10b4db0837dc51652756f/file",
+      "maxBytes": 43566,
+      "markers": [
+        {
+          "name": "id-a41e2576b37bd122f7ebafc76594f5370e1f9076bd2e07b608a285d3b61e8d17",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/bc283cdfcd526a52c3201279cda4bc298652efa898b10b4db0837dc51652756f/id-a41e2576b37bd122f7ebafc76594f5370e1f9076bd2e07b608a285d3b61e8d17",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/google_cloud_cpp/bazel/workspace0.bzl",
+          "sha256": "a1155db10587729f7898507f6d5d607edd2ce63cee9bb76a65eeb79bf24129f0",
+          "line": 84,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "bc61ef94facc78e20a645726f64756e5e285a045037c7a61f65af2941f4c25e1",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/bc61ef94facc78e20a645726f64756e5e285a045037c7a61f65af2941f4c25e1/file",
+      "maxBytes": 22017,
+      "markers": [
+        {
+          "name": "id-45aeeca9a83370667df9c79d4bac756b53b29f02af0da0ec093ea312e235eec1",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/bc61ef94facc78e20a645726f64756e5e285a045037c7a61f65af2941f4c25e1/id-45aeeca9a83370667df9c79d4bac756b53b29f02af0da0ec093ea312e235eec1",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full/WORKSPACE",
+          "sha256": "dee68de49f5212a0b12d47d80fb59f63314e74c1655a60e3f11a055d20d0507a",
+          "line": 20,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "c26b4e69cf02fea24511a108d158188b9d8174426311aac59ce803a78d107648",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/c26b4e69cf02fea24511a108d158188b9d8174426311aac59ce803a78d107648/file",
+      "maxBytes": 18118,
+      "markers": [
+        {
+          "name": "id-6ef1689952c725a6db76b32a74bebfc44853993fa944be86ba2a81a900c45c2b",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/c26b4e69cf02fea24511a108d158188b9d8174426311aac59ce803a78d107648/id-6ef1689952c725a6db76b32a74bebfc44853993fa944be86ba2a81a900c45c2b",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full/WORKSPACE",
+          "sha256": "dee68de49f5212a0b12d47d80fb59f63314e74c1655a60e3f11a055d20d0507a",
+          "line": 77,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "c47662ae375e9523870b87006f27c7f35f686f1489c0cbdf571a583a66c973c9",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/c47662ae375e9523870b87006f27c7f35f686f1489c0cbdf571a583a66c973c9/file",
+      "maxBytes": 279349087,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/third_party/xla/third_party/llvm/workspace.bzl",
+          "sha256": "6cc647edf86d3e6c0b172dba65d386a2b1f2625d5a009ea9f994c08cae77287a",
+          "line": 23,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "c652dad552122cd2e76968ec41c803f8222038169b11310dba0c85928265f5c1",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/c652dad552122cd2e76968ec41c803f8222038169b11310dba0c85928265f5c1/file",
+      "maxBytes": 17880965,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_python/python/private/runtimes_manifest_workspace.bzl",
+          "sha256": "0bc4c9f2e313d8fcc4bd417c9fc615947a7c9c7581806529cdb6b2621acca85e",
+          "line": 576,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "cd46b37c0f722d5a48c0accc9618cc5684c553332b913091023703461f318d9b",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/cd46b37c0f722d5a48c0accc9618cc5684c553332b913091023703461f318d9b/file",
+      "maxBytes": 112179248,
+      "markers": [
+        {
+          "name": "id-6f33952b60f50af0d492923119238ddbf0799bd419c2a96c8b65e184a8c5d8ab",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/cd46b37c0f722d5a48c0accc9618cc5684c553332b913091023703461f318d9b/id-6f33952b60f50af0d492923119238ddbf0799bd419c2a96c8b65e184a8c5d8ab",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full/WORKSPACE",
+          "sha256": "dee68de49f5212a0b12d47d80fb59f63314e74c1655a60e3f11a055d20d0507a",
+          "line": 12,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "d76bf7a60fd8b050444090dfa2837a4eaf9829e1165618ee35dceca5cbdf58d5",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/d76bf7a60fd8b050444090dfa2837a4eaf9829e1165618ee35dceca5cbdf58d5/file",
+      "maxBytes": 1815577,
+      "markers": [
+        {
+          "name": "id-a5669c11868950c566b55af2c9fa1fe386665d62ab112c718b50785dd5faba56",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/d76bf7a60fd8b050444090dfa2837a4eaf9829e1165618ee35dceca5cbdf58d5/id-a5669c11868950c566b55af2c9fa1fe386665d62ab112c718b50785dd5faba56",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/com_envoyproxy_protoc_gen_validate/bazel/repositories.bzl",
+          "sha256": "5027e9bf562d03158bd5228a43bf4e74e71abcca7abc44736adbfc1b01669a0c",
+          "line": 20,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "e11d2e1efce1589e5bdfa93986712c74fc7467a0f093143d489d2ef5ebb1ed2a",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/e11d2e1efce1589e5bdfa93986712c74fc7467a0f093143d489d2ef5ebb1ed2a/file",
+      "maxBytes": 1325628,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/third_party/py/python_init_rules.bzl",
+          "sha256": "f64ff13e256a0dac1b113c552750f70bbcd880bdd7e4cf35363a0188f3306fa8",
+          "line": 30,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "ed5e6c319f8ebcdf24a9491f866a599bb9a3c193b859a94ad13bd31f85b46855",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/ed5e6c319f8ebcdf24a9491f866a599bb9a3c193b859a94ad13bd31f85b46855/file",
+      "maxBytes": 774790,
+      "markers": [
+        {
+          "name": "id-037ceb36957639e314c0667d267f82cd33c59efa341d6c500faa2c199fbaf719",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/ed5e6c319f8ebcdf24a9491f866a599bb9a3c193b859a94ad13bd31f85b46855/id-037ceb36957639e314c0667d267f82cd33c59efa341d6c500faa2c199fbaf719",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/grpc/bazel/grpc_deps.bzl",
+          "sha256": "528fce62b4fdb591358889689aa185e49100efd169155f4e29417452b2c4d1b0",
+          "line": 217,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "ee20cc5c0bab47065473c8033d462374dd38d172406ecc8de5c8f08487943f2f",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/ee20cc5c0bab47065473c8033d462374dd38d172406ecc8de5c8f08487943f2f/file",
+      "maxBytes": 105227,
+      "markers": [
+        {
+          "name": "id-4e5799b4e80f73e433beaf009072a16b7c3b7f0e506c1e4771a4748a681481bd",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/ee20cc5c0bab47065473c8033d462374dd38d172406ecc8de5c8f08487943f2f/id-4e5799b4e80f73e433beaf009072a16b7c3b7f0e506c1e4771a4748a681481bd",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full/WORKSPACE",
+          "sha256": "dee68de49f5212a0b12d47d80fb59f63314e74c1655a60e3f11a055d20d0507a",
+          "line": 71,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "f7a67197cd8a79debfe70b8cef4dc19d03039af02cc561e31e0718e98cad83ac",
+      "kind": "retained-cache",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/f7a67197cd8a79debfe70b8cef4dc19d03039af02cc561e31e0718e98cad83ac/file",
+      "maxBytes": 307844,
+      "markers": [
+        {
+          "name": "id-762ae06041db356fb74b21cd7a68cbf4c9fe4034110f0d5b7e2872d99cc5c455",
+          "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/isolated-repository-cache/content_addressable/sha256/f7a67197cd8a79debfe70b8cef4dc19d03039af02cc561e31e0718e98cad83ac/id-762ae06041db356fb74b21cd7a68cbf4c9fe4034110f0d5b7e2872d99cc5c455",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full/WORKSPACE",
+          "sha256": "dee68de49f5212a0b12d47d80fb59f63314e74c1655a60e3f11a055d20d0507a",
+          "line": 63,
+          "meaning": "pinned checksum declaration; not configured-selection proof"
+        }
+      ]
+    },
+    {
+      "sha256": "45e2d3543ea1abc2aa5dad894452c848bf2c75df83c8b175c418166baee09d37",
+      "kind": "download",
+      "url": "https://static.rust-lang.org/dist/rustfmt-1.86.0-aarch64-apple-darwin.tar.xz",
+      "maxBytes": 536870912,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_rust/rust/known_shas.bzl",
+          "sha256": "9a397d1bc3b39a6cf0d580a9ec304e83da88f205a0fb23ac5128e4af930bd7a9",
+          "line": 17570,
+          "meaning": "rules_rust 0.61.0 exact component checksum"
+        }
+      ]
+    },
+    {
+      "sha256": "04d3618c686845853585f036e3211eb9e18f2d290f4610a7a78bdc1fcce1ebd9",
+      "kind": "download",
+      "url": "https://static.rust-lang.org/dist/llvm-tools-1.86.0-aarch64-apple-darwin.tar.xz",
+      "maxBytes": 536870912,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_rust/rust/known_shas.bzl",
+          "sha256": "9a397d1bc3b39a6cf0d580a9ec304e83da88f205a0fb23ac5128e4af930bd7a9",
+          "line": 11214,
+          "meaning": "rules_rust 0.61.0 exact component checksum"
+        }
+      ]
+    },
+    {
+      "sha256": "0fb121fb3b8fa9027d79ff598500a7e5cd086ddbc3557482ed3fdda00832c61b",
+      "kind": "download",
+      "url": "https://static.rust-lang.org/dist/rust-std-1.86.0-aarch64-apple-darwin.tar.xz",
+      "maxBytes": 536870912,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_rust/rust/known_shas.bzl",
+          "sha256": "9a397d1bc3b39a6cf0d580a9ec304e83da88f205a0fb23ac5128e4af930bd7a9",
+          "line": 15524,
+          "meaning": "rules_rust 0.61.0 exact component checksum"
+        }
+      ]
+    },
+    {
+      "sha256": "50542647bf09d039acd7b1a4d292cb4d3dde236aa1c535f7a075aab27ae3e1e4",
+      "kind": "download",
+      "url": "https://static.rust-lang.org/dist/rust-std-1.86.0-aarch64-linux-android.tar.xz",
+      "maxBytes": 536870912,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_rust/rust/known_shas.bzl",
+          "sha256": "9a397d1bc3b39a6cf0d580a9ec304e83da88f205a0fb23ac5128e4af930bd7a9",
+          "line": 15530,
+          "meaning": "rules_rust 0.61.0 exact component checksum"
+        }
+      ]
+    },
+    {
+      "sha256": "86d5a44708255473f81e58b1c364462bc204c0db5485eb8649afbdb93cb966c6",
+      "kind": "download",
+      "url": "https://static.rust-lang.org/dist/rust-std-1.86.0-x86_64-linux-android.tar.xz",
+      "maxBytes": 536870912,
+      "markers": [],
+      "references": [
+        {
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/rules_rust/rust/known_shas.bzl",
+          "sha256": "9a397d1bc3b39a6cf0d580a9ec304e83da88f205a0fb23ac5128e4af930bd7a9",
+          "line": 15656,
+          "meaning": "rules_rust 0.61.0 exact component checksum"
+        }
+      ]
+    }
+  ],
+  "cacheState": "37 retained complete payloads, plus explicitly pinned missing Rust components",
+  "transformations": "NONE; no extracted repository trees imported"
+}
