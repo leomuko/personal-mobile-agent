@@ -1,0 +1,150 @@
+{
+  "protocol": "dawn-python-patch-preparation-v1",
+  "implementationSha256": "bd4b6cfba445fbbf3253d9cdd7aca287d16f7028b35cd8b655881f543401915b",
+  "python": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+  "inputs": [
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+      "bytes": 102352,
+      "mode": 493,
+      "sha256": "271143990bc83af0fb2404a255038f5faafb96df1584ed7f085e5018c0f33ffb"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+      "bytes": 141373024,
+      "mode": 493,
+      "sha256": "7def90dd8829726686213a747fc5bff1583df933dae5edc55d755479e0bfe00a"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+      "bytes": 72672,
+      "mode": 493,
+      "sha256": "be184bb7054565eae25193e45e4235ea2d372c1eb6288ce900b2fad6d9dcc3f3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_DAWN_PYTHON_PATCH_QUALIFICATION_V1.md",
+      "bytes": 14336,
+      "mode": 420,
+      "sha256": "4a8d4a45c648dc5678609ad6b976badf8d0902259cdee8b0a9559b1c05f82640"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/candidate-inputs.json",
+      "bytes": 2343,
+      "mode": 420,
+      "sha256": "9abff87fc094bbcca8d971740083cbd75759001890f04dfc56c025d15b22d36a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/candidate-runtime-inventory.json",
+      "bytes": 452771,
+      "mode": 420,
+      "sha256": "6dcefbbf9c1f260687ff5168c137b444b61824739f713b8935481fde378144fb"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/protocol-review-1.json",
+      "bytes": 2729,
+      "mode": 420,
+      "sha256": "ec6bf6f222c7780b4454cfaf3d37a758017d84ec57ad2ba24c0f450b475f5f91"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/protocol-review-2.json",
+      "bytes": 2445,
+      "mode": 420,
+      "sha256": "6e193de56be3e65b12b8dab480e548630e3bf9e2c9027a21cec2919cf6014d72"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/protocol-review-3.json",
+      "bytes": 2195,
+      "mode": 420,
+      "sha256": "3800791381b48460db9b0165ed07ccb54a7af629be03daf6b8c4d452a17ae932"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/protocol-review-4.json",
+      "bytes": 2535,
+      "mode": 420,
+      "sha256": "10904a643efe327463ec7e1d91bd9cc7a70618e93229e80168dc5b471d876532"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/source-include-inventory.json",
+      "bytes": 7935,
+      "mode": 420,
+      "sha256": "ebdd5f7ceeeae74226df0f2652e06231612bdc2481df0aea72c04b57387572e6"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/result-lock.json",
+      "bytes": 35946,
+      "mode": 420,
+      "sha256": "9975de2d24da236eb83657c91e79c4b8d7b4658ef998f8d82a68cbf792b1fc8c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/results-review.json",
+      "bytes": 6892,
+      "mode": 420,
+      "sha256": "1fc877eb954ddbc0faf1720f5aa48994a8e09232c45c7f5b21fe257840f9dfcf"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/catalog.py",
+      "bytes": 14385,
+      "mode": 420,
+      "sha256": "bd4b6cfba445fbbf3253d9cdd7aca287d16f7028b35cd8b655881f543401915b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/wheels.py",
+      "bytes": 6867,
+      "mode": 420,
+      "sha256": "1e04b51f053e92e4891249ff680e7d0440a879a106b0ca1a573ef2c5b5de61e9"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/ml_drift_compatibility/analyze.py",
+      "bytes": 18796,
+      "mode": 420,
+      "sha256": "01706ddb5533fd0ccd8198518257034a86144b972aaab923c70a102fe74e5c59"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_python_catalog.py",
+      "bytes": 4680,
+      "mode": 420,
+      "sha256": "3a930039a8551995d68a9b4935bffdd33b97b28e57e88c192991d17ddcbd7045"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_python_wheels.py",
+      "bytes": 5483,
+      "mode": 420,
+      "sha256": "784b7ecf978bd72567cf6872411aa1898b75e16732756e4f4aadcc681806b452"
+    },
+    {
+      "path": "/usr/bin/sandbox-exec",
+      "bytes": 102368,
+      "mode": 493,
+      "sha256": "abc5bb136d6b5cce8fa85d789f78e3326c51ca60cae637b2064adfb67a1dcd9a"
+    },
+    {
+      "path": "/usr/bin/sw_vers",
+      "bytes": 135248,
+      "mode": 493,
+      "sha256": "2e5c391fb977b04bb22c360cb35145ca3a10b865db1223d2b25223134f750d77"
+    },
+    {
+      "path": "/usr/lib/dyld",
+      "bytes": 2562000,
+      "mode": 493,
+      "sha256": "373fce2b3689c2113d5341a6bba735e9f970401ba64896c0a6379680192f1cdf"
+    }
+  ],
+  "attemptParent": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/preparation-attempts",
+  "environment": {
+    "PATH": "/usr/bin:/bin",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1"
+  },
+  "scope": "local-read-only-catalog-metadata-inspection-no-acquisition-no-vendor-compiler-execution",
+  "seconds": 300,
+  "cleanupSeconds": 15,
+  "logBytes": 2097152,
+  "sourceQualificationPreserved": true,
+  "vendorAllowed": false,
+  "wheelsAllowed": false,
+  "BazelAllowed": false,
+  "deviceAllowed": false
+}

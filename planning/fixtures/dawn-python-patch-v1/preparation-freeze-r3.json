@@ -1,0 +1,173 @@
+{
+  "protocol": "dawn-python-patch-preparation-v1",
+  "implementationSha256": "e3fe875da3d187b3381573f20077a71d85d18580408e7e566c65de10bf0ca713",
+  "python": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+  "inputs": [
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+      "bytes": 102352,
+      "sha256": "271143990bc83af0fb2404a255038f5faafb96df1584ed7f085e5018c0f33ffb"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+      "bytes": 72672,
+      "sha256": "be184bb7054565eae25193e45e4235ea2d372c1eb6288ce900b2fad6d9dcc3f3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qa-admission-amendment-review-1/qa-summary.json",
+      "bytes": 2226,
+      "sha256": "d2722676e5d126f2658fda3cbe42197ed4e5be38ba2677c8d17eff293c6b5d45"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qa-preparation-review-1/snapshot.json",
+      "bytes": 8102,
+      "sha256": "1ad37753e4044311e82322677e92687fc4718ee5ee55be76b7e95dc5780e0b0f"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qa-preparation-review-2/qa-summary.json",
+      "bytes": 3088,
+      "sha256": "69118794433393ba912bd09079292ef44b81c847ab32b8646790bd785585b7b0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_DAWN_PYTHON_PATCH_QUALIFICATION_V1.md",
+      "bytes": 16333,
+      "sha256": "83bd33cf50358cc30e3b516bb392520e630dfb0499fffed7556137cdc1f3fff0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/candidate-inputs.json",
+      "bytes": 2343,
+      "sha256": "9abff87fc094bbcca8d971740083cbd75759001890f04dfc56c025d15b22d36a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/candidate-runtime-inventory.json",
+      "bytes": 452771,
+      "sha256": "6dcefbbf9c1f260687ff5168c137b444b61824739f713b8935481fde378144fb"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/cpp-prerequisite-block.json",
+      "bytes": 1440,
+      "sha256": "75b0ca71ff5a2dac8e5a8c28820d173f04ce0220e10f320aeace99d17ca603d3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/preparation-freeze-r1.json",
+      "bytes": 5986,
+      "sha256": "4d0b766d5c36bae235c234a4524485c4d749dd56bc4613e95e77d4c1b434706e"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/preparation-freeze-r2.json",
+      "bytes": 6879,
+      "sha256": "5e2d538774f8102481cdbacadb16cd21be19023473337927268957bb31ffbd32"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/preparation-review-1.json",
+      "bytes": 2633,
+      "sha256": "961a25fbca9c6844db65dcd70ae2804e8816ba126644534ab29505c7e2a17d7a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/protocol-review-1.json",
+      "bytes": 2729,
+      "sha256": "ec6bf6f222c7780b4454cfaf3d37a758017d84ec57ad2ba24c0f450b475f5f91"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/protocol-review-2.json",
+      "bytes": 2445,
+      "sha256": "6e193de56be3e65b12b8dab480e548630e3bf9e2c9027a21cec2919cf6014d72"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/protocol-review-3.json",
+      "bytes": 2195,
+      "sha256": "3800791381b48460db9b0165ed07ccb54a7af629be03daf6b8c4d452a17ae932"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/protocol-review-4.json",
+      "bytes": 2535,
+      "sha256": "10904a643efe327463ec7e1d91bd9cc7a70618e93229e80168dc5b471d876532"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/source-include-inventory.json",
+      "bytes": 7935,
+      "sha256": "ebdd5f7ceeeae74226df0f2652e06231612bdc2481df0aea72c04b57387572e6"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/result-lock.json",
+      "bytes": 35946,
+      "sha256": "9975de2d24da236eb83657c91e79c4b8d7b4658ef998f8d82a68cbf792b1fc8c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/results-review.json",
+      "bytes": 6892,
+      "sha256": "1fc877eb954ddbc0faf1720f5aa48994a8e09232c45c7f5b21fe257840f9dfcf"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/catalog.py",
+      "bytes": 16295,
+      "sha256": "e3fe875da3d187b3381573f20077a71d85d18580408e7e566c65de10bf0ca713"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/macho.py",
+      "bytes": 4366,
+      "sha256": "0b040994d1211d59dcdedad6b9ca0769b290f0e74666a2f823803dd40addfc60"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/wheels.py",
+      "bytes": 6867,
+      "sha256": "1e04b51f053e92e4891249ff680e7d0440a879a106b0ca1a573ef2c5b5de61e9"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/ml_drift_compatibility/analyze.py",
+      "bytes": 18796,
+      "sha256": "01706ddb5533fd0ccd8198518257034a86144b972aaab923c70a102fe74e5c59"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_python_catalog.py",
+      "bytes": 10509,
+      "sha256": "30c450d0c629ad2dbcffaffc08d13daf7f4300fcddd60e2daf10d3994b84db46"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_python_macho.py",
+      "bytes": 3200,
+      "sha256": "f47fe7852730928defd802b438723dd26b9adf95ca6bc1f51b726feb585ca4f1"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_python_wheels.py",
+      "bytes": 5483,
+      "sha256": "784b7ecf978bd72567cf6872411aa1898b75e16732756e4f4aadcc681806b452"
+    },
+    {
+      "path": "/usr/bin/sandbox-exec",
+      "bytes": 102368,
+      "sha256": "abc5bb136d6b5cce8fa85d789f78e3326c51ca60cae637b2064adfb67a1dcd9a"
+    },
+    {
+      "path": "/usr/bin/sw_vers",
+      "bytes": 135248,
+      "sha256": "2e5c391fb977b04bb22c360cb35145ca3a10b865db1223d2b25223134f750d77"
+    },
+    {
+      "path": "/usr/lib/dyld",
+      "bytes": 2562000,
+      "sha256": "373fce2b3689c2113d5341a6bba735e9f970401ba64896c0a6379680192f1cdf"
+    }
+  ],
+  "attemptParent": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/preparation-attempts",
+  "environment": {
+    "PATH": "/usr/bin:/bin",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1"
+  },
+  "scope": "local-read-only-catalog-metadata-inspection-no-acquisition-no-vendor-compiler-execution",
+  "seconds": 300,
+  "cleanupSeconds": 15,
+  "logBytes": 2097152,
+  "sourceQualificationPreserved": true,
+  "vendorAllowed": false,
+  "wheelsAllowed": false,
+  "BazelAllowed": false,
+  "deviceAllowed": false,
+  "previousFreezeSha256": "5e2d538774f8102481cdbacadb16cd21be19023473337927268957bb31ffbd32",
+  "revision": 3,
+  "admissionMode": "python-generation-cpp-blocked-v1",
+  "compilerQualified": false
+}
