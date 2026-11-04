@@ -1,0 +1,53 @@
+{
+  "additionalBlockingProbesPending": false,
+  "base": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "boundInputsVerified": 141,
+  "branch": "dev",
+  "callbackSemanticsQualified": false,
+  "changedPaths": [
+    "build/dawn-python-patch-v1/qa-qualification-review-1/"
+  ],
+  "cppProbesAuthorized": false,
+  "delegation": false,
+  "deviceExecutionAuthorized": false,
+  "findings": [
+    {
+      "confidence": "HIGH",
+      "evidence": "Mocked worker succeeds at 299s, post-worker admission finishes at 350s, runner publishes acceptance and returns2.",
+      "file": "scripts/diagnostics/dawn_python_patch_v1/qualify.py",
+      "id": "DPQ-QUAL-001",
+      "line": 243,
+      "priority": "P2",
+      "requiredRevision": "One outer invocation budget including admission and publication; preserve 300s decision/15s cleanup and reject irreversibly after expiry.",
+      "status": "OPEN",
+      "title": "Public acceptance can exceed whole qualification deadline",
+      "witness": "late-public-acceptance.json"
+    }
+  ],
+  "freezePath": "planning/fixtures/dawn-python-patch-v1/qualification-freeze-r1.json",
+  "freezeSha256": "bf8f0918e752c05531e6b53b0ab4cb38b5ea6f19673b98e99a86ca0f1678d701",
+  "head": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "implementationSha256": "f76d9010b87f3e0d9a1705b064aabae4a66f17a20c87f5b3a3b0d2f18d95c749",
+  "preparationResultsReview": "PASS; unchanged",
+  "preparationResultsSummarySha256": "729b58de550a41ffc2a46fc2fb056d2a533968a2769846b642b938077aca48a9",
+  "profile": "python-generation-cpp-blocked-v1",
+  "projectSourceChanged": false,
+  "reviewedOn": "2026-11-04",
+  "reviewer": "Codex \u2014 same retained sole primary independent QA reviewer; no delegation",
+  "rootAdoptionApproved": false,
+  "schema": 1,
+  "scope": "dawn-python-generation-implementation-and-qualification-freeze-R1",
+  "semanticEnablement": false,
+  "snapshotFiles": 148,
+  "snapshotSha256": "48dd26767c59129f17bfbe93d4c9a005a521131449c15c64bab719fdc76921c5",
+  "vendorExecutionApproved": false,
+  "verdict": "FAIL",
+  "verification": {
+    "actualWorkerOrVendorExecution": false,
+    "freshFocusedSyntheticTests": 48,
+    "full245TestSuiteIndependentlyRerun": false,
+    "networkRequests": 0,
+    "wholeDeadlineCounterexample": "REPRODUCED"
+  },
+  "wheelAcquisitionApprovedByReview": false
+}

@@ -1,0 +1,741 @@
+{
+  "protocol": "dawn-python-patch-qualification-v1",
+  "admissionMode": "python-generation-cpp-blocked-v1",
+  "implementationSha256": "f76d9010b87f3e0d9a1705b064aabae4a66f17a20c87f5b3a3b0d2f18d95c749",
+  "python": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+  "preparationAccepted": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/preparation-attempts/python-1/accepted.json",
+  "preparationAcceptedSha256": "4454fad467ddcab4aa12759e85625969cf2ff1db5ec062630ca97373dda09c73",
+  "inputs": [
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+      "bytes": 102352,
+      "sha256": "271143990bc83af0fb2404a255038f5faafb96df1584ed7f085e5018c0f33ffb"
+    },
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+      "bytes": 72672,
+      "sha256": "be184bb7054565eae25193e45e4235ea2d372c1eb6288ce900b2fad6d9dcc3f3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/preparation-attempts/python-1/accepted.json",
+      "bytes": 410,
+      "sha256": "4454fad467ddcab4aa12759e85625969cf2ff1db5ec062630ca97373dda09c73"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/preparation-attempts/python-1/inspector-trace.jsonl",
+      "bytes": 128557,
+      "sha256": "c13bdacf8056de649701a48377f9552f8bc1a7733b31db8d0eed53e278a0a8ec"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/preparation-attempts/python-1/outcome.json",
+      "bytes": 935,
+      "sha256": "8fcee48e229d5733b68e6b182405aaaa14abefcdcfcd37106c08e01b6acb8bea"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/preparation-attempts/python-1/prepared-catalog.json",
+      "bytes": 360650,
+      "sha256": "7fd85776b485802939955bcc1579952f9042eaf003063ceb0b5616733aab2ce2"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qa-preparation-results-review-1/qa-summary.json",
+      "bytes": 3307,
+      "sha256": "729b58de550a41ffc2a46fc2fb056d2a533968a2769846b642b938077aca48a9"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qa-preparation-review-3/qa-summary.json",
+      "bytes": 2956,
+      "sha256": "0f51503be12a642db1acc13829896027982b448fe3778b2a185986ac45b7795b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/LICENSE",
+      "bytes": 11829,
+      "sha256": "0493f897193af1796d5054659f45ec7d4c5af648fa67a99f01d30e55cc805abc"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/CMakeLists.txt",
+      "bytes": 9449,
+      "sha256": "7f2a68eeb0a3dd467e2fd78d24fa6cbab14da318ba1f5ece8bec25fc860ba360"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/OWNERS",
+      "bytes": 130,
+      "sha256": "a1deaa1fc8a27db57fe45d619c51209746ea0927bb839d2003f1bbaeccb8d8c9"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/dawn_generator.gni",
+      "bytes": 5180,
+      "sha256": "11a7d4d91d42dde61ac136652862be8b212a6a7f0e05d3a493e8b7e943c04ce9"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/dawn_gpu_info_generator.py",
+      "bytes": 9490,
+      "sha256": "60eac0bab246877e325e4472fb7fe363ad87b11ee9f9a4c05e9488e0f13b1e4b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/dawn_json_generator.py",
+      "bytes": 84272,
+      "sha256": "0d1ca05ea58f9c98d50096b035d2ea65d8154b8e69af7f05ef5b1a9537fddb5e"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/dawn_version_generator.py",
+      "bytes": 6408,
+      "sha256": "060ddf0f89ac1a18174f9465afb9accc89b5141a7606cb43daad590382a4f7ba"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/extract_json.py",
+      "bytes": 2432,
+      "sha256": "7e3dbd386dc08b94bc38e2d8be058484543699512d60a76b502731d1626405fb"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/generator_lib.gni",
+      "bytes": 8161,
+      "sha256": "c4045895bd0060fd82650ad93f8a2ca62b099bdb001dc184e741a6afa96ef9b6"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/generator_lib.py",
+      "bytes": 17826,
+      "sha256": "0e5a86b4991c4fec0c781d372ffe764fe3ccfc49f47d4839bc8aeebbf02728e9"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/opengl_loader_generator.py",
+      "bytes": 11168,
+      "sha256": "cfc8af10db83671d1ca2496340de6d64f017d9b71ccfcc15ea46d1adc2dd4f71"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/.clang-format",
+      "bytes": 40,
+      "sha256": "f8405bf75d1ab2ed2e69b525a538b409b801812a7c71225da7bb46434f7dcc18"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/BSD_LICENSE",
+      "bytes": 1648,
+      "sha256": "92b6ea59a7483a46bff5fc34d3debfbd304110f1b06e6e4ba1ba1e454405a43f"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/CPPLINT.cfg",
+      "bytes": 17,
+      "sha256": "88e5df55dfbd904f9ae298349a5115ebcfa2ea6e2a4faa850fe778afaf392228"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/api.h",
+      "bytes": 15361,
+      "sha256": "bcd262568fbab33af2ff8b6643a38d96e3b2604a7c7334b0e9390acadb1e30ab"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/api_cpp.h",
+      "bytes": 57465,
+      "sha256": "e45fcbe135a35310238df2f8ac310b295e6c8d5d5c7933895dab90340b6e799a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/api_cpp.ixx",
+      "bytes": 2811,
+      "sha256": "e89ed1496d872e616b535432221933b0d5626ffca37c58227b98481cd2da28a7"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/api_cpp_chained_struct.h",
+      "bytes": 2544,
+      "sha256": "d9be3dd66a7fd6d3958d25cd4f3062609f1bc89ef60358d029db83594208eec8"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/api_cpp_print.h",
+      "bytes": 4741,
+      "sha256": "f6dd27f0da53101e75098962fb9601c1d86879b2eabe4e289f321687742ce149"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/JNIClasses.cpp",
+      "bytes": 4559,
+      "sha256": "ecfcc719e3389b3210bec6415e2944dcfc2c3112ab77bdb225a478e7d355e45c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/JNIClasses.h",
+      "bytes": 2952,
+      "sha256": "f6936e12024909ecf2138c1cd8387b3a2d51eb9fc1c51b8586d8b491a4c7f933"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/OWNERS",
+      "bytes": 93,
+      "sha256": "b2132bc95f11229bfd9d73b81f469d2efdd03ea1bffaa82bf171c79b2435df51"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/api_jni_types.cpp",
+      "bytes": 6729,
+      "sha256": "b627ed39cc42e2b13f88f353100898e04299fe528c3cbcc41e26ee37e22c2c42"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/api_kotlin_async_helpers.kt",
+      "bytes": 4158,
+      "sha256": "13bb4debdb49cacd17a6ebaf3ab7bb15330df03841990cf23a52fcf7b16155a6"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/api_kotlin_callback.kt",
+      "bytes": 3565,
+      "sha256": "b23f455b09b7425e186916b40007095cb4ef6183accaf40fc13931f2e0f0259b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/api_kotlin_constants.kt",
+      "bytes": 1922,
+      "sha256": "c3d77ba11c82438b1f9a0d37bc2b1780f1cf1654ba62d71f8549cdc818e91e25"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/api_kotlin_enum.kt",
+      "bytes": 3394,
+      "sha256": "a1aedcfb85ad8293e9ecec42b37c696ad40781beab6875610bfb295cb3b7b6a8"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/api_kotlin_exceptions.kt",
+      "bytes": 3837,
+      "sha256": "8af4a956914867e8e1b5137aaed5607b71fa13079b3bc803fe220c678e87d816"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/api_kotlin_function_pointer.kt",
+      "bytes": 2896,
+      "sha256": "ddd80a7eb2e8a0c15511600b38613c3d233dca20946db2cf7e9ec87913add500"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/api_kotlin_functions.kt",
+      "bytes": 2704,
+      "sha256": "1d37ce26c000ec8e605c49708228a66c4eff655bcdd62e8add834995e9abde0e"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/api_kotlin_object.kt",
+      "bytes": 6102,
+      "sha256": "9ea6e9c83fa64604fa5a7ffeb77f9b9b22409d920f747f4654ae342c0813b76f"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/api_kotlin_structure.kt",
+      "bytes": 17466,
+      "sha256": "ff21f5116471170a8d19ca7eb5e63736fb24216a4b96283fdd880fd862043b3d"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/api_kotlin_types.kt",
+      "bytes": 17325,
+      "sha256": "7d912d3c140f1e64162953fa9998520eed4be66c0f793b261c4c39890709a2b1"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/kotlin_record_conversion.cpp",
+      "bytes": 18328,
+      "sha256": "462b795d8b3c765bf60313aec6d57e3597a1d9c0b1d6e5ca0f1f289030dc5eb8"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/methods.cpp",
+      "bytes": 10359,
+      "sha256": "f198a67f00169a51bc5cf6bd228bf418fe12da2f5f27c2af1de1fd6f19ef49b6"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/structures.cpp",
+      "bytes": 10139,
+      "sha256": "c5da8f17fe2c40f2d7a02400e1888bbd10739278f6a8f24005a9d0e1ea0327ff"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/art/structures.h",
+      "bytes": 2434,
+      "sha256": "7fbe792cd81fd6ac01cc30555bc6ad519abb1e5558a8f266c2f1626f9d63e429"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/common/GPUInfo.cpp",
+      "bytes": 6941,
+      "sha256": "9e44f3ebd2521dc150c7c5f3e5b6fb4d92415d7c14c20f4026863f4fe74f0e6a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/common/GPUInfo.h",
+      "bytes": 2868,
+      "sha256": "0ae37ed7b83e74c23bec10fbda46f281873f6eeab236399eb30153fd7476bed1"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/cpp_macros.tmpl",
+      "bytes": 3341,
+      "sha256": "7abd956707396a2a8bc7015e12dc581d3ad0dbfe03a0e2badc15fad296164c3d"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/dawn_version.h",
+      "bytes": 1926,
+      "sha256": "15a45f4181c32c08ec2f36e76dc8aa548b286710a3c09515c3720a4076bfcb3b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/ChainUtils.cpp",
+      "bytes": 8395,
+      "sha256": "c9547f5f3d53fc42c8229609f9423555b7984e0301ffec8d68d8e2a5df906818"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/ChainUtils.h",
+      "bytes": 5695,
+      "sha256": "02c495901f0397a1a4481f07fbe17e06dc761f1965db76c0df6f268dad62caa8"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/Features.h",
+      "bytes": 2432,
+      "sha256": "ca41e136e978b4866ba195f3f4d1e867ea99a390951ef51af176a98db42d7c7d"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/Features.inl",
+      "bytes": 3722,
+      "sha256": "5060782579598e8c140e3828abf673eba231763067bab366e1d49454e71dadd3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/ObjectType.cpp",
+      "bytes": 2486,
+      "sha256": "b6ea9bc8097723c73a3bdc056bedca8f219dcac8b8a93e8b811aedf344c42126"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/ObjectType.h",
+      "bytes": 2518,
+      "sha256": "c2ce30426d3bf9971dfa9627fb0514a6c767254dafdf12b21feb167ab455f8e0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/ProcTable.cpp",
+      "bytes": 10059,
+      "sha256": "8a57c257364738e5816e4573991ffbce7157360568b1b961d1b39e4f9dfb9d6d"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/ValidationUtils.cpp",
+      "bytes": 3078,
+      "sha256": "9d4ea2d98669f78a0a10fa216a88263330c5e4a5d1d2f03a9cb2a33f8da1aff1"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/ValidationUtils.h",
+      "bytes": 2417,
+      "sha256": "fa0f5a0fce3be9e5509acbc8f52a920f1b4736565307173263bec651d171661b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/api_StreamImpl.cpp",
+      "bytes": 5657,
+      "sha256": "d21c3baa60158a63dda032896da289119d8f98bc117c38a11d82066f90bc14f4"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/api_absl_format.cpp",
+      "bytes": 6720,
+      "sha256": "6fa4584f7ab99d2fd57f42c4df7e90596c783ffddb3036b9f23295bf475bb259"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/api_absl_format.h",
+      "bytes": 3986,
+      "sha256": "af1bb9656df9e0124d61ddf2e6ca392a4f64e63d963408dd2b6a1f1b32bab3aa"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/api_dawn_native_proc.cpp",
+      "bytes": 3777,
+      "sha256": "b7fa7ecc4b29c31fda2c4532625ded45a4821b842b9135ce986ecf093c03a003"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/api_structs.cpp",
+      "bytes": 10918,
+      "sha256": "fa1d82726a3f87179f1290fe802d3ef2c3169bfe1c60dd583559567917e5e6bf"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/api_structs.h",
+      "bytes": 10959,
+      "sha256": "0d0c18de14a9b4e2b953d37c74e475e5e4e7b63c50de20443054e83c6963de96"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/native/dawn_platform.h",
+      "bytes": 5833,
+      "sha256": "69527d905f30fbe4504ac00c33a6cfc8e290b5b68abc6182bcf260bffbaeb86c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/utils/ComboLimits.cpp",
+      "bytes": 2054,
+      "sha256": "ee4015d0765ce95fc940d6475ebbc069fe0da2968fb6fa8e7c4097998a086a6c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/utils/ComboLimits.h",
+      "bytes": 3981,
+      "sha256": "167359956d077de076e7ef54064318f90b61b957b6c8540c222cd70c31344755"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/ObjectType.h",
+      "bytes": 2136,
+      "sha256": "e7b1c70aca37dcf7d25d1ad9e3c8b93922fe5b323c6ac7dec1ace58fa747db45"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/WireCmd.cpp",
+      "bytes": 39161,
+      "sha256": "8c9f16e4c0760c3f15e663b3af36fd5f0cd3f62c0ff88710a429b49bd5c90a9a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/WireCmd.h",
+      "bytes": 7082,
+      "sha256": "2a8a22a41f3190d1867c4ada7a5f6fb33f51f4141360556585ed76c422d7bb23"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/client/ApiObjects.h",
+      "bytes": 2850,
+      "sha256": "8893f58c180f2be95ff72f0bb0ecdb311bbacf753e498ea0bf10d942d47f3942"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/client/ApiProcs.cpp",
+      "bytes": 8509,
+      "sha256": "09288038707129307a148de421baf43a0e635cee05aa1dcd443e55c6ae2cc499"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/client/ClientBase.h",
+      "bytes": 2954,
+      "sha256": "37a21233d5c76b6adee77f54bc20c11fb48ebda78142bd6632d2baa15ad9236e"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/client/ClientHandlers.cpp",
+      "bytes": 4407,
+      "sha256": "b3679d951d27024d360f406f3a7471e39f5b69418725ea820984f42507bfe9d9"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/client/ClientPrototypes.inc",
+      "bytes": 2173,
+      "sha256": "21cffed4a7996a575fa6f1eecc8c012a529aebdf26c11f34d43e7a28842a107b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/client/api.h",
+      "bytes": 2959,
+      "sha256": "3eb1b8f176b329edd0b0144ed5c79a968d6054a0ccdc7b61fc1fe3a2d1aa007e"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/server/ServerBase.h",
+      "bytes": 9299,
+      "sha256": "e6e6ad17bb02f6bfde5f5f7b3b935ca8ca470ce21b4044c88831315ca07f884c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/server/ServerDoers.cpp",
+      "bytes": 6118,
+      "sha256": "0dc91704771a6491d4d4eb369f0e8737e835dfc203e1e40c4b903313b0c0b4ed"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/server/ServerHandlers.cpp",
+      "bytes": 5678,
+      "sha256": "89fb0a8859adf649ded42d3a332fb7cf9b16546f926951163b68a7ffb9a5c1cf"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/server/ServerPrototypes.inc",
+      "bytes": 2644,
+      "sha256": "3eb4fc58f66aea6ac4efe381bbbb63e053c11ef1d640c5027ee9e4102b982f2c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn/wire/server/WGPUTraits.h",
+      "bytes": 2473,
+      "sha256": "ed30339439bd214cc02e78cc4051ae5c19443d1f59492c2824f1c3ed4315db31"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn_proc.cpp",
+      "bytes": 4702,
+      "sha256": "2934704311dc9a490a16318b609170d4a44251e8d8d302a09651c4d66dd7aaf3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn_proc_table.h",
+      "bytes": 2347,
+      "sha256": "aff18ec9f56250876bf0693ecf01bffec021621f7aa983d0fe8d34ba47ed2853"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/dawn_thread_dispatch_proc.cpp",
+      "bytes": 3024,
+      "sha256": "be0fcf2dc419a36c1c63c8a62b91ec5b007cd3d26779d973d52ada31c3febe85"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/emdawnwebgpu/LinkTest.cpp",
+      "bytes": 1120,
+      "sha256": "228b27fc8f1ce9c4cd1f946ed7be676e50bffe1bb288db50374c3fa6b4b90c6e"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/emdawnwebgpu/library_webgpu_enum_tables.js",
+      "bytes": 5497,
+      "sha256": "ceece8b0b9c911ba9ccbaf7ae33cc7d78f8b9b9cabf5a9f5a2f84b9cea094b9a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/emdawnwebgpu/library_webgpu_generated_sig_info.js",
+      "bytes": 3484,
+      "sha256": "c35932d47c633ffafbc479562460bb3233e00fd7c496d16ddd32b5705854a85b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/emdawnwebgpu/struct_info_webgpu.json",
+      "bytes": 3366,
+      "sha256": "567f301c41d0fc1c633f915633a1753d8cf0f8ce56565e653a282019af27ed66"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/mock_api.cpp",
+      "bytes": 9407,
+      "sha256": "ce8e415c43dbd7680aab9304fab68922d9db6d6587b6cc24c79ca79b98d7f532"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/mock_api.h",
+      "bytes": 9172,
+      "sha256": "4f439bcd4fd4ebb23b7ccf82b89d31725944ef6671e353ae08f977131cd7eb30"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/opengl/OpenGLFunctionsBase.cpp",
+      "bytes": 4591,
+      "sha256": "5a747c44b9c3b554422f46516d78831676863b19c32670c5df879e37a8443bdf"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/opengl/OpenGLFunctionsBase.h",
+      "bytes": 2838,
+      "sha256": "0ff49cccf69c9070e26c5e018762827def81db6bf2daa70ed872829efb7a9386"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/templates/opengl/opengl_platform.h",
+      "bytes": 3920,
+      "sha256": "f6953bd1f8ebd8b37428901b21b96116b7d07072ebba987cf073790648e5d615"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/generator/webgpu_docs_utility.py",
+      "bytes": 24107,
+      "sha256": "c45a38c75faabaa67a1ea05f6b26b0d3b18e9eb422670321669b8ae65d1db495"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/src/dawn/dawn.json",
+      "bytes": 196440,
+      "sha256": "935b497ab753a4af44f83c66c339bfed5a185f3342e7dfd7da007ed11d3ce6c6"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/src/dawn/dawn_wire.json",
+      "bytes": 18725,
+      "sha256": "08b2d6bcab539d510b10246dc73153a332fdc2ac69e1422a028614a9748cf965"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/src/emdawnwebgpu/pkg/webgpu_cpp/LICENSE",
+      "bytes": 1561,
+      "sha256": "7e1efc85a78732a13d7ddfc8b52912da7c8f8d3c6d334624b20e3f3a96297de0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/EGL-Registry/LICENSE",
+      "bytes": 2525,
+      "sha256": "4782253b8777b2c679544b31b18a52616d3c2ba0515dcf695e262bd318b356f0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/OpenGL-Registry/LICENSE",
+      "bytes": 2124,
+      "sha256": "d20809e7f3c8116615249bdefdc826c29b0b8332e7ac7ac249fd3949b716e8c5"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/agility-sdk/LICENSE",
+      "bytes": 11292,
+      "sha256": "caf3f489e3959df3605fec3c1f921fe72456c5d3640d998a5e635e8a9505cec5"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/benchmark_shaders/unity_boat_attack/LICENSE.md",
+      "bytes": 1075,
+      "sha256": "7ff3a8e0e49a0141989e4dea4fa92e18f908fe462a19d4b6cb2f1225c857bfa1"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/directx-headers/LICENSE",
+      "bytes": 1074,
+      "sha256": "7c77a44a8acd9b41fdc209864a8016b3d430b5d0e09309818d5b7444336df744"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/directx-shader-compiler/LICENSE",
+      "bytes": 29241,
+      "sha256": "27a49e35d1da96eba18fba54bc882667ff0ff8c0254f16f2b6e165d605ba7df8"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/emdawnwebgpu/LICENSE",
+      "bytes": 3291,
+      "sha256": "2f79bf3699b0870251255b381670237f73f21a04a38c094f791eba39c5fd1df7"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/emdawnwebgpu/pkg/webgpu/src/LICENSE",
+      "bytes": 3291,
+      "sha256": "2f79bf3699b0870251255b381670237f73f21a04a38c094f791eba39c5fd1df7"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/glfw3/LICENSE",
+      "bytes": 904,
+      "sha256": "149704059b5d0bf551637e50042dd4de9c2cae921021f6636298911e3a5f9462"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/glslang/LICENSE",
+      "bytes": 1309,
+      "sha256": "23353f4505b1c8ce4f8f72fc3b11dc74b4a8a7bf95921d93ff77f227c171a710"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/renderdoc/LICENSE.md",
+      "bytes": 1205,
+      "sha256": "b921912e9e433291f6010631a0dd41cec76c4a877966ecc22ba86151b2e66718"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/spirv-headers/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/spirv-tools/LICENSE",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/vulkan-headers/LICENSE.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/third_party/webgpu-headers/LICENSE",
+      "bytes": 1534,
+      "sha256": "17420d366df90c474bd70ad474694956cdb7fc64be70387a49a45458c4152d22"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/root-dependency-offline-v2/attempts/offline-1/selected-source/tools/nocompile/LICENSE",
+      "bytes": 1536,
+      "sha256": "368cca1106be99d39ecd32a38d8305585d802a475effb66380b91ffc9bcf709b"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_DAWN_PYTHON_GENERATION_EXECUTION_V1.md",
+      "bytes": 4760,
+      "sha256": "43849ea2b9f3eec848f327dc105b5b3b28b70f1b67053310e20faa951f23ad22"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_DAWN_PYTHON_PATCH_QUALIFICATION_V1.md",
+      "bytes": 16333,
+      "sha256": "83bd33cf50358cc30e3b516bb392520e630dfb0499fffed7556137cdc1f3fff0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/candidate-inputs.json",
+      "bytes": 2343,
+      "sha256": "9abff87fc094bbcca8d971740083cbd75759001890f04dfc56c025d15b22d36a"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/candidate-runtime-inventory.json",
+      "bytes": 452771,
+      "sha256": "6dcefbbf9c1f260687ff5168c137b444b61824739f713b8935481fde378144fb"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/cpp-prerequisite-block.json",
+      "bytes": 1440,
+      "sha256": "75b0ca71ff5a2dac8e5a8c28820d173f04ce0220e10f320aeace99d17ca603d3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/preparation-freeze-r3.json",
+      "bytes": 7724,
+      "sha256": "cba64cee812f93dfbd6ea4a91c14fd472148ab74bb10abc13b2a8a7ed3368606"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/source-include-inventory.json",
+      "bytes": 7935,
+      "sha256": "ebdd5f7ceeeae74226df0f2652e06231612bdc2481df0aea72c04b57387572e6"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/patch-manifest.json",
+      "bytes": 14718,
+      "sha256": "89016e29efc06644417e953da2102cfe8b77e138c979a7865701416decfee731"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/result-lock.json",
+      "bytes": 35946,
+      "sha256": "9975de2d24da236eb83657c91e79c4b8d7b4658ef998f8d82a68cbf792b1fc8c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/results-review.json",
+      "bytes": 6892,
+      "sha256": "1fc877eb954ddbc0faf1720f5aa48994a8e09232c45c7f5b21fe257840f9dfcf"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/root-dependency-offline-v2/source-validation.json",
+      "bytes": 16047,
+      "sha256": "c917d13d567da4e79758499916194c894190cf04430d6899a106a6c2a8f4ccdf"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/catalog.py",
+      "bytes": 16295,
+      "sha256": "e3fe875da3d187b3381573f20077a71d85d18580408e7e566c65de10bf0ca713"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/macho.py",
+      "bytes": 4366,
+      "sha256": "0b040994d1211d59dcdedad6b9ca0769b290f0e74666a2f823803dd40addfc60"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/policy.py",
+      "bytes": 3320,
+      "sha256": "f191fc49fa072e4efbf183bdfe3a899ed9ecb51c7d8a7439b80ff47472bb09e5"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/probe.py",
+      "bytes": 4571,
+      "sha256": "0ffbbe37f5a1a76ed6f88c3c855b13524f589234ec816a942afb9c818a7b9237"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/qualify.py",
+      "bytes": 17340,
+      "sha256": "f76d9010b87f3e0d9a1705b064aabae4a66f17a20c87f5b3a3b0d2f18d95c749"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/staging.py",
+      "bytes": 5002,
+      "sha256": "a1999ca327563a1cf55a0d0c9c6efc554aeeedc5ef84a0969a48e29d6558d545"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/wheels.py",
+      "bytes": 6867,
+      "sha256": "1e04b51f053e92e4891249ff680e7d0440a879a106b0ca1a573ef2c5b5de61e9"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/ml_drift_compatibility/analyze.py",
+      "bytes": 18796,
+      "sha256": "01706ddb5533fd0ccd8198518257034a86144b972aaab923c70a102fe74e5c59"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_python_catalog.py",
+      "bytes": 10509,
+      "sha256": "30c450d0c629ad2dbcffaffc08d13daf7f4300fcddd60e2daf10d3994b84db46"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_python_macho.py",
+      "bytes": 3200,
+      "sha256": "f47fe7852730928defd802b438723dd26b9adf95ca6bc1f51b726feb585ca4f1"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_python_policy.py",
+      "bytes": 4415,
+      "sha256": "1c9d6e595cd0329b5e2dde57f92c82737a61746e1ae1a964ea16f37d8bb00651"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_python_qualification.py",
+      "bytes": 4922,
+      "sha256": "7bb6914ec6bd385d69b82d1382b780c554f68827c0cccbf84a1aababea8511a3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_python_staging.py",
+      "bytes": 2896,
+      "sha256": "6f5e4fc6154eff2a87f007742eb031062eba7533cfe7e6e916cd6d4a3a679f9d"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_python_wheels.py",
+      "bytes": 5483,
+      "sha256": "784b7ecf978bd72567cf6872411aa1898b75e16732756e4f4aadcc681806b452"
+    },
+    {
+      "path": "/usr/bin/sandbox-exec",
+      "bytes": 102368,
+      "sha256": "abc5bb136d6b5cce8fa85d789f78e3326c51ca60cae637b2064adfb67a1dcd9a"
+    },
+    {
+      "path": "/usr/bin/sw_vers",
+      "bytes": 135248,
+      "sha256": "2e5c391fb977b04bb22c360cb35145ca3a10b865db1223d2b25223134f750d77"
+    },
+    {
+      "path": "/usr/lib/dyld",
+      "bytes": 2562000,
+      "sha256": "373fce2b3689c2113d5341a6bba735e9f970401ba64896c0a6379680192f1cdf"
+    }
+  ],
+  "attemptParent": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts",
+  "environment": {
+    "PATH": "/usr/bin:/bin",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1"
+  },
+  "seconds": 300,
+  "cleanupSeconds": 15,
+  "workerLogBytes": 1048576,
+  "childTraceBytes": 1048576,
+  "downloadCount": 2,
+  "redirects": 0,
+  "retries": 0,
+  "vendorCommands": {
+    "imports": 1,
+    "patchPrograms": 3,
+    "generators": 8,
+    "cppCompiles": 0,
+    "cppExecutions": 0
+  },
+  "compilerQualified": false,
+  "BazelAllowed": false,
+  "deviceAllowed": false,
+  "recipeQualified": false
+}
