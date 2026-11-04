@@ -1,0 +1,84 @@
+{
+  "additionalBlockingProbesPending": false,
+  "base": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "boundInputsVerified": 156,
+  "bounds": {
+    "childTraceBytes": 1048576,
+    "cleanupSeconds": 15,
+    "cppCompiles": 0,
+    "cppExecutions": 0,
+    "downloadCount": 2,
+    "generatorInvocations": 8,
+    "imports": 1,
+    "patchPrograms": 3,
+    "publicDecisionSeconds": 300,
+    "redirects": 0,
+    "retries": 0,
+    "workerLogBytes": 1048576
+  },
+  "branch": "dev",
+  "callbackSemanticsQualified": false,
+  "changedPaths": [
+    "build/dawn-python-patch-v1/qa-qualification-review-4/"
+  ],
+  "clockCorrection": {
+    "absoluteClock": "time.clock_gettime(time.CLOCK_MONOTONIC)",
+    "freshPinnedHostClockRegression": "PASS",
+    "limitsChanged": false,
+    "savedProof": "VERIFIED",
+    "stubbedInheritedAdmissionWithoutLocalClock": "PASS"
+  },
+  "compilerQualified": false,
+  "cppProbesAuthorized": false,
+  "delegation": false,
+  "deviceExecutionAuthorized": false,
+  "findings": [],
+  "freezePath": "planning/fixtures/dawn-python-patch-v1/qualification-freeze-r4.json",
+  "freezeSha256": "b34a8720fe4184e588b295989991be42ece67cf8f216eae6d6a1edc8456646ab",
+  "head": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "implementationSha256": "4c2b0b2bb278c46d97a643790d419d78044195dca2b2f60c806d552c318f7703",
+  "limitations": [
+    "Failed R3 child local timestamp was not recorded; diagnosis is corroborated by guard/logs and separate clock proof.",
+    "Actual wheel bytes, candidate/sandbox/generator and resource outcomes remain unproven until execution/results review.",
+    "No complete recipe, broad patch-semantic, SDK/root/ABI/device qualification."
+  ],
+  "previousFindingsStillClosed": [
+    "DPQ-QUAL-001",
+    "DPQ-QUAL-002"
+  ],
+  "priorR3Attempt": {
+    "acceptanceAbsent": true,
+    "classification": "HOST_CLOCK_ADMISSION_INFRASTRUCTURE_FAILURE_NO_ACQUISITION",
+    "cleanupConfirmedRecorded": true,
+    "path": "build/dawn-python-patch-v1/qualification-attempts/python-1",
+    "preserved": true,
+    "qualityEvidence": false,
+    "workerExitCode": 1
+  },
+  "priorReportsPreserved": true,
+  "profile": "python-generation-cpp-blocked-v1",
+  "projectSourceChanged": false,
+  "recipeQualified": false,
+  "reviewAllowsOnly": "One fresh exact R4 infrastructure-corrected host-only Python/generation attempt under existing authorization; preserve R3 failure, stop first failure, no retry/repair/fallback.",
+  "reviewedOn": "2026-11-04",
+  "reviewer": "Codex \u2014 same retained sole primary independent QA reviewer; no delegation",
+  "rootAdoptionApproved": false,
+  "schema": 1,
+  "scope": "dawn-python-generation-qualification-R4-clock-correction-and-exact-freeze",
+  "semanticEnablement": false,
+  "snapshotFiles": 167,
+  "snapshotSha256": "b7a27ba2972cfa8d62f5eaae5074f89035d6740ddef7a8f99bae11f5c2e85b44",
+  "vendorExecutionApproved": true,
+  "verdict": "PASS",
+  "verification": {
+    "freshFocusedTests": 58,
+    "fullSuiteIndependentlyRerun": false,
+    "independentDeadlinePublicationScenarios": 6,
+    "networkRequests": 0,
+    "priorR3ReviewAndFreezeRecords": "UNCHANGED",
+    "qualificationWorkerOrVendorExecuted": false,
+    "r3PreservedProjectInputs": 143,
+    "trustedHostClockSubprocessExecuted": true
+  },
+  "wheelAcquisitionApprovedByReview": true
+}
