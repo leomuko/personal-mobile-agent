@@ -1,0 +1,91 @@
+{
+  "additionalBlockingProbesPending": false,
+  "base": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "boundInputsVerified": 166,
+  "bounds": {
+    "childTraceBytes": 1048576,
+    "cleanupSeconds": 15,
+    "cppCompiles": 0,
+    "cppExecutions": 0,
+    "downloadCount": 1,
+    "generatorInvocations": 8,
+    "imports": 1,
+    "networkArtifact": "markupsafe-3.0.3-cp313-cp313-macosx_11_0_arm64.whl",
+    "patchPrograms": 3,
+    "publicDecisionSeconds": 300,
+    "redirects": 0,
+    "retainedCopyCount": 1,
+    "retries": 0,
+    "workerLogBytes": 1048576
+  },
+  "branch": "dev",
+  "callbackSemanticsQualified": false,
+  "changedPaths": [
+    "build/dawn-python-patch-v1/qa-qualification-review-5/"
+  ],
+  "compilerQualified": false,
+  "cppProbesAuthorized": false,
+  "delegation": false,
+  "deviceExecutionAuthorized": false,
+  "findings": [],
+  "freezePath": "planning/fixtures/dawn-python-patch-v1/qualification-freeze-r5.json",
+  "freezeSha256": "c87fcc7f6b9a0048e22165f2ea4c2c3997fbbbc81082d3124d8f6c01a124f63f",
+  "head": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "implementationSha256": "9b972cc5be56b074ae7b51c2c5f1dbfbd7f2693815d08ad784f660c53c6eb748",
+  "limitations": [
+    "No standalone HTTP receipt/network capture for failed R4; count inferred from reviewed ordered code and artifacts.",
+    "No actual MarkupSafe bytes or candidate/sandbox/generator outcomes yet.",
+    "No complete recipe, broad patch semantics, SDK/root/ABI/device qualification."
+  ],
+  "previousFindingsStillClosed": [
+    "DPQ-QUAL-001",
+    "DPQ-QUAL-002"
+  ],
+  "priorR4Attempt": {
+    "acceptanceAbsent": true,
+    "classification": "RAW_METADATA_LITERAL_REJECTION_BEFORE_VENDOR",
+    "cleanupConfirmedRecorded": true,
+    "markupsafeAbsent": true,
+    "path": "build/dawn-python-patch-v1/qualification-attempts/python-2",
+    "preserved": true
+  },
+  "priorReportsPreserved": true,
+  "profile": "python-generation-cpp-blocked-v1",
+  "projectSourceChanged": false,
+  "rawMetadataAmendmentSha256": "578b212137028fc7b2c49d8e517f8ab95c49b64a401998b5194be870299e0109",
+  "recipeQualified": false,
+  "retainedJinja2": {
+    "advertisedAndRawLiteralsRetainedSeparately": true,
+    "amendedWholeZipCrcRecordPassed": true,
+    "bytes": 134899,
+    "copyDistinctInode": true,
+    "copyNetworkRequests": 0,
+    "decodedBytes": 496892,
+    "members": 31,
+    "oldStrictRejectionReproduced": true,
+    "sha256": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+    "wheelCodeImported": false
+  },
+  "reviewAllowsOnly": "One fresh exact R5 attempt: bound retained Jinja2 copy/full revalidation, one pinned MarkupSafe acquisition, unchanged host Python/generation subset; stop first failure, no retry/repair/fallback.",
+  "reviewedOn": "2026-11-04",
+  "reviewer": "Codex \u2014 same retained sole primary independent QA reviewer; no delegation",
+  "rootAdoptionApproved": false,
+  "schema": 1,
+  "scope": "dawn-python-generation-R5-raw-wheel-metadata-amendment-implementation-results-and-freeze",
+  "semanticEnablement": false,
+  "snapshotFiles": 179,
+  "snapshotSha256": "0b959c2d105afc11f34f6073d13a8c7c2739e4283213e76d95e5e31ad4cf675b",
+  "vendorExecutionApproved": true,
+  "verdict": "PASS",
+  "verification": {
+    "actualQualificationAttemptRun": false,
+    "extraDataAmendmentNegatives": 7,
+    "freshFocusedTests": 60,
+    "fullSuiteIndependentlyRerun": false,
+    "independentDeadlinePublicationScenarios": 6,
+    "networkRequests": 0,
+    "oldCandidateInputsAndStrictWheelInspector": "UNCHANGED",
+    "r4PreservedProjectInputs": 151
+  },
+  "wheelAcquisitionApprovedByReview": true
+}
