@@ -1,0 +1,60 @@
+{
+  "protocol": "dawn-python-patch-candidate-inputs-v1",
+  "wheels": [
+    {
+      "bytes": 134899,
+      "filename": "jinja2-3.1.6-py3-none-any.whl",
+      "identityStatus": "METADATA_ONLY_BYTES_NOT_VERIFIED",
+      "package": "Jinja2",
+      "sha256": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "url": "https://files.pythonhosted.org/packages/62/a1/3d680cbfd5f4b8f15abc1d571870c5fc3e594bb582bc3b64ea099db13e56/jinja2-3.1.6-py3-none-any.whl",
+      "version": "3.1.6",
+      "distribution": "jinja2",
+      "purelib": "true",
+      "tag": "py3-none-any",
+      "requiresPython": ">=3.7",
+      "requiresDist": [
+        "MarkupSafe>=2.0",
+        "Babel>=2.7; extra == \"i18n\""
+      ],
+      "providesExtra": [
+        "i18n"
+      ],
+      "selectedExtras": [],
+      "byteVerification": "NOT_RUN"
+    },
+    {
+      "bytes": 12029,
+      "filename": "markupsafe-3.0.3-cp313-cp313-macosx_11_0_arm64.whl",
+      "identityStatus": "METADATA_ONLY_BYTES_NOT_VERIFIED",
+      "package": "MarkupSafe",
+      "sha256": "116bb52f642a37c115f517494ea5feb03889e04df47eeff5b130b1808ce7c219",
+      "url": "https://files.pythonhosted.org/packages/9c/d9/5f7756922cdd676869eca1c4e3c0cd0df60ed30199ffd775e319089cb3ed/markupsafe-3.0.3-cp313-cp313-macosx_11_0_arm64.whl",
+      "version": "3.0.3",
+      "distribution": "markupsafe",
+      "purelib": "false",
+      "tag": "cp313-cp313-macosx_11_0_arm64",
+      "requiresPython": ">=3.9",
+      "requiresDist": [],
+      "providesExtra": [],
+      "selectedExtras": [],
+      "byteVerification": "NOT_RUN"
+    }
+  ],
+  "runtimeInventory": {
+    "path": "planning/fixtures/dawn-python-patch-v1/candidate-runtime-inventory.json",
+    "sha256": "6dcefbbf9c1f260687ff5168c137b444b61824739f713b8935481fde378144fb"
+  },
+  "sourceQualification": {
+    "path": "planning/fixtures/root-dependency-offline-v2/source-validation.json",
+    "sha256": "c917d13d567da4e79758499916194c894190cf04430d6899a106a6c2a8f4ccdf"
+  },
+  "patchManifest": {
+    "path": "planning/fixtures/root-dependency-offline-v2/patch-manifest.json",
+    "sha256": "89016e29efc06644417e953da2102cfe8b77e138c979a7865701416decfee731"
+  },
+  "nativeDependencyPinning": "PENDING_REVIEWED_PREPARATION",
+  "compilerSDKPinning": "PENDING_REVIEWED_PREPARATION",
+  "executableQualificationReady": false,
+  "adopted": false
+}
