@@ -1,0 +1,37 @@
+{
+  "status": "BLOCKED",
+  "reason": "EXACT_ABSEIL_SOURCE_NOT_RETAINED_IN_CHECKED_LOCATIONS",
+  "archive": {
+    "url": "https://github.com/abseil/abseil-cpp/archive/20260526.0.tar.gz",
+    "sha256": "6e1aee535473414164bf83e4ebc40240dec71a4701f8a642d906e95bea1aea0c",
+    "revision": "20260526.0"
+  },
+  "rootDeclaration": {
+    "path": "build/repository-cache-v1/analysis-attempts/configured-1/inventory.stdout.log",
+    "bytes": 3247442,
+    "sha256": "107799d8aa6dc96e716aded8d19a58fa72b82f76f22d2249c69ee03f8ca2c721"
+  },
+  "rootPatch": {
+    "path": "build/ml-drift-compatibility-v1/sdk-full/PATCH.abseil",
+    "bytes": 886,
+    "sha256": "2d14482f889029bb6c3332ee925eb058e784ce35115b5e9222c43185c9d5dbc5"
+  },
+  "rootBuildRewrite": "sed -i -e 's|@googletest|@com_google_googletest|g' absl/*/BUILD* absl/*/*/BUILD* absl/*/*/*/BUILD*",
+  "expectedExtractedRoot": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/com_google_absl",
+  "localSearch": {
+    "buildTreeSpanHeaderMatches": 0,
+    "buildTreeExactArchiveMatches": 0,
+    "standardUserCacheExactArchiveMatches": 0
+  },
+  "acquisitionAuthorized": false,
+  "substituteHeadersAllowed": false,
+  "cppProbesAuthorized": false,
+  "callbackSemanticsQualified": false,
+  "independentStages": [
+    "wheel-bytes",
+    "wheel-structure",
+    "candidate-python",
+    "patch-programs",
+    "generator-output-comparison"
+  ]
+}
