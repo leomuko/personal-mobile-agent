@@ -1,0 +1,65 @@
+{
+  "additionalBlockingProbesPending": false,
+  "base": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "boundInputsVerified": 145,
+  "branch": "dev",
+  "callbackSemanticsQualified": false,
+  "changedPaths": [
+    "build/dawn-python-patch-v1/qa-qualification-review-2/"
+  ],
+  "closedFindings": [
+    {
+      "evidence": "Original delayed final admission now rejects; no public acceptance.",
+      "id": "DPQ-QUAL-001",
+      "status": "CLOSED"
+    }
+  ],
+  "cppProbesAuthorized": false,
+  "delegation": false,
+  "deviceExecutionAuthorized": false,
+  "findings": [
+    {
+      "confidence": "HIGH",
+      "evidence": "Synthetic KeyboardInterrupt after accepted hardlink effect leaves accepted-subset.json while runner returns1 and terminal says acceptanceRevoked:true.",
+      "file": "scripts/diagnostics/dawn_python_patch_v1/qualify.py",
+      "id": "DPQ-QUAL-002",
+      "line": 289,
+      "priority": "P2",
+      "requiredRevision": "Track intent before interruptible publication or discover all candidate links by pending identity; revoke only own links and report confirmation truthfully.",
+      "status": "OPEN",
+      "title": "Hardlink effect can precede publication tracking and escape rollback",
+      "witness": "publication-and-deadline-probes.json"
+    }
+  ],
+  "freezePath": "planning/fixtures/dawn-python-patch-v1/qualification-freeze-r2.json",
+  "freezeSha256": "b08cf7cfb83b9260595bb3a4cbb4b4038625da012d513f1dc872fee8ef435c6c",
+  "head": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "implementationSha256": "2a940fdfe42d15bf0ca2bed4542d807fec2af65e47b835664db44a908b2f84fd",
+  "preparationResultsReview": "PASS; unaffected",
+  "priorReportsPreserved": true,
+  "profile": "python-generation-cpp-blocked-v1",
+  "projectSourceChanged": false,
+  "reviewedOn": "2026-11-04",
+  "reviewer": "Codex \u2014 same retained sole primary independent QA reviewer; no delegation",
+  "rootAdoptionApproved": false,
+  "schema": 1,
+  "scope": "dawn-python-generation-qualification-R2-followup-and-exact-freeze",
+  "semanticEnablement": false,
+  "snapshotFiles": 152,
+  "snapshotSha256": "b63a80f3b0fdd9c58c9bae43fe531f6bbc100c2f3094e33354d593c35dec1f11",
+  "vendorExecutionApproved": false,
+  "verdict": "FAIL",
+  "verification": {
+    "actualWorkerOrVendorExecution": false,
+    "freshFocusedSyntheticTests": 54,
+    "fullSuiteIndependentlyRerun": false,
+    "independentProbes": [
+      "normal-success",
+      "original-late-revalidation-rejected",
+      "interrupt-after-outcome-hardlink",
+      "interrupt-after-accepted-hardlink-leaks-acceptance"
+    ],
+    "networkRequests": 0
+  },
+  "wheelAcquisitionApprovedByReview": false
+}
