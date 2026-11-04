@@ -1,0 +1,268 @@
+{
+  "evidenceInventory": {
+    "bytes": 1052630,
+    "path": "planning/fixtures/dawn-python-patch-v1/retained-evidence-inventory.json",
+    "sha256": "9830572868be0ecfddeb0d97f7c142b3dcce87c78fa88493bdf7ab79795ff7d2"
+  },
+  "files": [
+    {
+      "bytes": 3269,
+      "path": "docs/P2_DAWN_CALLBACK_PATCH_STATIC_ASSESSMENT_V1.md",
+      "sha256": "64652d2dd97cb19377071cfbcffb2760c9e292d105a09d4e9da4f46d130406ba"
+    },
+    {
+      "bytes": 5229,
+      "path": "docs/P2_DAWN_PYTHON_PATCH_QUALIFICATION_V1_RESULTS.md",
+      "sha256": "ed487b34970d84fed5f8512290470cdf589d9e86abdeffdf424a49c603f961e1"
+    },
+    {
+      "bytes": 9278,
+      "path": "planning/P2_DAWN_PYTHON_GENERATION_EXECUTION_V1.md",
+      "sha256": "c50269dea5868ff8219e13930b04d9e524e7d610469de52c520eb5a93dac046c"
+    },
+    {
+      "bytes": 16333,
+      "path": "planning/P2_DAWN_PYTHON_PATCH_QUALIFICATION_V1.md",
+      "sha256": "83bd33cf50358cc30e3b516bb392520e630dfb0499fffed7556137cdc1f3fff0"
+    },
+    {
+      "bytes": 2226,
+      "path": "planning/fixtures/dawn-python-patch-v1/admission-review.json",
+      "sha256": "d2722676e5d126f2658fda3cbe42197ed4e5be38ba2677c8d17eff293c6b5d45"
+    },
+    {
+      "bytes": 5522,
+      "path": "planning/fixtures/dawn-python-patch-v1/callback_probe.cpp",
+      "sha256": "f600376e9e05a5fc9d7efa10b4a8b12835fe045adfacf9dae40c097066412470"
+    },
+    {
+      "bytes": 2343,
+      "path": "planning/fixtures/dawn-python-patch-v1/candidate-inputs.json",
+      "sha256": "9abff87fc094bbcca8d971740083cbd75759001890f04dfc56c025d15b22d36a"
+    },
+    {
+      "bytes": 452771,
+      "path": "planning/fixtures/dawn-python-patch-v1/candidate-runtime-inventory.json",
+      "sha256": "6dcefbbf9c1f260687ff5168c137b444b61824739f713b8935481fde378144fb"
+    },
+    {
+      "bytes": 1440,
+      "path": "planning/fixtures/dawn-python-patch-v1/cpp-prerequisite-block.json",
+      "sha256": "75b0ca71ff5a2dac8e5a8c28820d173f04ce0220e10f320aeace99d17ca603d3"
+    },
+    {
+      "bytes": 6893,
+      "path": "planning/fixtures/dawn-python-patch-v1/patch-qualification-status.json",
+      "sha256": "09b169d049e01c805ef9ef51ce714c4ab55f3061beab4e82ed27f0ccc1597114"
+    },
+    {
+      "bytes": 5986,
+      "path": "planning/fixtures/dawn-python-patch-v1/preparation-freeze-r1.json",
+      "sha256": "4d0b766d5c36bae235c234a4524485c4d749dd56bc4613e95e77d4c1b434706e"
+    },
+    {
+      "bytes": 6879,
+      "path": "planning/fixtures/dawn-python-patch-v1/preparation-freeze-r2.json",
+      "sha256": "5e2d538774f8102481cdbacadb16cd21be19023473337927268957bb31ffbd32"
+    },
+    {
+      "bytes": 7724,
+      "path": "planning/fixtures/dawn-python-patch-v1/preparation-freeze-r3.json",
+      "sha256": "cba64cee812f93dfbd6ea4a91c14fd472148ab74bb10abc13b2a8a7ed3368606"
+    },
+    {
+      "bytes": 5986,
+      "path": "planning/fixtures/dawn-python-patch-v1/preparation-freeze.json",
+      "sha256": "4d0b766d5c36bae235c234a4524485c4d749dd56bc4613e95e77d4c1b434706e"
+    },
+    {
+      "bytes": 3307,
+      "path": "planning/fixtures/dawn-python-patch-v1/preparation-results-review.json",
+      "sha256": "729b58de550a41ffc2a46fc2fb056d2a533968a2769846b642b938077aca48a9"
+    },
+    {
+      "bytes": 2633,
+      "path": "planning/fixtures/dawn-python-patch-v1/preparation-review-1.json",
+      "sha256": "961a25fbca9c6844db65dcd70ae2804e8816ba126644534ab29505c7e2a17d7a"
+    },
+    {
+      "bytes": 2956,
+      "path": "planning/fixtures/dawn-python-patch-v1/preparation-review-3.json",
+      "sha256": "0f51503be12a642db1acc13829896027982b448fe3778b2a185986ac45b7795b"
+    },
+    {
+      "bytes": 360650,
+      "path": "planning/fixtures/dawn-python-patch-v1/prepared-catalog.json",
+      "sha256": "7fd85776b485802939955bcc1579952f9042eaf003063ceb0b5616733aab2ce2"
+    },
+    {
+      "bytes": 2729,
+      "path": "planning/fixtures/dawn-python-patch-v1/protocol-review-1.json",
+      "sha256": "ec6bf6f222c7780b4454cfaf3d37a758017d84ec57ad2ba24c0f450b475f5f91"
+    },
+    {
+      "bytes": 2445,
+      "path": "planning/fixtures/dawn-python-patch-v1/protocol-review-2.json",
+      "sha256": "6e193de56be3e65b12b8dab480e548630e3bf9e2c9027a21cec2919cf6014d72"
+    },
+    {
+      "bytes": 2195,
+      "path": "planning/fixtures/dawn-python-patch-v1/protocol-review-3.json",
+      "sha256": "3800791381b48460db9b0165ed07ccb54a7af629be03daf6b8c4d452a17ae932"
+    },
+    {
+      "bytes": 2535,
+      "path": "planning/fixtures/dawn-python-patch-v1/protocol-review-4.json",
+      "sha256": "10904a643efe327463ec7e1d91bd9cc7a70618e93229e80168dc5b471d876532"
+    },
+    {
+      "bytes": 39853,
+      "path": "planning/fixtures/dawn-python-patch-v1/qualification-freeze-r1.json",
+      "sha256": "bf8f0918e752c05531e6b53b0ab4cb38b5ea6f19673b98e99a86ca0f1678d701"
+    },
+    {
+      "bytes": 41043,
+      "path": "planning/fixtures/dawn-python-patch-v1/qualification-freeze-r2.json",
+      "sha256": "b08cf7cfb83b9260595bb3a4cbb4b4038625da012d513f1dc872fee8ef435c6c"
+    },
+    {
+      "bytes": 41787,
+      "path": "planning/fixtures/dawn-python-patch-v1/qualification-freeze-r3.json",
+      "sha256": "d169eeb3d5a28ff32282b9375e58ad03de807637858417240795b5a27cd727b9"
+    },
+    {
+      "bytes": 43902,
+      "path": "planning/fixtures/dawn-python-patch-v1/qualification-freeze-r4.json",
+      "sha256": "b34a8720fe4184e588b295989991be42ece67cf8f216eae6d6a1edc8456646ab"
+    },
+    {
+      "bytes": 46686,
+      "path": "planning/fixtures/dawn-python-patch-v1/qualification-freeze-r5.json",
+      "sha256": "c87fcc7f6b9a0048e22165f2ea4c2c3997fbbbc81082d3124d8f6c01a124f63f"
+    },
+    {
+      "bytes": 3678,
+      "path": "planning/fixtures/dawn-python-patch-v1/qualification-results.json",
+      "sha256": "cc7fc3d7c8fab09df145509c2d19f1585f66e1d71f80e99114871866f53f7c91"
+    },
+    {
+      "bytes": 2303,
+      "path": "planning/fixtures/dawn-python-patch-v1/qualification-review-1.json",
+      "sha256": "6a2ae5ab5f01842bae02040ab18c1e02c38c567f45f3d44717dddbb70fafc3db"
+    },
+    {
+      "bytes": 2637,
+      "path": "planning/fixtures/dawn-python-patch-v1/qualification-review-2.json",
+      "sha256": "38048c5272f915c8b73be73610d00ab0d298db77888af3534b77898d113d9add"
+    },
+    {
+      "bytes": 3046,
+      "path": "planning/fixtures/dawn-python-patch-v1/qualification-review-3.json",
+      "sha256": "a4c51b317f62e14e5457e7657c2062c41386d52cd77ad8c3d265d5bd346030e0"
+    },
+    {
+      "bytes": 3282,
+      "path": "planning/fixtures/dawn-python-patch-v1/qualification-review-4.json",
+      "sha256": "5454965779986286bebbdd1a55b6c002b2271403b67e8695fc36f0aa62c51693"
+    },
+    {
+      "bytes": 3589,
+      "path": "planning/fixtures/dawn-python-patch-v1/qualification-review-5.json",
+      "sha256": "025e8fe69a2957a02baafc8ad1a0956f0e4ce10fac1fb4affe0f6acec9774ec3"
+    },
+    {
+      "bytes": 28334,
+      "path": "planning/fixtures/dawn-python-patch-v1/qualified-python-manifest.json",
+      "sha256": "4e7bce0efd6422dcf96a75dfdd2adf5b7df00ad7e3ee2c5aa0832a2232110fcd"
+    },
+    {
+      "bytes": 1052630,
+      "path": "planning/fixtures/dawn-python-patch-v1/retained-evidence-inventory.json",
+      "sha256": "9830572868be0ecfddeb0d97f7c142b3dcce87c78fa88493bdf7ab79795ff7d2"
+    },
+    {
+      "bytes": 7935,
+      "path": "planning/fixtures/dawn-python-patch-v1/source-include-inventory.json",
+      "sha256": "ebdd5f7ceeeae74226df0f2652e06231612bdc2481df0aea72c04b57387572e6"
+    },
+    {
+      "bytes": 587,
+      "path": "planning/fixtures/dawn-python-patch-v1/wheel-metadata-amendment.json",
+      "sha256": "578b212137028fc7b2c49d8e517f8ab95c49b64a401998b5194be870299e0109"
+    },
+    {
+      "bytes": 16295,
+      "path": "scripts/diagnostics/dawn_python_patch_v1/catalog.py",
+      "sha256": "e3fe875da3d187b3381573f20077a71d85d18580408e7e566c65de10bf0ca713"
+    },
+    {
+      "bytes": 4366,
+      "path": "scripts/diagnostics/dawn_python_patch_v1/macho.py",
+      "sha256": "0b040994d1211d59dcdedad6b9ca0769b290f0e74666a2f823803dd40addfc60"
+    },
+    {
+      "bytes": 3320,
+      "path": "scripts/diagnostics/dawn_python_patch_v1/policy.py",
+      "sha256": "f191fc49fa072e4efbf183bdfe3a899ed9ecb51c7d8a7439b80ff47472bb09e5"
+    },
+    {
+      "bytes": 4571,
+      "path": "scripts/diagnostics/dawn_python_patch_v1/probe.py",
+      "sha256": "0ffbbe37f5a1a76ed6f88c3c855b13524f589234ec816a942afb9c818a7b9237"
+    },
+    {
+      "bytes": 22751,
+      "path": "scripts/diagnostics/dawn_python_patch_v1/qualify.py",
+      "sha256": "9b972cc5be56b074ae7b51c2c5f1dbfbd7f2693815d08ad784f660c53c6eb748"
+    },
+    {
+      "bytes": 5002,
+      "path": "scripts/diagnostics/dawn_python_patch_v1/staging.py",
+      "sha256": "a1999ca327563a1cf55a0d0c9c6efc554aeeedc5ef84a0969a48e29d6558d545"
+    },
+    {
+      "bytes": 6867,
+      "path": "scripts/diagnostics/dawn_python_patch_v1/wheels.py",
+      "sha256": "1e04b51f053e92e4891249ff680e7d0440a879a106b0ca1a573ef2c5b5de61e9"
+    },
+    {
+      "bytes": 10509,
+      "path": "scripts/tests/test_dawn_python_catalog.py",
+      "sha256": "30c450d0c629ad2dbcffaffc08d13daf7f4300fcddd60e2daf10d3994b84db46"
+    },
+    {
+      "bytes": 3200,
+      "path": "scripts/tests/test_dawn_python_macho.py",
+      "sha256": "f47fe7852730928defd802b438723dd26b9adf95ca6bc1f51b726feb585ca4f1"
+    },
+    {
+      "bytes": 4415,
+      "path": "scripts/tests/test_dawn_python_policy.py",
+      "sha256": "1c9d6e595cd0329b5e2dde57f92c82737a61746e1ae1a964ea16f37d8bb00651"
+    },
+    {
+      "bytes": 14140,
+      "path": "scripts/tests/test_dawn_python_qualification.py",
+      "sha256": "1d47fbc55e5457469d45d668b08cb7e59f4f99ed2597307eb17ab466e2924092"
+    },
+    {
+      "bytes": 2896,
+      "path": "scripts/tests/test_dawn_python_staging.py",
+      "sha256": "6f5e4fc6154eff2a87f007742eb031062eba7533cfe7e6e916cd6d4a3a679f9d"
+    },
+    {
+      "bytes": 5483,
+      "path": "scripts/tests/test_dawn_python_wheels.py",
+      "sha256": "784b7ecf978bd72567cf6872411aa1898b75e16732756e4f4aadcc681806b452"
+    }
+  ],
+  "protocol": "dawn-python-patch-results-v1",
+  "rootAdopted": false,
+  "semanticEnabled": false,
+  "sourceFreeze": {
+    "bytes": 46686,
+    "path": "planning/fixtures/dawn-python-patch-v1/qualification-freeze-r5.json",
+    "sha256": "c87fcc7f6b9a0048e22165f2ea4c2c3997fbbbc81082d3124d8f6c01a124f63f"
+  },
+  "status": "PYTHON_GENERATION_SUBSET_PASSED_CPP_BLOCKED"
+}

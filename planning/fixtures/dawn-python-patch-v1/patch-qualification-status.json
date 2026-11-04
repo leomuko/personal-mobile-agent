@@ -1,0 +1,175 @@
+{
+  "AndroidInterfaces": "NOT_RUN",
+  "FP16Numerics": "NOT_RUN",
+  "callbackBehaviorVerified": false,
+  "commands": [
+    {
+      "index": 1,
+      "postimageSha256": "92007acd3d1f9a04f89239ede729a865e86dac3f196f7f1499409f32f058c43c",
+      "preimageSha256": "e45fcbe135a35310238df2f8ac310b295e6c8d5d5c7933895dab90340b6e799a"
+    },
+    {
+      "index": 2,
+      "postimageSha256": "e75aaaab8678d6d85b23fe99b2ec7cca5c3df9c516761c3af5757fcaadb8bb37",
+      "preimageSha256": "92007acd3d1f9a04f89239ede729a865e86dac3f196f7f1499409f32f058c43c"
+    },
+    {
+      "index": 3,
+      "postimageSha256": "160001ac2245ddec19c7965014a5cdb9da86937754cfdc2d2719208c4f3f31a4",
+      "preimageSha256": "e75aaaab8678d6d85b23fe99b2ec7cca5c3df9c516761c3af5757fcaadb8bb37"
+    }
+  ],
+  "compilerExecuted": false,
+  "generated": {
+    "affectedExactTransformations": 2,
+    "callbackBehaviorVerified": false,
+    "invocations": 8,
+    "outputs": {
+      "candidate-0": {
+        "include/dawn/dawn_proc_table.h": {
+          "bytes": 17688,
+          "sha256": "c62d73d8b719aece7bc71971aefc0391278935987455ab95a1885b786f774499"
+        },
+        "include/dawn/webgpu.h": {
+          "bytes": 257568,
+          "sha256": "c155709ae014edb51a74752a72b70ada1779129c6ce60f24ea9ff56017c6a188"
+        },
+        "include/dawn/webgpu_cpp.h": {
+          "bytes": 544270,
+          "sha256": "68c18c9cb3e9562d7e6acea8716ae7e032298bb276ed8239551f7c5345e03afe"
+        },
+        "include/dawn/webgpu_cpp_print.h": {
+          "bytes": 102318,
+          "sha256": "2b4a771673884bb3b5290a5b43235eab4b5ab0393d77d38410ea73607c0b0d4a"
+        },
+        "include/dawn/wire/client/webgpu.h": {
+          "bytes": 44333,
+          "sha256": "90d0414bc08eb88d857a112c75bb55ef3c8bc93137ff4517a1680c52751b0f55"
+        },
+        "include/dawn/wire/client/webgpu_cpp.h": {
+          "bytes": 562428,
+          "sha256": "561774f2f6d999e86fe635fc33e14680b96dce65c6c639621087205b7654cae1"
+        },
+        "include/dawn/wire/client/webgpu_cpp_print.h": {
+          "bytes": 102419,
+          "sha256": "356c007a583b5e96679a535323bb4f4c4fb7893e086d0156d5684303c379d733"
+        },
+        "include/webgpu/webgpu_cpp_chained_struct.h": {
+          "bytes": 2402,
+          "sha256": "7329fc197c9047ce1c08c3294401836f7f7b24bdf07fbaf0a266253ffa1ac3b8"
+        }
+      },
+      "candidate-1": {
+        "include/dawn/dawn_proc_table.h": {
+          "bytes": 17688,
+          "sha256": "c62d73d8b719aece7bc71971aefc0391278935987455ab95a1885b786f774499"
+        },
+        "include/dawn/webgpu.h": {
+          "bytes": 257568,
+          "sha256": "c155709ae014edb51a74752a72b70ada1779129c6ce60f24ea9ff56017c6a188"
+        },
+        "include/dawn/webgpu_cpp.h": {
+          "bytes": 544270,
+          "sha256": "68c18c9cb3e9562d7e6acea8716ae7e032298bb276ed8239551f7c5345e03afe"
+        },
+        "include/dawn/webgpu_cpp_print.h": {
+          "bytes": 102318,
+          "sha256": "2b4a771673884bb3b5290a5b43235eab4b5ab0393d77d38410ea73607c0b0d4a"
+        },
+        "include/dawn/wire/client/webgpu.h": {
+          "bytes": 44333,
+          "sha256": "90d0414bc08eb88d857a112c75bb55ef3c8bc93137ff4517a1680c52751b0f55"
+        },
+        "include/dawn/wire/client/webgpu_cpp.h": {
+          "bytes": 562428,
+          "sha256": "561774f2f6d999e86fe635fc33e14680b96dce65c6c639621087205b7654cae1"
+        },
+        "include/dawn/wire/client/webgpu_cpp_print.h": {
+          "bytes": 102419,
+          "sha256": "356c007a583b5e96679a535323bb4f4c4fb7893e086d0156d5684303c379d733"
+        },
+        "include/webgpu/webgpu_cpp_chained_struct.h": {
+          "bytes": 2402,
+          "sha256": "7329fc197c9047ce1c08c3294401836f7f7b24bdf07fbaf0a266253ffa1ac3b8"
+        }
+      },
+      "control-0": {
+        "include/dawn/dawn_proc_table.h": {
+          "bytes": 17688,
+          "sha256": "c62d73d8b719aece7bc71971aefc0391278935987455ab95a1885b786f774499"
+        },
+        "include/dawn/webgpu.h": {
+          "bytes": 257568,
+          "sha256": "c155709ae014edb51a74752a72b70ada1779129c6ce60f24ea9ff56017c6a188"
+        },
+        "include/dawn/webgpu_cpp.h": {
+          "bytes": 544241,
+          "sha256": "470e356570253e6db71f7ea2f4d3ab9596dbdf8224b1491f0488758ad1dc8fdb"
+        },
+        "include/dawn/webgpu_cpp_print.h": {
+          "bytes": 102318,
+          "sha256": "2b4a771673884bb3b5290a5b43235eab4b5ab0393d77d38410ea73607c0b0d4a"
+        },
+        "include/dawn/wire/client/webgpu.h": {
+          "bytes": 44333,
+          "sha256": "90d0414bc08eb88d857a112c75bb55ef3c8bc93137ff4517a1680c52751b0f55"
+        },
+        "include/dawn/wire/client/webgpu_cpp.h": {
+          "bytes": 562399,
+          "sha256": "efaeed84d4b0c456b2ccf4182e57ab680a31ba8dfa7db2ce20d61a8f39fbfa29"
+        },
+        "include/dawn/wire/client/webgpu_cpp_print.h": {
+          "bytes": 102419,
+          "sha256": "356c007a583b5e96679a535323bb4f4c4fb7893e086d0156d5684303c379d733"
+        },
+        "include/webgpu/webgpu_cpp_chained_struct.h": {
+          "bytes": 2402,
+          "sha256": "7329fc197c9047ce1c08c3294401836f7f7b24bdf07fbaf0a266253ffa1ac3b8"
+        }
+      },
+      "control-1": {
+        "include/dawn/dawn_proc_table.h": {
+          "bytes": 17688,
+          "sha256": "c62d73d8b719aece7bc71971aefc0391278935987455ab95a1885b786f774499"
+        },
+        "include/dawn/webgpu.h": {
+          "bytes": 257568,
+          "sha256": "c155709ae014edb51a74752a72b70ada1779129c6ce60f24ea9ff56017c6a188"
+        },
+        "include/dawn/webgpu_cpp.h": {
+          "bytes": 544241,
+          "sha256": "470e356570253e6db71f7ea2f4d3ab9596dbdf8224b1491f0488758ad1dc8fdb"
+        },
+        "include/dawn/webgpu_cpp_print.h": {
+          "bytes": 102318,
+          "sha256": "2b4a771673884bb3b5290a5b43235eab4b5ab0393d77d38410ea73607c0b0d4a"
+        },
+        "include/dawn/wire/client/webgpu.h": {
+          "bytes": 44333,
+          "sha256": "90d0414bc08eb88d857a112c75bb55ef3c8bc93137ff4517a1680c52751b0f55"
+        },
+        "include/dawn/wire/client/webgpu_cpp.h": {
+          "bytes": 562399,
+          "sha256": "efaeed84d4b0c456b2ccf4182e57ab680a31ba8dfa7db2ce20d61a8f39fbfa29"
+        },
+        "include/dawn/wire/client/webgpu_cpp_print.h": {
+          "bytes": 102419,
+          "sha256": "356c007a583b5e96679a535323bb4f4c4fb7893e086d0156d5684303c379d733"
+        },
+        "include/webgpu/webgpu_cpp_chained_struct.h": {
+          "bytes": 2402,
+          "sha256": "7329fc197c9047ce1c08c3294401836f7f7b24bdf07fbaf0a266253ffa1ac3b8"
+        }
+      }
+    },
+    "repeatable": true,
+    "unaffectedByteEqual": 6
+  },
+  "historicalManifest": {
+    "bytes": 14718,
+    "path": "planning/fixtures/root-dependency-offline-v2/patch-manifest.json",
+    "sha256": "89016e29efc06644417e953da2102cfe8b77e138c979a7865701416decfee731"
+  },
+  "rootAdopted": false,
+  "status": "GENERATION_VERIFIED_CALLBACK_SEMANTICS_BLOCKED"
+}

@@ -1,0 +1,110 @@
+{
+  "P2Complete": false,
+  "acceptedSubset": {
+    "BazelSelectionVerified": false,
+    "cleanupConfirmed": true,
+    "compilerQualified": false,
+    "decisionDeadlineMonotonic": 28340.849564,
+    "decisionStartedMonotonic": 28040.849564,
+    "freezeSha256": "c87fcc7f6b9a0048e22165f2ea4c2c3997fbbbc81082d3124d8f6c01a124f63f",
+    "recipeQualified": false,
+    "report": {
+      "bytes": 1259,
+      "mode": 420,
+      "path": "build/dawn-python-patch-v1/qualification-attempts/python-3/qualification-report.json",
+      "sha256": "46badf5d300a0cb95c585e5535596ffd5f8c361cf02ccb71da745b0c13fb3d91"
+    }
+  },
+  "focusedTests": 60,
+  "hostTests": 257,
+  "independentResultsReview": "PENDING",
+  "outcome": {
+    "argv": [
+      "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+      "-I",
+      "-S",
+      "-B",
+      "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/qualify.py",
+      "--worker",
+      "--freeze",
+      "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/qualification-freeze-r5.json",
+      "--sha256",
+      "c87fcc7f6b9a0048e22165f2ea4c2c3997fbbbc81082d3124d8f6c01a124f63f",
+      "--attempt",
+      "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3",
+      "--decision-deadline",
+      "28340.849564"
+    ],
+    "classification": "ANALYSIS_COMMAND_SUCCEEDED",
+    "cleanupConfirmed": true,
+    "decisionDeadlineMonotonic": 28340.849564,
+    "elapsedSeconds": 21.729384291000002,
+    "exitCode": 0,
+    "freezeSha256": "c87fcc7f6b9a0048e22165f2ea4c2c3997fbbbc81082d3124d8f6c01a124f63f",
+    "stderr": "build/dawn-python-patch-v1/qualification-attempts/python-3/worker.stderr.log",
+    "stdout": "build/dawn-python-patch-v1/qualification-attempts/python-3/worker.stdout.log"
+  },
+  "report": {
+    "BazelSelectionVerified": false,
+    "CPPBinaryExecutions": "NOT_RUN",
+    "CPPNegativeCompiles": "NOT_RUN",
+    "CPPPositiveCompiles": "NOT_RUN",
+    "admissionMode": "python-generation-cpp-blocked-v1",
+    "adopted": false,
+    "callbackSemantics": "BLOCKED_MISSING_PINNED_ABSEIL",
+    "childTraceBytes": 28129,
+    "compilerExecuted": false,
+    "peakRssBytes": 60555264,
+    "protocol": "dawn-python-patch-qualification-v1",
+    "seconds": 21.55973400000221,
+    "stages": {
+      "eight-generators-comparison": {
+        "seconds": 5.036980999997468,
+        "status": "PASSED"
+      },
+      "final-prepared-inputs": {
+        "seconds": 5.767288999999437,
+        "status": "PASSED"
+      },
+      "imports-render": {
+        "seconds": 1.9960099999989325,
+        "status": "PASSED"
+      },
+      "prepared-inputs": {
+        "seconds": 6.029811000000336,
+        "status": "PASSED"
+      },
+      "private-packages": {
+        "seconds": 0.00779300000067451,
+        "status": "PASSED"
+      },
+      "private-runtime": {
+        "seconds": 0.5892749999984517,
+        "status": "PASSED"
+      },
+      "qualified-source": {
+        "seconds": 0.03241399999751593,
+        "status": "PASSED"
+      },
+      "sandbox-health": {
+        "seconds": 0.15351400000145077,
+        "status": "PASSED"
+      },
+      "three-patch-programs": {
+        "seconds": 1.0394080000005488,
+        "status": "PASSED"
+      },
+      "wheel-bytes-records": {
+        "seconds": 0.5452860000004875,
+        "status": "PASSED"
+      },
+      "wheel-native-closure": {
+        "seconds": 0.31676400000287686,
+        "status": "PASSED"
+      }
+    },
+    "status": "PYTHON_GENERATION_SUBSET_PASSED_CPP_BLOCKED",
+    "vendorCodeExecuted": true
+  },
+  "semanticSearchEnabled": false
+}

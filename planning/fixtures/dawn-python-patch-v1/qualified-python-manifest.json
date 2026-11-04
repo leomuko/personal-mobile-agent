@@ -1,0 +1,462 @@
+{
+  "BazelSelectionVerified": false,
+  "globalPackageInstallation": false,
+  "nativeWheelClosure": {
+    "bytes": 1017,
+    "path": "build/dawn-python-patch-v1/qualification-attempts/python-3/stage-wheel-native-closure.json",
+    "sha256": "6e7a88903dd65149c08067a6302c5698b725dcc0bbdcb2ff701d6792ec2c9ce9"
+  },
+  "preparedNativeCatalog": {
+    "bytes": 360650,
+    "path": "planning/fixtures/dawn-python-patch-v1/prepared-catalog.json",
+    "sha256": "7fd85776b485802939955bcc1579952f9042eaf003063ceb0b5616733aab2ce2"
+  },
+  "runtime": {
+    "BazelSelectionVerified": false,
+    "SOABI": "cpython-313-darwin",
+    "executable": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/bin/python3.13",
+    "interpreter": "3.13.13 (main, Apr 14 2026, 14:32:41) [Clang 22.1.3 ]",
+    "nativeSha256": "be6bdd965d9d96a939c7b6ce4846e16c021dff0d09515a94924b3d5905263b2b",
+    "nativeSpeedups": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/markupsafe/_speedups.cpython-313-darwin.so",
+    "origins": {
+      "__future__": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/__future__.py",
+      "__main__": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/bootstrap/probe.py",
+      "_abc": "built-in",
+      "_ast": "built-in",
+      "_bisect": "built-in",
+      "_blake2": "built-in",
+      "_bz2": "built-in",
+      "_codecs": "built-in",
+      "_collections": "built-in",
+      "_collections_abc": "frozen",
+      "_compat_pickle": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/_compat_pickle.py",
+      "_compression": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/_compression.py",
+      "_frozen_importlib": "frozen",
+      "_frozen_importlib_external": "frozen",
+      "_functools": "built-in",
+      "_hashlib": "built-in",
+      "_imp": "built-in",
+      "_io": "built-in",
+      "_json": "built-in",
+      "_locale": "built-in",
+      "_lzma": "built-in",
+      "_opcode": "built-in",
+      "_opcode_metadata": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/_opcode_metadata.py",
+      "_operator": "built-in",
+      "_osx_support": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/_osx_support.py",
+      "_pickle": "built-in",
+      "_random": "built-in",
+      "_signal": "built-in",
+      "_sre": "built-in",
+      "_stat": "built-in",
+      "_string": "built-in",
+      "_struct": "built-in",
+      "_sysconfigdata__darwin_darwin": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/_sysconfigdata__darwin_darwin.py",
+      "_thread": "built-in",
+      "_tokenize": "built-in",
+      "_typing": "built-in",
+      "_warnings": "built-in",
+      "_weakref": "built-in",
+      "_weakrefset": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/_weakrefset.py",
+      "abc": "frozen",
+      "argparse": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/argparse.py",
+      "ast": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/ast.py",
+      "bisect": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/bisect.py",
+      "builtins": "built-in",
+      "bz2": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/bz2.py",
+      "codecs": "frozen",
+      "collections": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/collections/__init__.py",
+      "collections.abc": "frozen",
+      "contextlib": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/contextlib.py",
+      "copy": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/copy.py",
+      "copyreg": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/copyreg.py",
+      "dataclasses": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/dataclasses.py",
+      "dis": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/dis.py",
+      "encodings": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/encodings/__init__.py",
+      "encodings.aliases": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/encodings/aliases.py",
+      "encodings.unicode_escape": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/encodings/unicode_escape.py",
+      "encodings.utf_8": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/encodings/utf_8.py",
+      "enum": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/enum.py",
+      "errno": "built-in",
+      "fnmatch": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/fnmatch.py",
+      "functools": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/functools.py",
+      "genericpath": "frozen",
+      "gettext": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/gettext.py",
+      "glob": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/glob.py",
+      "grp": "built-in",
+      "hashlib": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/hashlib.py",
+      "importlib": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/importlib/__init__.py",
+      "importlib._abc": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/importlib/_abc.py",
+      "importlib._bootstrap": "frozen",
+      "importlib._bootstrap_external": "frozen",
+      "importlib.machinery": "frozen",
+      "importlib.util": "frozen",
+      "inspect": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/inspect.py",
+      "io": "frozen",
+      "ipaddress": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/ipaddress.py",
+      "itertools": "built-in",
+      "jinja2": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/__init__.py",
+      "jinja2._identifier": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/_identifier.py",
+      "jinja2.async_utils": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/async_utils.py",
+      "jinja2.bccache": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/bccache.py",
+      "jinja2.compiler": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/compiler.py",
+      "jinja2.defaults": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/defaults.py",
+      "jinja2.environment": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/environment.py",
+      "jinja2.exceptions": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/exceptions.py",
+      "jinja2.ext": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/ext.py",
+      "jinja2.filters": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/filters.py",
+      "jinja2.idtracking": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/idtracking.py",
+      "jinja2.lexer": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/lexer.py",
+      "jinja2.loaders": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/loaders.py",
+      "jinja2.nodes": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/nodes.py",
+      "jinja2.optimizer": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/optimizer.py",
+      "jinja2.parser": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/parser.py",
+      "jinja2.runtime": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/runtime.py",
+      "jinja2.tests": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/tests.py",
+      "jinja2.utils": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/utils.py",
+      "jinja2.visitor": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/jinja2/visitor.py",
+      "json": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/json/__init__.py",
+      "json.decoder": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/json/decoder.py",
+      "json.encoder": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/json/encoder.py",
+      "json.scanner": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/json/scanner.py",
+      "keyword": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/keyword.py",
+      "linecache": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/linecache.py",
+      "locale": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/locale.py",
+      "lzma": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/lzma.py",
+      "markupsafe": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/markupsafe/__init__.py",
+      "markupsafe._speedups": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/packages/markupsafe/_speedups.cpython-313-darwin.so",
+      "marshal": "built-in",
+      "math": "built-in",
+      "ntpath": "frozen",
+      "numbers": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/numbers.py",
+      "opcode": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/opcode.py",
+      "operator": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/operator.py",
+      "os": "frozen",
+      "os.path": "frozen",
+      "pathlib": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/pathlib/__init__.py",
+      "pathlib._abc": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/pathlib/_abc.py",
+      "pathlib._local": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/pathlib/_local.py",
+      "pickle": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/pickle.py",
+      "platform": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/platform.py",
+      "posix": "built-in",
+      "posixpath": "frozen",
+      "pprint": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/pprint.py",
+      "pwd": "built-in",
+      "random": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/random.py",
+      "re": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/re/__init__.py",
+      "re._casefix": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/re/_casefix.py",
+      "re._compiler": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/re/_compiler.py",
+      "re._constants": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/re/_constants.py",
+      "re._parser": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/re/_parser.py",
+      "reprlib": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/reprlib.py",
+      "runpy": "frozen",
+      "shutil": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/shutil.py",
+      "stat": "frozen",
+      "string": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/string.py",
+      "struct": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/struct.py",
+      "sys": "built-in",
+      "sysconfig": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/sysconfig/__init__.py",
+      "tempfile": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/tempfile.py",
+      "threading": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/threading.py",
+      "time": "built-in",
+      "token": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/token.py",
+      "tokenize": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/tokenize.py",
+      "types": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/types.py",
+      "typing": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/typing.py",
+      "urllib": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/urllib/__init__.py",
+      "urllib.parse": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/urllib/parse.py",
+      "warnings": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/warnings.py",
+      "weakref": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/runtime/lib/python3.13/weakref.py",
+      "zipimport": "frozen",
+      "zlib": "built-in"
+    },
+    "renderChecksPassed": true,
+    "selectedExtras": [],
+    "target": "imports"
+  },
+  "runtimeInventory": {
+    "bytes": 452771,
+    "path": "planning/fixtures/dawn-python-patch-v1/candidate-runtime-inventory.json",
+    "sha256": "6dcefbbf9c1f260687ff5168c137b444b61824739f713b8935481fde378144fb"
+  },
+  "status": "PYTHON_GENERATION_SUBSET_PASSED_CPP_BLOCKED",
+  "wheels": [
+    {
+      "artifact": {
+        "advertisedRequiresDist": [
+          "MarkupSafe>=2.0",
+          "Babel>=2.7; extra == \"i18n\""
+        ],
+        "byteVerification": "NOT_RUN",
+        "bytes": 134899,
+        "distribution": "jinja2",
+        "filename": "jinja2-3.1.6-py3-none-any.whl",
+        "identityStatus": "METADATA_ONLY_BYTES_NOT_VERIFIED",
+        "package": "Jinja2",
+        "providesExtra": [
+          "i18n"
+        ],
+        "purelib": "true",
+        "requiresDist": [
+          "MarkupSafe>=2.0",
+          "Babel>=2.7 ; extra == \"i18n\""
+        ],
+        "requiresPython": ">=3.7",
+        "selectedExtras": [],
+        "sha256": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+        "tag": "py3-none-any",
+        "url": "https://files.pythonhosted.org/packages/62/a1/3d680cbfd5f4b8f15abc1d571870c5fc3e594bb582bc3b64ea099db13e56/jinja2-3.1.6-py3-none-any.whl",
+        "version": "3.1.6"
+      },
+      "byteVerified": true,
+      "decodedBytes": 496892,
+      "entries": 31,
+      "executed": false,
+      "files": {
+        "jinja2-3.1.6.dist-info/METADATA": {
+          "bytes": 2871,
+          "crc32": 3867765599,
+          "sha256": "68c5548fb67c4132a13898d9b31ec50c6bea2abdd915d921f214355c3a6499c8"
+        },
+        "jinja2-3.1.6.dist-info/RECORD": {
+          "bytes": 2340,
+          "crc32": 346461990,
+          "sha256": "2e9f60b12e1a436c1ac6fdbded6090b6b791eb8d6753935c49941846e05a294d"
+        },
+        "jinja2-3.1.6.dist-info/WHEEL": {
+          "bytes": 82,
+          "crc32": 3447469225,
+          "sha256": "ff6a3334508b59cf776cae1628708ef9e0d410d0e5a3e76073d714deaa2460ee"
+        },
+        "jinja2-3.1.6.dist-info/entry_points.txt": {
+          "bytes": 58,
+          "crc32": 2954716544,
+          "sha256": "38bf39818535783f1cb8f9629227c59e05e97818dac65eab209f0a902ff7afe2"
+        },
+        "jinja2-3.1.6.dist-info/licenses/LICENSE.txt": {
+          "bytes": 1475,
+          "crc32": 3000423056,
+          "sha256": "3b49dcee4105eb37bac10faf1be260408fe85d252b8e9df2e0979fc1e094437b"
+        },
+        "jinja2/__init__.py": {
+          "bytes": 1928,
+          "crc32": 4032504946,
+          "sha256": "c717a93bd8bb0c7b2a910ae004476e2ed7e8cf6402b93ebf81b2f85d237585b5"
+        },
+        "jinja2/_identifier.py": {
+          "bytes": 1958,
+          "crc32": 468274969,
+          "sha256": "ff361cb4d2b346a964fe6bab4cd973ae3bb514524bed56bf223aaa77b8a2da55"
+        },
+        "jinja2/async_utils.py": {
+          "bytes": 2834,
+          "crc32": 1469986366,
+          "sha256": "bcaf8f76cba8ace3275929c4913de25094489139d880ed93e8c9c6c43807239a"
+        },
+        "jinja2/bccache.py": {
+          "bytes": 14061,
+          "crc32": 1014822320,
+          "sha256": "821d2ab3daee9675e8d0f857e634c9cb6507cc8f3016743ade8fefc3b9e1cd18"
+        },
+        "jinja2/compiler.py": {
+          "bytes": 74131,
+          "crc32": 2338909900,
+          "sha256": "f51a42425e57f3c0479652623ec1cf876f791e1d2e029bf0149350baeb542de3"
+        },
+        "jinja2/constants.py": {
+          "bytes": 1433,
+          "crc32": 2228141045,
+          "sha256": "18ca05c9d045fe476969128fa0ce5c97932f8aab9544b57266d7e9e7ed7a8e0d"
+        },
+        "jinja2/debug.py": {
+          "bytes": 6297,
+          "crc32": 454120396,
+          "sha256": "0a71ea0831ddf81546bed8bff19b13a259d7361037102b18fba9ffda9c14f07c"
+        },
+        "jinja2/defaults.py": {
+          "bytes": 1267,
+          "crc32": 3410586344,
+          "sha256": "6e805c4b0efc87e969db461b697489b2a900236b8dfe60ff4ed0b27697aae705"
+        },
+        "jinja2/environment.py": {
+          "bytes": 61513,
+          "crc32": 327516836,
+          "sha256": "f6786b3fb0a1f8d6c65f4d30bf2af8cb2fae84d1ead8e09ceb48201ab9e2fdf9"
+        },
+        "jinja2/exceptions.py": {
+          "bytes": 5071,
+          "crc32": 3696545235,
+          "sha256": "8a81de1eb5b009635a5d7d629c798755b96f73885a3bb017b230a9dc67d6bf1d"
+        },
+        "jinja2/ext.py": {
+          "bytes": 31875,
+          "crc32": 3122477406,
+          "sha256": "e4f1797877e1f265c02315c71d1076c576d7a218bca44de71d23b16baeae4bb1"
+        },
+        "jinja2/filters.py": {
+          "bytes": 55212,
+          "crc32": 52494276,
+          "sha256": "3d0fc481df67f634a0b671906321782b98f69d8c21508ba584f9f28a691dafe9"
+        },
+        "jinja2/idtracking.py": {
+          "bytes": 10555,
+          "crc32": 2150490544,
+          "sha256": "fa5979948a7bde930bdc4ad46222098fbb5d996c5c1ff2250efdf203f862658a"
+        },
+        "jinja2/lexer.py": {
+          "bytes": 29786,
+          "crc32": 3007811321,
+          "sha256": "2d88988a8e9bafe4dea7d9cf72ea565ec3c4b6396ec37a75994fa534155151f9"
+        },
+        "jinja2/loaders.py": {
+          "bytes": 24055,
+          "crc32": 1615737881,
+          "sha256": "c08ae7c63bdc6ea8795705b6f0d4a47e8b620eaf2a342c4839215b1948922c1e"
+        },
+        "jinja2/meta.py": {
+          "bytes": 4397,
+          "crc32": 2726441913,
+          "sha256": "3930cf91a16f5361e0bf1fba6a4cfbd79e05f012166919af25c045bf0a291f0c"
+        },
+        "jinja2/nativetypes.py": {
+          "bytes": 4210,
+          "crc32": 2098990826,
+          "sha256": "ec620600b54981dc8bf34a1925d4146947f04ade6ada549265b5edd1d35ffcce"
+        },
+        "jinja2/nodes.py": {
+          "bytes": 34579,
+          "crc32": 3516075973,
+          "sha256": "9b50eecdcafaaa1648f0943a57226050d8a78c07f96d0ce28d29839ccb2f531f"
+        },
+        "jinja2/optimizer.py": {
+          "bytes": 1651,
+          "crc32": 3372587790,
+          "sha256": "ac99c246543ba59b04126321b100e00bfa4ac831f13f94cf4bacd53c6b2072ef"
+        },
+        "jinja2/parser.py": {
+          "bytes": 40383,
+          "crc32": 2306281973,
+          "sha256": "94b385cb7b0498773921a1074621f5b1056721dda6a14433872789653b5d637d"
+        },
+        "jinja2/py.typed": {
+          "bytes": 0,
+          "crc32": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "jinja2/runtime.py": {
+          "bytes": 34249,
+          "crc32": 3788473082,
+          "sha256": "80393e1af76b8895ea82c19b1e0adc2933f4629eb33d7ce1ceb2290851f78c05"
+        },
+        "jinja2/sandbox.py": {
+          "bytes": 15009,
+          "crc32": 2810501077,
+          "sha256": "330d9a8ad958d88f256bb15885c5f6606f41b5461c2e70f41a1ddddbd7035ab6"
+        },
+        "jinja2/tests.py": {
+          "bytes": 5926,
+          "crc32": 1789732119,
+          "sha256": "54bb018551675a0f8fc52073d4c8519cd5a03f5a2f5e4de778ed452d031e0bd4"
+        },
+        "jinja2/utils.py": {
+          "bytes": 24129,
+          "crc32": 3347207181,
+          "sha256": "ad1a77a3d7bb64a4b87f2ad645b10bc8b729b8655315c9e8a1a39ad6ac7f1489"
+        },
+        "jinja2/visitor.py": {
+          "bytes": 3557,
+          "crc32": 3179944977,
+          "sha256": "11c9cbd4f2307ffe1154238cc6c44db91f005c76d2d6a7c074c384da780a273e"
+        }
+      },
+      "installed": false,
+      "nativeMembers": [],
+      "recordVerified": true
+    },
+    {
+      "artifact": {
+        "byteVerification": "NOT_RUN",
+        "bytes": 12029,
+        "distribution": "markupsafe",
+        "filename": "markupsafe-3.0.3-cp313-cp313-macosx_11_0_arm64.whl",
+        "identityStatus": "METADATA_ONLY_BYTES_NOT_VERIFIED",
+        "package": "MarkupSafe",
+        "providesExtra": [],
+        "purelib": "false",
+        "requiresDist": [],
+        "requiresPython": ">=3.9",
+        "selectedExtras": [],
+        "sha256": "116bb52f642a37c115f517494ea5feb03889e04df47eeff5b130b1808ce7c219",
+        "tag": "cp313-cp313-macosx_11_0_arm64",
+        "url": "https://files.pythonhosted.org/packages/9c/d9/5f7756922cdd676869eca1c4e3c0cd0df60ed30199ffd775e319089cb3ed/markupsafe-3.0.3-cp313-cp313-macosx_11_0_arm64.whl",
+        "version": "3.0.3"
+      },
+      "byteVerified": true,
+      "decodedBytes": 73708,
+      "entries": 14,
+      "executed": false,
+      "files": {
+        "markupsafe-3.0.3.dist-info/METADATA": {
+          "bytes": 2690,
+          "crc32": 1571831103,
+          "sha256": "12b4cc61a7fa288cf7667ee3f213786d9619db57fb33ff6f934afbcb5c12ec81"
+        },
+        "markupsafe-3.0.3.dist-info/RECORD": {
+          "bytes": 914,
+          "crc32": 2439185091,
+          "sha256": "2ab0777314dbaa9e07efbefdc61af10c75025f1c3ce40cbc5b080abfef04444e"
+        },
+        "markupsafe-3.0.3.dist-info/WHEEL": {
+          "bytes": 136,
+          "crc32": 2454919956,
+          "sha256": "a2a1890a91bad456499afc99dc2ff4682bfeda675f718f5eddf5efc9436659f3"
+        },
+        "markupsafe-3.0.3.dist-info/licenses/LICENSE.txt": {
+          "bytes": 1475,
+          "crc32": 2791381595,
+          "sha256": "489a8e1108509ed98a37bb983e11e0f7e1d31f0bd8f99a79c8448e7ff37d07ea"
+        },
+        "markupsafe-3.0.3.dist-info/top_level.txt": {
+          "bytes": 11,
+          "crc32": 2712234873,
+          "sha256": "ab2d0f9637b9209bafb020637a32728430a310075c0cb2bfd9a81571ec7c67a5"
+        },
+        "markupsafe/__init__.py": {
+          "bytes": 13248,
+          "crc32": 2081984708,
+          "sha256": "bb57cb70d0b1d0ff04ecb4facf73977fa8a99d29a09ba69e7e77b9cbe77ba38d"
+        },
+        "markupsafe/_native.py": {
+          "bytes": 210,
+          "crc32": 3763788387,
+          "sha256": "8522ecf099b3e5aa9acae7a780927791d4f93f0369056a4aae6412762a67742f"
+        },
+        "markupsafe/_speedups.c": {
+          "bytes": 4327,
+          "crc32": 1839326698,
+          "sha256": "b77b42ea8555efe6e6294aaf08ee69552932f86f000885e958c689c2436d2638"
+        },
+        "markupsafe/_speedups.cpython-313-darwin.so": {
+          "bytes": 50656,
+          "crc32": 3243278639,
+          "sha256": "be6bdd965d9d96a939c7b6ce4846e16c021dff0d09515a94924b3d5905263b2b"
+        },
+        "markupsafe/_speedups.pyi": {
+          "bytes": 41,
+          "crc32": 1273318699,
+          "sha256": "10d7756d87bb81b0547f6cb0c9858e194a675ce1cd27e7204cda9eb655bc8799"
+        },
+        "markupsafe/py.typed": {
+          "bytes": 0,
+          "crc32": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "installed": false,
+      "nativeMembers": [
+        "markupsafe/_speedups.cpython-313-darwin.so"
+      ],
+      "recordVerified": true
+    }
+  ]
+}
