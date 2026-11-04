@@ -1,0 +1,78 @@
+{
+  "additionalBlockingProbesPending": false,
+  "base": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "boundInputsVerified": 148,
+  "bounds": {
+    "childTraceBytes": 1048576,
+    "cleanupSeconds": 15,
+    "cppCompiles": 0,
+    "cppExecutions": 0,
+    "downloadCount": 2,
+    "generatorInvocations": 8,
+    "imports": 1,
+    "patchPrograms": 3,
+    "publicDecisionSeconds": 300,
+    "redirects": 0,
+    "retries": 0,
+    "workerLogBytes": 1048576
+  },
+  "branch": "dev",
+  "callbackSemanticsQualified": false,
+  "changedPaths": [
+    "build/dawn-python-patch-v1/qa-qualification-review-3/"
+  ],
+  "closedFindings": [
+    {
+      "evidence": "Publication intent precedes link; after-effect interrupts revoke owned links; foreign evidence preserved and revocation flags truthful.",
+      "id": "DPQ-QUAL-002",
+      "status": "CLOSED"
+    }
+  ],
+  "compilerQualified": false,
+  "cppProbesAuthorized": false,
+  "delegation": false,
+  "deviceExecutionAuthorized": false,
+  "findings": [],
+  "freezePath": "planning/fixtures/dawn-python-patch-v1/qualification-freeze-r3.json",
+  "freezeSha256": "d169eeb3d5a28ff32282b9375e58ad03de807637858417240795b5a27cd727b9",
+  "head": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "implementationSha256": "8d687583ea9a231d0b67a60a5b537e260c8e959a1d53470d9e1ed1a5c85e0c2e",
+  "limitations": [
+    "Actual wheel bytes, candidate/import/render/generator, sandbox and resource results remain unproven until execution/results review.",
+    "C++ remains BLOCKED/NOT_RUN; no broad patch-semantic, ABI, SDK/root or complete recipe qualification."
+  ],
+  "preparationResultsReview": "PASS; unaffected",
+  "previousFindingsStillClosed": [
+    "DPQ-QUAL-001"
+  ],
+  "priorReportsPreserved": true,
+  "profile": "python-generation-cpp-blocked-v1",
+  "projectSourceChanged": false,
+  "recipeQualified": false,
+  "reviewAllowsOnly": "Single exact frozen host-only Python/generation attempt under existing user authorization; stop first failure, no retry or repair.",
+  "reviewedOn": "2026-11-04",
+  "reviewer": "Codex \u2014 same retained sole primary independent QA reviewer; no delegation",
+  "rootAdoptionApproved": false,
+  "schema": 1,
+  "scope": "dawn-python-generation-qualification-R3-followup-and-exact-freeze",
+  "semanticEnablement": false,
+  "snapshotFiles": 156,
+  "snapshotSha256": "55a08d02604b8d0b3c13e8f008d5c736b0656c7caec279c9eece4908e66ebc03",
+  "vendorExecutionApproved": true,
+  "verdict": "PASS",
+  "verification": {
+    "actualWorkerOrVendorExecution": false,
+    "foreignAcceptedAndOutcomeEvidence": "PRESERVED with truthful uncertainty",
+    "freshFocusedSyntheticTests": 56,
+    "fullSuiteIndependentlyRerun": false,
+    "independentScenarios": 6,
+    "interruptedOutcomeAndAcceptedLinks": "REVOKED with pending evidence retained",
+    "networkRequests": 0,
+    "normalSuccess": "PASS",
+    "originalDeadlineWitness": "REJECTED",
+    "parentReportedFullTests": 253,
+    "r2FreezeAndFailReviewRecords": "UNCHANGED",
+    "r2PreservedProjectInputs": 140
+  },
+  "wheelAcquisitionApprovedByReview": true
+}
