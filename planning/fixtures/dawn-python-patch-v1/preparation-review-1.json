@@ -1,0 +1,78 @@
+{
+  "additionalBlockingProbesPending": false,
+  "base": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "boundInputsVerified": 21,
+  "branch": "dev",
+  "changedPaths": [
+    "build/dawn-python-patch-v1/qa-preparation-review-1/"
+  ],
+  "delegation": false,
+  "deviceExecutionAuthorized": false,
+  "findings": [
+    {
+      "id": "DPQ-CAT-001",
+      "line": 67,
+      "priority": "P2",
+      "status": "OPEN",
+      "title": "Inspector success after 15-second deadline",
+      "witnesses": [
+        "late-metadata-success.json"
+      ]
+    },
+    {
+      "id": "DPQ-CAT-002",
+      "line": 49,
+      "priority": "P2",
+      "status": "OPEN",
+      "title": "Traversal errors silently omit inventory contents",
+      "witnesses": [
+        "unreadable-subtree-accepted.json"
+      ]
+    },
+    {
+      "id": "DPQ-CAT-003",
+      "line": 106,
+      "priority": "P2",
+      "status": "OPEN",
+      "title": "Absent/inconsistent native evidence accepted as resolved graph",
+      "witnesses": [
+        "empty-inspector-graph-accepted.json",
+        "inconsistent-native-graph-accepted.json"
+      ]
+    }
+  ],
+  "freezeSha256": "4d0b766d5c36bae235c234a4524485c4d749dd56bc4613e95e77d4c1b434706e",
+  "futureProbeFixturesReviewed": false,
+  "head": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "implementationSha256": "bd4b6cfba445fbbf3253d9cdd7aca287d16f7028b35cd8b655881f543401915b",
+  "limitations": [
+    "Actual native/toolchain/catalog preparation not run.",
+    "Native parser findings use synthetic responses and do not claim actual llvm-otool failure.",
+    "No vendor-phase approval; future probe.py/callback_probe.cpp outside scope."
+  ],
+  "preparationExecutionApproved": false,
+  "projectSourceChanged": false,
+  "protocolSha256": "4a8d4a45c648dc5678609ad6b976badf8d0902259cdee8b0a9559b1c05f82640",
+  "reviewedOn": "2026-11-04",
+  "reviewer": "Codex \u2014 same retained sole primary independent QA reviewer; no delegation",
+  "rootAdoptionApproved": false,
+  "schema": 1,
+  "scope": "dawn-python-patch-preparation-implementation-and-exact-freeze",
+  "semanticEnablement": false,
+  "snapshotFiles": 33,
+  "snapshotSha256": "1ad37753e4044311e82322677e92687fc4718ee5ee55be76b7e95dc5780e0b0f",
+  "sourceCopiesPreserved": true,
+  "vendorExecutionApproved": false,
+  "verdict": "FAIL",
+  "verification": {
+    "catalogOrInspectionToolsExecuted": false,
+    "freshCatalogTests": 9,
+    "freshDataOnlyWheelTests": 9,
+    "freshFocusedTests": 18,
+    "fullSuiteIndependentlyRerun": false,
+    "networkRequests": 0,
+    "parentRecordedFullTests": 215,
+    "syntheticWitnesses": 4,
+    "wrongFreezeAndTamperedInputNoSpawn": "PASS"
+  }
+}
