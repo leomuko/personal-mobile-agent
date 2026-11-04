@@ -1,0 +1,14 @@
+{
+  "BazelPythonSelectionVerified": false,
+  "P2Complete": false,
+  "commitsCreated": 0,
+  "compilerQualified": false,
+  "deviceWorkloads": 0,
+  "frozenResultSnapshotPreserved": true,
+  "independentResultsReview": "PASSED",
+  "resultLockSha256": "0e3c1041be7e39ceaa0b4244ed2f5267eda225dde88ddb876fa71bd9fafaa902",
+  "resultsReviewSha256": "336d3bd77a24b2e2d2da8b663f1cac39a06799dff2d2938be97ab2cb6762e056",
+  "rootFixesAdopted": false,
+  "semanticSearchEnabled": false,
+  "status": "INDEPENDENTLY_REVIEWED_PYTHON_GENERATION_SUBSET_PASS_CPP_BLOCKED"
+}
