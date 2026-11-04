@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "verdict": "FAIL",
+  "scope": "dawn-python-patch-qualification-v1-protocol-only",
+  "reviewer": "Codex — retained sole primary independent QA reviewer, same chat; no delegation",
+  "reviewedOn": "2026-11-04",
+  "branch": "dev",
+  "head": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "base": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "protocolPath": "planning/P2_DAWN_PYTHON_PATCH_QUALIFICATION_V1.md",
+  "protocolSha256": "0a18bb6880bf487db749425d3c98b7f5daf81f264749f41377bcfc3be544e546",
+  "snapshotSha256": "08860f8ab94d7a565d739e55b82a6293c621ca80eed72e95cd83f50df85bd30e",
+  "snapshotFiles": 17,
+  "findings": [
+    {
+      "id": "DPQ-P01",
+      "priority": "P2",
+      "confidence": "HIGH",
+      "status": "OPEN",
+      "line": 29,
+      "title": "Exact inactive optional Babel requirement is rejected",
+      "requiredRevision": "Allow only the recorded inactive literal and declaration with no selected extras; no Babel or general resolver."
+    },
+    {
+      "id": "DPQ-P02",
+      "priority": "P2",
+      "confidence": "HIGH",
+      "status": "OPEN",
+      "line": 81,
+      "title": "Five-file output contract conflicts with eight actual FileRenders",
+      "requiredRevision": "Freeze all eight outputs, compare six unaffected and both api_cpp.h-derived outputs, preserve invocations and generator bytes."
+    }
+  ],
+  "verification": {
+    "staticAudit": "PASS; audit.py, static-evidence.json",
+    "metadataResponseBindings": "PASS; both retained response hashes and selected wheel rows",
+    "selectedSourceBindings": "PASS; four relevant files versus qualified source receipt",
+    "generatorInventory": "PASS; restricted AST interpretation only, headers=3/cpp_headers=5",
+    "vendorOrCompilerExecution": "NOT_RUN; prohibited in protocol review",
+    "networkRequests": 0,
+    "newHostImplementationTests": "NOT_RUN; implementation not present",
+    "fullHistoricalInventories": "NOT_RUN; outside focused protocol scope"
+  },
+  "additionalBlockingProbesPending": false,
+  "implementationAdmitted": false,
+  "executionFreezeApproved": false,
+  "deviceExecutionAuthorized": false,
+  "rootAdoptionApproved": false,
+  "semanticEnablement": false,
+  "limitations": [
+    "Wheel METADATA and bytes not acquired; dependency finding is corroborated by retained release metadata.",
+    "Private interpreter, sandbox, dyld closure, compiler/SDK/Abseil catalogs and measured resource feasibility await preparation and exact-freeze reviews.",
+    "Host callback agreement cannot prove standard conformance, Android ABI or complete dependency recipe readiness."
+  ],
+  "changedPaths": ["build/dawn-python-patch-v1/qa-protocol-review-1/"],
+  "projectSourceChanged": false,
+  "delegation": false
+}

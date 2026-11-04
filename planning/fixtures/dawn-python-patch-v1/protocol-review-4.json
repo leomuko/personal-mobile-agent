@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "verdict": "PASS",
+  "scope": "dawn-python-patch-qualification-v1-protocol-followup-P03-P04",
+  "reviewedOn": "2026-11-04",
+  "reviewer": "Codex — same retained sole primary independent QA reviewer; no delegation",
+  "branch": "dev",
+  "base": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "head": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "protocolPath": "planning/P2_DAWN_PYTHON_PATCH_QUALIFICATION_V1.md",
+  "protocolSha256": "9fe1253fb5283874abbbe9d8f5a549559be105d2d241acde179ed9f931c4462a",
+  "priorProtocolSha256": "b7801f014aa7fa57f19cb457edaaa6dbda8c06359ba9f63417c59cd65176fd1d",
+  "priorSupplementalFailSha256": "3800791381b48460db9b0165ed07ccb54a7af629be03daf6b8c4d452a17ae932",
+  "snapshotSha256": "92c42187d575d9b34863c4b55e89f00d564f11511087cb032d6e5f83b2656a45",
+  "snapshotFiles": 16,
+  "findings": [],
+  "closedFindings": [
+    {"id": "DPQ-P03", "status": "CLOSED", "evidence": "Explicit strict C++20/17 flags; no extensions, downgrade, projection or repair; failed header compatibility stops dependent cases."},
+    {"id": "DPQ-P04", "status": "CLOSED", "evidence": "Exact bounded same-archive 26-header data-only selection and manifest validation; frozen include precedence/closure with no fabricated headers."}
+  ],
+  "previousFindingsStillClosed": ["DPQ-P01", "DPQ-P02"],
+  "priorReportsPreserved": true,
+  "checks": {
+    "focusedStaticContractAndDiff": "PASS",
+    "resourceOwnershipFailureAndPublicationRules": "UNCHANGED",
+    "selectedHeaderCombinedLimitBytes": 8388608,
+    "selectedHeaderMemberLimitBytes": 1048576,
+    "compilerOrVendorExecution": "NOT_RUN",
+    "archiveScanOrExtraction": "NOT_RUN",
+    "networkRequests": 0,
+    "implementationCatalogsAndTests": "NOT_REVIEWED; outside protocol verdict"
+  },
+  "limitations": [
+    "Actual preparation catalogs, native/system-cache/toolchain closure and exact execution freeze remain separate required reviews.",
+    "Reported SDK/clang-resource counts are not independently qualified by this protocol review.",
+    "Strict C++17 compatibility can fail and cannot be repaired in this slice.",
+    "No complete recipe, broad patch-semantic, standard-conformance, Android ABI, SDK or root adoption qualification."
+  ],
+  "additionalBlockingProbesPending": false,
+  "executionFreezeApproved": false,
+  "deviceExecutionAuthorized": false,
+  "rootAdoptionApproved": false,
+  "semanticEnablement": false,
+  "projectSourceChanged": false,
+  "changedPaths": ["build/dawn-python-patch-v1/qa-protocol-review-4/"],
+  "delegation": false
+}

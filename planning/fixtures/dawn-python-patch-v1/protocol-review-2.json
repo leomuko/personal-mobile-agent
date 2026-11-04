@@ -1,0 +1,50 @@
+{
+  "schema": 1,
+  "verdict": "PASS",
+  "scope": "dawn-python-patch-qualification-v1-protocol-followup",
+  "reviewer": "Codex — same retained sole primary independent QA reviewer; no delegation",
+  "reviewedOn": "2026-11-04",
+  "branch": "dev",
+  "base": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "head": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "protocolPath": "planning/P2_DAWN_PYTHON_PATCH_QUALIFICATION_V1.md",
+  "protocolSha256": "b7801f014aa7fa57f19cb457edaaa6dbda8c06359ba9f63417c59cd65176fd1d",
+  "priorProtocolSha256": "0a18bb6880bf487db749425d3c98b7f5daf81f264749f41377bcfc3be544e546",
+  "priorFailSummarySha256": "ec6bf6f222c7780b4454cfaf3d37a758017d84ec57ad2ba24c0f450b475f5f91",
+  "snapshotSha256": "1182e747c0f5ec133e5824fda4e09be2a6a67a87f5c991487c4506b23b8d9e9e",
+  "snapshotFiles": 24,
+  "findings": [],
+  "closedFindings": [
+    {"id": "DPQ-P01", "status": "CLOSED", "evidence": "Exact known inactive Babel requirement and declaration only; no selected extras, evaluator or Babel acquisition."},
+    {"id": "DPQ-P02", "status": "CLOSED", "evidence": "Exact eight outputs; six unaffected and both affected output oracles; two-header probe matrix, unchanged generator invocation count."}
+  ],
+  "checks": {
+    "focusedStaticAudit": "PASS",
+    "priorNonProtocolBindings": "16/16 unchanged",
+    "originalFailPreservation": "PASS",
+    "generatedOutputs": 8,
+    "unaffectedOutputs": 6,
+    "affectedOutputs": 2,
+    "generatorInvocations": 8,
+    "positiveCompilerInvocations": 6,
+    "positiveExecutions": 6,
+    "negativeCompilerInvocations": 12,
+    "resourceAndFailureRules": "UNCHANGED",
+    "vendorExecution": "NOT_RUN",
+    "implementationTests": "NOT_RUN; outside protocol scope",
+    "networkRequests": 0
+  },
+  "limitations": [
+    "New helper, tests and candidate inventories remain unreviewed.",
+    "Implementation/preparation and exact execution freeze must be reviewed before vendor execution.",
+    "Runtime/native/system cache/toolchain closure, isolation and resource enforcement remain unverified implementation gates.",
+    "No broad patch-semantic, standard-conformance, ABI, packaged SDK or complete recipe qualification."
+  ],
+  "executionFreezeApproved": false,
+  "deviceExecutionAuthorized": false,
+  "rootAdoptionApproved": false,
+  "semanticEnablement": false,
+  "projectSourceChanged": false,
+  "changedPaths": ["build/dawn-python-patch-v1/qa-protocol-review-2/"],
+  "delegation": false
+}

@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "verdict": "FAIL",
+  "scope": "dawn-python-patch-qualification-v1-supplemental-protocol-review",
+  "reviewedOn": "2026-11-04",
+  "reviewer": "Codex — same retained sole primary independent QA reviewer; no delegation",
+  "branch": "dev",
+  "head": "5bf94adf940d89950996f389f9eff5bb5a543023",
+  "protocolSha256": "b7801f014aa7fa57f19cb457edaaa6dbda8c06359ba9f63417c59cd65176fd1d",
+  "snapshotSha256": "e0a0eb06aad9a55a901be00d19ce467b8b43133cbef027e3db55dbb56525e44b",
+  "snapshotFiles": 11,
+  "supersedesCurrentAdmissionVerdictOf": "build/dawn-python-patch-v1/qa-protocol-review-2/qa-summary.json",
+  "priorReportsPreserved": true,
+  "previousFindingsStillClosed": ["DPQ-P01", "DPQ-P02"],
+  "findings": [
+    {"id": "DPQ-P03", "priority": "P2", "status": "OPEN", "confidence": "HIGH", "line": 108,
+     "title": "Strict C++17 acceptance must reject compiler extensions",
+     "requiredRevision": "Freeze -std=c++17 -pedantic-errors without suppressions; retained explicit(false) failure remains failure, never patched or reclassified."},
+    {"id": "DPQ-P04", "priority": "P2", "status": "OPEN", "confidence": "HIGH", "line": 88,
+     "title": "Qualified 105 files omit required checked-in source include closure",
+     "requiredRevision": "Explicit bounded same-archive data-only preparation and separate exact include inventory/freeze; no fabricated aliases, shadowing or hidden include repairs."}
+  ],
+  "checks": {
+    "exactPatchStringInspection": "PASS; nine explicit(false) sites remain unchanged",
+    "priorSelectedIncludeFiles": 0,
+    "retainedArchiveHash": "PASS",
+    "wrapperLookup": "PASS; bounded member 322, 1686 bytes, SHA256 5316d9fd241e604b3260fa8d4398a458a3dc88ee69c540ac959260b444bdfae3",
+    "sourceExtraction": "NOT_RUN",
+    "vendorOrCompilerExecution": "NOT_RUN",
+    "networkRequests": 0,
+    "new26HeaderInventory": "NOT_REVIEWED"
+  },
+  "additionalBlockingProbesPending": false,
+  "executionFreezeApproved": false,
+  "deviceExecutionAuthorized": false,
+  "rootAdoptionApproved": false,
+  "semanticEnablement": false,
+  "changedPaths": ["build/dawn-python-patch-v1/qa-protocol-review-3/"],
+  "projectSourceChanged": false,
+  "delegation": false
+}
