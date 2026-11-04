@@ -1,0 +1,11 @@
+{
+  "protocol": "dawn-wheel-raw-metadata-amendment-v1",
+  "artifactSha256": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+  "advertisedRequiresDist": ["MarkupSafe>=2.0", "Babel>=2.7; extra == \"i18n\""],
+  "wheelRequiresDist": ["MarkupSafe>=2.0", "Babel>=2.7 ; extra == \"i18n\""],
+  "selectedExtras": [],
+  "additionalDependenciesAllowed": false,
+  "genericNormalizationAllowed": false,
+  "provenance": "qualification-attempts/python-2: pinned bytes matched; literal admission rejected the extra ASCII space before semicolon",
+  "previousAttemptPreserved": true
+}
