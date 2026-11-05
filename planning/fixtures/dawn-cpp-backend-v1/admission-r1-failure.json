@@ -1,0 +1,21 @@
+{
+  "automaticRetries": 0,
+  "buildOrDeviceWork": false,
+  "captureMethod": "exact returned tool output and exit classification; no owner stderr file was created",
+  "cleanupRequired": false,
+  "cleanupStatus": "NOT_APPLICABLE_NO_OWNED_CHILD",
+  "cppCasesExecuted": false,
+  "exitCode": 1,
+  "freezeSha256": "829f3285fecc43577e072c415e3ced8a1122d15c8b9f46cf2f57f3293f76e2b4",
+  "metadata2Created": false,
+  "nativeQueriesExecuted": 0,
+  "ownerStarted": false,
+  "protocol": "cpp-backend-admission-rejection-v1",
+  "queriesNotRun": 31,
+  "reviewSha256": "bac80ac01111de46e32ea2cb0d5baecf4934aa08795fd8e1579024405620403c",
+  "status": "ADMISSION_REJECTED_UNBOUND_REQUIRED_INPUT",
+  "stderr": "ValueError: unbound metadata code dependency\n",
+  "stdout": "",
+  "toolReportedWallSeconds": 0.142650583,
+  "toolWallMetricIsNotNativeRuntime": true
+}

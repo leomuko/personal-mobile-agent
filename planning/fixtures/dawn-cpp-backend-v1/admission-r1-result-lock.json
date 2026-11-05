@@ -1,0 +1,68 @@
+{
+  "P2Complete": false,
+  "automaticRetries": 0,
+  "cppMatrixAuthorized": false,
+  "files": [
+    {
+      "bytes": 843,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/admission-r1-failure.json",
+      "sha256": "9e4b1d87d233454d4b78b961a8854566a8b787f99f8b66964480417760c6afc0"
+    },
+    {
+      "bytes": 624,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/admission-r1-required-input-diagnostic.json",
+      "sha256": "d1ad32f5addff7d6aa5d16872f46659bfa730bfb3a62c2d9f3355242735073ec"
+    },
+    {
+      "bytes": 88896,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/metadata-execution-freeze-r1.json",
+      "sha256": "829f3285fecc43577e072c415e3ced8a1122d15c8b9f46cf2f57f3293f76e2b4"
+    },
+    {
+      "bytes": 2914,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/preparation-review.json",
+      "sha256": "bac80ac01111de46e32ea2cb0d5baecf4934aa08795fd8e1579024405620403c"
+    },
+    {
+      "bytes": 91989,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/metadata-execution-freeze-r2.json",
+      "sha256": "52a0e72aaff0cc6f77ab2c8a22ba4af61c679b95bba3844a5ec4ce07a1973869"
+    },
+    {
+      "bytes": 1116,
+      "path": "build/dawn-cpp-backend-v1/metadata-2-launch.json",
+      "sha256": "957aea28246ae71b1e708ffffb70f02baee891cbe5ff73997568de5ae669b28e"
+    },
+    {
+      "bytes": 624,
+      "path": "build/dawn-cpp-backend-v1/metadata-2-required-input-diagnostic.json",
+      "sha256": "d1ad32f5addff7d6aa5d16872f46659bfa730bfb3a62c2d9f3355242735073ec"
+    },
+    {
+      "bytes": 3700,
+      "path": "docs/P2_CPP_BACKEND_ADMISSION_REJECTION_V1.md",
+      "sha256": "33e02033efeb1c27006d9b8b7f507414c67a04f0a75ab329d4db1a47fdc2b55f"
+    },
+    {
+      "bytes": 2221,
+      "path": "scripts/tests/test_dawn_cpp_backend_admission.py",
+      "sha256": "42786e7feb25ea7c29906bf33b3ed9f6b6744727f48b413edbbc3f67c4a63909"
+    },
+    {
+      "bytes": 2800,
+      "path": "build/dawn-cpp-backend-v1/admission-correction-focused.log",
+      "sha256": "ab375754877d3451f8435aa6495da401f7ae974dbb5ea29bb97e59cb32104126"
+    },
+    {
+      "bytes": 40389,
+      "path": "build/dawn-cpp-backend-v1/admission-correction-host.log",
+      "sha256": "12e1d21874f596473dbbfe6ee46818ea49ff852addd1494950f1ff5e16e1af61"
+    }
+  ],
+  "metadata2Created": false,
+  "nativeQueriesExecuted": 0,
+  "ownerStarted": false,
+  "protocol": "backend-admission-rejection-and-correction-v1",
+  "semanticEnablement": false,
+  "status": "EXECUTION_BLOCKED_R2_REVIEW_PENDING"
+}

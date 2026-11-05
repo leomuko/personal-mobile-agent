@@ -1,0 +1,16 @@
+{
+  "freezeSha256": "829f3285fecc43577e072c415e3ced8a1122d15c8b9f46cf2f57f3293f76e2b4",
+  "metadata2Exists": false,
+  "method": "read-only required-set evaluation; admission/main/owner not invoked again",
+  "missingRequiredInputs": [
+    {
+      "bytes": 1247,
+      "mode": 420,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/observed-inspector-helper.json",
+      "sha256": "ad2b8246d698bc622166455033e9ba82621ce4719ddd78f9ab8bc2d9cb75fe76"
+    }
+  ],
+  "nativeQueriesExecuted": 0,
+  "ownerStarted": false,
+  "protocol": "cpp-backend-admission-failure-diagnostic-v1"
+}
