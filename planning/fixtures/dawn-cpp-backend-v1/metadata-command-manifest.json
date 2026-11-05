@@ -1,0 +1,1258 @@
+{
+  "attemptName": "metadata-2",
+  "attemptParent": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts",
+  "backendCatalog": "planning/fixtures/dawn-cpp-backend-v1/backend-native-catalog.json",
+  "cacheMap": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.map",
+  "commands": [
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
+      ],
+      "id": "inspect-1",
+      "kind": "native-inspector",
+      "option": "-L",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-l",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
+      ],
+      "id": "inspect-2",
+      "kind": "native-inspector",
+      "option": "-l",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld"
+      ],
+      "id": "inspect-3",
+      "kind": "native-inspector",
+      "option": "-L",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-l",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld"
+      ],
+      "id": "inspect-4",
+      "kind": "native-inspector",
+      "option": "-l",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool"
+      ],
+      "id": "inspect-5",
+      "kind": "native-inspector",
+      "option": "-L",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-l",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool"
+      ],
+      "id": "inspect-6",
+      "kind": "native-inspector",
+      "option": "-l",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic"
+      ],
+      "id": "inspect-7",
+      "kind": "native-inspector",
+      "option": "-L",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-l",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic"
+      ],
+      "id": "inspect-8",
+      "kind": "native-inspector",
+      "option": "-l",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib"
+      ],
+      "id": "inspect-9",
+      "kind": "native-inspector",
+      "option": "-L",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-l",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib"
+      ],
+      "id": "inspect-10",
+      "kind": "native-inspector",
+      "option": "-l",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libcodedirectory.dylib"
+      ],
+      "id": "inspect-11",
+      "kind": "native-inspector",
+      "option": "-L",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libcodedirectory.dylib"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-l",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libcodedirectory.dylib"
+      ],
+      "id": "inspect-12",
+      "kind": "native-inspector",
+      "option": "-l",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libcodedirectory.dylib"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib"
+      ],
+      "id": "inspect-13",
+      "kind": "native-inspector",
+      "option": "-L",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-l",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib"
+      ],
+      "id": "inspect-14",
+      "kind": "native-inspector",
+      "option": "-l",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libtapi.dylib"
+      ],
+      "id": "inspect-15",
+      "kind": "native-inspector",
+      "option": "-L",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libtapi.dylib"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "-arch",
+        "arm64",
+        "-l",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libtapi.dylib"
+      ],
+      "id": "inspect-16",
+      "kind": "native-inspector",
+      "option": "-l",
+      "subject": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libtapi.dylib"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "--version"
+      ],
+      "id": "driver-version",
+      "kind": "driver-version"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-print-resource-dir"
+      ],
+      "id": "resource-dir",
+      "kind": "resource-dir"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+        "-print-prog-name=ld"
+      ],
+      "id": "linker-path",
+      "kind": "linker-path"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-target",
+        "arm64-apple-macos26.5",
+        "-isysroot",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-resource-dir",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+        "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+        "-stdlib=libc++",
+        "-fintegrated-as",
+        "-fno-modules",
+        "-fno-implicit-modules",
+        "-nostdinc",
+        "-nostdinc++",
+        "-std=c++20",
+        "-pedantic-errors",
+        "-O0",
+        "-g0",
+        "-fno-color-diagnostics",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+        "-iframework",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "-###",
+        "-x",
+        "c++",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp",
+        "-o",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/control-ordinary-c++20.not-created"
+      ],
+      "expectedIncludes": [
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        },
+        {
+          "framework": true,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        }
+      ],
+      "expectedStandard": "c++20",
+      "id": "jobs-control-ordinary-c++20",
+      "kind": "driver-jobs",
+      "output": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/control-ordinary-c++20.not-created",
+      "profile": "control-ordinary-c++20",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-target",
+        "arm64-apple-macos26.5",
+        "-isysroot",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-resource-dir",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+        "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+        "-stdlib=libc++",
+        "-fintegrated-as",
+        "-fno-modules",
+        "-fno-implicit-modules",
+        "-nostdinc",
+        "-nostdinc++",
+        "-std=c++20",
+        "-pedantic-errors",
+        "-O0",
+        "-g0",
+        "-fno-color-diagnostics",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+        "-iframework",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "-E",
+        "-v",
+        "-x",
+        "c++",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp",
+        "-o",
+        "/dev/null"
+      ],
+      "expectedIncludes": [
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        },
+        {
+          "framework": true,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        }
+      ],
+      "id": "includes-control-ordinary-c++20",
+      "kind": "include-search",
+      "profile": "control-ordinary-c++20"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-target",
+        "arm64-apple-macos26.5",
+        "-isysroot",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-resource-dir",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+        "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+        "-stdlib=libc++",
+        "-fintegrated-as",
+        "-fno-modules",
+        "-fno-implicit-modules",
+        "-nostdinc",
+        "-nostdinc++",
+        "-std=c++20",
+        "-pedantic-errors",
+        "-O0",
+        "-g0",
+        "-fno-color-diagnostics",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+        "-iframework",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "-###",
+        "-x",
+        "c++",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp",
+        "-o",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/candidate-ordinary-c++20.not-created"
+      ],
+      "expectedIncludes": [
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        },
+        {
+          "framework": true,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        }
+      ],
+      "expectedStandard": "c++20",
+      "id": "jobs-candidate-ordinary-c++20",
+      "kind": "driver-jobs",
+      "output": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/candidate-ordinary-c++20.not-created",
+      "profile": "candidate-ordinary-c++20",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-target",
+        "arm64-apple-macos26.5",
+        "-isysroot",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-resource-dir",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+        "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+        "-stdlib=libc++",
+        "-fintegrated-as",
+        "-fno-modules",
+        "-fno-implicit-modules",
+        "-nostdinc",
+        "-nostdinc++",
+        "-std=c++20",
+        "-pedantic-errors",
+        "-O0",
+        "-g0",
+        "-fno-color-diagnostics",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+        "-iframework",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "-E",
+        "-v",
+        "-x",
+        "c++",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp",
+        "-o",
+        "/dev/null"
+      ],
+      "expectedIncludes": [
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        },
+        {
+          "framework": true,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        }
+      ],
+      "id": "includes-candidate-ordinary-c++20",
+      "kind": "include-search",
+      "profile": "candidate-ordinary-c++20"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-target",
+        "arm64-apple-macos26.5",
+        "-isysroot",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-resource-dir",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+        "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+        "-stdlib=libc++",
+        "-fintegrated-as",
+        "-fno-modules",
+        "-fno-implicit-modules",
+        "-nostdinc",
+        "-nostdinc++",
+        "-std=c++17",
+        "-pedantic-errors",
+        "-O0",
+        "-g0",
+        "-fno-color-diagnostics",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+        "-iframework",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "-###",
+        "-x",
+        "c++",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp",
+        "-o",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/candidate-ordinary-c++17.not-created"
+      ],
+      "expectedIncludes": [
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        },
+        {
+          "framework": true,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        }
+      ],
+      "expectedStandard": "c++17",
+      "id": "jobs-candidate-ordinary-c++17",
+      "kind": "driver-jobs",
+      "output": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/candidate-ordinary-c++17.not-created",
+      "profile": "candidate-ordinary-c++17",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-target",
+        "arm64-apple-macos26.5",
+        "-isysroot",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-resource-dir",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+        "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+        "-stdlib=libc++",
+        "-fintegrated-as",
+        "-fno-modules",
+        "-fno-implicit-modules",
+        "-nostdinc",
+        "-nostdinc++",
+        "-std=c++17",
+        "-pedantic-errors",
+        "-O0",
+        "-g0",
+        "-fno-color-diagnostics",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+        "-iframework",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "-E",
+        "-v",
+        "-x",
+        "c++",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp",
+        "-o",
+        "/dev/null"
+      ],
+      "expectedIncludes": [
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        },
+        {
+          "framework": true,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        }
+      ],
+      "id": "includes-candidate-ordinary-c++17",
+      "kind": "include-search",
+      "profile": "candidate-ordinary-c++17"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-target",
+        "arm64-apple-macos26.5",
+        "-isysroot",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-resource-dir",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+        "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+        "-stdlib=libc++",
+        "-fintegrated-as",
+        "-fno-modules",
+        "-fno-implicit-modules",
+        "-nostdinc",
+        "-nostdinc++",
+        "-std=c++20",
+        "-pedantic-errors",
+        "-O0",
+        "-g0",
+        "-fno-color-diagnostics",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+        "-iframework",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "-###",
+        "-x",
+        "c++",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp",
+        "-o",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/control-wire-c++20.not-created"
+      ],
+      "expectedIncludes": [
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        },
+        {
+          "framework": true,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        }
+      ],
+      "expectedStandard": "c++20",
+      "id": "jobs-control-wire-c++20",
+      "kind": "driver-jobs",
+      "output": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/control-wire-c++20.not-created",
+      "profile": "control-wire-c++20",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-target",
+        "arm64-apple-macos26.5",
+        "-isysroot",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-resource-dir",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+        "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+        "-stdlib=libc++",
+        "-fintegrated-as",
+        "-fno-modules",
+        "-fno-implicit-modules",
+        "-nostdinc",
+        "-nostdinc++",
+        "-std=c++20",
+        "-pedantic-errors",
+        "-O0",
+        "-g0",
+        "-fno-color-diagnostics",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+        "-iframework",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "-E",
+        "-v",
+        "-x",
+        "c++",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp",
+        "-o",
+        "/dev/null"
+      ],
+      "expectedIncludes": [
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        },
+        {
+          "framework": true,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        }
+      ],
+      "id": "includes-control-wire-c++20",
+      "kind": "include-search",
+      "profile": "control-wire-c++20"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-target",
+        "arm64-apple-macos26.5",
+        "-isysroot",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-resource-dir",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+        "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+        "-stdlib=libc++",
+        "-fintegrated-as",
+        "-fno-modules",
+        "-fno-implicit-modules",
+        "-nostdinc",
+        "-nostdinc++",
+        "-std=c++20",
+        "-pedantic-errors",
+        "-O0",
+        "-g0",
+        "-fno-color-diagnostics",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+        "-iframework",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "-###",
+        "-x",
+        "c++",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp",
+        "-o",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/candidate-wire-c++20.not-created"
+      ],
+      "expectedIncludes": [
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        },
+        {
+          "framework": true,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        }
+      ],
+      "expectedStandard": "c++20",
+      "id": "jobs-candidate-wire-c++20",
+      "kind": "driver-jobs",
+      "output": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/candidate-wire-c++20.not-created",
+      "profile": "candidate-wire-c++20",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-target",
+        "arm64-apple-macos26.5",
+        "-isysroot",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-resource-dir",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+        "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+        "-stdlib=libc++",
+        "-fintegrated-as",
+        "-fno-modules",
+        "-fno-implicit-modules",
+        "-nostdinc",
+        "-nostdinc++",
+        "-std=c++20",
+        "-pedantic-errors",
+        "-O0",
+        "-g0",
+        "-fno-color-diagnostics",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+        "-iframework",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "-E",
+        "-v",
+        "-x",
+        "c++",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp",
+        "-o",
+        "/dev/null"
+      ],
+      "expectedIncludes": [
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        },
+        {
+          "framework": true,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        }
+      ],
+      "id": "includes-candidate-wire-c++20",
+      "kind": "include-search",
+      "profile": "candidate-wire-c++20"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-target",
+        "arm64-apple-macos26.5",
+        "-isysroot",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-resource-dir",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+        "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+        "-stdlib=libc++",
+        "-fintegrated-as",
+        "-fno-modules",
+        "-fno-implicit-modules",
+        "-nostdinc",
+        "-nostdinc++",
+        "-std=c++17",
+        "-pedantic-errors",
+        "-O0",
+        "-g0",
+        "-fno-color-diagnostics",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+        "-iframework",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "-###",
+        "-x",
+        "c++",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp",
+        "-o",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/candidate-wire-c++17.not-created"
+      ],
+      "expectedIncludes": [
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        },
+        {
+          "framework": true,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        }
+      ],
+      "expectedStandard": "c++17",
+      "id": "jobs-candidate-wire-c++17",
+      "kind": "driver-jobs",
+      "output": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/candidate-wire-c++17.not-created",
+      "profile": "candidate-wire-c++17",
+      "source": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp"
+    },
+    {
+      "argv": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "--driver-mode=g++",
+        "--no-default-config",
+        "-target",
+        "arm64-apple-macos26.5",
+        "-isysroot",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "-resource-dir",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+        "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+        "-stdlib=libc++",
+        "-fintegrated-as",
+        "-fno-modules",
+        "-fno-implicit-modules",
+        "-nostdinc",
+        "-nostdinc++",
+        "-std=c++17",
+        "-pedantic-errors",
+        "-O0",
+        "-g0",
+        "-fno-color-diagnostics",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include",
+        "-I",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+        "-isystem",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+        "-iframework",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "-E",
+        "-v",
+        "-x",
+        "c++",
+        "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/empty.cpp",
+        "-o",
+        "/dev/null"
+      ],
+      "expectedIncludes": [
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        },
+        {
+          "framework": false,
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        },
+        {
+          "framework": false,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        },
+        {
+          "framework": true,
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        }
+      ],
+      "id": "includes-candidate-wire-c++17",
+      "kind": "include-search",
+      "profile": "candidate-wire-c++17"
+    }
+  ],
+  "counts": {
+    "driverQueries": 3,
+    "dryRuns": 6,
+    "includeSearches": 6,
+    "inspector": 16,
+    "total": 31
+  },
+  "executionProfiles": {
+    "compiler": [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
+    ],
+    "inspector": [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic"
+    ]
+  },
+  "nativeExecutionAuthorized": false,
+  "nativeFiles": [
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld",
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic",
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib",
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libcodedirectory.dylib",
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib",
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libtapi.dylib"
+  ],
+  "protocol": "dawn-cpp-backend-metadata-v1",
+  "resourceRoot": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+  "scope": "exact-wrapper-backend-31-query-metadata-only",
+  "sdkRoot": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+  "trees": [
+    {
+      "inventory": "planning/fixtures/dawn-cpp-qualification-v1/sdk-inventory.json"
+    },
+    {
+      "inventory": "planning/fixtures/dawn-cpp-qualification-v1/resource-inventory.json"
+    },
+    {
+      "inventory": "planning/fixtures/dawn-cpp-toolchain-v1/control-generated-inventory.json"
+    },
+    {
+      "inventory": "planning/fixtures/dawn-cpp-toolchain-v1/candidate-generated-inventory.json"
+    },
+    {
+      "inventory": "planning/fixtures/dawn-cpp-toolchain-v1/checked-in-source-inventory.json"
+    },
+    {
+      "inventory": "planning/fixtures/dawn-cpp-toolchain-v1/prepared-abseil-inventory.json"
+    }
+  ]
+}

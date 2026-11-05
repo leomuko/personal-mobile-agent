@@ -1,0 +1,693 @@
+{
+  "aliases": {
+    "backend": {
+      "anchor": "/Applications/Xcode.app/Contents/Developer",
+      "file": {
+        "bytes": 472320,
+        "mode": 493,
+        "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic",
+        "sha256": "6beb1ad9c4fb7edafd59fddcb093f358f9a250bfe1db2db9f04ed1aacd523a69"
+      },
+      "links": [],
+      "requested": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic",
+      "resolved": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic"
+    },
+    "compiler": {
+      "anchor": "/Applications/Xcode.app/Contents/Developer",
+      "file": {
+        "bytes": 141373024,
+        "mode": 493,
+        "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+        "sha256": "7def90dd8829726686213a747fc5bff1583df933dae5edc55d755479e0bfe00a"
+      },
+      "links": [],
+      "requested": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+      "resolved": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
+    },
+    "wrapper": {
+      "anchor": "/Applications/Xcode.app/Contents/Developer",
+      "file": {
+        "bytes": 72672,
+        "mode": 493,
+        "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+        "sha256": "be184bb7054565eae25193e45e4235ea2d372c1eb6288ce900b2fad6d9dcc3f3"
+      },
+      "links": [],
+      "requested": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+      "resolved": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool"
+    }
+  },
+  "architecture": "ARM64 subtype0 as recorded; no Android ABI qualification",
+  "conventionalAlias": {
+    "anchor": "/Applications/Xcode.app/Contents/Developer",
+    "file": {
+      "bytes": 72672,
+      "mode": 493,
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+      "sha256": "be184bb7054565eae25193e45e4235ea2d372c1eb6288ce900b2fad6d9dcc3f3"
+    },
+    "links": [
+      {
+        "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool",
+        "target": "llvm-otool"
+      }
+    ],
+    "requested": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool",
+    "resolved": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool"
+  },
+  "executionProfiles": {
+    "compiler": [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
+    ],
+    "inspector": [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic"
+    ]
+  },
+  "files": {
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang": {
+      "bytes": 141373024,
+      "dependencies": [
+        {
+          "installName": "/usr/lib/libresolv.9.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libSystem.B.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libz.1.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libc++.1.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        }
+      ],
+      "mode": 493,
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+      "rawMachO": {
+        "commandBytes": 2352,
+        "commandCount": 22,
+        "cpu": 16777228,
+        "dependencies": [
+          "/usr/lib/libresolv.9.dylib",
+          "/usr/lib/libSystem.B.dylib",
+          "/usr/lib/libz.1.dylib",
+          "/usr/lib/libc++.1.dylib"
+        ],
+        "filetype": 2,
+        "identifier": null,
+        "libraryNames": [
+          "/usr/lib/libresolv.9.dylib",
+          "/usr/lib/libSystem.B.dylib",
+          "/usr/lib/libz.1.dylib",
+          "/usr/lib/libc++.1.dylib"
+        ],
+        "loadCommandSha256": "1b7171ca061a6a468706428a4b7004294dfa52749ce6787289086b19bc4f28ea",
+        "loadNames": [
+          "/usr/lib/dyld",
+          "/usr/lib/libresolv.9.dylib",
+          "/usr/lib/libSystem.B.dylib",
+          "/usr/lib/libz.1.dylib",
+          "/usr/lib/libc++.1.dylib"
+        ],
+        "rpaths": [
+          "@loader_path/../lib"
+        ],
+        "sliceBytes": 141373024,
+        "sliceOffset": 0,
+        "subtype": 0
+      },
+      "sha256": "7def90dd8829726686213a747fc5bff1583df933dae5edc55d755479e0bfe00a"
+    },
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld": {
+      "bytes": 2331792,
+      "dependencies": [
+        {
+          "installName": "@rpath/libtapi.dylib",
+          "kind": "BUNDLED",
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libtapi.dylib"
+        },
+        {
+          "installName": "@rpath/libcodedirectory.dylib",
+          "kind": "BUNDLED",
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libcodedirectory.dylib"
+        },
+        {
+          "installName": "@rpath/libLTO.dylib",
+          "kind": "BUNDLED",
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib"
+        },
+        {
+          "installName": "@rpath/libswiftDemangle.dylib",
+          "kind": "BUNDLED",
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib"
+        },
+        {
+          "installName": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libobjc.A.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libc++.1.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libSystem.B.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+          "kind": "PINNED_SYSTEM_CACHE"
+        }
+      ],
+      "mode": 493,
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld",
+      "rawMachO": {
+        "commandBytes": 2992,
+        "commandCount": 28,
+        "cpu": 16777228,
+        "dependencies": [
+          "@rpath/libtapi.dylib",
+          "@rpath/libcodedirectory.dylib",
+          "@rpath/libLTO.dylib",
+          "@rpath/libswiftDemangle.dylib",
+          "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+          "/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics",
+          "/usr/lib/libobjc.A.dylib",
+          "/usr/lib/libc++.1.dylib",
+          "/usr/lib/libSystem.B.dylib",
+          "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+        ],
+        "filetype": 2,
+        "identifier": null,
+        "libraryNames": [
+          "@rpath/libtapi.dylib",
+          "@rpath/libcodedirectory.dylib",
+          "@rpath/libLTO.dylib",
+          "@rpath/libswiftDemangle.dylib",
+          "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+          "/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics",
+          "/usr/lib/libobjc.A.dylib",
+          "/usr/lib/libc++.1.dylib",
+          "/usr/lib/libSystem.B.dylib",
+          "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+        ],
+        "loadCommandSha256": "79ab5360855eb5c945e0e6b4aac6fd8ed3a9b690d90ac0e75deae2bfd485506a",
+        "loadNames": [
+          "/usr/lib/dyld",
+          "@rpath/libtapi.dylib",
+          "@rpath/libcodedirectory.dylib",
+          "@rpath/libLTO.dylib",
+          "@rpath/libswiftDemangle.dylib",
+          "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+          "/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics",
+          "/usr/lib/libobjc.A.dylib",
+          "/usr/lib/libc++.1.dylib",
+          "/usr/lib/libSystem.B.dylib",
+          "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+        ],
+        "rpaths": [
+          "@executable_path/../lib/"
+        ],
+        "sliceBytes": 2331792,
+        "sliceOffset": 0,
+        "subtype": 0
+      },
+      "sha256": "5897b275efd93b201b6df5832dd541262b3f20f290859ba78f2200a6a66ef38b"
+    },
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool": {
+      "bytes": 72672,
+      "dependencies": [
+        {
+          "installName": "/usr/lib/libc++.1.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libSystem.B.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        }
+      ],
+      "mode": 493,
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+      "rawMachO": {
+        "commandBytes": 1576,
+        "commandCount": 19,
+        "cpu": 16777228,
+        "dependencies": [
+          "/usr/lib/libc++.1.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ],
+        "filetype": 2,
+        "identifier": null,
+        "libraryNames": [
+          "/usr/lib/libc++.1.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ],
+        "loadCommandSha256": "8912f422ea8d1e24a1836bfc27df73392577f28b0b611b6d01e74d55d6f3f738",
+        "loadNames": [
+          "/usr/lib/dyld",
+          "/usr/lib/libc++.1.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ],
+        "rpaths": [],
+        "sliceBytes": 72672,
+        "sliceOffset": 0,
+        "subtype": 0
+      },
+      "sha256": "be184bb7054565eae25193e45e4235ea2d372c1eb6288ce900b2fad6d9dcc3f3"
+    },
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic": {
+      "bytes": 472320,
+      "mode": 493,
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic",
+      "rawMachO": {
+        "commandBytes": 1576,
+        "commandCount": 19,
+        "cpu": 16777228,
+        "dependencies": [
+          "/usr/lib/libc++.1.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ],
+        "filetype": 2,
+        "identifier": null,
+        "libraryNames": [
+          "/usr/lib/libc++.1.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ],
+        "loadCommandSha256": "78db15a8a1bf6116638ae88cdcdc8d31c53716dbc4e413edd87371bd773a8692",
+        "loadNames": [
+          "/usr/lib/dyld",
+          "/usr/lib/libc++.1.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ],
+        "rpaths": [],
+        "sliceBytes": 472320,
+        "sliceOffset": 0,
+        "subtype": 0
+      },
+      "sha256": "6beb1ad9c4fb7edafd59fddcb093f358f9a250bfe1db2db9f04ed1aacd523a69"
+    },
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib": {
+      "bytes": 76699312,
+      "dependencies": [
+        {
+          "installName": "/usr/lib/libz.1.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libresolv.9.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libSystem.B.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libc++.1.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        }
+      ],
+      "mode": 493,
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib",
+      "rawMachO": {
+        "commandBytes": 2192,
+        "commandCount": 20,
+        "cpu": 16777228,
+        "dependencies": [
+          "/usr/lib/libz.1.dylib",
+          "/usr/lib/libresolv.9.dylib",
+          "/usr/lib/libSystem.B.dylib",
+          "/usr/lib/libc++.1.dylib"
+        ],
+        "filetype": 6,
+        "identifier": "@rpath/libLTO.dylib",
+        "libraryNames": [
+          "@rpath/libLTO.dylib",
+          "/usr/lib/libz.1.dylib",
+          "/usr/lib/libresolv.9.dylib",
+          "/usr/lib/libSystem.B.dylib",
+          "/usr/lib/libc++.1.dylib"
+        ],
+        "loadCommandSha256": "54bb5a6f6dd4d8cb839c80cf97a680ac4260e052e641fb82e94d85e2a907250f",
+        "loadNames": [
+          "@rpath/libLTO.dylib",
+          "/usr/lib/libz.1.dylib",
+          "/usr/lib/libresolv.9.dylib",
+          "/usr/lib/libSystem.B.dylib",
+          "/usr/lib/libc++.1.dylib"
+        ],
+        "rpaths": [
+          "@loader_path/../lib"
+        ],
+        "sliceBytes": 76699312,
+        "sliceOffset": 0,
+        "subtype": 0
+      },
+      "sha256": "3822d5b5f4d8201fef438ec9ab4d6c5f0256c2b9920ffc529d2fecbbf224441b"
+    },
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libcodedirectory.dylib": {
+      "bytes": 73760,
+      "dependencies": [
+        {
+          "installName": "/usr/lib/libSystem.B.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        }
+      ],
+      "mode": 493,
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libcodedirectory.dylib",
+      "rawMachO": {
+        "commandBytes": 1376,
+        "commandCount": 16,
+        "cpu": 16777228,
+        "dependencies": [
+          "/usr/lib/libSystem.B.dylib"
+        ],
+        "filetype": 6,
+        "identifier": "@rpath/libcodedirectory.dylib",
+        "libraryNames": [
+          "@rpath/libcodedirectory.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ],
+        "loadCommandSha256": "5994f573cb7ea13c6784d36355e0914c3fdfab9ceafc7bd361253858a1d05a3b",
+        "loadNames": [
+          "@rpath/libcodedirectory.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ],
+        "rpaths": [],
+        "sliceBytes": 73760,
+        "sliceOffset": 0,
+        "subtype": 0
+      },
+      "sha256": "5495c7647a41103bc8ecd43678e77352dbc1a5fd244aa3bd419d226040b23ee5"
+    },
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib": {
+      "bytes": 602672,
+      "dependencies": [
+        {
+          "installName": "/usr/lib/libobjc.A.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libc++.1.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libSystem.B.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        }
+      ],
+      "mode": 493,
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib",
+      "rawMachO": {
+        "commandBytes": 1432,
+        "commandCount": 19,
+        "cpu": 16777228,
+        "dependencies": [
+          "/usr/lib/libobjc.A.dylib",
+          "/usr/lib/libc++.1.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ],
+        "filetype": 6,
+        "identifier": "@rpath/libswiftDemangle.dylib",
+        "libraryNames": [
+          "@rpath/libswiftDemangle.dylib",
+          "/usr/lib/libobjc.A.dylib",
+          "/usr/lib/libc++.1.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ],
+        "loadCommandSha256": "e863efff4f97e70f683e9059b5f216fb5ecea33829c451e4dc19255aa6753bdd",
+        "loadNames": [
+          "@rpath/libswiftDemangle.dylib",
+          "/usr/lib/libobjc.A.dylib",
+          "/usr/lib/libc++.1.dylib",
+          "/usr/lib/libSystem.B.dylib"
+        ],
+        "rpaths": [
+          "/usr/lib/swift"
+        ],
+        "sliceBytes": 602672,
+        "sliceOffset": 0,
+        "subtype": 0
+      },
+      "sha256": "5ada6d0e202521c1b427cbdd5f3c850f6384b94aed873f32936672baac4be195"
+    },
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libtapi.dylib": {
+      "bytes": 328240,
+      "dependencies": [
+        {
+          "installName": "/usr/lib/libSystem.B.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libz.1.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        },
+        {
+          "installName": "/usr/lib/libc++.1.dylib",
+          "kind": "PINNED_SYSTEM_CACHE"
+        }
+      ],
+      "mode": 493,
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libtapi.dylib",
+      "rawMachO": {
+        "commandBytes": 1560,
+        "commandCount": 19,
+        "cpu": 16777228,
+        "dependencies": [
+          "/usr/lib/libSystem.B.dylib",
+          "/usr/lib/libz.1.dylib",
+          "/usr/lib/libc++.1.dylib"
+        ],
+        "filetype": 6,
+        "identifier": "@rpath/libtapi.dylib",
+        "libraryNames": [
+          "@rpath/libtapi.dylib",
+          "/usr/lib/libSystem.B.dylib",
+          "/usr/lib/libz.1.dylib",
+          "/usr/lib/libc++.1.dylib"
+        ],
+        "loadCommandSha256": "56769b97412813009567df6c4c47d28baaa7a96a635365e46dd1a6bad39d18db",
+        "loadNames": [
+          "@rpath/libtapi.dylib",
+          "/usr/lib/libSystem.B.dylib",
+          "/usr/lib/libz.1.dylib",
+          "/usr/lib/libc++.1.dylib"
+        ],
+        "rpaths": [],
+        "sliceBytes": 328240,
+        "sliceOffset": 0,
+        "subtype": 0
+      },
+      "sha256": "1a1b65968056504b99f4be0e2d5a4e120d8d673e70c4a72360c670fd0008dcc2"
+    }
+  },
+  "loadCommandGraphs": [
+    {
+      "executable": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+      "nodes": {
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang": [
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libresolv.9.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libSystem.B.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libz.1.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libc++.1.dylib"
+          }
+        ]
+      }
+    },
+    {
+      "executable": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld",
+      "nodes": {
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld": [
+          {
+            "kind": "BUNDLED",
+            "name": "@rpath/libtapi.dylib",
+            "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libtapi.dylib"
+          },
+          {
+            "kind": "BUNDLED",
+            "name": "@rpath/libcodedirectory.dylib",
+            "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libcodedirectory.dylib"
+          },
+          {
+            "kind": "BUNDLED",
+            "name": "@rpath/libLTO.dylib",
+            "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib"
+          },
+          {
+            "kind": "BUNDLED",
+            "name": "@rpath/libswiftDemangle.dylib",
+            "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libobjc.A.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libc++.1.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libSystem.B.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+          }
+        ],
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib": [
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libz.1.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libresolv.9.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libSystem.B.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libc++.1.dylib"
+          }
+        ],
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libcodedirectory.dylib": [
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libSystem.B.dylib"
+          }
+        ],
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib": [
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libobjc.A.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libc++.1.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libSystem.B.dylib"
+          }
+        ],
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libtapi.dylib": [
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libSystem.B.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libz.1.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libc++.1.dylib"
+          }
+        ]
+      }
+    },
+    {
+      "executable": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+      "nodes": {
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool": [
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libc++.1.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libSystem.B.dylib"
+          }
+        ]
+      }
+    },
+    {
+      "executable": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic",
+      "nodes": {
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic": [
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libc++.1.dylib"
+          },
+          {
+            "kind": "PINNED_SYSTEM_CACHE",
+            "name": "/usr/lib/libSystem.B.dylib"
+          }
+        ]
+      }
+    }
+  ],
+  "nativeQualified": false,
+  "originalNativeCatalog": {
+    "bytes": 16161,
+    "mode": 420,
+    "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-qualification-v1/native-static-inventory.json",
+    "sha256": "a42f13e09975b89bfe1f01f8e3e26d3d4c55c08b32dcc7914591637199d5f359"
+  },
+  "originalNativeFiles": [
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld",
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool",
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib",
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libcodedirectory.dylib",
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libswiftDemangle.dylib",
+    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libtapi.dylib"
+  ],
+  "priorAttempt": "build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-1",
+  "priorExecutionFreeze": {
+    "bytes": 86721,
+    "mode": 420,
+    "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/metadata-execution-freeze-r4.json",
+    "sha256": "ebfaa5b337f042c2be353e20ab225eb8dbbcf989bdb6a3aaddc49b3e82f28126"
+  },
+  "priorOutcome": {
+    "path": "build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-1/outcome.json",
+    "sha256": "99090fca26d1a28958fb63417cb40f98fec9ee19b3124fb13b69d9eb74eadf4e"
+  },
+  "protocol": "cpp-inspector-backend-static-v1",
+  "staticIdentityVerified": true,
+  "systemCacheMap": {
+    "bytes": 1338214,
+    "mode": 493,
+    "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.map",
+    "sha256": "9486c0f76e880803a785925771d601d064fee8a7bec4279bd54c059db92adddd"
+  },
+  "wrapperExecutionEdge": {
+    "basis": "metadata-1 wrapper-reported attempted dispatch; no successful backend execution proof",
+    "destination": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic",
+    "nativeDispatchVerified": false,
+    "source": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-otool"
+  }
+}

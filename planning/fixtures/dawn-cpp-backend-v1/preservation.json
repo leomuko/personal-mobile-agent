@@ -1,0 +1,13 @@
+{
+  "nativeQueriesExecuted": false,
+  "newAttemptCreated": false,
+  "oldAttemptUnchanged": true,
+  "oldFrozenInputRowsVerified": 94,
+  "oldFullTreesVerified": 6,
+  "oldMetadataAttemptEntriesVerified": 7,
+  "oldResultBindingsVerified": 29,
+  "oldSourceUnchanged": true,
+  "previousCleanupConfirmed": true,
+  "protocol": "cpp-backend-preparation-preservation-v1",
+  "status": "PASS"
+}
