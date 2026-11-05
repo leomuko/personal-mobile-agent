@@ -1,0 +1,29 @@
+{
+  "exactTraceRecord": {
+    "argv": [
+      "/usr/bin/sandbox-exec",
+      "-p",
+      "(version 1)(allow default)(deny network*)(deny file-write*)(allow file-write* (subpath \"/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2\"))(allow file-write* (literal \"/dev/null\"))(deny process-exec)(allow process-exec (literal \"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang\"))",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+      "--driver-mode=g++",
+      "--no-default-config",
+      "-B/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+      "-print-prog-name=ld"
+    ],
+    "exitCode": 0,
+    "outputBase64": "bGQK",
+    "seconds": 0.011715875000000153
+  },
+  "nativeQueryCount": 19,
+  "newNativeQueriesExecuted": 0,
+  "qualified": false,
+  "rootCause": "UNPROVED",
+  "schema": 1,
+  "traceFile": {
+    "bytes": 88442,
+    "mode": 420,
+    "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2/command-trace.jsonl",
+    "sha256": "941a02a445e87102a835bf37a4c62a846d0c1ad7b98e19af34242574794c9215"
+  },
+  "traceRecordIndex": 18
+}

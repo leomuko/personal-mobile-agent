@@ -1,0 +1,56 @@
+{
+  "fullSuite": {
+    "command": [
+      "/Users/kezileo/Desktop/personal_mobile_agent/build/constrained-decoding-reference/bin/python",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "scripts/tests",
+      "-p",
+      "test_*.py",
+      "-v"
+    ],
+    "existingEnvironment": true,
+    "failures": 0,
+    "requestedInterpreter": "/Users/kezileo/Desktop/personal_mobile_agent/build/constrained-decoding-reference/bin/python",
+    "resolvedInterpreter": {
+      "bytes": 102352,
+      "mode": 493,
+      "path": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+      "sha256": "271143990bc83af0fb2404a255038f5faafb96df1584ed7f085e5018c0f33ffb"
+    },
+    "skips": 0,
+    "tests": 367,
+    "venvConfig": {
+      "bytes": 111,
+      "mode": 420,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/constrained-decoding-reference/pyvenv.cfg",
+      "sha256": "0d96cc1b5736a0ecc270a68b24323826e1f368e6f62d6267569bb1b20776fa9a"
+    }
+  },
+  "isolatedFullAttempt": {
+    "cause": "SentencePiece unavailable with isolated site-disabled Python3.9",
+    "classification": "UNAVAILABLE_FOR_5_OLDER_MODULES",
+    "errors": 5,
+    "log": "build/dawn-cpp-linker-v1/host-tests-isolated-python39-unavailable.log",
+    "passed": 311,
+    "testsReported": 316
+  },
+  "nativeProbesRun": 0,
+  "newPackageInstallation": false,
+  "pinnedFocusedSuite": {
+    "failures": 0,
+    "flags": [
+      "-I",
+      "-S",
+      "-B"
+    ],
+    "python": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+    "skips": 0,
+    "testPattern": "test_dawn_cpp_linker.py",
+    "tests": 24
+  },
+  "schema": 1
+}

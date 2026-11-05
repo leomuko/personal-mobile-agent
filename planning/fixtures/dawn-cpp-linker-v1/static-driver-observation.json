@@ -1,0 +1,46 @@
+{
+  "additionalOccurrencesOmitted": {
+    "_access\\0": true,
+    "ld-path=": false,
+    "print-prog-name=": false
+  },
+  "completeOccurrenceInventory": false,
+  "executableBehaviorProved": false,
+  "file": {
+    "bytes": 141373024,
+    "mode": 493,
+    "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+    "sha256": "7def90dd8829726686213a747fc5bff1583df933dae5edc55d755479e0bfe00a"
+  },
+  "nativeExecutionOccurred": false,
+  "observations": {
+    "_access\\0": [
+      109381921,
+      110035252,
+      110035311,
+      110035362,
+      110463988,
+      110760873,
+      110792755,
+      111178636,
+      111180596,
+      111187957,
+      111188098,
+      116083574,
+      116093418,
+      116093447,
+      116094202,
+      116094231
+    ],
+    "ld-path=": [
+      105167853,
+      105242975,
+      105943298
+    ],
+    "print-prog-name=": [
+      105181664,
+      105256786
+    ]
+  },
+  "stringOccurrencesOnly": true
+}

@@ -1,0 +1,54 @@
+{
+  "downloadedSources": false,
+  "nativeExecutionOccurred": false,
+  "notAppleBinarySourceProof": true,
+  "references": [
+    {
+      "claim": "General program-name lookup can return unresolved input after executable searches.",
+      "lineRanges": [
+        [
+          2360,
+          2367
+        ],
+        [
+          6057,
+          6100
+        ]
+      ],
+      "url": "https://github.com/llvm/llvm-project/blob/llvmorg-21.1.0/clang/lib/Driver/Driver.cpp"
+    },
+    {
+      "claim": "Absolute --ld-path remains subject to executability validation; not guaranteed here.",
+      "lineRanges": [
+        [
+          998,
+          1064
+        ]
+      ],
+      "url": "https://github.com/llvm/llvm-project/blob/llvmorg-21.1.0/clang/lib/Driver/ToolChain.cpp"
+    },
+    {
+      "claim": "Upstream checks read/execute access and regular-file type.",
+      "lineRanges": [
+        [
+          566,
+          598
+        ]
+      ],
+      "url": "https://github.com/llvm/llvm-project/blob/llvmorg-21.1.0/llvm/lib/Support/Unix/Path.inc"
+    },
+    {
+      "claim": "Darwin job construction selects a linker through the toolchain.",
+      "lineRanges": [
+        [
+          538,
+          542
+        ]
+      ],
+      "url": "https://github.com/llvm/llvm-project/blob/llvmorg-21.1.0/clang/lib/Driver/ToolChains/Darwin.cpp"
+    }
+  ],
+  "role": "explanatory-upstream-reference-only",
+  "schema": 1,
+  "upstreamTag": "llvmorg-21.1.0"
+}
