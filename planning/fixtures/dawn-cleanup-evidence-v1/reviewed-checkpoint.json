@@ -1,0 +1,12 @@
+{
+  "status": "INDEPENDENTLY_REVIEWED_CLEANUP_FIX_AND_CPP_PROPOSAL_PASS",
+  "resultLockSha256": "f0596706160d6a10fc20730f2fe7f9048740a48b2f0ffe8402606f9c36a91ec4",
+  "proposalLockSha256": "307c6225c161f03eb90ea618928eff8334fc28c81e730bb6ae80b5ddaf84e658",
+  "reviewSha256": "6001da334836352f5a57f402e76336d762c79dce95cd75be52dd51a6bc3b2d93",
+  "P2Complete": false,
+  "semanticEnabled": false,
+  "cppExecutionReady": false,
+  "acquisitionAuthorized": false,
+  "compilerExecuted": false,
+  "commitsCreated": 0
+}

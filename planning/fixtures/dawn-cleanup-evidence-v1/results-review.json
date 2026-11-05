@@ -1,0 +1,58 @@
+{
+  "BazelSelectionVerified": false,
+  "P2Complete": false,
+  "acquisitionAuthorized": false,
+  "cleanupFixVerdict": "PASS",
+  "cleanupResultLockSha256": "f0596706160d6a10fc20730f2fe7f9048740a48b2f0ffe8402606f9c36a91ec4",
+  "compilerExecuted": false,
+  "cppExecutionReadiness": "NOT_READY",
+  "cppProposalLockSha256": "307c6225c161f03eb90ea618928eff8334fc28c81e730bb6ae80b5ddaf84e658",
+  "cppProposalVerdict": "PASS_PROPOSAL_ONLY",
+  "deviceExecutionAuthorized": false,
+  "findings": [],
+  "head": "83dec19d4244394d33d2019b5a7e09ead9d408a8",
+  "limitations": [
+    "Owner-error reproductions mocked; actual process cleanup is not proven by UNCERTAIN outcomes.",
+    "Abseil payload, patch/rewrite semantics, native inspector/runtime/helper closure, driver argv and complete-header harness remain unqualified.",
+    "OS-cache inventory rows compared to prior catalog; cache payload not freshly rehashed.",
+    "No compiler, linker, sed, patch, vendor, acquisition, Bazel or device execution.",
+    "Historical locks and prior reports were preserved; stale execution freezes were not refreshed.",
+    "Proposal PASS does not approve an executable freeze or root adoption."
+  ],
+  "nativeExecutionAuthorized": false,
+  "reviewPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cleanup-evidence-v1/qa-review-1/review.md",
+  "reviewedOn": "2026-11-04",
+  "reviewer": "Retained sole primary independent Codex QA reviewer",
+  "rootAdopted": false,
+  "schema": 1,
+  "scope": "dawn-cleanup-exception-fix-evidence-and-abseil-cpp-proposal-only",
+  "semanticEnablement": false,
+  "snapshotPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cleanup-evidence-v1/qa-review-1/snapshot.json",
+  "snapshotSha256": "fa7862350d039f8793956e4878be2bcddb206ccd10e701468d7ae880acbbdbab",
+  "vendorExecuted": false,
+  "verdict": "PASS",
+  "verification": {
+    "baselineMissingOutcomeReproduced": true,
+    "diffCheck": "PASS",
+    "heldDraftBindings": 1,
+    "historicalGitBindings": 49,
+    "independentAudit": "PASS",
+    "independentFocusedTests": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 61,
+      "skipped": 0
+    },
+    "oldFreezeRejectsChangedSource": true,
+    "producerFullTests": {
+      "freshIndependentRerun": false,
+      "passed": 258
+    },
+    "rawNativeBytes": 223263920,
+    "rawNativeFiles": 11,
+    "retainedEvidenceEntries": 4539,
+    "sdkResourceBytes": 849499659,
+    "sdkResourceEntries": 50077,
+    "threeCurrentExceptionsRecordedUncertain": true
+  }
+}
