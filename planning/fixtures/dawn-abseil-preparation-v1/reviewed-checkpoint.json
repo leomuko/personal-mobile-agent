@@ -1,0 +1,64 @@
+{
+  "protocol": "abseil-preparation-reviewed-checkpoint-v1",
+  "verdict": "PASS_PREPARATION_IMPLEMENTATION_AND_FREEZE_ONLY",
+  "freezeSha256": "abcf9101fbec62db93ef836115c04bf9869de00a970812a4db742b676347a90c",
+  "reviewSha256": "f343cd216ce018fcac3f9496108cffadb6236adc0290007d8e1383470ce7acf0",
+  "bindings": [
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-abseil-preparation-v1/preparation-freeze-r2.json",
+      "bytes": 25136,
+      "sha256": "abcf9101fbec62db93ef836115c04bf9869de00a970812a4db742b676347a90c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-abseil-preparation-v1/preparation-review.json",
+      "bytes": 3064,
+      "sha256": "f343cd216ce018fcac3f9496108cffadb6236adc0290007d8e1383470ce7acf0"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-abseil-preparation-v1/reviewed-snapshot.json",
+      "bytes": 25216,
+      "sha256": "db034608d231b77c7db92aa79a071dd62124b9c4c93d9fec37c8e7d3e0422742"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/review.md",
+      "bytes": 6966,
+      "sha256": "d8dd9e24cbe6ef0a8025c976677ca3a36464f708a3f25dce73845114af74263c"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/binding-audit.json",
+      "bytes": 458,
+      "sha256": "00831ab2f594de0bfa4caa0e9649f65b49195a59563db8d1788b3990b6d456f4"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/controller-probes.json",
+      "bytes": 16433,
+      "sha256": "6e3bc9be67f8f30a1325fc5ddeb1b2806c565bc66ca5bf666f558018c08ec3f3"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/focused-tests.log",
+      "bytes": 3916,
+      "sha256": "b5c557b765694dd368a113d692ad22acd48bf6190e3abcb49b0e02b08eb9c340"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/focused-pinned-python39.log",
+      "bytes": 3916,
+      "sha256": "276c140b7064b30f72c8ec43faf32d1d76623c89b6d92f6093979c436171ce40"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/final-admission-check.json",
+      "bytes": 322,
+      "sha256": "eaa4c6d68a4250d6eb9e2b234fc58612be002b8d95ab2167e6266ede0b77bbdc"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/host-tests-freeze.log",
+      "bytes": 34473,
+      "sha256": "f7ec42d41c4b5a658a6b9bb49a7d5e3b0bf922d80c3088829ee8495007c14da3"
+    }
+  ],
+  "sourceAcquired": false,
+  "realSourcePrepared": false,
+  "compilerReady": false,
+  "BazelSelectionVerified": false,
+  "P2Complete": false,
+  "semanticEnablement": false
+}

@@ -1,0 +1,457 @@
+{
+  "baseHead": "83dec19d4244394d33d2019b5a7e09ead9d408a8",
+  "branch": "dev",
+  "files": {
+    "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9": {
+      "bytes": 102352,
+      "sha256": "271143990bc83af0fb2404a255038f5faafb96df1584ed7f085e5018c0f33ffb"
+    },
+    "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/gzip.py": {
+      "bytes": 21772,
+      "sha256": "e1287cead7a16d31bacb1498e3847467f672056d5b0b8d5fa7f2ba4e0c5d3cba"
+    },
+    "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py": {
+      "bytes": 55520,
+      "sha256": "bb1b56ca9ae39036d57f9e9c9420862a150c13c3c940e8eb63fda05a6961351b"
+    },
+    "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py": {
+      "bytes": 36609,
+      "sha256": "f8db5ac96dcb251ce1678fcbb64e56b263c37c1e563cde6191266bbf0ba7f766"
+    },
+    "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/ssl.py": {
+      "bytes": 50751,
+      "sha256": "955eb00ea314832cc9d8db71729c434d0a10c293303634daa5688d3eef755e82"
+    },
+    "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py": {
+      "bytes": 101280,
+      "sha256": "8d1a5f86334c468df202969a87df233dc25c1449f8696f24a986e922b2cfdefd"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e": {
+      "bytes": 573440,
+      "mode": 493,
+      "sha256": "7a024959c8c14d46e2964f975f2256b3f9efc2da950a31067d26ac7ac16498d4"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.01": {
+      "bytes": 1715355648,
+      "mode": 493,
+      "sha256": "2130d36b0a4a034cec46d44b9205e08d5bceca280509f90defe3d0ac3891496e"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.02.dylddata": {
+      "bytes": 234569728,
+      "mode": 493,
+      "sha256": "dc6bf44cce543831717e158914166bffc8a98f7015e38c5b2ea50bb2566dc541"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.03.dyldreadonly": {
+      "bytes": 127057920,
+      "mode": 493,
+      "sha256": "9e5d46f5e4b5f3f719264c766910d523559dbee992322b21f684a89ba1884943"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.04.dyldlinkedit": {
+      "bytes": 601341952,
+      "mode": 493,
+      "sha256": "0a403732b86c08b39daf6669532c3f5bb10bb12ef288b597e366a06f1b981b0b"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.05": {
+      "bytes": 1819885568,
+      "mode": 493,
+      "sha256": "bfcb33596a2bde568376c39ba179f3666becddbda2153cc7e48e0ffd21237aa4"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.06.dylddata": {
+      "bytes": 237125632,
+      "mode": 493,
+      "sha256": "996039f29c5f41941922ca54e7cfc249b707bcc1cfa4d9654945417027864e17"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.07.dyldreadonly": {
+      "bytes": 7290880,
+      "mode": 493,
+      "sha256": "a9c6dd008245e2d4e024dd54875f95a33c4b488680f7e3b3e825cfa79dac7550"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.08.dyldlinkedit": {
+      "bytes": 617381888,
+      "mode": 493,
+      "sha256": "d9d696f6624da68fb4df4dca0f3ea1a5b4c76a7de1a2e6d107d1e36cee9e75dc"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.09": {
+      "bytes": 182812672,
+      "mode": 493,
+      "sha256": "99344558cc98e4155262495ba2f2132aaf1331a02a8e7d6a129c7cf0a31e72c5"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.10.dylddata": {
+      "bytes": 23199744,
+      "mode": 493,
+      "sha256": "fb7f328058ad6f118592c1b7d81d67d431d8e73e4ed8ed3239de20eb65bd0e98"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.11": {
+      "bytes": 32768,
+      "mode": 493,
+      "sha256": "be38a6ebbd6b0a5cf4692e23e683f53dcbb478725aac5b1e0b8cfe02ac9edc5e"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.12.dyldlinkedit": {
+      "bytes": 254345216,
+      "mode": 493,
+      "sha256": "f61b8530e5697eaa744b3f36ea1c1a26a2da1a469f1f5f0395162c2e172b8625"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.atlas": {
+      "bytes": 2372801,
+      "mode": 493,
+      "sha256": "ad196c5e2c1c0a3be152007906f1892861edaca96cbf4a8aa3bc581e07d684e2"
+    },
+    "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.map": {
+      "bytes": 1338214,
+      "mode": 493,
+      "sha256": "9486c0f76e880803a785925771d601d064fee8a7bec4279bd54c059db92adddd"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/AGENTS.md": {
+      "bytes": 4233,
+      "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/focused-host39-freeze.log": {
+      "bytes": 3916,
+      "sha256": "836bc8721dd716870bb3db2a47b872a99a0d48acc906cd76b6e12b6986f012ce"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/host-tests-freeze.log": {
+      "bytes": 34473,
+      "sha256": "f7ec42d41c4b5a658a6b9bb49a7d5e3b0bf922d80c3088829ee8495007c14da3"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/audit.log": {
+      "bytes": 107,
+      "sha256": "97de96371ca0aa5be071b5606328c582054b1efe7a6985f1672496074d94623f"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/audit.py": {
+      "bytes": 9864,
+      "sha256": "a4fc1bd9def890e848419dfe4a8bc732ce97a793b7656af48ce879a50ecabac7"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/binding-audit.json": {
+      "bytes": 458,
+      "sha256": "00831ab2f594de0bfa4caa0e9649f65b49195a59563db8d1788b3990b6d456f4"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/controller-probes.json": {
+      "bytes": 16433,
+      "sha256": "6e3bc9be67f8f30a1325fc5ddeb1b2806c565bc66ca5bf666f558018c08ec3f3"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/finalize.py": {
+      "bytes": 5516,
+      "sha256": "048f72b5bb5072a955cccaadb4338a1e1a3ffe3175a34a18587254cfc0a4f3d7"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/focused-pinned-python39.log": {
+      "bytes": 3916,
+      "sha256": "276c140b7064b30f72c8ec43faf32d1d76623c89b6d92f6093979c436171ce40"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/focused-tests.log": {
+      "bytes": 3916,
+      "sha256": "b5c557b765694dd368a113d692ad22acd48bf6190e3abcb49b0e02b08eb9c340"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/qa-preparation-review-1/review.md": {
+      "bytes": 6966,
+      "sha256": "d8dd9e24cbe6ef0a8025c976677ca3a36464f708a3f25dce73845114af74263c"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-r1.py": {
+      "bytes": 4000,
+      "sha256": "6afa9be44c896188b8849eae393ebdff2ab60d778da745726ce3eeb5d5c54cf2"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/build/dawn-abseil-preparation-v1/sed-probe.py": {
+      "bytes": 4379,
+      "sha256": "1b7a73b62c457ffef803704c4542d21612f7da9fd6ea545fe74827eb3fa9bb43"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/scripts/diagnostics/dawn_abseil_v1/archive.py": {
+      "bytes": 11831,
+      "sha256": "46776e84432ddd41ee75cd9dd20c645edc01efa32735c0babb0d447d9c911713"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/scripts/diagnostics/dawn_abseil_v1/prepare.py": {
+      "bytes": 16301,
+      "sha256": "14a76fa9c54dfb2529df6da11f1018d2d310d854dc0af84cdf512e003afc8e0d"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/scripts/diagnostics/dawn_abseil_v1/tools.py": {
+      "bytes": 1491,
+      "sha256": "c3779bce8ae7a33fc48da8127817059040b75dc2cbea7e887e92a12482c061dc"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/scripts/diagnostics/dawn_abseil_v1/transforms.py": {
+      "bytes": 6655,
+      "sha256": "47a81482171f7455cc91abb78f586afe60ced810c8545dec15155f90fb2fa064"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/scripts/diagnostics/dawn_python_patch_v1/catalog.py": {
+      "bytes": 16295,
+      "sha256": "e3fe875da3d187b3381573f20077a71d85d18580408e7e566c65de10bf0ca713"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/scripts/diagnostics/dawn_python_patch_v1/macho.py": {
+      "bytes": 4366,
+      "sha256": "0b040994d1211d59dcdedad6b9ca0769b290f0e74666a2f823803dd40addfc60"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/scripts/diagnostics/dawn_python_patch_v1/policy.py": {
+      "bytes": 3320,
+      "sha256": "f191fc49fa072e4efbf183bdfe3a899ed9ecb51c7d8a7439b80ff47472bb09e5"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/scripts/diagnostics/dawn_python_patch_v1/probe.py": {
+      "bytes": 4571,
+      "sha256": "0ffbbe37f5a1a76ed6f88c3c855b13524f589234ec816a942afb9c818a7b9237"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/scripts/diagnostics/dawn_python_patch_v1/qualify.py": {
+      "bytes": 22923,
+      "sha256": "1e2f2d353d7c0bf49d3e33cd02f1c3fef647344bd5a6c0a16ae785d72fe255d1"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/scripts/diagnostics/dawn_python_patch_v1/staging.py": {
+      "bytes": 5002,
+      "sha256": "a1999ca327563a1cf55a0d0c9c6efc554aeeedc5ef84a0969a48e29d6558d545"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/scripts/diagnostics/dawn_python_patch_v1/wheels.py": {
+      "bytes": 6867,
+      "sha256": "1e04b51f053e92e4891249ff680e7d0440a879a106b0ca1a573ef2c5b5de61e9"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/scripts/diagnostics/ml_drift_compatibility/analyze.py": {
+      "bytes": 18796,
+      "sha256": "01706ddb5533fd0ccd8198518257034a86144b972aaab923c70a102fe74e5c59"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe-source/scripts/diagnostics/root_dependency_offline_v2/inspect.py": {
+      "bytes": 23725,
+      "sha256": "3acfc58714dda2d104e31c12680adb412b4e082ab52d9adf84c23ddd3947e615"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probe.py": {
+      "bytes": 4379,
+      "sha256": "1b7a73b62c457ffef803704c4542d21612f7da9fd6ea545fe74827eb3fa9bb43"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/before-tree.json": {
+      "bytes": 723,
+      "sha256": "911a33ecb2b015779bb900cbc43808a72504ea8b44ed94bfe3fee1917e8bb0e3"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/command-trace.json": {
+      "bytes": 478,
+      "sha256": "c3ade9f14920ed7208f056fbc7d02821ea5202722246dd5a9346cdab761f0675"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/facts.json": {
+      "bytes": 899,
+      "sha256": "b1651ad0c607f28464ff5c8797809b7bbd6d38f717fc1ee2a461fa329d74f64b"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/fixture/absl/a/BUILD.bazel": {
+      "bytes": 31,
+      "sha256": "85ccb398c463b2e8916f36de9466bfabfede196d2f305dc4f39cb6f59c13edf2"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/fixture/absl/a/BUILD.bazel-e": {
+      "bytes": 20,
+      "sha256": "0246b5106a4c8d273e10b0844960e1fc9fa053cc68221e4a881486dc9f67e2fd"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/fixture/absl/a/b/BUILD.bazel": {
+      "bytes": 16,
+      "sha256": "d805110f86f8bc06b480a43b150abace2c986ad91ea283b2076b7dcd923f8464"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/fixture/absl/a/b/BUILD.bazel-e": {
+      "bytes": 16,
+      "sha256": "d805110f86f8bc06b480a43b150abace2c986ad91ea283b2076b7dcd923f8464"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/fixture/absl/a/b/c/BUILD.bazel": {
+      "bytes": 54,
+      "sha256": "99c9048d9eae427fab0336dd099fcff85cdc61faafb84879d9368deeecd0bd44"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/fixture/absl/a/b/c/BUILD.bazel-e": {
+      "bytes": 32,
+      "sha256": "ba1096c985369ecade9f80a4a154b31fc8b8de8a683296e1fda2bcc68a9c8e25"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/observed-tree.json": {
+      "bytes": 1141,
+      "sha256": "c6620900867288e532bc506e9fda7cfca839739b8100f3495a61fe13b7e647c4"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/outcome.json": {
+      "bytes": 843,
+      "sha256": "ce9581e336f69c78308f9824ba47a3efce6b0a9c3abd2e7a51dd20633f90d60c"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/outcome.pending.json": {
+      "bytes": 843,
+      "sha256": "ce9581e336f69c78308f9824ba47a3efce6b0a9c3abd2e7a51dd20633f90d60c"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/qualified-facts.json": {
+      "bytes": 1010,
+      "sha256": "ef06f64fda1a2dab7c1bc4ae00152123a4a33e6e5814aea1c8ab184dd43cc3a2"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/qualified-facts.pending.json": {
+      "bytes": 1010,
+      "sha256": "ef06f64fda1a2dab7c1bc4ae00152123a4a33e6e5814aea1c8ab184dd43cc3a2"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/rewrite-plan.json": {
+      "bytes": 848,
+      "sha256": "55c3af1cdb361714a645ed07b239ff796d7583d8c471cb968f2afc3f10cb6fe6"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/worker.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1/worker.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cleanup-evidence-v1/qa-review-1/snapshot.json": {
+      "bytes": 9324,
+      "sha256": "fa7862350d039f8793956e4878be2bcddb206ccd10e701468d7ae880acbbdbab"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full/PATCH.abseil": {
+      "bytes": 886,
+      "sha256": "2d14482f889029bb6c3332ee925eb058e784ce35115b5e9222c43185c9d5dbc5"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/ml-drift-compatibility-v1/sdk-full/WORKSPACE": {
+      "bytes": 20633,
+      "sha256": "dee68de49f5212a0b12d47d80fb59f63314e74c1655a60e3f11a055d20d0507a"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/inventory-output/install/96e26d97222159f904e14600d7490eb0/embedded_tools/tools/build_defs/repo/http.bzl": {
+      "bytes": 21667,
+      "sha256": "989e943d9e103280d2ec3e3cb3fedaac2ca89ed946c4f218a1eb929cdfe89c72"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/inventory-output/install/96e26d97222159f904e14600d7490eb0/embedded_tools/tools/build_defs/repo/utils.bzl": {
+      "bytes": 17468,
+      "sha256": "07a5c5a448559549f4f5272d2e628809d3f43be77b9eac1ab20911d9cb0ea39a"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/repository-cache-v1/analysis-attempts/configured-1/inventory.stdout.log": {
+      "bytes": 3247442,
+      "sha256": "107799d8aa6dc96e716aded8d19a58fa72b82f76f22d2249c69ee03f8ca2c721"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/docs/P2_ABSEIL_PREPARATION_READINESS_V1.md": {
+      "bytes": 5864,
+      "sha256": "c9b109e121b521793b41697a2d31d51105bde672b9fffeca47760489f6fd9e07"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/DEFERRED_ISSUES.md": {
+      "bytes": 7229,
+      "sha256": "c493ae78b6dcbea62111322339e3bfe7c62210e2982ba09fccec0b1d6850d003"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_ABSEIL_CPP_QUALIFICATION_PROPOSAL_V1.md": {
+      "bytes": 12709,
+      "sha256": "b03a0de09c6fec363548afc6e5f114e92c757d519315e1a7065cfbb05d7792d8"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/QA_AGENT_PROMPT.md": {
+      "bytes": 5660,
+      "sha256": "79c9ecbc2dd9ec33315bec7e080bd13b5135b4efee4dd4848a43524455e6069d"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-abseil-preparation-v1/manifest.json": {
+      "bytes": 2262,
+      "sha256": "1c18df35783e20b1e5d2638314396d07eed415a52ad3e89d17b816864d0f2c2e"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-abseil-preparation-v1/patch-contexts.json": {
+      "bytes": 1519,
+      "sha256": "192bb79d5fe150097ba63620b0eca2c5add213f359c66f536532ab6169878fd5"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-abseil-preparation-v1/preparation-freeze-r1.json": {
+      "bytes": 24793,
+      "sha256": "2b423f33c2c272633c6d98f5dd6ae60eac404c0f4f626ebc41fc1e4f81864a43"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-abseil-preparation-v1/preparation-freeze-r2.json": {
+      "bytes": 25136,
+      "sha256": "abcf9101fbec62db93ef836115c04bf9869de00a970812a4db742b676347a90c"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-abseil-preparation-v1/root-abseil.patch": {
+      "bytes": 886,
+      "sha256": "2d14482f889029bb6c3332ee925eb058e784ce35115b5e9222c43185c9d5dbc5"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-abseil-preparation-v1/sed-behavior.json": {
+      "bytes": 1149,
+      "sha256": "7c2093394a7535ff58190b489a32b2b10b96c767ae6c353328998dccae5d4203"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-abseil-preparation-v1/sed-probe-freeze-r2.json": {
+      "bytes": 8605,
+      "sha256": "98be71845a6bcd64e5c60221f7faf9eab53c8c82d4790511107b3cba3df84d7c"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-abseil-preparation-v1/sed-probe-freeze.json": {
+      "bytes": 8511,
+      "sha256": "0508b2d331def31638d249de1c030832067a902cb5eafa8a3e5b5365588548d8"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-abseil-preparation-v1/shell-pins.json": {
+      "bytes": 4381,
+      "sha256": "391e074b5ae7be46b241e483dd0c3fbda44cd1445e2f996adb698abdde03c23a"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cleanup-evidence-v1/results-review.json": {
+      "bytes": 2496,
+      "sha256": "6001da334836352f5a57f402e76336d762c79dce95cd75be52dd51a6bc3b2d93"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-qualification-v1/abseil-source-and-patch.json": {
+      "bytes": 2381,
+      "sha256": "41788d32fca9e293428b175e5f69fee71700a07f4a600b439de7ec60760eac83"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-qualification-v1/proposal-review.json": {
+      "bytes": 2496,
+      "sha256": "6001da334836352f5a57f402e76336d762c79dce95cd75be52dd51a6bc3b2d93"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_abseil_v1/README.md": {
+      "bytes": 4053,
+      "sha256": "772af3b9e44227b8e5707aad5112c637d5b4e24e706f9bf98f05314e9fccc013"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_abseil_v1/archive.py": {
+      "bytes": 11898,
+      "sha256": "1ad555cc595f3a0597a0f26a78602a85bb3e4a8a8c8271b41a141af4427d9011"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_abseil_v1/prepare.py": {
+      "bytes": 17932,
+      "sha256": "600834b2f34bc2421f39e2f4e1c8c5794614e3ddc562c357e1a803c9dfb7bb0d"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_abseil_v1/tools.py": {
+      "bytes": 1491,
+      "sha256": "c3779bce8ae7a33fc48da8127817059040b75dc2cbea7e887e92a12482c061dc"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_abseil_v1/transforms.py": {
+      "bytes": 6784,
+      "sha256": "7da2ed2dc976b0d88e7a2145035196720320a1ff24c31238be7125627a187d28"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/catalog.py": {
+      "bytes": 16295,
+      "sha256": "e3fe875da3d187b3381573f20077a71d85d18580408e7e566c65de10bf0ca713"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/macho.py": {
+      "bytes": 4366,
+      "sha256": "0b040994d1211d59dcdedad6b9ca0769b290f0e74666a2f823803dd40addfc60"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/policy.py": {
+      "bytes": 3320,
+      "sha256": "f191fc49fa072e4efbf183bdfe3a899ed9ecb51c7d8a7439b80ff47472bb09e5"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/probe.py": {
+      "bytes": 4571,
+      "sha256": "0ffbbe37f5a1a76ed6f88c3c855b13524f589234ec816a942afb9c818a7b9237"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/qualify.py": {
+      "bytes": 22923,
+      "sha256": "1e2f2d353d7c0bf49d3e33cd02f1c3fef647344bd5a6c0a16ae785d72fe255d1"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/staging.py": {
+      "bytes": 5002,
+      "sha256": "a1999ca327563a1cf55a0d0c9c6efc554aeeedc5ef84a0969a48e29d6558d545"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_python_patch_v1/wheels.py": {
+      "bytes": 6867,
+      "sha256": "1e04b51f053e92e4891249ff680e7d0440a879a106b0ca1a573ef2c5b5de61e9"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/ml_drift_compatibility/analyze.py": {
+      "bytes": 18796,
+      "sha256": "01706ddb5533fd0ccd8198518257034a86144b972aaab923c70a102fe74e5c59"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/root_dependency_offline_v2/inspect.py": {
+      "bytes": 23725,
+      "sha256": "3acfc58714dda2d104e31c12680adb412b4e082ab52d9adf84c23ddd3947e615"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_abseil_archive.py": {
+      "bytes": 8197,
+      "sha256": "a1bc65a834d9549366a65fb02175ae2611a5d132a0613d76f4b8e344bcb1fbc4"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_abseil_prepare.py": {
+      "bytes": 10782,
+      "sha256": "155b4fc62497a682a99dd861e4c74562e9d40d4b22aa9bea65464e562279632f"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_abseil_transforms.py": {
+      "bytes": 4346,
+      "sha256": "a691bdf26062003ea3dc87ba16ec32bfca8252d9c60549d1ce24ad191161eb54"
+    },
+    "/bin/bash": {
+      "bytes": 1290128,
+      "mode": 365,
+      "sha256": "16303dedab719ddb63efd9dd68092a0da37b397bfd4fcb856d5f1c86c5ee414b"
+    },
+    "/usr/bin/sandbox-exec": {
+      "bytes": 102368,
+      "mode": 493,
+      "sha256": "abc5bb136d6b5cce8fa85d789f78e3326c51ca60cae637b2064adfb67a1dcd9a"
+    },
+    "/usr/bin/sed": {
+      "bytes": 169952,
+      "mode": 493,
+      "sha256": "6ac57d91d32dda62f954dbcfe29e43dd55e69946821092b542dbbbe7dca86997"
+    }
+  },
+  "freezeSha256": "abcf9101fbec62db93ef836115c04bf9869de00a970812a4db742b676347a90c",
+  "frozenInputRows": 93,
+  "reviewedOn": "2026-11-05",
+  "schema": 1,
+  "scope": "abseil-acquisition-preparation-only"
+}
