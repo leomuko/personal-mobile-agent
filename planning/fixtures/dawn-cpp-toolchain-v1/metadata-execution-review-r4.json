@@ -1,0 +1,48 @@
+{
+  "BazelSelectionVerified": false,
+  "P2Complete": false,
+  "actualDriverEhOutputObserved": false,
+  "compilerMatrixAuthorized": false,
+  "deviceExecutionAuthorized": false,
+  "findings": [],
+  "freezePath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/metadata-execution-freeze-r4.json",
+  "freezeSha256": "ebfaa5b337f042c2be353e20ab225eb8dbbcf989bdb6a3aaddc49b3e82f28126",
+  "freshFocusedTestsPassed": 29,
+  "fullSuiteFreshIndependentRerun": false,
+  "limitations": [
+    "Pre-query policy approval only; no actual native output or EH runtime behavior qualified.",
+    "Unrecognized real defaults still stop the first attempt without retry or automatic policy expansion.",
+    "Future 72-command C++ matrix remains unapproved."
+  ],
+  "linkOrBinaryExecutionAuthorized": false,
+  "nativeMetadataFreezeApproved": true,
+  "nativeQueriesExecuted": false,
+  "preQueryEhAmendmentApproved": true,
+  "producerFullTestsRecorded": 320,
+  "reviewPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-metadata-implementation-4/review.md",
+  "reviewStartsJob": false,
+  "reviewedOn": "2026-11-05",
+  "reviewer": "Retained sole primary independent Codex QA reviewer",
+  "rootAdopted": false,
+  "schema": 1,
+  "scope": "native-inspection-driver-metadata-and-empty-preprocessing-only",
+  "semanticEnablement": false,
+  "snapshotPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-metadata-implementation-4/snapshot.json",
+  "snapshotSha256": "ee15d2c6c2489c1e8257c74f85fb9a61c00eb78aa776cf8d19d1ed5b55f65490",
+  "verdict": "PASS",
+  "verification": {
+    "changedExistingBindings": [
+      "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_cpp_toolchain_v1/policy.py",
+      "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_cpp_metadata_policy.py"
+    ],
+    "freezeSha256": "ebfaa5b337f042c2be353e20ab225eb8dbbcf989bdb6a3aaddc49b3e82f28126",
+    "inputsFreshlyHashed": 94,
+    "nativeExecuted": false,
+    "nativeGraphsAndStructuralContracts": "PASS_DATA_ONLY",
+    "osCacheHashing": "FRESH",
+    "preservedR3SourceCopiesChecked": 2,
+    "priorR3ReviewPreserved": true,
+    "treesVerified": 6,
+    "unchangedCommands": 29
+  }
+}
