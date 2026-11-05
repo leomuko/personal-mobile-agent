@@ -1,0 +1,34 @@
+{
+  "actualFreezeAndReviewBytesUsed": true,
+  "canonicalFunction": "scripts/diagnostics/dawn_cpp_backend_v1/qualify.py:admission",
+  "dispatchInvoked": false,
+  "failure": null,
+  "forbiddenBoundariesInstrumented": 10,
+  "freezeReviewPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-backend-v1/qa-admission-correction-1/freeze-review.json",
+  "freezeReviewSha256": "f4050d3d6e0cea858da1b4d8fe08aa7f133ee9ecc4c6f8d75580c3008bf40bd7",
+  "freezeSha256": "52a0e72aaff0cc6f77ab2c8a22ba4af61c679b95bba3844a5ec4ce07a1973869",
+  "inputCheckMocked": false,
+  "mainInvoked": false,
+  "nativeInvoked": false,
+  "observations": {
+    "analysisFloorBytes": 19327352832,
+    "attempt": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2",
+    "capacityPassed": true,
+    "freeBytes": 3224666112,
+    "metadata2Absent": true,
+    "notAnExecutionReservation": true,
+    "observedAtUtc": "2026-11-05T19:23:37.661379+00:00",
+    "parentEntries": [
+      "metadata-1"
+    ],
+    "parentQuarantine": "PASS_READ_ONLY",
+    "pathWithinProject": true,
+    "resolved": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-2",
+    "smallSliceRequiredBytes": 1073741824
+  },
+  "ownerInvoked": false,
+  "readOnlyAdmission": "PASS",
+  "schema": 1,
+  "subprocessInvoked": false,
+  "workerInvoked": false
+}

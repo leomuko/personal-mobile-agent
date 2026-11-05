@@ -1,0 +1,113 @@
+{
+  "P2Complete": false,
+  "automaticRetries": 0,
+  "compilerMatrixAuthorized": false,
+  "files": [
+    {
+      "bytes": 2482,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/admission-r1-result-lock.json",
+      "sha256": "3d9163b81e0a919927f37dc73fcba090fe2267051a32038889165673f704ab09"
+    },
+    {
+      "bytes": 91989,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/metadata-execution-freeze-r2.json",
+      "sha256": "52a0e72aaff0cc6f77ab2c8a22ba4af61c679b95bba3844a5ec4ce07a1973869"
+    },
+    {
+      "bytes": 1317,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/admission-r2-freeze-review.json",
+      "sha256": "f4050d3d6e0cea858da1b4d8fe08aa7f133ee9ecc4c6f8d75580c3008bf40bd7"
+    },
+    {
+      "bytes": 3932,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/admission-r2-results-review.json",
+      "sha256": "feb1a8a5c47573198c7b160a528344ea3b6122ad10c605795c640fed910e8508"
+    },
+    {
+      "bytes": 35845,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/admission-r2-reviewed-snapshot.json",
+      "sha256": "dbf94070880aed840d13ae42056cc892aa66635acff9f9d691c22f2002548ca3"
+    },
+    {
+      "bytes": 1396,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/admission-r2-read-only-proof.json",
+      "sha256": "8bddf1f674a408fcfe850671fc77d571d26f1e83fd5b79c26157f5371814e3a2"
+    },
+    {
+      "bytes": 2868,
+      "path": "docs/P2_CPP_BACKEND_ADMISSION_CORRECTION_QA_V1.md",
+      "sha256": "0e1139a46424de6eefa43157d9833b1981affe28299ab7f3afb073472a7316f8"
+    },
+    {
+      "bytes": 1317,
+      "path": "build/dawn-cpp-backend-v1/qa-admission-correction-1/freeze-review.json",
+      "sha256": "f4050d3d6e0cea858da1b4d8fe08aa7f133ee9ecc4c6f8d75580c3008bf40bd7"
+    },
+    {
+      "bytes": 3932,
+      "path": "build/dawn-cpp-backend-v1/qa-admission-correction-1/qa-summary.json",
+      "sha256": "feb1a8a5c47573198c7b160a528344ea3b6122ad10c605795c640fed910e8508"
+    },
+    {
+      "bytes": 35845,
+      "path": "build/dawn-cpp-backend-v1/qa-admission-correction-1/snapshot.json",
+      "sha256": "dbf94070880aed840d13ae42056cc892aa66635acff9f9d691c22f2002548ca3"
+    },
+    {
+      "bytes": 1396,
+      "path": "build/dawn-cpp-backend-v1/qa-admission-correction-1/read-only-admission.json",
+      "sha256": "8bddf1f674a408fcfe850671fc77d571d26f1e83fd5b79c26157f5371814e3a2"
+    },
+    {
+      "bytes": 2815,
+      "path": "build/dawn-cpp-backend-v1/qa-admission-correction-1/canonical_admission.py",
+      "sha256": "0e914382812b2baaa1d86da2ad2bfa9ecf4330f6622b3c25d8da99719de17ac7"
+    },
+    {
+      "bytes": 1396,
+      "path": "build/dawn-cpp-backend-v1/qa-admission-correction-1/canonical-admission.log",
+      "sha256": "b95ee680a6a0409a1d67ea47a3d2c9b3343a2d659642e5ee1feecbe1ec2597f3"
+    },
+    {
+      "bytes": 646,
+      "path": "build/dawn-cpp-backend-v1/qa-admission-correction-1/preflight-observations.json",
+      "sha256": "0ee5287b0c869d1c9e3af92d0b21a7f4e1a6504b7b295a0393e23707cb43c107"
+    },
+    {
+      "bytes": 5066,
+      "path": "build/dawn-cpp-backend-v1/qa-admission-correction-1/audit.py",
+      "sha256": "40f75aad1a1c776479cf909f209a70c9fe1a2f4fdf6d86999f997f50a46213ac"
+    },
+    {
+      "bytes": 622,
+      "path": "build/dawn-cpp-backend-v1/qa-admission-correction-1/audit.log",
+      "sha256": "872a604547891e38f123b2db5327f5ce43eab9962cf89e4e4f336317c4d08202"
+    },
+    {
+      "bytes": 622,
+      "path": "build/dawn-cpp-backend-v1/qa-admission-correction-1/input-audit.json",
+      "sha256": "872a604547891e38f123b2db5327f5ce43eab9962cf89e4e4f336317c4d08202"
+    },
+    {
+      "bytes": 6015,
+      "path": "build/dawn-cpp-backend-v1/qa-admission-correction-1/focused-and-affected-tests.log",
+      "sha256": "37d095c23f6460ac60ffe4f03bf3f489dcd3d5e589a5f499acf13b69532b04c8"
+    },
+    {
+      "bytes": 6125,
+      "path": "build/dawn-cpp-backend-v1/qa-admission-correction-1/review.md",
+      "sha256": "d3ce90cfbbe956d9cfed3384946586f875f970ea047f3178294e069ef14e036f"
+    }
+  ],
+  "freezeSha256": "52a0e72aaff0cc6f77ab2c8a22ba4af61c679b95bba3844a5ec4ce07a1973869",
+  "metadata2Created": false,
+  "nativeDispatchVerified": false,
+  "nativeQueriesRun": 0,
+  "protocol": "reviewed-cpp-backend-admission-correction-v1",
+  "queriesNotRun": 31,
+  "reviewSha256": "f4050d3d6e0cea858da1b4d8fe08aa7f133ee9ecc4c6f8d75580c3008bf40bd7",
+  "schema": 1,
+  "semanticEnablement": false,
+  "separateExecutionAuthorizationRequired": true,
+  "verdict": "PASS_PREPARATION_AND_READ_ONLY_ADMISSION_ONLY"
+}
