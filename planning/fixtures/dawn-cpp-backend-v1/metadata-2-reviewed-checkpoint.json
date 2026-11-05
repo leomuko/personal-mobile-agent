@@ -1,0 +1,78 @@
+{
+  "P2Complete": false,
+  "automaticRetries": 0,
+  "cleanupConfirmed": true,
+  "files": [
+    {
+      "bytes": 3064,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/metadata-2-result-lock.json",
+      "sha256": "e7d723c508e0814809283a5cc623523ce86474c14072a1bb40c16f4797acbbf2"
+    },
+    {
+      "bytes": 3176,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/metadata-2-results-review.json",
+      "sha256": "030e5f82ddd24a11efb22697475336c28a3985895a4454535eaa5f7923f5b676"
+    },
+    {
+      "bytes": 37516,
+      "path": "planning/fixtures/dawn-cpp-backend-v1/metadata-2-reviewed-snapshot.json",
+      "sha256": "4fb00548e31713c75215ef188d386795e40a31d111f77c80708cde0a69d8bcfa"
+    },
+    {
+      "bytes": 2564,
+      "path": "docs/P2_CPP_BACKEND_METADATA_QA_V1.md",
+      "sha256": "96dd5d11e35d6456caf27a15956e668b2ff292f50b225a897ce793b671691353"
+    },
+    {
+      "bytes": 848,
+      "path": "build/dawn-cpp-backend-v1/qa-metadata-2-results-1/audit-results.json",
+      "sha256": "fc54c6aad0f3cd989fcbbdbd9d94467c8f41e6c042da8ea8fdfaf27b8e9b1a9e"
+    },
+    {
+      "bytes": 848,
+      "path": "build/dawn-cpp-backend-v1/qa-metadata-2-results-1/audit.log",
+      "sha256": "fc54c6aad0f3cd989fcbbdbd9d94467c8f41e6c042da8ea8fdfaf27b8e9b1a9e"
+    },
+    {
+      "bytes": 6538,
+      "path": "build/dawn-cpp-backend-v1/qa-metadata-2-results-1/audit.py",
+      "sha256": "af92d9f03665da277bf02dea27564ee1e9d7029602c22357a8a588f2f743a0eb"
+    },
+    {
+      "bytes": 2022,
+      "path": "build/dawn-cpp-backend-v1/qa-metadata-2-results-1/output-replay.json",
+      "sha256": "d8df1e8c9d5e3df80094540a903312a81452de580fd5955b2f35389715a886c5"
+    },
+    {
+      "bytes": 3176,
+      "path": "build/dawn-cpp-backend-v1/qa-metadata-2-results-1/qa-summary.json",
+      "sha256": "030e5f82ddd24a11efb22697475336c28a3985895a4454535eaa5f7923f5b676"
+    },
+    {
+      "bytes": 7063,
+      "path": "build/dawn-cpp-backend-v1/qa-metadata-2-results-1/review.md",
+      "sha256": "feab87f5f142fd43e20e55bdb213c22eece7869fe9185fa6a20c64bfc53bd376"
+    },
+    {
+      "bytes": 1399,
+      "path": "build/dawn-cpp-backend-v1/qa-metadata-2-results-1/reviewer-attempt-inventory.json",
+      "sha256": "7d3858a4452b7d24c8e2649d70a3757ff1dfa2aca784f0c0ba61bd64f209cb5b"
+    },
+    {
+      "bytes": 37516,
+      "path": "build/dawn-cpp-backend-v1/qa-metadata-2-results-1/snapshot.json",
+      "sha256": "4fb00548e31713c75215ef188d386795e40a31d111f77c80708cde0a69d8bcfa"
+    }
+  ],
+  "freezeSha256": "52a0e72aaff0cc6f77ab2c8a22ba4af61c679b95bba3844a5ec4ce07a1973869",
+  "furtherExecutionAuthorized": false,
+  "notRunQueries": 12,
+  "passedQueries": 18,
+  "protocol": "reviewed-cpp-backend-metadata-2-results-v1",
+  "publicAcceptancePresent": false,
+  "qualification": "BLOCKED_LINKER_SELECTION_CONTRACT",
+  "schema": 1,
+  "semanticEnablement": false,
+  "validatorFailedQueries": 1,
+  "verdict": "PASS_EVIDENCE_INTEGRITY_ONLY"
+}
