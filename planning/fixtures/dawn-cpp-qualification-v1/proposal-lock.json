@@ -1,0 +1,68 @@
+{
+  "BazelSelectionVerified": false,
+  "acquisitionAuthorized": false,
+  "analysisFloorBytes": 19327352832,
+  "compilerExecuted": false,
+  "files": [
+    {
+      "bytes": 6538,
+      "path": "build/dawn-cpp-preparation-v1/pin-local-inputs.py",
+      "sha256": "51e9af23c3cecebcc4f6ed2789157f2b3f66d41467e0d2b742dd05fa7e2f6269"
+    },
+    {
+      "bytes": 3269,
+      "path": "docs/P2_DAWN_CALLBACK_PATCH_STATIC_ASSESSMENT_V1.md",
+      "sha256": "64652d2dd97cb19377071cfbcffb2760c9e292d105a09d4e9da4f46d130406ba"
+    },
+    {
+      "bytes": 12709,
+      "path": "planning/P2_ABSEIL_CPP_QUALIFICATION_PROPOSAL_V1.md",
+      "sha256": "b03a0de09c6fec363548afc6e5f114e92c757d519315e1a7065cfbb05d7792d8"
+    },
+    {
+      "bytes": 2381,
+      "path": "planning/fixtures/dawn-cpp-qualification-v1/abseil-source-and-patch.json",
+      "sha256": "41788d32fca9e293428b175e5f69fee71700a07f4a600b439de7ec60760eac83"
+    },
+    {
+      "bytes": 86909,
+      "path": "planning/fixtures/dawn-cpp-qualification-v1/local-inputs.json",
+      "sha256": "aef69b6df15c0567a620ae68476c36336ca47a7d6d860083ceff0bfe524b8b9d"
+    },
+    {
+      "bytes": 16161,
+      "path": "planning/fixtures/dawn-cpp-qualification-v1/native-static-inventory.json",
+      "sha256": "a42f13e09975b89bfe1f01f8e3e26d3d4c55c08b32dcc7914591637199d5f359"
+    },
+    {
+      "bytes": 54581,
+      "path": "planning/fixtures/dawn-cpp-qualification-v1/resource-inventory.json",
+      "sha256": "7cbcaa4992205ab7fab0ba09cd94d99de35712ee98152397373ffa3e4f32d1b3"
+    },
+    {
+      "bytes": 7957871,
+      "path": "planning/fixtures/dawn-cpp-qualification-v1/sdk-inventory.json",
+      "sha256": "13da4e31cfc24bb1022874250833fe7e3851d7fffac1d36ee1418dac25ec6957"
+    },
+    {
+      "bytes": 5522,
+      "path": "planning/fixtures/dawn-python-patch-v1/callback_probe.cpp",
+      "sha256": "f600376e9e05a5fc9d7efa10b4a8b12835fe045adfacf9dae40c097066412470"
+    },
+    {
+      "bytes": 4003,
+      "path": "planning/fixtures/dawn-python-patch-v1/results-review.json",
+      "sha256": "336d3bd77a24b2e2d2da8b663f1cac39a06799dff2d2938be97ab2cb6762e056"
+    },
+    {
+      "bytes": 7935,
+      "path": "planning/fixtures/dawn-python-patch-v1/source-include-inventory.json",
+      "sha256": "ebdd5f7ceeeae74226df0f2652e06231612bdc2481df0aea72c04b57387572e6"
+    }
+  ],
+  "nativeExecutionAuthorized": false,
+  "protocol": "dawn-cpp-qualification-proposal-v1",
+  "rootAdopted": false,
+  "sourcePayloadVerified": false,
+  "status": "PROPOSED_EXECUTION_NOT_READY"
+}
