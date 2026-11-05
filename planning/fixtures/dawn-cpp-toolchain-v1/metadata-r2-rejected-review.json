@@ -1,0 +1,38 @@
+{
+  "APIEquivalenceVerified": false,
+  "P2Complete": false,
+  "compilerMatrixAuthorized": false,
+  "deviceExecutionAuthorized": false,
+  "executionAuthorized": false,
+  "findings": [
+    {
+      "confidence": "high",
+      "id": "CPP-META-003",
+      "priority": "P2",
+      "title": "Unowned dumpdir and contradictory frontend flags still accepted"
+    }
+  ],
+  "freezeSha256": "a7989a3822866d1329d0d5afc10a9c2d3bf3299a05c4e9a1c778bff103010f7a",
+  "freshFocusedTestsPassed": 26,
+  "fullSuiteFreshIndependentRerun": false,
+  "inputsFreshlyHashed": 84,
+  "nativeGraphAndStructuralContracts": "PASS_DATA_ONLY",
+  "nativeQueriesExecuted": false,
+  "nativeQueryArgvUnchanged": 29,
+  "newInvalidProbesAccepted": 2,
+  "originalInvalidProbesRejected": 5,
+  "priorFindings": {
+    "CPP-META-001": "ORIGINAL_PROBES_FIXED_CLOSED_GRAMMAR_REMAINS_INCOMPLETE",
+    "CPP-META-002": "ADDRESSED_STATIC_AND_SYNTHETIC"
+  },
+  "producerFullSuiteReported": 317,
+  "rejectedR1SourceCopiesCompared": 20,
+  "reportPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-metadata-implementation-2/review.md",
+  "reviewedOn": "2026-11-05",
+  "reviewer": "Retained sole primary independent Codex QA reviewer",
+  "schema": 1,
+  "scope": "native-inspection-driver-metadata-and-empty-preprocessing-only",
+  "semanticEnablement": false,
+  "snapshotSha256": "6a6ccdc12ae1da3e8a0d88208e9883835faf8bd713c804e11c309fa808bb2ad0",
+  "verdict": "FAIL"
+}

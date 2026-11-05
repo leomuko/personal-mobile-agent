@@ -1,0 +1,41 @@
+{
+  "BazelSelectionVerified": false,
+  "P2Complete": false,
+  "compilerMatrixAuthorized": false,
+  "deviceExecutionAuthorized": false,
+  "executionAuthorized": false,
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "output-probes.json",
+      "id": "CPP-META-001",
+      "priority": "P2",
+      "title": "Unqualified library/plugin/include inputs accepted in driver plans"
+    },
+    {
+      "confidence": "high",
+      "evidence": "output-probes.json",
+      "id": "CPP-META-002",
+      "priority": "P2",
+      "title": "Diagnostics and malformed inspector structure accepted"
+    }
+  ],
+  "freezeSha256": "8108bdb0663fda67eee8f41a3e8b7737cfbed18b16de27f2cb0e4451cb6c399d",
+  "freshFocusedTestsPassed": 19,
+  "frozenInputRowsVerified": 72,
+  "fullSuiteFreshIndependentRerun": false,
+  "nativeGraphPayloadsVerified": 7,
+  "nativeQueriesExecuted": false,
+  "preserveForFollowup": true,
+  "producerFullTestsRecorded": 310,
+  "reviewPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-metadata-implementation-1/review.md",
+  "reviewedOn": "2026-11-05",
+  "reviewer": "Retained sole primary independent Codex QA reviewer",
+  "schema": 1,
+  "scope": "native-inspection-driver-metadata-and-empty-preprocessing-only",
+  "semanticEnablement": false,
+  "snapshotSha256": "1e0b7500c30175272119883a81e25afa82f5039c7f913d2badebc5ac665a009f",
+  "treeEntriesVerified": 51826,
+  "treeRegularBytesVerified": 864481703,
+  "verdict": "FAIL"
+}
