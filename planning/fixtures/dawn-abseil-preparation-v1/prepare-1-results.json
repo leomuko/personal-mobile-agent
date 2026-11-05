@@ -1,0 +1,140 @@
+{
+  "AndroidCompatibilityVerified": false,
+  "BazelSelectionVerified": false,
+  "P2Complete": false,
+  "archive": {
+    "bytes": 2391476,
+    "redirects": 1,
+    "retries": 0,
+    "seconds": 7.110350999999355,
+    "sha256": "6e1aee535473414164bf83e4ebc40240dec71a4701f8a642d906e95bea1aea0c"
+  },
+  "attempt": "build/dawn-abseil-preparation-v1/attempts/prepare-1",
+  "candidateEntries": 1692,
+  "candidateRegularBytes": 11611231,
+  "cleanupConfirmed": true,
+  "compilerExecuted": false,
+  "cppReady": false,
+  "freezeSha256": "abcf9101fbec62db93ef836115c04bf9869de00a970812a4db742b676347a90c",
+  "httpEvents": [
+    {
+      "location": "https://codeload.github.com/abseil/abseil-cpp/tar.gz/refs/tags/20260526.0",
+      "locationTruncated": false,
+      "status": 302,
+      "url": "https://github.com/abseil/abseil-cpp/archive/20260526.0.tar.gz"
+    },
+    {
+      "contentLength": "2391476",
+      "status": 200,
+      "url": "https://codeload.github.com/abseil/abseil-cpp/tar.gz/refs/tags/20260526.0"
+    }
+  ],
+  "independentResultsReview": "PENDING",
+  "inventory": {
+    "completeSourceValidated": true,
+    "decodedBytes": 12636160,
+    "gzipEOFValidated": true,
+    "headerCount": 1670,
+    "inventorySha256": "25427886b82c589cfcb1ed84e957ed525884b9e7aae2dfc09943d65a924171ad",
+    "paxBytes": 52,
+    "types": {
+      "directory": 75,
+      "file": 1594,
+      "pax-global": 1
+    }
+  },
+  "launcherExitCode": 2,
+  "launcherExitMeaning": "source preparation passed; C++ remains blocked",
+  "ownedWorkerAndCleanupSeconds": 22.558689125,
+  "parentWholeElapsedSeparatelyRecorded": false,
+  "patchTargets": [
+    {
+      "afterBytes": 23758,
+      "beforeBytes": 23844,
+      "hunk": {
+        "after": "    ],\n    copts = ABSL_DEFAULT_COPTS,\n    linkopts = ABSL_DEFAULT_LINKOPTS,\n    deps = [\n        \":base\",\n        \":config\",\n",
+        "before": "    ],\n    copts = ABSL_DEFAULT_COPTS,\n    linkopts = ABSL_DEFAULT_LINKOPTS,\n    visibility = [\n        \"//absl:__subpackages__\",\n        \"//absl:friends\",\n    ],\n    deps = [\n        \":base\",\n        \":config\",\n",
+        "newCount": 6,
+        "newLine": 577,
+        "oldCount": 10,
+        "oldLine": 577,
+        "target": "absl/base/BUILD.bazel"
+      },
+      "line": 577,
+      "postimageSha256": "20229153787f7b81fb0498d69a38293285081c8bffc43cf00c325e2b9bc72dc3",
+      "preimageSha256": "662c84282e407c934b8c087127446da29e4b8aab151eb2687733902761c7002b",
+      "target": "absl/base/BUILD.bazel"
+    },
+    {
+      "afterBytes": 9450,
+      "beforeBytes": 9447,
+      "hunk": {
+        "after": "\n// MSVC AVX (/arch:AVX) implies SSE 4.2 and PCLMULQDQ.\n#include <intrin.h>\n// #define ABSL_CRC_INTERNAL_HAVE_X86_SIMD\n\n#elif defined(__aarch64__) && defined(__LITTLE_ENDIAN__) &&                 \\\n    defined(__ARM_FEATURE_CRC32) && defined(ABSL_INTERNAL_HAVE_ARM_NEON) && \\\n",
+        "before": "\n// MSVC AVX (/arch:AVX) implies SSE 4.2 and PCLMULQDQ.\n#include <intrin.h>\n#define ABSL_CRC_INTERNAL_HAVE_X86_SIMD\n\n#elif defined(__aarch64__) && defined(__LITTLE_ENDIAN__) &&                 \\\n    defined(__ARM_FEATURE_CRC32) && defined(ABSL_INTERNAL_HAVE_ARM_NEON) && \\\n",
+        "newCount": 7,
+        "newLine": 39,
+        "oldCount": 7,
+        "oldLine": 39,
+        "target": "absl/crc/internal/crc32_x86_arm_combined_simd.h"
+      },
+      "line": 39,
+      "postimageSha256": "7a6299fb74475e53e71e187998671346571b87d5ece710589600a898e4db51e4",
+      "preimageSha256": "04161f73ac69745fb54ad8d447574529af5a4df71a7e2ceb049e0c0a05c8f118",
+      "target": "absl/crc/internal/crc32_x86_arm_combined_simd.h"
+    }
+  ],
+  "peakWorkerRssBytes": 36732928,
+  "protocol": "abseil-source-preparation-results-v1",
+  "publicationDeadlineCheck": "original absolute 300-second deadline enforced by frozen parent before/after both links",
+  "publicationLinkIdentityVerified": true,
+  "reviewSha256": "f343cd216ce018fcac3f9496108cffadb6236adc0290007d8e1383470ce7acf0",
+  "rewrite": {
+    "backupSuffix": "-e",
+    "backups": 24,
+    "plan": {
+      "bytes": 7124,
+      "mode": 420,
+      "path": "build/dawn-abseil-preparation-v1/attempts/prepare-1/planned-rewrite.json",
+      "sha256": "8623d666a62d63fe92aa7c677136a9c6a472c78c93e768df15241fe1f632db05"
+    },
+    "substitutions": 504,
+    "targets": 24,
+    "zeroSubstitutionTargets": 1
+  },
+  "rootAdopted": false,
+  "rootPatchNativeEquivalenceVerified": false,
+  "semanticEnablement": false,
+  "sourceEntriesIncludingRoot": 1669,
+  "sourceRegularBytes": 11347822,
+  "stages": {
+    "BUILD-rewrite": {
+      "seconds": 0.14723600000070292,
+      "status": "PASSED"
+    },
+    "acquisition": {
+      "seconds": 7.11038600000029,
+      "status": "PASSED"
+    },
+    "clone": {
+      "seconds": 0.4646179999981541,
+      "status": "PASSED"
+    },
+    "complete-source": {
+      "seconds": 0.09306699999797274,
+      "status": "PASSED"
+    },
+    "final-verification": {
+      "seconds": 6.996735999997327,
+      "status": "PASSED"
+    },
+    "private-source": {
+      "seconds": 0.38441299999976764,
+      "status": "PASSED"
+    },
+    "root-patch": {
+      "seconds": 0.07899699999688892,
+      "status": "PASSED"
+    }
+  },
+  "status": "ABSEIL_SOURCE_PREPARATION_PASSED_CPP_BLOCKED"
+}

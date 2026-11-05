@@ -1,0 +1,52 @@
+{
+  "compilerReady": false,
+  "files": {
+    "CMakeLists.txt": {
+      "bytes": 9736,
+      "mode": 384,
+      "observations": [
+        "project version 20260526, ABSL_SOVERSION 2605.0.0; CMake not executed"
+      ],
+      "path": "build/dawn-abseil-preparation-v1/attempts/prepare-1/source/CMakeLists.txt",
+      "sha256": "d70c8afb4e570b93cece9f0bd8b702374d31db475655269be08659f6e50749a9"
+    },
+    "LICENSE": {
+      "bytes": 11361,
+      "mode": 384,
+      "observations": [
+        "Apache License, Version 2.0; source observation, no legal/distribution qualification"
+      ],
+      "path": "build/dawn-abseil-preparation-v1/attempts/prepare-1/source/LICENSE",
+      "sha256": "c79a7fea0e3cac04cd43f20e7b648e5a0ff8fa5344e644b0ee09ca1162b62747"
+    },
+    "MODULE.bazel": {
+      "bytes": 1354,
+      "mode": 384,
+      "observations": [
+        "abseil-cpp module version 20260526.0; module dependencies read as data only"
+      ],
+      "path": "build/dawn-abseil-preparation-v1/attempts/prepare-1/source/MODULE.bazel",
+      "sha256": "b4a76a8d70ba08aa0253fd5e374ca5a5fa6b15aba985a7bbe4467c138954830f"
+    },
+    "absl/base/config.h": {
+      "bytes": 34453,
+      "mode": 384,
+      "observations": [
+        "LTS release 20260526, patch level 0"
+      ],
+      "path": "build/dawn-abseil-preparation-v1/attempts/prepare-1/source/absl/base/config.h",
+      "sha256": "eac94074ece19d6cc0a0302c7a856a325d81e2d9b199f4a77dd05a8c8345851b"
+    },
+    "absl/types/span.h": {
+      "bytes": 31522,
+      "mode": 384,
+      "observations": [
+        "span.h retained; compiler-selected transitive closure not qualified"
+      ],
+      "path": "build/dawn-abseil-preparation-v1/attempts/prepare-1/source/absl/types/span.h",
+      "sha256": "d54ca083c3226821099037a2e93f6d48d04a6d9a3b0b46c90cd5f99f2de97604"
+    }
+  },
+  "protocol": "abseil-source-metadata-observations-v1",
+  "vendorCodeExecuted": false
+}
