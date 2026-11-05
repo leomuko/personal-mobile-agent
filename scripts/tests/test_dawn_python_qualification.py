@@ -70,7 +70,7 @@ class DawnQualificationTests(unittest.TestCase):
             self.assertFalse(report['vendorCodeExecuted']);self.assertFalse(report['compilerExecuted'])
 
 class DawnQualificationDeadlineTests(unittest.TestCase):
-    def exercise(self,delay=None):
+    def exercise(self,delay=None,cleanup_error=None):
         import contextlib,io,sys
         t=tempfile.TemporaryDirectory();self.addCleanup(t.cleanup);root=Path(t.name);attempt=root/'attempts/one'
         f=dict(attemptParent=str(attempt.parent),python='synthetic-only',environment={})
@@ -83,6 +83,7 @@ class DawnQualificationDeadlineTests(unittest.TestCase):
             elif delay=='budget' and counts[0]==1:clock[0]=17
         def worker(argv,cwd,prefix,env,seconds,limit,cleanup):
             calls.append(dict(argv=argv,seconds=seconds,cleanup=cleanup));clock[0]=299 if delay else 20
+            if cleanup_error is not None:raise cleanup_error
             (attempt/'qualification-report.json').write_text(json.dumps(dict(status='PYTHON_GENERATION_SUBSET_PASSED_CPP_BLOCKED')))
             if delay=='foreign':(attempt/'accepted-subset.json').write_bytes(b'foreign-prior-evidence')
             return dict(classification='ANALYSIS_COMMAND_SUCCEEDED',cleanupConfirmed=True,elapsedSeconds=clock[0])
@@ -146,6 +147,24 @@ class DawnQualificationDeadlineTests(unittest.TestCase):
         self.assertEqual((attempt/'accepted-subset.json').read_bytes(),b'foreign-prior-evidence')
         terminal=json.loads((attempt/'outcome.json').read_text())
         self.assertFalse(terminal['acceptanceRevoked']);self.assertTrue(terminal['publicAcceptancePresent'])
+
+    def test_cleanup_subprocess_errors_retain_failed_terminal_evidence_without_acceptance(self):
+        import subprocess
+        for error in [subprocess.TimeoutExpired('synthetic-owned-worker',15),
+                      subprocess.CalledProcessError(1,'synthetic-cleanup'),
+                      subprocess.SubprocessError('synthetic-cleanup-failure')]:
+            with self.subTest(error=type(error).__name__):
+                result,attempt,calls=self.exercise(cleanup_error=error)
+                self.assertEqual(result,1);self.assertEqual(len(calls),1)
+                self.assertFalse((attempt/'accepted-subset.json').exists())
+                self.assertFalse((attempt/'accepted-subset.pending.json').exists())
+                terminal=json.loads((attempt/'outcome.json').read_text())
+                self.assertEqual(terminal['classification'],'QUALIFICATION_FAILED_OR_DEADLINE_REVOKED')
+                self.assertIsNone(terminal['workerOutcome'])
+                self.assertIsNone(terminal['cleanupConfirmed'])
+                self.assertEqual(terminal['cleanupStatus'],'UNCERTAIN')
+                self.assertTrue(terminal['acceptanceRevoked']);self.assertFalse(terminal['publicAcceptancePresent'])
+                self.assertIn(type(error).__name__,terminal['failure'])
 
 
 class DawnQualificationClockTests(unittest.TestCase):

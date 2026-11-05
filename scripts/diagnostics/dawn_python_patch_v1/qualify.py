@@ -10,6 +10,7 @@ from pathlib import Path
 import resource
 import shlex
 import shutil
+import subprocess
 import sys
 import time
 import urllib.request
@@ -329,7 +330,7 @@ def main():
         for public,source in [(a.attempt/'outcome.json',terminal_pending),(a.attempt/'accepted-subset.json',pending)]:
             remaining(deadline,300);published.append((public,source));os.link(source,public);remaining(deadline,300)
         return 2
-    except (ValueError,OSError,KeyError,KeyboardInterrupt) as e:
+    except (ValueError,OSError,KeyError,KeyboardInterrupt,subprocess.SubprocessError) as e:
         failure=type(e).__name__+': '+str(e)[:2048]
         revocation_confirmed=False
         try:
@@ -339,6 +340,7 @@ def main():
         if created:
             terminal=dict(classification='QUALIFICATION_FAILED_OR_DEADLINE_REVOKED',
                 workerOutcome=outcome,cleanupConfirmed=None if outcome is None else outcome.get('cleanupConfirmed'),
+                cleanupStatus='CONFIRMED' if outcome is not None and outcome.get('cleanupConfirmed') is True else 'UNCERTAIN',
                 failure=failure,freezeSha256=a.sha256,elapsedSeconds=now()-started,
                 decisionDeadlineMonotonic=deadline,acceptanceRevoked=revocation_confirmed,
                 publicAcceptancePresent=os.path.lexists(a.attempt/'accepted-subset.json'))
