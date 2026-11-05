@@ -1,0 +1,53 @@
+{
+  "P2Complete": false,
+  "compilerQualified": false,
+  "files": [
+    {
+      "bytes": 71583,
+      "path": "planning/fixtures/dawn-cpp-linker-v1/probe-freeze-r1.json",
+      "sha256": "fc37dbb00cea5abc4b84c7ddf7445555dc0027bb1c86cbd09b288f1229c92ff3"
+    },
+    {
+      "bytes": 4869,
+      "path": "docs/P2_CPP_LINKER_SELECTION_PREPARATION_RESULTS_V1.md",
+      "sha256": "1fa320429bf86bac772b642e368793fbc2d645339062739e7922502aed9803ad"
+    },
+    {
+      "bytes": 1738,
+      "path": "planning/fixtures/dawn-cpp-linker-v1/host-test-environments.json",
+      "sha256": "2be4fbb7ef2d7867fc08eff874bdc64fce44d9f63a632c5eb85b26a268106e1e"
+    },
+    {
+      "bytes": 1282,
+      "path": "planning/fixtures/dawn-cpp-linker-v1/lookup-witness.json",
+      "sha256": "9f18264ad33843000b5d7b10440f6523a9b99fa9b05f2b0b7e0a67b35a815d63"
+    },
+    {
+      "bytes": 1434,
+      "path": "planning/fixtures/dawn-cpp-linker-v1/references.json",
+      "sha256": "3371e8525d57bf73b4992f92e9db3c19f27c23ce43415e4a7a6bc7e650bf59f0"
+    },
+    {
+      "bytes": 977,
+      "path": "planning/fixtures/dawn-cpp-linker-v1/static-driver-observation.json",
+      "sha256": "b72c71cbdb1974a07a76955579ab7b6b419544a566372d57897c8ff848826a8f"
+    },
+    {
+      "bytes": 211,
+      "path": "build/dawn-cpp-linker-v1/freeze-preparation.log",
+      "sha256": "a6310b371a49212b5b2356689bc1ddb0c69708c30afaeb338c24628f72d853e2"
+    }
+  ],
+  "freezeSha256": "fc37dbb00cea5abc4b84c7ddf7445555dc0027bb1c86cbd09b288f1229c92ff3",
+  "frozenInputs": 163,
+  "hostTests": 367,
+  "nativeExecutorImplemented": false,
+  "nativeQueriesExecuted": 0,
+  "pinnedFocusedTests": 24,
+  "protocol": "dawn-cpp-linker-preparation-results-v1",
+  "rootCause": "UNPROVED",
+  "schema": 1,
+  "semanticEnablement": false,
+  "status": "PREPARATION_REVIEW_PENDING",
+  "trees": 6
+}
