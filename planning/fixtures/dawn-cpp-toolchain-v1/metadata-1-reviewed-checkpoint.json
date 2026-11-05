@@ -1,0 +1,55 @@
+{
+  "P2Complete": false,
+  "compilerHelperObjectiveCompleted": false,
+  "cppMatrixExecuted": false,
+  "evidenceVerdict": "PASS",
+  "files": [
+    {
+      "bytes": 5917,
+      "path": "planning/fixtures/dawn-cpp-toolchain-v1/metadata-1-result-lock.json",
+      "sha256": "1c2883c8c0d1e0ada75d3ae3179c972c73a6d1a130c7c2dcb9dcdebca3d2976b"
+    },
+    {
+      "bytes": 3071,
+      "path": "planning/fixtures/dawn-cpp-toolchain-v1/metadata-1-results-review.json",
+      "sha256": "ef45094cd1328962c40e062da6fa629f6f3dda33b024f1ce0c3e5926623d328e"
+    },
+    {
+      "bytes": 8578,
+      "path": "planning/fixtures/dawn-cpp-toolchain-v1/metadata-1-results-snapshot.json",
+      "sha256": "729edeb1f11c45b118033435975398ce44011c1c5d771844827a15512f0f9170"
+    },
+    {
+      "bytes": 6366,
+      "path": "build/dawn-cpp-toolchain-v1/qa-metadata-results-1/review.md",
+      "sha256": "556cc74d077e883eb0eaa0b747be1cc914ce62a29b30055b1586615720dc1846"
+    },
+    {
+      "bytes": 6358,
+      "path": "build/dawn-cpp-toolchain-v1/qa-metadata-results-1/audit.py",
+      "sha256": "db4692860cdadb64a26f5ba70d17542de05095e7cce880a7f410d80fa6d970db"
+    },
+    {
+      "bytes": 795,
+      "path": "build/dawn-cpp-toolchain-v1/qa-metadata-results-1/audit-results.json",
+      "sha256": "eda98d87e04bcf20868a840f4399b027d3e85e2920f2d5ff2b3d770f6af8d820"
+    },
+    {
+      "bytes": 795,
+      "path": "build/dawn-cpp-toolchain-v1/qa-metadata-results-1/audit.log",
+      "sha256": "eda98d87e04bcf20868a840f4399b027d3e85e2920f2d5ff2b3d770f6af8d820"
+    },
+    {
+      "bytes": 259,
+      "path": "build/dawn-cpp-toolchain-v1/qa-metadata-results-1/decoded-error.txt",
+      "sha256": "436c42d32e2e06e9f4d79246bd156d532e4e86c606ab7afe40e560adbe77ff89"
+    }
+  ],
+  "furtherNativeExecutionAuthorized": false,
+  "harnessStaticReviewPassed": true,
+  "proposed31CommandScopeApproved": false,
+  "protocol": "reviewed-cpp-metadata-checkpoint-v1",
+  "qualificationVerdict": "BLOCKED",
+  "semanticEnablement": false,
+  "toolchainQualified": false
+}

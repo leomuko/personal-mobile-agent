@@ -1,0 +1,158 @@
+{
+  "files": {
+    "/Users/kezileo/Desktop/personal_mobile_agent/AGENTS.md": {
+      "bytes": 4233,
+      "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-1-launch.json": {
+      "bytes": 999,
+      "sha256": "d2e0c3e565476a81853ac44917047f6220c2368a52a823b5bfd67e947fbf4e00"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-1/command-trace.jsonl": {
+      "bytes": 1057,
+      "sha256": "9e5e26983019960a801cadeee592557ccc748b9f67441bc89e94d2962ff26134"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-1/empty.cpp": {
+      "bytes": 56,
+      "sha256": "796116eacc197df4614173aca4c92e7e44ce539c934a701cb0cd74e025de96bc"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-1/metadata-report.json": {
+      "bytes": 4358,
+      "sha256": "e07a6b0ec67703408c34416e55334a359164bf1f42e7614af56f02824f5b14c0"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-1/outcome.json": {
+      "bytes": 1529,
+      "sha256": "99090fca26d1a28958fb63417cb40f98fec9ee19b3124fb13b69d9eb74eadf4e"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-1/owner-started.json": {
+      "bytes": 165,
+      "sha256": "21df2d447973a48d8c2a26321872295b4c5d760e59f038cf4a197a7bfdef222e"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-1/worker.stderr.log": {
+      "bytes": 39,
+      "sha256": "1c577d60e9a89404150a9c788623ee9afbcb311dd3282d6511bf97bb6641fbbc"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-1/worker.stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-metadata-results-1/audit-results.json": {
+      "bytes": 795,
+      "sha256": "eda98d87e04bcf20868a840f4399b027d3e85e2920f2d5ff2b3d770f6af8d820"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-metadata-results-1/audit.log": {
+      "bytes": 795,
+      "sha256": "eda98d87e04bcf20868a840f4399b027d3e85e2920f2d5ff2b3d770f6af8d820"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-metadata-results-1/audit.py": {
+      "bytes": 6358,
+      "sha256": "db4692860cdadb64a26f5ba70d17542de05095e7cce880a7f410d80fa6d970db"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-metadata-results-1/decoded-error.txt": {
+      "bytes": 259,
+      "sha256": "436c42d32e2e06e9f4d79246bd156d532e4e86c606ab7afe40e560adbe77ff89"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-metadata-results-1/review.md": {
+      "bytes": 6366,
+      "sha256": "556cc74d077e883eb0eaa0b747be1cc914ce62a29b30055b1586615720dc1846"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/record-metadata-1.py": {
+      "bytes": 3254,
+      "sha256": "593ef76e6137139f94b72bbb6bce8640cf6c77ecb97f30afc55ab63a7e8d56bd"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/docs/P2_CPP_TOOLCHAIN_METADATA_RESULTS_V1.md": {
+      "bytes": 5444,
+      "sha256": "4c71fbcb2db2f8487adab89018cc35249d243feee7f4e197d7250e4d17445ad7"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_CPP_INSPECTOR_BACKEND_QUALIFICATION_PROPOSAL_V1.md": {
+      "bytes": 2331,
+      "sha256": "480c1fff3295bd9d01a703a749d88a795f49e64c5314da6bfccc43e8a24e0c53"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/QA_AGENT_PROMPT.md": {
+      "bytes": 5660,
+      "sha256": "79c9ecbc2dd9ec33315bec7e080bd13b5135b4efee4dd4848a43524455e6069d"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/cpp-command-matrix-v1.json": {
+      "bytes": 178360,
+      "sha256": "ce72d13ceb31f10da712d9570c79dd05651e7cb90493289b9a2f3f6e3c98fefa"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/harness-static-review.json": {
+      "bytes": 1578,
+      "sha256": "d75c47e86491b7909164973114aef328bc46392887d71b046929a472d7f9381d"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/harness-static-snapshot.json": {
+      "bytes": 12421,
+      "sha256": "590c0687154354730d28f3dd68c56ac4ef6830be2e159b8de90f1ae65611a1e6"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/metadata-1-evidence-inventory.json": {
+      "bytes": 1397,
+      "sha256": "db71b73f055a61d8e1e406b59b6d02144864643c9c1eeee27826ed8cee8b6ccf"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/metadata-1-result-lock.json": {
+      "bytes": 5917,
+      "sha256": "1c2883c8c0d1e0ada75d3ae3179c972c73a6d1a130c7c2dcb9dcdebca3d2976b"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/metadata-1-results.json": {
+      "bytes": 2164,
+      "sha256": "537321d8affbc0b3f66d443c08d7e59c38ddaf5baaa6983b71837a2b5625d799"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/metadata-execution-freeze-r4.json": {
+      "bytes": 86721,
+      "sha256": "ebfaa5b337f042c2be353e20ab225eb8dbbcf989bdb6a3aaddc49b3e82f28126"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/metadata-execution-review-r4.json": {
+      "bytes": 2262,
+      "sha256": "dc9fad603fd221a2be299da8c5049eb482fceedd08746e8aa3971728431751ae"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/observed-inspector-helper.json": {
+      "bytes": 1247,
+      "sha256": "ad2b8246d698bc622166455033e9ba82621ce4719ddd78f9ab8bc2d9cb75fe76"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_cpp_toolchain_v1/README.md": {
+      "bytes": 3222,
+      "sha256": "134150229804fee703cd0873bd2e92de095d38da624d507b60a84ad323e18753"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_cpp_toolchain_v1/headers.py": {
+      "bytes": 3421,
+      "sha256": "8825fbf580f7af4e0c167089da974853c2527d729e02990be8ea6eb8f414a8ca"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_cpp_toolchain_v1/inspector.py": {
+      "bytes": 6346,
+      "sha256": "a4ad83538c5b312464f4f63b773980016ecdce21a25585023f7aaede09e2052f"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_cpp_toolchain_v1/plan.py": {
+      "bytes": 3178,
+      "sha256": "57a36d89143775be66433884c4162255adc3e2e258775cc5b9249db25d5abc6d"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_cpp_toolchain_v1/policy.py": {
+      "bytes": 11390,
+      "sha256": "21edbf236a0f337a8d6c69992a99c0cbadfbdd59d4fbf60d3acc6fddc71849df"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_cpp_toolchain_v1/qualify.py": {
+      "bytes": 12220,
+      "sha256": "21ac21f324bc3d2ccba25dae3a3b62187c1fe2a79f4cbea15831811114cadf18"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_cpp_headers.py": {
+      "bytes": 2276,
+      "sha256": "e836598c1e456a9cc3cc1b38a74619f3a33a2e6c713936b7dc83219c0a1b5987"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_cpp_inspector.py": {
+      "bytes": 2579,
+      "sha256": "d1664ca117ae076cfa631cf28dc6bd28153175d68388a1fd1eeba541af9b7808"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_cpp_metadata_coordinator.py": {
+      "bytes": 4032,
+      "sha256": "d07e774429dfaa10f31011033b132996e569dcef7018cce6ae0f48c6ca158db8"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/scripts/tests/test_dawn_cpp_metadata_policy.py": {
+      "bytes": 7374,
+      "sha256": "a50522441b824195355f99a71e027377a528d4b920c38772b9a0a3df1d202b25"
+    }
+  },
+  "frozenInputsFreshlyVerified": 94,
+  "readiness": "BLOCKED",
+  "resultLockSha256": "1c2883c8c0d1e0ada75d3ae3179c972c73a6d1a130c7c2dcb9dcdebca3d2976b",
+  "reviewedOn": "2026-11-05",
+  "schema": 1,
+  "scope": "cpp-toolchain-metadata-blocked-results-only"
+}
