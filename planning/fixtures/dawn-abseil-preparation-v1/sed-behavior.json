@@ -1,0 +1,28 @@
+{
+  "acquisitionPerformed": false,
+  "backupSuffix": "-e",
+  "cleanupConfirmed": true,
+  "compilerExecuted": false,
+  "operation": {
+    "argv": [
+      "/usr/bin/sandbox-exec",
+      "-p",
+      "(version 1)(allow default)(deny network*)(deny file-write*)(allow file-write* (subpath \"/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/sed-probes/probe-1\"))(allow file-write* (literal \"/dev/null\"))",
+      "/bin/bash",
+      "--noprofile",
+      "--norc",
+      "-c",
+      "sed -i -e 's|@googletest|@com_google_googletest|g' absl/*/BUILD* absl/*/*/BUILD* absl/*/*/*/BUILD*"
+    ],
+    "command": "sed -i -e 's|@googletest|@com_google_googletest|g' absl/*/BUILD* absl/*/*/BUILD* absl/*/*/*/BUILD*",
+    "compilerExecuted": false,
+    "sourceCodeExecuted": false,
+    "stdout": ""
+  },
+  "probeFreezeSha256": "98be71845a6bcd64e5c60221f7faf9eab53c8c82d4790511107b3cba3df84d7c",
+  "rootCommand": "sed -i -e 's|@googletest|@com_google_googletest|g' absl/*/BUILD* absl/*/*/BUILD* absl/*/*/*/BUILD*",
+  "sourceExecuted": false,
+  "status": "PASSED_SYNTHETIC_ONLY",
+  "targets": 3,
+  "zeroReplacementBackupVerified": true
+}

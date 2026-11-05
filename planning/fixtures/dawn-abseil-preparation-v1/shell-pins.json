@@ -1,0 +1,115 @@
+{
+  "protocol": "abseil-trusted-shell-pins-v1",
+  "tools": {
+    "/bin/bash": {
+      "bytes": 1290128,
+      "mode": 365,
+      "path": "/bin/bash",
+      "sha256": "16303dedab719ddb63efd9dd68092a0da37b397bfd4fcb856d5f1c86c5ee414b"
+    },
+    "/usr/bin/sandbox-exec": {
+      "bytes": 102368,
+      "mode": 493,
+      "path": "/usr/bin/sandbox-exec",
+      "sha256": "abc5bb136d6b5cce8fa85d789f78e3326c51ca60cae637b2064adfb67a1dcd9a"
+    },
+    "/usr/bin/sed": {
+      "bytes": 169952,
+      "mode": 493,
+      "path": "/usr/bin/sed",
+      "sha256": "6ac57d91d32dda62f954dbcfe29e43dd55e69946821092b542dbbbe7dca86997"
+    }
+  },
+  "systemCaches": [
+    {
+      "bytes": 573440,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e",
+      "sha256": "7a024959c8c14d46e2964f975f2256b3f9efc2da950a31067d26ac7ac16498d4"
+    },
+    {
+      "bytes": 1715355648,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.01",
+      "sha256": "2130d36b0a4a034cec46d44b9205e08d5bceca280509f90defe3d0ac3891496e"
+    },
+    {
+      "bytes": 234569728,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.02.dylddata",
+      "sha256": "dc6bf44cce543831717e158914166bffc8a98f7015e38c5b2ea50bb2566dc541"
+    },
+    {
+      "bytes": 127057920,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.03.dyldreadonly",
+      "sha256": "9e5d46f5e4b5f3f719264c766910d523559dbee992322b21f684a89ba1884943"
+    },
+    {
+      "bytes": 601341952,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.04.dyldlinkedit",
+      "sha256": "0a403732b86c08b39daf6669532c3f5bb10bb12ef288b597e366a06f1b981b0b"
+    },
+    {
+      "bytes": 1819885568,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.05",
+      "sha256": "bfcb33596a2bde568376c39ba179f3666becddbda2153cc7e48e0ffd21237aa4"
+    },
+    {
+      "bytes": 237125632,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.06.dylddata",
+      "sha256": "996039f29c5f41941922ca54e7cfc249b707bcc1cfa4d9654945417027864e17"
+    },
+    {
+      "bytes": 7290880,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.07.dyldreadonly",
+      "sha256": "a9c6dd008245e2d4e024dd54875f95a33c4b488680f7e3b3e825cfa79dac7550"
+    },
+    {
+      "bytes": 617381888,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.08.dyldlinkedit",
+      "sha256": "d9d696f6624da68fb4df4dca0f3ea1a5b4c76a7de1a2e6d107d1e36cee9e75dc"
+    },
+    {
+      "bytes": 182812672,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.09",
+      "sha256": "99344558cc98e4155262495ba2f2132aaf1331a02a8e7d6a129c7cf0a31e72c5"
+    },
+    {
+      "bytes": 23199744,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.10.dylddata",
+      "sha256": "fb7f328058ad6f118592c1b7d81d67d431d8e73e4ed8ed3239de20eb65bd0e98"
+    },
+    {
+      "bytes": 32768,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.11",
+      "sha256": "be38a6ebbd6b0a5cf4692e23e683f53dcbb478725aac5b1e0b8cfe02ac9edc5e"
+    },
+    {
+      "bytes": 254345216,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.12.dyldlinkedit",
+      "sha256": "f61b8530e5697eaa744b3f36ea1c1a26a2da1a469f1f5f0395162c2e172b8625"
+    },
+    {
+      "bytes": 2372801,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.atlas",
+      "sha256": "ad196c5e2c1c0a3be152007906f1892861edaca96cbf4a8aa3bc581e07d684e2"
+    },
+    {
+      "bytes": 1338214,
+      "mode": 493,
+      "path": "/System/Volumes/Preboot/Cryptexes/OS/System/Library/dyld/dyld_shared_cache_arm64e.map",
+      "sha256": "9486c0f76e880803a785925771d601d064fee8a7bec4279bd54c059db92adddd"
+    }
+  ]
+}
