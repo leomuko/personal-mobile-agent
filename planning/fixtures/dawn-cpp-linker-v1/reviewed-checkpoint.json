@@ -1,0 +1,102 @@
+{
+  "P2Complete": false,
+  "canonicalDataOnlyVerify": "PASS",
+  "cppCasesNotRun": 72,
+  "files": [
+    {
+      "bytes": 1824,
+      "path": "planning/fixtures/dawn-cpp-linker-v1/preparation-result-lock.json",
+      "sha256": "288f56e309d77bd36071eb608bbc9ffb517518abbbb8a7d756e6b48662d9ec5b"
+    },
+    {
+      "bytes": 71583,
+      "path": "planning/fixtures/dawn-cpp-linker-v1/probe-freeze-r1.json",
+      "sha256": "fc37dbb00cea5abc4b84c7ddf7445555dc0027bb1c86cbd09b288f1229c92ff3"
+    },
+    {
+      "bytes": 3594,
+      "path": "planning/fixtures/dawn-cpp-linker-v1/preparation-review.json",
+      "sha256": "b0f679821cc82e730a3d19f990c8ba7d74d211efd9e831b739584cd6e50b1fc3"
+    },
+    {
+      "bytes": 43113,
+      "path": "planning/fixtures/dawn-cpp-linker-v1/reviewed-snapshot.json",
+      "sha256": "3649c52b4d269d951f78df19f65929993321136f74f276b1349fcde819378f3d"
+    },
+    {
+      "bytes": 557,
+      "path": "planning/fixtures/dawn-cpp-linker-v1/canonical-verify-proof.json",
+      "sha256": "bca7d06babdf11e43e89bf820abbf79ff5cfd712756ca4c98578e77fbc21b18e"
+    },
+    {
+      "bytes": 2571,
+      "path": "docs/P2_CPP_LINKER_SELECTION_PREPARATION_QA_V1.md",
+      "sha256": "eccfa12215cb56f7a6fddc9a056d3e90e022c40de94b19c7d125b50f9312e3a3"
+    },
+    {
+      "bytes": 923,
+      "path": "build/dawn-cpp-linker-v1/qa-preparation-1/audit-results.json",
+      "sha256": "5fa231828f889fa470b97e41b7cb9d016669e0ba2e8776940d040068df0148eb"
+    },
+    {
+      "bytes": 923,
+      "path": "build/dawn-cpp-linker-v1/qa-preparation-1/audit.log",
+      "sha256": "5fa231828f889fa470b97e41b7cb9d016669e0ba2e8776940d040068df0148eb"
+    },
+    {
+      "bytes": 6473,
+      "path": "build/dawn-cpp-linker-v1/qa-preparation-1/audit.py",
+      "sha256": "5e4a3da47267077f2f4214daa7389701ec8ecaea50d167ce1ab79945822a8857"
+    },
+    {
+      "bytes": 557,
+      "path": "build/dawn-cpp-linker-v1/qa-preparation-1/canonical-verify.json",
+      "sha256": "bca7d06babdf11e43e89bf820abbf79ff5cfd712756ca4c98578e77fbc21b18e"
+    },
+    {
+      "bytes": 2719,
+      "path": "build/dawn-cpp-linker-v1/qa-preparation-1/focused-python39-final.log",
+      "sha256": "041d72c1597c00b67e39ca19cdefd59a1a51f4c70ed66831256044b2f1ac9e35"
+    },
+    {
+      "bytes": 2719,
+      "path": "build/dawn-cpp-linker-v1/qa-preparation-1/focused-python39.log",
+      "sha256": "f834ee0339dde71d2a29d98acc9e8f99bb3ad155c31662a11ce98200f3de8f1a"
+    },
+    {
+      "bytes": 2719,
+      "path": "build/dawn-cpp-linker-v1/qa-preparation-1/focused-tests-final.log",
+      "sha256": "347b9c098a8a35898cef9950a180994ba0e7eca7c122575c78a0d63cb593f892"
+    },
+    {
+      "bytes": 2719,
+      "path": "build/dawn-cpp-linker-v1/qa-preparation-1/focused-tests.log",
+      "sha256": "67b138ae482db991de7e50bbe0c5556e1d401a78730acd10d491ef5a89acc168"
+    },
+    {
+      "bytes": 3594,
+      "path": "build/dawn-cpp-linker-v1/qa-preparation-1/qa-summary.json",
+      "sha256": "b0f679821cc82e730a3d19f990c8ba7d74d211efd9e831b739584cd6e50b1fc3"
+    },
+    {
+      "bytes": 7547,
+      "path": "build/dawn-cpp-linker-v1/qa-preparation-1/review.md",
+      "sha256": "4d77f6adb4087f7d5b40b2810aed78715237bf9a06635c22923b6acaf635f054"
+    },
+    {
+      "bytes": 43113,
+      "path": "build/dawn-cpp-linker-v1/qa-preparation-1/snapshot.json",
+      "sha256": "3649c52b4d269d951f78df19f65929993321136f74f276b1349fcde819378f3d"
+    }
+  ],
+  "freezeSha256": "fc37dbb00cea5abc4b84c7ddf7445555dc0027bb1c86cbd09b288f1229c92ff3",
+  "nativeExecutorImplemented": false,
+  "nativeQualification": "BLOCKED",
+  "nativeQueriesExecuted": 0,
+  "probeCommandsNotRun": 7,
+  "protocol": "reviewed-linker-selection-preparation-v1",
+  "rootCause": "UNPROVED",
+  "schema": 1,
+  "semanticEnablement": false,
+  "verdict": "PASS_PROPOSAL_PREPARATION_ONLY"
+}

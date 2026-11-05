@@ -1,0 +1,18 @@
+{
+  "actualParsedJsonUsed": true,
+  "canonicalFunction": "scripts/diagnostics/dawn_cpp_linker_v1/prepare.py:verify",
+  "executorImplemented": false,
+  "forbiddenBoundariesCalled": 0,
+  "forbiddenBoundariesInstrumented": 9,
+  "freezeSha256": "fc37dbb00cea5abc4b84c7ddf7445555dc0027bb1c86cbd09b288f1229c92ff3",
+  "nativeExecuted": false,
+  "readersAndHashesMocked": false,
+  "receipt": {
+    "inputs": 163,
+    "nativeExecutorImplemented": false,
+    "nativeQueriesExecuted": 0,
+    "status": "PASS_PREPARATION_ONLY",
+    "trees": 6
+  },
+  "status": "PASS"
+}
