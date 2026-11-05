@@ -1,0 +1,71 @@
+{
+  "BazelSelectionVerified": false,
+  "allEntriesRequired": true,
+  "archive": {
+    "maxBytes": 16777216,
+    "prefix": "abseil-cpp-20260526.0",
+    "redirect": "https://codeload.github.com/abseil/abseil-cpp/tar.gz/refs/tags/20260526.0",
+    "sha256": "6e1aee535473414164bf83e4ebc40240dec71a4701f8a642d906e95bea1aea0c",
+    "url": "https://github.com/abseil/abseil-cpp/archive/20260526.0.tar.gz"
+  },
+  "backupSuffix": "-e",
+  "compilerAllowed": false,
+  "hardlinksSupported": false,
+  "limits": {
+    "allPax": 1048576,
+    "compressed": 16777216,
+    "decoded": 134217728,
+    "depth": 64,
+    "file": 8388608,
+    "frames": 33554432,
+    "headers": 10000,
+    "names": 12582912,
+    "pax": 65536,
+    "rss": 536870912
+  },
+  "normalizedDirectoryMode": "0700",
+  "normalizedRegularMode": "0600",
+  "protocol": "abseil-acquisition-preparation-v1",
+  "requiredFiles": [
+    "LICENSE",
+    "CMakeLists.txt",
+    "MODULE.bazel",
+    "absl/types/span.h",
+    "absl/base/BUILD.bazel",
+    "absl/crc/internal/crc32_x86_arm_combined_simd.h"
+  ],
+  "rootAdopted": false,
+  "rootPatch": {
+    "bytes": 886,
+    "mode": 420,
+    "path": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-abseil-preparation-v1/root-abseil.patch",
+    "sha256": "2d14482f889029bb6c3332ee925eb058e784ce35115b5e9222c43185c9d5dbc5"
+  },
+  "rootPatchOrigin": {
+    "bytes": 886,
+    "path": "build/ml-drift-compatibility-v1/sdk-full/PATCH.abseil",
+    "sha256": "2d14482f889029bb6c3332ee925eb058e784ce35115b5e9222c43185c9d5dbc5"
+  },
+  "rootRewrite": "sed -i -e 's|@googletest|@com_google_googletest|g' absl/*/BUILD* absl/*/*/BUILD* absl/*/*/*/BUILD*",
+  "sourcePayloadAcquired": false,
+  "toolPins": {
+    "/bin/bash": {
+      "bytes": 1290128,
+      "mode": 365,
+      "path": "/bin/bash",
+      "sha256": "16303dedab719ddb63efd9dd68092a0da37b397bfd4fcb856d5f1c86c5ee414b"
+    },
+    "/usr/bin/sandbox-exec": {
+      "bytes": 102368,
+      "mode": 493,
+      "path": "/usr/bin/sandbox-exec",
+      "sha256": "abc5bb136d6b5cce8fa85d789f78e3326c51ca60cae637b2064adfb67a1dcd9a"
+    },
+    "/usr/bin/sed": {
+      "bytes": 169952,
+      "mode": 493,
+      "path": "/usr/bin/sed",
+      "sha256": "6ac57d91d32dda62f954dbcfe29e43dd55e69946821092b542dbbbe7dca86997"
+    }
+  }
+}
