@@ -1,0 +1,116 @@
+{
+  "completeArchiveProofReused": true,
+  "headers": {
+    "include/dawn/dawn_proc.h": {
+      "bytes": 2413,
+      "sha256": "e071805b66e5702e298f6a3589a7fbf7b63805c11d52ada46caea21759acbbf9"
+    },
+    "include/dawn/dawn_thread_dispatch_proc.h": {
+      "bytes": 2157,
+      "sha256": "9e95f1ca043cf863439302326f421e818c2c4763e70b556ffd8dcb30fa496d84"
+    },
+    "include/dawn/native/D3D11Backend.h": {
+      "bytes": 2757,
+      "sha256": "ab0c9b280b04698130472d904cdcc785224b3549795913d825cd47f3f3686fcc"
+    },
+    "include/dawn/native/D3D12Backend.h": {
+      "bytes": 3679,
+      "sha256": "fccc0091c98149c67b47856e297a24f33e6fba0ba567e6c887426b8f1cee9636"
+    },
+    "include/dawn/native/D3DBackend.h": {
+      "bytes": 2289,
+      "sha256": "c6d4802dabdd7789a70e3fbf54b5e27728d83839eca8027de015b3e691194a39"
+    },
+    "include/dawn/native/DawnNative.h": {
+      "bytes": 14558,
+      "sha256": "ae0edfce928e3a1c390d140038f8b3e489717126dde9f952892f042ff388ee08"
+    },
+    "include/dawn/native/MetalBackend.h": {
+      "bytes": 2661,
+      "sha256": "623722360ac7ea6f3b49e00d6762ee6457a055e9b52dc5ae9324156047796b71"
+    },
+    "include/dawn/native/NullBackend.h": {
+      "bytes": 1819,
+      "sha256": "c3b1b060edac2d762c8bcd036cd1851e5f2b25d15f95f0062d65007fdfce5b5f"
+    },
+    "include/dawn/native/OpenGLBackend.h": {
+      "bytes": 3434,
+      "sha256": "ec4ac02a0a0183bc85a46497d65df7b32dac3316c92005215b5c279b647ee1ba"
+    },
+    "include/dawn/native/VulkanBackend.h": {
+      "bytes": 7868,
+      "sha256": "0d0999d02c438320580205a5a2cc3e26f744cef867b1a6925f8366248b1bc37b"
+    },
+    "include/dawn/native/WebGPUBackend.h": {
+      "bytes": 2190,
+      "sha256": "f71ede7cb40629ac09dfc687b95e93122396e8bb45b37f2920a4095ea6503c44"
+    },
+    "include/dawn/native/dawn_native_export.h": {
+      "bytes": 2243,
+      "sha256": "c722ebaa9c0c9fda4d477bb8861cf60fdcbe225aa10ade9c523ee9456c5eb639"
+    },
+    "include/dawn/platform/DawnPlatform.h": {
+      "bytes": 8221,
+      "sha256": "60345ac0ea834f4b3436426db0db3eb53d4b64132f1b4a0a26467e17443ddbcd"
+    },
+    "include/dawn/platform/dawn_platform_export.h": {
+      "bytes": 2275,
+      "sha256": "8a4572e603a646777c230d25ba4141bc2112ed80ab37cf5f00c5b48b370a8f53"
+    },
+    "include/dawn/replay/Replay.h": {
+      "bytes": 3530,
+      "sha256": "df898da5fba155d4e8f12827fbce4534fc93e94036207ed0bba5f0d445e56943"
+    },
+    "include/dawn/replay/dawn_replay_export.h": {
+      "bytes": 2243,
+      "sha256": "fbe6193a5724dd020fd8d658ea55a764569940ba9fceb4e572b23f0569a681d0"
+    },
+    "include/dawn/wire/Wire.h": {
+      "bytes": 3751,
+      "sha256": "6b5ec03261fb5dcb63f52e3f806a1fee4df8dcbeff66ec4e0d611c31af80bf0c"
+    },
+    "include/dawn/wire/WireClient.h": {
+      "bytes": 7502,
+      "sha256": "dd1feaaa75f09cdc5ea3ea124cfcedc7b522b10ff262cef3a8d4e8439a26aa46"
+    },
+    "include/dawn/wire/WireServer.h": {
+      "bytes": 7428,
+      "sha256": "093f588cdf5ed271bbd83dbf4f59cf029036ea93fe1c079c9df9230e02b0894b"
+    },
+    "include/dawn/wire/dawn_wire_export.h": {
+      "bytes": 2211,
+      "sha256": "ffa5bff93bb86f547ba86406bbc44def47938b507fd479fc5f736cc376bc9d64"
+    },
+    "include/tint/tint.h": {
+      "bytes": 4135,
+      "sha256": "018eddeedf6d175fbe209edbb9472f8b13feb93d2150c5c26d3d982b8bffaefa"
+    },
+    "include/webgpu/webgpu.h": {
+      "bytes": 1686,
+      "sha256": "5316d9fd241e604b3260fa8d4398a458a3dc88ee69c540ac959260b444bdfae3"
+    },
+    "include/webgpu/webgpu_cpp.h": {
+      "bytes": 1702,
+      "sha256": "1166cea03743213cbd0a7fe04b01c8bcae8aa117d1370c124572c65b24f74aac"
+    },
+    "include/webgpu/webgpu_cpp_print.h": {
+      "bytes": 1726,
+      "sha256": "123e1c0567abe626d2730490e3ea00da9adf207ab4cc005c50a8a6a8bef7bd56"
+    },
+    "include/webgpu/webgpu_enum_class_bitmasks.h": {
+      "bytes": 6135,
+      "sha256": "f4d5ee0a55911670854d9e9d008dd9b565e44253f5d143bd91713065b22a0123"
+    },
+    "include/webgpu/webgpu_glfw.h": {
+      "bytes": 3406,
+      "sha256": "0d34411aa2a02d6c3f5f58c5b4eac831572a6ce05241ebd0756913688696a738"
+    }
+  },
+  "newWholeGzipEOFProof": false,
+  "protocol": "qualified-dawn-header-copy-v1",
+  "regularBytes": 104019,
+  "seconds": 0.03864599999724305,
+  "sourceExecuted": false,
+  "sourceSha256": "4ee2687c6f4b2b1f30e70028763201c898a763989f7aafcb284e197ab0a4735b",
+  "tarMembersVisited": 326
+}

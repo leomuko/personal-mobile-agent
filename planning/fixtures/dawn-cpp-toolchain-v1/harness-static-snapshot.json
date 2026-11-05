@@ -1,0 +1,194 @@
+{
+  "compilationExecuted": false,
+  "files": {
+    "/Users/kezileo/Desktop/personal_mobile_agent/AGENTS.md": {
+      "bytes": 4233,
+      "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-harness-preparation-1/review.md": {
+      "bytes": 13367,
+      "sha256": "76c12d397aa3bf73c36733dd963ee1a11a8646c0089d9ec8e5342f3544c296c9"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-harness-preparation-1/snapshot.json": {
+      "bytes": 12035,
+      "sha256": "93c26eb3484a1dc59a5201b64e7fd7ae1e290a232a9d7ec87d018840ae8c21a4"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-harness-preparation-2/review.md": {
+      "bytes": 8745,
+      "sha256": "6ddd86d42203dc3a37938893c04f2f654e163ca69ff3807dcd16101e40c2fc12"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-harness-preparation-2/static-bindings.json": {
+      "bytes": 13018,
+      "sha256": "e87cf57f91acf5d375130ba240d5d5bdcb68da209d37c8ed63c9f3c39fdd4c87"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-0-cpp_headers.json": {
+      "bytes": 16833,
+      "sha256": "985e5843270b7fc5754096a345c83d856c02535c6a6d8fc9ecaf26ddae5425dc"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include/dawn/dawn_proc_table.h": {
+      "bytes": 17688,
+      "sha256": "c62d73d8b719aece7bc71971aefc0391278935987455ab95a1885b786f774499"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include/dawn/webgpu.h": {
+      "bytes": 257568,
+      "sha256": "c155709ae014edb51a74752a72b70ada1779129c6ce60f24ea9ff56017c6a188"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include/dawn/webgpu_cpp.h": {
+      "bytes": 544270,
+      "sha256": "68c18c9cb3e9562d7e6acea8716ae7e032298bb276ed8239551f7c5345e03afe"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include/dawn/webgpu_cpp_print.h": {
+      "bytes": 102318,
+      "sha256": "2b4a771673884bb3b5290a5b43235eab4b5ab0393d77d38410ea73607c0b0d4a"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include/dawn/wire/client/webgpu.h": {
+      "bytes": 44333,
+      "sha256": "90d0414bc08eb88d857a112c75bb55ef3c8bc93137ff4517a1680c52751b0f55"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include/dawn/wire/client/webgpu_cpp.h": {
+      "bytes": 562428,
+      "sha256": "561774f2f6d999e86fe635fc33e14680b96dce65c6c639621087205b7654cae1"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include/dawn/wire/client/webgpu_cpp_print.h": {
+      "bytes": 102419,
+      "sha256": "356c007a583b5e96679a535323bb4f4c4fb7893e086d0156d5684303c379d733"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-0/_out/include/webgpu/webgpu_cpp_chained_struct.h": {
+      "bytes": 2402,
+      "sha256": "7329fc197c9047ce1c08c3294401836f7f7b24bdf07fbaf0a266253ffa1ac3b8"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-1/_out/include/dawn/dawn_proc_table.h": {
+      "bytes": 17688,
+      "sha256": "c62d73d8b719aece7bc71971aefc0391278935987455ab95a1885b786f774499"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-1/_out/include/dawn/webgpu.h": {
+      "bytes": 257568,
+      "sha256": "c155709ae014edb51a74752a72b70ada1779129c6ce60f24ea9ff56017c6a188"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-1/_out/include/dawn/webgpu_cpp.h": {
+      "bytes": 544270,
+      "sha256": "68c18c9cb3e9562d7e6acea8716ae7e032298bb276ed8239551f7c5345e03afe"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-1/_out/include/dawn/webgpu_cpp_print.h": {
+      "bytes": 102318,
+      "sha256": "2b4a771673884bb3b5290a5b43235eab4b5ab0393d77d38410ea73607c0b0d4a"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-1/_out/include/dawn/wire/client/webgpu.h": {
+      "bytes": 44333,
+      "sha256": "90d0414bc08eb88d857a112c75bb55ef3c8bc93137ff4517a1680c52751b0f55"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-1/_out/include/dawn/wire/client/webgpu_cpp.h": {
+      "bytes": 562428,
+      "sha256": "561774f2f6d999e86fe635fc33e14680b96dce65c6c639621087205b7654cae1"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-1/_out/include/dawn/wire/client/webgpu_cpp_print.h": {
+      "bytes": 102419,
+      "sha256": "356c007a583b5e96679a535323bb4f4c4fb7893e086d0156d5684303c379d733"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/candidate-repeat-1/_out/include/webgpu/webgpu_cpp_chained_struct.h": {
+      "bytes": 2402,
+      "sha256": "7329fc197c9047ce1c08c3294401836f7f7b24bdf07fbaf0a266253ffa1ac3b8"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-0-cpp_headers.json": {
+      "bytes": 16829,
+      "sha256": "59f88f54bdcbdf3131369219a69186faedc052a2b7736ce70474e9aa9188faa7"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include/dawn/dawn_proc_table.h": {
+      "bytes": 17688,
+      "sha256": "c62d73d8b719aece7bc71971aefc0391278935987455ab95a1885b786f774499"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include/dawn/webgpu.h": {
+      "bytes": 257568,
+      "sha256": "c155709ae014edb51a74752a72b70ada1779129c6ce60f24ea9ff56017c6a188"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include/dawn/webgpu_cpp.h": {
+      "bytes": 544241,
+      "sha256": "470e356570253e6db71f7ea2f4d3ab9596dbdf8224b1491f0488758ad1dc8fdb"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include/dawn/webgpu_cpp_print.h": {
+      "bytes": 102318,
+      "sha256": "2b4a771673884bb3b5290a5b43235eab4b5ab0393d77d38410ea73607c0b0d4a"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include/dawn/wire/client/webgpu.h": {
+      "bytes": 44333,
+      "sha256": "90d0414bc08eb88d857a112c75bb55ef3c8bc93137ff4517a1680c52751b0f55"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include/dawn/wire/client/webgpu_cpp.h": {
+      "bytes": 562399,
+      "sha256": "efaeed84d4b0c456b2ccf4182e57ab680a31ba8dfa7db2ce20d61a8f39fbfa29"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include/dawn/wire/client/webgpu_cpp_print.h": {
+      "bytes": 102419,
+      "sha256": "356c007a583b5e96679a535323bb4f4c4fb7893e086d0156d5684303c379d733"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include/webgpu/webgpu_cpp_chained_struct.h": {
+      "bytes": 2402,
+      "sha256": "7329fc197c9047ce1c08c3294401836f7f7b24bdf07fbaf0a266253ffa1ac3b8"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-1/_out/include/dawn/dawn_proc_table.h": {
+      "bytes": 17688,
+      "sha256": "c62d73d8b719aece7bc71971aefc0391278935987455ab95a1885b786f774499"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-1/_out/include/dawn/webgpu.h": {
+      "bytes": 257568,
+      "sha256": "c155709ae014edb51a74752a72b70ada1779129c6ce60f24ea9ff56017c6a188"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-1/_out/include/dawn/webgpu_cpp.h": {
+      "bytes": 544241,
+      "sha256": "470e356570253e6db71f7ea2f4d3ab9596dbdf8224b1491f0488758ad1dc8fdb"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-1/_out/include/dawn/webgpu_cpp_print.h": {
+      "bytes": 102318,
+      "sha256": "2b4a771673884bb3b5290a5b43235eab4b5ab0393d77d38410ea73607c0b0d4a"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-1/_out/include/dawn/wire/client/webgpu.h": {
+      "bytes": 44333,
+      "sha256": "90d0414bc08eb88d857a112c75bb55ef3c8bc93137ff4517a1680c52751b0f55"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-1/_out/include/dawn/wire/client/webgpu_cpp.h": {
+      "bytes": 562399,
+      "sha256": "efaeed84d4b0c456b2ccf4182e57ab680a31ba8dfa7db2ce20d61a8f39fbfa29"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-1/_out/include/dawn/wire/client/webgpu_cpp_print.h": {
+      "bytes": 102419,
+      "sha256": "356c007a583b5e96679a535323bb4f4c4fb7893e086d0156d5684303c379d733"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-1/_out/include/webgpu/webgpu_cpp_chained_struct.h": {
+      "bytes": 2402,
+      "sha256": "7329fc197c9047ce1c08c3294401836f7f7b24bdf07fbaf0a266253ffa1ac3b8"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/docs/P2_DAWN_CALLBACK_PATCH_STATIC_ASSESSMENT_V1.md": {
+      "bytes": 3269,
+      "sha256": "64652d2dd97cb19377071cfbcffb2760c9e292d105a09d4e9da4f46d130406ba"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_ABSEIL_CPP_QUALIFICATION_PROPOSAL_V1.md": {
+      "bytes": 12709,
+      "sha256": "b03a0de09c6fec363548afc6e5f114e92c757d519315e1a7065cfbb05d7792d8"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/QA_AGENT_PROMPT.md": {
+      "bytes": 5660,
+      "sha256": "79c9ecbc2dd9ec33315bec7e080bd13b5135b4efee4dd4848a43524455e6069d"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/callback_probe_v1.cpp": {
+      "bytes": 14046,
+      "sha256": "794bbf3f08a63336d9c8fd7eab5bd45a9c5cd442b9995cf2db40cf9ef3d737f4"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-toolchain-v1/explicit_override_v1.cpp": {
+      "bytes": 3009,
+      "sha256": "f2dc8dbef43aece4ed8f5f2bbc135a8b4ccba2243bf9bf2810af49f5a1ef36a7"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/callback_probe.cpp": {
+      "bytes": 5522,
+      "sha256": "f600376e9e05a5fc9d7efa10b4a8b12835fe045adfacf9dae40c097066412470"
+    },
+    "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-python-patch-v1/source-include-inventory.json": {
+      "bytes": 7935,
+      "sha256": "ebdd5f7ceeeae74226df0f2652e06231612bdc2481df0aea72c04b57387572e6"
+    }
+  },
+  "head": "06ff8ba50cc6e980e8fbeabc5de4f3e02e92ef87",
+  "headFreshlyQueried": true,
+  "reviewedOn": "2026-11-05",
+  "schema": 1,
+  "scope": "complete-header-harness-static-followup"
+}

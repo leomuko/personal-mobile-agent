@@ -1,0 +1,45 @@
+{
+  "APIEquivalenceVerified": false,
+  "BazelSelectionVerified": false,
+  "P2Complete": false,
+  "compilationOrNativeQueryExecuted": false,
+  "compilerExecutionAuthorized": false,
+  "deviceExecutionAuthorized": false,
+  "findings": [],
+  "futureCommandCounts": {
+    "base": 24,
+    "executionFreezeApproved": false,
+    "supplemental": 48,
+    "total": 72
+  },
+  "head": "06ff8ba50cc6e980e8fbeabc5de4f3e02e92ef87",
+  "historicalHeaderCopiesVerified": 32,
+  "limitations": [
+    "Static-only PASS; no compiler results or runtime measurements.",
+    "Explicit override differentials are expected investigations, not equivalence credit.",
+    "Concrete metadata/native/command/execution freeze still needs separate review."
+  ],
+  "metadataToolingReviewed": false,
+  "originalDraftPreserved": true,
+  "priorFindings": {
+    "HARN-001": "ADDRESSED_STATICALLY",
+    "HARN-002": "ADDRESSED_AS_API_DIFFERENTIAL_INVESTIGATION",
+    "HARN-003": "ADDRESSED_STATICALLY"
+  },
+  "reportPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/qa-harness-preparation-2/review.md",
+  "reviewedOn": "2026-11-05",
+  "reviewer": "Retained sole primary independent Codex QA reviewer",
+  "runtimeQualificationVerified": false,
+  "schema": 1,
+  "scope": "complete-header-harness-static-followup",
+  "semanticEnablement": false,
+  "snapshotSha256": "590c0687154354730d28f3dd68c56ac4ef6830be2e159b8de90f1ae65611a1e6",
+  "staticExpectedCounts": {
+    "calls": 34,
+    "cases": 30,
+    "ownedDestructions": 4,
+    "traits": 34,
+    "typedEffects": 11
+  },
+  "verdict": "PASS"
+}

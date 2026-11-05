@@ -1,0 +1,70 @@
+{
+  "files": {
+    "dawn": {
+      "kind": "directory",
+      "mode": 493
+    },
+    "dawn/dawn_proc_table.h": {
+      "bytes": 17688,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "c62d73d8b719aece7bc71971aefc0391278935987455ab95a1885b786f774499"
+    },
+    "dawn/webgpu.h": {
+      "bytes": 257568,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "c155709ae014edb51a74752a72b70ada1779129c6ce60f24ea9ff56017c6a188"
+    },
+    "dawn/webgpu_cpp.h": {
+      "bytes": 544241,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "470e356570253e6db71f7ea2f4d3ab9596dbdf8224b1491f0488758ad1dc8fdb"
+    },
+    "dawn/webgpu_cpp_print.h": {
+      "bytes": 102318,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "2b4a771673884bb3b5290a5b43235eab4b5ab0393d77d38410ea73607c0b0d4a"
+    },
+    "dawn/wire": {
+      "kind": "directory",
+      "mode": 493
+    },
+    "dawn/wire/client": {
+      "kind": "directory",
+      "mode": 493
+    },
+    "dawn/wire/client/webgpu.h": {
+      "bytes": 44333,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "90d0414bc08eb88d857a112c75bb55ef3c8bc93137ff4517a1680c52751b0f55"
+    },
+    "dawn/wire/client/webgpu_cpp.h": {
+      "bytes": 562399,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "efaeed84d4b0c456b2ccf4182e57ab680a31ba8dfa7db2ce20d61a8f39fbfa29"
+    },
+    "dawn/wire/client/webgpu_cpp_print.h": {
+      "bytes": 102419,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "356c007a583b5e96679a535323bb4f4c4fb7893e086d0156d5684303c379d733"
+    },
+    "webgpu": {
+      "kind": "directory",
+      "mode": 493
+    },
+    "webgpu/webgpu_cpp_chained_struct.h": {
+      "bytes": 2402,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "7329fc197c9047ce1c08c3294401836f7f7b24bdf07fbaf0a266253ffa1ac3b8"
+    }
+  },
+  "regularBytes": 1633368,
+  "root": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include"
+}
