@@ -1,0 +1,50 @@
+{
+  "AndroidCompatibilityVerified": false,
+  "BazelSelectionVerified": false,
+  "P2Complete": false,
+  "compilerReady": false,
+  "files": [
+    {
+      "bytes": 7216,
+      "path": "planning/fixtures/dawn-abseil-preparation-v1/prepare-1-result-lock.json",
+      "sha256": "cf8414c60d5d4ac2b92cb7941d2a4579e0f2bf7c22992acb84b22d3b0d60469d"
+    },
+    {
+      "bytes": 3232,
+      "path": "planning/fixtures/dawn-abseil-preparation-v1/prepare-1-results-review.json",
+      "sha256": "53c17121f6f029002253878d44b0b579f7fbbb0432b1fa2378ca7dce3bdac375"
+    },
+    {
+      "bytes": 10842,
+      "path": "planning/fixtures/dawn-abseil-preparation-v1/prepare-1-results-snapshot.json",
+      "sha256": "69dd83f1a9f3bb0be955ddd26848ecacf8773cc06d1cc354065ff55ea3f5106a"
+    },
+    {
+      "bytes": 6264,
+      "path": "build/dawn-abseil-preparation-v1/qa-results-review-1/review.md",
+      "sha256": "aef6f36acccb0de17ca2c6000c73fee6f89867d5825056d914ae9669c45d2b05"
+    },
+    {
+      "bytes": 10130,
+      "path": "build/dawn-abseil-preparation-v1/qa-results-review-1/audit.py",
+      "sha256": "6d80df60c32250ac6bcd61d4aa6bbf6b65a5017865b05f0f829d4d419c71d43b"
+    },
+    {
+      "bytes": 933,
+      "path": "build/dawn-abseil-preparation-v1/qa-results-review-1/audit-results.json",
+      "sha256": "99e8861e0fb22252ba20ac533650652ce2da824f6e324af724c1bdda210e47f8"
+    },
+    {
+      "bytes": 933,
+      "path": "build/dawn-abseil-preparation-v1/qa-results-review-1/audit.log",
+      "sha256": "99e8861e0fb22252ba20ac533650652ce2da824f6e324af724c1bdda210e47f8"
+    }
+  ],
+  "furtherExecutionAuthorized": false,
+  "harnessQualified": false,
+  "protocol": "abseil-source-preparation-reviewed-results-v1",
+  "rootAdopted": false,
+  "semanticEnablement": false,
+  "sourcePreparationVerified": true,
+  "verdict": "PASS_SOURCE_PREPARATION_ONLY"
+}
