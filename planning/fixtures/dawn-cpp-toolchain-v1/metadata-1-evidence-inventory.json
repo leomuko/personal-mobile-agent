@@ -1,0 +1,48 @@
+{
+  "files": {
+    "command-trace.jsonl": {
+      "bytes": 1057,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "9e5e26983019960a801cadeee592557ccc748b9f67441bc89e94d2962ff26134"
+    },
+    "empty.cpp": {
+      "bytes": 56,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "796116eacc197df4614173aca4c92e7e44ce539c934a701cb0cd74e025de96bc"
+    },
+    "metadata-report.json": {
+      "bytes": 4358,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "e07a6b0ec67703408c34416e55334a359164bf1f42e7614af56f02824f5b14c0"
+    },
+    "outcome.json": {
+      "bytes": 1529,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "99090fca26d1a28958fb63417cb40f98fec9ee19b3124fb13b69d9eb74eadf4e"
+    },
+    "owner-started.json": {
+      "bytes": 165,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "21df2d447973a48d8c2a26321872295b4c5d760e59f038cf4a197a7bfdef222e"
+    },
+    "worker.stderr.log": {
+      "bytes": 39,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "1c577d60e9a89404150a9c788623ee9afbcb311dd3282d6511bf97bb6641fbbc"
+    },
+    "worker.stdout.log": {
+      "bytes": 0,
+      "kind": "file",
+      "mode": 420,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "regularBytes": 7204,
+  "root": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/metadata-attempts/metadata-1"
+}

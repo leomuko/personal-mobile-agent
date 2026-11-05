@@ -1,0 +1,41 @@
+{
+  "allowedByCurrentFreeze": false,
+  "executionAttemptReportedByWrapper": true,
+  "exists": true,
+  "file": {
+    "bytes": 472320,
+    "mode": 493,
+    "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic",
+    "sha256": "6beb1ad9c4fb7edafd59fddcb093f358f9a250bfe1db2db9f04ed1aacd523a69"
+  },
+  "helperExecutionVerified": false,
+  "protocol": "observed-inspector-helper-static-v1",
+  "rawInspectionOnly": true,
+  "rawMachO": {
+    "commandBytes": 1576,
+    "commandCount": 19,
+    "cpu": 16777228,
+    "dependencies": [
+      "/usr/lib/libc++.1.dylib",
+      "/usr/lib/libSystem.B.dylib"
+    ],
+    "filetype": 2,
+    "identifier": null,
+    "libraryNames": [
+      "/usr/lib/libc++.1.dylib",
+      "/usr/lib/libSystem.B.dylib"
+    ],
+    "loadCommandSha256": "78db15a8a1bf6116638ae88cdcdc8d31c53716dbc4e413edd87371bd773a8692",
+    "loadNames": [
+      "/usr/lib/dyld",
+      "/usr/lib/libc++.1.dylib",
+      "/usr/lib/libSystem.B.dylib"
+    ],
+    "rpaths": [],
+    "sliceBytes": 472320,
+    "sliceOffset": 0,
+    "subtype": 0
+  },
+  "requestedPath": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/otool-classic",
+  "toolchainQualified": false
+}
