@@ -1,0 +1,43 @@
+{
+  "status": "PASSED",
+  "cases": [
+    {
+      "exception": "TimeoutExpired",
+      "exitCode": 1,
+      "ownerCalls": 1,
+      "outcomeSha256": "afc8656d730541e59ece758ec162abdc214c2163d5e8e60eba3c1660a9daa82d",
+      "accepted": false,
+      "cleanupStatus": "UNCERTAIN"
+    },
+    {
+      "exception": "CalledProcessError",
+      "exitCode": 1,
+      "ownerCalls": 1,
+      "outcomeSha256": "a52cb9973cd59dfe4a3c41c56120c3b95f77bccaff5883875bc74dc62b94c902",
+      "accepted": false,
+      "cleanupStatus": "UNCERTAIN"
+    },
+    {
+      "exception": "SubprocessError",
+      "exitCode": 1,
+      "ownerCalls": 1,
+      "outcomeSha256": "5df7160834071d21ace19249c898cb9e4984d2fe504388e6a1cc36b9a80f3975",
+      "accepted": false,
+      "cleanupStatus": "UNCERTAIN"
+    }
+  ],
+  "historicalFailure": {
+    "propagated": true,
+    "attemptCreated": true,
+    "outcomePresent": false,
+    "accepted": false
+  },
+  "historicalSourceSha256": "9b972cc5be56b074ae7b51c2c5f1dbfbd7f2693815d08ad784f660c53c6eb748",
+  "staleExecutionFreeze": {
+    "rejected": true,
+    "reason": "qualification implementation changed"
+  },
+  "ownerExecutionMocked": true,
+  "vendorExecuted": false,
+  "networkRequests": 0
+}

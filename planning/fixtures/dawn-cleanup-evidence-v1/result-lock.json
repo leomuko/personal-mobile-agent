@@ -1,0 +1,107 @@
+{
+  "P2Complete": false,
+  "files": [
+    {
+      "bytes": 423,
+      "path": "build/dawn-cleanup-evidence-v1/CalledProcessError.outcome.json",
+      "sha256": "a52cb9973cd59dfe4a3c41c56120c3b95f77bccaff5883875bc74dc62b94c902"
+    },
+    {
+      "bytes": 385,
+      "path": "build/dawn-cleanup-evidence-v1/SubprocessError.outcome.json",
+      "sha256": "5df7160834071d21ace19249c898cb9e4984d2fe504388e6a1cc36b9a80f3975"
+    },
+    {
+      "bytes": 418,
+      "path": "build/dawn-cleanup-evidence-v1/TimeoutExpired.outcome.json",
+      "sha256": "afc8656d730541e59ece758ec162abdc214c2163d5e8e60eba3c1660a9daa82d"
+    },
+    {
+      "bytes": 2032,
+      "path": "build/dawn-cleanup-evidence-v1/audit-preservation-r1.py",
+      "sha256": "e92652a0a5af5896722bb9d1b607b15106fb37626cd5264d520a43146b3b8788"
+    },
+    {
+      "bytes": 2234,
+      "path": "build/dawn-cleanup-evidence-v1/audit-preservation.py",
+      "sha256": "f984f88d2c1e9ec7cd198278a5b00e85251eb712e705a3d191e46b3b97dd8a8a"
+    },
+    {
+      "bytes": 6539,
+      "path": "build/dawn-cleanup-evidence-v1/focused-tests.log",
+      "sha256": "9acd30b8afd703a640d7eaa77b58d243639c63104763dd1e2677001e047e33f6"
+    },
+    {
+      "bytes": 30656,
+      "path": "build/dawn-cleanup-evidence-v1/host-tests.log",
+      "sha256": "b13e7183b6350b878874f821b4eb2a452a4b9c061175d944dee0002b5a0bbd12"
+    },
+    {
+      "bytes": 423,
+      "path": "build/dawn-cleanup-evidence-v1/preservation.json",
+      "sha256": "ea0070a9885e691b2cfe73d041d6bdcc9617226e0a589dd0ae8d563ad929df2a"
+    },
+    {
+      "bytes": 1202,
+      "path": "build/dawn-cleanup-evidence-v1/probe-results.json",
+      "sha256": "b8856b70c33cf80c61c4209c60b129babfb8afa9aaede5148d53366275088f69"
+    },
+    {
+      "bytes": 3186,
+      "path": "build/dawn-cleanup-evidence-v1/probe.py",
+      "sha256": "ed50463da443e8c06de970d1d0ca6fcacea79eae453dcbe9ba46ec9a390ab59a"
+    },
+    {
+      "bytes": 2706,
+      "path": "docs/P2_DAWN_CLEANUP_EXCEPTION_RESULTS_V1.md",
+      "sha256": "181e63daa5d0104a93e0cb57a626bb5a8d1f50bfe75e0edd3c4e2a877710d739"
+    },
+    {
+      "bytes": 423,
+      "path": "planning/fixtures/dawn-cleanup-evidence-v1/CalledProcessError.outcome.json",
+      "sha256": "a52cb9973cd59dfe4a3c41c56120c3b95f77bccaff5883875bc74dc62b94c902"
+    },
+    {
+      "bytes": 385,
+      "path": "planning/fixtures/dawn-cleanup-evidence-v1/SubprocessError.outcome.json",
+      "sha256": "5df7160834071d21ace19249c898cb9e4984d2fe504388e6a1cc36b9a80f3975"
+    },
+    {
+      "bytes": 418,
+      "path": "planning/fixtures/dawn-cleanup-evidence-v1/TimeoutExpired.outcome.json",
+      "sha256": "afc8656d730541e59ece758ec162abdc214c2163d5e8e60eba3c1660a9daa82d"
+    },
+    {
+      "bytes": 423,
+      "path": "planning/fixtures/dawn-cleanup-evidence-v1/preservation.json",
+      "sha256": "ea0070a9885e691b2cfe73d041d6bdcc9617226e0a589dd0ae8d563ad929df2a"
+    },
+    {
+      "bytes": 1202,
+      "path": "planning/fixtures/dawn-cleanup-evidence-v1/probe-results.json",
+      "sha256": "b8856b70c33cf80c61c4209c60b129babfb8afa9aaede5148d53366275088f69"
+    },
+    {
+      "bytes": 2507,
+      "path": "planning/fixtures/dawn-cpp-qualification-v1/proposal-lock.json",
+      "sha256": "307c6225c161f03eb90ea618928eff8334fc28c81e730bb6ae80b5ddaf84e658"
+    },
+    {
+      "bytes": 22923,
+      "path": "scripts/diagnostics/dawn_python_patch_v1/qualify.py",
+      "sha256": "1e2f2d353d7c0bf49d3e33cd02f1c3fef647344bd5a6c0a16ae785d72fe255d1"
+    },
+    {
+      "bytes": 15507,
+      "path": "scripts/tests/test_dawn_python_qualification.py",
+      "sha256": "da87a8bb55c10bb8838b50f6a24fe214a1cb980e7916cf5e9a13feabcd1b6f0f"
+    }
+  ],
+  "focusedTests": 61,
+  "hostTests": 258,
+  "independentReview": "PENDING",
+  "ownerExecutionMocked": true,
+  "protocol": "dawn-cleanup-exception-results-v1",
+  "semanticEnabled": false,
+  "vendorExecuted": false
+}

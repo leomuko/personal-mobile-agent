@@ -1,0 +1,14 @@
+{
+  "status": "PASSED",
+  "committedSnapshot": "83dec19d42",
+  "resultBindingsVerified": 50,
+  "gitBindingsVerified": 49,
+  "unchangedHeldDraftBindingsVerified": 1,
+  "evidenceEntriesVerified": 4539,
+  "changedCurrentSource": [
+    "scripts/diagnostics/dawn_python_patch_v1/qualify.py",
+    "scripts/tests/test_dawn_python_qualification.py"
+  ],
+  "historicalFilesModified": false,
+  "oldExecutionFreezeRefreshed": false
+}
