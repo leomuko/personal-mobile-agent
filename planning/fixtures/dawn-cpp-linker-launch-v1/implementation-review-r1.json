@@ -1,0 +1,120 @@
+{
+  "GitActionsRun": false,
+  "P2Complete": false,
+  "amendmentReviewSha256": "b0eb588b32b74a66491232c171fb7189ebf7e61063881c3268d7242ac35be018",
+  "amendmentSha256": "83b545b7eea24d7a5c9bb1bf3e02708528617eaa04cd3e1ead52a5f82185b015",
+  "baselineExecutionFreezeSha256": "0fedb46426268e487cfb18ec55a04b04b0c348db7b5ba956990d03118c0d1d56",
+  "branchAndHeadFreshlyQueried": false,
+  "cachedHostRegressionFixture": "Only the retained identity and no-argument argv from the four existing host test methods; no source or binary build/mutation",
+  "canonicalAdmissionProofRecordedSeparately": true,
+  "conditions": [
+    "Approval binds only this exact freeze, unchanged input rows and genuine amendment review.",
+    "Stable implementation-review.json must remain byte-identical after actual data-only admission; canonical receipt and final summary/snapshot are separate.",
+    "The caller may copy this actual artifact unchanged to the declared fixture review path; no fabricated review or hash replacement.",
+    "Actual tool approval for the exact recorded require_escalated request remains a prerequisite. The worker and launch generator cannot self-certify that external grant.",
+    "Use /bin/zsh, login=false, exact reviewed workdir and argv, no persistent prefix rule, one parent invocation, no automatic fallback/retry/resumption.",
+    "Retain inner compiler-only sandbox with ld/network denied, exact seven queries and 300/30/15-second limits and all existing ownership/publication/resource gates.",
+    "This is implementation approval, not successful linker launch, dry-run agreement, compilation, Bazel/SDK/runtime/model/device acceptance or P2 completion."
+  ],
+  "evidence": [
+    {
+      "bytes": 7250,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/qa-implementation-r1/audit_implementation.py",
+      "sha256": "bbc77fb6d90573515f30c57b85a53325dbb0491560ac761edf92b3f4b4d1d5b1"
+    },
+    {
+      "bytes": 10035,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/qa-implementation-r1/run_host_checks.py",
+      "sha256": "07b0932cce8224101836f8130937eb94248fd586f4d7ee9429676bf4e0a55f1b"
+    },
+    {
+      "bytes": 925,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/qa-implementation-r1/composition-audit.json",
+      "sha256": "acb168a1bba1bf2233c5c96f2acc1bfb7196919b86f48a8cb3baae717d64b226"
+    },
+    {
+      "bytes": 60516,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/qa-implementation-r1/frozen-input-audit.json",
+      "sha256": "dffb3962d252d8da5af59356b508b5690551777c3884aa9c26d86431a35af3f5"
+    },
+    {
+      "bytes": 24345,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/qa-implementation-r1/required-binding-negatives.json",
+      "sha256": "8a8d3092b87ccc23542d9f950c5ab35de3472518e8e1ea292d1b00bebd0c5698"
+    },
+    {
+      "bytes": 4674,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/qa-implementation-r1/focused.log",
+      "sha256": "e5915afd31c5bcbb433f254873e64f5d369704d18ad4ff340060f371321c88b6"
+    },
+    {
+      "bytes": 5168,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/qa-implementation-r1/focused-result.json",
+      "sha256": "2f56b1ccef233e76789ff7695835fdca0c636560e7335aeb1cad1c3b6f543e26"
+    },
+    {
+      "bytes": 52450,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/qa-implementation-r1/canonical-host-authorized.log",
+      "sha256": "e16a8513ace44a302ac6277ebed6d7c52a462f80c39fd727cbd1e64d15e79abb"
+    },
+    {
+      "bytes": 64527,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/qa-implementation-r1/canonical-host-authorized-result.json",
+      "sha256": "715228c256a747def95762863a67ec1f1e355ecc1f4dc46ea600f0bfdacc3212"
+    },
+    {
+      "bytes": 1305,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/qa-implementation-r1/cached-host-fixture-identity.json",
+      "sha256": "5cee72e2a039ec480d01dc36d288711943645bcebc695ab710b79a2c037544a7"
+    }
+  ],
+  "externalHostPermissionGrantedByReview": false,
+  "findings": [],
+  "freezePath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-linker-launch-v1/execution-freeze-r1.json",
+  "freezeSha256": "cd30922e6d7d250de7e6af5a17fe2baa6e94b70e42858bbf589569db7a04a812",
+  "implementationApproved": true,
+  "implementationSha256": "b9fb7534f49d9a80e68bd0d9d6d1a833ff2115ddeca544e919a53fb857f72e77",
+  "launcherReview": {
+    "actualAdmissionPrecedesRequestPreparation": true,
+    "automaticFallbackOrRetry": false,
+    "commandScopedRequireEscalated": true,
+    "dataOnly": true,
+    "exactTemplateAndShellSafeArgvSerialization": true,
+    "hashFormatValidatedBeforeAdmission": true,
+    "login": false,
+    "outputExclusiveAndConsumedAttemptRejected": true,
+    "persistentPrefixRuleRequested": false,
+    "selfCertifiesExternalGrant": false
+  },
+  "linker2AttemptCreated": false,
+  "linkerQueriesExecuted": 0,
+  "nativeExecutionAuthorizedByReview": false,
+  "oldHistoryAndProducerLogsPreserved": true,
+  "positiveActualLaunchRequestGeneration": "Not performed here; awaits unchanged review artifact copy at the hard-coded fixture path. Unit generator checks passed; actual executor admission follows this review.",
+  "reviewKind": "FROZEN_LAUNCH_IMPLEMENTATION_QA",
+  "reviewedAtUtc": "2026-11-06T17:42:31.378121+00:00",
+  "reviewer": "Retained independent Codex QA role; authored review-local audit scripts, not launch implementation",
+  "schema": 1,
+  "scope": "reviewed-linker-2-seven-probe-command-scoped-outer-exception",
+  "semanticEnablement": false,
+  "sourceEdited": false,
+  "toolPermissionRequestedByReviewer": false,
+  "verdict": "PASS",
+  "verification": {
+    "completeTreesFreshlyVerified": 6,
+    "errors": 0,
+    "exactFourFieldRebaseVerified": true,
+    "exactUnifiedCompositionPatchVerified": true,
+    "existingCachedRustHostFixtureAllowed": true,
+    "failures": 0,
+    "freshFocusedPinnedPython39Tests": 37,
+    "freshFullCanonicalReferenceVenvTests": 441,
+    "frozenInputsFreshlyVerified": 225,
+    "identicalCoreFunctionAstCount": 9,
+    "newCompilation": false,
+    "newNativeToolchainQueries": 0,
+    "omittedRequiredBindingsRejected": 223,
+    "originalR2BindingsPreserved": 207,
+    "skips": 0
+  }
+}
