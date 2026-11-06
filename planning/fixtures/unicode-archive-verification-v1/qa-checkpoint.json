@@ -1,0 +1,53 @@
+{
+  "P2Complete": false,
+  "bindings": [
+    {
+      "bytes": 5565,
+      "path": "build/unicode-archive-verification-v1/qa-migration-r1/review.md",
+      "sha256": "5cf3a0e7a36a99f75ad4d5852577434d94fad2d5420c91bb1adf8b80d0fc3de9"
+    },
+    {
+      "bytes": 12645,
+      "path": "build/unicode-archive-verification-v1/qa-migration-r1/review.json",
+      "sha256": "6ccb2e61fb5a08d4ca8bda020add7824988cd15a79ec7c0ff06d8b8f1b2c086d"
+    },
+    {
+      "bytes": 13595,
+      "path": "build/unicode-archive-verification-v1/qa-migration-r1/snapshot.json",
+      "sha256": "549e9a19956c1f43f30b74fcf05937cd1f34e7e5891929de4156f0269bee2937"
+    },
+    {
+      "bytes": 1418,
+      "path": "build/unicode-archive-verification-v1/qa-migration-r1/attribution-erratum.md",
+      "sha256": "a5ee1471ef2b53d0bbd649e52e72a715c49696e8068029988f8a81a439b90b16"
+    },
+    {
+      "bytes": 5826,
+      "path": "planning/fixtures/unicode-archive-verification-v1/producer-result-lock.json",
+      "sha256": "150617d8c4adf7cf65a69c9dbb825656470585512c4bc920afa04fe5a18b8b2c"
+    },
+    {
+      "bytes": 2295,
+      "path": "docs/P2_UNICODE_ARCHIVAL_VERIFICATION_QA_V1.md",
+      "sha256": "c0f136d6f94928439f8776b11433aa07129002ad09201067f10eb5ca64cd1fca"
+    }
+  ],
+  "canonicalHostTests": 404,
+  "date": "2026-11-06",
+  "findings": [],
+  "focusCountsOverlapFullSuite": true,
+  "focusedArchivalTests": 16,
+  "focusedExecutorTests": 21,
+  "nativeAttemptAbsent": true,
+  "nativeExecutionAuthorized": false,
+  "nativeQueriesExecuted": 0,
+  "newUserExecutionApprovalReceived": false,
+  "preservedOriginalMethods": 10,
+  "r2BoundInputsUnchanged": 207,
+  "r2FreezeSha256": "0fedb46426268e487cfb18ec55a04b04b0c348db7b5ba956990d03118c0d1d56",
+  "r2InventoriesUnchanged": 6,
+  "schema": 1,
+  "scope": "archival-test-routing-and-seven-probe-readiness-only",
+  "semanticEnablement": false,
+  "verdict": "PASS"
+}
