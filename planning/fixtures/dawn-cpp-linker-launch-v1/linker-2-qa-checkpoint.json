@@ -1,0 +1,65 @@
+{
+  "P2Complete": false,
+  "acceptancePublished": false,
+  "attempt": "linker-2",
+  "automaticRetryPerformed": false,
+  "bindings": [
+    {
+      "bytes": 5776,
+      "path": "planning/fixtures/dawn-cpp-linker-launch-v1/linker-2-result-lock.json",
+      "sha256": "68d81e90f897e83653ccf21f3572029faae3bfc57217302c3ed9ade1672429ac"
+    },
+    {
+      "bytes": 5535,
+      "path": "build/dawn-cpp-linker-launch-v1/qa-results-linker-2/review.md",
+      "sha256": "d922126574096d6b921cb3ae1e606c586635ff0e74c8b2faa62213f71123df57"
+    },
+    {
+      "bytes": 5830,
+      "path": "build/dawn-cpp-linker-launch-v1/qa-results-linker-2/review.json",
+      "sha256": "fd1a0535efaa53e05022eb44dddb2a8ca68d13b36e65575dc76c0c114ded9adb"
+    },
+    {
+      "bytes": 65461,
+      "path": "build/dawn-cpp-linker-launch-v1/qa-results-linker-2/snapshot.json",
+      "sha256": "aae3658774044cb6cf8dd2c671f83c65bf3546e54ab733b1b13bf76192d9d34d"
+    },
+    {
+      "bytes": 60535,
+      "path": "build/dawn-cpp-linker-launch-v1/qa-results-linker-2/post-run-frozen-input-audit.json",
+      "sha256": "fa5767af90be98654fa73d8f1b21004228eb44034c3f1df5eb8b934df0db72a4"
+    },
+    {
+      "bytes": 5046,
+      "path": "build/dawn-cpp-linker-launch-v1/qa-results-linker-2/trace-and-outcome-audit.json",
+      "sha256": "8094142f08a5d5d2895deeb97ec22c4117ec135367445d2286296603720f8435"
+    },
+    {
+      "bytes": 5568,
+      "path": "build/dawn-cpp-linker-launch-v1/qa-results-linker-2/producer-binding-audit.json",
+      "sha256": "2a0a4b1adb6ac3e61f9dc9a181c4446e1c06fca57825dfc89597ae820d625a7b"
+    },
+    {
+      "bytes": 2374,
+      "path": "docs/P2_CPP_LINKER_LAUNCH_LINKER2_QA.md",
+      "sha256": "6b2c36cd9772d278797dbbc98fe7802af4b8e01cd208e5635e7d0b5ebb0c7351"
+    }
+  ],
+  "cleanupConfirmed": true,
+  "clientDate": "2026-11-06",
+  "diagnosticUnqualifiedPass": 1,
+  "explicitPlanFailure": 1,
+  "findings": [],
+  "freshIndependentInputCount": 225,
+  "freshIndependentInventoryCount": 6,
+  "hostToolRequestAccepted": true,
+  "innerSandboxAndClangLaunchEstablished": true,
+  "newExecutionAuthorizationGranted": false,
+  "oldHistoryPreserved": true,
+  "publicationUncertain": false,
+  "qualification": "BLOCKED_NATIVE_LINKER_SELECTION_UNVERIFIED",
+  "remainingNotRun": 5,
+  "resultsIntegrity": "PASS",
+  "schema": 1,
+  "semanticEnablement": false
+}
