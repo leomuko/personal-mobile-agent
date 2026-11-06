@@ -1,0 +1,182 @@
+{
+  "P2Complete": false,
+  "date": "2026-11-06",
+  "evidence": [
+    {
+      "bytes": 53656,
+      "path": "build/unicode-archive-verification-v1/before.json",
+      "sha256": "4e72ffa1078cdc9b8f167a2d2c856b9776436b53082c6743bc421cbd4d34a442"
+    },
+    {
+      "bytes": 1979,
+      "path": "build/unicode-archive-verification-v1/focused-archival.log",
+      "sha256": "a459eb63ae4a3e27b0aa229e62e97dcae19935094c28a7e714fff99902b34478"
+    },
+    {
+      "bytes": 47875,
+      "path": "build/unicode-archive-verification-v1/full-host-suite.log",
+      "sha256": "7d2077c1fb30ad147ef03c7c20b885e4a229096441fd529194d99d14763777ec"
+    },
+    {
+      "bytes": 2708,
+      "path": "build/unicode-archive-verification-v1/focused-executor-python39.log",
+      "sha256": "c154075bc60b5fe5fd718ac5ae9034afb4cdd8ef62c414319106e2a00718475f"
+    },
+    {
+      "bytes": 13995,
+      "path": "build/unicode-archive-verification-v1/focused-archival-python39.log",
+      "sha256": "78110486557648b712e0a503197ef6c12e86521c16f1d8207de7808311efcb41"
+    },
+    {
+      "bytes": 1048,
+      "path": "build/unicode-archive-verification-v1/focused-original-methods.log",
+      "sha256": "c7742ffbf43e554bac85782af5d0d6a9588c706815782245a27a5b2dfa8ada09"
+    },
+    {
+      "bytes": 3330,
+      "path": "build/unicode-archive-verification-v1/direct-guard-checks.json",
+      "sha256": "9ba54e3d8e713f488c07f052c2b7b4b0541138512fff753fa29b0b95d1828231"
+    },
+    {
+      "bytes": 8982,
+      "path": "build/unicode-archive-verification-v1/developer-r2-bindings/result.json",
+      "sha256": "adc47a0d797301b71f4147586e7123663d9b400d24b98f701e03227252482334"
+    }
+  ],
+  "gitOperationsPerformed": false,
+  "nativeAttemptAbsent": true,
+  "nativeExecutionAuthorized": false,
+  "nativeQueries": [
+    {
+      "id": "diagnostic-program-lookup",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "explicit-jobs-control-ordinary-c++20",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "explicit-jobs-candidate-ordinary-c++20",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "explicit-jobs-candidate-ordinary-c++17",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "explicit-jobs-control-wire-c++20",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "explicit-jobs-candidate-wire-c++20",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "explicit-jobs-candidate-wire-c++17",
+      "status": "NOT_RUN"
+    }
+  ],
+  "originalTestsAndGuardsUnchanged": true,
+  "protocol": "unicode-correction-explicit-archival-verification-v1",
+  "r2Freeze": {
+    "bytes": 85367,
+    "path": "planning/fixtures/dawn-cpp-linker-executor-v1/execution-freeze-r2.json",
+    "sha256": "0fedb46426268e487cfb18ec55a04b04b0c348db7b5ba956990d03118c0d1d56"
+  },
+  "r2InputsUnchanged": 207,
+  "r2InventoriesUnchanged": 6,
+  "rawHistoricalDiscoveryMigrated": false,
+  "replacementExecutionFreezeRequired": false,
+  "reviewState": "PRODUCER_HOST_VERIFIED_INDEPENDENT_QA_PENDING",
+  "schema": 1,
+  "semanticEnablement": false,
+  "sources": [
+    {
+      "bytes": 4620,
+      "path": "scripts/diagnostics/unicode_archival_v1/verify.py",
+      "sha256": "d0bd01cd9d7693aad8311adda31085dd4d038d6bf4465fa3953997d66be11676"
+    },
+    {
+      "bytes": 3247,
+      "path": "scripts/diagnostics/unicode_archival_v1/suite.py",
+      "sha256": "279028d6138f607d957e795ae69655604754f765a9ffec46257832d6c697fda6"
+    },
+    {
+      "bytes": 2356,
+      "path": "scripts/diagnostics/unicode_archival_v1/README.md",
+      "sha256": "ba5698eb7f0a2b4247b8490acd564d51828b9fda30ef06da8b93ccf032f98975"
+    },
+    {
+      "bytes": 725,
+      "path": "scripts/host-python-test-suite.py",
+      "sha256": "568522144860b5356f20ab3c0756c088ca0af5c9251abca48628c0dd6f885423"
+    },
+    {
+      "bytes": 4729,
+      "path": "scripts/current-tests/test_unicode_correction.py",
+      "sha256": "999130bd80a7a534c2e5eb7a656413e52078694225f1e2e4ab8c990523e4d314"
+    },
+    {
+      "bytes": 9731,
+      "path": "scripts/tests/test_unicode_archival.py",
+      "sha256": "af62117cfdb30574a7d698eb1f08d2bedb805d016f13fb7a04c522e8284b9c0a"
+    },
+    {
+      "bytes": 2355,
+      "path": "planning/fixtures/unicode-archive-verification-v1/manifest.json",
+      "sha256": "e79b735f964e0c2b4c6bd7b1e348cc4acef745d96077d8bdcf3e10e09eedee47"
+    },
+    {
+      "bytes": 25720,
+      "path": "planning/fixtures/unicode-archive-verification-v1/proposed-seven-commands.json",
+      "sha256": "66fdfc4741d1190569f9e1141d186fd5ae1a60089705a601f95c0497def8476c"
+    },
+    {
+      "bytes": 3650,
+      "path": "docs/P2_UNICODE_ARCHIVAL_VERIFICATION_MIGRATION_V1.md",
+      "sha256": "2987ec847984c83b4bc92386c72389f4da30e00f78fac5c73bb5f2e91bb62cb2"
+    },
+    {
+      "bytes": 2740,
+      "path": "docs/P2_CPP_LINKER_ARCHIVAL_READINESS_V1.md",
+      "sha256": "5e067133789f006efe8f6c637cfe42d3aac359c557a92900f9fdb4945dc84855"
+    }
+  ],
+  "tests": {
+    "additionalBarePython39Archival": {
+      "errors": 9,
+      "log": "build/unicode-archive-verification-v1/focused-archival-python39.log",
+      "reason": "existing sentencepiece package absent from bare isolated Python3.9",
+      "run": 16,
+      "status": "FAILED_ENVIRONMENT_SETUP"
+    },
+    "archivalRegressions": {
+      "passed": 16,
+      "run": 16
+    },
+    "canonicalSuite": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 404,
+      "receipt": {
+        "discoveredTests": 404,
+        "executedTests": 404,
+        "modifiedCallSites": 1,
+        "nativeExecutionAuthorized": false,
+        "originalTestsRetained": 10,
+        "protocol": "unicode-correction-explicit-archival-verification-v1",
+        "skippedByRouting": 0
+      },
+      "run": 404,
+      "skips": 0
+    },
+    "focusedExecutorPython39": {
+      "passed": 21,
+      "run": 21
+    },
+    "originalUnicodeMethods": {
+      "passed": 10,
+      "run": 10
+    }
+  }
+}

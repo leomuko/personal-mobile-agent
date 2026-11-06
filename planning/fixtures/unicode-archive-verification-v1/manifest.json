@@ -1,0 +1,60 @@
+{
+  "P2Complete": false,
+  "activeTest": "scripts/current-tests/test_unicode_correction.py",
+  "allOriginalMethodsRetained": 10,
+  "lineage": [
+    {
+      "bytes": 4668,
+      "path": "scripts/tests/test_unicode_correction.py",
+      "sha256": "fb1b3950d4ca84b14239cc856707342146b9b23bd3b90ec1934dd2cba70f301b"
+    },
+    {
+      "bytes": 19428,
+      "path": "scripts/diagnostics/unicode_correction/run.py",
+      "sha256": "517ffd3aa58f0ad3c6382f8362aec8e24a7adb62e15eabaa9aa662cc38e0cc4d"
+    },
+    {
+      "bytes": 2456,
+      "path": "docs/P2_GRAMMAR_PROGRESS_SOURCE_SNAPSHOT.json",
+      "sha256": "20a167d9d1de9cbb3e825efbdd3557415e6b5bc08f561305b93d6c82309c8ee0"
+    },
+    {
+      "bytes": 1121,
+      "path": "docs/P2_ESCAPED_UNICODE_BOUNDARY_SOURCE_SNAPSHOT.json",
+      "sha256": "92bc5cb8fa39d43b561d8dc6dcf8206c8cd3afc756c5393f156c3a71e2f5fcb1"
+    },
+    {
+      "bytes": 2248,
+      "path": "docs/P2_UNICODE_GRAMMAR_CORRECTION_SOURCE_SNAPSHOT.json",
+      "sha256": "e89df35d7df61dce3366486eeb5ba77cd7655aa23a71ee1cebe25591584ba8f7"
+    },
+    {
+      "bytes": 1830,
+      "path": "planning/fixtures/grammar-progress-v2-unicode/preparation-lock.json",
+      "sha256": "4e5dd4b9bad7e93bdc300363c7d5000b73d14df7ffdf6c548c0f42ea2bbe9277"
+    },
+    {
+      "bytes": 566,
+      "path": "planning/fixtures/unicode-correction-proposal-v1/proposal-lock.json",
+      "sha256": "099cd96d97ac4646b86e7916fc1db1ee7e09ae9e956d3a97e1dfffaa60edf29c"
+    },
+    {
+      "bytes": 4233,
+      "path": "planning/fixtures/cpp-build-skills-v1/AGENTS.before.txt",
+      "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+    }
+  ],
+  "nativeExecutionAuthorized": false,
+  "onlyLogicalOverride": {
+    "archivePath": "planning/fixtures/cpp-build-skills-v1/AGENTS.before.txt",
+    "archivedSha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5",
+    "authorizedCurrentSha256": "a1056bc28a02f6090647bf1df56a056880640053efa2b021a5d9a9fae31478dd",
+    "logicalPath": "AGENTS.md"
+  },
+  "originalTest": "scripts/tests/test_unicode_correction.py",
+  "protocol": "unicode-correction-explicit-archival-verification-v1",
+  "routedCase": "InputTests.test_frozen_fixtures_reproduce_without_scores",
+  "schema": 1,
+  "scope": "data-only-historical-verification-not-current-native-admission",
+  "semanticEnablement": false
+}
