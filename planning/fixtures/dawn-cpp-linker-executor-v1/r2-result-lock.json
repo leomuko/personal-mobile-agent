@@ -1,0 +1,78 @@
+{
+  "P2Complete": false,
+  "files": [
+    {
+      "bytes": 85367,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/execution-freeze-r2.json",
+      "sha256": "0fedb46426268e487cfb18ec55a04b04b0c348db7b5ba956990d03118c0d1d56"
+    },
+    {
+      "bytes": 5195,
+      "path": "docs/P2_CPP_LINKER_EXECUTOR_R2_FOLLOWUP.md",
+      "sha256": "4d152edd368a679638499f27dfab9d2782ab387858266dabf02e5f810fda63bb"
+    },
+    {
+      "bytes": 77669,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/execution-freeze-r1.json",
+      "sha256": "e50136ebc062ba7e837c183de1fead550be777fe18ba23568f7021123b6c056b"
+    },
+    {
+      "bytes": 1007,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/implementation-result-lock.json",
+      "sha256": "b55dac83eb1ad13242f30edbe099ae1e27fe4a2b3c31952953bad4e21f117f59"
+    },
+    {
+      "bytes": 1636,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/r1-implementation-review.json",
+      "sha256": "3df2a3d614c37eca6e1e6c1fe815c08e2c390c671b95580869266ac97c1e5ff8"
+    },
+    {
+      "bytes": 46555,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/r1-reviewed-snapshot.json",
+      "sha256": "d3e7d129b2b62002d3719db8f354b4f7475006020a7aed84a051f42053fb9682"
+    },
+    {
+      "bytes": 724,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/r1-uncertain-publication-probe.json",
+      "sha256": "ac26088b6f0bec1bfd10afbeaad8cfb9121569b658833e080f841ba37f1c9165"
+    },
+    {
+      "bytes": 4323,
+      "path": "build/dawn-cpp-linker-executor-v1/rejected-r1-source/snapshot.json",
+      "sha256": "17981c9e1c0fba97423939060c030e6f669158ec61fe56f028e3d2a977fd6454"
+    },
+    {
+      "bytes": 180,
+      "path": "build/dawn-cpp-linker-executor-v1/freeze-preparation-r2.log",
+      "sha256": "bdddcc433366c5f03310e2ee715875ad83fc4155c08d69a34dc9c404aba61eb3"
+    },
+    {
+      "bytes": 2623,
+      "path": "build/cpp-build-skills-v1/before.json",
+      "sha256": "f94df2b5b201fdbeea5360a1f95931935074d6d68eedca33cc121c3ccd092777"
+    },
+    {
+      "bytes": 11239,
+      "path": "build/cpp-build-skills-v1/verified-source-records.json",
+      "sha256": "49b45ec68e25ce8f0d756d101b8563b49200b6e4adc3ebb831b74634080c785a"
+    },
+    {
+      "bytes": 12727,
+      "path": "build/cpp-build-skills-v1/developer-verification/result.json",
+      "sha256": "2a3c68b5b4951522484fd0d6ccbbd2276ba47200a928441fab9bae420a38d460"
+    }
+  ],
+  "focusedTestsPassed": 21,
+  "freezeSha256": "0fedb46426268e487cfb18ec55a04b04b0c348db7b5ba956990d03118c0d1d56",
+  "fullSuite": {
+    "errors": 1,
+    "passed": 387,
+    "reason": "Unchanged archival AGENTS source guard rejects authorized routing delta",
+    "reported": 388
+  },
+  "nativeQueriesExecuted": 0,
+  "schema": 1,
+  "scope": "executor-r2-host-correction-and-guidance-only",
+  "semanticEnablement": false,
+  "status": "R2_INDEPENDENT_REVIEW_PENDING"
+}

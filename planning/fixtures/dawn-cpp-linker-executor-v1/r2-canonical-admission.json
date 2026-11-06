@@ -1,0 +1,88 @@
+{
+  "P2Complete": false,
+  "affirmativeGatesMocked": false,
+  "arguments": {
+    "freeze": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-linker-executor-v1/execution-freeze-r2.json",
+    "review": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-executor-v1/qa-implementation-r2/freeze-review.json",
+    "reviewSha256": "0bc21be52c93cd02c1024ea06de46e9cffacc7b2dfa0a6774fbc341568daf0fc",
+    "sha256": "0fedb46426268e487cfb18ec55a04b04b0c348db7b5ba956990d03118c0d1d56"
+  },
+  "attemptCreated": false,
+  "canonicalCall": "e.admission(realR2Path, actualR2Sha256, genuineStableReviewPath, actualReviewSha256)",
+  "compilerMatrixExecuted": false,
+  "forbiddenBoundaries": [
+    "scripts/diagnostics/dawn_abseil_v1/prepare.py:download",
+    "scripts/diagnostics/dawn_abseil_v1/prepare.py:main",
+    "scripts/diagnostics/dawn_abseil_v1/prepare.py:worker",
+    "scripts/diagnostics/dawn_cpp_backend_v1/backend.py:dispatch",
+    "scripts/diagnostics/dawn_cpp_backend_v1/qualify.py:main",
+    "scripts/diagnostics/dawn_cpp_backend_v1/qualify.py:worker",
+    "scripts/diagnostics/dawn_cpp_linker_executor_v1/qualify.py:dispatch",
+    "scripts/diagnostics/dawn_cpp_linker_executor_v1/qualify.py:main",
+    "scripts/diagnostics/dawn_cpp_linker_executor_v1/qualify.py:worker",
+    "scripts/diagnostics/dawn_cpp_linker_v1/prepare.py:main",
+    "scripts/diagnostics/dawn_cpp_toolchain_v1/qualify.py:main",
+    "scripts/diagnostics/dawn_cpp_toolchain_v1/qualify.py:worker",
+    "scripts/diagnostics/dawn_python_patch_v1/catalog.py:main",
+    "scripts/diagnostics/dawn_python_patch_v1/catalog.py:metadata_command",
+    "scripts/diagnostics/dawn_python_patch_v1/qualify.py:download",
+    "scripts/diagnostics/dawn_python_patch_v1/qualify.py:main",
+    "scripts/diagnostics/dawn_python_patch_v1/qualify.py:worker",
+    "scripts/diagnostics/ml_drift_compatibility/analyze.py:command",
+    "scripts/diagnostics/ml_drift_compatibility/analyze.py:main",
+    "scripts/diagnostics/ml_drift_compatibility/analyze.py:run_owned",
+    "scripts/diagnostics/root_dependency_offline_v2/inspect.py:main",
+    "scripts/diagnostics/root_dependency_offline_v2/inspect.py:worker",
+    "subprocess.Popen",
+    "subprocess.call",
+    "subprocess.check_call",
+    "subprocess.check_output",
+    "subprocess.run"
+  ],
+  "forbiddenBoundaryCalls": [],
+  "freezeHashUnchangedAfterProof": true,
+  "hashReadersUnmodified": true,
+  "implementationSha256": "31158cc3560dec3cb8e0d23cdb51bf21f770dab64f843204292dd921447f8080",
+  "inputsVerified": 207,
+  "modelQualityQualified": false,
+  "nativeExecutionAuthorized": false,
+  "nativeQueries": [
+    {
+      "id": "diagnostic-program-lookup",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "explicit-jobs-control-ordinary-c++20",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "explicit-jobs-candidate-ordinary-c++20",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "explicit-jobs-candidate-ordinary-c++17",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "explicit-jobs-control-wire-c++20",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "explicit-jobs-candidate-wire-c++20",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "explicit-jobs-candidate-wire-c++17",
+      "status": "NOT_RUN"
+    }
+  ],
+  "proposalAndInputCheckersUnmodified": true,
+  "realExecutionAuditEvents": [],
+  "reviewCreatedAfterCodeApproval": true,
+  "reviewHashUnchangedAfterProof": true,
+  "schema": 1,
+  "seconds": 15.051647958,
+  "semanticEnablement": false,
+  "status": "PASS_DATA_ONLY_CANONICAL_ADMISSION",
+  "treesVerified": 6
+}
