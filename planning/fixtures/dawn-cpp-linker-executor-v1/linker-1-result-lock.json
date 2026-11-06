@@ -1,0 +1,111 @@
+{
+  "P2Complete": false,
+  "acceptancePublished": false,
+  "attempt": "linker-1",
+  "automaticRetryPerformed": false,
+  "bindings": [
+    {
+      "bytes": 366,
+      "path": "build/dawn-cpp-linker-executor-v1/execution-linker-1/admission.json",
+      "sha256": "3829cbc3771091cd2c3cd71e5eada3b1777233ae9c28a8fb543557c743b4335b"
+    },
+    {
+      "bytes": 776,
+      "path": "build/dawn-cpp-linker-executor-v1/execution-linker-1/authorization.json",
+      "sha256": "5f0e6bfd4ab46bad404c2e3c0f37834282faaa40233a1d769d8a62c5747b0de6"
+    },
+    {
+      "bytes": 53,
+      "path": "build/dawn-cpp-linker-executor-v1/execution-linker-1/diagnostic-program-lookup.raw.txt",
+      "sha256": "d34a4e4359a4dc36526cf5b363da32f7b7594a3a09eea17cbdfd6425b052d93e"
+    },
+    {
+      "bytes": 1208,
+      "path": "build/dawn-cpp-linker-executor-v1/execution-linker-1/execution-result.json",
+      "sha256": "d1b1a4e50195078211944ebc8354e78581712f162ac6fb72269bdd65cad2ca1b"
+    },
+    {
+      "bytes": 982,
+      "path": "build/dawn-cpp-linker-executor-v1/execution-linker-1/parent-command.json",
+      "sha256": "671e17c8b35b97f47a819eaae2c668716c32b7c79fb67a442217ba6bf2ed7db4"
+    },
+    {
+      "bytes": 49,
+      "path": "build/dawn-cpp-linker-executor-v1/execution-linker-1/parent.log",
+      "sha256": "0d0e62aef9910ae5ef0df5445dc29dc30bbd6018b03838633e53608d4bdada5e"
+    },
+    {
+      "bytes": 201,
+      "path": "build/dawn-cpp-linker-executor-v1/execution-linker-1/post-run-inputs.json",
+      "sha256": "90c1ef873fc62fa4e2b19f7bd465400cc0f599a6bb54543bd262172344275a9d"
+    },
+    {
+      "bytes": 803,
+      "path": "build/dawn-cpp-linker-v1/probe-attempts/linker-1/command-trace.jsonl",
+      "sha256": "e4eff030654216e21c1772135dda63088dc1b51057b19ece5c7df93887ec375b"
+    },
+    {
+      "bytes": 65,
+      "path": "build/dawn-cpp-linker-v1/probe-attempts/linker-1/empty.cpp",
+      "sha256": "d116569c3e70b0fc339fd017e07a86b320a06f24930af943b665c15a2366995b"
+    },
+    {
+      "bytes": 1530,
+      "path": "build/dawn-cpp-linker-v1/probe-attempts/linker-1/outcome.json",
+      "sha256": "22f736ad1de79c2e803e9abb1cb60506a0c8ee257b37f7168a09df7542709545"
+    },
+    {
+      "bytes": 163,
+      "path": "build/dawn-cpp-linker-v1/probe-attempts/linker-1/owner-started.json",
+      "sha256": "4a28f0c90facda95175a3067220bfdfb314b8294e77741a25d82a4a1e3211eef"
+    },
+    {
+      "bytes": 559,
+      "path": "build/dawn-cpp-linker-v1/probe-attempts/linker-1/probe-report.json",
+      "sha256": "8b313274482a75523cc879fb6be4f73c7f592d1ee24437f03bf6a3e477a5468a"
+    },
+    {
+      "bytes": 40,
+      "path": "build/dawn-cpp-linker-v1/probe-attempts/linker-1/worker.stderr.log",
+      "sha256": "25d8b09915e08c0902bd538441eb9aa2316cec6886d06940ac2636499004f422"
+    },
+    {
+      "bytes": 0,
+      "path": "build/dawn-cpp-linker-v1/probe-attempts/linker-1/worker.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 4761,
+      "path": "docs/P2_CPP_LINKER_EXECUTION_RESULTS_V1.md",
+      "sha256": "23a219c800170fac19c2d949be386e4b6ec383b393a1a47c0173abf7cde52dd7"
+    },
+    {
+      "bytes": 85367,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/execution-freeze-r2.json",
+      "sha256": "0fedb46426268e487cfb18ec55a04b04b0c348db7b5ba956990d03118c0d1d56"
+    },
+    {
+      "bytes": 5385,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/r2-freeze-review.json",
+      "sha256": "0bc21be52c93cd02c1024ea06de46e9cffacc7b2dfa0a6774fbc341568daf0fc"
+    }
+  ],
+  "cleanupConfirmed": true,
+  "clientDate": "2026-11-06",
+  "dispatchedCommands": 1,
+  "failedCommands": 1,
+  "independentResultsReview": "PENDING_SEPARATE_RECORD",
+  "nativeQualification": "BLOCKED",
+  "notRunCommands": 6,
+  "parentInvocations": 1,
+  "passedCommands": 0,
+  "postRunInputCount": 207,
+  "postRunInventoryCount": 6,
+  "producerStatus": "FAILED_AT_SANDBOX_APPLICATION",
+  "publicationUncertain": false,
+  "schema": 1,
+  "scope": "single authorized frozen R2 execution; one failed sandbox dispatch, six plans not run",
+  "semanticEnablement": false,
+  "sourceCodeModified": false,
+  "underlyingSandboxDenialCause": "UNPROVED"
+}
