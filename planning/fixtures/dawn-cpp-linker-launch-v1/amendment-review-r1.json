@@ -1,0 +1,103 @@
+{
+  "P2Complete": false,
+  "actualToolPermissionRequested": false,
+  "amendmentPath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-linker-launch-v1/amendment.json",
+  "amendmentSha256": "83b545b7eea24d7a5c9bb1bf3e02708528617eaa04cd3e1ead52a5f82185b015",
+  "baselineSha256": "0fedb46426268e487cfb18ec55a04b04b0c348db7b5ba956990d03118c0d1d56",
+  "conditions": [
+    "This PASS approves only the amendment proposal and exact document/manifest bytes; it is not implementation QA or native qualification.",
+    "Implement and freeze the narrow separate namespace with explicit minimum-delta patch composition; preserve old executor, worker/policy/owner behavior and all historical evidence.",
+    "Derive only attempt, commands, compilerSandbox and nativeEnvironment with the unchanged pinned plan functions; all other R2 contract fields and limits remain equal.",
+    "Bind the amendment, this genuine review, document, implementation/tests and complete dependencies into the new implementation gate; obtain independent implementation QA and actual data-only admission.",
+    "Resolve exactly the two hash placeholders from the actual reviewed implementation freeze and genuine independent implementation review; no fake review or self-referential hash.",
+    "Actual host request must be exec_command require_escalated, shell /bin/zsh, login=false, exact reviewed argv/workdir, and no persistent prefix_rule; host-tool approval must actually permit that one request.",
+    "Worker assertions cannot certify the external host permission grant. Record the real request/approval separately. Denial/failure stops; no default-mode fallback, persistent permission change, retry or resumption is inferred.",
+    "Preserve compiler-only inner sandbox with network denied and ld execution denied, stop first failure, 300/30/15 seconds and all output/RSS/input/storage ceilings; no other workloads are added."
+  ],
+  "documentPath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/P2_CPP_LINKER_LAUNCH_AMENDMENT_V1.md",
+  "documentSha256": "77938782da2d556aaec98c39ab6e574b6f1f00b2dcdce68863fed81409cce99f",
+  "evidence": [
+    {
+      "bytes": 9374,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/qa-amendment-r1/audit_amendment.py",
+      "sha256": "cb2df672c8192059bf68535cb792df555a2f3c19e3bc2cf2000a1ae317d1da86"
+    },
+    {
+      "bytes": 58869,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/qa-amendment-r1/audit.json",
+      "sha256": "5dac50b3d63d8324af716ebb5edd1a5e820899961fa142f8494dd97bed26d135"
+    },
+    {
+      "bytes": 30660,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/qa-amendment-r1/derivation-evidence.json",
+      "sha256": "a52cbd2454068b652c1bf881c303d7acfdedb6ebe41adff6f4a89bd11ecbabb6"
+    },
+    {
+      "bytes": 30413,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/proposed-contract-projection.json",
+      "sha256": "c28d1f426da3b82f279292e9c1ee731525531aff85c797487a96b31d18298ed2"
+    },
+    {
+      "bytes": 54197,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-launch-v1/before.json",
+      "sha256": "5f031b5b2a14528a98cdfc9d86ae6452384d957d9b4d43376bb96f78a88a3cc1"
+    }
+  ],
+  "findings": [],
+  "gitState": "Not freshly queried; excluded from scope",
+  "historicalLinker1Qualification": "BLOCKED; denial cause remains UNPROVED",
+  "implementationReviewed": false,
+  "launchBoundary": {
+    "automaticFallback": false,
+    "automaticRetry": false,
+    "externalApprovalStillRequired": true,
+    "hostTool": "exec_command",
+    "login": false,
+    "maximumParentInvocations": 1,
+    "persistentRuleRequested": false,
+    "sandbox_permissions": "require_escalated",
+    "shell": "/bin/zsh",
+    "workdir": "/Users/kezileo/Desktop/personal_mobile_agent",
+    "workerCannotSelfCertifyHostGrant": true
+  },
+  "nativeExecutionAuthorizationGrantedByReview": false,
+  "nativeQueriesExecuted": 0,
+  "newImplementationFreezeReviewed": false,
+  "notRun": [
+    "new implementation regressions (implementation follows proposal review)",
+    "new implementation freeze/admission",
+    "outside-sandbox permission request",
+    "native probes or workload execution",
+    "Git commands"
+  ],
+  "plannedUserProjectScope": "Next intended single run as supplied by parent handoff; actual host-tool grant remains separate and is not supplied by this review",
+  "protocol": "dawn-cpp-linker-launch-amendment-v1",
+  "reviewKind": "AMENDMENT_PROPOSAL_ONLY",
+  "reviewedAtUtc": "2026-11-06T17:25:20.973708+00:00",
+  "reviewer": "Retained independent Codex QA role; no launch amendment or implementation source authored",
+  "schema": 1,
+  "scope": "fresh-linker-2-command-scoped-outer-exception-inner-sandbox-preserved",
+  "semanticEnablement": false,
+  "sourceAdoptedOrEditedByReviewer": false,
+  "verdict": "PASS",
+  "verification": {
+    "baselineInputsFreshlyVerified": 207,
+    "completeTreesFreshlyVerified": 6,
+    "derivedEnvironmentOnlyHomeTmpdirChanged": true,
+    "exactRebaseFields": [
+      "attempt",
+      "commands",
+      "compilerSandbox",
+      "nativeEnvironment"
+    ],
+    "forbiddenExecutionCalls": 0,
+    "freshAttemptAbsent": true,
+    "historicalDirectRowsVerified": 3,
+    "innerSandboxOnlyAttemptSubpathChanged": true,
+    "nestedHistoricalBindingsVerified": 26,
+    "networkCalls": 0,
+    "projectionMatchesActualOldPlanFunctions": true,
+    "unchangedContractFields": 26,
+    "unchangedSevenCommandIdsOrderFlagsAndTools": true
+  }
+}

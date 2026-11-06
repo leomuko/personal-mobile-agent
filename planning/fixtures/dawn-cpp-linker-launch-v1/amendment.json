@@ -1,0 +1,78 @@
+{
+  "P2Complete": false,
+  "allowedRebaseFields": [
+    "attempt",
+    "commands",
+    "compilerSandbox",
+    "nativeEnvironment"
+  ],
+  "automaticRetryAuthorized": false,
+  "baseline": {
+    "bytes": 85367,
+    "path": "planning/fixtures/dawn-cpp-linker-executor-v1/execution-freeze-r2.json",
+    "sha256": "0fedb46426268e487cfb18ec55a04b04b0c348db7b5ba956990d03118c0d1d56"
+  },
+  "bazelAuthorized": false,
+  "clientDate": "2026-11-06",
+  "compilationAuthorized": false,
+  "deviceAuthorized": false,
+  "freshAttempt": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-v1/probe-attempts/linker-2",
+  "globalPermissionMutationAuthorized": false,
+  "historicalEvidence": [
+    {
+      "bytes": 5385,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/r2-freeze-review.json",
+      "sha256": "0bc21be52c93cd02c1024ea06de46e9cffacc7b2dfa0a6774fbc341568daf0fc"
+    },
+    {
+      "bytes": 4194,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/linker-1-result-lock.json",
+      "sha256": "8abd3de8927b44f58827e9f006a92fb5d141563bb0077162fe9c39f5e6d3105c"
+    },
+    {
+      "bytes": 2599,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/linker-1-qa-checkpoint.json",
+      "sha256": "6eda39a31b783a62f9fde507718ae1f5a0b8e4191884f5efbb2044c15cdfaf8a"
+    }
+  ],
+  "invariantLimits": {
+    "analysisFloorBytes": 19327352832,
+    "cleanupSeconds": 15,
+    "decisionSeconds": 300,
+    "querySeconds": 30,
+    "smallFloorBytes": 1073741824
+  },
+  "launchProfile": {
+    "automaticFallback": false,
+    "hostTool": "exec_command",
+    "login": false,
+    "maximumParentInvocations": 1,
+    "outerPermissionVerifiedBy": "host execution approval and recorded tool request; not self-certified by native worker",
+    "parentArguments": {
+      "attempt": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-v1/probe-attempts/linker-2",
+      "entrypoint": "/Users/kezileo/Desktop/personal_mobile_agent/scripts/diagnostics/dawn_cpp_linker_launch_v1/qualify.py",
+      "freeze": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-linker-launch-v1/execution-freeze-r1.json",
+      "freezeSha256": "SHA256_OF_REVIEWED_EXECUTION_FREEZE",
+      "python": "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/bin/python3.9",
+      "pythonFlags": [
+        "-I",
+        "-S",
+        "-B"
+      ],
+      "review": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-linker-launch-v1/implementation-review-r1.json",
+      "reviewSha256": "SHA256_OF_INDEPENDENT_REVIEW_BOUND_TO_FREEZE"
+    },
+    "persistentRuleRequested": false,
+    "sandbox_permissions": "require_escalated",
+    "shell": "/bin/zsh",
+    "workdir": "/Users/kezileo/Desktop/personal_mobile_agent"
+  },
+  "linkerExecutionAuthorized": false,
+  "nativeExecutionBeforeReviewAuthorized": false,
+  "oldAttempt": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-v1/probe-attempts/linker-1",
+  "protocol": "dawn-cpp-linker-launch-amendment-v1",
+  "rebaseRule": "Rebuild these four fields using the unchanged pinned plan functions for freshAttempt; every other R2 contract field remains equal. No arbitrary string substitution.",
+  "schema": 1,
+  "scope": "fresh-linker-2-command-scoped-outer-exception-inner-sandbox-preserved",
+  "semanticEnablement": false
+}
