@@ -1,0 +1,125 @@
+{
+  "P2Complete": false,
+  "files": [
+    {
+      "bytes": 2890,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/r2-result-lock.json",
+      "sha256": "bbdb908b01f0ba5fac9991bf2a4426bd6b3123ecc7d3f31342d5b8f96b7911f6"
+    },
+    {
+      "bytes": 85367,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/execution-freeze-r2.json",
+      "sha256": "0fedb46426268e487cfb18ec55a04b04b0c348db7b5ba956990d03118c0d1d56"
+    },
+    {
+      "bytes": 5385,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/r2-freeze-review.json",
+      "sha256": "0bc21be52c93cd02c1024ea06de46e9cffacc7b2dfa0a6774fbc341568daf0fc"
+    },
+    {
+      "bytes": 3576,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/r2-canonical-admission.json",
+      "sha256": "0525618b9c7ecfe5918706df5363847ebb94c46c479a0d6ad7338a6f02529f45"
+    },
+    {
+      "bytes": 6067,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/r2-implementation-review.json",
+      "sha256": "b380c2ec294dc7355f9e2ce20934c4ee3cdff45e909dea39b75a30049ecf2994"
+    },
+    {
+      "bytes": 59236,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/r2-reviewed-snapshot.json",
+      "sha256": "877219a0447a93afb4b6d37f6755cc3b598df3f905e3483fc8fe9fa0372cbf2e"
+    },
+    {
+      "bytes": 4644,
+      "path": "docs/P2_CPP_LINKER_EXECUTOR_R2_QA.md",
+      "sha256": "e4e090cd5a1251f20393dab50b10fd02e9c328e5f49f6bbffa742ba56b355fcc"
+    },
+    {
+      "bytes": 6933,
+      "path": "planning/fixtures/cpp-build-skills-v1/installation-checkpoint.json",
+      "sha256": "03e2757c7bdea71f453b3e2f091b6961a52a7fc34e1b2a07b6c00d56959eb9d1"
+    },
+    {
+      "bytes": 2714,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/binding-drift-negatives.json",
+      "sha256": "f220a23dc005ca44fc7e83a0486fe213d6e172d13d7d510621ee8a8781410162"
+    },
+    {
+      "bytes": 3844,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/binding_drift_probe.py",
+      "sha256": "cf292744ff110c1793781bcdac32947880f0129c3013c1c351b78a5827c26ac2"
+    },
+    {
+      "bytes": 3576,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/canonical-admission-receipt.json",
+      "sha256": "0525618b9c7ecfe5918706df5363847ebb94c46c479a0d6ad7338a6f02529f45"
+    },
+    {
+      "bytes": 2940,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/canonical_admission.py",
+      "sha256": "70ae4def8ee8b9e113b14295fd7926602111d68a40b7ee9d9b18e80fadf22b4a"
+    },
+    {
+      "bytes": 2645,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/focused-python39.log",
+      "sha256": "def2a9121a72968a83a41c1b39de22119f867f5429a75b598c4e87d3debb9a3f"
+    },
+    {
+      "bytes": 5385,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/freeze-review.json",
+      "sha256": "0bc21be52c93cd02c1024ea06de46e9cffacc7b2dfa0a6774fbc341568daf0fc"
+    },
+    {
+      "bytes": 56136,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/frozen-input-audit.json",
+      "sha256": "954ffc36dd6b11b5382f6c483da9592e85835f2f95e369554eefa6dbe0cd3b28"
+    },
+    {
+      "bytes": 1735,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/historical-guard-classification.json",
+      "sha256": "04d3589516e83f9a2e68b8cbc86b557d67d892dc34877f083907b2029bec467b"
+    },
+    {
+      "bytes": 9107,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/qa_checks.py",
+      "sha256": "eb154bc64a919c993bc46ae236b0ffe4989e5c2451337e8cef256c3e2c5e2f90"
+    },
+    {
+      "bytes": 754,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/quarantine-probe.json",
+      "sha256": "9537d72ad7f4c93bd518e531bcec8c9345a70e7cf6c615fefbe16b1b1a5e20ea"
+    },
+    {
+      "bytes": 4926,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/review.md",
+      "sha256": "c484ffb6266182f9f22a348134d8234f9d63a290e45a8967668845ff11a4d018"
+    },
+    {
+      "bytes": 59236,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/snapshot.json",
+      "sha256": "877219a0447a93afb4b6d37f6755cc3b598df3f905e3483fc8fe9fa0372cbf2e"
+    },
+    {
+      "bytes": 6067,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/summary.json",
+      "sha256": "b380c2ec294dc7355f9e2ce20934c4ee3cdff45e909dea39b75a30049ecf2994"
+    },
+    {
+      "bytes": 21210,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-implementation-r2/synthetic-checks.json",
+      "sha256": "a2155b253759d06522f7b9b820743f253fd1152986279698608af10558e7d2b2"
+    }
+  ],
+  "freezeSha256": "0fedb46426268e487cfb18ec55a04b04b0c348db7b5ba956990d03118c0d1d56",
+  "fullSuiteStatus": "NOT_GREEN_ARCHIVAL_MIGRATION_REQUIRED",
+  "interchangeabilityQualified": false,
+  "nativeExecutionAuthorized": false,
+  "nativeQueriesExecuted": 0,
+  "reviewSha256": "0bc21be52c93cd02c1024ea06de46e9cffacc7b2dfa0a6774fbc341568daf0fc",
+  "schema": 1,
+  "scope": "reviewed-r2-seven-probe-executor-implementation-only",
+  "semanticEnablement": false,
+  "verdict": "PASS_SCOPED_IMPLEMENTATION_AND_DATA_ONLY_ADMISSION"
+}

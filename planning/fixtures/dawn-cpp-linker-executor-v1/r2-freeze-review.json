@@ -1,0 +1,100 @@
+{
+  "P2Complete": false,
+  "canonicalAdmissionEvidenceRecordedSeparately": true,
+  "compilerMatrixAuthorized": false,
+  "conditions": [
+    "Approval applies only to the exact R2 freeze and unchanged bound inputs.",
+    "Canonical data-only admission proof is recorded separately after this genuine review; this stable review must remain byte-identical.",
+    "Native execution still requires separate explicit user authorization; all seven native queries remain NOT_RUN.",
+    "Keep the unchanged 300/30/15 second contract, stop at first failure, compiler-only execution profile and ld execution denial.",
+    "No SDK/Bazel build, compiler matrix, model quality/interchangeability, device acceptance, production enablement or P2 completion follows.",
+    "The historical archival migration remains separate work; full reference suite is not green."
+  ],
+  "deviceExecutionAuthorized": false,
+  "evidence": [
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-executor-v1/qa-implementation-r2/qa_checks.py",
+      "sha256": "eb154bc64a919c993bc46ae236b0ffe4989e5c2451337e8cef256c3e2c5e2f90"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-executor-v1/qa-implementation-r2/binding_drift_probe.py",
+      "sha256": "cf292744ff110c1793781bcdac32947880f0129c3013c1c351b78a5827c26ac2"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-executor-v1/qa-implementation-r2/frozen-input-audit.json",
+      "sha256": "954ffc36dd6b11b5382f6c483da9592e85835f2f95e369554eefa6dbe0cd3b28"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-executor-v1/qa-implementation-r2/focused-python39.log",
+      "sha256": "def2a9121a72968a83a41c1b39de22119f867f5429a75b598c4e87d3debb9a3f"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-executor-v1/qa-implementation-r2/quarantine-probe.json",
+      "sha256": "9537d72ad7f4c93bd518e531bcec8c9345a70e7cf6c615fefbe16b1b1a5e20ea"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-executor-v1/qa-implementation-r2/synthetic-checks.json",
+      "sha256": "a2155b253759d06522f7b9b820743f253fd1152986279698608af10558e7d2b2"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-executor-v1/qa-implementation-r2/binding-drift-negatives.json",
+      "sha256": "f220a23dc005ca44fc7e83a0486fe213d6e172d13d7d510621ee8a8781410162"
+    },
+    {
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-executor-v1/qa-implementation-r2/historical-guard-classification.json",
+      "sha256": "04d3589516e83f9a2e68b8cbc86b557d67d892dc34877f083907b2029bec467b"
+    }
+  ],
+  "executionAuthorized": false,
+  "findings": [],
+  "freezePath": "/Users/kezileo/Desktop/personal_mobile_agent/planning/fixtures/dawn-cpp-linker-executor-v1/execution-freeze-r2.json",
+  "freezeSha256": "0fedb46426268e487cfb18ec55a04b04b0c348db7b5ba956990d03118c0d1d56",
+  "freshFocusedTests": {
+    "interpreter": "pinned Python 3.9.6; -I -S -B",
+    "passed": 21,
+    "tests": 21
+  },
+  "frozenInputsFreshlyVerified": 207,
+  "fullReferenceSuite": {
+    "errors": 1,
+    "fixturesRebaselined": false,
+    "guardRelaxed": false,
+    "passed": 387,
+    "reason": "unchanged historical stale-source guard rejects authorized AGENTS routing addition; retained old bytes match original hash",
+    "source": "audited frozen producer host-tests-r2.log; no independent full rerun",
+    "status": "NOT_GREEN_ARCHIVAL_MIGRATION_REQUIRED",
+    "test": "test_unicode_correction.InputTests.test_frozen_fixtures_reproduce_without_scores",
+    "tests": 388
+  },
+  "gaps": [
+    "No full product/Gradle/UI review; no Kotlin source changed in this scope.",
+    "Producer readiness documentation/result lock created after the R2 freeze is outside this frozen implementation approval."
+  ],
+  "gitActions": "NOT_RUN_BY_USER_SCOPE; branch/HEAD not freshly queried",
+  "guidanceBindingDriftNegativesRejected": 26,
+  "implementationApproved": true,
+  "implementationSha256": "31158cc3560dec3cb8e0d23cdb51bf21f770dab64f843204292dd921447f8080",
+  "missingRequiredBindingsRejected": 193,
+  "modelDesignDocuments": "ACCEPTABLE_DESIGN_ONLY; existing owner/data continuity, per-configuration tokenizer/template/capability gates, no acquisition or quality claim",
+  "modelExecutionAuthorized": false,
+  "nativeExecutionAuthorized": false,
+  "nativeQueriesExecuted": false,
+  "proposalBindingsPreserved": 163,
+  "r1VerdictPreserved": "FAIL",
+  "resolvedFindings": [
+    {
+      "id": "CPP-EXEC-001",
+      "regression": "unlink effects followed by uncertain exception; accepted absent; cleanup confirmed; quarantine rejects",
+      "source": "scripts/diagnostics/dawn_cpp_linker_executor_v1/qualify.py:123",
+      "status": "FIXED_AND_INDEPENDENTLY_REPRODUCED"
+    }
+  ],
+  "reviewedAtUtc": "2026-11-05T22:19:49.860887+00:00",
+  "reviewer": "Secondary independent Codex implementation QA reviewer; did not author executor source",
+  "roleContext": "Follow-up after retained primary reviewer genuine R1 FAIL and usage quota; R1 not replaced or approved",
+  "schema": 1,
+  "scope": "reviewed-seven-probe-linker-metadata-only",
+  "semanticEnablement": false,
+  "treesFreshlyVerified": 6,
+  "verdict": "PASS"
+}
