@@ -1,0 +1,142 @@
+{
+  "historicalRecordsUnchanged": true,
+  "oldAGENTSSha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5",
+  "preservedBytes": "planning/fixtures/cpp-build-skills-v1/AGENTS.before.txt",
+  "records": [
+    {
+      "AGENTSBindings": [
+        {
+          "bytes": 4233,
+          "pointer": "/inputs/4",
+          "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+        }
+      ],
+      "fileSha256": "c9787682569fb8d694c8e68a714439333b75ca055404fed09540c12cf96bd9a7",
+      "path": "planning/fixtures/bazel-server-jvm-v1/analysis-freeze.json"
+    },
+    {
+      "AGENTSBindings": [
+        {
+          "pointer": "/files/~1Users~1kezileo~1Desktop~1personal_mobile_agent~1AGENTS.md",
+          "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+        }
+      ],
+      "fileSha256": "69dd83f1a9f3bb0be955ddd26848ecacf8773cc06d1cc354065ff55ea3f5106a",
+      "path": "planning/fixtures/dawn-abseil-preparation-v1/prepare-1-results-snapshot.json"
+    },
+    {
+      "AGENTSBindings": [
+        {
+          "pointer": "/files/~1Users~1kezileo~1Desktop~1personal_mobile_agent~1AGENTS.md",
+          "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+        }
+      ],
+      "fileSha256": "db034608d231b77c7db92aa79a071dd62124b9c4c93d9fec37c8e7d3e0422742",
+      "path": "planning/fixtures/dawn-abseil-preparation-v1/reviewed-snapshot.json"
+    },
+    {
+      "AGENTSBindings": [
+        {
+          "pointer": "/files/~1Users~1kezileo~1Desktop~1personal_mobile_agent~1AGENTS.md",
+          "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+        }
+      ],
+      "fileSha256": "dbf94070880aed840d13ae42056cc892aa66635acff9f9d691c22f2002548ca3",
+      "path": "planning/fixtures/dawn-cpp-backend-v1/admission-r2-reviewed-snapshot.json"
+    },
+    {
+      "AGENTSBindings": [
+        {
+          "pointer": "/files/~1Users~1kezileo~1Desktop~1personal_mobile_agent~1AGENTS.md",
+          "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+        }
+      ],
+      "fileSha256": "4fb00548e31713c75215ef188d386795e40a31d111f77c80708cde0a69d8bcfa",
+      "path": "planning/fixtures/dawn-cpp-backend-v1/metadata-2-reviewed-snapshot.json"
+    },
+    {
+      "AGENTSBindings": [
+        {
+          "pointer": "/files/~1Users~1kezileo~1Desktop~1personal_mobile_agent~1AGENTS.md",
+          "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+        }
+      ],
+      "fileSha256": "13cb83d7551fd3a6b6fa3b554d5d7935b3105cb2e635c937b75d9ae1e13b284b",
+      "path": "planning/fixtures/dawn-cpp-backend-v1/reviewed-snapshot.json"
+    },
+    {
+      "AGENTSBindings": [
+        {
+          "pointer": "/files/~1Users~1kezileo~1Desktop~1personal_mobile_agent~1AGENTS.md",
+          "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+        }
+      ],
+      "fileSha256": "3649c52b4d269d951f78df19f65929993321136f74f276b1349fcde819378f3d",
+      "path": "planning/fixtures/dawn-cpp-linker-v1/reviewed-snapshot.json"
+    },
+    {
+      "AGENTSBindings": [
+        {
+          "pointer": "/files/~1Users~1kezileo~1Desktop~1personal_mobile_agent~1AGENTS.md",
+          "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+        }
+      ],
+      "fileSha256": "590c0687154354730d28f3dd68c56ac4ef6830be2e159b8de90f1ae65611a1e6",
+      "path": "planning/fixtures/dawn-cpp-toolchain-v1/harness-static-snapshot.json"
+    },
+    {
+      "AGENTSBindings": [
+        {
+          "pointer": "/files/~1Users~1kezileo~1Desktop~1personal_mobile_agent~1AGENTS.md",
+          "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+        }
+      ],
+      "fileSha256": "729edeb1f11c45b118033435975398ce44011c1c5d771844827a15512f0f9170",
+      "path": "planning/fixtures/dawn-cpp-toolchain-v1/metadata-1-results-snapshot.json"
+    },
+    {
+      "AGENTSBindings": [
+        {
+          "bytes": 4233,
+          "pointer": "/inputs/4",
+          "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+        }
+      ],
+      "fileSha256": "5da08299b99c822ffcfcb3b9b5eae85594a782fc0f6d66b7621ca5d3c582b4aa",
+      "path": "planning/fixtures/ml-drift-compatibility-v1/analysis-freeze-v2.json"
+    },
+    {
+      "AGENTSBindings": [
+        {
+          "bytes": 4233,
+          "pointer": "/inputs/4",
+          "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+        }
+      ],
+      "fileSha256": "8214f94feb8d2591da396ae103f87d76438ed1c2657b92bde2e74a27be57d031",
+      "path": "planning/fixtures/ml-drift-compatibility-v1/analysis-freeze.json"
+    },
+    {
+      "AGENTSBindings": [
+        {
+          "bytes": 4233,
+          "pointer": "/inputs/4",
+          "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+        }
+      ],
+      "fileSha256": "afb82c30dfd4eed60f9b84610327b22e426806aef1eeb9742432f8a876bd2070",
+      "path": "planning/fixtures/repository-cache-v1/analysis-freeze.json"
+    },
+    {
+      "AGENTSBindings": [
+        {
+          "pointer": "/AGENTS.md",
+          "sha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5"
+        }
+      ],
+      "fileSha256": "20a167d9d1de9cbb3e825efbdd3557415e6b5bc08f561305b93d6c82309c8ee0",
+      "path": "docs/P2_GRAMMAR_PROGRESS_SOURCE_SNAPSHOT.json"
+    }
+  ],
+  "schema": 1
+}

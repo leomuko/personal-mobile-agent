@@ -32,6 +32,25 @@ Apply these skills in sympathy with the existing code and current user scope. Do
 - `rust-hardening` was assessed but is not installed or adopted. Its mandatory lint, arithmetic, cast and feature-matrix policies require separate user agreement. Optional memory-safety, Koin and CameraX skills remain deferred.
 - Installation revisions, reviewed resources, licenses and file hashes are in `docs/DIAGNOSTIC_SKILLS_PROVENANCE.md` and its JSON companion. These machine-local skills are not application dependencies; do not install repositories, hooks, plugins or MCP connections as a side effect.
 
+## Bazel and Clang diagnostic guidance
+
+- The pinned `bazel-evidence-engineering` and `clang` skills are installed under
+  `~/.codex/skills`. Read the applicable complete entry point and relevant references
+  before SDK dependency/configuration/action/provenance or targeted compiler work.
+  Installation revisions, licenses, reviewed resources and all file hashes are in
+  `docs/CPP_BUILD_SKILLS_PROVENANCE.md` and its JSON companion.
+- Bazel guidance applies to the SDK build surface; the repository's pinned
+  **Bazel 7.6.1** governs. Newer-version examples do not authorize upgrades,
+  dependency/lock changes, remote services or Bazel invocation.
+- Clang guidance applies to targeted diagnostics, template errors and toolchain
+  investigation. Verify suggestions against the pinned Apple Clang and reviewed
+  flags. Do not automatically apply `clang-tidy -fix`, broad modernization,
+  warning-policy changes, sanitizer/LTO settings, linker substitutions or
+  vectorization/aliasing assumptions.
+- Project instructions and frozen protocols remain authoritative. Skills are
+  guidance only, not runtime dependencies or permission to execute native probes.
+  Preserve historical guidance snapshots; bind routing changes only in new freezes.
+
 ## Validation and review
 
 - Inspect configured modules and targets before selecting checks. Baseline commands are `./gradlew :androidApp:assembleDebug :shared:jvmTest :androidApp:lintDebug`.
