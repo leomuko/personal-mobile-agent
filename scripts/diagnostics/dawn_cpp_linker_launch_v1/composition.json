@@ -1,0 +1,49 @@
+{
+  "baseline": {
+    "bytes": 15759,
+    "path": "scripts/diagnostics/dawn_cpp_linker_executor_v1/qualify.py",
+    "sha256": "31158cc3560dec3cb8e0d23cdb51bf21f770dab64f843204292dd921447f8080"
+  },
+  "candidate": {
+    "bytes": 20293,
+    "path": "scripts/diagnostics/dawn_cpp_linker_launch_v1/qualify.py",
+    "sha256": "b9fb7534f49d9a80e68bd0d9d6d1a833ff2115ddeca544e919a53fb857f72e77"
+  },
+  "changedFunctions": [
+    "historical_proposal (renamed old proposal)",
+    "verify_composition",
+    "proposal",
+    "required_inputs",
+    "admission"
+  ],
+  "nativeQueriesExecuted": 0,
+  "newControlFlags": false,
+  "patch": {
+    "bytes": 7295,
+    "path": "build/dawn-cpp-linker-launch-v1/executor-composition.patch",
+    "sha256": "d266a4dc3ded2a781cc46ed0d797c0f9eb4cc4132d829a14e011801b447826d3"
+  },
+  "schema": 1,
+  "unchangedFunctionAstSha256": {
+    "check": "6bdf6df6cbce5a0f62f795abe9f860d5b455d1c429cd54266fa46725159a3d49",
+    "check_inputs": "dd5a779340f9f91a337218aaa85417c4647524ee44d1841948ecadb86bb6684d",
+    "contract": "5784cf594892b208444bf7abf75109373c1069bfaefd22282c2687c2a442ad20",
+    "dispatch": "7480c534ddd4ac81841e7428f22ae78b2cd4c2f1f889b5dbcff2d3288aef0d1c",
+    "interruptions": "83b34642a2447e3220238bf1905eb0e27b21c02975f79647d36a7690eaa3472b",
+    "main": "b1974053b8c0f94db29e19140f9db09c5c53e60e0aaad39bcea01acc515c3521",
+    "module": "cf2747de1bd06bd67ea0c0e42333a616dfa2e8c8e15173829964f9b9832d9ff7",
+    "quarantine": "e3e7f1f2afa5932bdd7d19ba5e24bc8a6be8a970b4befcd792a86c11bb8ec374",
+    "worker": "281e997c2192bfd6d017723e8ad1b79a6c53f0b965f2020bc92a4274a1a31031"
+  },
+  "unchangedFunctions": [
+    "module",
+    "contract",
+    "check",
+    "check_inputs",
+    "quarantine",
+    "interruptions",
+    "dispatch",
+    "worker",
+    "main"
+  ]
+}
