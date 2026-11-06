@@ -1,0 +1,72 @@
+{
+  "P2Complete": false,
+  "acceptancePublished": false,
+  "attempt": "linker-1",
+  "automaticRetryPerformed": false,
+  "bindings": [
+    {
+      "bytes": 4194,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/linker-1-result-lock.json",
+      "sha256": "8abd3de8927b44f58827e9f006a92fb5d141563bb0077162fe9c39f5e6d3105c"
+    },
+    {
+      "bytes": 5382,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-results-linker-1/review.md",
+      "sha256": "6a8930defa1e817b927a6404557582acdfc3c075abe1c05e69a000534b592d88"
+    },
+    {
+      "bytes": 7174,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-results-linker-1/review.json",
+      "sha256": "95a5d0e2476f118f8bff9d3280e79f618ca1a259a0300242520ac4abe6a801c1"
+    },
+    {
+      "bytes": 59530,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-results-linker-1/snapshot.json",
+      "sha256": "8c1b88f271ba16c57b4b2678a0ebf8c607d89986c94b46797b87058bf4f56845"
+    },
+    {
+      "bytes": 55914,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-results-linker-1/post-run-frozen-input-audit.json",
+      "sha256": "c86139947c0d29cdb8eb6c1e209c762ae25ffe8ec5b8b3dfdb0bf542bacd528f"
+    },
+    {
+      "bytes": 6021,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-results-linker-1/retained-result-audit.json",
+      "sha256": "b66690c70b4c9ed8e6319bd3e27352bef64f6b19823a7b2e47c32b7fc87303d2"
+    },
+    {
+      "bytes": 3068,
+      "path": "build/dawn-cpp-linker-executor-v1/qa-results-linker-1/timing-erratum-followup.json",
+      "sha256": "9934335deba48f41204814e5ea0494a84e01428f5bc21a8176607132e5e15a29"
+    },
+    {
+      "bytes": 1691,
+      "path": "docs/P2_CPP_LINKER_EXECUTION_LINKER1_ERRATUM.md",
+      "sha256": "77e0e3760328adb377fbcfda3d50814bd6bf42938d4b9301ad4fd356642204cb"
+    },
+    {
+      "bytes": 2198,
+      "path": "docs/P2_CPP_LINKER_EXECUTION_LINKER1_QA.md",
+      "sha256": "acc9257ac78dc2519b75498adac294fba1e915a55afca6b6cd01d554377a94ce"
+    }
+  ],
+  "checkpointWrittenAfterFollowup": true,
+  "cleanupConfirmed": true,
+  "clientDate": "2026-11-06",
+  "diagnosticFailed": 1,
+  "dryRunPlansNotRun": 6,
+  "findingResolution": {
+    "id": "LINKER1-RESULTS-001",
+    "originalProducerAndReviewPreserved": true,
+    "status": "RESOLVED_BY_SEPARATE_TIMING_ERRATUM"
+  },
+  "freshIndependentInputCount": 207,
+  "freshIndependentInventoryCount": 6,
+  "newExecutionAuthorizationGranted": false,
+  "publicationUncertain": false,
+  "qualification": "BLOCKED_NATIVE_LINKER_SELECTION_UNVERIFIED",
+  "resultsIntegrity": "PASS",
+  "schema": 1,
+  "semanticEnablement": false,
+  "sourceCodeModified": false
+}
