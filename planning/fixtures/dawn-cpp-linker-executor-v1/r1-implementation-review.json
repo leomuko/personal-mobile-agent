@@ -1,0 +1,40 @@
+{
+  "P2Complete": false,
+  "canonicalPositiveAdmission": "NOT_PERFORMED_UNRESOLVED_FINDING_NO_GENUINE_PASS",
+  "compilerMatrixAuthorized": false,
+  "deviceExecutionAuthorized": false,
+  "executionAuthorized": false,
+  "findings": [
+    {
+      "confidence": "high",
+      "evidence": "quarantine-probes.json",
+      "id": "CPP-EXEC-001",
+      "priority": "P2",
+      "title": "Quarantine ignores outcome.publicationUncertain when acceptance is absent"
+    }
+  ],
+  "freezeSha256": "e50136ebc062ba7e837c183de1fead550be777fe18ba23568f7021123b6c056b",
+  "freshDistinctExecutorTests": 20,
+  "freshFocusedRuns": 2,
+  "frozenInputsFreshlyVerified": 176,
+  "fullSuiteFreshIndependentRerun": false,
+  "interchangeabilityQualified": false,
+  "modelDesignDocuments": "ACCEPTABLE_DESIGN_ONLY",
+  "nativeQueriesExecuted": false,
+  "otherBlockingFindingsReproduced": 0,
+  "preserveForFollowup": true,
+  "producerFullTestsRecorded": 387,
+  "proposalBindingsPreserved": 163,
+  "reviewPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-executor-v1/qa-implementation-1/review.md",
+  "reviewedOn": "2026-11-06",
+  "reviewer": "Retained sole primary independent Codex QA reviewer",
+  "schema": 1,
+  "scope": "reviewed-seven-probe-linker-metadata-only",
+  "semanticEnablement": false,
+  "snapshotPath": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-linker-executor-v1/qa-implementation-1/snapshot.json",
+  "snapshotSha256": "d3e7d129b2b62002d3719db8f354b4f7475006020a7aed84a051f42053fb9682",
+  "stablePassAttestationWritten": false,
+  "syntheticOwnerCallbacksOnly": true,
+  "treesVerified": 6,
+  "verdict": "FAIL"
+}

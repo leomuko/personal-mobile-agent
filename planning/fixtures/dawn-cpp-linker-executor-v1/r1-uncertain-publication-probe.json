@@ -1,0 +1,25 @@
+{
+  "exitCode": 1,
+  "ownerCalls": 1,
+  "terminal": {
+    "classification": "PROBES_FAILED_OR_REVOKED",
+    "cleanupConfirmed": true,
+    "cleanupStatus": "CONFIRMED",
+    "elapsedSeconds": 300.0,
+    "failure": "ValueError: deadline; uncertain revocation: synthetic uncertain result after owned unlink effects",
+    "freezeSha256": "unit",
+    "publicAcceptancePresent": false,
+    "publicationUncertain": true,
+    "workerOutcome": {
+      "classification": "ANALYSIS_COMMAND_SUCCEEDED",
+      "cleanupConfirmed": true,
+      "elapsedSeconds": 20,
+      "exitCode": 0
+    }
+  },
+  "acceptedExists": false,
+  "publicationFailureExists": false,
+  "quarantine": "ACCEPTED",
+  "nativeExecuted": false,
+  "ownerMocked": true
+}

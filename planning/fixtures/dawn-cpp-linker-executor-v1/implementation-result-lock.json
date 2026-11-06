@@ -1,0 +1,30 @@
+{
+  "P2Complete": false,
+  "files": [
+    {
+      "bytes": 77669,
+      "path": "planning/fixtures/dawn-cpp-linker-executor-v1/execution-freeze-r1.json",
+      "sha256": "e50136ebc062ba7e837c183de1fead550be777fe18ba23568f7021123b6c056b"
+    },
+    {
+      "bytes": 5303,
+      "path": "docs/P2_CPP_LINKER_EXECUTOR_IMPLEMENTATION_RESULTS_V1.md",
+      "sha256": "3b005327bb3de35b7f685f4b99f6c1f3dcbd23640a0b8a6c4777e5c999302f9c"
+    },
+    {
+      "bytes": 180,
+      "path": "build/dawn-cpp-linker-executor-v1/freeze-preparation.log",
+      "sha256": "364d7975648b55d0d96403e9108855231076faa2fa5974a1f58e1130433adb8d"
+    }
+  ],
+  "focusedPython39Tests": 20,
+  "freezeSha256": "e50136ebc062ba7e837c183de1fead550be777fe18ba23568f7021123b6c056b",
+  "hostTests": 387,
+  "interchangeabilityQualified": false,
+  "nativeQueriesExecuted": 0,
+  "newModelAcquired": false,
+  "schema": 1,
+  "scope": "linker-executor-host-implementation-only",
+  "semanticEnablement": false,
+  "status": "IMPLEMENTATION_QA_PENDING"
+}
