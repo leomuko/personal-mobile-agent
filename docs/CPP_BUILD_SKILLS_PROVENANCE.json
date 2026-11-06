@@ -1,0 +1,265 @@
+{
+  "P2Complete": false,
+  "date": "2026-11-06",
+  "diagnosticSkillsProvenanceUnchanged": [
+    {
+      "archive": "/Users/kezileo/Desktop/personal_mobile_agent/build/cpp-build-skills-v1/docs/DIAGNOSTIC_SKILLS_PROVENANCE.md",
+      "bytes": 3522,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/DIAGNOSTIC_SKILLS_PROVENANCE.md",
+      "sha256": "acc83a815496d83bf48e1868cb7a54fd8b7dadf1d32b6b0b531d04b3ba6b2668"
+    },
+    {
+      "archive": "/Users/kezileo/Desktop/personal_mobile_agent/build/cpp-build-skills-v1/docs/DIAGNOSTIC_SKILLS_PROVENANCE.json",
+      "bytes": 1211,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/docs/DIAGNOSTIC_SKILLS_PROVENANCE.json",
+      "sha256": "83de546432011afa9e398f35369cc59aad1504632237bfcaf771a1b58016c540"
+    }
+  ],
+  "exclusions": [
+    "automatic clang-tidy -fix",
+    "broad modernization",
+    "warning policy changes",
+    "sanitizer or LTO adoption",
+    "linker substitution",
+    "vectorization or aliasing assumptions",
+    "toolchain/dependency upgrades",
+    "native probes without reviewed freeze and separate authorization"
+  ],
+  "historicalGuidance": {
+    "AGENTSBeforeSha256": "ae0569ce9fd51fbce2251083b7462a23d6cd46ae3f439bc0e55755cca38e67b5",
+    "bindingInventory": "planning/fixtures/cpp-build-skills-v1/historical-AGENTS-bindings.json",
+    "note": "Historical AGENTS bindings remain unchanged and refer to preserved old bytes; new routing is a declared source delta, not historical revalidation.",
+    "oldFreezesRefreshed": false,
+    "preservedBytes": "planning/fixtures/cpp-build-skills-v1/AGENTS.before.txt"
+  },
+  "routing": {
+    "bazel": "SDK dependency resolution, configured graphs, toolchains, actions and provenance; pinned Bazel7.6.1 governs",
+    "clang": "Targeted diagnostics, template errors and toolchain investigation; verify flags against pinned Apple Clang"
+  },
+  "schema": 1,
+  "scope": "machine-local-development-guidance-only",
+  "semanticEnablement": false,
+  "separateNativeAuthorizationRequired": true,
+  "skills": [
+    {
+      "entryPointMatchesExpected": true,
+      "expectedEntryPointSha256": "854cbbdd2242e973a21ef07c54b087a10f69eaa79a717b2bb709106cc207034e",
+      "files": [
+        {
+          "bytes": 1104,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/LICENSE.txt",
+          "relativePath": "LICENSE.txt",
+          "sha256": "26b831c963e4d7a1874dcaf7b1e007beb7966535652705c497c69fed853d1fba",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/LICENSE.txt"
+        },
+        {
+          "bytes": 9731,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/SKILL.md",
+          "relativePath": "SKILL.md",
+          "sha256": "854cbbdd2242e973a21ef07c54b087a10f69eaa79a717b2bb709106cc207034e",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/SKILL.md"
+        },
+        {
+          "bytes": 273,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/agents/openai.yaml",
+          "relativePath": "agents/openai.yaml",
+          "sha256": "22a6a6b5678dd7cf7a1573f16f24f30dfa1f0da605dfdb982e742b5d005e0f9c",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/agents/openai.yaml"
+        },
+        {
+          "bytes": 8169,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/references/artifacts-and-supply-chain.md",
+          "relativePath": "references/artifacts-and-supply-chain.md",
+          "sha256": "aeb43bc4552b7582e4eb824e3bed132c107a853db253dff444c9d1b2a7116b45",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/references/artifacts-and-supply-chain.md"
+        },
+        {
+          "bytes": 8440,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/references/capability-ledger.md",
+          "relativePath": "references/capability-ledger.md",
+          "sha256": "6de9ec5415d093dafb60e5b5d62a5cf706f36466fbed7594757b5e7f0d3fc05e",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/references/capability-ledger.md"
+        },
+        {
+          "bytes": 3952,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/references/current-ecosystem.md",
+          "relativePath": "references/current-ecosystem.md",
+          "sha256": "edd8969304b4c9a19a04f0c348d16029c996007648dfa696b6af7662a10b48f9",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/references/current-ecosystem.md"
+        },
+        {
+          "bytes": 12628,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/references/evaluation-scenarios.md",
+          "relativePath": "references/evaluation-scenarios.md",
+          "sha256": "56a6855a63140eed5ee92391acfdbe896e127296f4d76e03a19e3aa40410dc14",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/references/evaluation-scenarios.md"
+        },
+        {
+          "bytes": 7274,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/references/external-dependencies-and-upgrades.md",
+          "relativePath": "references/external-dependencies-and-upgrades.md",
+          "sha256": "790bb4cb87eaa40db716ea71853daaf50ccc5dfe6433d9c080e5066339995784",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/references/external-dependencies-and-upgrades.md"
+        },
+        {
+          "bytes": 8075,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/references/graph-and-architecture.md",
+          "relativePath": "references/graph-and-architecture.md",
+          "sha256": "4c375a555ea2668a11b56db9795393a489894cf18b317a2c7a146c1b91fd1bc3",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/references/graph-and-architecture.md"
+        },
+        {
+          "bytes": 7517,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/references/incremental-performance.md",
+          "relativePath": "references/incremental-performance.md",
+          "sha256": "60ef77f5352288e942ee70450d6d3c7361090855bd6b71e91aa564b31fd8a220",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/references/incremental-performance.md"
+        },
+        {
+          "bytes": 5598,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/references/platforms-and-hermeticity.md",
+          "relativePath": "references/platforms-and-hermeticity.md",
+          "sha256": "9c476c486e110ea24570c516884ff6e175bee3ee7c58c2a93afdbc19a422b781",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/references/platforms-and-hermeticity.md"
+        },
+        {
+          "bytes": 8920,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/references/remote-build-infrastructure.md",
+          "relativePath": "references/remote-build-infrastructure.md",
+          "sha256": "0a2670649a133a3f44805bc5406562c6c1327754e89edba031930422b80824ee",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/references/remote-build-infrastructure.md"
+        },
+        {
+          "bytes": 5586,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/references/repository-first-inspection.md",
+          "relativePath": "references/repository-first-inspection.md",
+          "sha256": "4789944f16269d990dec71bd897d4c247e4533934a265fc2e18b7e46bfddfe8c",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/references/repository-first-inspection.md"
+        },
+        {
+          "bytes": 6332,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/references/rust-and-typescript.md",
+          "relativePath": "references/rust-and-typescript.md",
+          "sha256": "7b8a5cbf2044064ea6c990b3749d40220db968a08f2a1b9efbf3ae7f20cc1335",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/references/rust-and-typescript.md"
+        },
+        {
+          "bytes": 8489,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/references/starlark-rule-engineering.md",
+          "relativePath": "references/starlark-rule-engineering.md",
+          "sha256": "361da986c9b5afac02f7a6eb5546805f5e1a4780f9b3ab2851e052e439cf5bea",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/references/starlark-rule-engineering.md"
+        },
+        {
+          "bytes": 7635,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/bazel-evidence-engineering/references/testing-ci-and-evidence.md",
+          "relativePath": "references/testing-ci-and-evidence.md",
+          "sha256": "3e19a5a8f26e2864c4abd8cb36fac3033bc161f208464e7b2ccda52fa74e429a",
+          "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/references/testing-ci-and-evidence.md"
+        }
+      ],
+      "installationMethod": "installed skill-installer helper --method download; no git fallback",
+      "installedPath": "/Users/kezileo/.codex/skills/bazel-evidence-engineering",
+      "license": {
+        "bytes": 1104,
+        "retainedPath": "docs/third_party/CPP_BUILD_SKILLS/bazel-evidence-engineering-LICENSE.txt",
+        "sha256": "26b831c963e4d7a1874dcaf7b1e007beb7966535652705c497c69fed853d1fba",
+        "spdx": "MIT",
+        "upstreamUrl": "https://raw.githubusercontent.com/Kingda8/Agent-skills-for-Bazel/1fdaa839a030421d5e69709bde1bfd72f773b54e/skills/bazel-evidence-engineering/LICENSE.txt"
+      },
+      "repository": "Kingda8/Agent-skills-for-Bazel",
+      "reviewedResources": [
+        "SKILL.md",
+        "LICENSE.txt",
+        "references/repository-first-inspection.md",
+        "references/platforms-and-hermeticity.md",
+        "references/testing-ci-and-evidence.md",
+        "references/artifacts-and-supply-chain.md",
+        "references/current-ecosystem.md",
+        "references/external-dependencies-and-upgrades.md"
+      ],
+      "revision": "1fdaa839a030421d5e69709bde1bfd72f773b54e",
+      "sourceDirectory": "skills/bazel-evidence-engineering"
+    },
+    {
+      "entryPointMatchesExpected": true,
+      "expectedEntryPointSha256": "0e6fcb1d4c4a0eea87a82c587f9644352f3ed809d75aaed0966eaa65372b1057",
+      "files": [
+        {
+          "bytes": 5520,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/clang/SKILL.md",
+          "relativePath": "SKILL.md",
+          "sha256": "0e6fcb1d4c4a0eea87a82c587f9644352f3ed809d75aaed0966eaa65372b1057",
+          "upstreamUrl": "https://raw.githubusercontent.com/mohitmishra786/low-level-dev-skills/bdc58472fa9f309ed1b3f7d985a0d8e9bd8f4608/skills/compilers/clang/SKILL.md"
+        },
+        {
+          "bytes": 1971,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/clang/references/clang-tidy.md",
+          "relativePath": "references/clang-tidy.md",
+          "sha256": "3e88a2429214bff0c1abed630f240d501cc0b97c9742a8f96caa537273ee297f",
+          "upstreamUrl": "https://raw.githubusercontent.com/mohitmishra786/low-level-dev-skills/bdc58472fa9f309ed1b3f7d985a0d8e9bd8f4608/skills/compilers/clang/references/clang-tidy.md"
+        },
+        {
+          "bytes": 3975,
+          "matchesPinnedUpstream": true,
+          "path": "/Users/kezileo/.codex/skills/clang/references/flags.md",
+          "relativePath": "references/flags.md",
+          "sha256": "f6e195f342e89e5df6c22ccd9eb82cb10d328cb3d8d93c21191fbfc411dcdc9c",
+          "upstreamUrl": "https://raw.githubusercontent.com/mohitmishra786/low-level-dev-skills/bdc58472fa9f309ed1b3f7d985a0d8e9bd8f4608/skills/compilers/clang/references/flags.md"
+        }
+      ],
+      "installationMethod": "installed skill-installer helper --method download; no git fallback",
+      "installedPath": "/Users/kezileo/.codex/skills/clang",
+      "license": {
+        "bytes": 1065,
+        "retainedPath": "docs/third_party/CPP_BUILD_SKILLS/clang-LICENSE.txt",
+        "sha256": "bff4c77f3ad34eeec1f1b00dc894d8f65ec529232cf1d9cec9f6429ba39069d7",
+        "spdx": "MIT",
+        "upstreamUrl": "https://raw.githubusercontent.com/mohitmishra786/low-level-dev-skills/bdc58472fa9f309ed1b3f7d985a0d8e9bd8f4608/LICENSE"
+      },
+      "repository": "mohitmishra786/low-level-dev-skills",
+      "reviewedResources": [
+        "SKILL.md",
+        "references/flags.md",
+        "references/clang-tidy.md"
+      ],
+      "revision": "bdc58472fa9f309ed1b3f7d985a0d8e9bd8f4608",
+      "sourceDirectory": "skills/compilers/clang"
+    }
+  ],
+  "verification": {
+    "allFilesMatchPinnedUpstream": true,
+    "applicationDependenciesChanged": false,
+    "bazelOrClangInvoked": false,
+    "configurationHashesUnchanged": true,
+    "hooksInstalled": false,
+    "installedFiles": 19,
+    "mcpConnectionsInstalled": false,
+    "newSkillDirectories": [
+      "bazel-evidence-engineering",
+      "clang"
+    ],
+    "pluginDirectoryNamesUnchanged": true,
+    "pluginsInstalled": false,
+    "runtimePackagesInstalled": false
+  },
+  "version": "cpp-build-skills-provenance-v1"
+}
