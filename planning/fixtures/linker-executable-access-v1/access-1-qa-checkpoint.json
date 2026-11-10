@@ -1,0 +1,83 @@
+{
+  "P2Complete": false,
+  "acceptancePublished": false,
+  "accessQueriesExecutedByReviewer": 0,
+  "bindings": [
+    {
+      "bytes": 2146,
+      "path": "docs/P2_CPP_EXECUTABLE_ACCESS_ACCESS1_QA_V1.md",
+      "sha256": "dbe3eff912e40d6bec1ea79ae153e9ced7c4e2e283ae399c455e6e1c48966229"
+    },
+    {
+      "bytes": 4172,
+      "path": "planning/fixtures/linker-executable-access-v1/access-1-result-lock.json",
+      "sha256": "213ff1594ae23f3ae6d5c328dd328ccbfd728aa52e60e1079dc01abfe4060d06"
+    },
+    {
+      "bytes": 8454,
+      "path": "build/linker-executable-access-v1/qa-results-access-1/audit_results.py",
+      "sha256": "a7611bd0894fd879379189a0e981dd1cae6927f924903d7c20664a7daef320a5"
+    },
+    {
+      "bytes": 2889,
+      "path": "build/linker-executable-access-v1/qa-results-access-1/data_guard.py",
+      "sha256": "09adf34e7ad135e1a9e0c5168b789f4c4a004d39aaff9ccdf8a2f6213ae51111"
+    },
+    {
+      "bytes": 6122,
+      "path": "build/linker-executable-access-v1/qa-results-access-1/final-binding-audit.json",
+      "sha256": "07e846bfb871a6b203443d65b5df315a386e181aa81b81e52d7081bacc2d3e2b"
+    },
+    {
+      "bytes": 5622,
+      "path": "build/linker-executable-access-v1/qa-results-access-1/positive-capture.raw.txt",
+      "sha256": "73369da40748b9f990dc0feb20805797c168e0253d32dd7323fc940caab1dfea"
+    },
+    {
+      "bytes": 7332,
+      "path": "build/linker-executable-access-v1/qa-results-access-1/raw-and-binding-audit.json",
+      "sha256": "b03f1bd7e7ad12bbab5ee12fa5b5361eb67db8c99ed23c564d2163c088db683e"
+    },
+    {
+      "bytes": 3648,
+      "path": "build/linker-executable-access-v1/qa-results-access-1/review.json",
+      "sha256": "d7409fc6658116e5ea5e9389cb968e8f735cee432ebf87be1a2849c782339112"
+    },
+    {
+      "bytes": 2575,
+      "path": "build/linker-executable-access-v1/qa-results-access-1/review.md",
+      "sha256": "250944679a0dfc6036467fd366a803ad18d99e8b15db4e09b61d937bf358ba67"
+    },
+    {
+      "bytes": 12059,
+      "path": "build/linker-executable-access-v1/qa-results-access-1/seal_results.py",
+      "sha256": "f95e668003c342aa23954b6307c6baa06cf1983fe758f152d510a0fe289f0f65"
+    },
+    {
+      "bytes": 6378,
+      "path": "build/linker-executable-access-v1/qa-results-access-1/snapshot.json",
+      "sha256": "3101c41f799cd3b0a79c43c5940970104df2e8c5216a2a5d535dd29142672a12"
+    }
+  ],
+  "cleanupConfirmed": true,
+  "diagnosticOutcome": "FAILED_INCONCLUSIVE",
+  "findings": [],
+  "grantConsumed": true,
+  "historicalBindingsVerified": 58,
+  "independentReviewSha256": "d7409fc6658116e5ea5e9389cb968e8f735cee432ebf87be1a2849c782339112",
+  "independentSnapshotSha256": "3101c41f799cd3b0a79c43c5940970104df2e8c5216a2a5d535dd29142672a12",
+  "inputsVerified": 245,
+  "inventoriesVerified": 6,
+  "nativeQueriesExecutedByReviewer": 0,
+  "originalCause": "UNPROVED",
+  "policyContrastEstablished": false,
+  "producerBindingsVerified": 17,
+  "producerLockSha256": "213ff1594ae23f3ae6d5c328dd328ccbfd728aa52e60e1079dc01abfe4060d06",
+  "readinessBindingsVerified": 28,
+  "retryOrResumeAuthorized": false,
+  "reviewDate": "2026-11-07",
+  "schema": 1,
+  "scope": "access-1-independent-results-integrity-only",
+  "semanticEnablement": false,
+  "verdict": "PASS"
+}
