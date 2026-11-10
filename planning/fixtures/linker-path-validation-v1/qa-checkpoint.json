@@ -1,0 +1,97 @@
+{
+  "P2Complete": false,
+  "all225InputsRehashed": false,
+  "bindings": [
+    {
+      "bytes": 2403,
+      "path": "planning/fixtures/linker-path-validation-v1/static-result-lock.json",
+      "sha256": "f6a675e99932afd872b06e2f3ff6620fe75400c50775488007bf80e6c2231801"
+    },
+    {
+      "bytes": 2571,
+      "path": "docs/P2_CPP_LINKER_PATH_VALIDATION_STATIC_QA_V1.md",
+      "sha256": "81cb849f9ed3ba24b93cb8faf332adebd5b25b6f7fd75f76358d4bb13f089e7e"
+    },
+    {
+      "bytes": 12884,
+      "path": "build/linker-path-validation-v1/qa-static-proposal-r1/audit-attempt-1.py",
+      "sha256": "eb59fc602268c4ab101168f0407a590869235c3fdbc636ffc76b6bafcbec3a96"
+    },
+    {
+      "bytes": 49695,
+      "path": "build/linker-path-validation-v1/qa-static-proposal-r1/audit-failure.json",
+      "sha256": "215e9d04146f257b29c30e0fb5b2295131214c7dd8c3df2cab7b99ed3f093eae"
+    },
+    {
+      "bytes": 92696,
+      "path": "build/linker-path-validation-v1/qa-static-proposal-r1/audit-result.json",
+      "sha256": "3c5ed8997d8f31daf3cb225c7bb775bc03770bfccc911bc550726a76cae1dbde"
+    },
+    {
+      "bytes": 12896,
+      "path": "build/linker-path-validation-v1/qa-static-proposal-r1/audit.py",
+      "sha256": "5c1c6928e224f031cef71c918ef0033b6112fa1fe38c40e852c823878d32f272"
+    },
+    {
+      "bytes": 5505,
+      "path": "build/linker-path-validation-v1/qa-static-proposal-r1/review.json",
+      "sha256": "d603f39a4a5fa345f17bc989bafe454a21e23dcbd6f098dea061a1d9ed0998e4"
+    },
+    {
+      "bytes": 4076,
+      "path": "build/linker-path-validation-v1/qa-static-proposal-r1/review.md",
+      "sha256": "5fee8fc973a2ff3f53ee0e701a18b4bcaf959f2be9ee7df6d803c9c3c1bd90f7"
+    },
+    {
+      "bytes": 12287,
+      "path": "build/linker-path-validation-v1/qa-static-proposal-r1/seal.py",
+      "sha256": "55606a2f6e6365faa8b8eddf411063f7334b3c6bb544bc9e12813d8772fa0982"
+    },
+    {
+      "bytes": 17378,
+      "path": "build/linker-path-validation-v1/qa-static-proposal-r1/snapshot.json",
+      "sha256": "31ad6b0a198c8cf45a679b3af6d58f3d1b721cc2bae020cac4e1b6e5e453c370"
+    }
+  ],
+  "branch": "dev",
+  "executableAccessQueriesExecuted": 0,
+  "findings": [],
+  "head": "2ead92a2e641adc4565d13074bfb105ad29039c7",
+  "hostTests": "NOT_RUN_BY_SCOPE",
+  "implementationApproved": false,
+  "linkerQualification": "BLOCKED",
+  "nativeExecutionApproved": false,
+  "nativeQueriesExecuted": 0,
+  "producerLockSha256": "f6a675e99932afd872b06e2f3ff6620fe75400c50775488007bf80e6c2231801",
+  "reviewDate": "2026-11-07",
+  "reviewerAgentId": "01a1adc4-dd97-7db3-b5ca-65160263a8b0",
+  "rootCause": "UNPROVED",
+  "schema": 1,
+  "scope": "independent static-evidence and proposal review only",
+  "semanticEnablement": false,
+  "sixTreeContentsRehashed": false,
+  "verdict": "PASS",
+  "verified": {
+    "attemptAbsent": true,
+    "historicalBindingEntries": 58,
+    "historicalLockEntryCounts": [
+      17,
+      9,
+      24,
+      8
+    ],
+    "historicalUniquePaths": 56,
+    "identicalCaseArgvAndEnvironment": true,
+    "initialProducerGuardFailurePreserved": true,
+    "originalFailedAttemptsPreserved": true,
+    "producerBindings": 8,
+    "proposedPayloadBytes": 53,
+    "proposedPayloadMode": "0555",
+    "readCapBytes": 1073741824,
+    "readScopeNarrowedNotCapRaised": true,
+    "realLinkerDeniedBothCases": true,
+    "selectedFrozenInputs": 46,
+    "singleLiteralExecRuleDifference": true,
+    "targetAbsent": true
+  }
+}
