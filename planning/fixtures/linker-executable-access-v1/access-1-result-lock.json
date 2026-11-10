@@ -1,0 +1,107 @@
+{
+  "P2Complete": false,
+  "acceptancePublished": false,
+  "bindings": [
+    {
+      "bytes": 4730,
+      "path": "docs/P2_CPP_EXECUTABLE_ACCESS_ACCESS1_RESULTS_V1.md",
+      "sha256": "23144bf751d38cf0a502976422f90533338430d48877bad62f1056ed9603fe72"
+    },
+    {
+      "bytes": 78588,
+      "path": "planning/fixtures/linker-executable-access-v1/execution-freeze-r1.json",
+      "sha256": "32182dffa560676d2dda8a52a4bbbed0983ab68f3ab99ebcf98fe9db0913a9fc"
+    },
+    {
+      "bytes": 5990,
+      "path": "planning/fixtures/linker-executable-access-v1/implementation-review-r1.json",
+      "sha256": "d2e2439d0f376f681f0023f9149adf0b0a097f4cc61ffe540a902ba90d3bcc2a"
+    },
+    {
+      "bytes": 6698,
+      "path": "planning/fixtures/linker-executable-access-v1/readiness-checkpoint.json",
+      "sha256": "48e1b4bb1fbd54847a2db11a9c26c183242ad62bc5f9f89b11e3716378a35e08"
+    },
+    {
+      "bytes": 252,
+      "path": "build/linker-executable-access-v1/preflight-access-1.json",
+      "sha256": "aa974b13c6a3b192ebb5d1c582e9ff11209d425d68722f787004fc9c5479eb93"
+    },
+    {
+      "bytes": 465,
+      "path": "build/linker-executable-access-v1/execution-authorization-access-1.json",
+      "sha256": "6e66f04fda53e731dfd868b28f59ecf1d2aeb2a20beeb613ce0939c675b36f7d"
+    },
+    {
+      "bytes": 1097,
+      "path": "build/linker-executable-access-v1/submitted-request-access-1.json",
+      "sha256": "cbdada4c8769daefd69308846140516f49f29066a218d06787b109d671f8df26"
+    },
+    {
+      "bytes": 1498,
+      "path": "build/linker-executable-access-v1/host-invocation-access-1.json",
+      "sha256": "7da2d43a6038cf69f60c4733efe0dc57a44c4903b62c197eacb18dd87702e0a5"
+    },
+    {
+      "bytes": 256,
+      "path": "build/linker-executable-access-v1/post-run-preservation-access-1.json",
+      "sha256": "82a6d91ebbe5b8bb0d2cfff5f9a6fc3d93be98a3ab5d17e3bc8b38734eb5509f"
+    },
+    {
+      "bytes": 1262,
+      "path": "build/linker-executable-access-v1/access-1-result-summary.json",
+      "sha256": "b0185ab14acfa0594393235ba8468fa9d2dd293afce1c9b3e933c299713f7bc5"
+    },
+    {
+      "bytes": 10178,
+      "path": "build/linker-executable-access-v1/native-attempts/access-1/command-trace.jsonl",
+      "sha256": "ac68995e130d349bbb1d04b5b0cea8cc6a1a7fd360a0babccc3a23f28a364008"
+    },
+    {
+      "bytes": 362,
+      "path": "build/linker-executable-access-v1/native-attempts/access-1/diagnostic-report.json",
+      "sha256": "efc2a4c8b7b23fa6589c60c0ad27bcac4c937d03977218dc3a1172e66ebefd97"
+    },
+    {
+      "bytes": 65,
+      "path": "build/linker-executable-access-v1/native-attempts/access-1/empty.cpp",
+      "sha256": "d116569c3e70b0fc339fd017e07a86b320a06f24930af943b665c15a2366995b"
+    },
+    {
+      "bytes": 1576,
+      "path": "build/linker-executable-access-v1/native-attempts/access-1/outcome.json",
+      "sha256": "87587aa4923aa4f82f66802b04c09614da495da123be0f9dc2ea65628d17d7d8"
+    },
+    {
+      "bytes": 163,
+      "path": "build/linker-executable-access-v1/native-attempts/access-1/owner-started.json",
+      "sha256": "82514d0938e47b4cf64a35776eb23a5cdb967023a7427377141abf0190641a2a"
+    },
+    {
+      "bytes": 64,
+      "path": "build/linker-executable-access-v1/native-attempts/access-1/worker.stderr.log",
+      "sha256": "eae28bedf4dcd8307b51ce40b6e03b0b20e3b8a931cac550d1ed3f49c732525c"
+    },
+    {
+      "bytes": 0,
+      "path": "build/linker-executable-access-v1/native-attempts/access-1/worker.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "branch": "dev",
+  "capturedNativeCommands": 1,
+  "cleanupConfirmed": true,
+  "clientDate": "2026-11-07",
+  "freezeSha256": "32182dffa560676d2dda8a52a4bbbed0983ab68f3ab99ebcf98fe9db0913a9fc",
+  "head": "2ead92a2e641adc4565d13074bfb105ad29039c7",
+  "independentReview": "PENDING_SEPARATE_RECORD",
+  "notRunCommands": [
+    "synthetic-exception-absent"
+  ],
+  "onceAuthorizedRunConsumed": true,
+  "producerStatus": "FAILED_INCONCLUSIVE_CLEANUP_CONFIRMED",
+  "realLinkerQualification": "BLOCKED",
+  "reviewSha256": "d2e2439d0f376f681f0023f9149adf0b0a097f4cc61ffe540a902ba90d3bcc2a",
+  "schema": 1,
+  "semanticEnablement": false
+}
