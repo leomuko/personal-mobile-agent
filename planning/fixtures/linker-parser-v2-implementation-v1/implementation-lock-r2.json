@@ -1,0 +1,184 @@
+{
+  "P2Complete": false,
+  "bindings": [
+    {
+      "bytes": 12050,
+      "mode": 420,
+      "path": "scripts/diagnostics/linker_parser_v2/parser.py",
+      "sha256": "dc86bf48b3def39bcec4340436554b15b4e31cf45a95b98ee5df05ced4e0b830"
+    },
+    {
+      "bytes": 2385,
+      "mode": 420,
+      "path": "scripts/tests/test_linker_policy_fifo.py",
+      "sha256": "88c5618e91f97f52bdae24ebab25bb01190603bd42ccea2fd2d85e49a4cdafe7"
+    },
+    {
+      "bytes": 39167,
+      "mode": 420,
+      "path": "scripts/tests/test_linker_parser_v2.py",
+      "sha256": "88b26af7f7bbe28f87a20f6afdb13e168fe5aded06b648051f0e18cc57554e9b"
+    },
+    {
+      "bytes": 8027,
+      "mode": 420,
+      "path": "scripts/tests/test_linker_parser_v2_integrity.py",
+      "sha256": "c388f1c5947275c4fc1787cf41a4475a5fe071a6922f9755ed37d2205a3a5743"
+    },
+    {
+      "bytes": 3692,
+      "mode": 420,
+      "path": "docs/P2_CPP_PARSER_V2_FIFO_FIX_RESULTS_R2.md",
+      "sha256": "28c98a3f9957663b1b17954ab1df70f4bfde30274191aa045ba229913cae839f"
+    },
+    {
+      "bytes": 7228,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-v2-implementation-v1/implementation-lock-r1.json",
+      "sha256": "5c74c8ac5f672ca237ee112c668001d9257b938c14d70029a5044f9ae2863b76"
+    },
+    {
+      "bytes": 6164,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-v2-implementation-v1/qa-checkpoint-r1.json",
+      "sha256": "0075dd07994535c18ee20726ff6d2b9088ce2ad278578cca0e40b84f168aa09b"
+    },
+    {
+      "bytes": 1626,
+      "mode": 420,
+      "path": "build/linker-parser-v2/source-snapshot-r1.json",
+      "sha256": "38c54f5a3067bf1bae7e00d5dc52811df676747fc6bac9cf8b89a3be4ba12516"
+    },
+    {
+      "bytes": 12034,
+      "mode": 420,
+      "path": "build/linker-parser-v2/source-snapshot-r1/scripts/diagnostics/linker_parser_v2/parser.py",
+      "sha256": "993f352b58c3a3fb62fafa5bb7fd78d8b8c8a2c66989e5a99605ad6c85f282e3"
+    },
+    {
+      "bytes": 2940,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-review-2026-11-10-1/review.md",
+      "sha256": "b381ac021d7653e50672a0b645d9c1af2d6a0205a91701a79f374a187b4c118c"
+    },
+    {
+      "bytes": 1185,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-review-2026-11-10-1/fifo-policy-repro.json",
+      "sha256": "6378f408769b8295430ebc08534bb0a1888044110638e61d7560459e13bc64ad"
+    },
+    {
+      "bytes": 3580,
+      "mode": 420,
+      "path": "build/linker-parser-v2/run-focused.py",
+      "sha256": "7a58ea65379849753f61f3bd6ef5546beda44b38d9b6a29558a5ecef3f3d4d75"
+    },
+    {
+      "bytes": 4081,
+      "mode": 420,
+      "path": "build/linker-parser-v2/fifoR2-result.json",
+      "sha256": "87deb314bc023e1ac2b035bf6c3cca8e49a0f5af3234bff2294637196c720a61"
+    },
+    {
+      "bytes": 580127,
+      "mode": 420,
+      "path": "build/linker-parser-v2/fifoR2-cases.json",
+      "sha256": "cef30ce70a1f9ff3a4a31528796dfb5034e770dc13c7d94bcb244e4516ccfca3"
+    },
+    {
+      "bytes": 725,
+      "mode": 420,
+      "path": "scripts/host-python-test-suite.py",
+      "sha256": "568522144860b5356f20ab3c0756c088ca0af5c9251abca48628c0dd6f885423"
+    },
+    {
+      "bytes": 1176,
+      "mode": 420,
+      "path": "build/linker-parser-v2/fifo-fix-r2/before-fix.json",
+      "sha256": "be9e436140ca654b13c2e1be25c5d0223f0633946160add6f8301619da94a570"
+    },
+    {
+      "bytes": 63286,
+      "mode": 420,
+      "path": "build/linker-parser-v2/fifo-fix-r2/canonical-host.log",
+      "sha256": "cc826bbec503f9d9cc41e0a9f2d354f4d949a6b8a817baf9b8fa724e09fbaca2"
+    },
+    {
+      "bytes": 6456,
+      "mode": 420,
+      "path": "build/linker-parser-v2/fifo-fix-r2/focused.log",
+      "sha256": "e0c9f1f315fe7f4a86c9a69471bdfa797740ca30b2ccb202479736a17ddedf4c"
+    },
+    {
+      "bytes": 213,
+      "mode": 420,
+      "path": "build/linker-parser-v2/fifo-fix-r2/green-fifo.log",
+      "sha256": "223277e259953a9e784b440774878f9e88fcab6417b5da2093fe35be0069dca4"
+    },
+    {
+      "bytes": 3968,
+      "mode": 420,
+      "path": "build/linker-parser-v2/fifo-fix-r2/preservation.json",
+      "sha256": "7de3b8415829daf11b8345621b72a81770aefc4163e91fd17b7c0ddcf82582d5"
+    },
+    {
+      "bytes": 3482,
+      "mode": 420,
+      "path": "build/linker-parser-v2/fifo-fix-r2/preservation.log",
+      "sha256": "219ad1d3f339e16333f683f154f26f34affdc9412f5e885a7e16a295c4d8225a"
+    },
+    {
+      "bytes": 2228,
+      "mode": 420,
+      "path": "build/linker-parser-v2/fifo-fix-r2/red-fifo.log",
+      "sha256": "d5282f7aeb0755cc3ab30f9f223f6a5fb057e4721cb30e8041e202c1fb65243e"
+    },
+    {
+      "bytes": 4216,
+      "mode": 420,
+      "path": "build/linker-parser-v2/fifo-fix-r2/verify-preservation.py",
+      "sha256": "17f5a91e5aad92b81a10c82a815cabe16fe17d2ee23d80b5c532ca2b5a02c550"
+    },
+    {
+      "bytes": 12050,
+      "mode": 420,
+      "path": "build/linker-parser-v2/fifo-fix-r2/source-snapshot/scripts/diagnostics/linker_parser_v2/parser.py",
+      "sha256": "dc86bf48b3def39bcec4340436554b15b4e31cf45a95b98ee5df05ced4e0b830"
+    },
+    {
+      "bytes": 2385,
+      "mode": 420,
+      "path": "build/linker-parser-v2/fifo-fix-r2/source-snapshot/scripts/tests/test_linker_policy_fifo.py",
+      "sha256": "88c5618e91f97f52bdae24ebab25bb01190603bd42ccea2fd2d85e49a4cdafe7"
+    }
+  ],
+  "branch": "dev",
+  "canonicalHostMethodsPassed": 541,
+  "currentR1SourceAdmissionPassed": false,
+  "date": "2026-11-10",
+  "explicitFocusedAssertions": 1837,
+  "fifoChildDeadlineSeconds": 2,
+  "fifoCleanupWaitSeconds": 2,
+  "fifoRegressionIsSeparateFromFocusedLedger": true,
+  "focusedMethodsPassed": 38,
+  "greenFifoExit": 0,
+  "head": "2ead92a2e641adc4565d13074bfb105ad29039c7",
+  "historicalAccess1Status": "FAILED_INCONCLUSIVE_UNCHANGED",
+  "historicalCase2Status": "NOT_RUN_UNCHANGED",
+  "independentReview": "PENDING_SEPARATE_RECORD",
+  "individualMutationActions": 1054,
+  "nativeBridgeIntegrated": false,
+  "nativeExecutionAuthorized": false,
+  "nativeToolchainQueriesExecuted": 0,
+  "oldR1VerifiedOnlyViaExplicitParserArchive": true,
+  "parentImplementationLockSha256": "5c74c8ac5f672ca237ee112c668001d9257b938c14d70029a5044f9ae2863b76",
+  "parserDelta": "O_NONBLOCK added; all other parser bytes unchanged",
+  "permissionChanges": false,
+  "producerStatus": "PASS",
+  "redFifoExit": 1,
+  "reviewedFamilies": 32,
+  "schema": 1,
+  "scope": "offline-policy-fifo-rejection-only-no-native-bridge",
+  "semanticEnablement": false,
+  "skips": 0
+}
