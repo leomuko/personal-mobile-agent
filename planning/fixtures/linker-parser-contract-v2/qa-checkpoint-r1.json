@@ -1,0 +1,83 @@
+{
+  "P2Complete": false,
+  "access1Status": "FAILED_INCONCLUSIVE_UNCHANGED",
+  "accessCalls": 0,
+  "bindings": [
+    {
+      "bytes": 2960,
+      "path": "docs/P2_CPP_PARSER_CONTRACT_V2_REVIEWED_HANDOFF.md",
+      "sha256": "37c375ebd0e3b5ad9477941fe1c5fe3c882677b5cd6ec922f7d61bafe2230114"
+    },
+    {
+      "bytes": 7450,
+      "path": "planning/fixtures/linker-parser-contract-v2/proposal-lock-r1.json",
+      "sha256": "2e22395071ab2574325b74b2f286cd59974c28ee3467681420ec3fc3e56a540f"
+    },
+    {
+      "bytes": 408,
+      "path": "build/linker-parser-contract-v2/primary-review-interruption.json",
+      "sha256": "914bd668f9afdd305b44408f11d3e279be64abd24a545849b8ccfdead3d980a6"
+    },
+    {
+      "bytes": 59754,
+      "path": "build/linker-parser-contract-v2/qa-proposal-r1/audit-result.json",
+      "sha256": "46bf919c2eab2df7fdc7e10dc3f07b3fd16b327b03fbd1b7237f4de0d9424cb5"
+    },
+    {
+      "bytes": 10953,
+      "path": "build/linker-parser-contract-v2/qa-proposal-r1/audit_proposal.py",
+      "sha256": "248d6c02469fb4aa84f9b4b3d1d4cbaeb84d6f093181c7ef0f88c170c3701b8a"
+    },
+    {
+      "bytes": 2889,
+      "path": "build/linker-parser-contract-v2/qa-proposal-r1/data_guard.py",
+      "sha256": "09adf34e7ad135e1a9e0c5168b789f4c4a004d39aaff9ccdf8a2f6213ae51111"
+    },
+    {
+      "bytes": 2553,
+      "path": "build/linker-parser-contract-v2/qa-proposal-r1/preliminary-inspection.json",
+      "sha256": "11a20fda1c7824bddb37b7578288640237d0616229798026fea7a5a9899e1ed9"
+    },
+    {
+      "bytes": 3225,
+      "path": "build/linker-parser-contract-v2/qa-proposal-r2-independent/review.json",
+      "sha256": "f9c25bf0a53c08af4659d0363066279df3ba1e6e8e46348f11ea8244fbb071de"
+    },
+    {
+      "bytes": 2932,
+      "path": "build/linker-parser-contract-v2/qa-proposal-r2-independent/review.md",
+      "sha256": "a8bd611c610aa76acab6cac04e58e0b0ec3bdaa32f89503320b62232eadc8df7"
+    },
+    {
+      "bytes": 20170,
+      "path": "build/linker-parser-contract-v2/qa-proposal-r2-independent/snapshot.json",
+      "sha256": "a2696cd673d2c37f87c884df35feeb182ec034f7fcaa000ad37ec1f090abdf47"
+    },
+    {
+      "bytes": 2634,
+      "path": "build/linker-parser-contract-v2/qa-proposal-r2-independent/verification-receipt.json",
+      "sha256": "d146815b0bd43675c05124833f7a5728e4284c558a1206999c3b8c9d58c0b875"
+    }
+  ],
+  "finalReviewSha256": "f9c25bf0a53c08af4659d0363066279df3ba1e6e8e46348f11ea8244fbb071de",
+  "finalSnapshotSha256": "a2696cd673d2c37f87c884df35feeb182ec034f7fcaa000ad37ec1f090abdf47",
+  "findings": [],
+  "grantConsumed": true,
+  "hostSuiteRun": false,
+  "implementationAuthorized": false,
+  "independentFinalReviewer": "01a1b63a-5ec5-73c1-af98-e2d13cf68664",
+  "mutationTestsRun": false,
+  "nativeCalls": 0,
+  "nativeExecutionAuthorized": false,
+  "primaryReviewStatus": "DATA_AUDIT_PASS_FINAL_VERDICT_BLOCKED_BY_USAGE_LIMIT",
+  "proposalBindingsVerified": 30,
+  "proposalLockSha256": "2e22395071ab2574325b74b2f286cd59974c28ee3467681420ec3fc3e56a540f",
+  "proposedParserImplemented": false,
+  "proposedParserReplayPerformed": false,
+  "regressionFamiliesPlannedNotRun": 32,
+  "reviewDate": "2026-11-07",
+  "schema": 1,
+  "scope": "independently-reviewed-parser-contract-proposal-only",
+  "semanticEnablement": false,
+  "verdict": "PASS"
+}
