@@ -1,0 +1,117 @@
+{
+  "codegenCompatibilityClaimed": false,
+  "completeSdkSourceQualified": false,
+  "localReferences": [
+    {
+      "entries": [
+        "ffp_contract",
+        "mframe_pointer_EQ",
+        "funwind_tables_EQ",
+        "target_sdk_version_EQ",
+        "target_linker_version",
+        "debugger_tuning_EQ",
+        "enable_tlsdesc"
+      ],
+      "file": {
+        "bytes": 581114,
+        "path": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/llvm-raw/clang/include/clang/Options/Options.td",
+        "sha256": "5582ec6e0e1cf7a1fef8cb885e83a75c34c5a8174bd7c1b0b3faf1c02da0525e"
+      },
+      "id": "local-options"
+    },
+    {
+      "entries": [
+        "FEAT_FlagM2",
+        "FEAT_DPB",
+        "FEAT_FCMA",
+        "FEAT_FlagM",
+        "FEAT_JSCVT",
+        "FEAT_SB",
+        "FEAT_CSV2_2"
+      ],
+      "file": {
+        "bytes": 54763,
+        "path": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/llvm-raw/llvm/lib/Target/AArch64/AArch64Features.td",
+        "sha256": "76e8063d5c0474dc49834deed90a6bf6f9b415e71f1538a9540ce7e52d265a8f"
+      },
+      "id": "local-aarch64"
+    }
+  ],
+  "nativeCalls": 0,
+  "pinnedAppleIdentitySource": "unchanged execution-freeze-r1.json input row for clang; full binary not freshly rehashed in this preparation",
+  "publicReferences": [
+    {
+      "id": "clang-commandline",
+      "status": "read through web, current unpinned documentation; explanatory only",
+      "url": "https://clang.llvm.org/docs/ClangCommandLineReference.html"
+    },
+    {
+      "id": "clang-diagnostics",
+      "status": "read through web, current unpinned documentation; explanatory only",
+      "url": "https://clang.llvm.org/docs/DiagnosticsReference.html"
+    },
+    {
+      "id": "clang-manual",
+      "status": "read through web; specific warning severity explanation only",
+      "url": "https://clang.llvm.org/docs/UsersManual.html"
+    }
+  ],
+  "researchProvenance": {
+    "agentId": "01a1b21e-1bc0-7de2-b457-35e813d3a4f4",
+    "appleBinarySourceMatchEstablished": false,
+    "role": "primary-source research sidecar, not QA or approval",
+    "sdkCommitWebRetrievalFailed": true
+  },
+  "retainedSdkSource": {
+    "caveat": "Hashed retained files + repository declaration only; no full-tree or verbatim-upstream/patch-completeness qualification, not Apple source match",
+    "declaration": {
+      "bytes": 1911,
+      "path": "build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/third_party/xla/third_party/llvm/workspace.bzl",
+      "sha256": "6cc647edf86d3e6c0b172dba65d386a2b1f2625d5a009ea9f994c08cae77287a"
+    },
+    "declaredArchiveSha256": "c47662ae375e9523870b87006f27c7f35f686f1489c0cbdf571a583a66c973c9",
+    "declaredPatchCount": 6,
+    "declaredRevision": "ab547095ead5464dc024d66264d9b8a987f429f3"
+  },
+  "schema": 1,
+  "scope": "explanatory references, not Apple-binary equivalence",
+  "supplementalPrimaryResearch": [
+    {
+      "id": "apple-ld64-options",
+      "release": "ld64-957.1",
+      "revision": "f60a74eaa2c99585de1dc0f2820e7a9f8aaf522c",
+      "sections": {
+        "F": "L4239-L4252",
+        "O0": "L4123-L4143",
+        "mllvm": "L3589-L3593"
+      },
+      "sourceMatchToSelectedLinker": false,
+      "url": "https://github.com/apple-oss-distributions/ld64/blob/f60a74eaa2c99585de1dc0f2820e7a9f8aaf522c/src/ld/Options.cpp"
+    },
+    {
+      "explanation": "Named boolean allows machine outlining of linkonceodr functions; pass activation/execution not established",
+      "id": "upstream-machine-outliner",
+      "url": "https://github.com/llvm/llvm-project/blob/3623fe661ae35c6c80ac221f14d85be76aa870f1/llvm/lib/CodeGen/MachineOutliner.cpp#L107-L116"
+    },
+    {
+      "explanation": "Explanatory emission path for the linker outliner pair, not Apple source equivalence",
+      "id": "upstream-darwin-emission",
+      "url": "https://github.com/llvm/llvm-project/blob/3623fe661ae35c6c80ac221f14d85be76aa870f1/clang/lib/Driver/ToolChains/Darwin.cpp#L555-L576"
+    },
+    {
+      "explanation": "Wno-error is severity control, not Wno diagnostic disabling",
+      "id": "upstream-warning-severity",
+      "url": "https://github.com/llvm/llvm-project/blob/3623fe661ae35c6c80ac221f14d85be76aa870f1/clang/docs/UsersManual.rst#L95-L111"
+    }
+  ],
+  "unverified": [
+    "Apple vendor selector implementation/effects",
+    "full source correspondence to clang-2100.1.1.101",
+    "effective rendered include-search priority",
+    "generated C++/ABI/runtime behavior",
+    "native negative-case rendering",
+    "linker option execution effects",
+    "six exact clang-vendor-feature selectors lack verified public Apple definitions in this investigation",
+    "mdarwin-stkchk-strong-link and fno-odr-hash-protocols precise Apple implementations"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "noHistoricalOutputChanged": true,
+  "observedPositive": {
+    "bytes": 5622,
+    "quality": "actual recorded positive-case raw exit0, frozen v1 parser REJECTED; not a new collection",
+    "rawSha256": "73369da40748b9f990dc0feb20805797c168e0253d32dd7323fc940caab1dfea",
+    "source": {
+      "bytes": 10178,
+      "path": "build/linker-executable-access-v1/native-attempts/access-1/command-trace.jsonl",
+      "sha256": "ac68995e130d349bbb1d04b5b0cea8cc6a1a7fd360a0babccc3a23f28a364008"
+    }
+  },
+  "schema": 1,
+  "syntheticNegative": {
+    "bytes": 5683,
+    "isSynthetic": true,
+    "nativeEvidence": false,
+    "proves": "test witness only; does not predict native negative output",
+    "sha256": "64a6f4a6f4b35263332c6a44c01b7c51387c071725d648e5400197f6a3e33f88",
+    "transformations": [
+      "copy four header lines",
+      "insert exact counterfactual invalid-linker diagnostic",
+      "copy frontend job line",
+      "set only linker supplier token to bare ld; serialize synthetic linker words"
+    ]
+  }
+}

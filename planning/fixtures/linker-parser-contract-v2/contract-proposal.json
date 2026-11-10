@@ -1,0 +1,2414 @@
+{
+  "P2Complete": false,
+  "executionControlsUnchanged": {
+    "analysisFloorBytes": 19327352832,
+    "cleanupSeconds": 15,
+    "commandOutputBytes": 262144,
+    "manifestBytes": 33554432,
+    "maximumInputBindings": 256,
+    "outerLogBytes": 524288,
+    "querySeconds": 30,
+    "seconds": 300,
+    "smallAdmissionBytes": 1073741824,
+    "sourceFreezeSha256": "32182dffa560676d2dda8a52a4bbbed0983ab68f3ab99ebcf98fe9db0913a9fc",
+    "traceBytes": 2097152,
+    "workerRssBytes": 536870912
+  },
+  "frontend": {
+    "orderedUnits": [
+      {
+        "exactTokens": [
+          {
+            "literal": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
+          }
+        ],
+        "form": "supplier",
+        "id": "cc1-000",
+        "key": "supplier",
+        "observedTokens": [
+          "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 0
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-cc1"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-001",
+        "key": "-cc1",
+        "observedTokens": [
+          "-cc1"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 1
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-triple"
+          },
+          {
+            "literal": "arm64-apple-macosx26.5.0"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-002",
+        "key": "-triple",
+        "observedTokens": [
+          "-triple",
+          "arm64-apple-macosx26.5.0"
+        ],
+        "observedValue": "arm64-apple-macosx26.5.0",
+        "tokenCount": 2,
+        "tokenStart": 2
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-O0"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-004",
+        "key": "-O0",
+        "observedTokens": [
+          "-O0"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 4
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-Wundef-prefix=TARGET_OS_"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-005",
+        "key": "-Wundef-prefix",
+        "observedTokens": [
+          "-Wundef-prefix=TARGET_OS_"
+        ],
+        "observedValue": "TARGET_OS_",
+        "tokenCount": 1,
+        "tokenStart": 5
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-Wdeprecated-objc-isa-usage"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-006",
+        "key": "-Wdeprecated-objc-isa-usage",
+        "observedTokens": [
+          "-Wdeprecated-objc-isa-usage"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 6
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-Werror=deprecated-objc-isa-usage"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-007",
+        "key": "-Werror",
+        "observedTokens": [
+          "-Werror=deprecated-objc-isa-usage"
+        ],
+        "observedValue": "deprecated-objc-isa-usage",
+        "tokenCount": 1,
+        "tokenStart": 7
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-Werror=implicit-function-declaration"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-008",
+        "key": "-Werror",
+        "observedTokens": [
+          "-Werror=implicit-function-declaration"
+        ],
+        "observedValue": "implicit-function-declaration",
+        "tokenCount": 1,
+        "tokenStart": 8
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-emit-obj"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-009",
+        "key": "-emit-obj",
+        "observedTokens": [
+          "-emit-obj"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 9
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-dumpdir"
+          },
+          {
+            "slot": "OUTPUT",
+            "suffix": "-"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-010",
+        "key": "-dumpdir",
+        "observedTokens": [
+          "-dumpdir",
+          "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1/control-ordinary-c++20.not-created-"
+        ],
+        "observedValue": "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1/control-ordinary-c++20.not-created-",
+        "tokenCount": 2,
+        "tokenStart": 10
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-disable-free"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-012",
+        "key": "-disable-free",
+        "observedTokens": [
+          "-disable-free"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 12
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-clear-ast-before-backend"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-013",
+        "key": "-clear-ast-before-backend",
+        "observedTokens": [
+          "-clear-ast-before-backend"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 13
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-disable-llvm-verifier"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-014",
+        "key": "-disable-llvm-verifier",
+        "observedTokens": [
+          "-disable-llvm-verifier"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 14
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-discard-value-names"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-015",
+        "key": "-discard-value-names",
+        "observedTokens": [
+          "-discard-value-names"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 15
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-main-file-name"
+          },
+          {
+            "literal": "empty.cpp"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-016",
+        "key": "-main-file-name",
+        "observedTokens": [
+          "-main-file-name",
+          "empty.cpp"
+        ],
+        "observedValue": "empty.cpp",
+        "tokenCount": 2,
+        "tokenStart": 16
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-mrelocation-model"
+          },
+          {
+            "literal": "pic"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-018",
+        "key": "-mrelocation-model",
+        "observedTokens": [
+          "-mrelocation-model",
+          "pic"
+        ],
+        "observedValue": "pic",
+        "tokenCount": 2,
+        "tokenStart": 18
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-pic-level"
+          },
+          {
+            "literal": "2"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-020",
+        "key": "-pic-level",
+        "observedTokens": [
+          "-pic-level",
+          "2"
+        ],
+        "observedValue": "2",
+        "tokenCount": 2,
+        "tokenStart": 20
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-mframe-pointer=non-leaf"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-022",
+        "key": "-mframe-pointer",
+        "observedTokens": [
+          "-mframe-pointer=non-leaf"
+        ],
+        "observedValue": "non-leaf",
+        "tokenCount": 1,
+        "tokenStart": 22
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fno-strict-return"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-023",
+        "key": "-fno-strict-return",
+        "observedTokens": [
+          "-fno-strict-return"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 23
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-ffp-contract=on"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-024",
+        "key": "-ffp-contract",
+        "observedTokens": [
+          "-ffp-contract=on"
+        ],
+        "observedValue": "on",
+        "tokenCount": 1,
+        "tokenStart": 24
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fno-rounding-math"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-025",
+        "key": "-fno-rounding-math",
+        "observedTokens": [
+          "-fno-rounding-math"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 25
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-funwind-tables=1"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-026",
+        "key": "-funwind-tables",
+        "observedTokens": [
+          "-funwind-tables=1"
+        ],
+        "observedValue": "1",
+        "tokenCount": 1,
+        "tokenStart": 26
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fobjc-msgsend-selector-stubs"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-027",
+        "key": "-fobjc-msgsend-selector-stubs",
+        "observedTokens": [
+          "-fobjc-msgsend-selector-stubs"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 27
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fno-sized-deallocation"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-028",
+        "key": "-fno-sized-deallocation",
+        "observedTokens": [
+          "-fno-sized-deallocation"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 28
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-sdk-version=26.5"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-029",
+        "key": "-target-sdk-version",
+        "observedTokens": [
+          "-target-sdk-version=26.5"
+        ],
+        "observedValue": "26.5",
+        "tokenCount": 1,
+        "tokenStart": 29
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fvisibility-inlines-hidden-static-local-var"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-030",
+        "key": "-fvisibility-inlines-hidden-static-local-var",
+        "observedTokens": [
+          "-fvisibility-inlines-hidden-static-local-var"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 30
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fno-modulemap-allow-subdirectory-search"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-031",
+        "key": "-fno-modulemap-allow-subdirectory-search",
+        "observedTokens": [
+          "-fno-modulemap-allow-subdirectory-search"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 31
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fdefine-target-os-macros"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-032",
+        "key": "-fdefine-target-os-macros",
+        "observedTokens": [
+          "-fdefine-target-os-macros"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 32
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fno-assume-unique-vtables"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-033",
+        "key": "-fno-assume-unique-vtables",
+        "observedTokens": [
+          "-fno-assume-unique-vtables"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 33
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fno-modulemap-allow-subdirectory-search"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-034",
+        "key": "-fno-modulemap-allow-subdirectory-search",
+        "observedTokens": [
+          "-fno-modulemap-allow-subdirectory-search"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 34
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-enable-tlsdesc"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-035",
+        "key": "-enable-tlsdesc",
+        "observedTokens": [
+          "-enable-tlsdesc"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 35
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-cpu"
+          },
+          {
+            "literal": "apple-m1"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-036",
+        "key": "-target-cpu",
+        "observedTokens": [
+          "-target-cpu",
+          "apple-m1"
+        ],
+        "observedValue": "apple-m1",
+        "tokenCount": 2,
+        "tokenStart": 36
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+v8.5a"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-038",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+v8.5a"
+        ],
+        "observedValue": "+v8.5a",
+        "tokenCount": 2,
+        "tokenStart": 38
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+aes"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-040",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+aes"
+        ],
+        "observedValue": "+aes",
+        "tokenCount": 2,
+        "tokenStart": 40
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+altnzcv"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-042",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+altnzcv"
+        ],
+        "observedValue": "+altnzcv",
+        "tokenCount": 2,
+        "tokenStart": 42
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+ccdp"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-044",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+ccdp"
+        ],
+        "observedValue": "+ccdp",
+        "tokenCount": 2,
+        "tokenStart": 44
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+ccpp"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-046",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+ccpp"
+        ],
+        "observedValue": "+ccpp",
+        "tokenCount": 2,
+        "tokenStart": 46
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+complxnum"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-048",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+complxnum"
+        ],
+        "observedValue": "+complxnum",
+        "tokenCount": 2,
+        "tokenStart": 48
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+crc"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-050",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+crc"
+        ],
+        "observedValue": "+crc",
+        "tokenCount": 2,
+        "tokenStart": 50
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+dotprod"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-052",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+dotprod"
+        ],
+        "observedValue": "+dotprod",
+        "tokenCount": 2,
+        "tokenStart": 52
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+flagm"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-054",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+flagm"
+        ],
+        "observedValue": "+flagm",
+        "tokenCount": 2,
+        "tokenStart": 54
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+fp-armv8"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-056",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+fp-armv8"
+        ],
+        "observedValue": "+fp-armv8",
+        "tokenCount": 2,
+        "tokenStart": 56
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+fp16fml"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-058",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+fp16fml"
+        ],
+        "observedValue": "+fp16fml",
+        "tokenCount": 2,
+        "tokenStart": 58
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+fptoint"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-060",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+fptoint"
+        ],
+        "observedValue": "+fptoint",
+        "tokenCount": 2,
+        "tokenStart": 60
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+fullfp16"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-062",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+fullfp16"
+        ],
+        "observedValue": "+fullfp16",
+        "tokenCount": 2,
+        "tokenStart": 62
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+jsconv"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-064",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+jsconv"
+        ],
+        "observedValue": "+jsconv",
+        "tokenCount": 2,
+        "tokenStart": 64
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+lse"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-066",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+lse"
+        ],
+        "observedValue": "+lse",
+        "tokenCount": 2,
+        "tokenStart": 66
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+neon"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-068",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+neon"
+        ],
+        "observedValue": "+neon",
+        "tokenCount": 2,
+        "tokenStart": 68
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+pauth"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-070",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+pauth"
+        ],
+        "observedValue": "+pauth",
+        "tokenCount": 2,
+        "tokenStart": 70
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+perfmon"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-072",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+perfmon"
+        ],
+        "observedValue": "+perfmon",
+        "tokenCount": 2,
+        "tokenStart": 72
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+predres"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-074",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+predres"
+        ],
+        "observedValue": "+predres",
+        "tokenCount": 2,
+        "tokenStart": 74
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+ras"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-076",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+ras"
+        ],
+        "observedValue": "+ras",
+        "tokenCount": 2,
+        "tokenStart": 76
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+rcpc"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-078",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+rcpc"
+        ],
+        "observedValue": "+rcpc",
+        "tokenCount": 2,
+        "tokenStart": 78
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+rdm"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-080",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+rdm"
+        ],
+        "observedValue": "+rdm",
+        "tokenCount": 2,
+        "tokenStart": 80
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+sb"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-082",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+sb"
+        ],
+        "observedValue": "+sb",
+        "tokenCount": 2,
+        "tokenStart": 82
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+sha2"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-084",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+sha2"
+        ],
+        "observedValue": "+sha2",
+        "tokenCount": 2,
+        "tokenStart": 84
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+sha3"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-086",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+sha3"
+        ],
+        "observedValue": "+sha3",
+        "tokenCount": 2,
+        "tokenStart": 86
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+specrestrict"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-088",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+specrestrict"
+        ],
+        "observedValue": "+specrestrict",
+        "tokenCount": 2,
+        "tokenStart": 88
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-feature"
+          },
+          {
+            "literal": "+ssbs"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-090",
+        "key": "-target-feature",
+        "observedTokens": [
+          "-target-feature",
+          "+ssbs"
+        ],
+        "observedValue": "+ssbs",
+        "tokenCount": 2,
+        "tokenStart": 90
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-abi"
+          },
+          {
+            "literal": "darwinpcs"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-092",
+        "key": "-target-abi",
+        "observedTokens": [
+          "-target-abi",
+          "darwinpcs"
+        ],
+        "observedValue": "darwinpcs",
+        "tokenCount": 2,
+        "tokenStart": 92
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-debugger-tuning=lldb"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-094",
+        "key": "-debugger-tuning",
+        "observedTokens": [
+          "-debugger-tuning=lldb"
+        ],
+        "observedValue": "lldb",
+        "tokenCount": 1,
+        "tokenStart": 94
+      },
+      {
+        "exactTokens": [
+          {
+            "prefix": "-fdebug-compilation-dir=",
+            "slot": "ATTEMPT"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-095",
+        "key": "-fdebug-compilation-dir",
+        "observedTokens": [
+          "-fdebug-compilation-dir=/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1"
+        ],
+        "observedValue": "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1",
+        "tokenCount": 1,
+        "tokenStart": 95
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-target-linker-version"
+          },
+          {
+            "literal": "1267"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-096",
+        "key": "-target-linker-version",
+        "observedTokens": [
+          "-target-linker-version",
+          "1267"
+        ],
+        "observedValue": "1267",
+        "tokenCount": 2,
+        "tokenStart": 96
+      },
+      {
+        "exactTokens": [
+          {
+            "prefix": "-fcoverage-compilation-dir=",
+            "slot": "ATTEMPT"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-098",
+        "key": "-fcoverage-compilation-dir",
+        "observedTokens": [
+          "-fcoverage-compilation-dir=/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1"
+        ],
+        "observedValue": "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1",
+        "tokenCount": 1,
+        "tokenStart": 98
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-nostdsysteminc"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-099",
+        "key": "-nostdsysteminc",
+        "observedTokens": [
+          "-nostdsysteminc"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 99
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-nobuiltininc"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-100",
+        "key": "-nobuiltininc",
+        "observedTokens": [
+          "-nobuiltininc"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 100
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-resource-dir"
+          },
+          {
+            "literal": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-101",
+        "key": "-resource-dir",
+        "observedTokens": [
+          "-resource-dir",
+          "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21"
+        ],
+        "observedValue": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+        "tokenCount": 2,
+        "tokenStart": 101
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-isysroot"
+          },
+          {
+            "literal": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-103",
+        "key": "-isysroot",
+        "observedTokens": [
+          "-isysroot",
+          "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+        ],
+        "observedValue": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "tokenCount": 2,
+        "tokenStart": 103
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-isystem"
+          },
+          {
+            "literal": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-105",
+        "key": "-isystem",
+        "observedTokens": [
+          "-isystem",
+          "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        ],
+        "observedValue": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+        "tokenCount": 2,
+        "tokenStart": 105
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-isystem"
+          },
+          {
+            "literal": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-107",
+        "key": "-isystem",
+        "observedTokens": [
+          "-isystem",
+          "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        ],
+        "observedValue": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+        "tokenCount": 2,
+        "tokenStart": 107
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-isystem"
+          },
+          {
+            "literal": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-109",
+        "key": "-isystem",
+        "observedTokens": [
+          "-isystem",
+          "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        ],
+        "observedValue": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+        "tokenCount": 2,
+        "tokenStart": 109
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-iframework"
+          },
+          {
+            "literal": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-111",
+        "key": "-iframework",
+        "observedTokens": [
+          "-iframework",
+          "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        ],
+        "observedValue": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "tokenCount": 2,
+        "tokenStart": 111
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-I"
+          },
+          {
+            "literal": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-113",
+        "key": "-I",
+        "observedTokens": [
+          "-I",
+          "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include"
+        ],
+        "observedValue": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include",
+        "tokenCount": 2,
+        "tokenStart": 113
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-I"
+          },
+          {
+            "literal": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-115",
+        "key": "-I",
+        "observedTokens": [
+          "-I",
+          "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        ],
+        "observedValue": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include",
+        "tokenCount": 2,
+        "tokenStart": 115
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-I"
+          },
+          {
+            "literal": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-117",
+        "key": "-I",
+        "observedTokens": [
+          "-I",
+          "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        ],
+        "observedValue": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate",
+        "tokenCount": 2,
+        "tokenStart": 117
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-stdlib=libc++"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-119",
+        "key": "-stdlib",
+        "observedTokens": [
+          "-stdlib=libc++"
+        ],
+        "observedValue": "libc++",
+        "tokenCount": 1,
+        "tokenStart": 119
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-Wno-elaborated-enum-base"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-120",
+        "key": "-Wno-elaborated-enum-base",
+        "observedTokens": [
+          "-Wno-elaborated-enum-base"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 120
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-pedantic-errors"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-121",
+        "key": "-pedantic-errors",
+        "observedTokens": [
+          "-pedantic-errors"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 121
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-std=c++20"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-122",
+        "key": "-std",
+        "observedTokens": [
+          "-std=c++20"
+        ],
+        "observedValue": "c++20",
+        "tokenCount": 1,
+        "tokenStart": 122
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fdeprecated-macro"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-123",
+        "key": "-fdeprecated-macro",
+        "observedTokens": [
+          "-fdeprecated-macro"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 123
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-ferror-limit"
+          },
+          {
+            "literal": "19"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-124",
+        "key": "-ferror-limit",
+        "observedTokens": [
+          "-ferror-limit",
+          "19"
+        ],
+        "observedValue": "19",
+        "tokenCount": 2,
+        "tokenStart": 124
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-stack-protector"
+          },
+          {
+            "literal": "1"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-126",
+        "key": "-stack-protector",
+        "observedTokens": [
+          "-stack-protector",
+          "1"
+        ],
+        "observedValue": "1",
+        "tokenCount": 2,
+        "tokenStart": 126
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fstack-check"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-128",
+        "key": "-fstack-check",
+        "observedTokens": [
+          "-fstack-check"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 128
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-mdarwin-stkchk-strong-link"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-129",
+        "key": "-mdarwin-stkchk-strong-link",
+        "observedTokens": [
+          "-mdarwin-stkchk-strong-link"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 129
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fblocks"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-130",
+        "key": "-fblocks",
+        "observedTokens": [
+          "-fblocks"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 130
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fencode-extended-block-signature"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-131",
+        "key": "-fencode-extended-block-signature",
+        "observedTokens": [
+          "-fencode-extended-block-signature"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 131
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fregister-global-dtors-with-atexit"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-132",
+        "key": "-fregister-global-dtors-with-atexit",
+        "observedTokens": [
+          "-fregister-global-dtors-with-atexit"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 132
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fgnuc-version=4.2.1"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-133",
+        "key": "-fgnuc-version",
+        "observedTokens": [
+          "-fgnuc-version=4.2.1"
+        ],
+        "observedValue": "4.2.1",
+        "tokenCount": 1,
+        "tokenStart": 133
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fno-cxx-modules"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-134",
+        "key": "-fno-cxx-modules",
+        "observedTokens": [
+          "-fno-cxx-modules"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 134
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fno-implicit-modules"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-135",
+        "key": "-fno-implicit-modules",
+        "observedTokens": [
+          "-fno-implicit-modules"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 135
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fskip-odr-check-in-gmf"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-136",
+        "key": "-fskip-odr-check-in-gmf",
+        "observedTokens": [
+          "-fskip-odr-check-in-gmf"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 136
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fcxx-exceptions"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-137",
+        "key": "-fcxx-exceptions",
+        "observedTokens": [
+          "-fcxx-exceptions"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 137
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fexceptions"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-138",
+        "key": "-fexceptions",
+        "observedTokens": [
+          "-fexceptions"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 138
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fmax-type-align=16"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-139",
+        "key": "-fmax-type-align",
+        "observedTokens": [
+          "-fmax-type-align=16"
+        ],
+        "observedValue": "16",
+        "tokenCount": 1,
+        "tokenStart": 139
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fcommon"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-140",
+        "key": "-fcommon",
+        "observedTokens": [
+          "-fcommon"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 140
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-141",
+        "key": "-clang-vendor-feature",
+        "observedTokens": [
+          "-clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation"
+        ],
+        "observedValue": "+disableNonDependentMemberExprInCurrentInstantiation",
+        "tokenCount": 1,
+        "tokenStart": 141
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fno-odr-hash-protocols"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-142",
+        "key": "-fno-odr-hash-protocols",
+        "observedTokens": [
+          "-fno-odr-hash-protocols"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 142
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-clang-vendor-feature=+enableAggressiveVLAFolding"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-143",
+        "key": "-clang-vendor-feature",
+        "observedTokens": [
+          "-clang-vendor-feature=+enableAggressiveVLAFolding"
+        ],
+        "observedValue": "+enableAggressiveVLAFolding",
+        "tokenCount": 1,
+        "tokenStart": 143
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-clang-vendor-feature=+revert09abecef7bbf"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-144",
+        "key": "-clang-vendor-feature",
+        "observedTokens": [
+          "-clang-vendor-feature=+revert09abecef7bbf"
+        ],
+        "observedValue": "+revert09abecef7bbf",
+        "tokenCount": 1,
+        "tokenStart": 144
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-clang-vendor-feature=+thisNoAlignAttr"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-145",
+        "key": "-clang-vendor-feature",
+        "observedTokens": [
+          "-clang-vendor-feature=+thisNoAlignAttr"
+        ],
+        "observedValue": "+thisNoAlignAttr",
+        "tokenCount": 1,
+        "tokenStart": 145
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-clang-vendor-feature=+thisNoNullAttr"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-146",
+        "key": "-clang-vendor-feature",
+        "observedTokens": [
+          "-clang-vendor-feature=+thisNoNullAttr"
+        ],
+        "observedValue": "+thisNoNullAttr",
+        "tokenCount": 1,
+        "tokenStart": 146
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-147",
+        "key": "-clang-vendor-feature",
+        "observedTokens": [
+          "-clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError"
+        ],
+        "observedValue": "+disableAtImportPrivateFrameworkInImplementationError",
+        "tokenCount": 1,
+        "tokenStart": 147
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-Wno-error=allocator-wrappers"
+          }
+        ],
+        "form": "joined-value",
+        "id": "cc1-148",
+        "key": "-Wno-error",
+        "observedTokens": [
+          "-Wno-error=allocator-wrappers"
+        ],
+        "observedValue": "allocator-wrappers",
+        "tokenCount": 1,
+        "tokenStart": 148
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-fdwarf2-cfi-asm"
+          }
+        ],
+        "form": "single",
+        "id": "cc1-149",
+        "key": "-fdwarf2-cfi-asm",
+        "observedTokens": [
+          "-fdwarf2-cfi-asm"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 149
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-o"
+          },
+          {
+            "slot": "OBJECT"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-150",
+        "key": "-o",
+        "observedTokens": [
+          "-o",
+          "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1/empty-78e844.o"
+        ],
+        "observedValue": "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1/empty-78e844.o",
+        "tokenCount": 2,
+        "tokenStart": 150
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-x"
+          },
+          {
+            "literal": "c++"
+          }
+        ],
+        "form": "separate-value",
+        "id": "cc1-152",
+        "key": "-x",
+        "observedTokens": [
+          "-x",
+          "c++"
+        ],
+        "observedValue": "c++",
+        "tokenCount": 2,
+        "tokenStart": 152
+      },
+      {
+        "exactTokens": [
+          {
+            "slot": "SOURCE"
+          }
+        ],
+        "form": "positional",
+        "id": "cc1-154",
+        "key": "positional",
+        "observedTokens": [
+          "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1/empty.cpp"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 154
+      }
+    ],
+    "tokenCount": 155
+  },
+  "headerExact": [
+    "Apple clang version 21.0.0 (clang-2100.1.1.101)",
+    "Target: arm64-apple-macos26.5",
+    "Thread model: posix",
+    "InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
+  ],
+  "historicalAccess1Status": "FAILED_INCONCLUSIVE_UNCHANGED",
+  "id": "pinned-apple-driver-output-contract-v2-draft-1",
+  "implementationAuthorized": false,
+  "includeMeaning": "Rendered cc1 token order only; no claim of effective header search precedence or equivalent compilation behavior",
+  "lexer": {
+    "controls": "reject NUL, ESC and other C0 controls except LF and horizontal tab; reject DEL",
+    "jobSplitting": "shlex.split(comments=False,posix=True); never shell execution",
+    "lineEndings": "LF only; require final LF",
+    "negativeDiagnostic": "exactly one whole-line frozen synthetic-path invalid-linker diagnostic, consumed as a typed error at a record boundary, never deleted from raw evidence",
+    "outputBytes": 262144,
+    "records": "four exact header lines then two POSIX-shlex job lines; ASCII-whitespace-only blank lines may be skipped",
+    "unexpectedText": "reject; no ignored diagnostics, helper lines, response files or unknown tokens",
+    "utf8": "strict"
+  },
+  "linkerNegative": {
+    "allOtherUnits": "same ordered linkerPositive units; change supplier only",
+    "exitCode": 1,
+    "supplier": "ld",
+    "syntheticOnlyBeforeNativeCollection": true,
+    "terminal": "FAILED"
+  },
+  "linkerPositive": {
+    "orderedUnits": [
+      {
+        "exactTokens": [
+          {
+            "slot": "SYNTHETIC_TARGET"
+          }
+        ],
+        "form": "supplier",
+        "id": "ld-000",
+        "key": "supplier",
+        "observedTokens": [
+          "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/prepared-inputs/406194aca8fa255d3e5e03cf1c416cf8726f081b212112b407db4a3c5563955c/eligibility-target"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 0
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-demangle"
+          }
+        ],
+        "form": "single",
+        "id": "ld-001",
+        "key": "-demangle",
+        "observedTokens": [
+          "-demangle"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 1
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-lto_library"
+          },
+          {
+            "literal": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib"
+          }
+        ],
+        "form": "separate-value",
+        "id": "ld-002",
+        "key": "-lto_library",
+        "observedTokens": [
+          "-lto_library",
+          "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib"
+        ],
+        "observedValue": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib",
+        "tokenCount": 2,
+        "tokenStart": 2
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-no_deduplicate"
+          }
+        ],
+        "form": "single",
+        "id": "ld-004",
+        "key": "-no_deduplicate",
+        "observedTokens": [
+          "-no_deduplicate"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 4
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-dynamic"
+          }
+        ],
+        "form": "single",
+        "id": "ld-005",
+        "key": "-dynamic",
+        "observedTokens": [
+          "-dynamic"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 5
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-arch"
+          },
+          {
+            "literal": "arm64"
+          }
+        ],
+        "form": "separate-value",
+        "id": "ld-006",
+        "key": "-arch",
+        "observedTokens": [
+          "-arch",
+          "arm64"
+        ],
+        "observedValue": "arm64",
+        "tokenCount": 2,
+        "tokenStart": 6
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-platform_version"
+          },
+          {
+            "literal": "macos"
+          },
+          {
+            "literal": "26.5.0"
+          },
+          {
+            "literal": "26.5"
+          }
+        ],
+        "form": "separate-three-values",
+        "id": "ld-008",
+        "key": "-platform_version",
+        "observedTokens": [
+          "-platform_version",
+          "macos",
+          "26.5.0",
+          "26.5"
+        ],
+        "observedValue": [
+          "macos",
+          "26.5.0",
+          "26.5"
+        ],
+        "tokenCount": 4,
+        "tokenStart": 8
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-syslibroot"
+          },
+          {
+            "literal": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+          }
+        ],
+        "form": "separate-value",
+        "id": "ld-012",
+        "key": "-syslibroot",
+        "observedTokens": [
+          "-syslibroot",
+          "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk"
+        ],
+        "observedValue": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+        "tokenCount": 2,
+        "tokenStart": 12
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-O0"
+          }
+        ],
+        "form": "single",
+        "id": "ld-014",
+        "key": "-O0",
+        "observedTokens": [
+          "-O0"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 14
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-mllvm"
+          },
+          {
+            "literal": "-enable-linkonceodr-outlining"
+          }
+        ],
+        "form": "separate-value",
+        "id": "ld-015",
+        "key": "-mllvm",
+        "observedTokens": [
+          "-mllvm",
+          "-enable-linkonceodr-outlining"
+        ],
+        "observedValue": "-enable-linkonceodr-outlining",
+        "tokenCount": 2,
+        "tokenStart": 15
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-o"
+          },
+          {
+            "slot": "OUTPUT"
+          }
+        ],
+        "form": "separate-value",
+        "id": "ld-017",
+        "key": "-o",
+        "observedTokens": [
+          "-o",
+          "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1/control-ordinary-c++20.not-created"
+        ],
+        "observedValue": "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1/control-ordinary-c++20.not-created",
+        "tokenCount": 2,
+        "tokenStart": 17
+      },
+      {
+        "exactTokens": [
+          {
+            "slot": "OBJECT"
+          }
+        ],
+        "form": "positional",
+        "id": "ld-019",
+        "key": "positional",
+        "observedTokens": [
+          "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1/empty-78e844.o"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 19
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-lc++"
+          }
+        ],
+        "form": "single",
+        "id": "ld-020",
+        "key": "-lc++",
+        "observedTokens": [
+          "-lc++"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 20
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-lSystem"
+          }
+        ],
+        "form": "single",
+        "id": "ld-021",
+        "key": "-lSystem",
+        "observedTokens": [
+          "-lSystem"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 21
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a"
+          }
+        ],
+        "form": "positional",
+        "id": "ld-022",
+        "key": "positional",
+        "observedTokens": [
+          "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/lib/darwin/libclang_rt.osx.a"
+        ],
+        "observedValue": null,
+        "tokenCount": 1,
+        "tokenStart": 22
+      },
+      {
+        "exactTokens": [
+          {
+            "literal": "-F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+          }
+        ],
+        "form": "joined-path",
+        "id": "ld-023",
+        "key": "-F",
+        "observedTokens": [
+          "-F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        ],
+        "observedValue": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+        "tokenCount": 1,
+        "tokenStart": 23
+      }
+    ],
+    "tokenCount": 24
+  },
+  "markerIdentityLimits": {
+    "noConcurrentWriterAssumed": true,
+    "noMarkerPreparationOrMutationInThisSlice": true,
+    "osEnforcedImmutabilityEstablished": false,
+    "prePostChecksExcludeTransientReplacement": false
+  },
+  "multiplicities": {
+    "mode": "exact full sequence, no generic last-option-wins or duplicate suppression",
+    "repeatedModulemapFlag": {
+      "count": 2,
+      "literal": "-fno-modulemap-allow-subdirectory-search",
+      "tokenIndices": [
+        31,
+        34
+      ]
+    },
+    "targetFeatures": {
+      "additionalOrOppositeFeatures": "reject",
+      "count": 27,
+      "orderedExactValues": [
+        "+v8.5a",
+        "+aes",
+        "+altnzcv",
+        "+ccdp",
+        "+ccpp",
+        "+complxnum",
+        "+crc",
+        "+dotprod",
+        "+flagm",
+        "+fp-armv8",
+        "+fp16fml",
+        "+fptoint",
+        "+fullfp16",
+        "+jsconv",
+        "+lse",
+        "+neon",
+        "+pauth",
+        "+perfmon",
+        "+predres",
+        "+ras",
+        "+rcpc",
+        "+rdm",
+        "+sb",
+        "+sha2",
+        "+sha3",
+        "+specrestrict",
+        "+ssbs"
+      ]
+    },
+    "vendorFeatures": "six exact joined literals once each at declared positions; no wildcard",
+    "warnings": "each exact literal/value in orderedUnits once; any other -W token rejected"
+  },
+  "nativeExecutionAuthorized": false,
+  "originalDriverIncludes": [
+    {
+      "framework": false,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include"
+    },
+    {
+      "framework": false,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+    },
+    {
+      "framework": false,
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+    },
+    {
+      "framework": false,
+      "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+    },
+    {
+      "framework": false,
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+    },
+    {
+      "framework": false,
+      "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+    },
+    {
+      "framework": true,
+      "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+    }
+  ],
+  "pathPolicy": "literal lexical comparison; no resolve/normalization, aliases, dot components, extra inputs or independent object paths",
+  "positiveRawSha256": "73369da40748b9f990dc0feb20805797c168e0253d32dd7323fc940caab1dfea",
+  "profile": "control-ordinary-c++20-arm64-apple-macos26.5-synthetic-dry-run-only",
+  "proposedRuntimeModule": "separate v2 parser; keep all existing parsers/executors/validators byte-for-byte unchanged",
+  "qaInventory": {
+    "bytes": 20661,
+    "path": "build/linker-executable-access-v1/qa-driver-defaults-review-2026-11-07-1/transcript-inventory.json",
+    "sha256": "87b92c013d5f1d72157fcfaa4cbf0ce2259e64b600bd36a17edd85e2c3dd08f1"
+  },
+  "renderedIncludes": [
+    {
+      "flag": "-isystem",
+      "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+    },
+    {
+      "flag": "-isystem",
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+    },
+    {
+      "flag": "-isystem",
+      "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+    },
+    {
+      "flag": "-iframework",
+      "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+    },
+    {
+      "flag": "-I",
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include"
+    },
+    {
+      "flag": "-I",
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+    },
+    {
+      "flag": "-I",
+      "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+    }
+  ],
+  "sampleBindings": {
+    "ATTEMPT": "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1",
+    "OBJECT": "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1/empty-78e844.o",
+    "OUTPUT": "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1/control-ordinary-c++20.not-created",
+    "SOURCE": "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1/empty.cpp",
+    "SYNTHETIC_TARGET": "/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/prepared-inputs/406194aca8fa255d3e5e03cf1c416cf8726f081b212112b407db4a3c5563955c/eligibility-target"
+  },
+  "schema": 1,
+  "scopeDoesNotInclude": [
+    "original seven-probe qualification",
+    "C++17/20 compilation matrix",
+    "Android ABIs",
+    "SDK builds",
+    "semantic search"
+  ],
+  "semanticBoundary": {
+    "knownSemanticFlags": "retain exact values; never ignore or rewrite",
+    "opaqueAppleTokens": "request explicit review acceptance for exact observed spellings in planning-only classifier; no harmlessness/codegen equivalence claim",
+    "unresolvedCompilerSemantics": "blocking for C++/runtime qualification, not silently waived by diagnostic replay"
+  },
+  "semanticEnablement": false,
+  "slots": {
+    "ATTEMPT": "single exact canonical absolute fresh path from a separately reviewed future execution freeze; historical sample never reused for native work",
+    "OBJECT": {
+      "basenameRegex": "empty-[A-Za-z0-9_-]{1,64}\\.o",
+      "parent": "literal ATTEMPT",
+      "ruleSource": "existing v1 bounded object-name rule; no inference about random suffix algorithm",
+      "sameValueAcrossJobs": true
+    },
+    "OUTPUT": "ATTEMPT + /control-ordinary-c++20.not-created",
+    "SOURCE": "ATTEMPT + /empty.cpp",
+    "SYNTHETIC_TARGET": "exact identity-pinned marker path/receipt in separately reviewed freeze; never real ld; not OS-enforced immutable"
+  },
+  "sourceCapture": {
+    "bytes": 10178,
+    "path": "build/linker-executable-access-v1/native-attempts/access-1/command-trace.jsonl",
+    "sha256": "ac68995e130d349bbb1d04b5b0cea8cc6a1a7fd360a0babccc3a23f28a364008"
+  },
+  "status": "PROPOSAL_ONLY_NOT_IMPLEMENTED"
+}

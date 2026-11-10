@@ -1,0 +1,1088 @@
+{
+  "allOtherUnits": "exact complete sequence in contract-proposal.json",
+  "decisions": [
+    {
+      "area": "frontend",
+      "category": "diagnostics",
+      "exactTokens": [
+        [
+          "-Wundef-prefix=TARGET_OS_"
+        ]
+      ],
+      "id": "delta-01",
+      "inventoriedForm": "-Wundef-prefix=TARGET_OS_",
+      "meaning": "Undefined-macro prefix diagnostic selection; preserve this exact prefix.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "https://clang.llvm.org/docs/DiagnosticsReference.html#wundef-prefix"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "UPSTREAM_DIAGNOSTIC_DESCRIPTION_ONLY",
+      "tokenStarts": [
+        5
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-005"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "diagnostics",
+      "exactTokens": [
+        [
+          "-Wdeprecated-objc-isa-usage"
+        ]
+      ],
+      "id": "delta-02",
+      "inventoriedForm": "-Wdeprecated-objc-isa-usage",
+      "meaning": "Specific Objective-C isa-usage warning selection.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "https://clang.llvm.org/docs/DiagnosticsReference.html#wdeprecated-objc-isa-usage"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "UPSTREAM_DIAGNOSTIC_DESCRIPTION_ONLY",
+      "tokenStarts": [
+        6
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-006"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "diagnostics",
+      "exactTokens": [
+        [
+          "-Werror=deprecated-objc-isa-usage"
+        ]
+      ],
+      "id": "delta-03",
+      "inventoriedForm": "-Werror=deprecated-objc-isa-usage",
+      "meaning": "Specific warning group promoted to error; not a generic -Werror allowance.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "https://clang.llvm.org/docs/DiagnosticsReference.html#wdeprecated-objc-isa-usage"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "UPSTREAM_DIAGNOSTIC_DESCRIPTION_ONLY",
+      "tokenStarts": [
+        7
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-007"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "diagnostics",
+      "exactTokens": [
+        [
+          "-Werror=implicit-function-declaration"
+        ]
+      ],
+      "id": "delta-04",
+      "inventoriedForm": "-Werror=implicit-function-declaration",
+      "meaning": "Specific implicit-function-declaration error setting.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "https://clang.llvm.org/docs/DiagnosticsReference.html#wimplicit-function-declaration"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "UPSTREAM_DIAGNOSTIC_DESCRIPTION_ONLY",
+      "tokenStarts": [
+        8
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-008"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "codegen",
+      "exactTokens": [
+        [
+          "-mframe-pointer=non-leaf"
+        ]
+      ],
+      "id": "delta-05",
+      "inventoriedForm": "-mframe-pointer=non-leaf",
+      "meaning": "Retain non-leaf frame pointers; joined spelling and non-leaf value are mandatory.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "local-options:mframe_pointer_EQ"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "RETAINED_OPTIONS_DECLARATION_APPLE_EFFECT_UNVERIFIED",
+      "tokenStarts": [
+        22
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-022"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "floating-point-semantics",
+      "exactTokens": [
+        [
+          "-ffp-contract=on"
+        ]
+      ],
+      "id": "delta-06",
+      "inventoriedForm": "-ffp-contract=on",
+      "meaning": "Permit same-statement FP contraction subject to pragmas in documented upstream behavior. Never equate on, off and fast.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "https://clang.llvm.org/docs/ClangCommandLineReference.html#cmdoption-clang-ffp-contract",
+        "local-options:ffp_contract"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "UPSTREAM_DOCUMENTED_APPLE_EFFECT_NOT_TESTED",
+      "tokenStarts": [
+        24
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-024"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "unwind-codegen",
+      "exactTokens": [
+        [
+          "-funwind-tables=1"
+        ]
+      ],
+      "id": "delta-07",
+      "inventoriedForm": "-funwind-tables=1",
+      "meaning": "Joined integer1; retained declaration marshals UnwindTables. No equivalence to v1 tables=2 or Apple numeric meaning is claimed.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "local-options:funwind_tables_EQ"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "RETAINED_DECLARATION_NUMERIC_EFFECT_NOT_QUALIFIED",
+      "tokenStarts": [
+        26
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-026"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "objc-codegen",
+      "exactTokens": [
+        [
+          "-fobjc-msgsend-selector-stubs"
+        ]
+      ],
+      "id": "delta-08",
+      "inventoriedForm": "-fobjc-msgsend-selector-stubs",
+      "meaning": "Named selector-stub setting; presence is documented, exact Apple lowering remains unverified.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "https://clang.llvm.org/docs/ClangCommandLineReference.html#cmdoption-clang-fobjc-msgsend-selector-stubs"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "FLAG_PRESENCE_ONLY_APPLE_EFFECT_UNRESOLVED",
+      "tokenStarts": [
+        27
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-027"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "cxx-semantics",
+      "exactTokens": [
+        [
+          "-fno-sized-deallocation"
+        ]
+      ],
+      "id": "delta-09",
+      "inventoriedForm": "-fno-sized-deallocation",
+      "meaning": "Disables the named sized global-deallocation option; exact spelling retained.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "https://clang.llvm.org/docs/ClangCommandLineReference.html#cmdoption-clang-fsized-deallocation"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "UPSTREAM_DOCUMENTED_APPLE_EFFECT_NOT_TESTED",
+      "tokenStarts": [
+        28
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-028"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "target-metadata",
+      "exactTokens": [
+        [
+          "-target-sdk-version=26.5"
+        ]
+      ],
+      "id": "delta-10",
+      "inventoriedForm": "-target-sdk-version=26.5",
+      "meaning": "Pin SDK version26.5; other versions or separate spelling are not admitted.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "local-options:target_sdk_version_EQ"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "RETAINED_DECLARATION_APPLE_EFFECT_UNVERIFIED",
+      "tokenStarts": [
+        29
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-029"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "visibility",
+      "exactTokens": [
+        [
+          "-fvisibility-inlines-hidden-static-local-var"
+        ]
+      ],
+      "id": "delta-11",
+      "inventoriedForm": "-fvisibility-inlines-hidden-static-local-var",
+      "meaning": "Visibility-affecting internal setting; no claim that ignoring it preserves emitted definitions.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 1,
+      "semanticEvidence": "APPLE_SPECIFIC_EFFECT_UNRESOLVED",
+      "tokenStarts": [
+        30
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-030"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "module-resolution",
+      "exactTokens": [
+        [
+          "-fno-modulemap-allow-subdirectory-search"
+        ],
+        [
+          "-fno-modulemap-allow-subdirectory-search"
+        ]
+      ],
+      "id": "delta-12",
+      "inventoriedForm": "-fno-modulemap-allow-subdirectory-search",
+      "meaning": "Exactly two occurrences at declared positions; no deduplication or generic repeated-flag tolerance.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 2,
+      "semanticEvidence": "APPLE_SPECIFIC_EFFECT_UNRESOLVED",
+      "tokenStarts": [
+        31,
+        34
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-031",
+        "cc1-034"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "preprocessor-semantics",
+      "exactTokens": [
+        [
+          "-fdefine-target-os-macros"
+        ]
+      ],
+      "id": "delta-13",
+      "inventoriedForm": "-fdefine-target-os-macros",
+      "meaning": "Target-OS macro-related setting; exact binary definitions and effects are unproved.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 1,
+      "semanticEvidence": "APPLE_SPECIFIC_EFFECT_UNRESOLVED",
+      "tokenStarts": [
+        32
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-032"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "cxx-optimizer-assumptions",
+      "exactTokens": [
+        [
+          "-fno-assume-unique-vtables"
+        ]
+      ],
+      "id": "delta-14",
+      "inventoriedForm": "-fno-assume-unique-vtables",
+      "meaning": "Vtable-uniqueness-related setting; no devirtualization equivalence claim.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 1,
+      "semanticEvidence": "APPLE_SPECIFIC_EFFECT_UNRESOLVED",
+      "tokenStarts": [
+        33
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-033"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "tls-codegen",
+      "exactTokens": [
+        [
+          "-enable-tlsdesc"
+        ]
+      ],
+      "id": "delta-15",
+      "inventoriedForm": "-enable-tlsdesc",
+      "meaning": "Exact descriptor-related token; retained LLVM declares a TLS descriptor control. Apple effect is not tested.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "local-options:enable_tlsdesc"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "RETAINED_DECLARATION_APPLE_EFFECT_UNVERIFIED",
+      "tokenStarts": [
+        35
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-035"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "target-isa",
+      "exactTokens": [
+        [
+          "-target-feature",
+          "+altnzcv"
+        ]
+      ],
+      "id": "delta-16",
+      "inventoriedForm": "-target-feature +altnzcv",
+      "meaning": "alternative NZCV FP comparison format; exact positive feature only.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "local-aarch64:FEAT_FlagM2"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "RETAINED_FEATURE_DECLARATION_APPLE_BACKEND_NOT_QUALIFIED",
+      "tokenStarts": [
+        42
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-042"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "target-isa",
+      "exactTokens": [
+        [
+          "-target-feature",
+          "+ccpp"
+        ]
+      ],
+      "id": "delta-17",
+      "inventoriedForm": "-target-feature +ccpp",
+      "meaning": "cache clean to persistence; exact positive feature only.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "local-aarch64:FEAT_DPB"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "RETAINED_FEATURE_DECLARATION_APPLE_BACKEND_NOT_QUALIFIED",
+      "tokenStarts": [
+        46
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-046"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "target-isa",
+      "exactTokens": [
+        [
+          "-target-feature",
+          "+complxnum"
+        ]
+      ],
+      "id": "delta-18",
+      "inventoriedForm": "-target-feature +complxnum",
+      "meaning": "complex FP arithmetic; exact positive feature only.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "local-aarch64:FEAT_FCMA"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "RETAINED_FEATURE_DECLARATION_APPLE_BACKEND_NOT_QUALIFIED",
+      "tokenStarts": [
+        48
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-048"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "target-isa",
+      "exactTokens": [
+        [
+          "-target-feature",
+          "+flagm"
+        ]
+      ],
+      "id": "delta-19",
+      "inventoriedForm": "-target-feature +flagm",
+      "meaning": "flag manipulation; exact positive feature only.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "local-aarch64:FEAT_FlagM"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "RETAINED_FEATURE_DECLARATION_APPLE_BACKEND_NOT_QUALIFIED",
+      "tokenStarts": [
+        54
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-054"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "target-isa",
+      "exactTokens": [
+        [
+          "-target-feature",
+          "+jsconv"
+        ]
+      ],
+      "id": "delta-20",
+      "inventoriedForm": "-target-feature +jsconv",
+      "meaning": "JavaScript FP conversion; exact positive feature only.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "local-aarch64:FEAT_JSCVT"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "RETAINED_FEATURE_DECLARATION_APPLE_BACKEND_NOT_QUALIFIED",
+      "tokenStarts": [
+        64
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-064"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "target-isa",
+      "exactTokens": [
+        [
+          "-target-feature",
+          "+sb"
+        ]
+      ],
+      "id": "delta-21",
+      "inventoriedForm": "-target-feature +sb",
+      "meaning": "speculation barrier; exact positive feature only.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "local-aarch64:FEAT_SB"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "RETAINED_FEATURE_DECLARATION_APPLE_BACKEND_NOT_QUALIFIED",
+      "tokenStarts": [
+        82
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-082"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "target-isa",
+      "exactTokens": [
+        [
+          "-target-feature",
+          "+specrestrict"
+        ]
+      ],
+      "id": "delta-22",
+      "inventoriedForm": "-target-feature +specrestrict",
+      "meaning": "architectural speculation restriction; exact positive feature only.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "local-aarch64:FEAT_CSV2_2"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "RETAINED_FEATURE_DECLARATION_APPLE_BACKEND_NOT_QUALIFIED",
+      "tokenStarts": [
+        88
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-088"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "debug-metadata",
+      "exactTokens": [
+        [
+          "-debugger-tuning=lldb"
+        ]
+      ],
+      "id": "delta-23",
+      "inventoriedForm": "-debugger-tuning=lldb",
+      "meaning": "Joined debugger-tuning value lldb only; not the old separate form.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "local-options:debugger_tuning_EQ"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "RETAINED_SPELLING_APPLE_EFFECT_UNVERIFIED",
+      "tokenStarts": [
+        94
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-094"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "target-metadata",
+      "exactTokens": [
+        [
+          "-target-linker-version",
+          "1267"
+        ]
+      ],
+      "id": "delta-24",
+      "inventoriedForm": "-target-linker-version",
+      "meaning": "Separate scalar1267; not an orphan input or an attestation that a linker executed.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "local-options:target_linker_version"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "RETAINED_DECLARATION_APPLE_EFFECT_UNVERIFIED",
+      "tokenStarts": [
+        96
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-096"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "runtime-selection",
+      "exactTokens": [
+        [
+          "-stdlib=libc++"
+        ]
+      ],
+      "id": "delta-25",
+      "inventoriedForm": "-stdlib=libc++",
+      "meaning": "Standard-library family libc++; retain with exact linked -lc++ / -lSystem set.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "https://clang.llvm.org/docs/ClangCommandLineReference.html#cmdoption-clang-stdlib"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "UPSTREAM_DOCUMENTED_APPLE_EFFECT_NOT_TESTED",
+      "tokenStarts": [
+        119
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-119"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "diagnostics",
+      "exactTokens": [
+        [
+          "-Wno-elaborated-enum-base"
+        ]
+      ],
+      "id": "delta-26",
+      "inventoriedForm": "-Wno-elaborated-enum-base",
+      "meaning": "Exactly this warning suppression, not permission to drop arbitrary warnings.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 1,
+      "semanticEvidence": "NAMED_WARNING_SETTING_APPLE_EFFECT_NOT_TESTED",
+      "tokenStarts": [
+        120
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-120"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "stack-codegen",
+      "exactTokens": [
+        [
+          "-fstack-check"
+        ]
+      ],
+      "id": "delta-27",
+      "inventoriedForm": "-fstack-check",
+      "meaning": "Stack-checking setting; not interchangeable with stack-protector1 or no-stack-check.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "https://clang.llvm.org/docs/ClangCommandLineReference.html#cmdoption-clang-fstack-check"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "UPSTREAM_FLAG_DESCRIPTION_APPLE_EFFECT_NOT_TESTED",
+      "tokenStarts": [
+        128
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-128"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "stack-linkage",
+      "exactTokens": [
+        [
+          "-mdarwin-stkchk-strong-link"
+        ]
+      ],
+      "id": "delta-28",
+      "inventoriedForm": "-mdarwin-stkchk-strong-link",
+      "meaning": "Darwin-specific linkage-related setting; exact helper/ABI effects remain unresolved.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 1,
+      "semanticEvidence": "APPLE_SPECIFIC_EFFECT_UNRESOLVED",
+      "tokenStarts": [
+        129
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-129"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "cxx-modules",
+      "exactTokens": [
+        [
+          "-fno-cxx-modules"
+        ]
+      ],
+      "id": "delta-29",
+      "inventoriedForm": "-fno-cxx-modules",
+      "meaning": "C++ module enablement control, distinct from implicit-module settings.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "https://clang.llvm.org/docs/ClangCommandLineReference.html#cmdoption-clang-fcxx-modules"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "UPSTREAM_DOCUMENTED_APPLE_EFFECT_NOT_TESTED",
+      "tokenStarts": [
+        134
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-134"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "storage-codegen",
+      "exactTokens": [
+        [
+          "-fcommon"
+        ]
+      ],
+      "id": "delta-30",
+      "inventoriedForm": "-fcommon",
+      "meaning": "Tentative-definition storage control; reject substitution with -fno-common. No compiled-language effect is tested here.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "https://clang.llvm.org/docs/ClangCommandLineReference.html#cmdoption-clang-fcommon"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "UPSTREAM_DOCUMENTED_APPLE_EFFECT_NOT_TESTED",
+      "tokenStarts": [
+        140
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-140"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "vendor-frontend-semantics",
+      "exactTokens": [
+        [
+          "-clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation"
+        ]
+      ],
+      "id": "delta-31",
+      "inventoriedForm": "-clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation",
+      "meaning": "Exact vendor selector only. Its name is not proof of behavior; no source match or semantic equivalence is established.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 1,
+      "semanticEvidence": "APPLE_VENDOR_IMPLEMENTATION_UNRESOLVED",
+      "tokenStarts": [
+        141
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-141"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "objc-odr-semantics",
+      "exactTokens": [
+        [
+          "-fno-odr-hash-protocols"
+        ]
+      ],
+      "id": "delta-32",
+      "inventoriedForm": "-fno-odr-hash-protocols",
+      "meaning": "Exact protocol/ODR-related spelling; vendor implementation is not established.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 1,
+      "semanticEvidence": "APPLE_SPECIFIC_EFFECT_UNRESOLVED",
+      "tokenStarts": [
+        142
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-142"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "vendor-frontend-semantics",
+      "exactTokens": [
+        [
+          "-clang-vendor-feature=+enableAggressiveVLAFolding"
+        ]
+      ],
+      "id": "delta-33",
+      "inventoriedForm": "-clang-vendor-feature=+enableAggressiveVLAFolding",
+      "meaning": "Exact vendor selector only. Its name is not proof of behavior; no source match or semantic equivalence is established.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 1,
+      "semanticEvidence": "APPLE_VENDOR_IMPLEMENTATION_UNRESOLVED",
+      "tokenStarts": [
+        143
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-143"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "vendor-frontend-semantics",
+      "exactTokens": [
+        [
+          "-clang-vendor-feature=+revert09abecef7bbf"
+        ]
+      ],
+      "id": "delta-34",
+      "inventoriedForm": "-clang-vendor-feature=+revert09abecef7bbf",
+      "meaning": "Exact vendor selector only. Its name is not proof of behavior; no source match or semantic equivalence is established.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 1,
+      "semanticEvidence": "APPLE_VENDOR_IMPLEMENTATION_UNRESOLVED",
+      "tokenStarts": [
+        144
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-144"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "vendor-frontend-semantics",
+      "exactTokens": [
+        [
+          "-clang-vendor-feature=+thisNoAlignAttr"
+        ]
+      ],
+      "id": "delta-35",
+      "inventoriedForm": "-clang-vendor-feature=+thisNoAlignAttr",
+      "meaning": "Exact vendor selector only. Its name is not proof of behavior; no source match or semantic equivalence is established.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 1,
+      "semanticEvidence": "APPLE_VENDOR_IMPLEMENTATION_UNRESOLVED",
+      "tokenStarts": [
+        145
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-145"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "vendor-frontend-semantics",
+      "exactTokens": [
+        [
+          "-clang-vendor-feature=+thisNoNullAttr"
+        ]
+      ],
+      "id": "delta-36",
+      "inventoriedForm": "-clang-vendor-feature=+thisNoNullAttr",
+      "meaning": "Exact vendor selector only. Its name is not proof of behavior; no source match or semantic equivalence is established.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 1,
+      "semanticEvidence": "APPLE_VENDOR_IMPLEMENTATION_UNRESOLVED",
+      "tokenStarts": [
+        146
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-146"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "vendor-frontend-semantics",
+      "exactTokens": [
+        [
+          "-clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError"
+        ]
+      ],
+      "id": "delta-37",
+      "inventoriedForm": "-clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError",
+      "meaning": "Exact vendor selector only. Its name is not proof of behavior; no source match or semantic equivalence is established.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 1,
+      "semanticEvidence": "APPLE_VENDOR_IMPLEMENTATION_UNRESOLVED",
+      "tokenStarts": [
+        147
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-147"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "diagnostics",
+      "exactTokens": [
+        [
+          "-Wno-error=allocator-wrappers"
+        ]
+      ],
+      "id": "delta-38",
+      "inventoriedForm": "-Wno-error=allocator-wrappers",
+      "meaning": "Exactly the named severity setting; allocator-wrappers group semantics at the Apple binary remain unresolved.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [
+        "https://github.com/llvm/llvm-project/blob/3623fe661ae35c6c80ac221f14d85be76aa870f1/clang/docs/UsersManual.rst#L95-L111"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "APPLE_SPECIFIC_EFFECT_UNRESOLVED",
+      "tokenStarts": [
+        148
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-148"
+      ]
+    },
+    {
+      "area": "frontend",
+      "category": "unwind-assembly",
+      "exactTokens": [
+        [
+          "-fdwarf2-cfi-asm"
+        ]
+      ],
+      "id": "delta-39",
+      "inventoriedForm": "-fdwarf2-cfi-asm",
+      "meaning": "Named CFI-assembly control; does not authorize replacing it with macros or other unwind options.",
+      "qualificationLimit": "planning-only transcript compatibility, never compiled semantic acceptance",
+      "references": [],
+      "requiredCount": 1,
+      "semanticEvidence": "NAMED_FLAG_APPLE_EFFECT_NOT_TESTED",
+      "tokenStarts": [
+        149
+      ],
+      "treatment": "consume exact ordered unit(s), values and multiplicity; reject other spellings, values, polarity, extra or missing occurrences",
+      "units": [
+        "cc1-149"
+      ]
+    },
+    {
+      "area": "linker",
+      "category": "link-optimization",
+      "exactTokens": [
+        [
+          "-O0"
+        ]
+      ],
+      "id": "delta-40",
+      "inventoriedForm": "-O0",
+      "meaning": "Supplemental ld64 source sets de-duplication false and optimization levelO0; not proof all optimization is disabled or of selected-linker equivalence.",
+      "qualificationLimit": "synthetic dry-run only, no linker execution or link behavior qualification",
+      "references": [
+        "https://github.com/apple-oss-distributions/ld64/blob/f60a74eaa2c99585de1dc0f2820e7a9f8aaf522c/src/ld/Options.cpp#L4123-L4143"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "SUPPLEMENTAL_APPLE_SOURCE_NOT_SELECTED_BINARY",
+      "tokenStarts": [
+        14
+      ],
+      "treatment": "consume exact ordered unit/value only; reject other options, values, paths or extra operands",
+      "units": [
+        "ld-014"
+      ]
+    },
+    {
+      "area": "linker",
+      "category": "linker-backend-forwarding",
+      "exactTokens": [
+        [
+          "-mllvm",
+          "-enable-linkonceodr-outlining"
+        ]
+      ],
+      "id": "delta-41",
+      "inventoriedForm": "-mllvm",
+      "meaning": "Supplemental ld64 forwards the next operand to LLVM options; upstream boolean permits machine outlining from linkonceodr functions. Exactly this pair, with no pass-activation or execution claim.",
+      "qualificationLimit": "synthetic dry-run only, no linker execution or link behavior qualification",
+      "references": [
+        "https://github.com/apple-oss-distributions/ld64/blob/f60a74eaa2c99585de1dc0f2820e7a9f8aaf522c/src/ld/Options.cpp#L3589-L3593",
+        "https://github.com/llvm/llvm-project/blob/3623fe661ae35c6c80ac221f14d85be76aa870f1/llvm/lib/CodeGen/MachineOutliner.cpp#L107-L116",
+        "https://github.com/llvm/llvm-project/blob/3623fe661ae35c6c80ac221f14d85be76aa870f1/clang/lib/Driver/ToolChains/Darwin.cpp#L555-L576"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "SUPPLEMENTAL_APPLE_AND_LLVM_NOT_SELECTED_BINARY",
+      "tokenStarts": [
+        15
+      ],
+      "treatment": "consume exact ordered unit/value only; reject other options, values, paths or extra operands",
+      "units": [
+        "ld-015"
+      ]
+    },
+    {
+      "area": "linker",
+      "category": "framework-search",
+      "exactTokens": [
+        [
+          "-F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        ]
+      ],
+      "id": "delta-42",
+      "inventoriedForm": "-F",
+      "meaning": "Supplemental ld64 source adds a framework search directory. Only the exact joined SDK path is proposed; this does not itself link a framework.",
+      "qualificationLimit": "synthetic dry-run only, no linker execution or link behavior qualification",
+      "references": [
+        "https://github.com/apple-oss-distributions/ld64/blob/f60a74eaa2c99585de1dc0f2820e7a9f8aaf522c/src/ld/Options.cpp#L4239-L4252"
+      ],
+      "requiredCount": 1,
+      "semanticEvidence": "SUPPLEMENTAL_APPLE_SOURCE_NOT_SELECTED_BINARY",
+      "tokenStarts": [
+        23
+      ],
+      "treatment": "consume exact ordered unit/value only; reject other options, values, paths or extra operands",
+      "units": [
+        "ld-023"
+      ]
+    },
+    {
+      "area": "rendering",
+      "exactTokens": [
+        {
+          "flag": "-isystem",
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1"
+        },
+        {
+          "flag": "-isystem",
+          "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include"
+        },
+        {
+          "flag": "-isystem",
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include"
+        },
+        {
+          "flag": "-iframework",
+          "path": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+        },
+        {
+          "flag": "-I",
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-python-patch-v1/qualification-attempts/python-3/control-repeat-0/_out/include"
+        },
+        {
+          "flag": "-I",
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-cpp-toolchain-v1/checked-in-include"
+        },
+        {
+          "flag": "-I",
+          "path": "/Users/kezileo/Desktop/personal_mobile_agent/build/dawn-abseil-preparation-v1/attempts/prepare-1/candidate"
+        }
+      ],
+      "id": "include-order",
+      "inventoriedForm": "rendered system/framework before user include paths",
+      "qualificationLimit": "not effective include search or header compatibility evidence",
+      "requiredCount": 7,
+      "semanticEvidence": "OBSERVED_RENDERING_ONLY",
+      "treatment": "match option kind, literal path and full order; preserve original driver argv unchanged"
+    }
+  ],
+  "duplicateModulemapCoveredTwice": true,
+  "orphan1267ConsumedBy": "-target-linker-version 1267",
+  "qaUnknownRows": 41,
+  "schema": 1,
+  "status": "PROPOSED_TREATMENTS_NOT_IMPLEMENTED"
+}

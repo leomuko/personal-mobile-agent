@@ -1,0 +1,228 @@
+{
+  "allFrontendTokensRepresented": 155,
+  "allLinkerTokensRepresented": 24,
+  "frontendInventoryRows": 107,
+  "frontendUnits": 107,
+  "implementationReplayPerformed": false,
+  "joinedForms": [
+    "-Wundef-prefix=TARGET_OS_",
+    "-Werror=deprecated-objc-isa-usage",
+    "-Werror=implicit-function-declaration",
+    "-mframe-pointer=non-leaf",
+    "-ffp-contract=on",
+    "-funwind-tables=1",
+    "-target-sdk-version=26.5",
+    "-debugger-tuning=lldb",
+    "-fdebug-compilation-dir=/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1",
+    "-fcoverage-compilation-dir=/Users/kezileo/Desktop/personal_mobile_agent/build/linker-executable-access-v1/native-attempts/access-1",
+    "-stdlib=libc++",
+    "-std=c++20",
+    "-fgnuc-version=4.2.1",
+    "-fmax-type-align=16",
+    "-clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation",
+    "-clang-vendor-feature=+enableAggressiveVLAFolding",
+    "-clang-vendor-feature=+revert09abecef7bbf",
+    "-clang-vendor-feature=+thisNoAlignAttr",
+    "-clang-vendor-feature=+thisNoNullAttr",
+    "-clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError",
+    "-Wno-error=allocator-wrappers"
+  ],
+  "linkerDelta": [
+    "-O0",
+    "-mllvm -enable-linkonceodr-outlining",
+    "-F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
+  ],
+  "linkerUnits": 16,
+  "qaInventory": {
+    "bytes": 20661,
+    "path": "build/linker-executable-access-v1/qa-driver-defaults-review-2026-11-07-1/transcript-inventory.json",
+    "sha256": "87b92c013d5f1d72157fcfaa4cbf0ce2259e64b600bd36a17edd85e2c3dd08f1"
+  },
+  "renderedIncludeOrderBound": true,
+  "repeatedModulemapIndices": [
+    31,
+    34
+  ],
+  "schema": 1,
+  "separateLinkerVersion": {
+    "option": "-target-linker-version",
+    "orphan1267IsNotSourceInput": true,
+    "value": "1267"
+  },
+  "targetFeatureCount": 27,
+  "uniqueUnknownRowSignatures": 40,
+  "unknownRows": 41,
+  "unmodeledFrontendRows": [
+    {
+      "kind": "unmodeled-option",
+      "option": "-Wundef-prefix=TARGET_OS_"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-Wdeprecated-objc-isa-usage"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-Werror=deprecated-objc-isa-usage"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-Werror=implicit-function-declaration"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-mframe-pointer=non-leaf"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-ffp-contract=on"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-funwind-tables=1"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-fobjc-msgsend-selector-stubs"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-fno-sized-deallocation"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-target-sdk-version=26.5"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-fvisibility-inlines-hidden-static-local-var"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-fno-modulemap-allow-subdirectory-search"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-fdefine-target-os-macros"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-fno-assume-unique-vtables"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-fno-modulemap-allow-subdirectory-search"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-enable-tlsdesc"
+    },
+    {
+      "kind": "unmodeled-target-feature",
+      "option": "-target-feature",
+      "value": "+altnzcv"
+    },
+    {
+      "kind": "unmodeled-target-feature",
+      "option": "-target-feature",
+      "value": "+ccpp"
+    },
+    {
+      "kind": "unmodeled-target-feature",
+      "option": "-target-feature",
+      "value": "+complxnum"
+    },
+    {
+      "kind": "unmodeled-target-feature",
+      "option": "-target-feature",
+      "value": "+flagm"
+    },
+    {
+      "kind": "unmodeled-target-feature",
+      "option": "-target-feature",
+      "value": "+jsconv"
+    },
+    {
+      "kind": "unmodeled-target-feature",
+      "option": "-target-feature",
+      "value": "+sb"
+    },
+    {
+      "kind": "unmodeled-target-feature",
+      "option": "-target-feature",
+      "value": "+specrestrict"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-debugger-tuning=lldb"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-target-linker-version"
+    },
+    {
+      "input": "1267",
+      "kind": "positional-input-or-unmodeled-value"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-stdlib=libc++"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-Wno-elaborated-enum-base"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-fstack-check"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-mdarwin-stkchk-strong-link"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-fno-cxx-modules"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-fcommon"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-fno-odr-hash-protocols"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-clang-vendor-feature=+enableAggressiveVLAFolding"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-clang-vendor-feature=+revert09abecef7bbf"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-clang-vendor-feature=+thisNoAlignAttr"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-clang-vendor-feature=+thisNoNullAttr"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-Wno-error=allocator-wrappers"
+    },
+    {
+      "kind": "unmodeled-option",
+      "option": "-fdwarf2-cfi-asm"
+    }
+  ]
+}

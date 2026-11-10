@@ -1,0 +1,187 @@
+{
+  "P2Complete": false,
+  "access1Status": "FAILED_INCONCLUSIVE_UNCHANGED",
+  "accessCalls": 0,
+  "bindings": [
+    {
+      "bytes": 10207,
+      "path": "planning/P2_CPP_DRIVER_OUTPUT_PARSER_CONTRACT_CORRECTION_V2.md",
+      "sha256": "1fb8c2e708208aedb60a154e965ec9933c5702eebffe0bebb86d4618b0530fd7"
+    },
+    {
+      "bytes": 2949,
+      "path": "docs/P2_CPP_PARSER_CONTRACT_V2_PREPARATION_STATUS.md",
+      "sha256": "f5496154abffff4ca20f3e63cbce442a9bfac0d472aaadb106215bf15fe88ec1"
+    },
+    {
+      "bytes": 1689,
+      "path": "planning/fixtures/linker-parser-contract-v2/README.md",
+      "sha256": "6159fe01c0fbde6aa39f8158bdccd02270bdd4eaa2bd99c977d64b2d4b421539"
+    },
+    {
+      "bytes": 63774,
+      "path": "planning/fixtures/linker-parser-contract-v2/contract-proposal.json",
+      "sha256": "dffedbf0ab134215a41df3cb3c64de715148282063fcc203156979085a8a46b4"
+    },
+    {
+      "bytes": 1021,
+      "path": "planning/fixtures/linker-parser-contract-v2/fixture-provenance.json",
+      "sha256": "9124fab56f74ecd49804b399c0c356acc9db9b27992e2fa45f69cd5cf76f6a2a"
+    },
+    {
+      "bytes": 6098,
+      "path": "planning/fixtures/linker-parser-contract-v2/mismatch-coverage.json",
+      "sha256": "68074b76c45f1246deef17869a160b3a76b605ab925621e12f1443486a7c644c"
+    },
+    {
+      "bytes": 39418,
+      "path": "planning/fixtures/linker-parser-contract-v2/mismatch-decisions.json",
+      "sha256": "5c4a97a2c9be327692cc4e5e986a4c8c222d9c429940e731747a9f6a05159f87"
+    },
+    {
+      "bytes": 5622,
+      "path": "planning/fixtures/linker-parser-contract-v2/observed-positive.raw.txt",
+      "sha256": "73369da40748b9f990dc0feb20805797c168e0253d32dd7323fc940caab1dfea"
+    },
+    {
+      "bytes": 4911,
+      "path": "planning/fixtures/linker-parser-contract-v2/references.json",
+      "sha256": "8388ce8a3a102c9be10fcbf1341ab2ebce6ab13b3d52c5639fe66f9636caff46"
+    },
+    {
+      "bytes": 7612,
+      "path": "planning/fixtures/linker-parser-contract-v2/regression-plan.json",
+      "sha256": "04dfac4f9d33496bee7cbd491e68f5b52dc4e3cdb51268aa57835dfe05dd7067"
+    },
+    {
+      "bytes": 5683,
+      "path": "planning/fixtures/linker-parser-contract-v2/synthetic-negative.raw.txt",
+      "sha256": "64a6f4a6f4b35263332c6a44c01b7c51387c071725d648e5400197f6a3e33f88"
+    },
+    {
+      "bytes": 11105,
+      "path": "build/linker-parser-contract-v2/prepare-proposal.py",
+      "sha256": "bb2c2d701bfe3cfc2b7069446377f8e30375d2ff725f0bdb4a3c99a240771901"
+    },
+    {
+      "bytes": 9781,
+      "path": "build/linker-parser-contract-v2/decision-data.py",
+      "sha256": "6f7302b67b5fd7e2dc422688c87573a91964a754f4e20e8475384390450f86ba"
+    },
+    {
+      "bytes": 5394,
+      "path": "build/linker-parser-contract-v2/regression-data.py",
+      "sha256": "7e08ca35721f8d9cabdf399c149105b3ccff96d9618dba7623014a9212200313"
+    },
+    {
+      "bytes": 7758,
+      "path": "build/linker-parser-contract-v2/audit-proposal.py",
+      "sha256": "ef9266e043314eb214e35345b83f0e3f3e20c7186b9e29312dcef0024d590909"
+    },
+    {
+      "bytes": 2023,
+      "path": "build/linker-parser-contract-v2/preparation-audit.json",
+      "sha256": "bf68997d3ea22fba7c1b79d50961c98661d406c0338f37f8ceaf006a9d933492"
+    },
+    {
+      "bytes": 2023,
+      "path": "build/linker-parser-contract-v2/preparation-audit-final.json",
+      "sha256": "bf68997d3ea22fba7c1b79d50961c98661d406c0338f37f8ceaf006a9d933492"
+    },
+    {
+      "bytes": 99,
+      "path": "build/linker-parser-contract-v2/protected-code-modes.json",
+      "sha256": "3d8636314bb2bcbf0cac86b438f1c151aea466a9cd9d0c97f0ffaff7d391adb8"
+    },
+    {
+      "bytes": 278,
+      "path": "build/linker-parser-contract-v2/reference-label-edit-failure.json",
+      "sha256": "7176ee32290c3579e880efe419871b3f425a5f442a2606d0c6d8b4d34727422e"
+    },
+    {
+      "bytes": 3572,
+      "path": "build/linker-parser-contract-v2/research-handoff.json",
+      "sha256": "1edcebc7add2191733356346a0aadc50167b63bcd5f54941abc90b00d5dacded"
+    },
+    {
+      "bytes": 7563,
+      "path": "build/linker-parser-contract-v2/preparation-audit-draft-1/audit-proposal.py",
+      "sha256": "4d38b270c4aaeeaa9245299e123c2a45ab2e88c760b5cb87ab958e3aa1d7d946"
+    },
+    {
+      "bytes": 2023,
+      "path": "build/linker-parser-contract-v2/preparation-audit-draft-1/preparation-audit.json",
+      "sha256": "bf68997d3ea22fba7c1b79d50961c98661d406c0338f37f8ceaf006a9d933492"
+    },
+    {
+      "bytes": 20661,
+      "path": "build/linker-executable-access-v1/qa-driver-defaults-review-2026-11-07-1/transcript-inventory.json",
+      "sha256": "87b92c013d5f1d72157fcfaa4cbf0ce2259e64b600bd36a17edd85e2c3dd08f1"
+    },
+    {
+      "bytes": 78588,
+      "path": "planning/fixtures/linker-executable-access-v1/execution-freeze-r1.json",
+      "sha256": "32182dffa560676d2dda8a52a4bbbed0983ab68f3ab99ebcf98fe9db0913a9fc"
+    },
+    {
+      "bytes": 5990,
+      "path": "planning/fixtures/linker-executable-access-v1/implementation-review-r1.json",
+      "sha256": "d2e2439d0f376f681f0023f9149adf0b0a097f4cc61ffe540a902ba90d3bcc2a"
+    },
+    {
+      "bytes": 4172,
+      "path": "planning/fixtures/linker-executable-access-v1/access-1-result-lock.json",
+      "sha256": "213ff1594ae23f3ae6d5c328dd328ccbfd728aa52e60e1079dc01abfe4060d06"
+    },
+    {
+      "bytes": 3221,
+      "path": "planning/fixtures/linker-executable-access-v1/access-1-qa-checkpoint.json",
+      "sha256": "0341e8dbc87231b429250a6b6df512d74bfd63924e5069658f14e3814a6f6891"
+    },
+    {
+      "bytes": 581114,
+      "path": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/llvm-raw/clang/include/clang/Options/Options.td",
+      "sha256": "5582ec6e0e1cf7a1fef8cb885e83a75c34c5a8174bd7c1b0b3faf1c02da0525e"
+    },
+    {
+      "bytes": 54763,
+      "path": "build/repository-cache-v1/analysis-attempts/configured-1/x86_64-output/be85e5bf6162e53dd7e04b03defae4eb/external/llvm-raw/llvm/lib/Target/AArch64/AArch64Features.td",
+      "sha256": "76e8063d5c0474dc49834deed90a6bf6f9b415e71f1538a9540ce7e52d265a8f"
+    },
+    {
+      "bytes": 1911,
+      "path": "build/bazel-server-jvm-v1/attempts/configured-1/x86_64-output/175cfa04369df3fd3f85cbfb14b19b8d/external/org_tensorflow/third_party/xla/third_party/llvm/workspace.bzl",
+      "sha256": "6cc647edf86d3e6c0b172dba65d386a2b1f2625d5a009ea9f994c08cae77287a"
+    }
+  ],
+  "branch": "dev",
+  "clientDate": "2026-11-07",
+  "compilerBinaryFreshlyRehashed": false,
+  "frontendTokens": 155,
+  "frontendUnits": 107,
+  "full245InputsFreshlyRehashed": false,
+  "grantConsumed": true,
+  "head": "2ead92a2e641adc4565d13074bfb105ad29039c7",
+  "hostSuiteRun": false,
+  "id": "pinned-apple-driver-output-contract-v2-draft-1",
+  "implementationAuthorized": false,
+  "implementedParser": false,
+  "independentReview": "PENDING_SEPARATE_RECORD",
+  "linkerTokens": 24,
+  "linkerUnits": 16,
+  "mismatchDecisionRows": 43,
+  "mutationTestsRun": false,
+  "nativeCalls": 0,
+  "nativeExecutionAuthorized": false,
+  "preservationBindingEntriesVerified": 132,
+  "producerStatus": "PREPARATION_CONSISTENCY_PASS",
+  "proposedParserReplayPerformed": false,
+  "protectedCodeBindingsVerified": 52,
+  "protectedCodeModesVerified": 52,
+  "regressionFamiliesPlannedNotRun": 32,
+  "schema": 1,
+  "scope": "reviewed-parser-contract-proposal-only-no-implementation",
+  "semanticEnablement": false,
+  "sixInventoriesFreshlyRehashed": false,
+  "targetFeatureValues": 27
+}

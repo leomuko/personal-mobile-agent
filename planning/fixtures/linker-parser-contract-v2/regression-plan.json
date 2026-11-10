@@ -1,0 +1,211 @@
+{
+  "baselinePositive": "observed-positive.raw.txt, actual raw capture; v1 rejected",
+  "everyInventoriedMismatchMustMapToMutation": true,
+  "families": [
+    {
+      "expected": "compatible structure, not new native evidence; access-1 stays FAILED",
+      "id": "R01",
+      "mutation": "Replay complete preserved raw positive under future v2 only",
+      "name": "observed-positive"
+    },
+    {
+      "expected": "same first rejection and FAILED/INCONCLUSIVE evidence unchanged",
+      "id": "R02",
+      "mutation": "Replay old parser and verify historical hashes",
+      "name": "historical-v1"
+    },
+    {
+      "expected": "typed expected rejection; command/worker/terminal FAILED; synthetic label persists",
+      "id": "R03",
+      "mutation": "Constructed negative fixture, exit1 and exact diagnostic",
+      "name": "synthetic-negative"
+    },
+    {
+      "expected": "reject; no removed/suppressed unknown output",
+      "id": "R04",
+      "mutation": "Missing/duplicated/unknown/inline diagnostic or incorrect target",
+      "name": "negative-diagnostic"
+    },
+    {
+      "expected": "reject every changed spelling/value; no last-option-wins",
+      "id": "R05",
+      "mutation": "Replace on with off/fast/fast-honor-pragmas or a separate form",
+      "name": "fp-contraction"
+    },
+    {
+      "expected": "reject",
+      "id": "R06",
+      "mutation": "Replace joined non-leaf with separate form/all/none",
+      "name": "frame-pointer"
+    },
+    {
+      "expected": "reject",
+      "id": "R07",
+      "mutation": "Replace joined1 with0/2/flag-only or extra occurrence",
+      "name": "unwind-tables"
+    },
+    {
+      "expected": "reject as changed scalar/input shape",
+      "id": "R08",
+      "mutation": "Replace1267, omit it, or supply orphan/extra1267",
+      "name": "linker-version"
+    },
+    {
+      "expected": "reject; no support for another profile",
+      "id": "R09",
+      "mutation": "Change target-sdk, triple, CPU, ABI, platform or standard",
+      "name": "sdk-and-abi"
+    },
+    {
+      "expected": "reject; exact per-warning severity retained",
+      "id": "R10",
+      "mutation": "Change/remove/duplicate each listed warning, add arbitrary -Wfoo/-w/-Wno-error",
+      "name": "warnings"
+    },
+    {
+      "expected": "reject, including apparently harmless unused flags",
+      "id": "R11",
+      "mutation": "Add arbitrary -f/-m flag or opposite setting",
+      "name": "extra-frontend-switch"
+    },
+    {
+      "expected": "reject; no wildcard, feature-name guessing or silent waiver",
+      "id": "R12",
+      "mutation": "Mutate/drop/duplicate each six exact vendor selectors or add seventh",
+      "name": "vendor-selectors"
+    },
+    {
+      "expected": "reject each mutation; retain exact ordered list",
+      "id": "R13",
+      "mutation": "For each27 values flip sign, change value, omit, add, duplicate or reorder",
+      "name": "target-features"
+    },
+    {
+      "expected": "reject; exactly two at declared positions passes structure only",
+      "id": "R14",
+      "mutation": "Counts1 and3, reversed placement, or changed spelling",
+      "name": "modulemap-count"
+    },
+    {
+      "expected": "reject",
+      "id": "R15",
+      "mutation": "Duplicate -cc1,-O0,-std,-fcommon or add -fno-common",
+      "name": "singleton-count"
+    },
+    {
+      "expected": "reject; user argv remains unchanged and rendered order is independently checked",
+      "id": "R16",
+      "mutation": "For each7 entries mutate flag/path/order, alias or framework class",
+      "name": "includes"
+    },
+    {
+      "expected": "reject",
+      "id": "R17",
+      "mutation": "Change joined-F SDK path, use separate form, alias or add directory",
+      "name": "framework-link-path"
+    },
+    {
+      "expected": "reject",
+      "id": "R18",
+      "mutation": "Change/remove/duplicate linker -O0",
+      "name": "link-optimization"
+    },
+    {
+      "expected": "reject; only one fixed pair",
+      "id": "R19",
+      "mutation": "Change/add/remove -mllvm operand or introduce second backend option",
+      "name": "linker-mllvm"
+    },
+    {
+      "expected": "reject",
+      "id": "R20",
+      "mutation": "Change/order/duplicate -lc++/-lSystem, runtime archive, object or add library/framework",
+      "name": "libraries-and-inputs"
+    },
+    {
+      "expected": "reject",
+      "id": "R21",
+      "mutation": "Change real-toolchain libLTO path or substitute marker-relative library",
+      "name": "lto-helper"
+    },
+    {
+      "expected": "reject literal mismatch; never resolve bareld into qualification",
+      "id": "R22",
+      "mutation": "Positive bare/relative/realld supplier, negative absolute supplier, or wrong compiler",
+      "name": "suppliers"
+    },
+    {
+      "expected": "reject; consistent safe rebased object is allowed only in frozen context",
+      "id": "R23",
+      "mutation": "Different safe object names across jobs, external parent, alias, slash or oversized basename",
+      "name": "object-reference"
+    },
+    {
+      "expected": "reject cross-field mismatch and path aliases",
+      "id": "R24",
+      "mutation": "Change source, output, dump prefix, debug or coverage directory independently",
+      "name": "source-output"
+    },
+    {
+      "expected": "reject",
+      "id": "R25",
+      "mutation": "Changed Apple version/build ID, target, thread model, install path or extra header",
+      "name": "header"
+    },
+    {
+      "expected": "reject; exactly two jobs",
+      "id": "R26",
+      "mutation": "Missing/third/helper job, response file or unknown nonempty line",
+      "name": "jobs"
+    },
+    {
+      "expected": "reject; no lossy decode",
+      "id": "R27",
+      "mutation": "Invalid UTF8, NUL,ESC,DEL,other forbidden controls,CRLF,missing finalLF or broken quoting",
+      "name": "lexical"
+    },
+    {
+      "expected": "reject, do not filter",
+      "id": "R28",
+      "mutation": "Unknown warning/error before/after/between records",
+      "name": "retained-warning-error"
+    },
+    {
+      "expected": "both structurally represented; no native attempt created and no context widening",
+      "id": "R29",
+      "mutation": "Historical sample and fresh test-only context with consistent derived slots",
+      "name": "context-rebase"
+    },
+    {
+      "expected": "realLinkerQualified=false, compilerQualified=false, acceptancePublicationAllowed=false",
+      "id": "R30",
+      "mutation": "All accepted offline shapes and synthetic classifications",
+      "name": "qualification-boundary"
+    },
+    {
+      "expected": "negative stays FAILED; no accepted-probes publication or retroactive pass",
+      "id": "R31",
+      "mutation": "Expected positive/negative fixture pair through future bridge",
+      "name": "negative-terminal"
+    },
+    {
+      "expected": "existing limits and first-failure stopping unchanged; no native calls in host tests",
+      "id": "R32",
+      "mutation": "Future separately authorized bridge: stop/cancel/deadline/cleanup/quarantine guards",
+      "name": "ownership-limits"
+    }
+  ],
+  "hostSuiteNotRunForProposal": true,
+  "nativeExecutionAuthorized": false,
+  "negative": "synthetic-negative.raw.txt, constructed only; not native evidence",
+  "noNewDependencyRequired": true,
+  "parameterization": "enumerate every corresponding ordered unit/value/multiplicity; counts are reported only after implementation",
+  "requiredBeforeFutureIntegration": [
+    "v2 complete positive replay",
+    "all mutation tests",
+    "historical v1 behavior/hash preservation",
+    "independent implementation QA"
+  ],
+  "schema": 1,
+  "status": "PLANNED_NOT_IMPLEMENTED_OR_RUN"
+}
