@@ -1,0 +1,66 @@
+{
+  "P2Complete": false,
+  "attemptCreated": false,
+  "bindings": [
+    {
+      "bytes": 5978,
+      "path": "build/linker-path-validation-v1/static-audit.py",
+      "sha256": "cab5ee45ba3dda24a16fabbd1c200b12b36964154a3e98b017f6aeb13049edf0"
+    },
+    {
+      "bytes": 8895,
+      "path": "build/linker-path-validation-v1/static-evidence.json",
+      "sha256": "69715945137c98a444eb20eb2e23b6fb4b8eac68ee7cde9f70787f16df83d9f4"
+    },
+    {
+      "bytes": 5444,
+      "path": "build/linker-path-validation-v1/development-1/static-audit.py",
+      "sha256": "3cd11324ca19f5a2366d155f28c80e323d86f1c23edc66c2f9710b6fb6e52c71"
+    },
+    {
+      "bytes": 437,
+      "path": "build/linker-path-validation-v1/development-1/failure.json",
+      "sha256": "35b9697a511db1cc691eb107d8edb088a21b60043472707013b1cc7f4b57f70a"
+    },
+    {
+      "bytes": 4203,
+      "path": "docs/P2_CPP_LINKER_PATH_VALIDATION_STATIC_RESULTS_V1.md",
+      "sha256": "0b5009a24870993d3b7c0f89256a7fb8cb1f5ed7c5ce1569082b89bf7caba23b"
+    },
+    {
+      "bytes": 5586,
+      "path": "planning/P2_CPP_LINKER_EXECUTABLE_ACCESS_DIAGNOSTIC_PROPOSAL_V1.md",
+      "sha256": "637d3920d0120e104a5a2cb09358dd6fea01a7c9748c01c7d1f895da612d2a75"
+    },
+    {
+      "bytes": 2860,
+      "path": "planning/fixtures/linker-path-validation-v1/references.json",
+      "sha256": "26b4c3d439c5b61a4d398130453a9d3adeaf0ca8ef9c199fc2688b111fef5962"
+    },
+    {
+      "bytes": 9670,
+      "path": "planning/fixtures/linker-path-validation-v1/proposal.json",
+      "sha256": "c567fa1d4030408681615eddf5dea76db8049d3f9019a41007188c7db7d731a9"
+    }
+  ],
+  "branch": "dev",
+  "clientDate": "2026-11-06",
+  "executableAccessQueriesExecuted": 0,
+  "freshAll225InputValidationClaimed": false,
+  "futureDiagnosticImplemented": false,
+  "futureExecutionFreezePrepared": false,
+  "head": "2ead92a2e641adc4565d13074bfb105ad29039c7",
+  "historicalBindingChecks": 58,
+  "independentReview": "PENDING_SEPARATE_RECORD",
+  "initialStaticReadGuardFailurePreserved": true,
+  "nativeExecutionAuthorized": false,
+  "nativeQueriesExecuted": 0,
+  "producerStatus": "STATIC_FINDINGS_VERIFIED_ROOT_CAUSE_UNPROVED",
+  "readCapExpanded": false,
+  "schema": 1,
+  "scope": "static path-validation inspection and future diagnostic proposal only",
+  "selectedFrozenFileBindings": 46,
+  "semanticEnablement": false,
+  "sixTreeContentsRehashed": false,
+  "targetCreated": false
+}
