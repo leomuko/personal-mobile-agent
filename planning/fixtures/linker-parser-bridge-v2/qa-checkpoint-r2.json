@@ -1,0 +1,359 @@
+{
+  "P2Complete": false,
+  "acceptancePublished": false,
+  "approvalGranted": false,
+  "attemptCreated": false,
+  "bindings": [
+    {
+      "bytes": 66697,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/canonical-host-r1.log",
+      "sha256": "d1e925e60f67e9c7cff7af191e02964b7ac0d52aa60a8bc28fe95ca9bca3a032"
+    },
+    {
+      "bytes": 66922,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/canonical-host-r2.log",
+      "sha256": "d3e61d349cc233faef37a09fa4991d9525befea83622c5c26aa2157556ab978a"
+    },
+    {
+      "bytes": 9367,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/executor-composition-r3.patch",
+      "sha256": "1357dbb6bd01c9ef99eb3b6e09aae2ace8046932bf616101ab81738c76ec57cf"
+    },
+    {
+      "bytes": 3510,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/focused-r1.log",
+      "sha256": "d65cae04d92d15d603cfcab8365c049baa6521bec0d8540bb71ba86dfbbdb501"
+    },
+    {
+      "bytes": 3735,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/focused-r2.log",
+      "sha256": "03241e9a6f74b1d7a06b42fef2180bb65311867664ea6653fb1ab814ac58c5ca"
+    },
+    {
+      "bytes": 180,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/freeze-creation-r1.log",
+      "sha256": "4b4847f530dda587b0dc5358875ddc71e82d42379230b65a85f370b6c661d5e5"
+    },
+    {
+      "bytes": 180,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/freeze-creation-r2.log",
+      "sha256": "10a6802feee4e31f4e73d390d0afa18d037007ec57fa3b0e96e0133dffba5cd3"
+    },
+    {
+      "bytes": 2074,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/launch-request-r2.json",
+      "sha256": "b65c1270878c827790d2efcce1808fe7fdf3854f721e87bc5627eecdf567a9ba"
+    },
+    {
+      "bytes": 1917,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/marker-receipt-r1.json",
+      "sha256": "b3eb133a4cfcc388acc23a58db6260ce22d44cc1b75baafe9459aae95c53d887"
+    },
+    {
+      "bytes": 4075,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/preservation-final.json",
+      "sha256": "6ccbf1cd59d4f3954fa6c04e6172d75f18d2eab8d446a2aea7950f73a25bdebe"
+    },
+    {
+      "bytes": 318,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/preservation-r1-failure.json",
+      "sha256": "f5b1d85ff13b36a2b9e9a8e679adf779560382027c39212d651f2c6dc951fb74"
+    },
+    {
+      "bytes": 1985,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/qa-implementation-r1/review.json",
+      "sha256": "4c88f70c9e30d159e0dd1684bcb8b8780b7145f5b140cfe841ea5d68cf7f5d43"
+    },
+    {
+      "bytes": 1089,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/qa-implementation-r1/review.md",
+      "sha256": "5a6c5c15c5f2e7abee3008c6ae5739f5a2cf000ba1ec3a76642195c2e65faf9d"
+    },
+    {
+      "bytes": 614,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/qa-implementation-r1/summary-exit-type-repro.json",
+      "sha256": "f3f612b202e9d7ba290d882f290fbf561965d855e2b2e99e3c17682f20fb5fc2"
+    },
+    {
+      "bytes": 3735,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/qa-implementation-r2/focused33.log",
+      "sha256": "6af9e132e32bcd6aa5b4cbf598596a2726720e1c85369d6966b5eb01a8c66f04"
+    },
+    {
+      "bytes": 4124,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/qa-implementation-r2/review.json",
+      "sha256": "7529245f410e9d5ec258d968c2741ffed4ff1a180076f2468a51c59926e12939"
+    },
+    {
+      "bytes": 2506,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/qa-implementation-r2/review.md",
+      "sha256": "7c36496728d27a182197bc69a58f636c688f5043d5ceb69798147274559f7d0f"
+    },
+    {
+      "bytes": 69826,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/qa-implementation-r2/snapshot.json",
+      "sha256": "4f59ce5266c8202fcbab3d3a79b48d40484a3d96e892232ff6a9e701db537469"
+    },
+    {
+      "bytes": 1992,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/qa-implementation-r2/verification.json",
+      "sha256": "c3e56cad97d9971ef4811c5aaa693416b43c3acf57c7b521a6efc0bd506e9c2b"
+    },
+    {
+      "bytes": 3204,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/read-only-admission-r2.json",
+      "sha256": "5a8e01883242166bd55dd680f20939c6a836c070dc6d05b5ee5b68f13ab127d0"
+    },
+    {
+      "bytes": 125,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/read-only-admission-r2.log",
+      "sha256": "13923788091724c8c22b51f2059b8243853353e04c403ba4121e20c5025c02db"
+    },
+    {
+      "bytes": 2694,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/read-only-admission-r2.py",
+      "sha256": "cdd1395c0e2585e5678a0c9caf9450420145fe0c6c7092560be6ce5602f3d186"
+    },
+    {
+      "bytes": 3220,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r1.json",
+      "sha256": "a08c75e995cd0f221e781ef922123abdce0c03c330f419ae4f521564d23522cc"
+    },
+    {
+      "bytes": 5554,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r1/docs/P2_CPP_PARSER_BRIDGE_V2_IMPLEMENTATION_RESULTS.md",
+      "sha256": "22e1ad18652c8e6c6a516b16a9df4a514e008056aaf15acfa5e705f6a4c96385"
+    },
+    {
+      "bytes": 4330,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r1/planning/P2_CPP_PARSER_BRIDGE_V2_IMPLEMENTATION.md",
+      "sha256": "6862fd0e4ba8bf7130f0214cd4cc4da23b1f71f5a188d82b724a65179b470799"
+    },
+    {
+      "bytes": 2762,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r1/scripts/diagnostics/linker_parser_bridge_v2/README.md",
+      "sha256": "9fbb8b055da0548a30c4aab097c1554668449ffd5a152eea31b078c0b2279476"
+    },
+    {
+      "bytes": 1619,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r1/scripts/diagnostics/linker_parser_bridge_v2/bridge.py",
+      "sha256": "e67b21e030ec1e6913d70fd9fc255904b2f591e3c2f1e98e2650e31e8443a65d"
+    },
+    {
+      "bytes": 4367,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r1/scripts/diagnostics/linker_parser_bridge_v2/freeze.py",
+      "sha256": "8a3d345b4d4b88fd3aa4b2c305388f29d032c56d8d45423d0ab6ddb27f1082a3"
+    },
+    {
+      "bytes": 2185,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r1/scripts/diagnostics/linker_parser_bridge_v2/launch.py",
+      "sha256": "d91de6b32893404e8700035675b1767b6b412b6f8035676bf0a8c09830c95bbf"
+    },
+    {
+      "bytes": 2827,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r1/scripts/diagnostics/linker_parser_bridge_v2/plan.py",
+      "sha256": "3e25a4539846c73f637affa6c3a666c26c08ef35a09095e8cd8f6dc1e1cc9d51"
+    },
+    {
+      "bytes": 16188,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r1/scripts/diagnostics/linker_parser_bridge_v2/qualify.py",
+      "sha256": "116d76f17bdeab1fbbce3370f67c06db3ca9db08785bfba00caaf72ebc87ed85"
+    },
+    {
+      "bytes": 9626,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r1/scripts/tests/test_linker_bridge_admission.py",
+      "sha256": "59b6136adb22d49cfef8da3d0d95a982160ffccad01ecbb6cc649e63fcd76c77"
+    },
+    {
+      "bytes": 19447,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r1/scripts/tests/test_linker_parser_bridge_v2.py",
+      "sha256": "9dda7cb3efdd285c9d5f0227da252c4bda909aa43ea6f6379fac4ec914d1f874"
+    },
+    {
+      "bytes": 3191,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r2.json",
+      "sha256": "dbd5da8af78066263ad1d0fe2d1a12f4e49beb5b48f77a281cd38e4905b5320a"
+    },
+    {
+      "bytes": 3975,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r2/docs/P2_CPP_PARSER_BRIDGE_V2_R2_RESULTS.md",
+      "sha256": "dcadc61f2f553e28f01448e4b85f8754f85559a36bfe520e82dc93412f591e1e"
+    },
+    {
+      "bytes": 4330,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r2/planning/P2_CPP_PARSER_BRIDGE_V2_IMPLEMENTATION.md",
+      "sha256": "6862fd0e4ba8bf7130f0214cd4cc4da23b1f71f5a188d82b724a65179b470799"
+    },
+    {
+      "bytes": 2762,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r2/scripts/diagnostics/linker_parser_bridge_v2/README.md",
+      "sha256": "9fbb8b055da0548a30c4aab097c1554668449ffd5a152eea31b078c0b2279476"
+    },
+    {
+      "bytes": 1619,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r2/scripts/diagnostics/linker_parser_bridge_v2/bridge.py",
+      "sha256": "e67b21e030ec1e6913d70fd9fc255904b2f591e3c2f1e98e2650e31e8443a65d"
+    },
+    {
+      "bytes": 4367,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r2/scripts/diagnostics/linker_parser_bridge_v2/freeze.py",
+      "sha256": "002df481605a43a681abbfcc5e45de2a8b9801a7a50e6f512892af572659aeb6"
+    },
+    {
+      "bytes": 2185,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r2/scripts/diagnostics/linker_parser_bridge_v2/launch.py",
+      "sha256": "b259028fbf19c84e2959a435477c7693fa263eef7bb6d4ae02f3545ef4a7967c"
+    },
+    {
+      "bytes": 2827,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r2/scripts/diagnostics/linker_parser_bridge_v2/plan.py",
+      "sha256": "3e25a4539846c73f637affa6c3a666c26c08ef35a09095e8cd8f6dc1e1cc9d51"
+    },
+    {
+      "bytes": 16278,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r2/scripts/diagnostics/linker_parser_bridge_v2/qualify.py",
+      "sha256": "801c6c4a1b0e42093084b46bde06d104f18b791c20d61c4fe816bb6723f35140"
+    },
+    {
+      "bytes": 9926,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r2/scripts/tests/test_linker_bridge_admission.py",
+      "sha256": "585f29ce8bcf7f12b2f9ed22ee6695bfe296fbe309e7c38c00b48efedbe4c429"
+    },
+    {
+      "bytes": 20075,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/source-snapshot-r2/scripts/tests/test_linker_parser_bridge_v2.py",
+      "sha256": "951522c6e8e2764a9053e7ed60b3ffe978d9abc7b631c7defebb2ad925417a6a"
+    },
+    {
+      "bytes": 229,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/test-worker-handoff.json",
+      "sha256": "efaabd3c2071046d84205050fdfffac8814d65a6dd806e8123733247a8048c52"
+    },
+    {
+      "bytes": 5449,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/verify-preservation-final.py",
+      "sha256": "ff472d175cb5ab2b844f56c566dfd67cc923059ab58145b5866fc4083b36f530"
+    },
+    {
+      "bytes": 5446,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/verify-preservation-r2.py",
+      "sha256": "81c9bd0892dff7456137efd4648aec246ce6c490a91968ec13c34c509233bca1"
+    },
+    {
+      "bytes": 4700,
+      "mode": 420,
+      "path": "build/linker-parser-bridge-v2/verify-preservation.py",
+      "sha256": "a1b5738dabbec06e2836ed5c67b5d2fe15bc7a92d92fdca9d3a70ffb2f916636"
+    },
+    {
+      "bytes": 5554,
+      "mode": 420,
+      "path": "docs/P2_CPP_PARSER_BRIDGE_V2_IMPLEMENTATION_RESULTS.md",
+      "sha256": "22e1ad18652c8e6c6a516b16a9df4a514e008056aaf15acfa5e705f6a4c96385"
+    },
+    {
+      "bytes": 3975,
+      "mode": 420,
+      "path": "docs/P2_CPP_PARSER_BRIDGE_V2_R2_RESULTS.md",
+      "sha256": "dcadc61f2f553e28f01448e4b85f8754f85559a36bfe520e82dc93412f591e1e"
+    },
+    {
+      "bytes": 4444,
+      "mode": 420,
+      "path": "docs/P2_CPP_PARSER_BRIDGE_V2_REVIEWED_HANDOFF.md",
+      "sha256": "75e5f73d51d569aefd87d9422680205e715bb1c4a1fbc30b4e7426b37d3fabec"
+    },
+    {
+      "bytes": 79288,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-bridge-v2/execution-freeze-r1.json",
+      "sha256": "e1b6a4fe27a97cba45fe932ae181a4292ec7b6a9ea9c2932524d5ee065c4e8f8"
+    },
+    {
+      "bytes": 79288,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-bridge-v2/execution-freeze-r2.json",
+      "sha256": "e5415753fb22f69537e7628aa33c95cb485a109261bdb24384dc6f6005c303f4"
+    },
+    {
+      "bytes": 4124,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-bridge-v2/implementation-review-r2.json",
+      "sha256": "7529245f410e9d5ec258d968c2741ffed4ff1a180076f2468a51c59926e12939"
+    }
+  ],
+  "branch": "dev",
+  "canonicalHostIndependentlyRerun": false,
+  "canonicalHostMethodsPassed": 574,
+  "date": "2026-11-10",
+  "fakeOwnersAreRuntimeEvidence": false,
+  "findings": [],
+  "focusedBridgeMethodsPassed": 33,
+  "freezeSha256": "e5415753fb22f69537e7628aa33c95cb485a109261bdb24384dc6f6005c303f4",
+  "head": "2ead92a2e641adc4565d13074bfb105ad29039c7",
+  "historicalAccess1Status": "FAILED_INCONCLUSIVE_UNCHANGED",
+  "historicalCase2Status": "NOT_RUN_UNCHANGED",
+  "independentReviewer": "01a1b63a-5ec5-73c1-af98-e2d13cf68664",
+  "inputsVerified": 246,
+  "inventoriesVerified": 6,
+  "nativeExecutionAuthorized": false,
+  "nativeQueriesExecuted": 0,
+  "originalGrantConsumed": true,
+  "permissionChanges": false,
+  "readOnlyAdmissionPassed": true,
+  "realLinkerQualified": false,
+  "resolvedFinding": "BRIDGE-V2-001",
+  "reviewSha256": "7529245f410e9d5ec258d968c2741ffed4ff1a180076f2468a51c59926e12939",
+  "schema": 1,
+  "scope": "host-reviewed-v2-diagnostic-bridge-and-producer-readonly-admission",
+  "semanticEnablement": false,
+  "staticNativePayloadsVerified": 8,
+  "verdict": "PASS"
+}

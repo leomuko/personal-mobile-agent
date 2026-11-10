@@ -1,0 +1,80 @@
+{
+  "acceptancePublicationAllowed": false,
+  "accessPredicateCalls": 0,
+  "attemptCreated": false,
+  "baseHead": "2ead92a2e641adc4565d13074bfb105ad29039c7",
+  "branch": "dev",
+  "confidence": "High for this frozen implementation and read-only static/host scope; no native runtime qualification",
+  "counts": {
+    "admissionMethods": 9,
+    "currentInputsVerified": 246,
+    "focusedMethods": 33,
+    "independentValueEquivalentTypeRejections": 4,
+    "inventoriesVerified": 6,
+    "staticNativePayloads": 8,
+    "workerParentMainMethods": 24
+  },
+  "evidence": [
+    "snapshot.json",
+    "verification.json",
+    "focused33.log",
+    "build/linker-parser-bridge-v2/canonical-host-r2.log",
+    "build/linker-parser-bridge-v2/preservation-final.json"
+  ],
+  "executionAuthorized": false,
+  "fakeOwnerTestsAreRuntimeEvidence": false,
+  "findings": [],
+  "freezeSha256": "e5415753fb22f69537e7628aa33c95cb485a109261bdb24384dc6f6005c303f4",
+  "genuineReadOnlyAdmissionPerformed": false,
+  "head": "2ead92a2e641adc4565d13074bfb105ad29039c7",
+  "historicalStatus": "Access-1 FAILED / INCONCLUSIVE unchanged; second case NOT_RUN; original grant consumed; P2 incomplete; semantic search disabled",
+  "implementationReviewPassed": true,
+  "markerRepin": {
+    "acceptedForNewFreezeOnly": true,
+    "actualPrePostEqualsNewReceipt": true,
+    "cause": "UNPROVED",
+    "concurrentTransientReplacementExcluded": false,
+    "deviceOnlyDifference": true,
+    "oldReceiptRefreshed": false,
+    "osEnforcedImmutabilityEstablished": false
+  },
+  "nativeCollectionApproved": false,
+  "nativeExecutionAuthorized": false,
+  "nativeQueriesExecuted": 0,
+  "networkCalls": 0,
+  "nextActions": "Parent may copy these review bytes unchanged to FIX/implementation-review-r2.json and perform guarded read-only admission. Native collection still requires separate authorization.",
+  "processDispatches": 0,
+  "resolvedFindings": [
+    {
+      "id": "BRIDGE-V2-001",
+      "status": "RESOLVED_IN_R2",
+      "verification": "Exact int required before per-row summary equality; positive0 and negative1 bool/float substitutes rejected; correct integer-negative report retains FAILED"
+    }
+  ],
+  "schema": 1,
+  "scope": "v2-two-synthetic-target-plans-no-real-linker-qualification",
+  "snapshotSha256": "4f59ce5266c8202fcbab3d3a79b48d40484a3d96e892232ff6a9e701db537469",
+  "sourceSha256": "801c6c4a1b0e42093084b46bde06d104f18b791c20d61c4fe816bb6723f35140",
+  "verdict": "PASS",
+  "verification": {
+    "blocked": [],
+    "failed": [],
+    "notRun": [
+      "Canonical574 suite independently rerun",
+      "Genuine admission against copied final review: parent follow-up after literal copy",
+      "Actual native worker execution, cancellation/deadline/cleanup, Clang/linker/access/Bazel/device probes or native policy contrast",
+      "Separate historical245/52/132/30/11 preservation audit not independently repeated; final producer receipt inspected"
+    ],
+    "passed": [
+      "Independent guarded pinned Python3.9 focused33 methods:9 admission and24 worker/parent/main; zero failures/errors/skips",
+      "Four independent value-equivalent summary probes:0->False/0.0 and negative1->True/1.0 rejected with exact worker exit-code type mismatch; valid integer reports accepted",
+      "Exact supplied R2 freeze hash;246 unique bound inputs and6 actual inventories verified by validate_freeze and q.check_inputs",
+      "Eight native payloads/load graphs statically inspected by q.native_rows; no tool executed",
+      "Actual marker receipt equality before/after checks; ten recorded dev-only changes16777231->16777234, all other fields equal, prior receipt preserved; cause UNPROVED",
+      "Ten R2 retained/current source/doc copies matched; reviewed files stable; exact planned rebasing, R2 launch/freeze routes and stale-R1 rejection reviewed",
+      "Owned synthetic test directories removed; actualaccess-v2-1 absent before/after; no acceptance publisher or native dispatch",
+      "574-method producer canonical PASS log inspected and hashed"
+    ]
+  },
+  "verificationSha256": "c3e56cad97d9971ef4811c5aaa693416b43c3acf57c7b521a6efc0bd506e9c2b"
+}
