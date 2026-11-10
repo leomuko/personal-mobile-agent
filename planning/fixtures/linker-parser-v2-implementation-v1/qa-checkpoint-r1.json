@@ -1,0 +1,172 @@
+{
+  "P2Complete": false,
+  "accessQueriesExecuted": 0,
+  "bindings": [
+    {
+      "bytes": 3593,
+      "mode": 420,
+      "path": "docs/P2_CPP_DRIVER_OUTPUT_PARSER_V2_REVIEWED_HANDOFF.md",
+      "sha256": "605e3db6e47955cf57e7b5b6ea75f362bf6d12f6d29f96eba9d0191c0f814e70"
+    },
+    {
+      "bytes": 7228,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-v2-implementation-v1/implementation-lock-r1.json",
+      "sha256": "5c74c8ac5f672ca237ee112c668001d9257b938c14d70029a5044f9ae2863b76"
+    },
+    {
+      "bytes": 1626,
+      "mode": 420,
+      "path": "build/linker-parser-v2/source-snapshot-r1.json",
+      "sha256": "38c54f5a3067bf1bae7e00d5dc52811df676747fc6bac9cf8b89a3be4ba12516"
+    },
+    {
+      "bytes": 3877,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-implementation-r1/review.json",
+      "sha256": "c486a5ea5010af5a039883d8b8e7f19081de5cd5e8988ea83e1ee6a5ffd6eddd"
+    },
+    {
+      "bytes": 2960,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-implementation-r1/review.md",
+      "sha256": "75f949e9af215988fac14225000adc19fef52787017285dcc270e16446f90ea7"
+    },
+    {
+      "bytes": 96519,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-implementation-r1/snapshot.json",
+      "sha256": "b6370405cc3a28e0de0b4fe22a1f0266cc34bb9f52fe3e55b43125ca185cb3c8"
+    },
+    {
+      "bytes": 5627,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-implementation-r1/independent-verification.json",
+      "sha256": "24a850f95e39e326c9783422fe4646fd3df9beacf9f88d2813b7c34b335eaaf3"
+    },
+    {
+      "bytes": 3601,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-implementation-r1/qa1-run-focused.py",
+      "sha256": "b81ea629e72afd6094901b29dfe720189b49d93642c9189b88cc8ecc9d212957"
+    },
+    {
+      "bytes": 4097,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-implementation-r1/qa1-result.json",
+      "sha256": "ce6f220e803c19f12c8fafa395c99c71af5fa346c8e889784259c3237996f5aa"
+    },
+    {
+      "bytes": 14422,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-implementation-r1/qa1-focused.log",
+      "sha256": "24bd1aea36d480286cf9f53f5a57fcd60882ba3ff8f5d0e2b868582530db7667"
+    },
+    {
+      "bytes": 579929,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-implementation-r1/qa1-cases.json",
+      "sha256": "a62670d2c35e01bbb8fc70b89c8d76f6c1eafb4ee865ec3b3371b276cd870470"
+    },
+    {
+      "bytes": 3601,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-implementation-r1/qa2-run-focused.py",
+      "sha256": "b81ea629e72afd6094901b29dfe720189b49d93642c9189b88cc8ecc9d212957"
+    },
+    {
+      "bytes": 4081,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-implementation-r1/qa2-result.json",
+      "sha256": "87deb314bc023e1ac2b035bf6c3cca8e49a0f5af3234bff2294637196c720a61"
+    },
+    {
+      "bytes": 6456,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-implementation-r1/qa2-focused.log",
+      "sha256": "4e054fcd2dc350af44461803866b699e4897d1f22062a4075627c39edd4ce7d5"
+    },
+    {
+      "bytes": 580127,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-implementation-r1/qa2-cases.json",
+      "sha256": "cef30ce70a1f9ff3a4a31528796dfb5034e770dc13c7d94bcb244e4516ccfca3"
+    },
+    {
+      "bytes": 12034,
+      "mode": 420,
+      "path": "build/linker-parser-v2/source-snapshot-r1/scripts/diagnostics/linker_parser_v2/parser.py",
+      "sha256": "993f352b58c3a3fb62fafa5bb7fd78d8b8c8a2c66989e5a99605ad6c85f282e3"
+    },
+    {
+      "bytes": 3344,
+      "mode": 420,
+      "path": "build/linker-parser-v2/source-snapshot-r1/scripts/diagnostics/linker_parser_v2/README.md",
+      "sha256": "f44316f2c85241aff768851d7bf087628bea74c53e080f449ee2c8f2decc119a"
+    },
+    {
+      "bytes": 39167,
+      "mode": 420,
+      "path": "build/linker-parser-v2/source-snapshot-r1/scripts/tests/test_linker_parser_v2.py",
+      "sha256": "88b26af7f7bbe28f87a20f6afdb13e168fe5aded06b648051f0e18cc57554e9b"
+    },
+    {
+      "bytes": 8027,
+      "mode": 420,
+      "path": "build/linker-parser-v2/source-snapshot-r1/scripts/tests/test_linker_parser_v2_integrity.py",
+      "sha256": "c388f1c5947275c4fc1787cf41a4475a5fe071a6922f9755ed37d2205a3a5743"
+    },
+    {
+      "bytes": 5656,
+      "mode": 420,
+      "path": "build/linker-parser-v2/source-snapshot-r1/docs/P2_CPP_DRIVER_OUTPUT_PARSER_V2_IMPLEMENTATION_RESULTS.md",
+      "sha256": "8e85ec9b23bc16f64f03b410b5a75de009de339f1d90a93556bd26277176fdd8"
+    }
+  ],
+  "branch": "dev",
+  "canonicalHostIndependentlyRerun": false,
+  "canonicalHostMethodsPassed": 540,
+  "compilerFreshlyRehashed": false,
+  "counts": {
+    "acceptedWitnessParses": 22,
+    "compareOutputCalls": 15,
+    "explicitCountedChecks": 1837,
+    "fakeBoundaryAssertions": 224,
+    "fakeBoundaryRuns": 33,
+    "ledgerRows": 1826,
+    "mainChecks": 1805,
+    "methods": 38,
+    "mutationActions": 1054,
+    "parseOutputCalls": 1073,
+    "reviewedFamilies": 32,
+    "supplementalChecks": 32,
+    "supplementalIntegrityScenarios": 21
+  },
+  "fakeBoundariesAreRuntimeEvidence": false,
+  "findings": [],
+  "full245InputsFreshlyRehashed": false,
+  "grantConsumed": true,
+  "head": "2ead92a2e641adc4565d13074bfb105ad29039c7",
+  "historicalAccess1Status": "FAILED_INCONCLUSIVE_UNCHANGED",
+  "historicalBindingsVerified": 132,
+  "historicalCase2Status": "NOT_RUN_UNCHANGED",
+  "implementationBindingsVerified": 27,
+  "implementationLockSha256": "5c74c8ac5f672ca237ee112c668001d9257b938c14d70029a5044f9ae2863b76",
+  "independentReviewer": "01a1b63a-5ec5-73c1-af98-e2d13cf68664",
+  "nativeBridgeApproved": false,
+  "nativeBridgeIntegrated": false,
+  "nativeExecutionAuthorized": false,
+  "nativeToolchainQueriesExecuted": 0,
+  "negativeCommandStatus": "FAILED",
+  "negativeTerminalStatus": "FAILED",
+  "proposalBindingsVerified": 30,
+  "proposalQaBindingsVerified": 11,
+  "protectedPythonBindingsVerified": 52,
+  "reviewDate": "2026-11-07",
+  "schema": 1,
+  "scope": "offline-v2-parser-implementation-only-no-native-bridge",
+  "semanticEnablement": false,
+  "semanticOrCodegenQualification": false,
+  "sixInventoriesFreshlyRehashed": false,
+  "verdict": "PASS"
+}

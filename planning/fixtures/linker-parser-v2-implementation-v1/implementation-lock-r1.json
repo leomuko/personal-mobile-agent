@@ -1,0 +1,208 @@
+{
+  "P2Complete": false,
+  "acceptancePublished": false,
+  "acceptedWitnessParses": 22,
+  "accessQueriesExecuted": 0,
+  "bindings": [
+    {
+      "bytes": 12034,
+      "mode": 420,
+      "path": "scripts/diagnostics/linker_parser_v2/parser.py",
+      "sha256": "993f352b58c3a3fb62fafa5bb7fd78d8b8c8a2c66989e5a99605ad6c85f282e3"
+    },
+    {
+      "bytes": 3344,
+      "mode": 420,
+      "path": "scripts/diagnostics/linker_parser_v2/README.md",
+      "sha256": "f44316f2c85241aff768851d7bf087628bea74c53e080f449ee2c8f2decc119a"
+    },
+    {
+      "bytes": 39167,
+      "mode": 420,
+      "path": "scripts/tests/test_linker_parser_v2.py",
+      "sha256": "88b26af7f7bbe28f87a20f6afdb13e168fe5aded06b648051f0e18cc57554e9b"
+    },
+    {
+      "bytes": 8027,
+      "mode": 420,
+      "path": "scripts/tests/test_linker_parser_v2_integrity.py",
+      "sha256": "c388f1c5947275c4fc1787cf41a4475a5fe071a6922f9755ed37d2205a3a5743"
+    },
+    {
+      "bytes": 5656,
+      "mode": 420,
+      "path": "docs/P2_CPP_DRIVER_OUTPUT_PARSER_V2_IMPLEMENTATION_RESULTS.md",
+      "sha256": "8e85ec9b23bc16f64f03b410b5a75de009de339f1d90a93556bd26277176fdd8"
+    },
+    {
+      "bytes": 7450,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-contract-v2/proposal-lock-r1.json",
+      "sha256": "2e22395071ab2574325b74b2f286cd59974c28ee3467681420ec3fc3e56a540f"
+    },
+    {
+      "bytes": 3278,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-contract-v2/qa-checkpoint-r1.json",
+      "sha256": "6a4812e8227b6d72b9ca441fe3345df7fed193f288dee85d16521437a94e5919"
+    },
+    {
+      "bytes": 63774,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-contract-v2/contract-proposal.json",
+      "sha256": "dffedbf0ab134215a41df3cb3c64de715148282063fcc203156979085a8a46b4"
+    },
+    {
+      "bytes": 7612,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-contract-v2/regression-plan.json",
+      "sha256": "04dfac4f9d33496bee7cbd491e68f5b52dc4e3cdb51268aa57835dfe05dd7067"
+    },
+    {
+      "bytes": 5622,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-contract-v2/observed-positive.raw.txt",
+      "sha256": "73369da40748b9f990dc0feb20805797c168e0253d32dd7323fc940caab1dfea"
+    },
+    {
+      "bytes": 5683,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-contract-v2/synthetic-negative.raw.txt",
+      "sha256": "64a6f4a6f4b35263332c6a44c01b7c51387c071725d648e5400197f6a3e33f88"
+    },
+    {
+      "bytes": 1021,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-contract-v2/fixture-provenance.json",
+      "sha256": "9124fab56f74ecd49804b399c0c356acc9db9b27992e2fa45f69cd5cf76f6a2a"
+    },
+    {
+      "bytes": 3580,
+      "mode": 420,
+      "path": "build/linker-parser-v2/run-focused.py",
+      "sha256": "7a58ea65379849753f61f3bd6ef5546beda44b38d9b6a29558a5ecef3f3d4d75"
+    },
+    {
+      "bytes": 2765,
+      "mode": 420,
+      "path": "build/linker-parser-v2/run-focused-development1.py",
+      "sha256": "23a9e4bf8955bfbcb3aeffbd637d8775381b78a18424e58fdbcb1358261bab04"
+    },
+    {
+      "bytes": 4194,
+      "mode": 420,
+      "path": "build/linker-parser-v2/development1.log",
+      "sha256": "23f0e70ea6952bca56ace1b57342f515e58cbc4be2ada87b71e1734e0545a1e8"
+    },
+    {
+      "bytes": 733,
+      "mode": 420,
+      "path": "build/linker-parser-v2/development1-result.json",
+      "sha256": "4122bee799d6854047b82073d6da0fd916412c5830ae72b3235581faf5a6e101"
+    },
+    {
+      "bytes": 580127,
+      "mode": 420,
+      "path": "build/linker-parser-v2/development1-cases.json",
+      "sha256": "cef30ce70a1f9ff3a4a31528796dfb5034e770dc13c7d94bcb244e4516ccfca3"
+    },
+    {
+      "bytes": 6456,
+      "mode": 420,
+      "path": "build/linker-parser-v2/development2.log",
+      "sha256": "148a3b2722049f47ad4cae9ac518d1e8e19613d04df8589185a39479150950e2"
+    },
+    {
+      "bytes": 4081,
+      "mode": 420,
+      "path": "build/linker-parser-v2/development2-result.json",
+      "sha256": "87deb314bc023e1ac2b035bf6c3cca8e49a0f5af3234bff2294637196c720a61"
+    },
+    {
+      "bytes": 580127,
+      "mode": 420,
+      "path": "build/linker-parser-v2/development2-cases.json",
+      "sha256": "cef30ce70a1f9ff3a4a31528796dfb5034e770dc13c7d94bcb244e4516ccfca3"
+    },
+    {
+      "bytes": 63170,
+      "mode": 420,
+      "path": "build/linker-parser-v2/full-host-suite.log",
+      "sha256": "6b0c204f430d79c36b46d89e4b91902cc559d783e8692652c769c2846a581e59"
+    },
+    {
+      "bytes": 5870,
+      "mode": 420,
+      "path": "build/linker-parser-v2/host-verification.json",
+      "sha256": "084dbf1d6f020c754a31898e85d5a194687b19aba2a1d97e8756ecd595422ca2"
+    },
+    {
+      "bytes": 4916,
+      "mode": 420,
+      "path": "build/linker-parser-v2/preserve-and-replay.py",
+      "sha256": "e282801a88f2f97ecfb973b4ff2d52e3f37a3acd7b66e1af0f1480cd2ce30fc2"
+    },
+    {
+      "bytes": 1751,
+      "mode": 420,
+      "path": "build/linker-parser-v2/preservation.json",
+      "sha256": "92ef130baf964ab5c2254acc5c1e72f673f254b25cf52240da15e78fe7ec2701"
+    },
+    {
+      "bytes": 16873,
+      "mode": 420,
+      "path": "build/linker-parser-v2/offline-replay.json",
+      "sha256": "17465a7ba7b4cef58e9d52b657cbbcbfd156ccab76086fb7be6d31fb8209815a"
+    },
+    {
+      "bytes": 2194,
+      "mode": 420,
+      "path": "build/linker-parser-v2/probe-words.py",
+      "sha256": "cf0713e8db9433cbe4fb14027a53882746ea12e622e3993fb27f2691e7853982"
+    },
+    {
+      "bytes": 29600,
+      "mode": 420,
+      "path": "build/linker-parser-v2/development-word-probe.json",
+      "sha256": "ac916cbad8daf002b0de045d5fa3258c35d210e9280edd4305819005d1244c5a"
+    }
+  ],
+  "branch": "dev",
+  "canonicalHostMethodsPassed": 540,
+  "clientDate": "2026-11-07",
+  "compilerFreshlyRehashed": false,
+  "contractSha256": "dffedbf0ab134215a41df3cb3c64de715148282063fcc203156979085a8a46b4",
+  "expectedNegativeCommandStatus": "FAILED",
+  "expectedNegativeTerminalStatus": "FAILED",
+  "explicitAssertions": 1837,
+  "fakeBoundaryRuns": 33,
+  "fakeBoundaryTestsNotRuntimeEvidence": true,
+  "focusedMethodsPassed": 38,
+  "full245InputsFreshlyRehashed": false,
+  "grantConsumed": true,
+  "head": "2ead92a2e641adc4565d13074bfb105ad29039c7",
+  "historicalAccess1Status": "FAILED_INCONCLUSIVE_UNCHANGED",
+  "historicalBindingsVerified": 132,
+  "historicalCase2Status": "NOT_RUN_UNCHANGED",
+  "independentReview": "PENDING_SEPARATE_RECORD",
+  "individualMutationActions": 1054,
+  "nativeBridgeIntegrated": false,
+  "nativeExecutionAuthorized": false,
+  "nativePolicyContrastEstablished": false,
+  "nativeToolchainQueriesExecuted": 0,
+  "offlineStructuralReplayPassed": true,
+  "parserImplemented": true,
+  "producerStatus": "PASS_OFFLINE_REPLAY_AND_HOST_REGRESSIONS",
+  "proposalBindingsVerified": 30,
+  "proposalLockSha256": "2e22395071ab2574325b74b2f286cd59974c28ee3467681420ec3fc3e56a540f",
+  "proposalQaBindingsVerified": 11,
+  "protectedCodeBindingsVerified": 52,
+  "reviewedFamiliesPassed": 32,
+  "schema": 1,
+  "scope": "offline-v2-parser-implementation-only-no-native-bridge",
+  "semanticEnablement": false,
+  "semanticOrCodegenQualification": false,
+  "sixInventoriesFreshlyRehashed": false,
+  "skips": 0,
+  "supplementalIntegrityScenarios": 21
+}
