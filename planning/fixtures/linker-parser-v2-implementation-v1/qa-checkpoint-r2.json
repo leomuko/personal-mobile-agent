@@ -1,0 +1,96 @@
+{
+  "P2Complete": false,
+  "bindings": [
+    {
+      "bytes": 6422,
+      "mode": 420,
+      "path": "planning/fixtures/linker-parser-v2-implementation-v1/implementation-lock-r2.json",
+      "sha256": "c1ebf9dc0bca9ce1a1594fe170a39d780071e568f07d50666e643c21478f40b8"
+    },
+    {
+      "bytes": 2688,
+      "mode": 420,
+      "path": "docs/P2_CPP_PARSER_V2_FIFO_FIX_REVIEWED_HANDOFF_R2.md",
+      "sha256": "bd2d34d0d7b5c76a4ee97a03e36f0d59c3fd85c501fc2b5f89993e10502503d9"
+    },
+    {
+      "bytes": 580127,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-fifo-fix-r2/independent-cases.json",
+      "sha256": "cef30ce70a1f9ff3a4a31528796dfb5034e770dc13c7d94bcb244e4516ccfca3"
+    },
+    {
+      "bytes": 211,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-fifo-fix-r2/independent-fifo.log",
+      "sha256": "af43b61048ae8cd1ec1cc93037c7ad771805abfd1754ce99972c7852c2a85a6a"
+    },
+    {
+      "bytes": 3595,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-fifo-fix-r2/independent-focused-runner.py",
+      "sha256": "d966fe70adc7f722531ba9280fabedebc047f4cb62135621a5e6b3b5f5b151d2"
+    },
+    {
+      "bytes": 6456,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-fifo-fix-r2/independent-focused.log",
+      "sha256": "e9276ed00477ae2daf34af63bc73d93ab354f414d90cd65c9abdce6067f10a17"
+    },
+    {
+      "bytes": 4081,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-fifo-fix-r2/independent-result.json",
+      "sha256": "87deb314bc023e1ac2b035bf6c3cca8e49a0f5af3234bff2294637196c720a61"
+    },
+    {
+      "bytes": 3110,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-fifo-fix-r2/review.json",
+      "sha256": "cb2dedf32e1315118974df422dcd693b46410eef85e89d3c86b78ab6dca27dda"
+    },
+    {
+      "bytes": 2328,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-fifo-fix-r2/review.md",
+      "sha256": "75131e8b5110a30f161483ade97a895d9f253332b9e951e1ca24657d58cd638a"
+    },
+    {
+      "bytes": 20281,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-fifo-fix-r2/snapshot.json",
+      "sha256": "fc1512dab8399c00b1cfc2349f148dafd3f5cf67fa1297ec2dfcebc6b61159c2"
+    },
+    {
+      "bytes": 5741,
+      "mode": 420,
+      "path": "build/linker-parser-v2/qa-fifo-fix-r2/verification.json",
+      "sha256": "40b7eec79399712f09de39fa5fb42537358af5a2d50b6c86b8eb4565b274d946"
+    }
+  ],
+  "branch": "dev",
+  "canonicalHostIndependentlyRerun": false,
+  "canonicalHostMethodsPassed": 541,
+  "date": "2026-11-10",
+  "fifoRegressionPassed": true,
+  "findings": [],
+  "focusedMethodsPassed": 38,
+  "head": "2ead92a2e641adc4565d13074bfb105ad29039c7",
+  "historicalAccess1Status": "FAILED_INCONCLUSIVE_UNCHANGED",
+  "historicalCase2Status": "NOT_RUN_UNCHANGED",
+  "implementationLockSha256": "c1ebf9dc0bca9ce1a1594fe170a39d780071e568f07d50666e643c21478f40b8",
+  "independentFifoRegressionPassed": true,
+  "independentFocusedCompleted": true,
+  "independentReviewer": "01a1b63a-5ec5-73c1-af98-e2d13cf68664",
+  "nativeBridgeApproved": false,
+  "nativeExecutionAuthorized": false,
+  "nativeToolchainQueriesExecuted": 0,
+  "permissionChanges": false,
+  "r1CurrentSourceAdmissionPassed": false,
+  "r1VerifiedViaExplicitArchive": true,
+  "resolvedFinding": "V2-PARSER-001",
+  "schema": 1,
+  "scope": "offline-policy-fifo-rejection-only-no-native-bridge",
+  "semanticEnablement": false,
+  "verdict": "PASS"
+}
