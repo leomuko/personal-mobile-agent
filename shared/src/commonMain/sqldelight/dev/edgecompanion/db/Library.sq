@@ -30,6 +30,17 @@ CREATE TABLE source_chunk (
 CREATE INDEX chunk_revision ON source_chunk(revision_id, id);
 CREATE VIRTUAL TABLE source_search USING fts4(title TEXT, text TEXT);
 
+CREATE TABLE IF NOT EXISTS source_passage (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  revision_id INTEGER NOT NULL REFERENCES source_revision(id),
+  start_utf16 INTEGER NOT NULL CHECK(start_utf16 >= 0),
+  end_utf16 INTEGER NOT NULL CHECK(end_utf16 > start_utf16),
+  text TEXT NOT NULL,
+  UNIQUE(revision_id, start_utf16)
+);
+CREATE INDEX IF NOT EXISTS passage_revision ON source_passage(revision_id, id);
+CREATE VIRTUAL TABLE IF NOT EXISTS source_passage_search USING fts4(text TEXT);
+
 readContext:
 SELECT epoch, message_fence FROM context_eligibility WHERE id = 1;
 
@@ -93,3 +104,74 @@ deleteRevisions:
 DELETE FROM source_revision WHERE source_id = ?;
 deleteSource:
 DELETE FROM source WHERE id = ?;
+
+passageCount:
+SELECT count(*) FROM source_passage;
+
+revisionPassageCount:
+SELECT count(*) FROM source_passage WHERE revision_id = ?;
+
+passageCoverage:
+SELECT count(*) AS total_revisions,
+  coalesce(sum(CASE WHEN status = 'PASSAGE_READY_V1' THEN 1 ELSE 0 END), 0) AS indexed_revisions
+FROM source_revision;
+
+nextPendingPassageRevision:
+SELECT id, text FROM source_revision WHERE status != 'PASSAGE_READY_V1' ORDER BY id LIMIT 1;
+
+passageRevision:
+SELECT text, status FROM source_revision WHERE id = ?;
+
+markPassageReady:
+UPDATE source_revision SET status = 'PASSAGE_READY_V1' WHERE id = ?;
+
+insertPassage:
+INSERT INTO source_passage(revision_id, start_utf16, end_utf16, text) VALUES (?, ?, ?, ?);
+
+indexPassage:
+INSERT INTO source_passage_search(docid, text) VALUES (?, ?);
+
+deletePassageRevisionSearch:
+DELETE FROM source_passage_search WHERE docid IN (SELECT id FROM source_passage WHERE revision_id = ?);
+
+deletePassageRevision:
+DELETE FROM source_passage WHERE revision_id = ?;
+
+deletePassageSourceSearch:
+DELETE FROM source_passage_search WHERE docid IN (
+  SELECT source_passage.id FROM source_passage JOIN source_revision ON source_revision.id = source_passage.revision_id
+  WHERE source_revision.source_id = ?
+);
+
+deletePassageSource:
+DELETE FROM source_passage WHERE revision_id IN (SELECT id FROM source_revision WHERE source_id = ?);
+
+scanPassageMatches:
+SELECT source_passage.id
+FROM source_passage_search
+JOIN source_passage ON source_passage.id = source_passage_search.docid
+JOIN source_revision ON source_revision.id = source_passage.revision_id
+WHERE source_passage_search MATCH :query AND source_passage.id > :afterId
+  AND source_passage_search.docid > CAST(:afterId AS INTEGER)
+  AND source_revision.status = 'PASSAGE_READY_V1'
+ORDER BY source_passage_search.docid LIMIT :pageSize;
+
+termPassageMatches:
+SELECT source_passage.id FROM source_passage_search
+JOIN source_passage ON source_passage.id = source_passage_search.docid
+JOIN source_revision ON source_revision.id = source_passage.revision_id
+WHERE source_passage_search MATCH :term
+  AND source_passage.id IN :candidateIds
+  AND source_passage_search.docid IN :candidateIds
+  AND source_passage.id >= :firstId AND source_passage.id <= :lastId
+  AND source_passage_search.docid >= CAST(:firstId AS INTEGER)
+  AND source_passage_search.docid <= CAST(:lastId AS INTEGER)
+  AND source_revision.status = 'PASSAGE_READY_V1'
+ORDER BY source_passage_search.docid LIMIT :pageSize;
+
+fetchPassage:
+SELECT source.id AS source_id, source.title, source_revision.id AS revision_id,
+  source_passage.id AS passage_id, source_passage.start_utf16, source_passage.end_utf16, source_passage.text
+FROM source_passage JOIN source_revision ON source_revision.id = source_passage.revision_id
+JOIN source ON source.id = source_revision.source_id
+WHERE source_passage.id = ? AND source_revision.status = 'PASSAGE_READY_V1';

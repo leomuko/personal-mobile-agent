@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS source_passage (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  revision_id INTEGER NOT NULL REFERENCES source_revision(id),
+  start_utf16 INTEGER NOT NULL CHECK(start_utf16 >= 0),
+  end_utf16 INTEGER NOT NULL CHECK(end_utf16 > start_utf16),
+  text TEXT NOT NULL,
+  UNIQUE(revision_id, start_utf16)
+);
+CREATE INDEX IF NOT EXISTS passage_revision ON source_passage(revision_id, id);
+CREATE VIRTUAL TABLE IF NOT EXISTS source_passage_search USING fts4(text TEXT);
