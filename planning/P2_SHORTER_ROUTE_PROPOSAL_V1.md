@@ -1,8 +1,63 @@
 # P2 shorter route — proposal v1
 
-2026-11-10. **Proposal for user review. Nothing here is implemented, approved or
-authorized.** It changes no source, freeze, fixture, threshold, dependency or Git
-state. P2 remains incomplete; semantic search stays disabled.
+2026-11-10; **revised 2026-11-11** after an independent review
+(`build/qa-shorter-route-2026-11-11-1/review.json`, findings ROUTE-F1 to F5,
+all accepted) and the user's acceptance of decisions D1–D4. The route is
+accepted in direction; **no implementation has started**. It changes no source,
+freeze, fixture, threshold, dependency or Git state. P2 remains incomplete;
+semantic search stays disabled.
+
+## Revision 2026-11-11: corrected diagnosis
+
+The first version said the encoder "misses the relevant passage in more than
+half of the answerable English queries". **That was wrong.** The published
+0.45 was measured *after* the calibrated cosine cutoff removed hits. Recomputed
+on the host from the retained vectors of run `p2-semantic-gate-8SCUVh`
+(read-only; exploratory, because these held-out rows are already exposed):
+
+| English held-out, 20 answerable / 20 unanswerable | Recall@5 | nDCG@10 | Relevant passage ranked first | False matches |
+| --- | ---: | ---: | ---: | ---: |
+| With the calibrated cutoff 0.8423 (published) | 0.45 | 0.45 | 9/20 | 0/20 |
+| No cutoff (ranking only) | 1.00 | 0.963 | 18/20 (other 2 ranked second) | 20/20 |
+
+Top-score ranges overlap: answerable 0.762–0.913, unanswerable 0.719–0.802.
+Swahili and Japanese rank the relevant passage near the bottom either way.
+
+What this does and does not show:
+
+- On this 34-passage English corpus the pinned encoder **ranks well**. The
+  gate failed on **deciding answerability from a score cutoff** fitted to 12
+  calibration rows, not on ranking.
+- It says nothing about ranking at library scale, about other languages, or
+  about any cutoff chosen after seeing these rows.
+- The hard problem is therefore **abstention and sufficiency**, which is also
+  what the earlier calibration and verifier campaigns ran into. Replacing the
+  encoder is not established as necessary.
+
+Consequences for the tracks below: Track B becomes a comparison with USE-QA
+kept as the control, and no longer blocks product work. Track A needs an
+explicit source-scope and abstention contract instead of relying on a
+retrieval cutoff. The original text of the tables and tracks is kept below,
+with corrections marked.
+
+## Accepted decisions (user, 2026-11-11)
+
+| # | Decision |
+| --- | --- |
+| D1 | Host bake-off of keyword-only, small permissively licensed encoders and their fusion, with USE-QA as control. One-time public model downloads allowed after licence and mobile-artifact confirmation. |
+| D2 | Measure 4096 and 8192 context on the S24; choose from measurement. Nothing larger than 2048 becomes the ordinary default before that. |
+| D3 | Retrieval runs automatically on ordinary chat turns when Sources is non-empty; with no hit it is ordinary chat with no claim about sources. **Refined after review:** a separate, explicit, persisted *source-scoped* request state carries the "your sources do not cover this" behaviour. How the user enters that state is open (D5). |
+| D4 | QA-only paths (V3, V4, constrained decoding) stay untouched and pinned to 2048/512. |
+| D5 (open) | The UI affordance for a source-scoped request. Not in the approved screenshots; needs the user's choice before S5. |
+
+## Scope statement
+
+This route delivers an **interim milestone**: grounded answers over text
+Sources with keyword passage retrieval and consulted-passage provenance. It is
+not P2 completion. Explicit Memory, text-PDF ingestion, semantic recall and the
+consolidated P2 acceptance campaign (including the 50 answerable / 20
+unanswerable quality targets) remain owed and unchanged. Keyword-only delivery
+is a degraded mode, not a substitute for semantic recall.
 
 ## Why a different route
 
@@ -19,10 +74,8 @@ original blocker, and none of those steps repairs it.
 
 Two observations follow from the retained evidence:
 
-1. **A verifier cannot recover recall.** The encoder misses the relevant passage
-   in more than half of the answerable English queries. No amount of verified,
-   schema-valid citation output helps when the passage was never retrieved. The
-   V4 draft explicitly kept the same encoder.
+1. ~~A verifier cannot recover recall.~~ **Withdrawn; see the corrected
+   diagnosis above.** Ranking was not the failure; the score cutoff was.
 2. **The product plan does not require model-written citations.** Section 6 of
    `IMPLEMENTATION_PLAN.md` says citations "must be assembled from retrieved
    source IDs and spans". The app already knows which passages it put in the
@@ -45,9 +98,17 @@ Use the published LiteRT-LM 0.17.1 runtime unchanged, with plain-text output.
 - The UI shows those recorded passages as **"passages consulted"**, each opening
   the exact revision and span. This is a provenance statement, not a claim that
   the model's sentence is supported by that span. Wording must stay honest.
-- Abstention is decided by the app before the model runs: when no passage
-  clears the retrieval cutoff, the assistant says the sources do not cover it
-  and does not load Gemma for a grounded answer.
+- **Revised 2026-11-11.** Two request states, persisted with the turn:
+  - *Ordinary chat:* retrieval augments the prompt when there are hits; with
+    none it is plain chat and makes no statement about sources.
+  - *Source-scoped:* with no hit, the app replies that the sources do not
+    cover it and does not load Gemma. With hits, the model is instructed to
+    answer only from the passages and to say when the requested detail is
+    absent.
+- A retrieved, relevant passage can still lack the requested detail. That
+  case, contradictions between passages and unsupported answers are measured
+  in the answer-quality slice. A score cutoff alone is not treated as proof of
+  answerability.
 - The existing context fence, delete invalidation, single `ModelManager` owner,
   cancellation and cleanup rules are reused as they are.
 
@@ -76,10 +137,17 @@ contract rule for this route only. The new value is not yet chosen and still
 needs measured S24 load time, memory and first-token latency before it is
 relied on. Implementation has not started.
 
-### Track B — replace the encoder candidate, host first
+### Track B — compare retrieval configurations, host first
 
-The qualification harness, fixture format, metrics and thresholds already exist
-and worked: they correctly rejected a weak candidate.
+**Revised 2026-11-11:** this is a comparison, not a replacement, and it does
+not block Track A. USE-QA stays in as the control, scored from its retained
+vectors. Every configuration reports three things separately: ranking with no
+cutoff, ranking after its own calibrated cutoff, and the false-match rate
+against the ≤5% gate. Keyword (BM25), cosine and rank fusion produce different
+score scales, so each gets its own stated ranking and calibration rule. All
+results on the v1 rows are exploratory.
+
+The original steps follow.
 
 1. **Host-only bake-off** (no device, no app change). Score on the existing
    passages and queries: (a) keyword/BM25 alone, (b) two or three current small
@@ -113,6 +181,11 @@ under Track A and says so. That is still a usable Sources feature.
   build. *Not checked as part of this proposal.*
 
 ## Suggested order
+
+**Superseded 2026-11-11** by the order in
+[P2_SLICE_PLAN_V1.md](P2_SLICE_PLAN_V1.md): passage retrieval first, then
+context profiles, grounded prompt and UI; the retrieval comparison runs
+separately. The original table is kept for the record.
 
 | Step | Scope | Needs |
 | --- | --- | --- |
