@@ -9,6 +9,22 @@ import dev.edgecompanion.db.CompanionDatabase
 class SourcesRepository(private val db: CompanionDatabase, private val capacity: LibraryCapacity,
     private val now: () -> Long) {
     private val sql get() = db.libraryQueries
+    private val passages = PassageIndex(db) { checkCapacity(SourceLimits.TRANSACTION_RESERVE) }
+
+    /** Repository-only S3 API. Caller owns the serial storage lane and the stop signal. */
+    fun retrievePassages(queryText: String, maxPassages: Int = PassageLimits.RESULT_PASSAGES,
+        maxTextUtf8Bytes: Int = PassageLimits.RESULT_TEXT_UTF8_BYTES,
+        control: PassageControl = PassageControl()): PassageRetrieval = guarded {
+        passages.retrieve(queryText, maxPassages, maxTextUtf8Bytes, control)
+    }
+
+    /** Explicit bounded work; no constructor/startup work or background scheduler. */
+    fun backfillPassages(maxRevisions: Int = PassageLimits.BACKFILL_REVISIONS,
+        control: PassageControl = PassageControl()): PassageBackfill = guarded {
+        passages.backfill(maxRevisions, control)
+    }
+
+    fun passageCoverage(): PassageCoverage = guarded { passages.coverage() }
 
     fun list(query: String = "", after: Long = 0): SourcePage = guarded {
         require(after >= 0)
@@ -50,6 +66,7 @@ class SourcesRepository(private val db: CompanionDatabase, private val capacity:
                 checkCapacity(SourceLimits.TRANSACTION_RESERVE)
             }
             sql.indexSource(id, name, text)
+            passages.publish(revision, text)
             checkCapacity(SourceLimits.TRANSACTION_RESERVE)
             SourceSummary(id, name, kind, created, revision, bytes)
         }
@@ -73,6 +90,7 @@ class SourcesRepository(private val db: CompanionDatabase, private val capacity:
         db.transactionWithResult {
             if (sql.sourceById(id).executeAsOneOrNull() == null) return@transactionWithResult false
             sql.advanceContext()
+            passages.deleteSource(id)
             sql.deleteSearch(id); sql.deleteChunks(id); sql.deleteRevisions(id); sql.deleteSource(id)
             true
         }
