@@ -4,8 +4,10 @@ CREATE TABLE message (
   created_at INTEGER NOT NULL,
   role TEXT NOT NULL DEFAULT 'USER',
   turn_id INTEGER,
-  generation_id TEXT UNIQUE
+  generation_id TEXT
 );
+
+CREATE UNIQUE INDEX message_generation_id ON message(generation_id);
 
 CREATE TABLE assistant_attempt (
   id TEXT NOT NULL PRIMARY KEY,
