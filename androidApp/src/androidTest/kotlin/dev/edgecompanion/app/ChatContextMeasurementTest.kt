@@ -32,7 +32,7 @@ import org.koin.android.ext.android.getKoin
  * Cold measurements mean engine-cold only; the OS file cache is uncontrolled.
  */
 class ChatContextMeasurementTest {
-    @Test fun gpuBakedProfileNearBoundAndShortControl(): Unit = runBlocking {
+    @Test fun gpuBakedProfileNearBoundShortControlAndLongAnswer(): Unit = runBlocking {
         val args = InstrumentationRegistry.getArguments()
         assumeTrue("Context measurement not requested", args.getString("chatContextMeasurement") == "true")
         val context = InstrumentationRegistry.getInstrumentation().targetContext
@@ -44,6 +44,9 @@ class ChatContextMeasurementTest {
         // Neither backend nor profile can be overridden by instrumentation arguments.
         require(args.getString("modelBackend").let { it == null || it == "GPU" })
         require(args.getString("chatContextTokens") == null)
+        // Engine-cold iterations per case, chosen by the host script; no automatic retries.
+        val repeat = requireNotNull(args.getString("chatContextRepeat")?.toIntOrNull()) { "chatContextRepeat is required" }
+        require(repeat in 1..MAX_REPEAT)
         check(Build.MODEL == "SM-S928B") { "Only the designated S24 Ultra is authorized" }
         check(!context.getSystemService(KeyguardManager::class.java).isKeyguardLocked) { "Unlock the authorized phone" }
         val profile = ChatContextProfile.entries.single { it.contextTokens == BuildConfig.CHAT_CONTEXT_TOKENS }
@@ -65,7 +68,7 @@ class ChatContextMeasurementTest {
         val liveTrace = File(context.noBackupFilesDir, "chat-context-$runId-telemetry.json")
         val stopMarker = File(context.noBackupFilesDir, "chat-context-$runId-supervision-stop.json")
         val cases = JSONArray()
-        val report = JSONObject().put("schema", 1).put("runId", runId).put("status", "running")
+        val report = JSONObject().put("schema", 2).put("runId", runId).put("status", "running")
             .put("startedAtMs", System.currentTimeMillis()).put("device", "${Build.MANUFACTURER} ${Build.MODEL}")
             .put("androidSdk", Build.VERSION.SDK_INT).put("appVersion", BuildConfig.VERSION_NAME)
             .put("buildType", BuildConfig.BUILD_TYPE).put("backend", "GPU").put("automaticFallback", false)
@@ -74,6 +77,9 @@ class ChatContextMeasurementTest {
             .put("budgetVersion", GemmaChatBudget.VERSION).put("policy", JSONObject(manager.memoryPolicy.exportFields()))
             .put("memoryFloorsCalibratedForExtendedContext", false).put("automaticRetries", 0)
             .put("sampleIntervalMs", SAMPLE_MS).put("acceptanceComplete", false)
+            .put("repeat", repeat).put("iterationOrder", "per iteration: near_bound, short_control, long_answer")
+            .put("decodeRateCase", LONG_ANSWER).put("minimumLongAnswerOutputTokens", MIN_LONG_ANSWER_TOKENS)
+            .put("decodeRateNote", "Only $LONG_ANSWER decode rates with at least $MIN_LONG_ANSWER_TOKENS output tokens are meaningful")
             .put("experimentConditions", "No app UI interaction; app manager must remain unloaded")
             .put("coldDefinition", "engine-cold only; not file-cache-cold")
             .put("cacheState", "engine-unloaded per case; OS file cache uncontrolled; compiler cache disabled")
@@ -150,13 +156,14 @@ class ChatContextMeasurementTest {
                         }
                     }
                     val fixtures = listOf("near_bound" to nearBound(profile),
-                        "short_control" to "Name three colors, separated by commas.")
-                    for ((name, prompt) in fixtures) {
+                        "short_control" to "Name three colors, separated by commas.",
+                        LONG_ANSWER to LONG_ANSWER_PROMPT)
+                    for (iteration in 1..repeat) for ((name, prompt) in fixtures) {
                         check(unloaded(manager.state.value)) { "Each case must start with no resident engine" }
                         measured.reset()
-                        val request = GemmaChatBudget.build(prompt, emptyList(), "$runId-$name", profile)
+                        val request = GemmaChatBudget.build(prompt, emptyList(), "$runId-$name-$iteration", profile)
                         val bound = GemmaChatBudget.validate(request)
-                        val entry = JSONObject().put("case", name).put("status", "running")
+                        val entry = JSONObject().put("case", name).put("iteration", iteration).put("status", "running")
                             .put("cleanupConfirmed", false)
                             .put("promptBytes", prompt.encodeToByteArray().size).put("promptSha256", sha256(prompt))
                             .put("inputTokenByteBound", bound)
@@ -199,6 +206,8 @@ class ChatContextMeasurementTest {
                             check(statistics.inputTokens?.let { it > 0 && it.toLong() <= bound } == true)
                             check(statistics.tokens?.let { it in 1..profile.outputTokens } == true)
                             check(statistics.decodeTokensPerSecond?.let { it.isFinite() && it > 0 } == true)
+                            // A long answer under MIN_LONG_ANSWER_TOKENS does not fail the run; it is recorded
+                            // with decodeRateMeaningful=false and excluded from the decode-rate summary.
                             entry.put("status", "measured")
                         } catch (problem: Throwable) {
                             entry.put("status", "failed").put("failureType", problem.javaClass.simpleName)
@@ -213,6 +222,8 @@ class ChatContextMeasurementTest {
                                     .put("inputTokens", native.finished?.inputTokens ?: JSONObject.NULL)
                                     .put("outputTokens", native.finished?.tokens ?: JSONObject.NULL)
                                     .put("decodeTokensPerSecond", native.finished?.decodeTokensPerSecond ?: JSONObject.NULL)
+                                    .put("decodeRateMeaningful", name == LONG_ANSWER &&
+                                        (native.finished?.tokens ?: 0) >= MIN_LONG_ANSWER_TOKENS)
                                     .put("nativeLoadCount", native.loads).put("nativeFinishedCount", native.finishedCount)
                                     .put("responseChars", responseChars).put("residentAfter", runtime(manager.state.value))
                                     .put("outcome", terminal?.outcome?.name ?: JSONObject.NULL)
@@ -374,5 +385,11 @@ class ChatContextMeasurementTest {
     private companion object {
         const val SAMPLE_MS = 500L
         const val SUPERVISION_LOSS = "SupervisionLoss"
+        const val MAX_REPEAT = 5
+        const val LONG_ANSWER = "long_answer"
+        const val MIN_LONG_ANSWER_TOKENS = 128
+        // Synthetic; about 50 short lines (roughly 250-350 tokens), below the 512-token output reservation.
+        const val LONG_ANSWER_PROMPT = "Write a numbered list from 1 to 50. Each line has the number, one adjective " +
+            "and one noun, for example \"1. quiet river\". Write nothing else."
     }
 }
