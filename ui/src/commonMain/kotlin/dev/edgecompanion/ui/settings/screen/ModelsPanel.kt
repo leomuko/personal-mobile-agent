@@ -27,10 +27,25 @@ fun ModelsPanel(asset: ModelAssetState, runtime: ModelRuntimeState, device: Stri
         Text(device, style = MaterialTheme.typography.bodySmall)
         Text(stringResource(asset.status.label()), Modifier.testTag("model-asset-state"))
         Text(stringResource(runtime.status.label()), Modifier.testTag("model-runtime-state"))
-        Text(stringResource(Res.string.model_configuration, ModelCatalog.gemma4.configuredContextTokens,
-            ModelCatalog.gemma4.maxOutputTokens, runtime.backend.name), style = MaterialTheme.typography.bodySmall)
+        val residentContext = runtime.loadedContextTokens
+        val residentOutput = runtime.loadedOutputTokens
+        val resident = residentContext != null && residentOutput != null
+        val fallbackConfiguration = if (runtime.status in setOf(RuntimeStatus.UNLOADED, RuntimeStatus.BLOCKED))
+            Res.string.model_configuration_unloaded else Res.string.model_configuration_unconfirmed
+        Text(if (resident) stringResource(Res.string.model_configuration_loaded,
+            residentContext, residentOutput, runtime.backend.name)
+            else stringResource(fallbackConfiguration, ModelCatalog.gemma4.configuredContextTokens,
+                ModelCatalog.gemma4.maxOutputTokens, runtime.backend.name),
+            modifier = Modifier.testTag("model-configuration"), style = MaterialTheme.typography.bodySmall)
         if (busyAsset) LinearProgressIndicator(Modifier.fillMaxWidth())
-        (runtime.error ?: runtime.commandError ?: asset.error)?.let { Text(stringResource(it.label()), color = MaterialTheme.colorScheme.error) }
+        val panelProfileRefused = loaded && runtime.commandError == ModelError.BUSY && resident &&
+            (residentContext != ModelCatalog.gemma4.configuredContextTokens || residentOutput != ModelCatalog.gemma4.maxOutputTokens)
+        if (panelProfileRefused && runtime.error == null) {
+            Text(stringResource(Res.string.model_test_profile_refused, ModelCatalog.gemma4.configuredContextTokens,
+                ModelCatalog.gemma4.maxOutputTokens), Modifier.testTag("model-test-profile-refused"), color = MaterialTheme.colorScheme.error)
+        } else (runtime.error ?: runtime.commandError ?: asset.error)?.let {
+            Text(stringResource(it.label()), color = MaterialTheme.colorScheme.error)
+        }
         FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             OutlinedButton(onClick = onImport, enabled = !busyAsset && runtime.status == RuntimeStatus.UNLOADED) {
                 Icon(Icons.Outlined.FileOpen, null); Spacer(Modifier.width(6.dp)); Text(stringResource(Res.string.model_import))
