@@ -3,7 +3,8 @@ package dev.edgecompanion.core.inference
 enum class MemoryAdmission { LOADING, GENERATION }
 enum class MemoryStage { BASELINE, LOADING, LOADED_IDLE, PREFILL, DECODING, CANCELLING, POST_RELEASE }
 data class MemoryTracePoint(val stage: MemoryStage, val backend: ModelBackend, val runtimeStatus: RuntimeStatus,
-    val engineOwned: Boolean, val monotonicMs: Long, val policyId: String)
+    val engineOwned: Boolean, val monotonicMs: Long, val policyId: String,
+    val contextTokensAtEvent: Int? = null, val outputTokensAtEvent: Int? = null)
 
 data class MemoryPolicy(
     val id: String,
@@ -26,6 +27,7 @@ data class MemoryPolicy(
     }
 
     fun blockedReason(snapshot: ResourceSnapshot, stage: MemoryAdmission): ModelError? = with(snapshot) {
+        // These unchanged floors are not calibrated for 4096/8192-token contexts.
         when {
             thermalStatus == null || thermalStatus < 0 || totalMemoryBytes == null || totalMemoryBytes <= 0 ||
                 availableMemoryBytes == null || availableMemoryBytes < 0 -> ModelError.RESOURCE_UNKNOWN

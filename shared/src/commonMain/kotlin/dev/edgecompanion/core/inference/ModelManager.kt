@@ -29,6 +29,11 @@ class ModelManager(
     private var poisoned = false
     // Written under operation after successful native load or confirmed release.
     private var loadedConfig: ModelConfig? = null
+        set(value) {
+            field = value
+            mutable.update { it.copy(loadedContextTokens = value?.contextTokens,
+                loadedOutputTokens = value?.maxOutputTokens) }
+        }
     private val ownsEngine: Boolean get() = loadedConfig != null
     private var releasing = 0
     private val cancellationSignals = mutableSetOf<Job>()
@@ -623,7 +628,8 @@ class ModelManager(
     private val resourceErrors = setOf(ModelError.LOW_MEMORY, ModelError.THERMAL, ModelError.RESOURCE_UNKNOWN)
 
     private suspend fun recordMemory(stage: MemoryStage, backend: ModelBackend) {
-        try { memoryTelemetry(MemoryTracePoint(stage, backend, state.value.status, ownsEngine, nowMs(), memoryPolicy.id)) }
+        try { memoryTelemetry(MemoryTracePoint(stage, backend, state.value.status, ownsEngine, nowMs(), memoryPolicy.id,
+            loadedConfig?.contextTokens, loadedConfig?.maxOutputTokens)) }
         catch (_: CancellationException) {
             currentCoroutineContext().ensureActive()
             mutable.update { it.copy(telemetryFailed = true) }

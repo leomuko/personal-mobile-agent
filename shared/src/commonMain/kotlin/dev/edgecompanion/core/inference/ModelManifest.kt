@@ -58,7 +58,8 @@ data class ModelRuntimeState(val status: RuntimeStatus = RuntimeStatus.UNLOADED,
     val cleanupError: ModelError? = null,
     val telemetryFailed: Boolean = false,
     val loadMs: Long? = null, val firstTokenMs: Long? = null, val generationMs: Long? = null,
-    val outputTokens: Int? = null, val inputTokens: Int? = null, val decodeTokensPerSecond: Double? = null)
+    val outputTokens: Int? = null, val inputTokens: Int? = null, val decodeTokensPerSecond: Double? = null,
+    val loadedContextTokens: Int? = null, val loadedOutputTokens: Int? = null)
 
 data class ResourceSnapshot(val totalMemoryBytes: Long?, val availableMemoryBytes: Long?,
     val lowMemory: Boolean, val thermalStatus: Int?, val pressureThresholdBytes: Long? = null,

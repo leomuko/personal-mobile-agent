@@ -48,6 +48,8 @@ class MemoryTelemetryRecorder(private val resources: AndroidModelResources,
         val entry = JSONObject().put("elapsedMs", SystemClock.elapsedRealtime() - started)
             .put("stage", captured.stage.name).put("backend", captured.backend.name)
             .put("runtimeStatusAtEvent", captured.runtimeStatus.name).put("engineOwnedAtEvent", captured.engineOwned)
+            .put("contextTokensAtEvent", captured.contextTokensAtEvent ?: JSONObject.NULL)
+            .put("outputTokensAtEvent", captured.outputTokensAtEvent ?: JSONObject.NULL)
             .put("eventElapsedMs", captured.monotonicMs - started).put("policyId", captured.policyId)
             .put("availableMemoryBytes", resource.availableMemoryBytes ?: JSONObject.NULL)
             .put("pressureThresholdBytes", resource.pressureThresholdBytes ?: JSONObject.NULL)
