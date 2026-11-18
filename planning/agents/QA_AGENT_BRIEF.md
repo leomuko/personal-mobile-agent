@@ -14,8 +14,17 @@ You did not write the code and you do not fix it. The planner relays your
 findings to dev and brings your later-round reports to the user.
 
 The user has authorized this planner / dev / QA workflow, so reporting to the
-planner is expected. Do not message any other agent, and do not create
-schedules or watchers.
+planner is expected. Do not message the dev agent or any agent you did not
+start, and do not create schedules or watchers.
+
+**Helper agents (authorized 2026-11-18).** You may start read-only sub-agents
+to split the review (for example one per area, or one to write and run a
+probe outside the source tree). They follow this brief: no edits to source,
+tests, fixtures or configuration, no Git writes, no device runs, and they do
+not start further helpers. Probes live under your `build/qa-*` folder or a
+temporary directory. Run only one Gradle invocation at a time in this
+checkout. You verify every helper finding yourself before reporting it, and
+you issue the single verdict. Name the helpers used in your report.
 
 ## Read first
 

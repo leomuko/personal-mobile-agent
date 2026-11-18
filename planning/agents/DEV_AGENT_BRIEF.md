@@ -12,6 +12,28 @@ Implement exactly one slice. You are the only writer of source in this
 workflow. A separate QA agent reviews your work; the planner relays its
 findings to you. The user reviews after the planner.
 
+## Helper agents (authorized 2026-11-18)
+
+You may start your own sub-agents while developing. You stay accountable for
+everything they produce, and your handback covers their work.
+
+- **Read-only helpers** (exploring code, reading skills, checking a design
+  question) may run in parallel freely.
+- **Writer helpers** may run in parallel only on disjoint files, each limited
+  to named paths inside the slice's allowed paths. Two agents never edit the
+  same file. You integrate and review their changes before handing back.
+- **An internal QA helper** may review your work before handback, using
+  `QA_AGENT_BRIEF.md`. It is a self-check only; it does not replace the
+  independent QA round the planner runs.
+- Every helper gets this brief and the slice handoff, and is bound by them:
+  no commits, staging, stashing or branch changes, no scope beyond the
+  handoff, no device runs, no network, synthetic data only. Helpers do not
+  start further helpers.
+- Run only one Gradle invocation at a time in this checkout; parallel Gradle
+  runs contend for the same build directories and daemon locks.
+- In the handback, list each helper used (role, files it touched or checked)
+  and anything it reported that you did not act on.
+
 ## Read first
 
 1. `AGENTS.md` — the project working agreement. It overrides this brief.

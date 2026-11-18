@@ -24,6 +24,9 @@ provenance. They do not complete P2. See "Remaining P2 scope" below.
 6. User reviews. Commits happen only on the user's instruction.
 
 One slice at a time. Dev is the only writer; QA and planner do not edit source.
+Since 2026-11-18 the dev and QA agents may start their own helper agents under
+the rules in their briefs (disjoint files for writers, read-only for QA, one
+Gradle run at a time); the planner's independent QA round still applies.
 
 ## Checks proportionate to the change
 
@@ -102,6 +105,13 @@ on a path under the folders archived on 2026-11-10.
   transitions with confirmed cleanup between them, a preloaded engine of the
   wrong profile, cancellation during the reload, over-bound rejection, and
   unchanged QA behaviour.
+- **Status (2026-11-18):** implemented with the S3 truncation correction;
+  independent QA PASS in round 3 of 3 (`build/qa-s2a-2026-11-16/`), after
+  fixes for S2a-F1 (panel prompts on an extended engine), S2a-F2 (stale idle
+  release unloading a replacement) and S2a-F3 (idle release skipped during
+  pending cancellation). Host scope only; 4096/8192 unmeasured until S2b.
+  Carry into S2b: expose the loaded context size in runtime state, telemetry
+  and the Models panel; memory admission does not yet scale with context.
 
 ### S2b — S24 context measurement (device)
 
