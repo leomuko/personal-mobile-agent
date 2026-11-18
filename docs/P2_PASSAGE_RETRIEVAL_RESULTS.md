@@ -281,3 +281,13 @@ follow-up. The first review identified the boilerplate-weight issue recorded
 above; the follow-up verified the bound and exact regression against the final
 acceptance evidence. QA did not rerun tests or device work. SQLCipher and broader
 retrieval-quality/capacity qualification remain outside this verdict.
+
+## 2026-11-16: query truncation reflects omitted content words
+
+`QUERY_LIMIT` and `queryTermsTruncated` now indicate that the eight-term
+selection omitted at least one content word. Dropping only filler allows a
+complete result when the remaining search finishes within its other bounds.
+The JDBC regression uses “What is the deadline for the contract in my notes?”
+and expects a complete result. The existing overflow test still checks that
+more than eight content words produce `QUERY_LIMIT`. Two existing passage tests
+now expect no truncation for long questions that omit only filler.
