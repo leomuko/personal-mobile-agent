@@ -48,7 +48,7 @@ class PassageRulesTest {
         val q = PassageRules.query("Please tell me what is the name of the Zircon valve pressure rating in megapascals?")
         assertEquals(listOf("name", "Zircon", "valve", "pressure", "rating", "megapascals"),
             q.terms.take(6).map { it.removeSurrounding("\"") })
-        assertTrue(q.truncated)
+        assertFalse(q.truncated)
         val exact = PassageRules.query("not 12 mm before 2026 Café 終")
         assertEquals(7, exact.terms.size)
         assertFalse(exact.truncated)

@@ -54,7 +54,7 @@ internal object PassageRules {
         val terms = content + all.filter { it.lowercase() in boilerplate }
         val literals = terms.take(PassageLimits.QUERY_TERMS).map { "\"$it\"" }
         return PassageQuery(literals.takeIf { it.isNotEmpty() }?.joinToString(" OR "), literals,
-            terms.size > PassageLimits.QUERY_TERMS, minOf(content.size, PassageLimits.QUERY_TERMS))
+            content.size > PassageLimits.QUERY_TERMS, minOf(content.size, PassageLimits.QUERY_TERMS))
     }
 
     fun utf8Size(text: String): Int = text.encodeToByteArray().let { bytes ->

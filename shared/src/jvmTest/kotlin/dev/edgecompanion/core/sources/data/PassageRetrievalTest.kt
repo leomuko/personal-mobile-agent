@@ -130,8 +130,16 @@ class PassageRetrievalTest {
         val answer = f.add("Zircon valve pressure rating: 12 megapascals.", "Rating")
         val result = f.repo.retrievePassages("Please tell me what is the name of the pressure rating for the Zircon valve in megapascals?")
         assertEquals(answer.id, result.passages.first().sourceId)
-        assertTrue(result.queryTermsTruncated) // Omitted words are still disclosed.
-        assertEquals(PassageStopReason.QUERY_LIMIT, result.reason)
+        assertFalse(result.queryTermsTruncated)
+        assertEquals(PassageStatus.COMPLETE, result.status)
+    }
+    @Test fun omittedFillerDoesNotMarkAnOrdinaryQuestionIncomplete() = PassageTestDatabase().use { f ->
+        val answer = f.add("Contract deadline: Friday.", "Notes")
+        val result = f.repo.retrievePassages("What is the deadline for the contract in my notes?")
+        assertEquals(answer.id, result.passages.first().sourceId)
+        assertFalse(result.queryTermsTruncated)
+        assertEquals(PassageStatus.COMPLETE, result.status)
+        assertNull(result.reason)
     }
     @Test fun sparseRareTermPagesScoreOnlyTheirExactCandidatesAndDeduplicateOverlaps() = PassageTestDatabase().use { f ->
         val first = f.add("needle rareanswer", "First rare")
