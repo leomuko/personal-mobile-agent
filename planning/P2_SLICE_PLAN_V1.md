@@ -131,6 +131,17 @@ on a path under the folders archived on 2026-11-10.
   prompts near each bound, through the existing supervised QA harness.
 - **Done when:** a results doc records the numbers and the planner recommends
   one value for the user to accept as the ordinary default.
+- **Status (2026-11-18):** first pass run on the S24 (4096 and 8192, both
+  passed) and the SQLCipher gate passed. Results and recommendation (4096,
+  provisional) in `docs/P2_CONTEXT_MEASUREMENT_RESULTS.md`. Follow-up needed:
+  2048 baseline, longer-answer decode case, repetitions.
+- **Follow-up (2026-11-18):** user accepted 4096 as the provisional ordinary
+  default (512 output; QA requests stay 2048/512; 8192 experimental).
+  [S2b follow-up handoff](agents/handoffs/S2B_FOLLOWUP_DEV_HANDOFF.md)
+  implemented and passed independent QA round 1 with P3 notes only:
+  release BuildConfig has no automated test, report build type/baked size come
+  from the test APK, summary flag nit, untracked-file provenance (fixed by
+  committing before runs). Next: S24 runs 2048, 4096, 8192 with `--repeat 3`.
 
 ### S4 — Grounded prompt, request scope and consulted-passage record
 

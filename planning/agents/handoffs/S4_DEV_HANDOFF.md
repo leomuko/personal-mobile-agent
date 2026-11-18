@@ -6,7 +6,7 @@ rules and handback format apply. Slice plan:
 [../../P2_SLICE_PLAN_V1.md](../../P2_SLICE_PLAN_V1.md), S4. Route and decision D3:
 [../../P2_SHORTER_ROUTE_PROPOSAL_V1.md](../../P2_SHORTER_ROUTE_PROPOSAL_V1.md).
 
-**Authorization:** host work only. Starts after the device-prep handoff is
+**Authorization:** host work only. Starts after the S2b follow-up handoff is
 accepted (both touch nearby code and share one checkout). No device runs.
 
 ## Where things stand
@@ -23,8 +23,9 @@ accepted (both touch nearby code and share one checkout). No device runs.
   `assistant.mutateContext`, which fences and cancels an active request.
 - `GemmaChatBudget.inputBound` rejects any message containing `<|`,
   `<start_of_` or `<turn|>`. Passage text is user data and may contain them.
-- Ordinary default context is 2048 (1,312 ASCII bytes of input at most);
-  4096/8192 exist for QA builds only.
+- Ordinary chat uses `EXTENDED_4096` (user decision 2026-11-18, provisional;
+  at most 3,360 ASCII bytes of input, 512 output tokens reserved). 8192 is
+  QA-only; QA protocol requests stay 2048/512.
 
 ## Decisions already made (do not reopen)
 
@@ -69,8 +70,11 @@ accepted (both touch nearby code and share one checkout). No device runs.
    and may be irrelevant. For `SOURCES` scope the instruction also says to say
    so when the passages do not contain the answer. Passages that contain the
    chat control sequences, or the block delimiter, are excluded (counted, not
-   an error); a passage is included whole or not at all. State how many
-   passages fit at 2048, 4096 and 8192 for typical 384-unit passages.
+   an error); a passage is included whole or not at all. Do not assume a
+   passage count: the budget must include the actual instruction text,
+   delimiters, per-passage labels, the current message and the history kept.
+   Report measured counts at 4096 (and 2048/8192 for comparison) with empty,
+   typical and long history, using 384-unit synthetic passages.
 5. **Outcomes.**
    - `ORDINARY`, no usable passage (none found, all excluded, none fit): the
      request is byte-identical to today's plain chat.
