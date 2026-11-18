@@ -55,7 +55,7 @@ keys; no script or existing test required modification. No existing test was edi
 
 ## Part B: measurement instrumentation
 
-`ChatContextMeasurementTest.gpuBakedProfileNearBoundAndShortControl` requires
+`ChatContextMeasurementTest.gpuBakedProfileNearBoundShortControlAndLongAnswer` (renamed in the S2b follow-up; see the procedure update at the end) requires
 explicit opt-in, the isolated secureQa package, the designated `SM-S928B`, an
 unlocked device and the existing run-specific supervision lease. It uses the
 baked `CHAT_CONTEXT_TOKENS` and GPU only, without fallback or retries.
@@ -94,6 +94,9 @@ export ANDROID_SERIAL='<AUTHORIZED_S24_SERIAL>'
 scripts/verify-chat-context.sh measure 4096   # separately authorized
 scripts/verify-chat-context.sh measure 8192   # separately authorized; not an automatic continuation
 ```
+
+> Superseded for new runs by the S2b follow-up procedure at the end of this document
+> (`measure 2048|4096|8192 --repeat N`, staged APKs, request-bound validation).
 
 What the script does, in order:
 
@@ -316,3 +319,68 @@ observations, not p95, sustained-memory or latency evidence.
   round-3 script all pass; see the dev handback for counts. No device,
   emulator or real adb was used. Real adb shell-protocol behaviour when the
   host client is killed remains unverified.
+
+## S2b follow-up procedure update (2026-11-18), host only
+
+No device or emulator was used and no real adb was called. These changes bind
+each run to what was requested; the earlier retained runs are not re-validated.
+
+- **Ordinary default.** Ordinary chat now bakes 4096 in debug, release and the
+  secureQa default. `-PchatContextTokens=2048|4096|8192` still changes secureQa
+  only. QA protocol requests, V3/V4, constrained decoding and the Models panel
+  stay at the manifest 2048/512. Memory floors remain uncalibrated for 4096.
+- **Command.** `scripts/verify-chat-context.sh measure 2048|4096|8192 [--repeat N]`,
+  N in 1–5, default 3. 2048 is the baseline (`STANDARD` in a secureQa build).
+  Anything else exits 2 before a build or device call.
+- **Staged APKs.** Right after the build, both APKs are copied into
+  `<results>/apks/` (inside the mode-0700 run directory, files mode 0400). The
+  aapt2 identity check, the recorded `apks.sha256` and both `adb install -r`
+  calls use only these copies, and the hashes are re-checked before each
+  install (`apk-integrity` on mismatch). A rebuild of `androidApp/build/outputs`
+  after staging cannot reach the device.
+- **Cases.** Each iteration runs `near_bound`, `short_control` and
+  `long_answer` (a synthetic 50-line list aiming for at least 128 output
+  tokens), each engine-cold. N iterations run in one instrumentation; a failed
+  iteration fails the run; no retries. A long answer under 128 tokens does not
+  fail the run: it is recorded with `decodeRateMeaningful: false` and left out
+  of the decode rate. Only long answers of at least 128 tokens are meaningful.
+- **Deadline.** `270 + 630 × N` seconds (630 = 3 cases × (180 s generation
+  timeout + 30 s cleanup timeout); N=1 keeps the old 900 s). N=3 → 2160 s.
+  `CHAT_CONTEXT_DEADLINE_SECONDS` still overrides; `result.json` records
+  `deadlineSource` (`formula` or `override`).
+- **Evidence.** Existence of each app-private file is read on the device with
+  `run-as … sh -c 'if [ -f … ]'` before `exec-out cat`. `evidence.json` records
+  each file as `present`, `absent`, `malformed` or `unavailable`. An absent
+  `supervision-stop.json` is normal (`"supervisionStop": "absent"`); a present
+  one fails the run (`supervision-loss`). Any pulled file that is not a JSON
+  object is kept as `<name>.malformed` and fails the run (`malformed-evidence`).
+- **Request binding.** Validation fails the run unless the report has schema 2,
+  the run ID, `measured`, confirmed cleanup, `buildType` `secureQa`
+  (`report-build-type`), baked context and every case's resident
+  `loadedContextTokens` equal to the requested profile (`report-profile`),
+  reserved and resident output 512 (`report-output`), GPU at report and resident level and no automatic fallback in the report
+  (cases carry no fallback field) (`report-backend`), the manifest model
+  SHA (`report-model`), exactly N iterations of the three cases
+  (`report-cases`), and a `decodeRateMeaningful` flag on each long answer
+  that matches its token count (`report-long-answer`).
+- **Summary.** A passing run writes `summary.json`: per case, the median and
+  range (min–max) and all values of load, first text, cold-to-first-text,
+  generation time, tokens and sampled peak PSS/RSS. Decode rate comes only
+  from long answers of at least 128 tokens, with the count of short ones; if
+  none qualifies it is `"status": "unavailable"`.
+
+Next run set (each separately authorized; never run concurrently with a build):
+
+```sh
+export ANDROID_SERIAL='<AUTHORIZED_S24_SERIAL>'
+scripts/verify-chat-context.sh measure 2048 --repeat 3
+scripts/verify-chat-context.sh measure 4096 --repeat 3
+scripts/verify-chat-context.sh measure 8192 --repeat 3
+```
+
+Estimated wall time per profile (from the first pass; not a measurement):
+build and install 1–3 min, thermal readiness under 15 s, instrumentation about
+4–6 min (per iteration about 15 s cold-to-first-text for each short case and
+about 15 s plus roughly 20–40 s of decoding for the long answer). Deadline
+2160 s for each. Host regressions:
+`node --test scripts/tests/verify-chat-context.test.mjs` (47 tests).
