@@ -4,11 +4,14 @@ plugins {
 }
 val androidPressureMemoryTest = providers.gradleProperty("androidPressureMemoryTest")
     .map { it.toBooleanStrict() }.getOrElse(false)
+// Ordinary chat uses 4096 in every build type (user decision 2026-11-18). The override is
+// QA-only: it changes secureQa alone, so 8192 stays reachable only in secureQa builds.
+val ordinaryChatContextTokens = "4096"
 val chatContextTokens = providers.gradleProperty("chatContextTokens")
     .map {
         require(it in setOf("2048", "4096", "8192")) { "chatContextTokens must be 2048, 4096, or 8192" }
         it
-    }.getOrElse("2048")
+    }.getOrElse(ordinaryChatContextTokens)
 android {
     namespace = "dev.edgecompanion.app"
     compileSdk = 37
@@ -22,7 +25,7 @@ android {
         ndk { abiFilters += listOf("arm64-v8a", "x86_64") }
         buildConfigField("boolean", "SECURE_WINDOWS", "true")
         buildConfigField("boolean", "ANDROID_PRESSURE_MEMORY_TEST", "false")
-        buildConfigField("int", "CHAT_CONTEXT_TOKENS", "2048")
+        buildConfigField("int", "CHAT_CONTEXT_TOKENS", ordinaryChatContextTokens)
     }
     buildTypes {
         getByName("debug") {

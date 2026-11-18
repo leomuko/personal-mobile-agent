@@ -29,6 +29,14 @@ internal fun modelModule(context: Context) = module {
         constrainedQaEnabled = BuildConfig.DEBUG && BuildConfig.BUILD_TYPE == "secureQa" && BuildConfig.ANDROID_PRESSURE_MEMORY_TEST,
         memoryTelemetry = get<MemoryTelemetryRecorder>()::recordStage) }
     single<ChatRuntime> { get<ModelManager>() }
-    single { ChatContextProfile.entries.single { it.contextTokens == BuildConfig.CHAT_CONTEXT_TOKENS } }
+    single { ordinaryChatProfile() }
     viewModel { ModelsViewModel(get()) }
 }
+
+/**
+ * Profile for ordinary chat: the build's baked context (4096 unless a secureQa build overrides it).
+ * QA protocol requests, V3/V4, constrained decoding and the Models panel keep the manifest 2048/512.
+ * Memory admission floors are still uncalibrated for 4096.
+ */
+internal fun ordinaryChatProfile(contextTokens: Int = BuildConfig.CHAT_CONTEXT_TOKENS): ChatContextProfile =
+    ChatContextProfile.entries.single { it.contextTokens == contextTokens }
