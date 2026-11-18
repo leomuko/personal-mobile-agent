@@ -3,18 +3,22 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn, execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import { chmodSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '../..');
-const script = join(root, 'scripts/verify-chat-context.sh');
+// VERIFY_CHAT_CONTEXT_SCRIPT lets a reviewer run this suite against another revision of the script.
+const script = process.env.VERIFY_CHAT_CONTEXT_SCRIPT || join(root, 'scripts/verify-chat-context.sh');
 const serial = 'SYNTHETIC-S24';
 const qaPackage = 'dev.edgecompanion.app.secureqa';
+const modelSha = JSON.parse(readFileSync(join(root, 'planning/models/gemma-4-e2b-it.json'), 'utf8')).artifact.sha256;
 
 const fakeAdb = `#!/usr/bin/env node
-const { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } = require('node:fs');
+const { appendFileSync, chmodSync, existsSync, mkdirSync, readFileSync, writeFileSync } = require('node:fs');
 const { execFileSync, spawnSync } = require('node:child_process');
+const { createHash } = require('node:crypto');
 const { dirname, join } = require('node:path');
 const args = process.argv.slice(2);
 const device = process.env.FAKE_DEVICE_DIR;
@@ -36,6 +40,20 @@ const hang = () => { setInterval(() => {}, 1 << 30); };
 // Simulates a stalled device call, but exits once its caller is gone so it cannot outlive the test.
 const stallUntilOrphaned = () => { const parent = process.ppid; setInterval(() => { if (process.ppid !== parent) process.exit(1); }, 100); };
 if (command === 'install' && rest[0] === '-r' && existsSync(rest[1])) {
+  // Simulates a rebuild that replaces the Gradle outputs after the script staged its copies.
+  if (process.env.FAKE_REBUILD_DURING_INSTALL === '1') for (const [path, id] of [
+    ['secureQa/androidApp-secureQa.apk', '${qaPackage}'],
+    ['androidTest/secureQa/androidApp-secureQa-androidTest.apk', '${qaPackage}.test']])
+    writeFileSync(join(process.env.APK_ROOT, path), id + '\\nrebuilt after staging\\n');
+  const bytes = readFileSync(rest[1]);
+  // Simulates the staged test APK changing after the app install, before its own install.
+  if (process.env.FAKE_TAMPER_STAGED_TEST === '1' && rest[1].endsWith('/androidApp-secureQa.apk')) {
+    const staged = join(dirname(rest[1]), 'androidApp-secureQa-androidTest.apk');
+    chmodSync(staged, 0o600); appendFileSync(staged, 'tampered');
+  }
+  // What the device would receive: the installed path and a digest of its bytes at install time.
+  appendFileSync(process.env.FAKE_ADB_LOG + '.installs', JSON.stringify({ path: rest[1],
+    sha256: createHash('sha256').update(bytes).digest('hex') }) + '\\n');
   const app = rest[1].endsWith('/androidApp-secureQa.apk');
   if (app && process.env.FAKE_INSTALL === 'fail-app') { console.log('Failure [INSTALL_FAILED_SYNTHETIC]'); process.exit(1); }
   if (app && process.env.FAKE_INSTALL === 'quiet-failure') { console.log('Failure [INSTALL_FAILED_SYNTHETIC]'); process.exit(0); }
@@ -48,6 +66,7 @@ if (command === 'exec-out' && rest[0] === 'run-as' && rest[1] === '${qaPackage}'
 }
 if (command === 'shell' && rest.length === 1 && rest[0].startsWith('run-as ${qaPackage} sh -c ')) {
   const result = spawnSync('/bin/sh', ['-c', rest[0].slice('run-as ${qaPackage} '.length)], { cwd: device });
+  process.stdout.write(result.stdout);
   process.exit(result.status ?? 1);
 }
 if (command === 'shell' && rest.join(' ') === 'cat /proc/uptime') { console.log('100.25 50.00'); process.exit(0); }
@@ -70,11 +89,39 @@ if (command === 'shell' && rest[0] === 'am' && rest[1] === 'instrument') {
   }
   if (cls === 'dev.edgecompanion.app.ChatContextMeasurementTest') {
     const runId = option('supervisionRunId');
-    const running = { schema: 1, runId, status: 'running', cases: [{ case: 'near_bound', status: 'running' }] };
-    write('no_backup/chat-context-' + runId + '.json', running);
+    const report = 'no_backup/chat-context-' + runId + '.json';
+    const running = { schema: 2, runId, status: 'running', cases: [{ case: 'near_bound', status: 'running' }] };
+    write(report, running);
+    write('no_backup/chat-context-' + runId + '-telemetry.json', { samples: [] });
     if (process.env.FAKE_INSTRUMENTATION === 'hang') { hang(); return; }
-    write('no_backup/chat-context-' + runId + '.json', { ...running, status: 'measured', cleanupConfirmed: true,
-      cases: [{ case: 'near_bound', status: 'measured' }] });
+    // A synthetic report that matches the request (profile from the run ID, repeat from the argument).
+    const profile = Number(runId.split('-')[1]);
+    const repeat = Number(option('chatContextRepeat'));
+    const cases = [];
+    for (let iteration = 1; iteration <= repeat; iteration++) for (const name of ['near_bound', 'short_control', 'long_answer']) {
+      // FAKE_SHORT_LONG_ANSWERS lists iterations (or "all") whose long answer stays under 128 tokens.
+      const shortList = (process.env.FAKE_SHORT_LONG_ANSWERS || '').split(',');
+      const short = name === 'long_answer' && (shortList.includes('all') || shortList.includes(String(iteration)));
+      const long = name === 'long_answer' && !short;
+      cases.push({ case: name, iteration, status: 'measured', cleanupConfirmed: true,
+        resident: { status: 'LOADED', backend: 'GPU', loadedContextTokens: profile, loadedOutputTokens: 512 },
+        loadMs: 9000 + 100 * iteration, firstTextMs: 500 + iteration, coldRequestFirstTextMs: 14000 + 10 * iteration,
+        generationMs: long ? 20000 : 600, inputTokens: 17, outputTokens: long ? 300 : short ? 90 : 6,
+        decodeTokensPerSecond: long ? 18 + iteration : 10, decodeRateMeaningful: long,
+        sampledPeakPssBytes: 2000000000 + iteration, sampledPeakRssBytes: 3000000000 });
+    }
+    // Mismatch regressions patch the top level, or the last case (its resident object is merged).
+    const casePatch = JSON.parse(process.env.FAKE_CASE_PATCH || '{}');
+    const last = cases.at(-1);
+    Object.assign(last, casePatch, { resident: { ...last.resident, ...(casePatch.resident || {}) } });
+    write(report, { ...running, status: 'measured', cleanupConfirmed: true, buildType: 'secureQa', backend: 'GPU',
+      automaticFallback: false, bakedContextTokens: profile, reservedOutputTokens: 512,
+      modelSha256: process.env.FAKE_MODEL_SHA, repeat, cases, ...JSON.parse(process.env.FAKE_REPORT_PATCH || '{}') });
+    if (process.env.FAKE_REPORT_RAW) writeFileSync(join(device, report), process.env.FAKE_REPORT_RAW);
+    const marker = 'no_backup/chat-context-' + runId + '-supervision-stop.json';
+    if (process.env.FAKE_STOP_MARKER === 'valid')
+      write(marker, { schema: 1, runId, status: 'failed', failureType: 'SupervisionLoss', recordedAtMs: 1 });
+    if (process.env.FAKE_STOP_MARKER === 'malformed') writeFileSync(join(device, marker), 'cat: no such file\\n');
     write('no_backup/qa-supervision/' + runId + '/status.json', { schema: 2, runId, status: 'closed', reason: null,
       cleanupConfirmed: false, elapsedMs: 1, capturedAtMs: Date.now(), leaseMs: 20000, pollMs: 500, cleanupMs: 5000 });
     if (process.env.FAKE_INSTRUMENTATION === 'safety-stop') writeFileSync(join(thermalDir, 'safety-stop.json'), '{"reason":"synthetic"}');
@@ -135,8 +182,9 @@ function run(dir, args, extra = {}, { signal } = {}) {
   const env = { ...process.env, PATH: `${join(dir, 'bin')}:${process.env.PATH}`, ANDROID_SERIAL: serial,
     ANDROID_HOME: join(dir, 'sdk'), ADB: join(dir, 'bin/adb'), GRADLE: join(dir, 'bin/gradlew'),
     APK_ROOT: join(dir, 'apk'), RESULTS_ROOT: join(dir, 'results'), FAKE_DEVICE_DIR: join(dir, 'device'),
-    FAKE_ADB_LOG: join(dir, 'adb.jsonl'), FAKE_GRADLE_LOG: join(dir, 'gradle.txt'), ...extra };
-  for (const name of ['QA_SUPERVISION_RUN_ID', 'QA_SUPERVISOR_PID', 'MEMORY_POLICY_REPORT', 'THERMAL_REPORT_DIR']) delete env[name];
+    FAKE_ADB_LOG: join(dir, 'adb.jsonl'), FAKE_GRADLE_LOG: join(dir, 'gradle.txt'), FAKE_MODEL_SHA: modelSha, ...extra };
+  for (const name of ['QA_SUPERVISION_RUN_ID', 'QA_SUPERVISOR_PID', 'MEMORY_POLICY_REPORT', 'THERMAL_REPORT_DIR',
+    'CHAT_CONTEXT_DEADLINE_SECONDS', 'PASSAGE_DEADLINE_SECONDS']) if (!(name in extra)) delete env[name];
   return new Promise(done => {
     const child = spawn('/bin/bash', [script, ...args], { cwd: root, env, stdio: ['ignore', 'pipe', 'pipe'] });
     let output = '';
@@ -149,8 +197,11 @@ function run(dir, args, extra = {}, { signal } = {}) {
     child.on('close', code => {
       if (poll) clearInterval(poll);
       const [name] = readdirSync(join(dir, 'results'));
-      const results = join(dir, 'results', name);
-      done({ code, output, pid: child.pid, results, calls: adbCalls(dir),
+      const results = name ? join(dir, 'results', name) : null;
+      const installsLog = join(dir, 'adb.jsonl.installs');
+      const installs = existsSync(installsLog)
+        ? readFileSync(installsLog, 'utf8').trim().split('\n').filter(Boolean).map(line => JSON.parse(line)) : [];
+      done({ code, output, pid: child.pid, results, calls: adbCalls(dir), installs,
         json: file => JSON.parse(readFileSync(join(results, file), 'utf8')) });
     });
   });
@@ -172,7 +223,8 @@ function assertOnlySecureQa(calls) {
     for (const match of text.matchAll(/run-as (\S+)/g)) assert.equal(match[1], qaPackage);
     if (args[2] === 'install') {
       assert.equal(args[3], '-r');
-      assert.match(args[4], /\/androidApp-secureQa(-androidTest)?\.apk$/);
+      // Only the run's staged copies are installed, never the Gradle outputs.
+      assert.match(args[4], /\/results\/[^/]+\/apks\/androidApp-secureQa(-androidTest)?\.apk$/);
     }
     if (args.includes('instrument')) assert.match(args.at(-1), /^dev\.edgecompanion\.app\.secureqa\.test\/androidx\.test\.runner\.AndroidJUnitRunner$/);
   }
@@ -199,6 +251,85 @@ test('measurement uses this script as the supervisor PID and only touches the se
     new RegExp(`^${qaPackage} ${qaPackage} .*\n${qaPackage}\\.test ${qaPackage}\\.test `));
   assertOnlySecureQa(result.calls);
   assert.match(readFileSync(join(dir, 'gradle.txt'), 'utf8'), /-PtestBuildType=secureQa -PchatContextTokens=4096 /);
+  // Default --repeat 3 reaches the device, and the deadline follows 270 + 630 x N.
+  assert.match(result.calls.find(isRunInstrument).args.join(' '), / -e chatContextRepeat 3 /);
+  assert.equal(summary.repeat, 3);
+  assert.equal(summary.deadlineSeconds, 270 + 630 * 3);
+  assert.equal(summary.deadlineSource, 'formula');
+  // The optional supervision-loss marker is recorded as absent, not saved as an error text.
+  assert.equal(result.json('evidence.json').supervisionStop, 'absent');
+  assert.ok(!existsSync(join(result.results, 'supervision-stop.json')));
+  assert.deepEqual(result.json('evidence.json'), { chatContext: 'present', partialTelemetry: 'present',
+    supervisionStop: 'absent', supervision: 'present', thermalFinal: 'present' });
+  const report = result.json('summary.json');
+  assert.deepEqual(Object.keys(report.cases), ['near_bound', 'short_control', 'long_answer']);
+  assert.deepEqual(report.cases.near_bound.loadMs, { median: 9200, min: 9100, max: 9300, values: [9100, 9200, 9300] });
+  assert.deepEqual(report.cases.long_answer.coldToFirstTextMs, { median: 14020, min: 14010, max: 14030, values: [14010, 14020, 14030] });
+  assert.deepEqual(report.cases.long_answer.decodeTokensPerSecond,
+    { median: 20, min: 19, max: 21, values: [19, 20, 21], iterations: [1, 2, 3], shortIterations: 0 });
+  assert.equal(report.cases.long_answer.decodeRateMeaningful, true);
+  for (const name of ['near_bound', 'short_control']) {
+    assert.equal(report.cases[name].decodeRateMeaningful, false);
+    assert.equal(report.cases[name].decodeTokensPerSecond, null, 'short-case decode rates are not reported');
+  }
+}));
+
+test('measure 2048 is the baseline profile and --repeat sets the iterations and deadline', () => withSandbox(async dir => {
+  const result = await run(dir, ['measure', '2048', '--repeat', '2']);
+  assert.equal(result.code, 0, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.status, 'passed');
+  assert.equal(summary.profile, 2048);
+  assert.equal(summary.repeat, 2);
+  assert.equal(summary.deadlineSeconds, 270 + 630 * 2);
+  assert.match(readFileSync(join(dir, 'gradle.txt'), 'utf8'), /-PtestBuildType=secureQa -PchatContextTokens=2048 /);
+  assert.match(result.calls.find(isRunInstrument).args.join(' '), / -e chatContextRepeat 2 /);
+  const report = result.json('summary.json');
+  assert.equal(report.profile, 2048);
+  assert.deepEqual(report.cases.short_control.loadMs, { median: 9150, min: 9100, max: 9200, values: [9100, 9200] });
+  assertOnlySecureQa(result.calls);
+}));
+
+for (const args of [['measure', '1024'], ['measure', '4096', '--repeat', '0'], ['measure', '4096', '--repeat', '6'],
+  ['measure', '4096', '--repeat'], ['measure', '4096', '--times', '3'], ['measure', '4096', '--repeat', '2x']]) {
+  test(`invalid arguments ${args.join(' ')} exit 2 before any build or device call`, () => withSandbox(async dir => {
+    const result = await run(dir, args);
+    assert.equal(result.code, 2, result.output);
+    assert.equal(result.results, null, 'no run directory');
+    assert.equal(result.calls.length, 0);
+    assert.ok(!existsSync(join(dir, 'gradle.txt')));
+  }));
+}
+
+test('APK outputs rebuilt after staging are not what gets installed', () => withSandbox(async dir => {
+  const original = { app: readFileSync(join(dir, appApk)), test: readFileSync(join(dir, testApk)) };
+  const result = await run(dir, ['measure', '4096', '--repeat', '1'], { FAKE_REBUILD_DURING_INSTALL: '1' });
+  assert.equal(result.code, 0, result.output);
+  assert.match(readFileSync(join(dir, appApk), 'utf8'), /rebuilt after staging/, 'the build outputs did change');
+  const hashes = Object.fromEntries(readFileSync(join(result.results, 'apks.sha256'), 'utf8').trim().split('\n')
+    .map(line => line.split(/\s+/)).map(([sha, name]) => [name, sha]));
+  const digest = bytes => createHash('sha256').update(bytes).digest('hex');
+  assert.equal(hashes['androidApp-secureQa.apk'], digest(original.app));
+  assert.equal(hashes['androidApp-secureQa-androidTest.apk'], digest(original.test));
+  assert.equal(result.installs.length, 2);
+  for (const install of result.installs) {
+    assert.ok(install.path.startsWith(join(result.results, 'apks') + '/'), `installed a staged copy: ${install.path}`);
+    const name = install.path.split('/').at(-1);
+    assert.equal(install.sha256, hashes[name], 'installed bytes are the hashed staged bytes');
+  }
+  assert.notEqual(digest(readFileSync(join(dir, appApk))), hashes['androidApp-secureQa.apk']);
+  assertOnlySecureQa(result.calls);
+}));
+
+test('a staged APK changed before its install fails the run before that install', () => withSandbox(async dir => {
+  const result = await run(dir, ['measure', '4096', '--repeat', '1'], { FAKE_TAMPER_STAGED_TEST: '1' });
+  assert.equal(result.code, 1, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.reason, 'apk-integrity');
+  assert.equal(summary.stage, 'install-tests');
+  assert.equal(result.installs.length, 1, 'only the app APK was installed');
+  assert.match(result.installs[0].path, /\/apks\/androidApp-secureQa\.apk$/);
+  assert.equal(result.calls.filter(isRunInstrument).length, 0);
 }));
 
 test('SQLCipher gate uses only install -r and am instrument on the secureQa app', () => withSandbox(async dir => {
@@ -229,6 +360,7 @@ test('a never-finishing instrumentation hits the deadline, stops this run and ke
   assert.match(stops[0].args.at(-1), new RegExp(`qa-supervision/${runId}/stop\\.tmp`));
   assert.deepEqual(result.json('chat-context.json').cases, [{ case: 'near_bound', status: 'running' }],
     'partial device evidence retained');
+  assert.equal(result.json('evidence.json').supervisionStop, 'absent');
   assert.ok(existsSync(join(result.results, 'thermal/samples.csv')));
   assert.ok(existsSync(join(result.results, 'thermal-final.txt')));
   assert.ok(!alive(summary.monitorPid), 'heartbeat monitor stopped');
@@ -291,7 +423,7 @@ for (const [name, args, extra, reason, stage] of gateFailures) {
 // DP-F5: the application ID is checked with build-tools aapt2 before each install -r, failing closed.
 const identityFailures = [
   ['an app APK with another application ID', dir => writeFileSync(join(dir, appApk), 'dev.edgecompanion.app\n'), 0],
-  ['a test APK with another application ID', dir => writeFileSync(join(dir, testApk), 'dev.edgecompanion.app.test\n'), 1],
+  ['a test APK with another application ID', dir => writeFileSync(join(dir, testApk), 'dev.edgecompanion.app.test\n'), 0],
   ['no aapt2 in any build-tools', dir => rmSync(join(dir, 'sdk/build-tools'), { recursive: true }), 0],
   ['an APK aapt2 cannot read', dir => writeFileSync(join(dir, appApk), ''), 0],
 ];
@@ -305,6 +437,81 @@ for (const [name, prepare, installs] of identityFailures) {
     assert.equal(summary.reason, 'apk-identity');
     assert.equal(result.calls.filter(call => call.args[2] === 'install').length, installs);
     assert.equal(result.calls.filter(isRunInstrument).length, 0);
+  }));
+}
+
+// Part B: the report must describe exactly the requested run, or the run fails with a specific reason.
+const reportMismatches = [
+  ['a requested-4096 report that says 8192', { FAKE_REPORT_PATCH: '{"bakedContextTokens":8192}' }, 'report-profile'],
+  ['a case resident at 8192', { FAKE_CASE_PATCH: '{"resident":{"loadedContextTokens":8192}}' }, 'report-profile'],
+  ['a case resident output of 256', { FAKE_CASE_PATCH: '{"resident":{"loadedOutputTokens":256}}' }, 'report-output'],
+  ['a reserved output of 256', { FAKE_REPORT_PATCH: '{"reservedOutputTokens":256}' }, 'report-output'],
+  ['a CPU backend', { FAKE_REPORT_PATCH: '{"backend":"CPU"}' }, 'report-backend'],
+  ['automatic fallback', { FAKE_REPORT_PATCH: '{"automaticFallback":true}' }, 'report-backend'],
+  ['a CPU resident', { FAKE_CASE_PATCH: '{"resident":{"backend":"CPU"}}' }, 'report-backend'],
+  ['another model SHA', { FAKE_MODEL_SHA: 'b'.repeat(64) }, 'report-model'],
+  ['a debug build type', { FAKE_REPORT_PATCH: '{"buildType":"debug"}' }, 'report-build-type'],
+  ['another run ID', { FAKE_REPORT_PATCH: '{"runId":"context-4096-other"}' }, 'report'],
+  ['a repeat count other than requested', { FAKE_REPORT_PATCH: '{"repeat":2}' }, 'report-cases'],
+  ['a missing iteration', { FAKE_REPORT_PATCH: '{"cases":[]}' }, 'report-cases'],
+  ['a short long answer flagged as a meaningful decode rate', { FAKE_CASE_PATCH: '{"outputTokens":6}' }, 'report-long-answer'],
+  ['a 300-token long answer not flagged as meaningful', { FAKE_CASE_PATCH: '{"decodeRateMeaningful":false}' }, 'report-long-answer'],
+  ['a failed case', { FAKE_CASE_PATCH: '{"status":"failed"}' }, 'report-cases'],
+];
+for (const [name, extra, reason] of reportMismatches) {
+  test(`${name} fails the run (${reason})`, () => withSandbox(async dir => {
+    const result = await run(dir, ['measure', '4096', '--repeat', '1'], extra);
+    assert.equal(result.code, 1, result.output);
+    const summary = result.json('result.json');
+    assert.equal(summary.status, 'failed');
+    assert.equal(summary.reason, reason);
+    assert.equal(summary.stage, 'validation');
+    assert.ok(!existsSync(join(result.results, 'summary.json')), 'no summary for a rejected run');
+    assertClientStopped(result, summary);
+  }));
+}
+
+// Ruling 2026-11-18: a long answer under 128 tokens does not fail the run; it is excluded from decode rate.
+test('long answers under 128 tokens in some iterations pass and are excluded from the decode rate', () => withSandbox(async dir => {
+  const result = await run(dir, ['measure', '4096'], { FAKE_SHORT_LONG_ANSWERS: '2' });
+  assert.equal(result.code, 0, result.output);
+  assert.equal(result.json('result.json').status, 'passed');
+  const longAnswer = result.json('summary.json').cases.long_answer;
+  assert.deepEqual(longAnswer.decodeTokensPerSecond,
+    { median: 20, min: 19, max: 21, values: [19, 21], iterations: [1, 3], shortIterations: 1 });
+  assert.deepEqual(longAnswer.outputTokens.values, [300, 90, 300], 'every iteration is still recorded');
+}));
+
+test('when no long answer reaches 128 tokens the run passes with decode rate unavailable', () => withSandbox(async dir => {
+  const result = await run(dir, ['measure', '4096'], { FAKE_SHORT_LONG_ANSWERS: 'all' });
+  assert.equal(result.code, 0, result.output);
+  assert.equal(result.json('result.json').status, 'passed');
+  assert.deepEqual(result.json('summary.json').cases.long_answer.decodeTokensPerSecond,
+    { status: 'unavailable', shortIterations: 3, minimumOutputTokens: 128 });
+}));
+
+// Part C: optional and required evidence files.
+test('a present, valid supervision-loss marker is retained and fails the run', () => withSandbox(async dir => {
+  const result = await run(dir, ['measure', '4096', '--repeat', '1'], { FAKE_STOP_MARKER: 'valid' });
+  assert.equal(result.code, 1, result.output);
+  assert.equal(result.json('result.json').reason, 'supervision-loss');
+  assert.equal(result.json('evidence.json').supervisionStop, 'present');
+  assert.equal(result.json('supervision-stop.json').failureType, 'SupervisionLoss');
+}));
+
+for (const [name, extra, key, file] of [
+  ['a present but non-JSON supervision-loss marker', { FAKE_STOP_MARKER: 'malformed' }, 'supervisionStop', 'supervision-stop.json'],
+  ['a present but non-JSON report', { FAKE_REPORT_RAW: 'cat: no_backup/chat-context.json: error' }, 'chatContext', 'chat-context.json'],
+]) {
+  test(`${name} is malformed evidence and fails the run`, () => withSandbox(async dir => {
+    const result = await run(dir, ['measure', '4096', '--repeat', '1'], extra);
+    assert.equal(result.code, 1, result.output);
+    const summary = result.json('result.json');
+    assert.equal(summary.reason, 'malformed-evidence');
+    assert.equal(summary.stage, 'validation');
+    assert.equal(result.json('evidence.json')[key], 'malformed');
+    assert.ok(!existsSync(join(result.results, file)), 'non-JSON text is not saved under the .json name');
+    assert.ok(existsSync(join(result.results, file + '.malformed')), 'kept for inspection');
   }));
 }
 
