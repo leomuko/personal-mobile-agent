@@ -72,6 +72,31 @@ class ConversationAssistantTest {
     private fun TestScope.session(store: Store, runtime: Runtime) = ConversationSession(StandardTestDispatcher(testScheduler),
         { ConversationController(store) { 42 } }, {}, chatRuntime = runtime).also { it.start(); runCurrent() }
 
+    @Test fun ordinaryConversationUsesTheInjectedExtendedProfile() = runTest {
+        val store = Store()
+        val runtime = Runtime()
+        val session = ConversationSession(StandardTestDispatcher(testScheduler),
+            { ConversationController(store) { 42 } }, {}, chatRuntime = runtime,
+            chatProfile = ChatContextProfile.EXTENDED_4096)
+        try {
+            session.start()
+            runCurrent()
+            val text = "x".repeat(1313)
+            session.editDraft(text)
+            runCurrent()
+            session.submit()
+            runCurrent()
+            val request = runtime.requests.single()
+            assertEquals(4096 to 512, request.contextTokens to request.outputTokens)
+            assertEquals(listOf(ChatMessage(ChatRole.USER, text)), request.messages)
+            assertEquals(text, store.rows.single().text)
+            runtime.delta("Synthetic answer")
+            runtime.finish()
+            runCurrent()
+            assertEquals(TurnStatus.COMPLETED, store.turns.single().status)
+        } finally { session.shutdown() }
+    }
+
     @Test fun streamingCompositionPreservesDraftAndDoubleSubmitIsRejected() = runTest {
         val store = Store(); val runtime = Runtime(); val session = session(store, runtime)
         try {
