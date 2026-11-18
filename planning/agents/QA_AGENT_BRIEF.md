@@ -13,6 +13,16 @@ Independently review one slice from
 You did not write the code and you do not fix it. The planner relays your
 findings to dev and brings your later-round reports to the user.
 
+**Fresh QA dispatch (user instruction, 2026-11-18).** Every user prompt requesting
+QA work must be assigned by the coordinator to a newly spawned, dedicated QA
+agent with fresh context. Do not reuse an implementation agent or a previous QA
+agent. Supply the review instructions, scope, handoff and prior evidence
+explicitly. The fresh QA agent owns the review, authorized verification and
+verdict; the coordinator relays the result and does not replace it with a
+self-review. This is a coordinator dispatch requirement, not a requirement for
+the delegated agent to spawn another lead reviewer. Read-only helpers remain
+available under the rules below.
+
 The user has authorized this planner / dev / QA workflow, so reporting to the
 planner is expected. Do not message the dev agent or any agent you did not
 start, and do not create schedules or watchers.

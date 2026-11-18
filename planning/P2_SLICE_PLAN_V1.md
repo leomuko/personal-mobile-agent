@@ -113,6 +113,16 @@ on a path under the folders archived on 2026-11-10.
   Carry into S2b: expose the loaded context size in runtime state, telemetry
   and the Models panel; memory admission does not yet scale with context.
 
+### S2b-prep — Loaded-context observability and device test readiness
+
+- **Goal:** make the device gates runnable and their results attributable.
+- **Scope:** loaded context/output sizes in runtime state, memory telemetry and
+  the Models panel (with a specific refusal message for S2a-F1); memory floors
+  stay unchanged and are documented as uncalibrated for 4096/8192; the S2b
+  measurement instrumentation test and the Android SQLCipher passage gate
+  test, written and compiled but not run.
+- **Handoff:** [agents/handoffs/DEVICE_PREP_DEV_HANDOFF.md](agents/handoffs/DEVICE_PREP_DEV_HANDOFF.md).
+
 ### S2b — S24 context measurement (device)
 
 - **Goal:** choose the context size from measurement.
@@ -137,6 +147,8 @@ on a path under the folders archived on 2026-11-10.
   deterministic retry, delete-during-generation, and restart recovery of
   stored references and scope.
 - **Depends on:** S3, S2a.
+- **Handoff:** [agents/handoffs/S4_DEV_HANDOFF.md](agents/handoffs/S4_DEV_HANDOFF.md)
+  (starts after S2b-prep; references-only provenance, typed `SOURCES` no-hit result).
 
 ### S5 — "Passages consulted" UI
 
@@ -195,8 +207,9 @@ These become slices after M1, or earlier if the user reorders.
 ## Order
 
 ```text
-S3 ──► S2a ──► S4 ──► S5 ──► M1
-          └──► S2b ──► S6 ──┘        S1: independent, after S3
+S3 ──► S2a ──► S2b-prep ──► S4 ──► S5 ──► M1
+                    ├──► SQLCipher gate (S24)  ──► S4 on device
+                    └──► S2b (S24) ──► S6 ──┘     S1: independent, after S3
 ```
 
 ## Known risks

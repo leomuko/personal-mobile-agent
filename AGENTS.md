@@ -58,3 +58,4 @@ Apply these skills in sympathy with the existing code and current user scope. Do
 - A successful build is not runtime verification. Report passed, failed, blocked, and not-run checks separately.
 - Keep synthetic fixtures separate from personal data. Do not upload notes, receipts, audio, database contents, keys, or tokens as test artifacts.
 - Use `planning/QA_AGENT_PROMPT.md` for independent QA. Review findings do not authorize code changes.
+- For each user prompt requesting QA work, the coordinator must start a new dedicated QA agent with fresh context, separate from the implementation agent. Delegate the full review, authorized checks and verdict to that agent; do not reuse an earlier reviewer or substitute the implementer's self-review. Pass the applicable instructions, scope and handoff explicitly. This dispatch rule applies to the coordinator, not recursively to the delegated QA agent.
