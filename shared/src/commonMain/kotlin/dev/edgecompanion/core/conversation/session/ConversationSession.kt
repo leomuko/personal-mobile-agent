@@ -12,6 +12,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import dev.edgecompanion.core.inference.ChatContextProfile
 import dev.edgecompanion.core.inference.ChatRuntime
 import dev.edgecompanion.core.sources.data.SourcesRepository
 import dev.edgecompanion.core.sources.data.SourceLibrary
@@ -26,6 +27,7 @@ class ConversationSession(
     private val mediaDispatcher: CoroutineDispatcher = Dispatchers.Default,
     private val chatRuntime: ChatRuntime? = null,
     private val sourcesProvider: (() -> SourcesRepository)? = null,
+    chatProfile: ChatContextProfile = ChatContextProfile.STANDARD,
 ) : SourceLibrary {
     private val scope = CoroutineScope(SupervisorJob() + dispatcher.limitedParallelism(1))
     private val mutable = MutableStateFlow(ConversationState())
@@ -34,7 +36,7 @@ class ConversationSession(
     override val sourceChanges = sourceVersion.asStateFlow()
     private var controller: ConversationController? = null
     private val available = CompletableDeferred<ConversationController?>()
-    private val assistant = ConversationAssistant(scope, { available.await() }, chatRuntime)
+    private val assistant = ConversationAssistant(scope, { available.await() }, chatRuntime, chatProfile)
     private val imports = Semaphore(1)
     private val importJobs = mutableMapOf<String, Job>()
     private val startup = scope.launch(start = CoroutineStart.LAZY) {

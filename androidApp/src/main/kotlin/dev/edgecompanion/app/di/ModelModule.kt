@@ -29,5 +29,6 @@ internal fun modelModule(context: Context) = module {
         constrainedQaEnabled = BuildConfig.DEBUG && BuildConfig.BUILD_TYPE == "secureQa" && BuildConfig.ANDROID_PRESSURE_MEMORY_TEST,
         memoryTelemetry = get<MemoryTelemetryRecorder>()::recordStage) }
     single<ChatRuntime> { get<ModelManager>() }
+    single { ChatContextProfile.entries.single { it.contextTokens == BuildConfig.CHAT_CONTEXT_TOKENS } }
     viewModel { ModelsViewModel(get()) }
 }

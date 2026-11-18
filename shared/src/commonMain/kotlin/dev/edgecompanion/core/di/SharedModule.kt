@@ -8,6 +8,7 @@ import dev.edgecompanion.core.conversation.data.ConversationStore
 import dev.edgecompanion.core.conversation.data.SqlConversationStore
 import dev.edgecompanion.core.conversation.session.ConversationController
 import dev.edgecompanion.core.conversation.session.ConversationSession
+import dev.edgecompanion.core.inference.ChatContextProfile
 import dev.edgecompanion.core.inference.ChatRuntime
 import dev.edgecompanion.core.sources.data.SourcesRepository
 
@@ -30,6 +31,7 @@ fun sharedModule() = module {
         ConversationSession(get<CoroutineDispatcher>(SessionDispatcher),
             controllerProvider = { get<ConversationController>() },
             closeStorage = storage::close, attachmentFiles = getOrNull(), chatRuntime = getOrNull<ChatRuntime>(),
-            sourcesProvider = { get<SourcesRepository>() })
+            sourcesProvider = { get<SourcesRepository>() },
+            chatProfile = getOrNull<ChatContextProfile>() ?: ChatContextProfile.STANDARD)
     } onClose { it?.stop() }
 }

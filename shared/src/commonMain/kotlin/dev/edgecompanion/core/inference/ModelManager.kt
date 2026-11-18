@@ -27,7 +27,9 @@ class ModelManager(
     private var idle: Job? = null
     private var generation: Job? = null
     private var poisoned = false
-    private var ownsEngine = false
+    // Written under operation after successful native load or confirmed release.
+    private var loadedConfig: ModelConfig? = null
+    private val ownsEngine: Boolean get() = loadedConfig != null
     private var releasing = 0
     private val cancellationSignals = mutableSetOf<Job>()
     private var assetWork: Job? = null
@@ -233,6 +235,7 @@ class ModelManager(
                 generation = currentCoroutineContext().job
                 chatCancellation = ChatOutcome.CANCELLED
                 GemmaChatBudget.validate(request)
+                if (prepared != null && request.contextTokens != 2048) throw ModelException(ModelError.CONTEXT_LIMIT)
                 if (constraint != null) {
                     if (!constrainedQaEnabled || verification == null || prepared == null)
                         throw ModelException(ModelError.CONTEXT_LIMIT)
@@ -258,8 +261,14 @@ class ModelManager(
                 if (ownsEngine && state.value.status == RuntimeStatus.FAILED) {
                     if (!cleanupOwnedEngine()) throw ModelException(ModelError.RESTART_REQUIRED)
                 }
-                if (ownsEngine && (state.value.status != RuntimeStatus.LOADED || state.value.backend != request.backend))
-                    throw ModelException(ModelError.BUSY)
+                loadedConfig?.let { loaded ->
+                    if (state.value.status != RuntimeStatus.LOADED || loaded.backend != request.backend)
+                        throw ModelException(ModelError.BUSY)
+                    if (loaded.contextTokens != request.contextTokens || loaded.maxOutputTokens != request.outputTokens) {
+                        if (!cleanupOwnedEngine()) throw ModelException(ModelError.RESTART_REQUIRED)
+                        currentCoroutineContext().ensureActive()
+                    }
+                }
                 memoryPolicy.blockedReason(resources(), if (ownsEngine) MemoryAdmission.GENERATION else MemoryAdmission.LOADING)
                     ?.let { throw ModelException(it) }
                 idle?.cancel()
@@ -270,12 +279,14 @@ class ModelManager(
                     mutable.value = ModelRuntimeState(RuntimeStatus.LOADING, request.backend)
                     recordMemory(MemoryStage.BASELINE, request.backend)
                     val path = assets.verify() ?: throw ModelException(ModelError.NOT_INSTALLED)
+                    if (prepared == null) currentCoroutineContext().ensureActive()
                     withContext(NonCancellable) {
                         recordMemory(MemoryStage.LOADING, request.backend)
                         prepared?.checkLive()
-                        engine.load(ModelConfig(path, manifest.sha256, request.contextTokens, request.backend,
-                            request.outputTokens)).getOrThrow()
-                        ownsEngine = true
+                        val config = ModelConfig(path, manifest.sha256, request.contextTokens, request.backend,
+                            request.outputTokens)
+                        engine.load(config).getOrThrow()
+                        loadedConfig = config
                         recordMemory(MemoryStage.LOADED_IDLE, request.backend)
                     }
                 }
@@ -416,25 +427,40 @@ class ModelManager(
 
     fun load(backend: ModelBackend) = work {
         if (poisoned) throw ModelException(ModelError.RESTART_REQUIRED)
-        if (state.value.status == RuntimeStatus.LOADED) return@work
-        if (ownsEngine) throw ModelException(ModelError.BUSY)
+        loadedConfig?.let { loaded ->
+            if (state.value.status != RuntimeStatus.LOADED) throw ModelException(ModelError.BUSY)
+            if (loaded.contextTokens == manifest.configuredContextTokens &&
+                loaded.maxOutputTokens == manifest.maxOutputTokens) return@work
+            if (loaded.backend != backend) throw ModelException(ModelError.BUSY)
+            idle?.cancel()
+            if (!cleanupOwnedEngine()) throw ModelException(ModelError.RESTART_REQUIRED)
+            currentCoroutineContext().ensureActive()
+        }
         memoryPolicy.blockedReason(resources(), MemoryAdmission.LOADING)?.let { error ->
             mutable.update { it.copy(status = RuntimeStatus.BLOCKED, error = error) }
             return@work
         }
         mutable.value = ModelRuntimeState(status = RuntimeStatus.LOADING, backend = backend)
-        recordMemory(MemoryStage.BASELINE, backend)
-        val path = assets.verify() ?: throw ModelException(ModelError.NOT_INSTALLED)
-        val started = nowMs()
-        withContext(NonCancellable) {
-            recordMemory(MemoryStage.LOADING, backend)
-            engine.load(ModelConfig(path, manifest.sha256, manifest.configuredContextTokens, backend,
-                manifest.maxOutputTokens)).getOrThrow()
-            ownsEngine = true
-            recordMemory(MemoryStage.LOADED_IDLE, backend)
+        try {
+            recordMemory(MemoryStage.BASELINE, backend)
+            val path = assets.verify() ?: throw ModelException(ModelError.NOT_INSTALLED)
+            val loadStarted = nowMs()
+            currentCoroutineContext().ensureActive()
+            withContext(NonCancellable) {
+                recordMemory(MemoryStage.LOADING, backend)
+                val config = ModelConfig(path, manifest.sha256, manifest.configuredContextTokens, backend,
+                    manifest.maxOutputTokens)
+                engine.load(config).getOrThrow()
+                loadedConfig = config
+                recordMemory(MemoryStage.LOADED_IDLE, backend)
+            }
+            memoryPolicy.blockedReason(resources(), MemoryAdmission.GENERATION)?.let { throw ModelException(it) }
+            mutable.update { it.copy(status = RuntimeStatus.LOADED, loadMs = nowMs() - loadStarted, error = null) }
+        } catch (cancelled: CancellationException) {
+            mutable.update { it.copy(status = if (ownsEngine) RuntimeStatus.LOADED else RuntimeStatus.UNLOADED) }
+            scheduleIdle()
+            throw cancelled
         }
-        memoryPolicy.blockedReason(resources(), MemoryAdmission.GENERATION)?.let { throw ModelException(it) }
-        mutable.update { it.copy(status = RuntimeStatus.LOADED, loadMs = nowMs() - started, error = null) }
         scheduleIdle()
     }
 
@@ -444,11 +470,14 @@ class ModelManager(
             reject(ModelError.BUSY)
             return@launch
         }
+        val config = loadedConfig
+        if (state.value.status != RuntimeStatus.LOADED || poisoned ||
+            config?.contextTokens != manifest.configuredContextTokens || config.maxOutputTokens != manifest.maxOutputTokens) {
+            reject(if (poisoned) ModelError.RESTART_REQUIRED else ModelError.BUSY)
+            operation.unlock()
+            return@launch
+        }
         try {
-            if (state.value.status != RuntimeStatus.LOADED || poisoned) {
-                reject(if (poisoned) ModelError.RESTART_REQUIRED else ModelError.BUSY)
-                return@launch
-            }
             mutable.update { it.copy(commandError = null) }
             require(prompt in ModelTestPrompts.allowed)
             memoryPolicy.blockedReason(resources(), MemoryAdmission.GENERATION)?.let { throw ModelException(it) }
@@ -579,7 +608,7 @@ class ModelManager(
         mutable.update { it.copy(status = RuntimeStatus.RELEASING) }
         try {
             withTimeout(5_000) { engine.release() }
-            ownsEngine = false
+            loadedConfig = null
             mutable.update { it.copy(status = RuntimeStatus.UNLOADED, cleanupError = null) }
             recordMemory(MemoryStage.POST_RELEASE, state.value.backend)
             true
@@ -610,7 +639,31 @@ class ModelManager(
 
     private fun scheduleIdle() {
         idle?.cancel()
-        if (state.value.status == RuntimeStatus.LOADED) idle = scope.launch { delay(idleMs); release() }
+        val config = loadedConfig ?: return
+        if (state.value.status != RuntimeStatus.LOADED) return
+        val scheduled = scope.launch(start = CoroutineStart.LAZY) {
+            delay(idleMs)
+            releaseIdle(config, currentCoroutineContext().job)
+        }
+        idle = scheduled
+        scheduled.start()
+    }
+
+    private suspend fun releaseIdle(config: ModelConfig, scheduled: Job) {
+        // Keep the expired timer alive until its cancellation signals settle.
+        // Public release can still cancel this waiter and take cleanup ownership.
+        while (cancellationSignals.isNotEmpty()) cancellationSignals.toList().joinAll()
+        operation.withLock {
+            // Reference equality distinguishes separate native loads with identical values.
+            // A cancelled/replaced timer cannot release a newer load or an active owner.
+            if (!enabled || poisoned || releasing > 0 || idle !== scheduled || loadedConfig !== config ||
+                state.value.status != RuntimeStatus.LOADED || chatId != null || foreground != null || generation != null)
+                return@withLock
+            releasing++
+            try {
+                if (cleanupOwnedEngine()) mutable.update { it.copy(status = RuntimeStatus.UNLOADED, error = null) }
+            } finally { releasing-- }
+        }
     }
 
     suspend fun shutdown() { releaseForHostLoss().join(); scope.cancel() }

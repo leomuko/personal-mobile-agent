@@ -12,7 +12,8 @@ import kotlin.random.Random
 
 /** One active request per durable session; native lifetime remains owned by ChatRuntime. */
 internal class ConversationAssistant(private val scope: CoroutineScope,
-    private val controller: suspend () -> ConversationController?, private val runtime: ChatRuntime?) {
+    private val controller: suspend () -> ConversationController?, private val runtime: ChatRuntime?,
+    private val chatProfile: ChatContextProfile = ChatContextProfile.STANDARD) {
     private val mutable = MutableStateFlow(AssistantState(enabled = runtime?.enabled == true))
     val state = mutable.asStateFlow()
     private val admission = Mutex()
@@ -53,7 +54,7 @@ internal class ConversationAssistant(private val scope: CoroutineScope,
                 val complete = older.filter { it.role == MessageRole.USER }.mapNotNull { user ->
                     older.lastOrNull { it.role == MessageRole.ASSISTANT && it.turnId == user.id }?.let { user.text to it.text }
                 }
-                val request = GemmaChatBudget.build(current, complete, id)
+                val request = GemmaChatBudget.build(current, complete, id, chatProfile)
                 val user = if (retryUserId == null) target.submit() else snapshot.messages.first { it.id == retryUserId }
                 if (user == null || user.text != current) return@launch
                 validId = id
