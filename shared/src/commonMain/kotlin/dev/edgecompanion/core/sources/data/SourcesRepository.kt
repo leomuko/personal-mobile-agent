@@ -26,6 +26,30 @@ class SourcesRepository(private val db: CompanionDatabase, private val capacity:
 
     fun passageCoverage(): PassageCoverage = guarded { passages.coverage() }
 
+    fun spanPreview(span: SourceSpan): SourceSpanPreview? = guarded {
+        val passage = findSpan(span) ?: return@guarded null
+        val text = passage.text.trim().replace(Regex("\\s+"), " ")
+        val preview = if (text.length <= 100) text else text.take(100).dropLastWhile { it.isHighSurrogate() }.trimEnd() + "…"
+        SourceSpanPreview(passage.title, preview)
+    }
+
+    fun sourceAtSpan(span: SourceSpan): SourceAtSpan? = guarded {
+        val passage = findSpan(span) ?: return@guarded null
+        val text = sql.passageRevision(span.revisionId).executeAsOneOrNull()?.text ?: return@guarded null
+        if (span.startUtf16 < 0 || span.endUtf16 > text.length || span.startUtf16 >= span.endUtf16) return@guarded null
+        val start = span.startUtf16.toInt()
+        val end = span.endUtf16.toInt()
+        val highlight = text.substring(start, end)
+        if (highlight != passage.text) return@guarded null
+        SourceAtSpan(passage.title, SourceTextRules.chunks(text.substring(0, start)).map { it.text },
+            highlight, SourceTextRules.chunks(text.substring(end)).map { it.text })
+    }
+
+    private fun findSpan(span: SourceSpan) = sql.fetchPassage(span.passageId).executeAsOneOrNull()?.takeIf {
+        it.source_id == span.sourceId && it.revision_id == span.revisionId &&
+            it.start_utf16 == span.startUtf16 && it.end_utf16 == span.endUtf16
+    }
+
     fun list(query: String = "", after: Long = 0): SourcePage = guarded {
         require(after >= 0)
         val term = if (query.isBlank()) null else SourceTextRules.query(query)

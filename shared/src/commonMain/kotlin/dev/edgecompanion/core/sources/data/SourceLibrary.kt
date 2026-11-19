@@ -7,6 +7,7 @@ interface SourceLibrary {
     val sourceChanges: StateFlow<Long>
     suspend fun listSources(query: String = "", after: Long = 0): SourcePage
     suspend fun sourceText(id: Long, after: Long = 0): SourceTextPage
+    suspend fun sourceAtSpan(span: SourceSpan): SourceAtSpan? = throw SourceException(SourceError.UNAVAILABLE)
     suspend fun addTextSource(title: String, text: String): SourceSummary
     suspend fun addUtf8Source(title: String, bytes: ByteArray): SourceSummary
     suspend fun renameSource(id: Long, title: String)

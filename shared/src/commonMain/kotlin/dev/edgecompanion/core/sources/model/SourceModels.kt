@@ -22,5 +22,8 @@ data class SourceSummary(val id: Long, val title: String, val kind: SourceKind, 
 data class SourceText(val id: Long, val start: Long, val end: Long, val text: String)
 data class SourcePage(val items: List<SourceSummary>, val next: Long?)
 data class SourceTextPage(val items: List<SourceText>, val next: Long?)
+data class SourceSpan(val sourceId: Long, val revisionId: Long, val passageId: Long, val startUtf16: Long, val endUtf16: Long)
+data class SourceSpanPreview(val title: String, val text: String)
+data class SourceAtSpan(val title: String, val before: List<String>, val highlight: String, val after: List<String>)
 data class LibraryFootprint(val usedBytes: Long, val freeBytes: Long)
 fun interface LibraryCapacity { fun measure(): LibraryFootprint }

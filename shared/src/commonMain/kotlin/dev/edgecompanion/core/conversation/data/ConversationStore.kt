@@ -22,6 +22,8 @@ interface ConversationStore {
     fun messages(): List<Message>
     fun draft(): String
     fun saveDraft(text: String)
+    fun draftScope(): RequestScope = RequestScope.ORDINARY
+    fun saveDraftScope(scope: RequestScope) { error("Draft scope unavailable") }
     fun append(text: String, timestamp: Long)
     fun submitUserMessage(text: String, timestamp: Long): Message { append(text, timestamp); return messages().last() }
     /** Persistent stores override this to keep the scope with the turn; simple fakes ignore it. */

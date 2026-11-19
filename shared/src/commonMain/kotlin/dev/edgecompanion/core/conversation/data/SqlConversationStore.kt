@@ -31,6 +31,9 @@ class SqlConversationStore(private val db: CompanionDatabase) : ConversationStor
     }
     override fun draft() = db.conversationQueries.readDraft().executeAsOneOrNull().orEmpty()
     override fun saveDraft(text: String) { db.conversationQueries.writeDraft(text) }
+    override fun draftScope() = db.conversationQueries.readDraftScope().executeAsOneOrNull()
+        ?.let(RequestScope::valueOf) ?: RequestScope.ORDINARY
+    override fun saveDraftScope(scope: RequestScope) { db.conversationQueries.writeDraftScope(scope.name) }
     override fun append(text: String, timestamp: Long) = append(text, timestamp, RequestScope.ORDINARY)
     private fun append(text: String, timestamp: Long, scope: RequestScope) = db.transaction {
         db.conversationQueries.insertMessage(text, timestamp)
@@ -76,7 +79,7 @@ class SqlConversationStore(private val db: CompanionDatabase) : ConversationStor
             if (!admits(userId, expectedEpoch, grounding)) return@transactionWithResult false
             val existing = attempts().firstOrNull { it.id == id }
             if (existing != null) return@transactionWithResult existing.status == TurnStatus.PENDING
-            if (attempts().any { it.userId == userId && it.status == TurnStatus.COMPLETED }) return@transactionWithResult false
+            if (attempts().any { it.userId == userId && it.blocksRetry }) return@transactionWithResult false
             db.conversationQueries.startAttempt(id, userId, expectedEpoch)
             writeGrounding(id, grounding)
             true
@@ -89,7 +92,7 @@ class SqlConversationStore(private val db: CompanionDatabase) : ConversationStor
     }
     override fun recordSourcesResult(id: String, grounding: TurnGrounding): Boolean = db.transactionWithResult {
         require(grounding.sourcesResult != null && grounding.consulted.isEmpty())
-        // Only an attempt that has not begun generating; submit and the retry start already refuse a completed turn.
+        // Only an attempt that has not begun generating.
         val attempt = begins(id, grounding) ?: return@transactionWithResult false
         if (attempt.grounded) return@transactionWithResult false
         db.conversationQueries.finishAttempt(TurnStatus.COMPLETED.name, null, id)

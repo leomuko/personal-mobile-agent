@@ -28,7 +28,7 @@ class ConversationController(private val store: ConversationStore, private val n
 
     private fun snapshot() = ConversationState(store.messages(), store.draft(), ready = true,
         attachments = store.attachments(), draftEpoch = store.epoch(), attempts = store.attempts(),
-        contextEpoch = store.contextEpoch(), messageFence = store.messageFence())
+        contextEpoch = store.contextEpoch(), messageFence = store.messageFence(), draftScope = store.draftScope())
 
     suspend fun refresh() = mutex.withLock { mutable.value = snapshot() }
 
@@ -89,6 +89,17 @@ class ConversationController(private val store: ConversationStore, private val n
         try {
             store.saveDraft(text.take(16_000))
             mutable.value = mutable.value.copy(draft = text.take(16_000), error = null)
+        } catch (cancelled: CancellationException) { throw cancelled }
+        catch (_: Exception) {
+            mutable.value = mutable.value.copy(error = ConversationError.DRAFT_SAVE)
+        }
+    }
+
+    suspend fun setDraftScope(scope: RequestScope) = mutex.withLock {
+        if (!mutable.value.ready) return@withLock
+        try {
+            store.saveDraftScope(scope)
+            mutable.value = mutable.value.copy(draftScope = scope, error = null)
         } catch (cancelled: CancellationException) { throw cancelled }
         catch (_: Exception) {
             mutable.value = mutable.value.copy(error = ConversationError.DRAFT_SAVE)

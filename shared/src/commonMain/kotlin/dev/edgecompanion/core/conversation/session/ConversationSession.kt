@@ -6,6 +6,7 @@ import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 
 import dev.edgecompanion.core.conversation.model.ConversationError
+import dev.edgecompanion.core.conversation.model.ConsultedPassage
 import dev.edgecompanion.core.conversation.model.ConversationState
 import dev.edgecompanion.core.conversation.model.RequestScope
 
@@ -76,7 +77,9 @@ class ConversationSession(
     fun start() { startup.start() }
     fun attachmentLimitReached() { scope.launch { controller?.attachmentError(limit = true) } }
     fun editDraft(text: String) { scope.launch { controller?.editDraft(text) } }
-    /** [scope] is persisted with the user turn; there is no UI for SOURCES yet (D5). */
+    fun setDraftScope(scope: RequestScope) { this.scope.launch { controller?.setDraftScope(scope) } }
+    fun submitDraft() { assistant.submit(requestScope = null) }
+    /** Explicit scope for non-composer callers. */
     fun submit(scope: RequestScope = RequestScope.ORDINARY) { assistant.submit(requestScope = scope) }
     fun retryAssistant(userId: Long) { assistant.submit(userId) }
     fun cancelAssistant() { assistant.cancel() }
@@ -97,6 +100,10 @@ class ConversationSession(
     }
     override suspend fun listSources(query: String, after: Long) = sources { it.list(query, after) }
     override suspend fun sourceText(id: Long, after: Long) = sources { it.text(id, after) }
+    suspend fun hasSources(): Boolean = listSources().items.isNotEmpty()
+    suspend fun consultedPreviews(references: List<ConsultedPassage>): List<SourceSpanPreview?> =
+        sources { repository -> references.map { repository.spanPreview(it.span) } }
+    override suspend fun sourceAtSpan(span: SourceSpan) = sources { it.sourceAtSpan(span) }
     override suspend fun addTextSource(title: String, text: String) = sources {
         it.importText(title, text, SourceKind.PASTED_TEXT).also { sourceVersion.value++ }
     }

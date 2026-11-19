@@ -36,7 +36,7 @@ internal class ConversationAssistant(private val scope: CoroutineScope,
     private var clearing = false
     private var cleanupFailed = false
 
-    fun submit(retryUserId: Long? = null, requestScope: RequestScope = RequestScope.ORDINARY) {
+    fun submit(retryUserId: Long? = null, requestScope: RequestScope? = RequestScope.ORDINARY) {
         scope.launch {
             if (clearing) return@launch
             if (cleanupFailed) {
@@ -60,14 +60,14 @@ internal class ConversationAssistant(private val scope: CoroutineScope,
                 if (retryUserId != null && retryUserId <= snapshot.messageFence) return@launch
                 val retried = if (retryUserId == null) null else
                     snapshot.messages.firstOrNull { it.id == retryUserId && it.role == MessageRole.USER } ?: return@launch
-                val turnScope = retried?.scope ?: requestScope
+                val turnScope = retried?.scope ?: requestScope ?: snapshot.draftScope
                 // Without a runtime, only SOURCES has work to do: its no-answer result needs no model (S4-F2).
                 if (generator == null && turnScope != RequestScope.SOURCES) {
-                    if (retryUserId == null) target.submit(requestScope); return@launch
+                    if (retryUserId == null) target.submit(turnScope); return@launch
                 }
                 val current = retried?.text ?: snapshot.draft.trim()
-                if (current.isEmpty()) { if (retryUserId == null) target.submit(requestScope); return@launch }
-                if (retryUserId != null && snapshot.attempts.any { it.userId == retryUserId && it.status == TurnStatus.COMPLETED }) return@launch
+                if (current.isEmpty()) { if (retryUserId == null) target.submit(turnScope); return@launch }
+                if (retryUserId != null && snapshot.attempts.any { it.userId == retryUserId && it.blocksRetry }) return@launch
                 val turnId = Random.nextLong().toString(16) + Random.nextLong().toString(16)
                 id = turnId
                 val older = snapshot.messages.filter { it.id > snapshot.messageFence && (retryUserId == null || it.id < retryUserId) }
@@ -78,7 +78,7 @@ internal class ConversationAssistant(private val scope: CoroutineScope,
                 GemmaChatBudget.build(current, complete, turnId, chatProfile)
                 // S4-F5: the PENDING attempt is durable before retrieval starts (with the message for a new turn),
                 // so a process loss at any later point restores as an INTERRUPTED attempt with Retry.
-                val user = if (retried == null) target.submit(requestScope, turnId, current) ?: return@launch else {
+                val user = if (retried == null) target.submit(turnScope, turnId, current) ?: return@launch else {
                     if (!target.startAssistant(turnId, retried.id, target.state.value.draftEpoch, snapshot.contextEpoch)) return@launch
                     retried
                 }
