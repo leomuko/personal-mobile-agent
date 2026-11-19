@@ -382,3 +382,55 @@ the staged `.secureqa` copies and loaded no model. **PASS: `OK (8 tests)`.**
 This closes the Android SQLCipher gap stated in the section above for
 migration 6. Raw results, git-ignored:
 `benchmarks/results/passage-20261119T102514Z-22814-2IxXZX/`.
+
+## 2026-11-19: S4 clean-up (S4-F6 fix, S4-F8 regression test)
+
+Host only. No device run.
+
+**S4-F6.** `ConversationController.submit` now tells a failed commit apart from
+a committed send whose refresh failed.
+
+- **Commit failed:** nothing is durable. The draft stays and `MESSAGE_SAVE` is
+  shown, as before.
+- **Committed, refresh failed:** the controller finishes that turn's `PENDING`
+  attempt as `INTERRUPTED`, then refreshes once more.
+  - If that refresh works, the UI shows the stored state: the message, an
+    empty draft and the interrupted attempt with Retry. No error is shown.
+  - If it fails too, `MESSAGE_SAVE` stays, but the attempt is already final in
+    storage.
+  - If finishing the attempt fails (S4-F9), it stays `PENDING` until a restore
+    reconciles it. `MESSAGE_SAVE` is then shown even when the refresh works.
+  - Only this turn's attempt is finished. Another `PENDING` attempt is not
+    touched.
+- The submit still returns `null`, so the assistant never retrieves or
+  generates for that attempt.
+- Unchanged: the epoch duplicate guard, and the `PENDING` attempt written in
+  the submit transaction (S4-F5). There is no schema or store change.
+
+Tests (JVM, in-memory JDBC SQLite, synthetic):
+
+- `SubmitRefreshFailureTest`, covering both scopes:
+  - one failed refresh: the turn retries without a restart, and a restore
+    changes nothing;
+  - two failed refreshes: the error stays, the attempt is final, and the next
+    send adds no duplicate;
+  - finishing fails but the refresh works: `MESSAGE_SAVE` is shown, the
+    attempt is `PENDING`, and a restore reconciles it;
+  - an unrelated `PENDING` attempt stays `PENDING`;
+  - failed submit transaction: nothing is durable and the draft stays.
+- `AttachmentPersistenceTest.retryAfterCommittedSendAndFailedRefreshDoesNotDuplicateMessage`
+  now expects the stored state right after the first send.
+  `sendFromStaleStateAfterTwoFailedRefreshesGoesThroughTheEpochGuard` covers
+  the guard: a stale state that still has the draft and a `READY` attachment
+  sends again and adds no duplicate (S4-F10).
+
+**S4-F8.** `verify-chat-context.test.mjs` adds two `sqlcipher` cases. Status
+`-4` and status `-3`, each beside `OK (8 tests)`, fail with reason
+`instrumentation`. No script change was needed. A copy of the script without
+the status-code clause exits 0 on both, so the cases do catch a regression.
+
+| Check | Before | After |
+|---|---|---|
+| `:shared:jvmTest` | 276 (2 skipped) | 282 (2 skipped), 0 failures |
+| `:androidApp:testDebugUnitTest` | 32 | 32, 0 failures |
+| node `verify-chat-context` + `qa-supervision` | 53 | 55, 0 failures |
