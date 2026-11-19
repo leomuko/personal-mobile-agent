@@ -1,7 +1,7 @@
 #!/bin/bash
 # Device-prep S24 runs (docs/P2_DEVICE_PREP_RESULTS.md). Each run needs separate authorization.
 #   scripts/verify-chat-context.sh measure 2048|4096|8192 [--repeat 1-5]   context measurement (supervised)
-#   scripts/verify-chat-context.sh sqlcipher                               SQLCipher passage gate
+#   scripts/verify-chat-context.sh sqlcipher                               SQLCipher passage + grounding gate
 # Targets only dev.edgecompanion.app.secureqa and its test package: installs with `install -r`,
 # runs `am instrument`, never uninstalls, clears or touches debug/release data.
 # Both APKs are copied into this run's private results directory right after the build; only those
@@ -370,8 +370,9 @@ if [[ "$MODE" == measure ]]; then
     -e chatContextMeasurement true -e supervisedThermal true -e supervisionRunId "$RUN_ID" -e chatContextRepeat "$REPEAT" \
     "$RUNNER" > "$RESULTS/instrumentation.txt" 2>&1 &
 else
-  "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r -e class dev.edgecompanion.app.PassageSqlCipherTest \
-    -e p2PassageSqlCipher true "$RUNNER" > "$RESULTS/instrumentation.txt" 2>&1 &
+  "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r \
+    -e class dev.edgecompanion.app.PassageSqlCipherTest,dev.edgecompanion.app.GroundingSqlCipherTest \
+    -e p2PassageSqlCipher true -e p2GroundingSqlCipher true "$RUNNER" > "$RESULTS/instrumentation.txt" 2>&1 &
 fi
 INSTR_PID=$!
 STARTED_INSTR_PID="$INSTR_PID"
@@ -421,7 +422,8 @@ if [[ "$MODE" == measure ]]; then
   GATE_REASON="$(check_report)" || fail "${GATE_REASON:-report}"
   write_summary || fail summary
 else
-  grep -Eq '^OK \(3 tests\)$' "$RESULTS/instrumentation.txt" || fail instrumentation
+  # PassageSqlCipherTest (3) + GroundingSqlCipherTest (5); a skipped opt-in would not count as passing.
+  grep -Eq '^OK \(8 tests\)$' "$RESULTS/instrumentation.txt" || fail instrumentation
 fi
 REASON=""
 STATUS=passed

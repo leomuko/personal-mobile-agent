@@ -127,9 +127,10 @@ if (command === 'shell' && rest[0] === 'am' && rest[1] === 'instrument') {
     if (process.env.FAKE_INSTRUMENTATION === 'safety-stop') writeFileSync(join(thermalDir, 'safety-stop.json'), '{"reason":"synthetic"}');
     console.log('OK (1 test)'); process.exit(process.env.FAKE_INSTRUMENTATION === 'exit-code' ? 1 : 0);
   }
-  if (cls === 'dev.edgecompanion.app.PassageSqlCipherTest') {
+  if (cls === 'dev.edgecompanion.app.PassageSqlCipherTest,dev.edgecompanion.app.GroundingSqlCipherTest') {
     if (process.env.FAKE_INSTRUMENTATION === 'hang') { hang(); return; }
-    console.log('OK (3 tests)'); process.exit(process.env.FAKE_INSTRUMENTATION === 'exit-code' ? 1 : 0);
+    if (process.env.FAKE_INSTRUMENTATION === 'passage-only') { console.log('OK (3 tests)'); process.exit(0); }
+    console.log('OK (8 tests)'); process.exit(process.env.FAKE_INSTRUMENTATION === 'exit-code' ? 1 : 0);
   }
 }
 console.error('Unexpected synthetic adb call'); process.exit(1);
@@ -340,6 +341,19 @@ test('SQLCipher gate uses only install -r and am instrument on the secureQa app'
   assertClientStopped(result, summary);
   assertOnlySecureQa(result.calls);
   assert.deepEqual(result.calls.map(call => call.args[2]), ['install', 'install', 'shell']);
+  const instrument = result.calls.find(isRunInstrument).args.join(' ');
+  assert.match(instrument, / -e class dev\.edgecompanion\.app\.PassageSqlCipherTest,dev\.edgecompanion\.app\.GroundingSqlCipherTest /);
+  assert.match(instrument, / -e p2PassageSqlCipher true -e p2GroundingSqlCipher true /);
+}));
+
+test('the SQLCipher gate fails when only the passage tests ran', () => withSandbox(async dir => {
+  const result = await run(dir, ['sqlcipher'], { FAKE_INSTRUMENTATION: 'passage-only' });
+  assert.equal(result.code, 1, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.status, 'failed');
+  assert.equal(summary.reason, 'instrumentation');
+  assert.equal(summary.stage, 'validation');
+  assertClientStopped(result, summary);
 }));
 
 test('a never-finishing instrumentation hits the deadline, stops this run and keeps failed evidence', () => withSandbox(async dir => {

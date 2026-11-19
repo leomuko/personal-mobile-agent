@@ -90,7 +90,7 @@ class PassageSqlCipherTest {
                 // 4.sqm introduces sources (schema 5); 5.sqm introduces passages (schema 6).
                 // Schema 4 cannot contain existing sources. Keep sources/chunks/search intact,
                 // remove only passage structures and restore the pre-passage revision status.
-                assertEquals(6L, CompanionDatabase.Schema.version)
+                assertEquals(7L, CompanionDatabase.Schema.version)
                 legacy.db.transaction {
                     legacy.execute("DROP TABLE source_passage_search")
                     legacy.execute("DROP TABLE source_passage")
@@ -107,7 +107,7 @@ class PassageSqlCipherTest {
                 // Reopening through the real encrypted factory executes migration 5 (5 -> 6).
                 legacy.reopen()
                 val migrated = legacy.repo
-                assertEquals(6L, legacy.scalar("PRAGMA user_version"))
+                assertEquals(7L, legacy.scalar("PRAGMA user_version"))
                 assertEquals(sources, migrated.list().items)
                 assertEquals(chunks, sources.map { migrated.text(it.id) })
                 assertEquals(search, migrated.list("contract"))
