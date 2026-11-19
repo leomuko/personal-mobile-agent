@@ -129,6 +129,45 @@ class GroundedAssistantTest {
 
     private fun r(block: PassageRetriever) = block
 
+    @Test fun onlyTemporaryNoAnswersCanRetryAndRecoveryUsesTheOriginalScope() = runTest {
+        val initial = mapOf(
+            SourcesNoAnswer.NOT_INDEXED to result(coverage = PassageCoverage(0, 1)),
+            SourcesNoAnswer.RETRIEVAL_INCOMPLETE to result(reason = PassageStopReason.DEADLINE),
+            SourcesNoAnswer.NO_MATCH to result(),
+            SourcesNoAnswer.PASSAGES_UNUSABLE to result(listOf(retrieved(0, "Synthetic @@@ text"))),
+        )
+        for ((reason, firstResult) in initial) {
+            var response = firstResult
+            var calls = 0
+            lane { _, _, _ -> calls++; response }.use { l ->
+                ask(l, RequestScope.SOURCES)
+                val user = l.store.messages().single()
+                val firstAttempt = l.store.attempts().single()
+                assertEquals(reason, firstAttempt.sourcesResult)
+                response = result(listOf(retrieved(0, "Synthetic greenhouse note.")))
+                l.assistant.submit(user.id, requestScope = RequestScope.ORDINARY)
+                runCurrent()
+                if (reason == SourcesNoAnswer.NOT_INDEXED || reason == SourcesNoAnswer.RETRIEVAL_INCOMPLETE) {
+                    assertEquals(2, calls)
+                    val attempt = l.store.attempts().last()
+                    assertNotEquals(firstAttempt.id, attempt.id)
+                    assertEquals(user.id, attempt.userId)
+                    assertEquals(RequestScope.SOURCES, l.store.messages().single().scope)
+                    assertTrue(l.runtime.requests.single().messages.last().text.startsWith(GroundedPrompt.SOURCES_INSTRUCTION))
+                    l.runtime.finish("Synthetic recovered reply")
+                    runCurrent()
+                    l.assistant.submit(user.id)
+                    runCurrent()
+                    assertEquals(2, l.store.attempts().size)
+                } else {
+                    assertEquals(1, calls)
+                    assertEquals(listOf(firstAttempt), l.store.attempts())
+                    assertTrue(l.runtime.requests.isEmpty())
+                }
+            }
+        }
+    }
+
     @Test fun sourcesNoAnswerReasonsArePersistedWithoutTheRuntime() = runTest {
         val cases = listOf<Pair<PassageRetriever, Pair<SourcesNoAnswer, RetrievalSummary>>>(
             r { _, _, _ -> result(reason = PassageStopReason.DEADLINE) } to

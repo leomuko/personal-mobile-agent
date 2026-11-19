@@ -37,6 +37,98 @@ class GroundedSessionTest {
     private val garden = "The synthetic greenhouse vent opens at twenty degrees on weekdays."
     private val question = "When does the greenhouse vent open?"
 
+    @Test fun composerSendUsesRestoredScopeAndSendingDoesNotResetIt() = runTest {
+        Fixture().use { f ->
+            var chat = session(f)
+            try {
+                chat.addTextSource("Garden", garden)
+                chat.editDraft(question)
+                chat.setDraftScope(RequestScope.SOURCES)
+                runCurrent()
+                assertEquals(question, f.store.draft())
+                assertEquals(RequestScope.SOURCES, f.store.draftScope())
+                chat.shutdown()
+                chat = session(f)
+                assertEquals(question, chat.state.value.draft)
+                assertEquals(RequestScope.SOURCES, chat.state.value.draftScope)
+                chat.submitDraft()
+                runCurrent()
+                assertEquals(RequestScope.SOURCES, f.store.messages().single().scope)
+                assertTrue(f.runtime.requests.single().messages.last().text.startsWith(GroundedPrompt.SOURCES_INSTRUCTION))
+                f.runtime.finish("Synthetic answer")
+                runCurrent()
+                assertEquals("", chat.state.value.draft)
+                assertEquals(RequestScope.SOURCES, chat.state.value.draftScope)
+                chat.setDraftScope(RequestScope.ORDINARY)
+                chat.editDraft("Synthetic follow-up")
+                chat.submitDraft()
+                runCurrent()
+                assertEquals(RequestScope.ORDINARY, f.store.messages().last().scope)
+            } finally { chat.shutdown() }
+        }
+    }
+
+    @Test fun removingLastSourceDoesNotDowngradeStickyScopedSendToOrdinary() = runTest {
+        Fixture().use { f ->
+            val chat = session(f)
+            try {
+                assertFalse(chat.hasSources())
+                val source = chat.addTextSource("Garden", garden)
+                assertTrue(chat.hasSources())
+                chat.setDraftScope(RequestScope.SOURCES)
+                assertTrue(chat.deleteSource(source.id))
+                assertFalse(chat.hasSources())
+                chat.editDraft(question)
+                chat.submitDraft()
+                runCurrent()
+                assertEquals(RequestScope.SOURCES, f.store.messages().single().scope)
+                assertEquals(SourcesNoAnswer.NO_MATCH, f.store.attempts().single().sourcesResult)
+                assertTrue(f.runtime.requests.isEmpty())
+                assertEquals(RequestScope.SOURCES, chat.state.value.draftScope)
+
+                chat.setDraftScope(RequestScope.ORDINARY)
+                chat.editDraft("Synthetic ordinary follow-up")
+                chat.submitDraft()
+                runCurrent()
+                assertEquals(RequestScope.ORDINARY, f.store.draftScope())
+                assertEquals(listOf(RequestScope.SOURCES, RequestScope.ORDINARY), f.store.messages().map { it.scope })
+                assertEquals("Synthetic ordinary follow-up", f.runtime.requests.single().messages.last().text)
+            } finally { chat.shutdown() }
+        }
+    }
+
+    @Test fun consultedLookupsResolveCurrentTitleAndExactUtf16SpanThenReportDeletion() = runTest {
+        Fixture().use { f ->
+            val chat = session(f)
+            try {
+                val body = "🌱 Synthetic filler. ".repeat(105) + "The greenhouse vent timer says noon."
+                val source = chat.addTextSource("Garden", body)
+                send(chat, "greenhouse vent timer")
+                val reference = f.store.attempts().single().consulted.single()
+                assertTrue(reference.startUtf16 > 0)
+                val exact = body.substring(reference.startUtf16.toInt(), reference.endUtf16.toInt())
+                val span = reference.span
+                assertEquals("Garden", chat.consultedPreviews(listOf(reference)).single()?.title)
+                chat.renameSource(source.id, "Renamed garden")
+                val shown = assertNotNull(chat.consultedPreviews(listOf(reference)).single())
+                assertEquals("Renamed garden", shown.title)
+                assertTrue(shown.text.length <= 101)
+                val detail = assertNotNull(chat.sourceAtSpan(span))
+                assertEquals(shown.title, detail.title)
+                assertEquals(exact, detail.highlight)
+                assertEquals(body, detail.before.joinToString("") + detail.highlight + detail.after.joinToString(""))
+                assertNull(chat.sourceAtSpan(span.copy(revisionId = span.revisionId + 1)))
+                assertNull(chat.sourceAtSpan(span.copy(startUtf16 = span.startUtf16 + 1)))
+                f.runtime.finish("Synthetic reply")
+                runCurrent()
+                assertTrue(chat.deleteSource(source.id))
+                assertEquals(listOf(reference), f.store.attempts().single().consulted)
+                assertEquals(listOf(null), chat.consultedPreviews(listOf(reference)))
+                assertNull(chat.sourceAtSpan(span))
+            } finally { chat.shutdown() }
+        }
+    }
+
     @Test fun ordinaryHitPacksEvidenceAndReferencesSurviveRestart() = runTest {
         Fixture().use { f ->
             var session = session(f)

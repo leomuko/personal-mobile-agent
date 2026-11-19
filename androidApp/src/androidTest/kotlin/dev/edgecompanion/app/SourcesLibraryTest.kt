@@ -61,7 +61,7 @@ class SourcesLibraryTest {
             chat.reserve(dev.edgecompanion.core.attachments.model.Attachment("synthetic", "fixture.txt", "text/plain"))
             val epoch = chat.epoch()
             assertTrue(chat.startAssistantTurn("pending", user.id, epoch))
-            listOf("DROP TABLE source_search", "DROP TABLE source_chunk", "DROP TABLE source_revision",
+            listOf("DROP TABLE draft_scope", "DROP TABLE source_search", "DROP TABLE source_chunk", "DROP TABLE source_revision",
                 "DROP TABLE source", "DROP TABLE context_eligibility", "ALTER TABLE assistant_attempt DROP COLUMN context_epoch",
                 "PRAGMA user_version = 4").forEach { driver.execute(null, it, 0) }
             driver.close(); driver = EncryptedDatabaseFactory.open(context, name)

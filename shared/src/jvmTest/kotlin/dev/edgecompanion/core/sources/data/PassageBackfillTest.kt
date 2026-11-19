@@ -23,7 +23,7 @@ class PassageBackfillTest {
         val user = Message(1, "saved message", 42)
         val chunks = f.repo.text(legacy.id)
         f.migrate()
-        assertEquals(7, CompanionDatabase.Schema.version)
+        assertEquals(8, CompanionDatabase.Schema.version)
         val chat = SqlConversationStore(f.db)
         assertEquals(listOf(legacy), f.repo.list("needle").items)
         assertEquals(chunks, f.repo.text(legacy.id))

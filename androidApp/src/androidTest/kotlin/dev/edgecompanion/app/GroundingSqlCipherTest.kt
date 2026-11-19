@@ -47,9 +47,10 @@ class GroundingSqlCipherTest {
     private val references = listOf(ConsultedPassage(1, 4, 5, 6, 0, 10), ConsultedPassage(2, 4, 5, 7, 10, 20))
 
     @Test fun encryptedSchemaSixMigratesToSevenAsOrdinaryWithoutReferences() = fixture().use { f ->
-        assertEquals(7L, CompanionDatabase.Schema.version)
-        // Synthetic downgrade on the encrypted file: drop only migration 6's tables, then write schema-6 rows.
+        assertEquals(8L, CompanionDatabase.Schema.version)
+        // Recreate the schema-6 shape on the encrypted fixture, then write legacy rows.
         f.db.transaction {
+            f.execute("DROP TABLE draft_scope")
             f.execute("DROP TABLE consulted_passage")
             f.execute("DROP TABLE attempt_grounding")
             f.execute("DROP TABLE message_scope")
@@ -64,9 +65,9 @@ class GroundingSqlCipherTest {
         assertEquals(0L, f.scalar("SELECT count(*) FROM sqlite_master WHERE name IN " +
             "('message_scope', 'attempt_grounding', 'consulted_passage')"))
 
-        // Reopening through the real encrypted factory executes migration 6 (6 -> 7).
+        // Reopening through the encrypted factory applies migrations 6 and 7.
         f.reopen()
-        assertEquals(7L, f.scalar("PRAGMA user_version"))
+        assertEquals(8L, f.scalar("PRAGMA user_version"))
         assertEquals(3L, f.scalar("SELECT count(*) FROM sqlite_master WHERE name IN " +
             "('message_scope', 'attempt_grounding', 'consulted_passage')"))
         val store = f.store
@@ -112,6 +113,24 @@ class GroundingSqlCipherTest {
         assertEquals(expected, f.store.attempts())
         assertEquals(messages, f.store.messages())
         f.assertEncryptedOnDisk("Synthetic scoped question")
+    }
+
+    @Test fun encryptedSchemaSevenDraftMigratesOffAndRestoresStickyScopeAfterReopen() = fixture().use { f ->
+        f.store.saveDraft("Synthetic migration draft")
+        f.db.transaction {
+            f.execute("DROP TABLE draft_scope")
+            f.execute("PRAGMA user_version = 7")
+        }
+        assertEquals(7L, f.scalar("PRAGMA user_version"))
+        f.reopen()
+        assertEquals(8L, f.scalar("PRAGMA user_version"))
+        assertEquals("Synthetic migration draft", f.store.draft())
+        assertEquals(RequestScope.ORDINARY, f.store.draftScope())
+        f.store.saveDraftScope(RequestScope.SOURCES)
+        f.reopen()
+        assertEquals("Synthetic migration draft", f.store.draft())
+        assertEquals(RequestScope.SOURCES, f.store.draftScope())
+        f.assertEncryptedOnDisk("Synthetic migration draft")
     }
 
     @Test fun sourcesResultAndStoppedTurnsFinishTheirOwnAttempt() = fixture().use { f ->

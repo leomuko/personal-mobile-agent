@@ -8,7 +8,7 @@ import java.io.File
 import java.nio.file.Files
 import kotlin.test.*
 
-/** Migration 6 on temporary copies of the schema snapshots; JDBC only, not SQLCipher. */
+/** Conversation migrations on temporary copies of schema snapshots using JDBC. */
 class GroundingMigrationTest {
     private fun withSnapshot(version: Int, block: (JdbcSqliteDriver) -> Unit) {
         val temporary = Files.createTempDirectory("grounding-migration-").toFile()
@@ -36,7 +36,7 @@ class GroundingMigrationTest {
                 "INSERT INTO draft VALUES (1, 'Synthetic draft')",
             )
             CompanionDatabase.Schema.migrate(driver, version.toLong(), CompanionDatabase.Schema.version)
-            assertEquals(7L, CompanionDatabase.Schema.version)
+            assertEquals(8L, CompanionDatabase.Schema.version)
             assertTrue(driver.tables().containsAll(listOf("message_scope", "attempt_grounding", "consulted_passage")))
             val store = SqlConversationStore(CompanionDatabase(driver))
             assertEquals(listOf(RequestScope.ORDINARY, RequestScope.ORDINARY, RequestScope.ORDINARY), store.messages().map { it.scope })
@@ -72,6 +72,20 @@ class GroundingMigrationTest {
             assertEquals(TurnStatus.PENDING, store.attempts().single().status)
             assertTrue(user.id < newer.id)
         } finally { driver.close() }
+    }
+
+    @Test fun schemaSevenDraftMigratesWithOffDefaultAndStoresScopeSeparatelyFromDraftText() = withSnapshot(7) { driver ->
+        driver.exec("INSERT INTO draft VALUES (1, 'Synthetic existing draft')")
+        CompanionDatabase.Schema.migrate(driver, 7, CompanionDatabase.Schema.version)
+        val store = SqlConversationStore(CompanionDatabase(driver))
+        assertEquals("Synthetic existing draft", store.draft())
+        assertEquals(RequestScope.ORDINARY, store.draftScope())
+        store.saveDraftScope(RequestScope.SOURCES)
+        assertEquals("Synthetic existing draft", store.draft())
+        store.saveDraft("Synthetic changed draft")
+        val restored = SqlConversationStore(CompanionDatabase(driver))
+        assertEquals("Synthetic changed draft", restored.draft())
+        assertEquals(RequestScope.SOURCES, restored.draftScope())
     }
 
     /** S4-F5: the PENDING attempt is committed with the message; begin and the SOURCES result finish that attempt. */
