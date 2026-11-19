@@ -1,7 +1,8 @@
 # P2 decisions draft: D5 details (S5) and the S6 answer-quality rubric
 
-2026-11-19. Planner draft for the user's approval. Nothing here is implemented
-yet. Slice context: [P2_SLICE_PLAN_V1.md](P2_SLICE_PLAN_V1.md), S5 and S6.
+2026-11-19. **Approved by the user on 2026-11-19: every recommended answer below
+(D5.1–D5.7, S24 screenshots for S5, and the S6 rubric as drafted).** Nothing here is
+implemented yet. Slice context: [P2_SLICE_PLAN_V1.md](P2_SLICE_PLAN_V1.md), S5 and S6.
 Each open point carries a **recommended** answer. Approve as written or
 change individual items.
 

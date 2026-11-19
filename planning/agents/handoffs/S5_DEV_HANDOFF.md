@@ -10,13 +10,37 @@ helper-agent rules and handback format apply. Background:
 **Authorization:** host work only. No device or emulator runs. The S24
 screenshots come later, with the user's go-ahead.
 
-**Start condition:**
-- The S4 clean-up must have been accepted and committed by the user.
-- The user must have approved D5.1–D5.7, or changed them. If the planner's
-  message does not confirm both, stop and ask the planner. Do not build from
-  the draft.
-- If the user changed any D5 item, the planner's message gives the change, and
-  that change wins over this file.
+**Start condition: met on 2026-11-19.**
+- The S4 clean-up is committed (`319e084..ea179bb`, planning `8883c9c`).
+- The user approved D5.1–D5.7 as recommended, with a **sticky** chip.
+- The user chose S24 screenshots as S5 evidence. Each run needs their go-ahead.
+
+## Part 0: carried-over S4 issue to fix first (S4-F7, P3)
+
+`GroundedPrompt` excludes passages that contain the chat control sequences or
+lines that look like the `@@@` delimiter. That check has two problems:
+- **Bypass:** lookalikes that use Unicode spaces get through. Examples are
+  NBSP, U+2000–U+200A, U+3000, and tab between marker tokens. The real marker
+  itself cannot be forged.
+- **Over-exclusion:** passages are dropped that merely contain a code-diff hunk
+  line (`@@ -1,3 +1,4 @@`), an `@@handle`, or an all-caps "PASSAGE 1" heading.
+
+Required behaviour:
+- Normalize Unicode whitespace before matching delimiter lookalikes.
+- Match only lines that could actually be read as the block's structural
+  lines: `@@@ BEGIN PASSAGES`, `@@@ END PASSAGES`, and the per-passage label
+  format.
+- Do not exclude passages that merely contain `@@` text or diff hunks. Any `@@@` still excludes the passage, as it does today.
+- Keep `grounded-prompt-v1` byte-identical for passages that were already
+  accepted. If the label or delimiter format must change, bump the version
+  and say why.
+
+Tests:
+- each Unicode-space lookalike is excluded;
+- diff hunks, `@@handle` and similar text are included;
+- the existing packing tests are unchanged.
+
+S4-F3, retry after a temporary no-answer, is closed by D5.5 below.
 
 ## Where things stand
 
@@ -41,7 +65,7 @@ screenshots come later, with the user's go-ahead.
   `planning/design/approved/02-conversation-memory.png`. It shows source chips
   under an answer, and a composer with `+`, a text field and a mic.
 
-## What to build (approved D5 items; confirm against the planner's message)
+## What to build (D5 approved as recommended, 2026-11-19)
 
 1. **Sources chip (D5.1–D5.4, D5.7)**
    - A toggle chip in the composer row, between `+` and the text field, with a
@@ -114,7 +138,7 @@ screenshots come later, with the user's go-ahead.
 - S6 quality work.
 - Changing the default context profile.
 - Memory and PDF.
-- S4-F7.
+- S4-F7 beyond Part 0.
 - Device and emulator runs.
 - Anything in `DEFERRED_ISSUES.md`.
 

@@ -50,7 +50,7 @@ on a path under the folders archived on 2026-11-10.
 | D2 | Accepted | Measure 4096 and 8192 on the S24; nothing above 2048 is the ordinary default before that. |
 | D3 | Accepted, refined | Automatic retrieval on ordinary chat turns; no hit means plain chat. A separate, explicit, persisted source-scoped request state carries the "sources do not cover this" reply. |
 | D4 | Accepted | QA-only paths stay untouched and pinned to 2048/512. |
-| D5 | Accepted (2026-11-19), details pending | A toggle chip next to the input box makes the next request source-scoped. Details awaiting approval: [P2_S5_S6_DECISIONS_DRAFT_V1.md](P2_S5_S6_DECISIONS_DRAFT_V1.md). |
+| D5 | Accepted (2026-11-19) | A sticky toggle chip ("My sources") next to the input box makes requests source-scoped; details D5.1–D5.7 approved as recommended in [P2_S5_S6_DECISIONS_DRAFT_V1.md](P2_S5_S6_DECISIONS_DRAFT_V1.md). The S6 rubric there is approved too. |
 
 ## Slices
 
@@ -186,7 +186,9 @@ on a path under the folders archived on 2026-11-10.
   drawer and the full app; resource strings; wording says "consulted", never
   "verified" or "supported by".
 - **Done when:** Compose tests cover present, absent and deleted-source
-  states, large font and both hosts; emulator screenshots are attached.
+  states, large font and both hosts; S24 `secureQa` screenshots are attached
+  (user decision 2026-11-19, replacing emulator screenshots; each run needs the
+  user's go-ahead).
 - **Depends on:** S4, D5.
 
 ### S6 — Answer-quality check (device)
