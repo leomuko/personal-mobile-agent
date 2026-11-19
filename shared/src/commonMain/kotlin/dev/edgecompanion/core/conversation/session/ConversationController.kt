@@ -105,20 +105,37 @@ class ConversationController(private val store: ConversationStore, private val n
         val attachments = mutable.value.attachments.filter { it.messageId == null }
         if (!mutable.value.ready || (text.isEmpty() && attachments.isEmpty()) ||
             attachments.any { it.status != AttachmentStatus.READY }) return@withLock null
-        try {
+        val intent = attemptId?.takeIf { text == expectedText }
+        val submitted = try {
             // A previous send may have committed before its UI refresh failed.
             if (store.epoch() != mutable.value.draftEpoch) {
                 mutable.value = snapshot()
                 return@withLock null
             }
-            val submitted = store.submitUserMessage(text, now(), scope, attemptId?.takeIf { text == expectedText })
-            mutable.value = snapshot()
-            submitted
+            store.submitUserMessage(text, now(), scope, intent)
         } catch (cancelled: CancellationException) { throw cancelled }
         catch (_: Exception) {
+            // Commit failed (or the guard's refresh did): nothing new is durable and the draft is kept.
             mutable.value = mutable.value.copy(error = ConversationError.MESSAGE_SAVE)
-            null
+            return@withLock null
         }
+        try {
+            mutable.value = snapshot()
+            return@withLock submitted
+        } catch (cancelled: CancellationException) { throw cancelled }
+        catch (_: Exception) { }
+        // S4-F6: committed, but the refresh failed. The caller will not own the saved PENDING attempt, so it is
+        // finished as INTERRUPTED (Retry, as after a restore) before one more refresh shows the stored state.
+        // If finishing fails, the attempt stays PENDING until restore, so the error stays visible (S4-F9).
+        val finished = intent == null ||
+            runCatching { store.finishAssistantTurn(intent, TurnStatus.INTERRUPTED, null) }.isSuccess
+        try {
+            val stored = snapshot()
+            mutable.value = if (finished) stored else stored.copy(error = ConversationError.MESSAGE_SAVE)
+        }
+        catch (cancelled: CancellationException) { throw cancelled }
+        catch (_: Exception) { mutable.value = mutable.value.copy(error = ConversationError.MESSAGE_SAVE) }
+        null
     }
 
     suspend fun startAssistant(id: String, userId: Long, epoch: Long, contextEpoch: Long = state.value.contextEpoch,

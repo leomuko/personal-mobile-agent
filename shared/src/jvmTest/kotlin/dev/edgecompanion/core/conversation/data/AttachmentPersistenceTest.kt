@@ -66,8 +66,41 @@ class AttachmentPersistenceTest {
         failRefresh = true
         controller.submit()
         assertEquals(1, persisted.messages().size)
-        assertNotNull(controller.state.value.error)
+        // S4-F6: the committed send refreshes once more, so the UI already shows the stored state.
+        assertEquals(1, controller.state.value.messages.size)
+        assertEquals("", controller.state.value.draft)
+        assertNotNull(controller.state.value.attachments.single().messageId)
+        assertNull(controller.state.value.error)
         controller.submit()
+        assertEquals(1, persisted.messages().size)
+        assertEquals(1, controller.state.value.messages.size)
+    } }
+
+    /** Both refreshes fail: the stale state still has the draft and a READY attachment, so the epoch guard decides. */
+    @Test fun sendFromStaleStateAfterTwoFailedRefreshesGoesThroughTheEpochGuard() = database { db -> runTest {
+        val persisted = SqlConversationStore(db)
+        var failReads = 0
+        val store = object : ConversationStore by persisted {
+            override fun messages() = if (failReads > 0) {
+                failReads--
+                error("Synthetic read failure")
+            } else persisted.messages()
+        }
+        val controller = ConversationController(store) { 42 }
+        controller.restore()
+        controller.editDraft("Send once")
+        controller.reserve(Attachment("photo", "photo.png", "image/png"), 0)
+        controller.complete("photo", 12)
+        failReads = 2
+        controller.submit()
+        assertEquals(1, persisted.messages().size)
+        assertNotNull(controller.state.value.error)
+        // Stale UI state: the sent draft and its READY, unlinked attachment are still shown.
+        assertEquals("Send once", controller.state.value.draft)
+        assertEquals(AttachmentStatus.READY, controller.state.value.attachments.single().status)
+        assertNull(controller.state.value.attachments.single().messageId)
+        controller.submit()
+        assertEquals(1, persisted.messages().size)
         assertEquals(1, controller.state.value.messages.size)
         assertEquals("", controller.state.value.draft)
         assertNotNull(controller.state.value.attachments.single().messageId)
