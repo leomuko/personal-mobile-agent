@@ -422,8 +422,8 @@ if [[ "$MODE" == measure ]]; then
   GATE_REASON="$(check_report)" || fail "${GATE_REASON:-report}"
   write_summary || fail summary
 else
-  # PassageSqlCipherTest (3) + GroundingSqlCipherTest (5); a skipped opt-in would not count as passing.
-  grep -Eq '^OK \(8 tests\)$' "$RESULTS/instrumentation.txt" || fail instrumentation
+  # PassageSqlCipherTest (3) + GroundingSqlCipherTest (6); a skipped opt-in would not count as passing.
+  grep -Eq '^OK \(9 tests\)$' "$RESULTS/instrumentation.txt" || fail instrumentation
 fi
 REASON=""
 STATUS=passed
