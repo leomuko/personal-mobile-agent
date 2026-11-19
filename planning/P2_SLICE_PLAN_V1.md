@@ -50,7 +50,7 @@ on a path under the folders archived on 2026-11-10.
 | D2 | Accepted | Measure 4096 and 8192 on the S24; nothing above 2048 is the ordinary default before that. |
 | D3 | Accepted, refined | Automatic retrieval on ordinary chat turns; no hit means plain chat. A separate, explicit, persisted source-scoped request state carries the "sources do not cover this" reply. |
 | D4 | Accepted | QA-only paths stay untouched and pinned to 2048/512. |
-| D5 | **Open** | How the user makes a request source-scoped (not in the approved screenshots). Needed before S5; S4 builds the state without UI. |
+| D5 | Accepted (2026-11-19), details pending | A toggle chip next to the input box makes the next request source-scoped. Details awaiting approval: [P2_S5_S6_DECISIONS_DRAFT_V1.md](P2_S5_S6_DECISIONS_DRAFT_V1.md). |
 
 ## Slices
 
