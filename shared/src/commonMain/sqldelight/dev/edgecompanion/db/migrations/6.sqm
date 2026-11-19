@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS message_scope (
+  message_id INTEGER NOT NULL PRIMARY KEY REFERENCES message(id),
+  scope TEXT NOT NULL CHECK(scope IN ('ORDINARY', 'SOURCES'))
+);
+CREATE TABLE IF NOT EXISTS attempt_grounding (
+  attempt_id TEXT NOT NULL PRIMARY KEY REFERENCES assistant_attempt(id),
+  retrieval_status TEXT,
+  retrieval_reason TEXT,
+  indexed_revisions INTEGER,
+  total_revisions INTEGER,
+  sources_result TEXT
+);
+CREATE TABLE IF NOT EXISTS consulted_passage (
+  attempt_id TEXT NOT NULL REFERENCES assistant_attempt(id),
+  position INTEGER NOT NULL CHECK(position >= 1),
+  source_id INTEGER NOT NULL,
+  revision_id INTEGER NOT NULL,
+  passage_id INTEGER NOT NULL,
+  start_utf16 INTEGER NOT NULL CHECK(start_utf16 >= 0),
+  end_utf16 INTEGER NOT NULL CHECK(end_utf16 > start_utf16),
+  PRIMARY KEY(attempt_id, position)
+);

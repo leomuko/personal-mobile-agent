@@ -6,6 +6,8 @@ import dev.edgecompanion.core.conversation.model.ConversationError
 import dev.edgecompanion.core.conversation.model.ConversationState
 import dev.edgecompanion.core.conversation.model.Message
 import dev.edgecompanion.core.conversation.model.TurnStatus
+import dev.edgecompanion.core.conversation.model.RequestScope
+import dev.edgecompanion.core.conversation.model.TurnGrounding
 import dev.edgecompanion.core.inference.ModelError
 import dev.edgecompanion.core.conversation.data.ConversationStore
 
@@ -93,7 +95,12 @@ class ConversationController(private val store: ConversationStore, private val n
         }
     }
 
-    suspend fun submit(): Message? = mutex.withLock {
+    /**
+     * Saves the draft as a user message. With [attemptId], the turn's PENDING attempt is created in the same
+     * transaction, but only when the saved text is [expectedText] (the text the request was built from).
+     */
+    suspend fun submit(scope: RequestScope = RequestScope.ORDINARY, attemptId: String? = null,
+        expectedText: String? = null): Message? = mutex.withLock {
         val text = mutable.value.draft.trim()
         val attachments = mutable.value.attachments.filter { it.messageId == null }
         if (!mutable.value.ready || (text.isEmpty() && attachments.isEmpty()) ||
@@ -104,7 +111,7 @@ class ConversationController(private val store: ConversationStore, private val n
                 mutable.value = snapshot()
                 return@withLock null
             }
-            val submitted = store.submitUserMessage(text, now())
+            val submitted = store.submitUserMessage(text, now(), scope, attemptId?.takeIf { text == expectedText })
             mutable.value = snapshot()
             submitted
         } catch (cancelled: CancellationException) { throw cancelled }
@@ -114,11 +121,30 @@ class ConversationController(private val store: ConversationStore, private val n
         }
     }
 
-    suspend fun startAssistant(id: String, userId: Long, epoch: Long, contextEpoch: Long = state.value.contextEpoch): Boolean = mutex.withLock {
-        if (store.contextEpoch() != contextEpoch) return@withLock false
-        val started = store.startAssistantTurn(id, userId, epoch)
+    suspend fun startAssistant(id: String, userId: Long, epoch: Long, contextEpoch: Long = state.value.contextEpoch,
+        grounding: TurnGrounding = TurnGrounding.NONE): Boolean = mutex.withLock {
+        if (store.contextEpoch() != contextEpoch) { mutable.value = snapshot(); return@withLock false }
+        val started = store.startAssistantTurn(id, userId, epoch, grounding.copy(contextEpoch = contextEpoch))
         mutable.value = snapshot()
         started
+    }
+    /** Begins generation for the turn's PENDING attempt; grounding is written only under [contextEpoch]. */
+    suspend fun beginAssistant(id: String, contextEpoch: Long, grounding: TurnGrounding): Boolean = mutex.withLock {
+        if (store.contextEpoch() != contextEpoch) { mutable.value = snapshot(); return@withLock false }
+        val begun = store.beginAssistantTurn(id, grounding.copy(contextEpoch = contextEpoch))
+        mutable.value = snapshot()
+        begun
+    }
+    /** SOURCES scope with no usable passage: completes the PENDING attempt with a typed result, no model call. */
+    suspend fun recordSourcesResult(id: String, contextEpoch: Long, grounding: TurnGrounding): Boolean = mutex.withLock {
+        if (store.contextEpoch() != contextEpoch) { mutable.value = snapshot(); return@withLock false }
+        val recorded = store.recordSourcesResult(id, grounding.copy(contextEpoch = contextEpoch))
+        mutable.value = snapshot()
+        recorded
+    }
+    suspend fun discardAssistant(id: String) = mutex.withLock {
+        store.discardPendingAssistantTurn(id)
+        mutable.value = snapshot()
     }
     suspend fun completeAssistant(id: String, text: String): Boolean = mutex.withLock {
         val saved = store.completeAssistantTurn(id, text, now())

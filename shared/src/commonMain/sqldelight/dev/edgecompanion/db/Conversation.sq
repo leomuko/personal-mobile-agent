@@ -27,6 +27,30 @@ CREATE VIRTUAL TABLE message_search USING fts4(text TEXT);
 
 CREATE INDEX message_created_at ON message(created_at);
 
+-- S4: request scope per user turn and references-only consulted-passage provenance.
+CREATE TABLE IF NOT EXISTS message_scope (
+  message_id INTEGER NOT NULL PRIMARY KEY REFERENCES message(id),
+  scope TEXT NOT NULL CHECK(scope IN ('ORDINARY', 'SOURCES'))
+);
+CREATE TABLE IF NOT EXISTS attempt_grounding (
+  attempt_id TEXT NOT NULL PRIMARY KEY REFERENCES assistant_attempt(id),
+  retrieval_status TEXT,
+  retrieval_reason TEXT,
+  indexed_revisions INTEGER,
+  total_revisions INTEGER,
+  sources_result TEXT
+);
+CREATE TABLE IF NOT EXISTS consulted_passage (
+  attempt_id TEXT NOT NULL REFERENCES assistant_attempt(id),
+  position INTEGER NOT NULL CHECK(position >= 1),
+  source_id INTEGER NOT NULL,
+  revision_id INTEGER NOT NULL,
+  passage_id INTEGER NOT NULL,
+  start_utf16 INTEGER NOT NULL CHECK(start_utf16 >= 0),
+  end_utf16 INTEGER NOT NULL CHECK(end_utf16 > start_utf16),
+  PRIMARY KEY(attempt_id, position)
+);
+
 allMessages:
 SELECT * FROM message ORDER BY id;
 
@@ -52,11 +76,43 @@ SELECT context_epoch FROM assistant_attempt WHERE id = ?;
 finishAttempt:
 UPDATE assistant_attempt SET status = ?, error = ? WHERE id = ? AND status = 'PENDING';
 
+deletePendingAttempt:
+DELETE FROM assistant_attempt WHERE id = ? AND status = 'PENDING';
+
 reconcileAttempts:
 UPDATE assistant_attempt SET status = 'INTERRUPTED' WHERE status = 'PENDING';
 
 clearAttempts:
 DELETE FROM assistant_attempt;
+
+messageScopes:
+SELECT message_id, scope FROM message_scope ORDER BY message_id;
+
+writeMessageScope:
+INSERT OR REPLACE INTO message_scope(message_id, scope) VALUES (?, ?);
+
+clearMessageScopes:
+DELETE FROM message_scope;
+
+insertGrounding:
+INSERT INTO attempt_grounding(attempt_id, retrieval_status, retrieval_reason, indexed_revisions, total_revisions, sources_result)
+VALUES (?, ?, ?, ?, ?, ?);
+
+groundings:
+SELECT * FROM attempt_grounding;
+
+clearGroundings:
+DELETE FROM attempt_grounding;
+
+insertConsulted:
+INSERT INTO consulted_passage(attempt_id, position, source_id, revision_id, passage_id, start_utf16, end_utf16)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+consultedPassages:
+SELECT * FROM consulted_passage ORDER BY attempt_id, position;
+
+clearConsulted:
+DELETE FROM consulted_passage;
 
 indexMessage:
 INSERT INTO message_search(docid, text) VALUES (last_insert_rowid(), ?);
