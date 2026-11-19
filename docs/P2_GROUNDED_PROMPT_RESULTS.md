@@ -363,3 +363,22 @@ ANDROID_SERIAL=<authorized S24 serial> scripts/verify-chat-context.sh sqlcipher
   for the `SOURCES` no-answer path. S5 may want a separate phase.
 - **Quoting the marker.** A user message that itself contains `@@@` is not
   rejected. It is the user's own text and follows the end marker.
+
+## 2026-11-19: Android SQLCipher run (S24 Ultra)
+
+Commit `dcbf40a` with a clean tree. The `secureQa` build ran on the S24 Ultra
+(serial ending 8D6B) via `scripts/verify-chat-context.sh sqlcipher`. It installed only
+the staged `.secureqa` copies and loaded no model. **PASS: `OK (8 tests)`.**
+
+- `GroundingSqlCipherTest`: 5 of 5 passed:
+  - encrypted schema 6 migrates to 7 as `ORDINARY` with no references;
+  - scope, grounding and reference writes are transactional, and a stale epoch rolls back;
+  - a source-scoped result and stopped turns finish their own attempt;
+  - process loss during retrieval restores the same turn as interrupted;
+  - clear removes scopes, grounding and references.
+- `PassageSqlCipherTest`: 3 of 3 passed at schema version 7.
+- S4-F8 check: the raw output shows 8 test starts (status 1) and 8 passes (status 0). No skipped (`-4`) or failed status appears.
+
+This closes the Android SQLCipher gap stated in the section above for
+migration 6. Raw results, git-ignored:
+`benchmarks/results/passage-20261119T102514Z-22814-2IxXZX/`.
