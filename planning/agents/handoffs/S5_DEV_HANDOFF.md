@@ -131,6 +131,115 @@ S4-F3, retry after a temporary no-answer, is closed by D5.5 below.
   already receive the shared UI. Say which files.
 - A new note, `docs/P2_PASSAGES_UI_RESULTS.md`
 
+### Planner rulings, round 1 (2026-11-19)
+
+The dev's first handback stopped at the allowed-path boundary. These rulings
+widen the paths as follows.
+
+- **R1, host wiring allowed.** These files may change, for callback and
+  navigation wiring only:
+  - `ui/src/commonMain/kotlin/dev/edgecompanion/ui/app/CompanionScreen.kt`
+  - `ui/src/commonMain/kotlin/dev/edgecompanion/ui/navigation/AssistantNavigation.kt`
+  - `androidApp/src/main/kotlin/dev/edgecompanion/app/MainActivity.kt`
+
+  The wiring covers the chip state and toggle, the empty-library signal, and
+  opening a source at a span from either host. These files get no other
+  behaviour changes.
+- **R2, no new dependency and no `ui/build.gradle.kts` change.**
+  - Compose coverage uses the existing Android Compose test setup
+    (`libs.compose.test`, already in `androidApp`'s `androidTestImplementation`).
+    Add new S5 test classes under
+    `androidApp/src/androidTest/kotlin/dev/edgecompanion/app/`, alongside
+    `ComposerLayoutTest` and `HostRegressionTest`.
+  - Compile them on the host with `:androidApp:assembleDebugAndroidTest`.
+    Running them is a device step: it happens on the S24 together with the
+    screenshots, after the user's go-ahead.
+  - Put as much logic as possible where the host can run it:
+    - chip state, the reason-to-text and Retry mapping, and the consulted-row
+      presentation in `ui/src/commonTest` (view model and presentation
+      classes);
+    - persistence and lookup in the shared JVM tests.
+  - In the handback, report compiled-only and executed tests separately.
+- **R3, no script change in this slice.** List the S5 instrumentation classes
+  and the expected test count. The planner arranges the S24 runner at the
+  device stage.
+- **R4, migration-only test updates allowed (2026-11-19).** Migration 7 raises
+  the schema from 7 to 8. These files may change:
+  - `shared/src/jvmTest/kotlin/dev/edgecompanion/core/sources/data/PassageBackfillTest.kt`
+  - `androidApp/src/androidTest/kotlin/dev/edgecompanion/app/PassageSqlCipherTest.kt`
+  - `androidApp/src/androidTest/kotlin/dev/edgecompanion/app/GroundingSqlCipherTest.kt`
+  - `androidApp/src/androidTest/kotlin/dev/edgecompanion/app/SourcesLibraryTest.kt`
+
+  The changes are limited to:
+  - the expected schema version constants;
+  - fixture steps that rebuild older schemas, so that they account for
+    migration 7.
+
+  Do not remove, loosen or skip any assertion. Do not touch the copies under
+  `benchmarks/results/`.
+
+  You may add **one** 7→8 case on an encrypted database to
+  `GroundingSqlCipherTest`. If you do, say so and give the new expected
+  count. The `sqlcipher` gate currently requires `OK (8 tests)`; the planner
+  updates the gate at the device stage, and this slice makes no script change.
+
+  List every change in these files in the handback. They are
+  compile-checked on the host only. An S24 `sqlcipher` rerun after
+  migration 7 is required before S5 is accepted, with the user's go-ahead.
+### Planner rulings, QA round 1 (2026-11-19, `build/qa-s5-2026-11-19-r1/`, FAIL)
+
+- **S5-F1, P2, fix.** A checked chip must always be able to turn off:
+  `enabled = ready && (hasSources == true || checked)`. Turning it on still
+  requires at least one source.
+
+  D5.4's "no silent ordinary send" still holds. A send while the chip is
+  checked stays `SOURCES`; only an explicit tap turns it off.
+
+  Change these two tests to match the ruling, and say so in the handback:
+  - `emptyLibraryDisablesTheChipAndKeepsItsSavedChoice`
+  - `removingLastSourceDoesNotDowngradeStickyScopedSendToOrdinary`
+
+  Add these tests:
+  - a checked chip on an empty library can be turned off;
+  - an unchecked chip on an empty library cannot be turned on;
+  - `hasSources == null` behaves as an empty library.
+- **S5-F2, P2, fix.** Add tests that go through the real
+  `ConversationViewModel` and session, not fake lambdas. They must show:
+  - a send with the chip on stores `SOURCES`;
+  - toggling the chip persists the scope.
+
+  These tests must fail if `submit()` ignores the scope (mutant M14) or if
+  `setSourcesOnly` always stores `ORDINARY` (mutant M15). Also add a host test
+  for the "From my sources" label mapping (mutant M17).
+- **S5-F3, P3, document only. The user decides with the S24 screenshots.**
+  - Make no layout change in this round.
+  - Describe the composer precisely in `docs/P2_PASSAGES_UI_RESULTS.md`:
+    - what sits in each row while idle and while typing;
+    - the width at which it wraps;
+    - that it differs from the single-row composer in approved image 02.
+  - Add a screenshot item for the S24's default width and for a narrow width.
+- **S5-F4, P3, fix.** This ruling amends D5.2: the accessible name must start
+  with the visible label. Use the resource string "My sources, answer from my
+  sources only". Also:
+  - attach the "Add a source to use this" hint to the disabled chip's
+    semantics;
+  - give the "Passages consulted" expander an expanded or collapsed state.
+- **S5-F5, P3, fix.** Clear the drawer's open passage when the activity
+  receives a new intent, matching the full app. Add a test if the host makes
+  it feasible; otherwise add an S24 screenshot item for re-entering the drawer.
+- **N1, script gate, now allowed (supersedes R3 for this item only).** Update
+  `scripts/verify-chat-context.sh` sqlcipher mode, and its test in
+  `scripts/tests/verify-chat-context.test.mjs`:
+  - require `OK (9 tests)`;
+  - fix the comment to say `PassageSqlCipherTest` 3 + `GroundingSqlCipherTest` 6;
+  - keep the `STATUS_CODE -1..-4` failure pattern.
+
+  Run the node tests, and confirm afterwards that no `SYNTHETIC` process
+  remains.
+- **M7 (redundant revision check):** no action.
+- **S4-F7 (Part 0) is accepted for QA as handed back.** That includes keeping
+  bare `BEGIN PASSAGES` and `END PASSAGES` lines as excluded lookalikes.
+
 ## Out of scope
 
 - Semantic ranking.
@@ -168,7 +277,8 @@ S4-F3, retry after a temporary no-answer, is closed by D5.5 below.
 ```sh
 ./gradlew --offline :shared:verifySqlDelightMigration :shared:jvmTest --rerun :androidApp:assembleDebug :androidApp:lintDebug
 ./gradlew --offline :androidApp:testDebugUnitTest --rerun
-./gradlew --offline :ui:allTests --rerun   # or the ui test task the build defines; name it
+./gradlew --offline :ui:allTests --rerun
+./gradlew --offline :androidApp:assembleDebugAndroidTest   # compile the S5 Compose tests (R2)
 ```
 
 Run one Gradle invocation at a time.
