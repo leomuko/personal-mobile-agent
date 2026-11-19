@@ -160,6 +160,23 @@ on a path under the folders archived on 2026-11-10.
 - **Depends on:** S3, S2a.
 - **Handoff:** [agents/handoffs/S4_DEV_HANDOFF.md](agents/handoffs/S4_DEV_HANDOFF.md)
   (starts after S2b-prep; references-only provenance, typed `SOURCES` no-hit result).
+- **Status (2026-11-19):** implemented on host; independent QA PASS round 1
+  (`build/qa-s4-2026-11-19/`). Planner rulings during dev: packing keeps the
+  most recent turn before passages and caps passages at 4 (4096: 4 passages
+  with up to 2 turns); `PASSAGES_UNUSABLE` reason; retrieval skipped on an
+  empty library; backfill limited to 250 ms per batch. Open P3s: lookalike
+  delimiter lines in passages, a SOURCES turn with chat disabled records no
+  result, temporary no-answer reasons block retry (S5 design), two test gaps.
+  Not yet verified: migration 6 on Android SQLCipher (needs
+  `GroundingSqlCipherTest` and an S24 run of `PassageSqlCipherTest` at v7).
+- **Round 2 (2026-11-19):** a separate fresh review found S4-F5 (P2: process
+  loss during retrieval left no attempt or Retry) and S4-F2; fixed by writing
+  the PENDING attempt in the submit transaction and recording SOURCES results
+  without the runtime; lookalike delimiters excluded; `GroundingSqlCipherTest`
+  added (compile only). Fresh QA round 2 PASS with P3s: S4-F6 (a PENDING
+  attempt can outlive a failed state refresh until restore), S4-F7 (Unicode
+  space lookalikes; diff-hunk false positives), S4-F8 (the `OK (8 tests)` gate
+  does not detect skipped opt-ins). S4-F3 remains an S5 design item.
 
 ### S5 — "Passages consulted" UI
 
