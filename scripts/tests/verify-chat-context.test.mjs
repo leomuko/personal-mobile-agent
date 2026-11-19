@@ -130,6 +130,9 @@ if (command === 'shell' && rest[0] === 'am' && rest[1] === 'instrument') {
   if (cls === 'dev.edgecompanion.app.PassageSqlCipherTest,dev.edgecompanion.app.GroundingSqlCipherTest') {
     if (process.env.FAKE_INSTRUMENTATION === 'hang') { hang(); return; }
     if (process.env.FAKE_INSTRUMENTATION === 'passage-only') { console.log('OK (3 tests)'); process.exit(0); }
+    // A skipped (assumption failure, -4) or ignored (-3) opt-in test beside an otherwise passing count.
+    if (process.env.FAKE_INSTRUMENTATION === 'assumption-failure') console.log('INSTRUMENTATION_STATUS_CODE: -4');
+    if (process.env.FAKE_INSTRUMENTATION === 'ignored') console.log('INSTRUMENTATION_STATUS_CODE: -3');
     console.log('OK (8 tests)'); process.exit(process.env.FAKE_INSTRUMENTATION === 'exit-code' ? 1 : 0);
   }
 }
@@ -355,6 +358,19 @@ test('the SQLCipher gate fails when only the passage tests ran', () => withSandb
   assert.equal(summary.stage, 'validation');
   assertClientStopped(result, summary);
 }));
+
+// S4-F8: FAILURE_PATTERN rejects these status codes before the OK count is read.
+for (const [mode, code] of [['assumption-failure', -4], ['ignored', -3]]) {
+  test(`the SQLCipher gate fails on status ${code} even beside OK (8 tests)`, () => withSandbox(async dir => {
+    const result = await run(dir, ['sqlcipher'], { FAKE_INSTRUMENTATION: mode });
+    assert.equal(result.code, 1, result.output);
+    const summary = result.json('result.json');
+    assert.equal(summary.status, 'failed');
+    assert.equal(summary.reason, 'instrumentation');
+    assert.equal(summary.stage, 'validation');
+    assertClientStopped(result, summary);
+  }));
+}
 
 test('a never-finishing instrumentation hits the deadline, stops this run and keeps failed evidence', () => withSandbox(async dir => {
   const result = await run(dir, ['measure', '8192'],
