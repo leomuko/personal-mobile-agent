@@ -48,6 +48,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import dev.edgecompanion.ui.app.CompanionScreen
 import dev.edgecompanion.ui.conversation.viewmodel.ConversationViewModel
+import dev.edgecompanion.ui.sources.screen.SourceSpanRoute
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -107,6 +108,7 @@ open class MainActivity : ComponentActivity() {
         setContent {
             AssistantAppearance(appearance, floating = drawer) { appearanceState ->
                 val state by conversation.state.collectAsStateWithLifecycle()
+                val hasSources by conversation.hasSources.collectAsStateWithLifecycle()
                 val recording by audio.state.collectAsStateWithLifecycle()
                 BackHandler(enabled = recording.active) { confirmDiscard = true }
                 val presenceState by presence.state.collectAsStateWithLifecycle()
@@ -132,6 +134,9 @@ open class MainActivity : ComponentActivity() {
                             recording = recording,
                             onStopRecording = { audio.stop() }, onCancelRecording = { audio.stop(cancel = true) },
                             onCancelAssistant = conversation::cancelAssistant, onRetryAssistant = conversation::retryAssistant,
+                            hasSources = hasSources, onSourcesOnly = conversation::setSourcesOnly,
+                            observeConsulted = conversation::observeConsulted,
+                            sourceSpanContent = { span, modifier -> SourceSpanRoute(sources, span, modifier) },
                             appearance = appearanceState, onThemeMode = { appearance.select(it) },
                             sourcesContent = { modifier -> dev.edgecompanion.ui.sources.screen.SourcesRoute(sources, sourcePicker::launch, modifier) },
                             modelsContent = if (BuildConfig.DEBUG) ({

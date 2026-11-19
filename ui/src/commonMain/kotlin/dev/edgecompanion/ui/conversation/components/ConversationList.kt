@@ -4,6 +4,10 @@ import dev.edgecompanion.core.attachments.model.Attachment
 
 import dev.edgecompanion.ui.designsystem.components.Mascot
 import dev.edgecompanion.ui.conversation.presentation.stringResource
+import dev.edgecompanion.ui.conversation.presentation.ConsultedRead
+import dev.edgecompanion.ui.conversation.presentation.messageResource
+import dev.edgecompanion.ui.conversation.presentation.offersSourcesRetry
+import dev.edgecompanion.ui.conversation.presentation.sourceScopeLabel
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -20,14 +24,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.edgecompanion.core.conversation.model.*
 import dev.edgecompanion.core.inference.ModelError
+import dev.edgecompanion.core.sources.model.SourceSpan
 import androidx.compose.material.icons.Icons
 import androidx.compose.ui.platform.testTag
 import dev.edgecompanion.ui.resources.*
+import kotlinx.coroutines.flow.Flow
 import org.jetbrains.compose.resources.stringResource
 
 @Composable internal fun Conversation(state: ConversationState, list: LazyListState, modifier: Modifier,
     onPreview: (Attachment) -> Unit, thumbnail: @Composable (Attachment, Modifier) -> Unit,
-    onRetryAssistant: (Long) -> Unit = {}) {
+    onRetryAssistant: (Long) -> Unit,
+    observeConsulted: (List<ConsultedPassage>) -> Flow<ConsultedRead>,
+    onOpenPassage: (SourceSpan) -> Unit,
+) {
     var lastMessageCount by rememberSaveable { mutableStateOf(0) }
     val latestAttempts = remember(state.attempts) { state.attempts.associateBy { it.userId } }
     LaunchedEffect(state.messages.size) {
@@ -70,12 +79,36 @@ import org.jetbrains.compose.resources.stringResource
                     }
                     Text(stringResource(Res.string.saved_locally), Modifier.padding(top = 4.dp), style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    message.sourceScopeLabel?.let { label ->
+                        Text(stringResource(label), style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    }
+                    if (message.role == MessageRole.ASSISTANT)
+                        ConsultedPassages(latestAttempts[message.turnId]?.consulted.orEmpty(), observeConsulted, onOpenPassage)
                     val attempt = latestAttempts[message.id]
                     if (message.role == MessageRole.USER && attempt != null && attempt.status in setOf(TurnStatus.CANCELLED, TurnStatus.FAILED, TurnStatus.INTERRUPTED)) {
                         Text(stringResource(if (attempt.status == TurnStatus.CANCELLED) Res.string.assistant_cancelled else Res.string.assistant_interrupted),
                             style = MaterialTheme.typography.labelSmall)
                         if (state.assistant.enabled && message.id > state.messageFence) TextButton(onClick = { onRetryAssistant(message.id) }, enabled = !state.assistant.active) {
                             Icon(Icons.Outlined.Refresh, null); Text(stringResource(Res.string.assistant_retry))
+                        }
+                    }
+                }
+                if (message.role == MessageRole.USER) latestAttempts[message.id]?.sourcesResult?.let { reason ->
+                    Column(Modifier.fillMaxWidth().padding(top = 12.dp)) {
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.Top) {
+                            Mascot(Modifier.size(32.dp))
+                            Surface(color = MaterialTheme.colorScheme.surfaceContainer, shape = RoundedCornerShape(8.dp),
+                                modifier = Modifier.weight(1f).testTag("sources-no-answer")) {
+                                Text(stringResource(reason.messageResource), Modifier.padding(14.dp),
+                                    style = MaterialTheme.typography.bodyLarge)
+                            }
+                        }
+                        if (state.offersSourcesRetry(message.id, reason)) {
+                            TextButton(onClick = { onRetryAssistant(message.id) }, enabled = !state.assistant.active) {
+                                Icon(Icons.Outlined.Refresh, null)
+                                Text(stringResource(Res.string.assistant_retry))
+                            }
                         }
                     }
                 }

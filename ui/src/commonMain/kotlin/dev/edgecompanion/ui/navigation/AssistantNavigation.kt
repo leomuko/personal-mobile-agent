@@ -14,23 +14,51 @@ import androidx.compose.material.icons.automirrored.outlined.Chat
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.backhandler.BackHandler
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavType
 import androidx.navigation.compose.*
+import androidx.navigation.navArgument
+import androidx.savedstate.read
+import dev.edgecompanion.core.sources.model.SourceSpan
 import dev.edgecompanion.ui.resources.*
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 
+private const val SOURCE_SPAN_ROUTE = "sources/passage/{span}"
+
+private fun SourceSpan.navigationArgument() =
+    listOf(sourceId, revisionId, passageId, startUtf16, endUtf16).joinToString("_")
+
+private fun String.sourceSpan(): SourceSpan? {
+    val parts = split('_')
+    if (parts.size != 5) return null
+    val values = parts.map { it.toLongOrNull() ?: return null }
+    return SourceSpan(values[0], values[1], values[2], values[3], values[4])
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 internal fun AssistantNavigation(
     floating: Boolean,
     conversationRequest: Int,
-    content: @Composable (AssistantDestination, () -> Unit, LazyListState) -> Unit,
+    content: @Composable (
+        destination: AssistantDestination, openMenu: () -> Unit, chatList: LazyListState,
+        openPassage: (SourceSpan) -> Unit, span: SourceSpan?, backToChat: () -> Unit,
+    ) -> Unit,
 ) {
     val chatList = rememberLazyListState()
     if (floating) {
-        content(AssistantDestination.CHAT, {}, chatList)
+        var selection by rememberSaveable(conversationRequest) { mutableStateOf<String?>(null) }
+        val span = selection?.sourceSpan()
+        val close: () -> Unit = { selection = null }
+        BackHandler(enabled = span != null, onBack = close)
+        content(if (span == null) AssistantDestination.CHAT else AssistantDestination.SOURCES, {}, chatList,
+            { selection = it.navigationArgument() }, span, close)
         return
     }
     val nav = rememberNavController()
@@ -86,8 +114,14 @@ internal fun AssistantNavigation(
         NavHost(nav, startDestination = AssistantDestination.CHAT.route, modifier = Modifier.fillMaxSize()) {
             AssistantDestination.entries.forEach { destination ->
                 composable(destination.route) {
-                    content(destination, { scope.launch { drawer.open() } }, chatList)
+                    content(destination, { scope.launch { drawer.open() } }, chatList, { span ->
+                        nav.navigate("sources/passage/${span.navigationArgument()}") { launchSingleTop = true }
+                    }, null, {})
                 }
+            }
+            composable(SOURCE_SPAN_ROUTE, arguments = listOf(navArgument("span") { type = NavType.StringType })) { backStack ->
+                val span = backStack.arguments?.read { getString("span") }?.sourceSpan()
+                content(AssistantDestination.SOURCES, {}, chatList, {}, span, { nav.popBackStack() })
             }
         }
     }

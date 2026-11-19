@@ -10,6 +10,12 @@ import kotlinx.coroutines.sync.Mutex
 
 data class SourceDetail(val sourceId: Long, val revisionId: Long, val page: SourceTextPage)
 enum class SourceImportOutcome { SAVED, BUSY, FAILED }
+internal sealed interface SpanRead {
+    data object Loading : SpanRead
+    data object Unavailable : SpanRead
+    data object Deleted : SpanRead
+    data class Found(val detail: SourceAtSpan) : SpanRead
+}
 
 data class SourcesState(
     val query: String = "", val page: SourcePage = SourcePage(emptyList(), null),
@@ -48,6 +54,11 @@ class SourcesViewModel(private val library: SourceLibrary) : ViewModel() {
     fun closeDetail() { mutable.update { it.copy(selected = null, detail = null) }; refresh() }
     fun nextText() { state.value.text.next?.let { refresh(it) } }
     fun firstText() = refresh(0)
+
+    internal fun observeSpan(span: SourceSpan): Flow<SpanRead> = library.sourceChanges.map {
+        try { library.sourceAtSpan(span)?.let(SpanRead::Found) ?: SpanRead.Deleted }
+        catch (_: SourceException) { SpanRead.Unavailable }
+    }
 
     fun refresh(textAfter: Long = 0) {
         val id = ++sequence

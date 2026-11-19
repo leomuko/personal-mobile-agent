@@ -138,4 +138,19 @@
     <string name="model_load_ms">Load: %1$d ms</string>
     <string name="model_first_token_ms">First token: %1$d ms</string>
     <string name="model_output_tokens">Output tokens: %1$d</string>
+    <string name="my_sources">My sources</string>
+    <string name="sources_only_toggle">My sources, answer from my sources only</string>
+    <string name="sources_empty_hint">Add a source to use this</string>
+    <string name="sources_only_disabled_state">Off. %1$s</string>
+    <string name="from_my_sources">From my sources</string>
+    <string name="passages_consulted">Passages consulted</string>
+    <string name="passages_expanded">Expanded</string>
+    <string name="passages_collapsed">Collapsed</string>
+    <string name="back_to_chat">Back to chat</string>
+    <string name="source_deleted">Source deleted</string>
+    <string name="source_passage_unavailable">Could not open this passage.</string>
+    <string name="sources_no_match">Your sources don’t cover this.</string>
+    <string name="sources_not_indexed">Your sources are still being indexed.</string>
+    <string name="sources_retrieval_incomplete">I couldn’t finish searching your sources.</string>
+    <string name="sources_passages_unusable">I couldn’t use the passages I found.</string>
 </resources>
