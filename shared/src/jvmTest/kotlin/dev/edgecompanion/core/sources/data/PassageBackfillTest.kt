@@ -1,7 +1,7 @@
 package dev.edgecompanion.core.sources.data
 
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
-import dev.edgecompanion.core.attachments.model.Attachment
+import dev.edgecompanion.core.conversation.model.Message
 import dev.edgecompanion.core.conversation.data.SqlConversationStore
 import dev.edgecompanion.core.sources.model.*
 import dev.edgecompanion.db.CompanionDatabase
@@ -14,12 +14,17 @@ class PassageBackfillTest {
     @Test fun migrationPreservesChatAttachmentsDraftChunksAndSourceSearchThenBackfills() = PassageTestDatabase(legacy = true).use { f ->
         val text = "contract needle " + "x ".repeat(1000) + "😀"
         val legacy = f.legacy(text)
-        val chat = SqlConversationStore(f.db)
-        val user = chat.submitUserMessage("saved message", 42)
-        chat.saveDraft("unsent"); chat.reserve(Attachment("file", "synthetic.txt", "text/plain"))
+        // Schema-5 chat rows are written with raw SQL: the current store expects the latest schema.
+        listOf("INSERT INTO message(id, text, created_at, role, turn_id) VALUES (1, 'saved message', 42, 'USER', 1)",
+            "INSERT INTO message_search(docid, text) VALUES (1, 'saved message')",
+            "INSERT INTO draft(id, text) VALUES (1, 'unsent')",
+            "INSERT INTO attachment(id, name, mime_type, status) VALUES ('file', 'synthetic.txt', 'text/plain', 'IMPORTING')",
+        ).forEach { f.driver.execute(null, it, 0) }
+        val user = Message(1, "saved message", 42)
         val chunks = f.repo.text(legacy.id)
         f.migrate()
-        assertEquals(6, CompanionDatabase.Schema.version)
+        assertEquals(7, CompanionDatabase.Schema.version)
+        val chat = SqlConversationStore(f.db)
         assertEquals(listOf(legacy), f.repo.list("needle").items)
         assertEquals(chunks, f.repo.text(legacy.id))
         assertEquals(user, chat.messages().single()); assertEquals("unsent", chat.draft())
