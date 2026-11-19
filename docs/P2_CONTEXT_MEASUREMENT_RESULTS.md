@@ -97,3 +97,39 @@ see the procedure update in `docs/P2_DEVICE_PREP_RESULTS.md`.
   `summary.json`. Deadline `270 + 630 × N` s (2160 s at N=3).
 - **Still open.** No variance, decode-rate or 2048 data until the run set is
   authorized and executed; not file-cache-cold; no thermal soak.
+
+## 2026-11-19: repeated comparison (2048, 4096, 8192; three engine-cold iterations each)
+
+Commit `0557e8c`, `secureQa`, GPU, S24 Ultra (serial ending 8D6B), runs back to
+back, no retries. Median with range. The long-answer case produced 291 output
+tokens in every iteration, so its decode rate is meaningful; the 6-token cases'
+decode rates are not reported.
+
+| | 2048 | 4096 | 8192 |
+| --- | --- | --- | --- |
+| Cold load (near bound) | 9.24 s (9.05–9.38) | 9.58 s (9.08–9.78) | 12.33 s (9.87–13.16) |
+| First text, input at the byte limit | 0.77 s, 280 tokens | 1.01 s, 705 tokens | 1.82 s, 1,554 tokens |
+| First text, short prompt | 0.62 s (0.56–0.64) | 0.56 s (0.54–0.60) | 0.72 s (0.65–0.75) |
+| Cold to first text, short prompt | 12.4 s (12.1–13.9) | 13.2 s (12.1–13.9) | 16.5 s (14.0–17.5) |
+| Decode, 291-token answer | 33.5 tok/s (32.0–33.7) | 32.8 tok/s (32.7–35.1) | 30.1 tok/s (28.4–30.8) |
+| Peak PSS (near bound) | 2.03 GB (2.01–2.05) | 2.37 GB (2.35–2.38) | 2.78 GB (2.75–2.79) |
+| Thermal status / max skin | 0 / 35.4 °C | 0 / 38.7 °C | 0 / 39.0 °C |
+
+Raw results (git-ignored): `benchmarks/results/context-2048-20261118T205011Z-54948-ccDTwI/`,
+`context-4096-20261118T205303Z-55462-2KHa0Z/`, `context-8192-20261118T205907Z-56276-1kHP27/`.
+An earlier 8192 attempt (`context-8192-20261118T205557Z-55988-mlvT4q/`) stopped
+before any model load because the phone was locked; it was rerun once on the
+user's instruction after unlocking.
+
+Observations:
+- 4096 costs about 0.3 GB more peak PSS than 2048 with no measurable change in
+  load time or decode rate.
+- 8192 costs about 0.75 GB more than 2048; two of three iterations per case
+  loaded in about 12.5 s instead of about 9.5 s, and decode was about 10%
+  slower. The cause (memory, thermal or allocation) is not established; the
+  8192 run came last and the skin temperature was highest.
+- Thermal status stayed 0 throughout. Runs were sequential, not a soak test.
+
+Planner conclusion: the repeated data supports keeping 4096 as the provisional
+ordinary default and 8192 as experimental. Limits unchanged: memory floors are
+uncalibrated for 4096, OS file cache was warm, one device.
