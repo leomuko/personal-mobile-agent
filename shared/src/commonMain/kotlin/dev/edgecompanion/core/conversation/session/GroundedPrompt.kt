@@ -51,30 +51,29 @@ internal object GroundedPrompt {
     } catch (_: ModelException) { false }
 
     private val LINE_BREAKS = charArrayOf('\n', '\r', '\u000B', '\u000C', '\u0085', '\u2028', '\u2029')
-    /** A whole line shaped like BEGIN, END or a PASSAGE label, with at most one "@" (two or more already exclude). */
-    private val LABEL_SHAPE = Regex("@?\\s*(BEGIN\\s+PASSAGES|END\\s+PASSAGES|PASSAGE\\s+[0-9]+)\\s*")
+    // Bare BEGIN/END boundaries remain lookalikes. A numbered label needs an at-sign to
+    // distinguish it from a heading in source text. Allow whitespace between marker characters.
+    private val STRUCTURAL_LINE = Regex("(?:@ *){0,3}(?:BEGIN|END) +PASSAGES|(?:@ *){1,3}PASSAGE +[0-9]+")
 
-    /** True when the folded text contains the marker or any folded line starts with "@@" or a label shape. */
+    /** True for a folded marker anywhere or a whole line shaped like a block boundary or numbered label. */
     internal fun imitatesStructure(text: String): Boolean {
         val folded = fold(text)
         if (folded.contains(MARK)) return true
-        return folded.split(*LINE_BREAKS).any { raw ->
-            val line = raw.trimStart()
-            line.startsWith("@@") || LABEL_SHAPE.matches(line)
-        }
+        return folded.split(*LINE_BREAKS).any { STRUCTURAL_LINE.matches(it.trim(' ')) }
     }
 
     /**
      * A partial NFKC-style fold, in common Kotlin without dependencies: fullwidth ASCII forms and the small
-     * and fullwidth commercial at map to ASCII, the ideographic space to a space, and zero-width and other
-     * format characters (Unicode Cf, which includes U+200B..U+200F, U+2060 and U+FEFF) are removed.
+     * and fullwidth commercial at map to ASCII, Unicode whitespace within a line maps to ASCII space,
+     * and zero-width and other format characters (Unicode Cf) are removed. Line breaks are preserved.
      * It is not full NFKC: other compatibility forms are left as they are.
      */
     internal fun fold(text: String): String = buildString(text.length) {
         for (c in text) when {
             c in '\uFF01'..'\uFF5E' -> append(c - 0xFEE0)
             c == '\uFE6B' -> append('@')
-            c == '\u3000' -> append(' ')
+            c in LINE_BREAKS -> append(c)
+            c.isWhitespace() -> append(' ')
             c.category == CharCategory.FORMAT -> Unit
             else -> append(c)
         }

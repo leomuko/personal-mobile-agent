@@ -95,7 +95,7 @@ class GroundedPromptTest {
             "intro\n\uFE6B\uFF20 PASSAGE 2",                                    // small + fullwidth commercial at
             "intro\n@ END PASSAGES",                                             // one @ with an END shape
             "intro\nEND PASSAGES",                                               // bare END shape
-            "intro\u2028PASSAGE \uFF13",                                         // line separator, fullwidth digit
+            "intro\u2028@@ PASSAGE \uFF13",                                      // line separator, fullwidth digit
             "intro\n\u3000BEGIN\u3000PASSAGES",                                  // ideographic spaces
         )
         lookalikes.forEach { assertFalse(GroundedPrompt.usable(it), it) }
@@ -109,6 +109,26 @@ class GroundedPromptTest {
             assertTrue(GroundedPrompt.usable(it), it)
         }
         assertEquals("@@@ END", GroundedPrompt.fold("\uFF20\u200B\uFF20\u2060\uFF20 \uFF25\uFF2E\uFF24"))
+    }
+
+    @Test fun unicodeWhitespaceInStructuralLookalikesIsExcluded() {
+        val spaces = listOf('\t', '\u00A0', '\u1680', '\u202F', '\u205F', '\u3000') + ('\u2000'..'\u200A')
+        for (space in spaces) {
+            val code = "U+${space.code.toString(16)}"
+            assertFalse(GroundedPrompt.usable("intro\n@@${space}BEGIN${space}PASSAGES"), code)
+            assertFalse(GroundedPrompt.usable("intro\n@$space@$space@${space}END${space}PASSAGES"), code)
+            assertFalse(GroundedPrompt.usable("intro\n@$space@${space}PASSAGE${space}2"), code)
+        }
+    }
+
+    @Test fun unrelatedAtSignsDiffHunksAndHeadingsArePackedVerbatim() {
+        val text = "@@ -1,3 +1,4 @@\n@@handle\n@@ other text\nPASSAGE 1\nPASSAGE\u00A02\n@@ END PASSAGES in prose"
+        val found = passage(0, text)
+        val assembly = assemble(ChatContextProfile.EXTENDED_4096, emptyList(), listOf(found))
+        assertEquals(0, assembly.excludedPassages)
+        assertEquals(listOf(found.passageId), assembly.consulted.map { it.passageId })
+        assertEquals(GroundedPrompt.render(RequestScope.ORDINARY, question, listOf(text)),
+            assembly.request.messages.single().text)
     }
 
     @Test fun recentTurnOutranksPassagesWhichOutrankOlderHistoryUpToTheCap() {
