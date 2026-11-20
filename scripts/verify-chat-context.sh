@@ -2,6 +2,7 @@
 # Device-prep S24 runs (docs/P2_DEVICE_PREP_RESULTS.md). Each run needs separate authorization.
 #   scripts/verify-chat-context.sh measure 2048|4096|8192 [--repeat 1-5]   context measurement (supervised)
 #   scripts/verify-chat-context.sh sqlcipher                               SQLCipher passage + grounding gate
+#   scripts/verify-chat-context.sh ui                                      S5 Compose UI tests + S24 captures
 # Targets only dev.edgecompanion.app.secureqa and its test package: installs with `install -r`,
 # runs `am instrument`, never uninstalls, clears or touches debug/release data.
 # Both APKs are copied into this run's private results directory right after the build; only those
@@ -10,7 +11,7 @@
 # Bash 3.2 errexit ignores a failing bare [[ ]], so every gate is written `check || fail reason`.
 set -Eeuo pipefail
 
-usage() { printf 'Usage: %s measure 2048|4096|8192 [--repeat 1-5] | %s sqlcipher\n' "$0" "$0" >&2; }
+usage() { printf 'Usage: %s measure 2048|4096|8192 [--repeat 1-5] | %s sqlcipher | %s ui\n' "$0" "$0" "$0" >&2; }
 MODE="${1:-}"
 PROFILE=""
 REPEAT=""
@@ -26,7 +27,7 @@ case "$MODE" in
     fi
     case "$REPEAT" in 1|2|3|4|5) ;; *) usage; exit 2 ;; esac
     ;;
-  sqlcipher) [[ $# -eq 1 ]] || { usage; exit 2; } ;;
+  sqlcipher|ui) [[ $# -eq 1 ]] || { usage; exit 2; } ;;
   *) usage; exit 2 ;;
 esac
 
@@ -49,6 +50,9 @@ DEADLINE_FORMULA=""
 if [[ "$MODE" == measure ]]; then
   DEADLINE_FORMULA="270 + 630 * repeat"
   DEADLINE="${CHAT_CONTEXT_DEADLINE_SECONDS:-$((270 + 630 * REPEAT))}"
+elif [[ "$MODE" == ui ]]; then
+  # Fixed, no override: 27 Compose/activity tests and 40 PNG captures, no model; well under 15 minutes.
+  DEADLINE=900
 else DEADLINE="${PASSAGE_DEADLINE_SECONDS:-600}"; fi
 STOP_GRACE="${QA_STOP_GRACE_SECONDS:-30}"
 THERMAL_READY="${THERMAL_READY_SECONDS:-15}"
@@ -62,10 +66,19 @@ TEST_APK="$APK_ROOT/androidTest/secureQa/androidApp-secureQa-androidTest.apk"
 EXPECTED_OUTPUT_TOKENS=512
 MANIFEST="$ROOT/planning/models/gemma-4-e2b-it.json"
 FAILURE_PATTERN='FAILURES!!!|INSTRUMENTATION_FAILED|Process crashed|INSTRUMENTATION_ABORTED|INSTRUMENTATION_STATUS_CODE: -[1-4]'
+# ui mode: PassagesUiTest 6 + PassagesCaptureTest 9 + ComposerLayoutTest 7 + HostRegressionTest 5.
+UI_CLASSES=dev.edgecompanion.app.PassagesUiTest,dev.edgecompanion.app.PassagesCaptureTest,dev.edgecompanion.app.ComposerLayoutTest,dev.edgecompanion.app.HostRegressionTest
+UI_EXPECTED_TESTS=27
+# One PNG per planned capture variant (docs/P2_PASSAGES_UI_RESULTS.md, items 1-9).
+UI_EXPECTED_SCREENSHOTS=40
+LIST_END=END-OF-CAPTURE-LIST
 
 STAMP="$(date -u +%Y%m%dT%H%M%SZ)" || exit 2
 if [[ "$MODE" == measure ]]; then RUN_ID="context-$PROFILE-$STAMP-$$"
+elif [[ "$MODE" == ui ]]; then RUN_ID="passages-ui-$STAMP-$$"
 else RUN_ID="passage-$STAMP-$$"; fi
+# The capture test writes only under this run's own directory in the secureQa app's no_backup.
+CAPTURE_REMOTE="no_backup/passages-captures/$RUN_ID"
 mkdir -p "$RESULTS_ROOT" || exit 2
 RESULTS="$(mktemp -d "$RESULTS_ROOT/$RUN_ID-XXXXXX")" || exit 2
 # Run-owned copies of the APKs inside the private (mktemp -d, mode 0700) results directory: the
@@ -171,7 +184,106 @@ collect_evidence() {
         const at = line.indexOf("="); out[line.slice(0, at)] = line.slice(at + 1); }
       require("node:fs").writeFileSync(process.argv[1], JSON.stringify(out, null, 2) + "\n");' \
       "$RESULTS/evidence.json" || true
+  elif [[ "$MODE" == ui ]]; then
+    pull "no_backup/passages-captures/$RUN_ID.json" capture-metadata.json captureMetadata || true
+    pull_screenshots || true
+    write_ui_evidence || true
   fi
+}
+
+# Prints the entries of this run's capture directory. Fails unless the device printed the end
+# marker, so an unreadable listing is never mistaken for an empty one.
+list_screenshots() {
+  local out=""
+  out="$(device shell "run-as $PACKAGE sh -c 'if [ -d $CAPTURE_REMOTE ]; then ls -1 $CAPTURE_REMOTE; fi; echo $LIST_END'" \
+    < /dev/null 2>> "$RESULTS/pull-errors.txt")" || return 1
+  out="$(printf '%s\n' "$out" | tr -d '\r')" || return 1
+  [[ "$(printf '%s\n' "$out" | tail -n 1)" == "$LIST_END" ]] || return 1
+  printf '%s\n' "$out" | sed '$d'
+}
+
+# Pulls every NN-name.png the device lists into screenshots/. Other names are only listed (the
+# validation rejects them); a failed pull is recorded and its partial file removed.
+pull_screenshots() {
+  local names="" name=""
+  names="$(list_screenshots)" || { note_evidence screenshotList unavailable; return 1; }
+  note_evidence screenshotList present
+  printf '%s\n' "$names" | sed '/^$/d' > "$RESULTS/screenshot-list.txt" || return 1
+  mkdir -p "$RESULTS/screenshots" || return 1
+  : > "$RESULTS/screenshot-pull-failures.txt" || return 1
+  while IFS= read -r name; do
+    if [[ ! "$name" =~ ^[0-9][0-9]-[a-z0-9-]+\.png$ ]]; then continue; fi
+    # stdin from /dev/null: adb must not consume the remaining names.
+    if ! device exec-out run-as "$PACKAGE" cat "$CAPTURE_REMOTE/$name" < /dev/null \
+      > "$RESULTS/screenshots/$name" 2>> "$RESULTS/pull-errors.txt"; then
+      rm -f -- "${RESULTS:?}/screenshots/${name:?}"
+      printf '%s\n' "$name" >> "$RESULTS/screenshot-pull-failures.txt"
+    fi
+  done < "$RESULTS/screenshot-list.txt"
+}
+
+# evidence.json for ui mode: file states, the device listing, and each pulled PNG's sha256 and size.
+write_ui_evidence() {
+  EVIDENCE_LINES="$EVIDENCE_LINES" node -e 'const fs = require("node:fs"), path = require("node:path");
+    const { createHash } = require("node:crypto");
+    const [results, expected] = process.argv.slice(1);
+    const lines = file => fs.existsSync(file) ? fs.readFileSync(file, "utf8").split("\n").filter(Boolean) : [];
+    const out = {};
+    for (const line of process.env.EVIDENCE_LINES.split("\n").filter(Boolean)) {
+      const at = line.indexOf("="); out[line.slice(0, at)] = line.slice(at + 1); }
+    out.expectedScreenshots = Number(expected);
+    out.listedScreenshots = lines(path.join(results, "screenshot-list.txt"));
+    out.pullFailures = lines(path.join(results, "screenshot-pull-failures.txt"));
+    const dir = path.join(results, "screenshots");
+    const names = fs.existsSync(dir) ? fs.readdirSync(dir).sort() : [];
+    out.screenshotCount = names.length;
+    out.screenshots = {};
+    for (const name of names) {
+      const bytes = fs.readFileSync(path.join(dir, name));
+      out.screenshots[name] = { sha256: createHash("sha256").update(bytes).digest("hex"), bytes: bytes.length };
+    }
+    fs.writeFileSync(path.join(results, "evidence.json"), JSON.stringify(out, null, 2) + "\n");' \
+    "$RESULTS" "$UI_EXPECTED_SCREENSHOTS"
+}
+
+# Prints a failure reason and exits non-zero unless exactly the expected PNGs were pulled, each is a
+# PNG whose bytes still match its recorded sha256, the capture metadata names the same files for
+# this run, and each pulled file has the size and sha256 the device recorded for it.
+check_screenshots() {
+  node -e 'const fs = require("node:fs"), path = require("node:path");
+    const { createHash } = require("node:crypto");
+    const [results, runId] = process.argv.slice(1);
+    const fail = reason => { console.log(reason); process.exit(1); };
+    let e; try { e = JSON.parse(fs.readFileSync(path.join(results, "evidence.json"), "utf8")); }
+    catch { fail("screenshots-unavailable"); }
+    if (e.screenshotList !== "present") fail("screenshots-unavailable");
+    const pattern = /^[0-9]{2}-[a-z0-9-]+\.png$/;
+    if (!Array.isArray(e.listedScreenshots) || e.listedScreenshots.some(name => !pattern.test(name)))
+      fail("screenshot-name");
+    if (!Array.isArray(e.pullFailures) || e.pullFailures.length) fail("screenshot-pull-failed");
+    const dir = path.join(results, "screenshots");
+    const names = fs.existsSync(dir) ? fs.readdirSync(dir).sort() : [];
+    if (JSON.stringify(names) !== JSON.stringify([...e.listedScreenshots].sort())) fail("screenshots-unavailable");
+    if (names.length !== e.expectedScreenshots || e.screenshotCount !== names.length) fail("screenshot-count");
+    const signature = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+    for (const name of names) {
+      const bytes = fs.readFileSync(path.join(dir, name));
+      if (bytes.length <= signature.length || !bytes.subarray(0, 8).equals(signature)) fail("screenshot-format");
+      const recorded = (e.screenshots || {})[name] || {};
+      if (recorded.sha256 !== createHash("sha256").update(bytes).digest("hex")) fail("screenshot-manifest");
+    }
+    if (Object.keys(e.screenshots || {}).sort().join("\n") !== names.join("\n")) fail("screenshot-manifest");
+    if (e.captureMetadata !== "present") fail("capture-metadata");
+    const m = JSON.parse(fs.readFileSync(path.join(results, "capture-metadata.json"), "utf8"));
+    const captured = m && m.captures && typeof m.captures === "object" ? Object.keys(m.captures).sort() : [];
+    if (m.runId !== runId || captured.join("\n") !== names.join("\n")) fail("capture-metadata");
+    // The device recorded each PNG after writing it; a truncated or altered pull no longer matches.
+    for (const name of names) {
+      const bytes = fs.readFileSync(path.join(dir, name)), device = m.captures[name] || {};
+      if (device.bytes !== bytes.length || device.sha256 !== createHash("sha256").update(bytes).digest("hex"))
+        fail("screenshot-pull-mismatch");
+    }' \
+    "$RESULTS" "$RUN_ID"
 }
 
 # Prints a failure reason and exits non-zero unless the pulled evidence is complete and well formed.
@@ -369,6 +481,9 @@ if [[ "$MODE" == measure ]]; then
   "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r -e class dev.edgecompanion.app.ChatContextMeasurementTest \
     -e chatContextMeasurement true -e supervisedThermal true -e supervisionRunId "$RUN_ID" -e chatContextRepeat "$REPEAT" \
     "$RUNNER" > "$RESULTS/instrumentation.txt" 2>&1 &
+elif [[ "$MODE" == ui ]]; then
+  "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r -e class "$UI_CLASSES" \
+    -e passagesCaptureRunId "$RUN_ID" "$RUNNER" > "$RESULTS/instrumentation.txt" 2>&1 &
 else
   "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r \
     -e class dev.edgecompanion.app.PassageSqlCipherTest,dev.edgecompanion.app.GroundingSqlCipherTest \
@@ -421,6 +536,9 @@ if [[ "$MODE" == measure ]]; then
   [[ ! -f "$THERMAL_REPORT_DIR/safety-stop.json" ]] || fail thermal-monitor
   GATE_REASON="$(check_report)" || fail "${GATE_REASON:-report}"
   write_summary || fail summary
+elif [[ "$MODE" == ui ]]; then
+  grep -Eq "^OK \($UI_EXPECTED_TESTS tests\)$" "$RESULTS/instrumentation.txt" || fail instrumentation
+  GATE_REASON="$(check_screenshots)" || fail "${GATE_REASON:-screenshots}"
 else
   # PassageSqlCipherTest (3) + GroundingSqlCipherTest (6); a skipped opt-in would not count as passing.
   grep -Eq '^OK \(9 tests\)$' "$RESULTS/instrumentation.txt" || fail instrumentation

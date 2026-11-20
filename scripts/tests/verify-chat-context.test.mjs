@@ -13,6 +13,8 @@ const root = resolve(import.meta.dirname, '../..');
 const script = process.env.VERIFY_CHAT_CONTEXT_SCRIPT || join(root, 'scripts/verify-chat-context.sh');
 const serial = 'SYNTHETIC-S24';
 const qaPackage = 'dev.edgecompanion.app.secureqa';
+const uiClasses = ['PassagesUiTest', 'PassagesCaptureTest', 'ComposerLayoutTest', 'HostRegressionTest']
+  .map(name => `dev.edgecompanion.app.${name}`).join(',');
 const modelSha = JSON.parse(readFileSync(join(root, 'planning/models/gemma-4-e2b-it.json'), 'utf8')).artifact.sha256;
 
 const fakeAdb = `#!/usr/bin/env node
@@ -61,12 +63,24 @@ if (command === 'install' && rest[0] === '-r' && existsSync(rest[1])) {
 }
 if (command === 'exec-out' && rest[0] === 'run-as' && rest[1] === '${qaPackage}' && rest[2] === 'cat') {
   const path = join(device, rest[3]);
+  // Capture pulls: a failing cat, or a short read that keeps the PNG signature, with exit 0.
+  if (process.env.FAKE_PULL_FAIL && rest[3].endsWith(process.env.FAKE_PULL_FAIL)) { console.error('synthetic read error'); process.exit(1); }
   if (!existsSync(path)) { console.error('No such file'); process.exit(1); }
-  process.stdout.write(readFileSync(path)); process.exit(0);
+  const content = readFileSync(path);
+  if (process.env.FAKE_TRUNCATE_PULL && rest[3].endsWith(process.env.FAKE_TRUNCATE_PULL)) {
+    process.stdout.write(content.subarray(0, 11)); process.exit(0);
+  }
+  process.stdout.write(content); process.exit(0);
 }
 if (command === 'shell' && rest.length === 1 && rest[0].startsWith('run-as ${qaPackage} sh -c ')) {
   const result = spawnSync('/bin/sh', ['-c', rest[0].slice('run-as ${qaPackage} '.length)], { cwd: device });
-  process.stdout.write(result.stdout);
+  let out = result.stdout.toString();
+  // Capture listing variants: names no real directory can hold, or a listing cut before its end marker.
+  if (rest[0].includes('END-OF-CAPTURE-LIST')) {
+    if (process.env.FAKE_LISTING_EXTRA) out = out.replace('END-OF-CAPTURE-LIST', process.env.FAKE_LISTING_EXTRA.split('|').join('\\n') + '\\nEND-OF-CAPTURE-LIST');
+    if (process.env.FAKE_LISTING === 'no-marker') out = out.replace('END-OF-CAPTURE-LIST\\n', '');
+  }
+  process.stdout.write(out);
   process.exit(result.status ?? 1);
 }
 if (command === 'shell' && rest.join(' ') === 'cat /proc/uptime') { console.log('100.25 50.00'); process.exit(0); }
@@ -135,6 +149,32 @@ if (command === 'shell' && rest[0] === 'am' && rest[1] === 'instrument') {
     const status = process.env.FAKE_INSTRUMENTATION;
     if (/^-[1-4]$/.test(status)) console.log('INSTRUMENTATION_STATUS_CODE: ' + status);
     console.log('OK (9 tests)'); process.exit(status === 'exit-code' ? 1 : 0);
+  }
+  if (cls === '${uiClasses}') {
+    if (process.env.FAKE_INSTRUMENTATION === 'hang') { hang(); return; }
+    // Synthetic captures: 40 PNGs by default; FAKE_SCREENSHOTS varies the set the device leaves behind.
+    const runId = option('passagesCaptureRunId');
+    const shots = process.env.FAKE_SCREENSHOTS || '';
+    const dir = 'no_backup/passages-captures/' + runId;
+    mkdirSync(join(device, dir), { recursive: true });
+    const count = shots === 'missing' ? 39 : shots === 'extra' ? 41 : 40;
+    const captures = {};
+    for (let i = 1; i <= count; i++) {
+      const name = String(1 + (i - 1) % 9).padStart(2, '0') + '-synthetic-capture-' + i + '.png';
+      const png = Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), Buffer.from('synthetic ' + i)]);
+      const bytes = shots === 'not-png' && i === 1 ? Buffer.from('synthetic text') : png;
+      writeFileSync(join(device, dir, name), bytes);
+      // As PassagesCaptureTest records it on the device: size and sha256 of the written PNG.
+      captures[name] = { item: 1 + (i - 1) % 9, widthPx: 1080, heightPx: 2000, bytes: bytes.length,
+        sha256: createHash('sha256').update(bytes).digest('hex') };
+    }
+    if (shots === 'metadata-hash') captures[Object.keys(captures)[0]].sha256 = 'c'.repeat(64);
+    if (shots === 'bad-name') writeFileSync(join(device, dir, 'synthetic-notes.txt'), 'synthetic');
+    if (shots === 'metadata-mismatch') delete captures[Object.keys(captures)[0]];
+    if (shots !== 'no-metadata') write(dir + '.json', { schema: 1, runId: shots === 'metadata-run-id' ? runId + '-other' : runId, captures });
+    const status = process.env.FAKE_INSTRUMENTATION;
+    if (/^-[1-4]$/.test(status)) console.log('INSTRUMENTATION_STATUS_CODE: ' + status);
+    console.log(status === 'old-count' ? 'OK (26 tests)' : 'OK (27 tests)'); process.exit(status === 'exit-code' ? 1 : 0);
   }
 }
 console.error('Unexpected synthetic adb call'); process.exit(1);
@@ -559,3 +599,121 @@ test('the script itself is Bash 3.2 syntax and uses no Bash 4 features', () => {
   // The instrumentation client is backgrounded directly, never through the device() function.
   assert.doesNotMatch(text, /^\s*device shell am instrument/m);
 });
+
+// S5 device runner: `ui` runs the Compose UI classes and pulls the run's captures from secureQa.
+const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
+
+test('ui mode runs the four UI classes, pulls 40 captures and records their hashes', () => withSandbox(async dir => {
+  const result = await run(dir, ['ui']);
+  assert.equal(result.code, 0, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.status, 'passed');
+  assert.equal(summary.mode, 'ui');
+  assert.equal(summary.deadlineSeconds, 900);
+  assertClientStopped(result, summary);
+  assertOnlySecureQa(result.calls);
+  assert.match(readFileSync(join(dir, 'gradle.txt'), 'utf8'), /^--offline -PtestBuildType=secureQa :androidApp:assembleSecureQa :androidApp:assembleSecureQaAndroidTest /);
+  assert.equal(result.installs.length, 2);
+  for (const install of result.installs) assert.ok(install.path.startsWith(join(result.results, 'apks') + '/'));
+  const instrument = result.calls.find(isRunInstrument).args;
+  assert.deepEqual(instrument.slice(2, 8), ['shell', 'am', 'instrument', '-w', '-r', '-e']);
+  assert.equal(instrument[8], 'class');
+  assert.equal(instrument[9], uiClasses);
+  assert.deepEqual(instrument.slice(10, 13), ['-e', 'passagesCaptureRunId', summary.runId]);
+  const evidence = result.json('evidence.json');
+  assert.equal(evidence.captureMetadata, 'present');
+  assert.equal(evidence.screenshotList, 'present');
+  assert.equal(evidence.expectedScreenshots, 40);
+  assert.equal(evidence.screenshotCount, 40);
+  assert.deepEqual(evidence.pullFailures, []);
+  const pulled = readdirSync(join(result.results, 'screenshots')).sort();
+  assert.equal(pulled.length, 40);
+  assert.deepEqual(Object.keys(evidence.screenshots).sort(), pulled);
+  const remote = join(dir, 'device/no_backup/passages-captures', summary.runId);
+  for (const name of pulled) {
+    assert.match(name, /^[0-9]{2}-[a-z0-9-]+\.png$/);
+    const bytes = readFileSync(join(result.results, 'screenshots', name));
+    assert.equal(evidence.screenshots[name].sha256, sha256(bytes), `manifest hash for ${name}`);
+    assert.equal(evidence.screenshots[name].bytes, bytes.length);
+    assert.equal(sha256(readFileSync(join(remote, name))), sha256(bytes), `pulled bytes match the device file ${name}`);
+  }
+  // Every capture pull reads this run's directory in the secureQa app, and nothing else.
+  const pulls = result.calls.filter(call => call.args[2] === 'exec-out' && call.args.at(-1).endsWith('.png'));
+  assert.equal(pulls.length, 40);
+  for (const { args } of pulls) assert.ok(args.at(-1).startsWith(`no_backup/passages-captures/${summary.runId}/`));
+  assert.equal(result.json('capture-metadata.json').runId, summary.runId);
+}));
+
+test('ui mode rejects extra arguments before any build or device call', () => withSandbox(async dir => {
+  const result = await run(dir, ['ui', 'extra']);
+  assert.equal(result.code, 2, result.output);
+  assert.equal(result.results, null);
+  assert.equal(result.calls.length, 0);
+}));
+
+const uiFailures = [
+  ['a wrong test count', { FAKE_INSTRUMENTATION: 'old-count' }, 'instrumentation'],
+  ...[-1, -2, -3, -4].map(code => [`status ${code} beside OK (27 tests)`, { FAKE_INSTRUMENTATION: String(code) }, 'instrumentation']),
+  ['a missing screenshot', { FAKE_SCREENSHOTS: 'missing' }, 'screenshot-count'],
+  ['an extra screenshot', { FAKE_SCREENSHOTS: 'extra' }, 'screenshot-count'],
+  ['an extra file that is not a capture', { FAKE_SCREENSHOTS: 'bad-name' }, 'screenshot-name'],
+  ['a capture that is not a PNG', { FAKE_SCREENSHOTS: 'not-png' }, 'screenshot-format'],
+  ['missing capture metadata', { FAKE_SCREENSHOTS: 'no-metadata' }, 'capture-metadata'],
+  ['metadata that names other captures', { FAKE_SCREENSHOTS: 'metadata-mismatch' }, 'capture-metadata'],
+  // QA round 1 (S5R-F2, S5R-F3).
+  ['metadata from another run', { FAKE_SCREENSHOTS: 'metadata-run-id' }, 'capture-metadata'],
+  ['a device hash that differs from the pulled file', { FAKE_SCREENSHOTS: 'metadata-hash' }, 'screenshot-pull-mismatch'],
+  ['a truncated pull that keeps the PNG signature', { FAKE_TRUNCATE_PULL: '-capture-1.png' }, 'screenshot-pull-mismatch'],
+  ['a listing without its end marker', { FAKE_LISTING: 'no-marker' }, 'screenshots-unavailable'],
+  ['a failed capture pull', { FAKE_PULL_FAIL: '-capture-2.png' }, 'screenshot-pull-failed'],
+  ['a listing that repeats a pulled name', { FAKE_LISTING_EXTRA: '01-synthetic-capture-1.png' }, 'screenshots-unavailable'],
+  ['a non-zero instrumentation exit beside OK (27 tests)', { FAKE_INSTRUMENTATION: 'exit-code' }, 'instrumentation'],
+];
+for (const [name, extra, reason] of uiFailures) {
+  test(`ui mode fails on ${name} (${reason})`, () => withSandbox(async dir => {
+    const result = await run(dir, ['ui'], extra);
+    assert.equal(result.code, 1, result.output);
+    const summary = result.json('result.json');
+    assert.equal(summary.status, 'failed');
+    assert.equal(summary.reason, reason);
+    assert.equal(summary.stage, 'validation');
+    assertClientStopped(result, summary);
+    assertOnlySecureQa(result.calls);
+    // Whatever was pulled is still kept and hashed for inspection.
+    const evidence = result.json('evidence.json');
+    for (const [file, entry] of Object.entries(evidence.screenshots))
+      assert.equal(entry.sha256, sha256(readFileSync(join(result.results, 'screenshots', file))));
+  }));
+}
+
+test('ui mode never pulls a listed name outside NN-name.png, including path traversal', () => withSandbox(async dir => {
+  const unsafe = ['../01-escape.png', '01-a/../02-b.png', 'sub/01-nested.png', '/data/01-absolute.png', '01-Upper.png'];
+  const result = await run(dir, ['ui'], { FAKE_LISTING_EXTRA: unsafe.join('|') });
+  assert.equal(result.code, 1, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.reason, 'screenshot-name');
+  assert.equal(summary.stage, 'validation');
+  const pulled = result.calls.filter(call => call.args[2] === 'exec-out').map(call => call.args.at(-1));
+  for (const name of unsafe) assert.ok(!pulled.some(path => path.endsWith(name)), `not pulled: ${name}`);
+  assert.equal(pulled.filter(path => path.endsWith('.png')).length, 40, 'only the 40 valid captures were pulled');
+  assert.deepEqual(readdirSync(join(result.results, 'screenshots')).length, 40);
+  assert.ok(!existsSync(join(result.results, '01-escape.png')) && !existsSync(join(dir, 'results', '01-escape.png')));
+  assertOnlySecureQa(result.calls);
+}));
+
+test('ui evidence records why the listing or a pull failed', () => withSandbox(async dir => {
+  const noMarker = await run(dir, ['ui'], { FAKE_LISTING: 'no-marker' });
+  assert.equal(noMarker.json('evidence.json').screenshotList, 'unavailable');
+  const shots = join(noMarker.results, 'screenshots');
+  assert.ok(!existsSync(shots) || readdirSync(shots).length === 0, 'nothing pulled without a confirmed listing');
+  assert.equal(noMarker.calls.filter(call => call.args[2] === 'exec-out' && call.args.at(-1).endsWith('.png')).length, 0);
+}));
+
+test('a failed capture pull is recorded and its partial file removed', () => withSandbox(async dir => {
+  const result = await run(dir, ['ui'], { FAKE_PULL_FAIL: '-capture-2.png' });
+  assert.equal(result.json('result.json').reason, 'screenshot-pull-failed');
+  const evidence = result.json('evidence.json');
+  assert.deepEqual(evidence.pullFailures, ['02-synthetic-capture-2.png']);
+  assert.ok(!existsSync(join(result.results, 'screenshots', '02-synthetic-capture-2.png')));
+  assert.equal(evidence.screenshotCount, 39);
+}));
