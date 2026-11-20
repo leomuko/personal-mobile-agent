@@ -134,9 +134,9 @@ enum class AttachmentSource { FILES, CAMERA, GALLERY }
             }
         }
         if (chip.showEmptyHint) {
-            // The disabled switch already announces the hint.
+            // The hint stays visible; while the switch is disabled it announces the hint instead.
             val hint = Modifier.testTag("sources-empty-hint")
-            val semantics = if (chip.enabled) hint else hint.clearAndSetSemantics {}
+            val semantics = if (chip.hintAnnouncedByChip) hint.clearAndSetSemantics {} else hint
             Text(stringResource(Res.string.sources_empty_hint), semantics.padding(start = 12.dp, top = 4.dp),
                 style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
@@ -151,7 +151,7 @@ enum class AttachmentSource { FILES, CAMERA, GALLERY }
 
 @Composable private fun SourcesChip(state: SourcesChipState, onChange: (Boolean) -> Unit) {
     val name = stringResource(Res.string.sources_only_toggle)
-    val disabledState = if (!state.enabled && state.showEmptyHint)
+    val disabledState = if (state.hintAnnouncedByChip)
         stringResource(Res.string.sources_only_disabled_state, stringResource(Res.string.sources_empty_hint))
     else null
     Surface(

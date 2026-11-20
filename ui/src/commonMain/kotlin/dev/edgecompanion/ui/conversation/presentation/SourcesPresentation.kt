@@ -5,7 +5,13 @@ import dev.edgecompanion.core.sources.model.SourceSpan
 import dev.edgecompanion.core.sources.model.SourceSpanPreview
 import dev.edgecompanion.ui.resources.*
 
-internal data class SourcesChipState(val checked: Boolean, val enabled: Boolean, val showEmptyHint: Boolean)
+internal data class SourcesChipState(val checked: Boolean, val enabled: Boolean, val showEmptyHint: Boolean) {
+    /**
+     * S5-F4: while the chip is disabled, its state description carries the add-source hint, so the
+     * visible hint text is removed from the accessibility tree instead of being announced twice.
+     */
+    val hintAnnouncedByChip get() = showEmptyHint && !enabled
+}
 
 internal fun ConversationState.sourcesChip(hasSources: Boolean?): SourcesChipState {
     val checked = draftScope == RequestScope.SOURCES

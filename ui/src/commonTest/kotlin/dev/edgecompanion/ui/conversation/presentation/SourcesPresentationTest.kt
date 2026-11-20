@@ -51,6 +51,26 @@ class SourcesPresentationTest {
         assertFalse(ConversationState(ready = true).sourcesChip(null).enabled)
     }
 
+    /**
+     * S24 ui run 2026-11-20 (PassagesCaptureTest.item2EmptyLibraryChip): once the chip is turned off on
+     * an empty library, the visible hint is announced by the disabled chip's state description and is
+     * not a separate text node, so it must be located by its tag, not by its text.
+     */
+    @Test fun disabledChipCarriesTheAddSourceHintOnlyForAKnownEmptyLibrary() {
+        val off = ConversationState(ready = true)
+        val on = off.copy(draftScope = RequestScope.SOURCES)
+        assertTrue(off.sourcesChip(false).hintAnnouncedByChip, "empty, chip off")
+        assertFalse(on.sourcesChip(false).hintAnnouncedByChip, "empty, chip on: the hint is its own text")
+        assertTrue(on.sourcesChip(false).showEmptyHint, "empty, chip on: the hint is still shown")
+        for (scope in RequestScope.entries) {
+            val state = ConversationState(ready = true, draftScope = scope)
+            assertFalse(state.sourcesChip(null).hintAnnouncedByChip, "unknown, $scope")
+            assertFalse(state.sourcesChip(true).hintAnnouncedByChip, "has sources, $scope")
+        }
+        val notReady = ConversationState(draftScope = RequestScope.SOURCES)
+        assertTrue(notReady.sourcesChip(true).let { !it.enabled && !it.hintAnnouncedByChip }, "not ready, has sources")
+    }
+
     @Test fun fromMySourcesLabelBelongsOnlyToScopedUserMessages() {
         val scoped = Message(1, "Synthetic question", 0, scope = RequestScope.SOURCES)
         assertEquals(Res.string.from_my_sources, scoped.sourceScopeLabel)
