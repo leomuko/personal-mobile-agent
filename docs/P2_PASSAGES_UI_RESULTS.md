@@ -173,3 +173,198 @@ captures below are Compose-level stand-ins, not lifecycle evidence.
 
 None of the 27 `ui` tests and none of the 40 captures have run on a device.
 Running them needs the user's go-ahead.
+
+## 2026-11-20: S24 `ui` run failures (host diagnosis and fixes)
+
+Run `benchmarks/results/passages-ui-20261120T090127Z-23894-8CuDBO/`:
+25 of 27 passed, 36 of 40 PNGs pulled. Two failures. Host work only; nothing
+below was run on a device.
+
+### 1. `PassagesCaptureTest.item2EmptyLibraryChip` (line 143): test matcher
+
+- **Symptom.** After the chip is turned off on an empty library,
+  `onNodeWithText("Add a source to use this").assertIsDisplayed()` fails.
+  The four later item-2 PNGs were not written (two `empty-chip-off-hint`,
+  `02-drawer-empty-chip-on`, `02-full-unknown-availability-no-hint`).
+- **Root cause: the test, not the UI.** By S5-F4 the disabled chip announces
+  the hint in its state description ("Off. Add a source to use this"). So
+  that it is not read twice, the visible hint `Text` has
+  `clearAndSetSemantics {}` while the chip is disabled. The text is still
+  drawn, but it has no text semantics. In compose-ui-test 1.12.1 a node that
+  is not found counts as "not displayed", which gives exactly this message.
+- **D5.4 is met.** The hint is drawn whenever `showEmptyHint` is true
+  (`hasSources == false`), whether the chip is on or off.
+  `02-full-empty-chip-on.png` shows it below the composer.
+  In the same run, `PassagesUiTest.emptyLibraryDisablesTheChipAndKeepsItsSavedChoice`
+  passed in both hosts. It asserts that the `sources-empty-hint` node is
+  displayed in the disabled, chip-off state, and checks the chip's state
+  description.
+- **Fix (test only).** Line 143 now asserts the `sources-empty-hint` tag is
+  displayed and that the chip's state description is
+  "Off. Add a source to use this". This is the same check `PassagesUiTest`
+  uses. The unknown-availability step is unchanged and still asserts no hint.
+- **Host test.** The rule "the disabled chip carries the hint" is now one
+  property, `SourcesChipState.hintAnnouncedByChip`
+  (`showEmptyHint && !enabled`). The chip's state description and the
+  hint's semantics clearing both use it, so behaviour is unchanged.
+  `SourcesPresentationTest.disabledChipCarriesTheAddSourceHintOnlyForAKnownEmptyLibrary`
+  pins the property:
+  - empty library, chip off: the chip carries the hint;
+  - empty library, chip on: the hint is its own text and is still shown;
+  - unknown availability and has-sources: the chip does not carry it.
+
+  Mutating the property to `!enabled` makes the test fail.
+
+### 2. `ComposerLayoutTest.focusWithoutSoftwareKeyboardExpandsAndBackPreservesDraftInBothHosts` (line 71): not attributed to S5, pending the S24 rerun
+
+- **Symptom.** After the field is focused and the composer is expanded,
+  `sendKeyDownUpSync(KEYCODE_BACK)` is followed by a failed
+  `composer-compact` `assertIsDisplayed`. The stack does not say which host
+  iteration failed.
+- **No layout or tag mismatch.**
+  - `git diff 5818f15 HEAD` on `Composer.kt` leaves the expansion rule
+    unchanged: `editing || imeVisible || attachments || multiline`.
+  - The tag still follows that rule: `composer-expanded` or
+    `composer-compact`.
+  - The Back path is also unchanged: the pre-IME key handler on the field,
+    `BackHandler(enabled = editing && …)`, and `endEditing()`.
+  - S5 did restructure the composer, though. The root changed from
+    `BoxWithConstraints` to `Column(BoxWithConstraints, hint)`. A focusable,
+    toggleable chip now sits inside the input layout. The field is placed
+    differently, with mic and Send on a second row while editing.
+    `AssistantNavigation` gained a drawer `BackHandler`, which is disabled
+    in this fixture because no span is open. None of these is known to
+    block Back, but that is inference, not evidence: no S24 run of this
+    test exists between `5818f15` and the failing run (the
+    2026-11-20T083836Z run stopped on the Espresso `InputManager` error).
+- **What the same S24 run proves.**
+  - `PassagesCaptureTest` item 1 and item 8 ran 16 typing/idle cycles in
+    both hosts, at default and 320 dp width. In each one, a focused field
+    gave `composer-expanded`. Clearing focus then gave `composer-compact`
+    and an unfocused field.
+  - `imeBottomPx` was 0 in every capture, typing included, so no IME was
+    involved.
+  - So the S5 composer's expand and collapse work on the S24. The only step
+    not exercised is the injected Back key reaching `endEditing()`.
+- **What changed since the last pass.** This test last passed on the S24 on
+  2026-10-01, four times (`docs/S24_ULTRA_QA_2026-10-01.md`). Since then:
+  - the S24 OS changed: Espresso 3.5 failed there with
+    `InputManager.getInstance` missing, which led to commit `52f3a10`;
+  - `espresso-core` is now 3.7.0;
+  - the test now runs as the 17th case of a 27-test instrumentation, not in
+    a two-test run.
+
+  Hypothesis, unverified: with `targetSdk = 36` the platform may hand the
+  Back key to the window's top `OnBackInvokedCallback` early. The pre-IME
+  stage, where the field's `onPreInterceptKeyBeforeSoftKeyboard` runs, is
+  still view-tree dispatch, so this would not by itself explain a missed
+  Back. The cause could not be pinned down without a device. These are
+  candidates, not findings:
+  - the key reached no focused test window;
+  - another callback took it;
+  - the activity's default Back ran;
+  - it was delivered late.
+- **Change (test only).**
+  - The rule is now `createAndroidComposeRule<ComponentActivity>()`, the
+    same activity and dispatcher that `createComposeRule()` launches, so the
+    activity can be inspected.
+  - Before sending Back, the test waits (up to 5 s) for the test window to
+    have input focus. It then asserts that the composer has claimed Back
+    while editing: `onBackPressedDispatcher.hasEnabledCallbacks()`. This
+    check is new and stronger.
+  - After Back (QA round 2, UIF-F3) the composer must reach
+    `composer-compact` within a 1 s budget, counted from when the
+    synchronous key injection returns. The original test asserted it at
+    the next idle, so this is slightly looser than before: a collapse
+    delayed by under 1 s would now pass. The elapsed time is in the
+    failure message. The 5 s wait applies only to the window-focus
+    precondition.
+  - On failure the message reports: whether the composer is still
+    expanded, whether the input is focused, whether the activity is
+    finishing, window focus, and whether Back is still claimed.
+  - Every original assertion is kept: expand on focus, compact and
+    unfocused after Back, draft "Keep" displayed, and the sheet-Back
+    sequence, in both hosts.
+- **Host test.** Not feasible. `ui` commonTest has no Compose UI test
+  harness, and Back key routing is platform behaviour. This needs the S24
+  rerun.
+
+### QA round 2 (`build/qa-s24-ui-fixes-2026-11-20/review.txt`)
+
+- **UIF-F1.** In the disabled, known-empty step, `PassagesCaptureTest` and
+  `PassagesUiTest` now also assert
+  `onNodeWithText("Add a source to use this", useUnmergedTree = true).assertDoesNotExist()`.
+  QA's mutant M3 (the hint's semantics never cleared) would then fail on the
+  device, as a double TalkBack read would. No host check: `ui` commonTest
+  has no Compose UI test harness, so the `Composer` wiring cannot be
+  exercised there. `SourcesPresentationTest` still pins only the property.
+- **UIF-F3** and **UIF-F4.** See failure 2 above: the 1 s collapse budget,
+  the "not attributed to S5" wording, the S5 structural changes, and the
+  routing explanation marked as a hypothesis.
+- UIF-F2 (pixel evidence for the chip-off hint) closes with the rerun's
+  `02-*-empty-chip-off-hint` PNGs. UIF-F5 needs no action.
+
+### Host checks for this section
+
+- `./gradlew --offline :ui:jvmTest --rerun :shared:jvmTest --rerun :androidApp:assembleDebug :androidApp:lintDebug`:
+  passed. UI JVM 22 of 22. Shared JVM 289: 287 passed, 2 opt-in skipped.
+  Lint 0 errors, 7 warnings.
+- `./gradlew --offline --rerun-tasks -PtestBuildType=secureQa :androidApp:assembleSecureQa :androidApp:assembleSecureQaAndroidTest`:
+  passed. The changed instrumentation classes compiled only; they did not
+  run.
+- `./gradlew --offline :androidApp:testDebugUnitTest --rerun`: passed, 32 of
+  32.
+- Expected `ui` counts are unchanged: 27 tests and 40 PNGs. No test or
+  capture was added or removed. The four missing item-2 PNGs come back once
+  item 2 gets past line 143.
+- Not run: any device or emulator step. Whether failure 2 is fixed is
+  unverified until the S24 `ui` rerun, which needs the user's go-ahead.
+
+## 2026-11-20: S5-F3 user visual decision — refine the composer
+
+After reviewing the explanation and retained S24 captures, the user selected
+**Refine it** rather than accepting the current adaptive layout unchanged.
+
+Approved direction:
+
+- Retain the compact idle bar where the controls and input fit comfortably.
+- Give the message field a dedicated full-width row while typing/expanded.
+  Move controls, including **My sources**, into a separate controls row.
+- At narrow widths and large font sizes, prioritize readable message input;
+  avoid squeezing it beside the source chip and awkward word wrapping.
+- Use the same behavior in the drawer and full app. Preserve the sticky source
+  choice, draft and attachment continuity, and accessible controls.
+
+This settles the S5-F3 layout choice; implementation and verification of the
+refinement remain pending. Keyboard/inset correctness remains a QA item, and
+this decision does not establish that the retained fixture captures prove it.
+Only documentation was updated to record this decision; no app code changed
+and no tests, device runs or commits were performed.
+
+## 2026-11-20: S24 `ui` rerun after the UI test fixes (planner)
+
+Run on the S24 (`R5CX22V8D6B`, `secureQa`, staged APK copies only, nothing
+uninstalled), at HEAD `52f3a10` plus the uncommitted, QA-passed test fixes
+(tracked-diff sha256 `a33fb0cc2e25895a0ba3cb15b59d980c3e3bfba18fd7c12e6e2aa9646c89c729`).
+
+| Run directory (`benchmarks/results/`) | Source | Result | PNGs |
+| --- | --- | --- | --- |
+| `passages-ui-20261120T090127Z-23894-8CuDBO` | `2bee021`, diff `73e496dd…` | Failed, 2 of 27 (item-2 matcher; Composer Back) | 36 |
+| `passages-ui-20261120T093917Z-27642-aQ3IQk` | `52f3a10`, diff `a33fb0cc…` | Failed, 7 of 27: "No compose hierarchies found" in the first 7 cases | 35 |
+| `passages-ui-20261120T094151Z-27972-TFUKrG` | `52f3a10`, diff `a33fb0cc…` | **Passed, `OK (27 tests)`**, exit 0, 900 s deadline | 40 of 40 |
+
+- An independent QA check of the passing run confirmed 27 distinct passing
+  tests with no skipped or failed status, 40 of 40 PNGs matching the recorded
+  hashes, sizes and inventory, and visual inspection of all 40. The item-2
+  empty-library hint is visible in both hosts. **UIF-F2 closes**; S5-F6 stays
+  resolved.
+- **Repeatability is not shown.** The `093917Z` attempt used identical source
+  and APK hashes and failed 7 of 27 because no Compose root was available. The
+  planner attributes this to the phone screen being off or locked, but that
+  cause is a hypothesis, not a verified one. Both failed run directories are
+  kept as evidence beside the pass.
+- **S5R-F7 stays open (non-blocking):** the metadata for ordinary captures
+  records font scale `1.0` as a supplied value rather than measuring it. The
+  explicit `2.0` large-font captures (item 7) are not affected.
+- The S5-F3 composer refinement (decision above) is not implemented. These
+  screenshots show the layout as it was before that refinement.

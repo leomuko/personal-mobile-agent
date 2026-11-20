@@ -190,6 +190,15 @@ on a path under the folders archived on 2026-11-10.
   (user decision 2026-11-19, replacing emulator screenshots; each run needs the
   user's go-ahead).
 - **Depends on:** S4, D5.
+- **User visual decision (2026-11-20, S5-F3): Refine the composer.** Keep the
+  compact idle bar where it fits. While typing/expanded, give the message field
+  a dedicated full-width row and place controls, including **My sources**, in
+  a separate row. Adapt narrow and large-font layouts to prioritize readable
+  input rather than squeezing the field beside the chip. Apply consistently
+  in the drawer and full app, preserving sticky scope, draft/attachment and
+  accessibility behavior. The visual choice is settled; refinement implementation
+  and verification remain pending. See the dated decision in
+  [P2_PASSAGES_UI_RESULTS.md](../docs/P2_PASSAGES_UI_RESULTS.md).
 
 ### S6 — Answer-quality check (device)
 
