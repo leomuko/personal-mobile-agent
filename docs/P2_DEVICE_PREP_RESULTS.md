@@ -384,3 +384,76 @@ build and install 1–3 min, thermal readiness under 15 s, instrumentation about
 about 15 s plus roughly 20–40 s of decoding for the long answer). Deadline
 2160 s for each. Host regressions:
 `node --test scripts/tests/verify-chat-context.test.mjs` (47 tests).
+
+## S5 `ui` mode procedure (2026-11-19), host only
+
+`scripts/verify-chat-context.sh ui` builds `secureQa` and stages and
+identity-checks both APKs, using the same path as `sqlcipher`. It installs
+only the staged `.secureqa` copies with `install -r` and never uninstalls. It
+runs one `am instrument` under a fixed 900 s deadline (no override), with no
+thermal monitor; no model is loaded.
+
+- **Classes, in one run:** `PassagesUiTest` (6), `PassagesCaptureTest` (9),
+  `ComposerLayoutTest` (7) and `HostRegressionTest` (5). The run requires
+  `OK (27 tests)`, and `FAILURE_PATTERN` rejects status -1 to -4.
+- **What every instrumentation run does to `.secureqa`.** Starting any
+  instrumentation starts the `.secureqa` app. `CompanionApplication` opens
+  the app's own conversation database through `ConversationSession`. It also
+  runs `models.verify()`, which hashes the model file but does not load it.
+  This was already true of `sqlcipher` and `measure` runs.
+- **Device safety of the two regressions.** Both run inside the `.secureqa`
+  package, whose manifest removes the network permissions. Neither touches
+  the debug or release apps. Neither loads a model.
+  - `ComposerLayoutTest` renders synthetic Compose state. It saves three
+    PNGs in the `.secureqa` cache directory. Two are captures of its own
+    Compose root.
+  - `narrowRtlLargeTextSheetWrapsAndBackRetainsDraft` writes the third,
+    `composer-sheet-large-rtl.png`, using `uiAutomation.takeScreenshot()`.
+    That is a full-display screenshot. It can include the status bar, the
+    navigation bar and any heads-up notification shown at that moment.
+  - The script never pulls the cache files, and nothing uploads them. They
+    stay on the device until the `.secureqa` cache is cleared.
+  - `HostRegressionTest` launches the `.secureqa` `MainActivity`,
+    `DrawerActivity` and `CaptureActivity`, and creates `MascotView` objects
+    in memory. It checks window flags and tasks.
+  - Its activity launches use the app's normal start-up, described above.
+    The test itself saves no files and no conversation content. If camera
+    permission was granted to `.secureqa`, `CaptureActivity` briefly opens
+    the camera preview.
+- **Captures:** `PassagesCaptureTest` receives `-e passagesCaptureRunId
+  <run ID>`. It writes
+  `no_backup/passages-captures/<run ID>/NN-name.png` and
+  `no_backup/passages-captures/<run ID>.json` in `.secureqa` storage. The
+  script lists that directory through `run-as`, requiring an end marker,
+  and pulls each `NN-name.png` with `exec-out run-as … cat` into
+  `screenshots/`. Names outside that pattern are never pulled. It records
+  each file's sha256 and size in `evidence.json`. On the device, the capture
+  test records the size and sha256 of each PNG it wrote in `<run ID>.json`.
+  Every pulled file must match those values. The run fails with one of
+  these reasons:
+  - `screenshot-count`: the count is not 40;
+  - `screenshot-name`: an entry does not match `NN-name.png`, for example a
+    name containing `/` or `..`;
+  - `screenshot-format`: a file lacks the PNG signature;
+  - `screenshot-manifest`: a host-recorded hash no longer matches its file
+    (defence in depth; `screenshot-pull-mismatch` normally fires first, and
+    this reason has no dedicated node test);
+  - `capture-metadata`: the metadata is missing, or names other files or
+    another run;
+  - `screenshot-pull-mismatch`: a pulled file's size or sha256 differs from
+    the value the device recorded, for example a truncated pull;
+  - `screenshot-pull-failed`: a pull command failed;
+  - `screenshots-unavailable`: the listing has no end marker, or the pulled
+    set differs from the listing.
+
+  The pull loop reads stdin from `/dev/null`, so `adb` cannot consume the
+  remaining names. The fake adb cannot test this guard.
+- **Left on the device:** the captures stay in `.secureqa` `no_backup` after
+  the pull, because the script deletes nothing on the device.
+
+```sh
+export ANDROID_SERIAL='<AUTHORIZED_S24_SERIAL>'
+scripts/verify-chat-context.sh ui
+```
+
+Host regressions: `node --test scripts/tests/verify-chat-context.test.mjs`.

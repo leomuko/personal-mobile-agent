@@ -38,3 +38,138 @@ Use synthetic sources and chat in the `secureQa` build after the user authorizes
 7. Large font in the drawer and full app, including the composer and expanded passage list.
 8. The same idle and typing composer states in both hosts at a narrow width, aiming for 320 dp. Record the actual width and whether the mic and Send wrap.
 9. Drawer with a passage open, then Chat after leaving via Home and re-entering from the mascot.
+
+## 2026-11-19: S24 SQLCipher gate after migration 7 (schema 8)
+
+Commit `caaa5c1`, clean tree, `secureQa` on the S24 Ultra (serial ending 8D6B),
+via `scripts/verify-chat-context.sh sqlcipher`. Only the staged `.secureqa`
+copies were installed; no model was loaded. **PASS: `OK (9 tests)`.**
+
+- `GroundingSqlCipherTest` 6/6, including the new encrypted 7→8 case
+  (`encryptedSchemaSevenDraftMigratesOffAndRestoresStickyScopeAfterReopen`).
+- `PassageSqlCipherTest` 3/3 at schema 8.
+- Raw output: 9 test starts (status 1) and 9 passes (status 0); no skipped or
+  failed status.
+
+Raw results (git-ignored):
+`benchmarks/results/passage-20261119T130156Z-72466-4DwmWG/`.
+
+Still pending on the S24 (each needs the user's go-ahead): the six
+`PassagesUiTest` cases (needs a runner; the script has no UI mode) and the
+screenshot list above. Open P3: S5-F6, the empty-library hint also shows while
+source availability is unknown; ruling: show it only when the library is known
+to be empty.
+
+## 2026-11-19: S5 device runner and S5-F6 (host only)
+
+Host work only; nothing in this section was run on a device or emulator.
+
+- **S5-F6.** The **Add a source to use this** hint, and the disabled chip's
+  matching state description, now appear only when the library is known to be
+  empty (`hasSources == false`). Unknown availability still keeps an
+  unchecked chip from turning on (`ready && (hasSources == true || checked)`)
+  but shows no hint. `SourcesPresentationTest` pins all three states.
+  `PassagesUiTest.emptyLibraryDisablesTheChipAndKeepsItsSavedChoice` asserted
+  the hint for unknown availability; it now expects the hint only for the
+  empty library, and checks empty and unknown in both hosts. The count stays
+  at six cases.
+- **Runner.** `scripts/verify-chat-context.sh ui` runs `PassagesUiTest` (6),
+  `PassagesCaptureTest` (9), `ComposerLayoutTest` (7) and `HostRegressionTest`
+  (5) in one instrumentation, and requires `OK (27 tests)`. It then pulls
+  exactly 40 PNGs into `screenshots/` with their sha256 in `evidence.json`.
+  The deadline is fixed at 900 s. See `docs/P2_DEVICE_PREP_RESULTS.md`.
+
+### Capture files (`screenshots/NN-name.png`, NN = planned item)
+
+All captures use synthetic state and render the shared `CompanionScreen` in a
+Compose test window, not the app's secure activity window.
+
+**Host framing (S5R-F4).** Before any content is set, the test activity
+calls `enableEdgeToEdge()` and uses `adjustResize`, as `MainActivity`
+declares. The capture frame applies the same status-bar, navigation-bar and
+IME padding as `MainActivity`. Inside that padding, the full app fills the
+padded height. The drawer is a rounded sheet at 86 % of the padded height.
+
+Known differences from the real hosts:
+- The PNG is the frame node only. The bar areas show the frame's background,
+  not the status icons or navigation handle.
+- The drawer's backdrop is plain grey. The real drawer window is
+  translucent over whatever is behind it.
+- The theme is `CompanionTheme`'s default, not the user's stored
+  appearance.
+- The narrow item 8 frame is 320 dp wide inside the full-width test window.
+- The keyboard is never in a PNG. Whether it appears during "typing", and so
+  whether the IME padding lifts the composer, depends on the device. The
+  insets recorded per capture show it.
+
+`capture-metadata.json` records, for each PNG:
+- the pixel size, density, width in dp and font scale;
+- the size and sha256 that the device wrote;
+- the status-bar, navigation-bar and IME insets in pixels.
+
+On the device, an inset of zero means that padding did not apply.
+
+| Item | Files | Count |
+|---|---|---|
+| 1 | `01-{full,drawer}-{off,on}-{idle,typing}`, `01-drawer-on-after-host-switch`, `01-full-on-after-recreation` | 10 |
+| 2 | `02-{full,drawer}-empty-chip-on`, `02-{full,drawer}-empty-chip-off-hint`, `02-full-unknown-availability-no-hint` | 5 |
+| 3 | `03-{full,drawer}-passages-{collapsed,expanded}` | 4 |
+| 4 | `04-{full,drawer}-source-detail-highlight` | 2 |
+| 5 | `05-{full,drawer}-source-deleted`, `05-full-ordinary-no-passages` | 3 |
+| 6 | `06-full-{no-match,not-indexed-retry,retrieval-incomplete-retry,passages-unusable}` | 4 |
+| 7 | `07-{full,drawer}-large-font-passages-expanded` (font scale 2.0, default width) | 2 |
+| 8 | `08-{full,drawer}-{off,on}-{idle,typing}-narrow` (frame 320 dp; actual width in the metadata) | 8 |
+| 9 | `09-drawer-passage-open`, `09-drawer-chat-after-reentry-request` | 2 |
+
+Total: 40.
+
+"Typing" means a synthetic draft in a focused field, with the software
+keyboard controller removed, as in `ComposerLayoutTest`. The composer
+expands as it does while typing, but the PNG does not show the keyboard.
+Item 6 is captured in the full app only; `PassagesUiTest` checks the same
+four messages in both hosts.
+
+### Lifecycle limits
+
+The runner drives no real activity lifecycle for these items. All three
+captures below are Compose-level stand-ins, not lifecycle evidence.
+
+- **Item 1, after switching hosts.** The chip is turned on with a tap in the
+  full-app layout, and the drawer layout then reads the same shared state in
+  the same composition. Two separate activities are not shown.
+- **Item 1, after recreation** (`01-full-on-after-recreation`). This is a
+  re-render stand-in, not a restore.
+  - `StateRestorationTester` recreates the composition, but the chip state
+    lives in a test-held state outside the composition. The image would show
+    "on" even with no saved-state handling at all.
+  - It is not a process restart or a real activity reopen.
+  - Persistence of the stored scope is covered elsewhere: by the host JDBC
+    tests and by the S24 encrypted 7→8 case in the SQLCipher gate.
+- **Item 9.** This shows the drawer with a passage open, then the
+  new-conversation request that `MainActivity.onNewIntent` raises. Home,
+  the mascot tap and the real `onNewIntent` delivery are not driven.
+  Driving them would need the real secure activity, the secureQa app's stored
+  conversation and the overlay, which this synthetic capture class does not
+  touch.
+
+### Host checks for this section
+
+- The UI JVM suite passed 21 of 21.
+- The shared JVM suite ran 289: 287 passed, and the 2 existing opt-in tests
+  were skipped.
+- Debug assembly passed. Debug lint reported 0 errors and 7 warnings.
+- The `secureQa` app and androidTest APKs compiled. The new and changed
+  instrumentation classes compiled only and did not execute.
+- The node suites passed 81 of 81: 76 in `verify-chat-context`, 23 of them
+  for `ui`, and 5 in `qa-supervision`. No synthetic process remained.
+- QA round 1 fixes (S5R-F1 to F5) are in. Of the mutants that survived QA
+  round 1, M4, M8, M9, both forms of M10, M12 and M15 now fail at least one
+  node test each. M7 (the host-manifest hash check) still survives: the new
+  device-record comparison (`screenshot-pull-mismatch`) catches the same
+  changed or truncated file first, so `screenshot-manifest` is defence in
+  depth with no dedicated node test (QA round 2, S5R-F6). The `/dev/null`
+  stdin guard (M11) cannot be tested with the fake adb.
+- The test and PNG counts are unchanged: 27 and 40.
+
+None of the 27 `ui` tests and none of the 40 captures have run on a device.
+Running them needs the user's go-ahead.
