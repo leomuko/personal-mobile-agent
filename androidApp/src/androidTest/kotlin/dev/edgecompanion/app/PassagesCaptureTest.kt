@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.StateRestorationTester
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
@@ -140,7 +141,12 @@ class PassagesCaptureTest {
             compose.onNodeWithTag("sources-empty-hint").assertIsDisplayed()
             capture(2, "$host-empty-chip-on")
             chip().performClick().assertIsOff().assertIsNotEnabled()
-            compose.onNodeWithText("Add a source to use this").assertIsDisplayed()
+            // S5-F4: the disabled chip announces the hint, so the still-visible hint text has no text
+            // semantics of its own; find it by its tag and check the chip's state description.
+            compose.onNodeWithTag("sources-empty-hint").assertIsDisplayed()
+            // UIF-F1: the hint must not also be read as its own text (a double TalkBack read).
+            compose.onNodeWithText("Add a source to use this", useUnmergedTree = true).assertDoesNotExist()
+            chip().assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Off. Add a source to use this"))
             capture(2, "$host-empty-chip-off-hint")
         }
         compose.runOnIdle { drawer.value = false; available.value = null; scope.value = RequestScope.ORDINARY }

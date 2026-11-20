@@ -1,6 +1,8 @@
 package dev.edgecompanion.app
 
 import android.graphics.Bitmap
+import android.os.SystemClock
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.width
@@ -13,8 +15,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.*
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -31,7 +34,8 @@ import org.junit.Test
 import java.io.File
 
 class ComposerLayoutTest {
-    @get:Rule val compose = createComposeRule()
+    // Same ComponentActivity that createComposeRule() launches; the activity is needed for the Back diagnostics.
+    @get:Rule val compose = createAndroidComposeRule<ComponentActivity>()
 
     @Test fun delayedDraftAcknowledgementsDoNotReplaceNewerTyping() {
         val state = mutableStateOf(ConversationState(ready = true))
@@ -67,7 +71,7 @@ class ComposerLayoutTest {
             compose.onNodeWithTag("composer-input").performSemanticsAction(SemanticsActions.RequestFocus) { it() }
             compose.onNodeWithTag("composer-expanded").assertIsDisplayed()
             compose.onNodeWithTag("composer-input").assertIsFocused()
-            InstrumentationRegistry.getInstrumentation().sendKeyDownUpSync(android.view.KeyEvent.KEYCODE_BACK)
+            pressBackWhileEditingAndAwaitCompact(if (drawer) "drawer" else "full")
             compose.onNodeWithTag("composer-compact").assertIsDisplayed()
             compose.onNodeWithTag("composer-input").assertIsNotFocused()
             compose.onNodeWithText("Keep").assertIsDisplayed()
@@ -156,6 +160,38 @@ class ComposerLayoutTest {
         compose.onNodeWithTag("composer-compact").assertIsDisplayed()
     }
 
+    /**
+     * Sends a real Back key while the field is focused and requires the compact composer within a
+     * 1 s budget (the collapse is synchronous, so the original test asserted it at the next idle).
+     * Preconditions: the test window has input focus (key injection reaches only the focused window)
+     * and the composer has claimed Back while editing. On failure the message records which link
+     * of the chain broke, which the S24 run on 2026-11-20 could not tell apart.
+     */
+    private fun pressBackWhileEditingAndAwaitCompact(host: String) {
+        compose.waitUntil(WINDOW_FOCUS_TIMEOUT_MS) { compose.runOnUiThread { compose.activity.hasWindowFocus() } }
+        assertTrue("$host: editing must claim Back before the key is sent",
+            compose.runOnUiThread { compose.activity.onBackPressedDispatcher.hasEnabledCallbacks() })
+        InstrumentationRegistry.getInstrumentation().sendKeyDownUpSync(android.view.KeyEvent.KEYCODE_BACK)
+        val sentAt = SystemClock.uptimeMillis()
+        val compact = runCatching {
+            compose.waitUntil(BACK_COLLAPSE_BUDGET_MS) { compose.onAllNodesWithTag("composer-compact").fetchSemanticsNodes().isNotEmpty() }
+        }
+        val elapsed = SystemClock.uptimeMillis() - sentAt
+        if (compact.isFailure) {
+            val expanded = runCatching { compose.onAllNodesWithTag("composer-expanded").fetchSemanticsNodes().isNotEmpty() }
+            val focused = runCatching {
+                compose.onNodeWithTag("composer-input").fetchSemanticsNode().config.getOrElse(SemanticsProperties.Focused) { false }
+            }
+            val activity = compose.runOnUiThread {
+                with(compose.activity) { "finishing=$isFinishing, windowFocus=${hasWindowFocus()}, " +
+                    "backClaimed=${onBackPressedDispatcher.hasEnabledCallbacks()}" }
+            }
+            fail("$host: Back did not return the composer to compact within the $BACK_COLLAPSE_BUDGET_MS ms " +
+                "budget (gave up after $elapsed ms; expanded=${expanded.getOrElse { it.javaClass.simpleName }}, " +
+                "inputFocused=${focused.getOrElse { it.javaClass.simpleName }}, $activity)")
+        }
+    }
+
     private fun assertActionsAligned(tag: String) {
         val container = compose.onNodeWithTag(tag).fetchSemanticsNode().boundsInRoot
         val mic = compose.onNodeWithContentDescription("Start voice capture").fetchSemanticsNode().boundsInRoot
@@ -182,6 +218,13 @@ class ComposerLayoutTest {
                 onRemoveAttachment = onRemove, onPreviewAttachment = onPreview,
                 thumbnail = { _, modifier -> Image(bitmap, null, modifier, contentScale = ContentScale.Crop) })
         }
+    }
+
+    private companion object {
+        /** Test-environment precondition only: the window must hold input focus before a key is sent. */
+        const val WINDOW_FOCUS_TIMEOUT_MS = 5_000L
+        /** Collapse after Back is synchronous; a delay a user would notice must fail. */
+        const val BACK_COLLAPSE_BUDGET_MS = 1_000L
     }
 
     private fun screenshot(name: String) {

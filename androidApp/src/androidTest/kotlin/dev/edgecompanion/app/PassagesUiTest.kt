@@ -84,6 +84,8 @@ class PassagesUiTest {
             if (available == false) {
                 chip().assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, hinted))
                 compose.onNodeWithTag("sources-empty-hint").assertIsDisplayed()
+                // UIF-F1: the disabled chip carries the hint; its text must not be announced again.
+                compose.onNodeWithText("Add a source to use this", useUnmergedTree = true).assertDoesNotExist()
             } else {
                 chip().assert(SemanticsMatcher("no add-source hint") {
                     it.config.getOrElseNullable(SemanticsProperties.StateDescription) { null } != hinted
