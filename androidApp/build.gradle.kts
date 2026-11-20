@@ -75,5 +75,22 @@ dependencies {
     "secureQaImplementation"(libs.mediapipe.text)
     androidTestImplementation(libs.test.runner)
     androidTestImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.espresso.core)
+    constraints {
+        val concurrentFuturesReason =
+            "Espresso 3.7.0 and androidx.test:core 1.7.0 request concurrent-futures and " +
+                "concurrent-futures-ktx 1.2.0, but AGP runtime consistency holds the test runtime " +
+                "at 1.1.0; hold the androidTest compile classpath at the same 1.1.0 so tests " +
+                "cannot compile against 1.2.0-only APIs. Only 1.1.0 of concurrent-futures is in " +
+                "the offline cache."
+        androidTestImplementation("androidx.concurrent:concurrent-futures") {
+            version { strictly("1.1.0") }
+            because(concurrentFuturesReason)
+        }
+        androidTestImplementation("androidx.concurrent:concurrent-futures-ktx") {
+            version { strictly("1.1.0") }
+            because(concurrentFuturesReason)
+        }
+    }
     androidTestImplementation(libs.tink)
 }
