@@ -9,7 +9,8 @@ internal data class SourcesChipState(val checked: Boolean, val enabled: Boolean,
 
 internal fun ConversationState.sourcesChip(hasSources: Boolean?): SourcesChipState {
     val checked = draftScope == RequestScope.SOURCES
-    return SourcesChipState(checked, ready && (hasSources == true || checked), ready && hasSources != true)
+    // Unknown availability cannot turn the chip on, but only a known-empty library earns the add-source hint.
+    return SourcesChipState(checked, ready && (hasSources == true || checked), ready && hasSources == false)
 }
 
 internal val Message.sourceScopeLabel get() =

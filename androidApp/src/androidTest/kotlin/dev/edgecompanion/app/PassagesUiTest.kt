@@ -75,14 +75,23 @@ class PassagesUiTest {
                 scope.value = if (on) RequestScope.SOURCES else RequestScope.ORDINARY
             })
         }
-        for ((floating, available) in listOf(false to false, true to null)) {
+        val hinted = "Off. Add a source to use this"
+        // S5-F6: unknown availability keeps the chip from turning on but shows no add-source hint.
+        for (floating in listOf(false, true)) for (available in listOf(false, null)) {
             compose.runOnIdle { drawer.value = floating; present.value = available; scope.value = RequestScope.SOURCES }
             chip().assertIsEnabled().assertIsOn().performClick()
             chip().assertIsNotEnabled().assertIsOff()
-                .assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, "Off. Add a source to use this"))
-            compose.onNodeWithTag("sources-empty-hint").assertIsDisplayed()
+            if (available == false) {
+                chip().assert(SemanticsMatcher.expectValue(SemanticsProperties.StateDescription, hinted))
+                compose.onNodeWithTag("sources-empty-hint").assertIsDisplayed()
+            } else {
+                chip().assert(SemanticsMatcher("no add-source hint") {
+                    it.config.getOrElseNullable(SemanticsProperties.StateDescription) { null } != hinted
+                })
+                compose.onNodeWithTag("sources-empty-hint").assertDoesNotExist()
+            }
         }
-        compose.runOnIdle { present.value = true; assertEquals(listOf(false, false), toggles) }
+        compose.runOnIdle { present.value = true; assertEquals(List(4) { false }, toggles) }
         chip().assertIsEnabled().assertIsOff().performClick().assertIsOn()
         compose.onNodeWithTag("sources-empty-hint").assertDoesNotExist()
     }

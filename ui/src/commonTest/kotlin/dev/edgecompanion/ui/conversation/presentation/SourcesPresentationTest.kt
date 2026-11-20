@@ -34,11 +34,21 @@ class SourcesPresentationTest {
         assertEquals(SourcesChipState(false, false, true), off.sourcesChip(false))
     }
 
-    @Test fun unknownLibraryAvailabilityBehavesLikeAnEmptyLibrary() {
+    @Test fun unknownLibraryAvailabilityGatesTheChipLikeAnEmptyLibraryWithoutTheHint() {
         for (scope in RequestScope.entries) {
             val state = ConversationState(ready = true, draftScope = scope)
-            assertEquals(state.sourcesChip(false), state.sourcesChip(null))
+            assertEquals(state.sourcesChip(false).copy(showEmptyHint = false), state.sourcesChip(null))
         }
+    }
+
+    @Test fun addSourceHintShowsOnlyWhenTheLibraryIsKnownToBeEmpty() {
+        for (scope in RequestScope.entries) {
+            val state = ConversationState(ready = true, draftScope = scope)
+            assertFalse(state.sourcesChip(null).showEmptyHint, "unknown, $scope")
+            assertTrue(state.sourcesChip(false).showEmptyHint, "empty, $scope")
+            assertFalse(state.sourcesChip(true).showEmptyHint, "has sources, $scope")
+        }
+        assertFalse(ConversationState(ready = true).sourcesChip(null).enabled)
     }
 
     @Test fun fromMySourcesLabelBelongsOnlyToScopedUserMessages() {
