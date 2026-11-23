@@ -3,7 +3,6 @@ package dev.edgecompanion.ui.conversation.components
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
@@ -23,9 +22,11 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import dev.edgecompanion.core.attachments.model.*
@@ -102,7 +103,8 @@ enum class AttachmentSource { FILES, CAMERA, GALLERY }
                             onDraft(draft)
                         }, enabled = state.ready, textStyle = style,
                             maxLines = 4, cursorBrush = SolidColor(MaterialTheme.colorScheme.primary),
-                            modifier = Modifier.onFocusChanged { editing = it.isFocused }
+                            // Fills its slot, so the whole full-width row is the field's touch target.
+                            modifier = Modifier.fillMaxWidth().onFocusChanged { editing = it.isFocused }
                                 .onPreInterceptKeyBeforeSoftKeyboard { event ->
                                     if (editing && event.key == Key.Back) {
                                         if (event.type == KeyEventType.KeyUp) endEditing()
@@ -118,7 +120,7 @@ enum class AttachmentSource { FILES, CAMERA, GALLERY }
                             })
                     },
                     add = { ToolButton(Icons.Outlined.Add, stringResource(Res.string.add_attachment), openAttachments, state.ready) },
-                    sourcesChip = { SourcesChip(chip, onSourcesOnly) },
+                    sourcesChip = { SourcesChip(chip, sourcesChipShowsLabel(expanded, chip.checked), onSourcesOnly) },
                     mic = {
                         ToolButton(Icons.Outlined.Mic, stringResource(Res.string.start_voice), {
                             endEditing(); onMic()
@@ -149,18 +151,28 @@ enum class AttachmentSource { FILES, CAMERA, GALLERY }
     BackHandler(enabled = editing && !attachmentSheetOpen && !recording.active) { endEditing() }
 }
 
-@Composable private fun SourcesChip(state: SourcesChipState, onChange: (Boolean) -> Unit) {
+/**
+ * User decision 2026-11-23: while the composer is not expanded and the chip is off (enabled or not), the
+ * chip shows only its icon, so the idle bar keeps its one row; on, or while expanded, it shows its label.
+ */
+internal fun sourcesChipShowsLabel(expanded: Boolean, checked: Boolean): Boolean = expanded || checked
+
+@Composable private fun SourcesChip(state: SourcesChipState, showLabel: Boolean, onChange: (Boolean) -> Unit) {
     val name = stringResource(Res.string.sources_only_toggle)
     val disabledState = if (state.hintAnnouncedByChip)
         stringResource(Res.string.sources_only_disabled_state, stringResource(Res.string.sources_empty_hint))
     else null
+    // UIF-F9: the toggleable Surface overload applies toggleable (and its ripple/state layer) after the
+    // shape clip. The modifier-level toggleable it replaces sat before the Surface's clip, so a press or
+    // focus layer left behind when the click disabled the chip was drawn over the square layout bounds.
     Surface(
-        modifier = Modifier.heightIn(min = 48.dp).testTag("sources-scope-chip")
+        checked = state.checked, onCheckedChange = onChange, enabled = state.enabled,
+        modifier = Modifier.heightIn(min = 48.dp).widthIn(min = 48.dp).testTag("sources-scope-chip")
             .semantics {
                 contentDescription = name
+                role = Role.Switch
                 if (disabledState != null) stateDescription = disabledState
-            }
-            .toggleable(value = state.checked, enabled = state.enabled, role = Role.Switch, onValueChange = onChange),
+            },
         shape = RoundedCornerShape(16.dp),
         color = if (state.checked && state.enabled) MaterialTheme.colorScheme.primaryContainer
             else MaterialTheme.colorScheme.surface,
@@ -168,16 +180,59 @@ enum class AttachmentSource { FILES, CAMERA, GALLERY }
             else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = if (state.enabled) 1f else 0.60f),
     ) {
         Row(Modifier.padding(horizontal = 8.dp, vertical = 6.dp).clearAndSetSemantics {},
-            horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
+            horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterHorizontally),
+            verticalAlignment = Alignment.CenterVertically) {
             Icon(Icons.Outlined.Description, null, Modifier.size(16.dp))
-            Text(stringResource(Res.string.my_sources), Modifier.weight(1f, fill = false),
-                style = MaterialTheme.typography.labelMedium)
+            // A narrow controls row shortens the label; the accessible name above stays whole.
+            // Only the chip's own content changes; the semantics above carry the name in both forms.
+            if (showLabel) Text(stringResource(Res.string.my_sources), Modifier.weight(1f, fill = false),
+                style = MaterialTheme.typography.labelMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)
             if (state.checked) Icon(Icons.Outlined.Check, null, Modifier.size(16.dp))
         }
     }
 }
 
-/** Reposition one stable text field instead of recreating its focus/selection when the IME opens. */
+/**
+ * Where ComposerInputLayout puts each control, in start-relative px (placeRelative mirrors them for RTL).
+ * One row: `+`, chip, field, mic, send. Stacked: the field on its own full-width row, then a controls row
+ * with `+` and the chip at the start and mic and send at the end. The attachment strip is always first.
+ */
+internal data class ComposerPlacement(val height: Int, val fieldX: Int, val fieldY: Int, val fieldWidth: Int,
+    val chipX: Int, val chipY: Int, val actionY: Int, val addX: Int, val micX: Int, val sendX: Int)
+
+/** The idle one-row bar is kept only while its field still shows its one-line content at [floor] or wider. */
+internal fun composerUsesOneRow(expanded: Boolean, width: Int, button: Int, chipWidth: Int, fieldContentWidth: Int,
+    floor: Int): Boolean = !expanded && width - 3 * button - chipWidth >= maxOf(floor, fieldContentWidth)
+
+/** The chip never takes the field's room: it shares only the controls row with `+`, mic and send. */
+internal fun composerChipMaxWidth(width: Int, button: Int): Int = maxOf(button, width - 3 * button)
+
+/** The field width to measure with: the space between chip and mic in one row, else the full width. */
+internal fun composerFieldWidth(oneRow: Boolean, width: Int, button: Int, chipWidth: Int): Int =
+    (if (oneRow) width - 3 * button - chipWidth else width).coerceAtLeast(1)
+
+internal fun composerPlacement(oneRow: Boolean, width: Int, button: Int, stripHeight: Int, chipWidth: Int,
+    chipHeight: Int, fieldHeight: Int): ComposerPlacement {
+    val fieldWidth = composerFieldWidth(oneRow, width, button, chipWidth)
+    return if (oneRow) {
+        val row = maxOf(button, chipHeight, fieldHeight)
+        ComposerPlacement(height = stripHeight + row, fieldX = button + chipWidth,
+            fieldY = stripHeight + (row - fieldHeight) / 2, fieldWidth = fieldWidth, chipX = button,
+            chipY = stripHeight + (row - chipHeight) / 2, actionY = stripHeight + (row - button) / 2,
+            addX = 0, micX = width - 2 * button, sendX = width - button)
+    } else {
+        val controls = stripHeight + fieldHeight
+        val row = maxOf(button, chipHeight)
+        ComposerPlacement(height = controls + row, fieldX = 0, fieldY = stripHeight, fieldWidth = fieldWidth,
+            chipX = button, chipY = controls + (row - chipHeight) / 2, actionY = controls + (row - button) / 2,
+            addX = 0, micX = width - 2 * button, sendX = width - button)
+    }
+}
+
+/**
+ * Reposition one stable text field instead of recreating its focus/selection when the IME opens: both
+ * arrangements place the same six children, so switching between them never replaces the field.
+ */
 @Composable private fun ComposerInputLayout(expanded: Boolean, attachments: @Composable () -> Unit,
     field: @Composable () -> Unit, add: @Composable () -> Unit, sourcesChip: @Composable () -> Unit,
     mic: @Composable () -> Unit, send: @Composable () -> Unit) {
@@ -195,21 +250,23 @@ enum class AttachmentSource { FILES, CAMERA, GALLERY }
         val micButton = children[3].measure(Constraints.fixed(button, button))
         val sendButton = children[4].measure(Constraints.fixed(button, button))
         val strip = children[0].measure(Constraints(maxWidth = width))
-        val chipWidthLimit = minOf(148.dp.roundToPx(), (width - button - 72.dp.roundToPx()).coerceAtLeast(0))
-        val chip = children[5].measure(Constraints(maxWidth = chipWidthLimit))
-        val compactFieldWidth = width - 3 * button - chip.width
-        val wrapActions = expanded || compactFieldWidth < 72.dp.roundToPx()
-        val fieldWidth = (if (wrapActions) width - button - chip.width else compactFieldWidth).coerceAtLeast(1)
+        val chip = children[5].measure(Constraints(maxWidth = composerChipMaxWidth(width, button)))
+        // The field's unwrapped width (placeholder or idle draft on one line); not needed while editing.
+        val content = if (expanded) 0 else children[1].maxIntrinsicWidth(Constraints.Infinity)
+        val oneRow = composerUsesOneRow(expanded, width, button, chip.width, content, COMPACT_FIELD_FLOOR.roundToPx())
+        val fieldWidth = composerFieldWidth(oneRow, width, button, chip.width)
         val input = children[1].measure(Constraints(minWidth = fieldWidth, maxWidth = fieldWidth))
-        val rowHeight = maxOf(button, input.height, chip.height)
-        val actionY = if (wrapActions) strip.height + rowHeight else (rowHeight - button) / 2
-        layout(width, strip.height + rowHeight + if (wrapActions) button else 0) {
+        val at = composerPlacement(oneRow, width, button, strip.height, chip.width, chip.height, input.height)
+        layout(width, at.height) {
             strip.placeRelative(0, 0)
-            input.placeRelative(button + chip.width, strip.height + (rowHeight - input.height) / 2)
-            addButton.placeRelative(0, strip.height + (rowHeight - button) / 2)
-            chip.placeRelative(button, strip.height + (rowHeight - chip.height) / 2)
-            micButton.placeRelative(width - 2 * button, actionY)
-            sendButton.placeRelative(width - button, actionY)
+            input.placeRelative(at.fieldX, at.fieldY)
+            addButton.placeRelative(at.addX, at.actionY)
+            chip.placeRelative(at.chipX, at.chipY)
+            micButton.placeRelative(at.micX, at.actionY)
+            sendButton.placeRelative(at.sendX, at.actionY)
         }
     }
 }
+
+/** The narrowest field the one-row bar may leave, before the field's own content width is considered. */
+private val COMPACT_FIELD_FLOOR = 72.dp
