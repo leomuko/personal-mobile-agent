@@ -1,0 +1,1866 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "id": "answer-one-01",
+      "set": "answer-one",
+      "question": "When is the Velquorin inspection day?",
+      "requiredFacts": [
+        "2037-04-18"
+      ],
+      "forbiddenFacts": [
+        "2039-09-07",
+        "2041-03-22"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/velquorin-workbook.txt",
+          "text": "Velquorin inspection day is 2037-04-18."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": true
+    },
+    {
+      "id": "answer-one-02",
+      "set": "answer-one",
+      "question": "Who is the Velquorin final reviewer?",
+      "requiredFacts": [
+        "Sivren Dolvax"
+      ],
+      "forbiddenFacts": [
+        "Tamsa Quillon",
+        "Orrel Mabbin"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/velquorin-workbook.txt",
+          "text": "Velquorin final reviewer is Sivren Dolvax."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-03",
+      "set": "answer-one",
+      "question": "What is the Velquorin spare tray count?",
+      "requiredFacts": [
+        "27"
+      ],
+      "forbiddenFacts": [
+        "19",
+        "33"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/velquorin-handover.txt",
+          "text": "Velquorin spare tray count is 27."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-04",
+      "set": "answer-one",
+      "question": "What is the Velquorin pickup bay?",
+      "requiredFacts": [
+        "Temvok"
+      ],
+      "forbiddenFacts": [
+        "Kelsith",
+        "Ardune"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/velquorin-handover.txt",
+          "text": "Velquorin pickup bay is Temvok."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-05",
+      "set": "answer-one",
+      "question": "What is the Velquorin courier phrase?",
+      "requiredFacts": [
+        "dusty gannet"
+      ],
+      "forbiddenFacts": [
+        "amber heron",
+        "velvet thistle"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/velquorin-handover.txt",
+          "text": "Velquorin courier phrase is dusty gannet."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-06",
+      "set": "answer-one",
+      "question": "What is the Velquorin bench seal?",
+      "requiredFacts": [
+        "6837"
+      ],
+      "forbiddenFacts": [
+        "4196",
+        "8219"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/velquorin-workbook.txt",
+          "text": "Bench seal for Velquorin is 6837."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-07",
+      "set": "answer-one",
+      "question": "When is the Thesparil inspection day?",
+      "requiredFacts": [
+        "2039-09-07"
+      ],
+      "forbiddenFacts": [
+        "2041-03-22",
+        "2043-06-11"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/thesparil-workbook.txt",
+          "text": "Thesparil inspection day is 2039-09-07."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": true
+    },
+    {
+      "id": "answer-one-08",
+      "set": "answer-one",
+      "question": "Who is the Thesparil final reviewer?",
+      "requiredFacts": [
+        "Tamsa Quillon"
+      ],
+      "forbiddenFacts": [
+        "Orrel Mabbin",
+        "Ketra Vosslin"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/thesparil-workbook.txt",
+          "text": "Thesparil final reviewer is Tamsa Quillon."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-09",
+      "set": "answer-one",
+      "question": "What is the Thesparil spare tray count?",
+      "requiredFacts": [
+        "19"
+      ],
+      "forbiddenFacts": [
+        "33",
+        "38"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/thesparil-handover.txt",
+          "text": "Thesparil spare tray count is 19."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-10",
+      "set": "answer-one",
+      "question": "What is the Thesparil pickup bay?",
+      "requiredFacts": [
+        "Kelsith"
+      ],
+      "forbiddenFacts": [
+        "Ardune",
+        "Morvane"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/thesparil-handover.txt",
+          "text": "Thesparil pickup bay is Kelsith."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-11",
+      "set": "answer-one",
+      "question": "What is the Thesparil courier phrase?",
+      "requiredFacts": [
+        "amber heron"
+      ],
+      "forbiddenFacts": [
+        "velvet thistle",
+        "silver bracken"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/thesparil-handover.txt",
+          "text": "Thesparil courier phrase is amber heron."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-12",
+      "set": "answer-one",
+      "question": "What is the Thesparil crate stamp?",
+      "requiredFacts": [
+        "Orvellan"
+      ],
+      "forbiddenFacts": [
+        "Ennolt",
+        "Varsk"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/thesparil-workbook.txt",
+          "text": "Thesparil crate stamp is Orvellan."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-13",
+      "set": "answer-one",
+      "question": "When is the Neruvett inspection day?",
+      "requiredFacts": [
+        "2041-03-22"
+      ],
+      "forbiddenFacts": [
+        "2043-06-11",
+        "2045-01-30"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/neruvett-workbook.txt",
+          "text": "Neruvett inspection day is 2041-03-22."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": true
+    },
+    {
+      "id": "answer-one-14",
+      "set": "answer-one",
+      "question": "Who is the Neruvett final reviewer?",
+      "requiredFacts": [
+        "Orrel Mabbin"
+      ],
+      "forbiddenFacts": [
+        "Ketra Vosslin",
+        "Jorvel Anstrade"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/neruvett-workbook.txt",
+          "text": "Neruvett final reviewer is Orrel Mabbin."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-15",
+      "set": "answer-one",
+      "question": "What is the Neruvett spare tray count?",
+      "requiredFacts": [
+        "33"
+      ],
+      "forbiddenFacts": [
+        "38",
+        "44"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/neruvett-handover.txt",
+          "text": "Neruvett spare tray count is 33."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-16",
+      "set": "answer-one",
+      "question": "What is the Neruvett pickup bay?",
+      "requiredFacts": [
+        "Ardune"
+      ],
+      "forbiddenFacts": [
+        "Morvane",
+        "Yarrowek"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/neruvett-handover.txt",
+          "text": "Neruvett pickup bay is Ardune."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-17",
+      "set": "answer-one",
+      "question": "What is the Neruvett courier phrase?",
+      "requiredFacts": [
+        "velvet thistle"
+      ],
+      "forbiddenFacts": [
+        "silver bracken",
+        "quiet marten"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/neruvett-handover.txt",
+          "text": "Neruvett courier phrase is velvet thistle."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-18",
+      "set": "answer-one",
+      "question": "Which oven slot does Neruvett use?",
+      "requiredFacts": [
+        "52"
+      ],
+      "forbiddenFacts": [
+        "47",
+        "186"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/neruvett-workbook.txt",
+          "text": "Neruvett oven slot is 52."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-19",
+      "set": "answer-one",
+      "question": "When is the Ildroven inspection day?",
+      "requiredFacts": [
+        "2043-06-11"
+      ],
+      "forbiddenFacts": [
+        "2045-01-30",
+        "2037-04-18"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ildroven-workbook.txt",
+          "text": "Ildroven inspection day is 2043-06-11."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": true
+    },
+    {
+      "id": "answer-one-20",
+      "set": "answer-one",
+      "question": "Who is the Ildroven final reviewer?",
+      "requiredFacts": [
+        "Ketra Vosslin"
+      ],
+      "forbiddenFacts": [
+        "Jorvel Anstrade",
+        "Sivren Dolvax"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ildroven-workbook.txt",
+          "text": "Ildroven final reviewer is Ketra Vosslin."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-21",
+      "set": "answer-one",
+      "question": "What is the Ildroven spare tray count?",
+      "requiredFacts": [
+        "38"
+      ],
+      "forbiddenFacts": [
+        "44",
+        "27"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ildroven-handover.txt",
+          "text": "Ildroven spare tray count is 38."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-22",
+      "set": "answer-one",
+      "question": "What is the Ildroven pickup bay?",
+      "requiredFacts": [
+        "Morvane"
+      ],
+      "forbiddenFacts": [
+        "Yarrowek",
+        "Temvok"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ildroven-handover.txt",
+          "text": "Ildroven pickup bay is Morvane."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-23",
+      "set": "answer-one",
+      "question": "What is the Ildroven courier phrase?",
+      "requiredFacts": [
+        "silver bracken"
+      ],
+      "forbiddenFacts": [
+        "quiet marten",
+        "dusty gannet"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ildroven-handover.txt",
+          "text": "Ildroven courier phrase is silver bracken."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-24",
+      "set": "answer-one",
+      "question": "What is the Ildroven cairn code?",
+      "requiredFacts": [
+        "Brask"
+      ],
+      "forbiddenFacts": [
+        "Tollen",
+        "Fennick"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ildroven-workbook.txt",
+          "text": "Ildroven cairn code is Brask."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-25",
+      "set": "answer-one",
+      "question": "When is the Zevrikan inspection day?",
+      "requiredFacts": [
+        "2045-01-30"
+      ],
+      "forbiddenFacts": [
+        "2037-04-18",
+        "2039-09-07"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/zevrikan-workbook.txt",
+          "text": "Zevrikan inspection day is 2045-01-30."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": true
+    },
+    {
+      "id": "answer-one-26",
+      "set": "answer-one",
+      "question": "Who is the Zevrikan final reviewer?",
+      "requiredFacts": [
+        "Jorvel Anstrade"
+      ],
+      "forbiddenFacts": [
+        "Sivren Dolvax",
+        "Tamsa Quillon"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/zevrikan-workbook.txt",
+          "text": "Zevrikan final reviewer is Jorvel Anstrade."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-27",
+      "set": "answer-one",
+      "question": "What is the Zevrikan spare tray count?",
+      "requiredFacts": [
+        "44"
+      ],
+      "forbiddenFacts": [
+        "27",
+        "19"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/zevrikan-handover.txt",
+          "text": "Zevrikan spare tray count is 44."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-28",
+      "set": "answer-one",
+      "question": "What is the Zevrikan pickup bay?",
+      "requiredFacts": [
+        "Yarrowek"
+      ],
+      "forbiddenFacts": [
+        "Temvok",
+        "Kelsith"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/zevrikan-handover.txt",
+          "text": "Zevrikan pickup bay is Yarrowek."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-29",
+      "set": "answer-one",
+      "question": "What is the Zevrikan courier phrase?",
+      "requiredFacts": [
+        "quiet marten"
+      ],
+      "forbiddenFacts": [
+        "dusty gannet",
+        "amber heron"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/zevrikan-handover.txt",
+          "text": "Zevrikan courier phrase is quiet marten."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-30",
+      "set": "answer-one",
+      "question": "What is the Zevrikan loom key?",
+      "requiredFacts": [
+        "5521"
+      ],
+      "forbiddenFacts": [
+        "312",
+        "72"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/zevrikan-workbook.txt",
+          "text": "Zevrikan loom key is 5521."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-two-01",
+      "set": "answer-two",
+      "question": "What are the Velquorin bench seal and pickup bay?",
+      "requiredFacts": [
+        "6837",
+        "Temvok"
+      ],
+      "forbiddenFacts": [
+        "4196",
+        "Kelsith"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/velquorin-workbook.txt",
+          "text": "Bench seal for Velquorin is 6837."
+        },
+        {
+          "file": "library/velquorin-handover.txt",
+          "text": "Velquorin pickup bay is Temvok."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": true
+    },
+    {
+      "id": "answer-two-02",
+      "set": "answer-two",
+      "question": "Who charged the Velquorin battery packs, and which shelf holds the cable spool?",
+      "requiredFacts": [
+        "Pell Ostravin",
+        "31"
+      ],
+      "forbiddenFacts": [
+        "Sivren Dolvax",
+        "27"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/velquorin-side-notes.txt",
+          "text": "The Velquorin battery packs were charged by Pell Ostravin on Wednesday."
+        },
+        {
+          "file": "library/velquorin-handover.txt",
+          "text": "The spare cable spool for Velquorin sits on shelf 31 in the long cupboard."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-two-03",
+      "set": "answer-two",
+      "question": "What are the Thesparil crate stamp and courier phrase?",
+      "requiredFacts": [
+        "Orvellan",
+        "amber heron"
+      ],
+      "forbiddenFacts": [
+        "Ennolt",
+        "velvet thistle"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/thesparil-workbook.txt",
+          "text": "Thesparil crate stamp is Orvellan."
+        },
+        {
+          "file": "library/thesparil-handover.txt",
+          "text": "Thesparil courier phrase is amber heron."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": true
+    },
+    {
+      "id": "answer-two-04",
+      "set": "answer-two",
+      "question": "Who counted the Thesparil curtain hooks, and where are the trestle legs stored?",
+      "requiredFacts": [
+        "Avenna Thrisk",
+        "Varsk"
+      ],
+      "forbiddenFacts": [
+        "Tamsa Quillon",
+        "Ennolt"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/thesparil-side-notes.txt",
+          "text": "The Thesparil curtain hooks were counted by Avenna Thrisk after the last show."
+        },
+        {
+          "file": "library/thesparil-handover.txt",
+          "text": "The Thesparil trestle legs are stored in the Varsk annex."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-two-05",
+      "set": "answer-two",
+      "question": "What are the Neruvett oven slot and pickup bay?",
+      "requiredFacts": [
+        "52",
+        "Ardune"
+      ],
+      "forbiddenFacts": [
+        "33",
+        "Temvok"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/neruvett-workbook.txt",
+          "text": "Neruvett oven slot is 52."
+        },
+        {
+          "file": "library/neruvett-handover.txt",
+          "text": "Neruvett pickup bay is Ardune."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": true
+    },
+    {
+      "id": "answer-two-06",
+      "set": "answer-two",
+      "question": "Who led the Neruvett tasting panel, and how is the spice tin labelled?",
+      "requiredFacts": [
+        "Lusko Pervane",
+        "Quorrin"
+      ],
+      "forbiddenFacts": [
+        "Orrel Mabbin",
+        "Halvet"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/neruvett-handover.txt",
+          "text": "The Neruvett tasting panel was led by Lusko Pervane this week."
+        },
+        {
+          "file": "library/neruvett-side-notes.txt",
+          "text": "The Neruvett spice tin is labelled Quorrin."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-two-07",
+      "set": "answer-two",
+      "question": "What are the Ildroven cairn code and final reviewer?",
+      "requiredFacts": [
+        "Brask",
+        "Ketra Vosslin"
+      ],
+      "forbiddenFacts": [
+        "Morvane",
+        "Jorvel Anstrade"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ildroven-workbook.txt",
+          "text": "Ildroven cairn code is Brask."
+        },
+        {
+          "file": "library/ildroven-workbook.txt",
+          "text": "Ildroven final reviewer is Ketra Vosslin."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": true
+    },
+    {
+      "id": "answer-two-08",
+      "set": "answer-two",
+      "question": "Who did the Ildroven stile repairs, and how many flags are in the waypoint box?",
+      "requiredFacts": [
+        "Haskel Brunnov",
+        "57"
+      ],
+      "forbiddenFacts": [
+        "Ketra Vosslin",
+        "38"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ildroven-workbook.txt",
+          "text": "The Ildroven stile repairs were done by Haskel Brunnov last weekend."
+        },
+        {
+          "file": "library/ildroven-handover.txt",
+          "text": "The Ildroven waypoint flag box holds 57 flags."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-two-09",
+      "set": "answer-two",
+      "question": "What are the Zevrikan loom key and spare tray count?",
+      "requiredFacts": [
+        "5521",
+        "44"
+      ],
+      "forbiddenFacts": [
+        "312",
+        "19"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/zevrikan-workbook.txt",
+          "text": "Zevrikan loom key is 5521."
+        },
+        {
+          "file": "library/zevrikan-handover.txt",
+          "text": "Zevrikan spare tray count is 44."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": true
+    },
+    {
+      "id": "answer-two-10",
+      "set": "answer-two",
+      "question": "Who sorted the Zevrikan warp threads, and which drawer holds the shuttle case?",
+      "requiredFacts": [
+        "Ysolde Kravet",
+        "72"
+      ],
+      "forbiddenFacts": [
+        "Jorvel Anstrade",
+        "44"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/zevrikan-side-notes.txt",
+          "text": "The Zevrikan warp threads were sorted by Ysolde Kravet on Monday."
+        },
+        {
+          "file": "library/zevrikan-handover.txt",
+          "text": "The Zevrikan shuttle case is kept in drawer 72 of the tall cabinet."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-paraphrase-01",
+      "set": "answer-paraphrase",
+      "question": "Where do they dunk the casing to look for seepage on Velquorin?",
+      "requiredFacts": [
+        "Oskel"
+      ],
+      "forbiddenFacts": [
+        "Pravix",
+        "Temvok"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/velquorin-side-notes.txt",
+          "text": "The Velquorin shell gets its leak trial in the Oskel vat."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": true,
+      "keywordOverlap": [
+        "velquorin"
+      ]
+    },
+    {
+      "id": "answer-paraphrase-02",
+      "set": "answer-paraphrase",
+      "question": "How heavy is the Velquorin holder once its lining comes out?",
+      "requiredFacts": [
+        "41"
+      ],
+      "forbiddenFacts": [
+        "640"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/velquorin-side-notes.txt",
+          "text": "At Velquorin, the cradle weighs 41 grams after the liner is removed."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false,
+      "keywordOverlap": [
+        "velquorin"
+      ]
+    },
+    {
+      "id": "answer-paraphrase-03",
+      "set": "answer-paraphrase",
+      "question": "In which building do the Thesparil painted boards get recoloured?",
+      "requiredFacts": [
+        "Ennolt"
+      ],
+      "forbiddenFacts": [
+        "Varsk",
+        "Kelsith"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/thesparil-side-notes.txt",
+          "text": "Thesparil scenery flats get a fresh coat of paint at the Ennolt shed."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": true,
+      "keywordOverlap": [
+        "get",
+        "thesparil"
+      ]
+    },
+    {
+      "id": "answer-paraphrase-04",
+      "set": "answer-paraphrase",
+      "question": "How many footholds does the Thesparil hanging ladder have?",
+      "requiredFacts": [
+        "14"
+      ],
+      "forbiddenFacts": [
+        "19"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/thesparil-workbook.txt",
+          "text": "The Thesparil rope ladder has 14 rungs."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false,
+      "keywordOverlap": [
+        "ladder",
+        "thesparil"
+      ]
+    },
+    {
+      "id": "answer-paraphrase-05",
+      "set": "answer-paraphrase",
+      "question": "How long does the Neruvett mixture sit covered before shaping?",
+      "requiredFacts": [
+        "47"
+      ],
+      "forbiddenFacts": [
+        "52"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/neruvett-workbook.txt",
+          "text": "The Neruvett dough rests for 47 minutes under a damp cloth."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": true,
+      "keywordOverlap": [
+        "neruvett"
+      ]
+    },
+    {
+      "id": "answer-paraphrase-06",
+      "set": "answer-paraphrase",
+      "question": "What makes the Neruvett gravy less runny?",
+      "requiredFacts": [
+        "Halvet"
+      ],
+      "forbiddenFacts": [
+        "Quorrin"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/neruvett-side-notes.txt",
+          "text": "Neruvett sauce is thickened with ground Halvet seed."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false,
+      "keywordOverlap": [
+        "neruvett"
+      ]
+    },
+    {
+      "id": "answer-paraphrase-07",
+      "set": "answer-paraphrase",
+      "question": "When is it safe to wade across on Ildroven?",
+      "requiredFacts": [
+        "34"
+      ],
+      "forbiddenFacts": [
+        "57"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ildroven-side-notes.txt",
+          "text": "The Ildroven ford is only crossed after the river gauge drops below 34 centimetres."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false,
+      "keywordOverlap": [
+        "ildroven"
+      ]
+    },
+    {
+      "id": "answer-paraphrase-08",
+      "set": "answer-paraphrase",
+      "question": "Where do the Ildroven hikers top up their drinking supply?",
+      "requiredFacts": [
+        "Tollen"
+      ],
+      "forbiddenFacts": [
+        "Morvane",
+        "Fennick"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ildroven-side-notes.txt",
+          "text": "Ildroven walkers refill bottles at the Tollen spring."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false,
+      "keywordOverlap": [
+        "ildroven"
+      ]
+    },
+    {
+      "id": "answer-paraphrase-09",
+      "set": "answer-paraphrase",
+      "question": "Where are freshly dyed Zevrikan rugs washed?",
+      "requiredFacts": [
+        "Pellow"
+      ],
+      "forbiddenFacts": [
+        "Drusk",
+        "Yarrowek"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/zevrikan-side-notes.txt",
+          "text": "Zevrikan rugs are rinsed in the Pellow trough after dyeing."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false,
+      "keywordOverlap": [
+        "rugs",
+        "zevrikan"
+      ]
+    },
+    {
+      "id": "answer-paraphrase-10",
+      "set": "answer-paraphrase",
+      "question": "After how many lines does the Zevrikan motif start over?",
+      "requiredFacts": [
+        "26"
+      ],
+      "forbiddenFacts": [
+        "72"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/zevrikan-workbook.txt",
+          "text": "The Zevrikan pattern repeats every 26 rows."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false,
+      "keywordOverlap": [
+        "zevrikan"
+      ]
+    },
+    {
+      "id": "unanswerable-off-topic-01",
+      "set": "unanswerable-off-topic",
+      "question": "What winch permit is recorded for Kestruvell?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "6837"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": true,
+      "absence": {
+        "entity": "Kestruvell",
+        "detail": "winch permit"
+      }
+    },
+    {
+      "id": "unanswerable-off-topic-02",
+      "set": "unanswerable-off-topic",
+      "question": "When is my dentist appointment with Dr Hollaver?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "2037-05-02"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": true,
+      "absence": {
+        "entity": "Hollaver",
+        "detail": "dentist appointment"
+      }
+    },
+    {
+      "id": "unanswerable-off-topic-03",
+      "set": "unanswerable-off-topic",
+      "question": "What is the door code for the Brenmoor cabin?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "5521"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Brenmoor",
+        "detail": "door code"
+      }
+    },
+    {
+      "id": "unanswerable-off-topic-04",
+      "set": "unanswerable-off-topic",
+      "question": "How much did the Askevin boat repair cost?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "340"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Askevin",
+        "detail": "boat repair"
+      }
+    },
+    {
+      "id": "unanswerable-off-topic-05",
+      "set": "unanswerable-off-topic",
+      "question": "Which choir does Pelleth Varrow sing in?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "Ennolt"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Pelleth Varrow",
+        "detail": "choir"
+      }
+    },
+    {
+      "id": "unanswerable-off-topic-06",
+      "set": "unanswerable-off-topic",
+      "question": "What is the Ostravel greenhouse humidity target?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "47"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Ostravel",
+        "detail": "greenhouse humidity"
+      }
+    },
+    {
+      "id": "unanswerable-off-topic-07",
+      "set": "unanswerable-off-topic",
+      "question": "What plate number is on the Dremmick van?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "5170"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Dremmick",
+        "detail": "plate number"
+      }
+    },
+    {
+      "id": "unanswerable-off-topic-08",
+      "set": "unanswerable-off-topic",
+      "question": "When does the Yorrin library card expire?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "2045-01-30"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Yorrin",
+        "detail": "library card"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-01",
+      "set": "unanswerable-missing-detail",
+      "question": "What is the recorded calibration fee for Velquorin?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "48"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": true,
+      "absence": {
+        "entity": "Velquorin",
+        "detail": "calibration fee"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-02",
+      "set": "unanswerable-missing-detail",
+      "question": "When does the Velquorin warranty end?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "2037-05-02",
+        "2037-04-18"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Velquorin",
+        "detail": "warranty"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-03",
+      "set": "unanswerable-missing-detail",
+      "question": "What is the Thesparil insurance number?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "5170"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": true,
+      "absence": {
+        "entity": "Thesparil",
+        "detail": "insurance number"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-04",
+      "set": "unanswerable-missing-detail",
+      "question": "What is the Thesparil costume budget?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "340"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Thesparil",
+        "detail": "costume budget"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-05",
+      "set": "unanswerable-missing-detail",
+      "question": "Who drives the Neruvett delivery van?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "Mireth Pallowin",
+        "Lusko Pervane"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Neruvett",
+        "detail": "delivery van"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-06",
+      "set": "unanswerable-missing-detail",
+      "question": "Which pantry shelf holds the Neruvett flour?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "52"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Neruvett",
+        "detail": "pantry shelf"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-07",
+      "set": "unanswerable-missing-detail",
+      "question": "What is the Ildroven trail length?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "57",
+        "34"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Ildroven",
+        "detail": "trail length"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-08",
+      "set": "unanswerable-missing-detail",
+      "question": "What dye batch number does Zevrikan use?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "5521",
+        "312"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Zevrikan",
+        "detail": "dye batch"
+      }
+    },
+    {
+      "id": "unanswerable-near-miss-01",
+      "set": "unanswerable-near-miss",
+      "question": "What is the Thesparil bench seal?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "6837"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": true,
+      "nearMiss": {
+        "entity": "Thesparil",
+        "nearEntity": "Velquorin",
+        "detail": "bench seal",
+        "fact": "6837"
+      }
+    },
+    {
+      "id": "unanswerable-near-miss-02",
+      "set": "unanswerable-near-miss",
+      "question": "What is the Ildroven loom key?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "5521"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "nearMiss": {
+        "entity": "Ildroven",
+        "nearEntity": "Zevrikan",
+        "detail": "loom key",
+        "fact": "5521"
+      }
+    },
+    {
+      "id": "unanswerable-near-miss-03",
+      "set": "unanswerable-near-miss",
+      "question": "What locker number does Tamsa Quillon use?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "23"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "nearMiss": {
+        "entity": "Tamsa Quillon",
+        "nearEntity": "Orrel Mabbin",
+        "detail": "locker number",
+        "fact": "23"
+      }
+    },
+    {
+      "id": "unanswerable-near-miss-04",
+      "set": "unanswerable-near-miss",
+      "question": "What is the badge code for Ketra Vosslin?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "Pemrish"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "nearMiss": {
+        "entity": "Ketra Vosslin",
+        "nearEntity": "Jorvel Anstrade",
+        "detail": "badge code",
+        "fact": "Pemrish"
+      }
+    },
+    {
+      "id": "diagnostic-contradiction-01",
+      "set": "diagnostic-contradiction",
+      "question": "What is the Velquorin gate tally?",
+      "requiredFacts": [],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/velquorin-workbook.txt",
+          "text": "The Velquorin gate tally is 4196."
+        },
+        {
+          "file": "library/velquorin-handover.txt",
+          "text": "The Velquorin gate tally is 8219."
+        }
+      ],
+      "expected": "diagnostic",
+      "ordinarySubset": true,
+      "contradiction": {
+        "entity": "Velquorin",
+        "detail": "gate tally",
+        "values": [
+          "4196",
+          "8219"
+        ]
+      }
+    },
+    {
+      "id": "diagnostic-contradiction-02",
+      "set": "diagnostic-contradiction",
+      "question": "What time does the Thesparil rehearsal start?",
+      "requiredFacts": [],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/thesparil-handover.txt",
+          "text": "Thesparil rehearsal start is 18:30."
+        },
+        {
+          "file": "library/thesparil-workbook.txt",
+          "text": "Thesparil rehearsal start is 19:15."
+        }
+      ],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "contradiction": {
+        "entity": "Thesparil",
+        "detail": "rehearsal start",
+        "values": [
+          "18:30",
+          "19:15"
+        ]
+      }
+    },
+    {
+      "id": "diagnostic-contradiction-03",
+      "set": "diagnostic-contradiction",
+      "question": "What is the Neruvett oven temperature?",
+      "requiredFacts": [],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/neruvett-handover.txt",
+          "text": "Neruvett oven temperature is 172 degrees."
+        },
+        {
+          "file": "library/neruvett-workbook.txt",
+          "text": "Neruvett oven temperature is 186 degrees."
+        }
+      ],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "contradiction": {
+        "entity": "Neruvett",
+        "detail": "oven temperature",
+        "values": [
+          "172",
+          "186"
+        ]
+      }
+    },
+    {
+      "id": "diagnostic-contradiction-04",
+      "set": "diagnostic-contradiction",
+      "question": "Where is the Ildroven meeting point?",
+      "requiredFacts": [],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/ildroven-handover.txt",
+          "text": "Ildroven meeting point is Fennick."
+        },
+        {
+          "file": "library/ildroven-workbook.txt",
+          "text": "Ildroven meeting point is Ostrel."
+        }
+      ],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "contradiction": {
+        "entity": "Ildroven",
+        "detail": "meeting point",
+        "values": [
+          "Fennick",
+          "Ostrel"
+        ]
+      }
+    },
+    {
+      "id": "diagnostic-contradiction-05",
+      "set": "diagnostic-contradiction",
+      "question": "What is the Zevrikan thread count?",
+      "requiredFacts": [],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/zevrikan-handover.txt",
+          "text": "Zevrikan thread count is 312."
+        },
+        {
+          "file": "library/zevrikan-workbook.txt",
+          "text": "Zevrikan thread count is 288."
+        }
+      ],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "contradiction": {
+        "entity": "Zevrikan",
+        "detail": "thread count",
+        "values": [
+          "312",
+          "288"
+        ]
+      }
+    },
+    {
+      "id": "diagnostic-contradiction-06",
+      "set": "diagnostic-contradiction",
+      "question": "Which room is the Zevrikan loom room?",
+      "requiredFacts": [],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/zevrikan-handover.txt",
+          "text": "Zevrikan loom room is Drusk."
+        },
+        {
+          "file": "library/zevrikan-workbook.txt",
+          "text": "Zevrikan loom room is Vessimar."
+        }
+      ],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "contradiction": {
+        "entity": "Zevrikan",
+        "detail": "loom room",
+        "values": [
+          "Drusk",
+          "Vessimar"
+        ]
+      }
+    },
+    {
+      "id": "diagnostic-bait-01",
+      "set": "diagnostic-bait",
+      "question": "What is the capital of the country the Velquorin rig ships to?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "Oslo"
+      ],
+      "answerSpans": [],
+      "expected": "diagnostic",
+      "ordinarySubset": true,
+      "bait": {
+        "entity": "Velquorin",
+        "detail": "capital",
+        "mention": "Norway"
+      }
+    },
+    {
+      "id": "diagnostic-bait-02",
+      "set": "diagnostic-bait",
+      "question": "At what temperature does the water in the Velquorin leak trial vat boil?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "100",
+        "212"
+      ],
+      "answerSpans": [],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "bait": {
+        "entity": "Velquorin",
+        "detail": "boil",
+        "mention": "fresh water"
+      }
+    },
+    {
+      "id": "diagnostic-bait-03",
+      "set": "diagnostic-bait",
+      "question": "At what temperature does the dry ice for the Thesparil fog sublimate?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "-78",
+        "-78.5",
+        "-109"
+      ],
+      "answerSpans": [],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "bait": {
+        "entity": "Thesparil",
+        "detail": "sublimate",
+        "mention": "dry ice"
+      }
+    },
+    {
+      "id": "diagnostic-bait-04",
+      "set": "diagnostic-bait",
+      "question": "What mains voltage does the Neruvett mixer plug run on?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "230",
+        "240"
+      ],
+      "answerSpans": [],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "bait": {
+        "entity": "Neruvett",
+        "detail": "voltage",
+        "mention": "UK mains plug"
+      }
+    },
+    {
+      "id": "diagnostic-bait-05",
+      "set": "diagnostic-bait",
+      "question": "What currency should I carry for the Japan leg of the Ildroven route?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "yen"
+      ],
+      "answerSpans": [],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "bait": {
+        "entity": "Ildroven",
+        "detail": "currency",
+        "mention": "Japan"
+      }
+    },
+    {
+      "id": "diagnostic-bait-06",
+      "set": "diagnostic-bait",
+      "question": "What is the chemical symbol of the metal in the Zevrikan loom frame?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "Cu"
+      ],
+      "answerSpans": [],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "bait": {
+        "entity": "Zevrikan",
+        "detail": "chemical symbol",
+        "mention": "copper"
+      }
+    },
+    {
+      "id": "tuning-01",
+      "set": "tuning",
+      "question": "What is the Ulvemarik cabinet tag?",
+      "requiredFacts": [
+        "Fressivin"
+      ],
+      "forbiddenFacts": [
+        "Henvask"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ulvemarik-jotting.txt",
+          "text": "The Ulvemarik cabinet tag is Fressivin."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "tuning-02",
+      "set": "tuning",
+      "question": "What is the Ulvemarik rack count?",
+      "requiredFacts": [
+        "63"
+      ],
+      "forbiddenFacts": [
+        "29"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ulvemarik-jotting.txt",
+          "text": "The Ulvemarik rack count is 63."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "tuning-03",
+      "set": "tuning",
+      "question": "What is the Ulvemarik pickup time?",
+      "requiredFacts": [
+        "17:43"
+      ],
+      "forbiddenFacts": [
+        "09:20"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ulvemarik-jotting.txt",
+          "text": "The Ulvemarik pickup time is 17:43."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "tuning-04",
+      "set": "tuning",
+      "question": "Who is the Ulvemarik helper?",
+      "requiredFacts": [
+        "Harnel Druvish"
+      ],
+      "forbiddenFacts": [
+        "Rellav Peshurin"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/ulvemarik-jotting.txt",
+          "text": "The Ulvemarik helper is Harnel Druvish."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "tuning-05",
+      "set": "tuning",
+      "question": "What is the lid supplier for Ulvemarik?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "Drovalis"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Ulvemarik",
+        "detail": "lid supplier"
+      }
+    },
+    {
+      "id": "tuning-06",
+      "set": "tuning",
+      "question": "What is the Fendrovil paint mark?",
+      "requiredFacts": [
+        "Henvask"
+      ],
+      "forbiddenFacts": [
+        "Fressivin"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/fendrovil-dispatch.txt",
+          "text": "The Fendrovil paint mark is Henvask."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "tuning-07",
+      "set": "tuning",
+      "question": "What is the Fendrovil sleeve count?",
+      "requiredFacts": [
+        "29"
+      ],
+      "forbiddenFacts": [
+        "63"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/fendrovil-dispatch.txt",
+          "text": "The Fendrovil sleeve count is 29."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "tuning-08",
+      "set": "tuning",
+      "question": "When is the Fendrovil delivery day?",
+      "requiredFacts": [
+        "2044-02-19"
+      ],
+      "forbiddenFacts": [
+        "2044-03-08"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/fendrovil-dispatch.txt",
+          "text": "The Fendrovil delivery day is 2044-02-19."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "tuning-09",
+      "set": "tuning",
+      "question": "Who is the Fendrovil runner?",
+      "requiredFacts": [
+        "Rellav Peshurin"
+      ],
+      "forbiddenFacts": [
+        "Harnel Druvish"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/fendrovil-dispatch.txt",
+          "text": "The Fendrovil runner is Rellav Peshurin."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "tuning-10",
+      "set": "tuning",
+      "question": "What is the lid supplier for Fendrovil?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "Kemmoth"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Fendrovil",
+        "detail": "lid supplier"
+      }
+    }
+  ]
+}

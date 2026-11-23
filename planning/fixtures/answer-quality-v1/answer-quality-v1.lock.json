@@ -1,0 +1,148 @@
+{
+  "schema": 1,
+  "fixture": "answer-quality-v1",
+  "files": {
+    "items.json": "7dbb3cb82249190fb4a052af8eca1d7e06d399b34b4e464b0a6d1d0303528fa8",
+    "library/cross-project-register.txt": "b168045dd3aab2f00084fa9205097acc6982d3974c1a3582bb9a3dee105dafce",
+    "library/fendrovil-dispatch.txt": "c498d92ca17e42e7a6ef71c12b42ad4eb5d2995edfe1fbbcba2f16b8626e8d77",
+    "library/ildroven-handover.txt": "670dfa85a87d97bf8100480b8097a6751bb06dbb2154a09169b3bd86f32e36d0",
+    "library/ildroven-side-notes.txt": "82cf86ed6c25ab3f6f132b24f6580a6af3cdcb12818da6f71b7ad3bcb7692f1f",
+    "library/ildroven-workbook.txt": "41712fc6c18719fae6f9df942d6f964561eba26a14ff76693be0742254ebfe8c",
+    "library/neruvett-handover.txt": "3411f686acf885eebccad5f476f7a54e5ffedc981503b2c126c3b89d9006270f",
+    "library/neruvett-side-notes.txt": "5f6c003d08f362f0c907700c86a13dc5973cc62b17790842fee5a99622792b6b",
+    "library/neruvett-workbook.txt": "94a0ac36c08a134202c013d4af41652c6ea2b1ae90eaa620b22ae5200fbe6a70",
+    "library/thesparil-handover.txt": "faaf0bcdbb8ea5128b4a2c98c5e3c162550b20d24725d1351b15d75c26a4cf3f",
+    "library/thesparil-side-notes.txt": "fcd39139e1ba7bcc785132b7591d24319c1f6f852ab30d298893ce9cfcfa4021",
+    "library/thesparil-workbook.txt": "937996e87454996c77f0548539b85d598447adbad99dfa7ed5fcb6446e8783d5",
+    "library/ulvemarik-jotting.txt": "03a91ce8866fd882b9aa93d5fc2b88ea617e8c82340ab47ce8ff401a9ce13446",
+    "library/velquorin-handover.txt": "ca321d8e65f27b2742a34a21207afde85179f6c6f477466f88b96bb5135ba449",
+    "library/velquorin-side-notes.txt": "42ebcb53ff6ad8c00eda5b9d97c0c6360f765f1436fa4db94798a040a5f3f3de",
+    "library/velquorin-workbook.txt": "f0d4fafbeeb550576ec5a186b8e9daadc1a63fa2e370184492d0d3c0e8b14f4d",
+    "library/zevrikan-handover.txt": "f0d64fecf9b2d4df9a3efb03fed7dd935d09f9d83738e4bdca8d6dd9bb224099",
+    "library/zevrikan-side-notes.txt": "331220d1c896a56a385ef57fef74b8571c97b0201b0193d01b66781df0e974d4",
+    "library/zevrikan-workbook.txt": "c3e1a1bcab8422fb47354120c9b8a9a8c6197859bdcb3b612acb4ac2074ef59d"
+  },
+  "librarySha256": "cee5a65f80442015df126e9a02d6e8989387cf8ec680ea139e8b4bea57175374",
+  "passageBoundaries": {
+    "library/cross-project-register.txt": [
+      [0, 350],
+      [350, 724],
+      [724, 1062],
+      [1062, 1243]
+    ],
+    "library/fendrovil-dispatch.txt": [
+      [0, 346],
+      [346, 677],
+      [677, 1019],
+      [1019, 1316],
+      [1316, 1466]
+    ],
+    "library/ildroven-handover.txt": [
+      [0, 366],
+      [366, 723],
+      [723, 1075]
+    ],
+    "library/ildroven-side-notes.txt": [
+      [0, 369],
+      [369, 730]
+    ],
+    "library/ildroven-workbook.txt": [
+      [0, 307],
+      [307, 575],
+      [575, 958],
+      [958, 1011]
+    ],
+    "library/neruvett-handover.txt": [
+      [0, 369],
+      [369, 702],
+      [702, 1040],
+      [1040, 1199]
+    ],
+    "library/neruvett-side-notes.txt": [
+      [0, 383],
+      [383, 743]
+    ],
+    "library/neruvett-workbook.txt": [
+      [0, 363],
+      [363, 737],
+      [737, 1010]
+    ],
+    "library/thesparil-handover.txt": [
+      [0, 378],
+      [378, 702],
+      [702, 1084],
+      [1084, 1433]
+    ],
+    "library/thesparil-side-notes.txt": [
+      [0, 368],
+      [368, 683],
+      [683, 899]
+    ],
+    "library/thesparil-workbook.txt": [
+      [0, 350],
+      [350, 711],
+      [711, 1083],
+      [1083, 1238]
+    ],
+    "library/ulvemarik-jotting.txt": [
+      [0, 349],
+      [349, 700],
+      [700, 1080],
+      [1080, 1387],
+      [1387, 1538]
+    ],
+    "library/velquorin-handover.txt": [
+      [0, 301],
+      [301, 652],
+      [652, 1021],
+      [1021, 1386],
+      [1386, 1627]
+    ],
+    "library/velquorin-side-notes.txt": [
+      [0, 350],
+      [350, 699],
+      [699, 1050],
+      [1050, 1175]
+    ],
+    "library/velquorin-workbook.txt": [
+      [0, 382],
+      [382, 743],
+      [743, 1114],
+      [1114, 1403],
+      [1403, 1510]
+    ],
+    "library/zevrikan-handover.txt": [
+      [0, 375],
+      [375, 740],
+      [740, 1123],
+      [1123, 1159]
+    ],
+    "library/zevrikan-side-notes.txt": [
+      [0, 330],
+      [330, 630]
+    ],
+    "library/zevrikan-workbook.txt": [
+      [0, 323],
+      [323, 623],
+      [623, 974],
+      [974, 1032]
+    ]
+  },
+  "counts": {
+    "answer-one": 30,
+    "answer-two": 10,
+    "answer-paraphrase": 10,
+    "unanswerable-off-topic": 8,
+    "unanswerable-missing-detail": 8,
+    "unanswerable-near-miss": 4,
+    "diagnostic-contradiction": 6,
+    "diagnostic-bait": 6,
+    "tuning": 10
+  },
+  "ordinarySubsetCount": 20,
+  "freezePolicy": {
+    "approval": "Independent QA and the user's go-ahead before the first S24 run",
+    "noResultsDrivenChanges": true,
+    "tuningExcludedFromHeldout": true
+  }
+}

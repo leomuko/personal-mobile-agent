@@ -1,0 +1,19 @@
+# Velquorin instrument rig workbook
+
+Workbook for the Velquorin rig. Entries are in the order I made them, so later lines may correct earlier ones. Measurements come from the bench calipers unless marked otherwise.
+
+Bench seal for Velquorin is 6837. I logged the mark before packing the demo rigs. The seal sticker goes on the underside, next to the serial plate, never on the lid.
+
+Velquorin inspection day is 2037-04-18. The checklist will stay clipped to the carrying case. The demo itself is on 2037-05-02, so there is a fortnight to fix whatever the inspection finds.
+
+Velquorin final reviewer is Sivren Dolvax. Put the review card under the foam insert. Sivren prefers the card filled in with pencil, so small corrections stay readable.
+
+The Velquorin gate tally is 4196.
+
+Bench log, week two: tightened the hinge screws, replaced one worn grommet, re-taped the handle. The left latch still clicks twice before it closes. I think that is normal for this case model, but it is worth a look.
+
+Meeting notes, Friday: agreed to keep the demo short, about twenty minutes, with questions at the end and not during. Sivren will bring the spare rig from Pravix if the main one fails the morning check.
+
+The empty Velquorin carry case weighs 640 grams. Weigh it again after the new foam goes in, because the courier charges by weight band.
+
+Reminder to self: the bench light flickers when the heater is on. Move the heater cable to the other socket before the demo, and tell Sivren in case it happens on the day.

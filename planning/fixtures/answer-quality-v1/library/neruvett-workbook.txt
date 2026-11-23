@@ -1,0 +1,17 @@
+# Neruvett test kitchen workbook
+
+Workbook for the Neruvett recipe trials. Weights are in grams and times in minutes. When a trial fails I still record it, because the failures explain the later changes.
+
+Neruvett oven slot is 52. The slot numbers are scratched on the oven door frame, and the low numbers are near the fan.
+
+Neruvett inspection day is 2041-03-22. The hygiene inspector checks the fridge logs and the allergen labels, so keep both up to date.
+
+Neruvett final reviewer is Orrel Mabbin. Orrel tastes the final batch and signs the recipe card before it goes into the folder.
+
+Neruvett oven temperature is 186 degrees.
+
+Trial log, week three: the second loaf collapsed, probably too much water. The third was better but pale. Next time, longer in the oven and less salt.
+
+The Neruvett dough rests for 47 minutes under a damp cloth. Any shorter and the crumb comes out tight.
+
+Meeting notes, Wednesday: agreed to test two sauces next week instead of three. Orrel wants one of them to be dairy free.

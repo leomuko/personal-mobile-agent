@@ -1,0 +1,17 @@
+# Velquorin instrument rig side notes
+
+Loose notes from the Velquorin bench that did not fit anywhere else. Some of these are reminders, and some are things I learned the slow way.
+
+The Velquorin shell gets its leak trial in the Oskel vat. A thin film of oil on the seals is enough. Wipe the vat rim afterwards, or the next person gets oily sleeves.
+
+The Oskel vat is filled with fresh water each morning before the Velquorin trials start. Drain it on Fridays.
+
+At Velquorin, the cradle weighs 41 grams after the liner is removed. Measure before attaching the feet. The feet add a little, but nobody has written down how much.
+
+The Velquorin battery packs were charged by Pell Ostravin on Wednesday. They last the whole demo if the screen brightness stays low.
+
+Overheard at lunch: the canteen is changing suppliers again, and the soup will be worse for a while. Also, the car park barrier is being repainted next week.
+
+Side task: sort the drawer of loose screws by size. Half of them are from a different project and can go back to the store room.
+
+Thing I learned: never stack the Velquorin rig cases more than two high. The bottom lid bows and the latch stops lining up.
