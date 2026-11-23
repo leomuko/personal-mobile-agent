@@ -3,6 +3,7 @@
 #   scripts/verify-chat-context.sh measure 2048|4096|8192 [--repeat 1-5]   context measurement (supervised)
 #   scripts/verify-chat-context.sh sqlcipher                               SQLCipher passage + grounding gate
 #   scripts/verify-chat-context.sh ui                                      S5 Compose UI tests + S24 captures
+#   scripts/verify-chat-context.sh quality --set tuning|heldout [--passes 1|3]   S6 capture
 # Targets only dev.edgecompanion.app.secureqa and its test package: installs with `install -r`,
 # runs `am instrument`, never uninstalls, clears or touches debug/release data.
 # Both APKs are copied into this run's private results directory right after the build; only those
@@ -11,10 +12,13 @@
 # Bash 3.2 errexit ignores a failing bare [[ ]], so every gate is written `check || fail reason`.
 set -Eeuo pipefail
 
-usage() { printf 'Usage: %s measure 2048|4096|8192 [--repeat 1-5] | %s sqlcipher | %s ui\n' "$0" "$0" "$0" >&2; }
+usage() { printf 'Usage: %s measure 2048|4096|8192 [--repeat 1-5] | %s sqlcipher | %s ui | %s quality --set tuning|heldout [--passes 1|3]\n' "$0" "$0" "$0" "$0" >&2; }
 MODE="${1:-}"
 PROFILE=""
 REPEAT=""
+QUALITY_SET=""
+QUALITY_PASSES=""
+QUALITY_LOCK=""
 case "$MODE" in
   measure)
     [[ $# -eq 2 || $# -eq 4 ]] || { usage; exit 2; }
@@ -28,6 +32,22 @@ case "$MODE" in
     case "$REPEAT" in 1|2|3|4|5) ;; *) usage; exit 2 ;; esac
     ;;
   sqlcipher|ui) [[ $# -eq 1 ]] || { usage; exit 2; } ;;
+  quality)
+    [[ ( $# -eq 3 || $# -eq 5 ) && "$2" == --set ]] || { usage; exit 2; }
+    QUALITY_SET="$3"
+    case "$QUALITY_SET" in
+      tuning) QUALITY_ITEMS=10; QUALITY_SCOPE_BLOCKS=1 ;;
+      heldout) QUALITY_ITEMS=102; QUALITY_SCOPE_BLOCKS=2 ;;
+      *) usage; exit 2 ;;
+    esac
+    QUALITY_PASSES=1
+    if [[ $# -eq 5 ]]; then
+      [[ "$4" == --passes ]] || { usage; exit 2; }
+      QUALITY_PASSES="$5"
+      case "$QUALITY_PASSES" in 1|3) ;; *) usage; exit 2 ;; esac
+    fi
+    PROFILE=4096
+    ;;
   *) usage; exit 2 ;;
 esac
 
@@ -47,12 +67,21 @@ RESULTS_ROOT="${RESULTS_ROOT:-$ROOT/benchmarks/results}"
 # app release, telemetry and reporting. N=1 gives the earlier 900 s default. An explicit
 # CHAT_CONTEXT_DEADLINE_SECONDS replaces the formula and is recorded as an override.
 DEADLINE_FORMULA=""
+DEADLINE_OVERRIDE=""
 if [[ "$MODE" == measure ]]; then
   DEADLINE_FORMULA="270 + 630 * repeat"
+  DEADLINE_OVERRIDE="${CHAT_CONTEXT_DEADLINE_SECONDS:-}"
   DEADLINE="${CHAT_CONTEXT_DEADLINE_SECONDS:-$((270 + 630 * REPEAT))}"
 elif [[ "$MODE" == ui ]]; then
   # Fixed, no override: 27 Compose/activity tests and 40 PNG captures, no model; well under 15 minutes.
   DEADLINE=900
+elif [[ "$MODE" == quality ]]; then
+  # Per item: 90 seconds to finish, 20 to settle a timeout, 10 for evidence.
+  # Each scope block gets 240 seconds for engine transitions. Admission and cleanup get 300 seconds.
+  # An explicit ANSWER_QUALITY_DEADLINE_SECONDS replaces the formula and is recorded as an override.
+  DEADLINE_FORMULA="300 + passes * (240 * scopeBlocksPerPass + 120 * itemsPerPass)"
+  DEADLINE_OVERRIDE="${ANSWER_QUALITY_DEADLINE_SECONDS:-}"
+  DEADLINE="${ANSWER_QUALITY_DEADLINE_SECONDS:-$((300 + QUALITY_PASSES * (240 * QUALITY_SCOPE_BLOCKS + 120 * QUALITY_ITEMS)))}"
 else DEADLINE="${PASSAGE_DEADLINE_SECONDS:-600}"; fi
 STOP_GRACE="${QA_STOP_GRACE_SECONDS:-30}"
 THERMAL_READY="${THERMAL_READY_SECONDS:-15}"
@@ -76,6 +105,7 @@ LIST_END=END-OF-CAPTURE-LIST
 STAMP="$(date -u +%Y%m%dT%H%M%SZ)" || exit 2
 if [[ "$MODE" == measure ]]; then RUN_ID="context-$PROFILE-$STAMP-$$"
 elif [[ "$MODE" == ui ]]; then RUN_ID="passages-ui-$STAMP-$$"
+elif [[ "$MODE" == quality ]]; then RUN_ID="answer-quality-$QUALITY_SET-$STAMP-$$"
 else RUN_ID="passage-$STAMP-$$"; fi
 # The capture test writes only under this run's own directory in the secureQa app's no_backup.
 CAPTURE_REMOTE="no_backup/passages-captures/$RUN_ID"
@@ -86,7 +116,7 @@ RESULTS="$(mktemp -d "$RESULTS_ROOT/$RUN_ID-XXXXXX")" || exit 2
 STAGED="$RESULTS/apks"
 STAGED_APP="$STAGED/androidApp-secureQa.apk"
 STAGED_TEST="$STAGED/androidApp-secureQa-androidTest.apk"
-if [[ "$MODE" == measure ]]; then
+if [[ "$MODE" == measure || "$MODE" == quality ]]; then
   export QA_SUPERVISION_RUN_ID="$RUN_ID"
   # The thermal monitor is started directly by this process, so its parent is this script's PID.
   export QA_SUPERVISOR_PID=$$
@@ -167,11 +197,15 @@ pull() {
 collect_evidence() {
   [[ "$EVIDENCE_COLLECTED" == false ]] || return 0
   EVIDENCE_COLLECTED=true
-  if [[ "$MODE" == measure ]]; then
-    pull "no_backup/chat-context-$RUN_ID.json" chat-context.json chatContext || true
-    pull "no_backup/chat-context-$RUN_ID-telemetry.json" partial-telemetry.json partialTelemetry || true
-    # Optional: the device writes this marker only after a supervision loss; "absent" is normal.
-    pull "no_backup/chat-context-$RUN_ID-supervision-stop.json" supervision-stop.json supervisionStop || true
+  if [[ "$MODE" == measure || "$MODE" == quality ]]; then
+    if [[ "$MODE" == measure ]]; then
+      pull "no_backup/chat-context-$RUN_ID.json" chat-context.json chatContext || true
+      pull "no_backup/chat-context-$RUN_ID-telemetry.json" partial-telemetry.json partialTelemetry || true
+      pull "no_backup/chat-context-$RUN_ID-supervision-stop.json" supervision-stop.json supervisionStop || true
+    else
+      pull "no_backup/answer-quality-$RUN_ID.json" answer-quality.json answerQuality || true
+      pull "no_backup/answer-quality-$RUN_ID-supervision-stop.json" supervision-stop.json supervisionStop || true
+    fi
     pull "no_backup/qa-supervision/$RUN_ID/status.json" supervision.json supervision || true
     if device shell dumpsys thermalservice > "$RESULTS/thermal-final.txt" 2>> "$RESULTS/pull-errors.txt"; then
       note_evidence thermalFinal present
@@ -295,7 +329,68 @@ check_evidence() {
     if (e.supervisionStop === "present") fail("supervision-loss");
     if (e.supervisionStop !== "absent") fail("evidence-unavailable");
     if (e.supervision !== "present") fail("supervision");
-    if (e.chatContext !== "present") fail("report");' "$RESULTS/evidence.json"
+    if (e[process.argv[2]] !== "present") fail("report");' "$RESULTS/evidence.json" "${1:-chatContext}"
+}
+
+quality_source_binding() {
+  node --input-type=module - "$ROOT" <<'JS'
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { join } from 'node:path';
+const root = process.argv[2];
+const read = name => readFileSync(join(root, name), 'utf8');
+const grounding = read('shared/src/commonMain/kotlin/dev/edgecompanion/core/conversation/session/GroundedPrompt.kt');
+const runtime = read('shared/src/androidMain/kotlin/dev/edgecompanion/core/inference/litert/LiteRtLlmEngine.kt');
+const sampler = 'SamplerConfig(topK = 1, topP = 1.0, temperature = 0.0, seed = 0)';
+const ordinarySampler = /maxOutputToken = request\.maxTokens,\s*thinkingConfig = ThinkingConfig\(enableThinking = false\),\s*samplerConfig = ([^\n]+)\)\)/;
+if (!grounding.includes('const val VERSION = "grounded-prompt-v1"') ||
+    !grounding.includes('const val MAX_PASSAGES = 4') || runtime.match(ordinarySampler)?.[1] !== sampler) process.exit(1);
+const hash = text => createHash('sha256').update(text).digest('hex');
+// Untracked S6 files are bound by content, not only by the commit and tracked diff (S6Q-F9).
+const bound = ['scripts/answer-quality.mjs',
+  'androidApp/src/androidTest/kotlin/dev/edgecompanion/app/AnswerQualityTest.kt',
+  'androidApp/src/androidTest/kotlin/dev/edgecompanion/app/support/AnswerQualityFixture.kt',
+  'planning/fixtures/answer-quality-v1/answer-quality-v1.lock.json'];
+console.log(JSON.stringify({ promptVersion: 'grounded-prompt-v1', groundingSha256: hash(grounding),
+  runtimeSourceSha256: hash(runtime), sampler,
+  files: Object.fromEntries(bound.map(name => [name, hash(readFileSync(join(root, name)))])) }));
+JS
+}
+
+# True only when the pulled capture records a broken harness invariant (S6Q-F5).
+quality_invariant_breach() {
+  node --input-type=module - "$RESULTS/answer-quality.json" <<'JS'
+import { readFileSync } from 'node:fs';
+let report;
+try { report = JSON.parse(readFileSync(process.argv[2], 'utf8')); } catch { process.exit(1); }
+process.exit(report?.failureType === 'HarnessInvariant' ? 0 : 1);
+JS
+}
+
+check_quality_report() {
+  node --input-type=module - "$RESULTS" "$RUN_ID" "$QUALITY_SET" "$QUALITY_PASSES" "$QUALITY_LOCK" "$MANIFEST" <<'JS'
+import { readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { checkRun, determinism, loadFixture, schedule, sha256 } from './scripts/answer-quality.mjs';
+const [dir, runId, set, passes, lockHash, manifest] = process.argv.slice(2);
+const fail = reason => { console.log(reason); process.exit(1); };
+try {
+  const fixture = loadFixture(join(dir, 'fixture'));
+  const bytes = readFileSync(join(dir, 'answer-quality.json'));
+  const report = JSON.parse(bytes.toString('utf8'));
+  if (fixture.lockSha256 !== lockHash || report.fixtureLockSha256 !== lockHash) fail('fixture-hash');
+  if (report.runId !== runId || report.set !== set) fail('quality-run');
+  if (report.passes !== Number(passes)) fail('quality-passes');
+  if (report.cases?.length !== schedule(fixture.items, set, Number(passes)).length) fail('quality-items');
+  const sha = JSON.parse(readFileSync(manifest, 'utf8')).artifact.sha256;
+  if (report.modelSha256 !== sha || report.automaticFallback !== false) fail('quality-model');
+  checkRun(report, fixture);
+  writeFileSync(join(dir, 'capture-summary.json'), JSON.stringify({
+    runId, set, passes: Number(passes), items: report.cases.length, determinism: determinism(report),
+    reportSha256: sha256(bytes),
+  }, null, 2) + '\n');
+} catch { fail('quality-report'); }
+JS
 }
 
 # Prints a failure reason and exits non-zero unless the device reported exactly what was requested.
@@ -368,13 +463,13 @@ write_summary() {
 }
 
 publish_deadline_stop() {
-  node --input-type=module - "$ROOT/scripts/qa-supervision.mjs" "$RESULTS/deadline-stop.json" "$DEADLINE" <<'JS'
+  node --input-type=module - "$ROOT/scripts/qa-supervision.mjs" "$RESULTS/deadline-stop.json" "$DEADLINE" "${1:-deadline}" <<'JS'
 import { writeFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 const { stopSupervisedQa } = await import(pathToFileURL(process.argv[2]).href);
 const runId = process.env.QA_SUPERVISION_RUN_ID;
 const result = stopSupervisedQa({ adb: process.env.ADB, serial: process.env.ANDROID_SERIAL, runId });
-writeFileSync(process.argv[3], JSON.stringify({ reason: 'deadline', runId, deadlineSeconds: Number(process.argv[4]),
+writeFileSync(process.argv[3], JSON.stringify({ reason: process.argv[5], runId, deadlineSeconds: Number(process.argv[4]),
   ...result, recordedAt: new Date().toISOString() }, null, 2) + '\n');
 JS
 }
@@ -383,6 +478,16 @@ finish() {
   local code=$?
   trap - EXIT
   set +e
+  if [[ "$MODE" == quality && -n "$INSTR_PID" ]]; then
+    stop_owned "$MONITOR_PID"
+    MONITOR_PID=""
+    publish_deadline_stop interrupted || true
+    # Let the supervised test attempt cleanup before pulling retained items.
+    for ((i=0; i<STOP_GRACE; i++)); do
+      kill -0 "$INSTR_PID" 2>/dev/null || break
+      sleep 1
+    done
+  fi
   stop_owned "$INSTR_PID"
   stop_owned "$MONITOR_PID"
   case "$STAGE" in instrumentation|deadline|validation|complete) collect_evidence ;; esac
@@ -393,7 +498,8 @@ finish() {
   fi
   RESULT_MODE="$MODE" RESULT_PROFILE="$PROFILE" RESULT_REPEAT="$REPEAT" RESULT_RUN_ID="$RUN_ID" RESULT_STATUS="$STATUS" \
     RESULT_REASON="$REASON" RESULT_STAGE="$STAGE" RESULT_EXIT="$code" RESULT_DEADLINE="$DEADLINE" \
-    RESULT_DEADLINE_FORMULA="$DEADLINE_FORMULA" RESULT_DEADLINE_OVERRIDE="${CHAT_CONTEXT_DEADLINE_SECONDS:-}" \
+    RESULT_DEADLINE_FORMULA="$DEADLINE_FORMULA" RESULT_DEADLINE_OVERRIDE="$DEADLINE_OVERRIDE" \
+    RESULT_QUALITY_SET="$QUALITY_SET" RESULT_QUALITY_PASSES="$QUALITY_PASSES" RESULT_QUALITY_LOCK="$QUALITY_LOCK" \
     RESULT_SUPERVISOR="$$" RESULT_MONITOR="$STARTED_MONITOR_PID" RESULT_INSTR="$STARTED_INSTR_PID" \
     node --input-type=module - "$RESULTS/result.json" <<'JS'
 import { writeFileSync } from 'node:fs';
@@ -407,6 +513,8 @@ writeFileSync(process.argv[2], JSON.stringify({ runId: e.RESULT_RUN_ID, mode: e.
   deadlineSource: e.RESULT_DEADLINE_FORMULA ? (e.RESULT_DEADLINE_OVERRIDE ? 'override' : 'formula') : 'default',
   deadlineFormulaSeconds: e.RESULT_DEADLINE_FORMULA || null, supervisorPid: Number(e.RESULT_SUPERVISOR),
   monitorPid: pid(e.RESULT_MONITOR), instrumentationPid: pid(e.RESULT_INSTR),
+  ...(e.RESULT_MODE === 'quality' ? { qualitySet: e.RESULT_QUALITY_SET,
+    qualityPasses: Number(e.RESULT_QUALITY_PASSES), fixtureLockSha256: e.RESULT_QUALITY_LOCK || null } : {}),
   recordedAt: new Date().toISOString() }, null, 2) + '\n');
 JS
   printf 'Device-prep %s %s at %s (exit %s). Reports: %s\n' "$MODE" "$STATUS" "$STAGE" "$code" "$RESULTS"
@@ -417,8 +525,16 @@ trap 'exit 130' INT
 trap 'exit 143' TERM
 
 printf 'Device-prep reports: %s\n' "$RESULTS"
+if [[ "$MODE" == quality ]]; then
+  stage fixture
+  cp -R "$ROOT/planning/fixtures/answer-quality-v1" "$RESULTS/fixture" || fail fixture
+  QUALITY_LOCK="$(node --input-type=module -e \
+    'import { loadFixture } from "./scripts/answer-quality.mjs"; console.log(loadFixture(process.argv[1]).lockSha256)' \
+    "$RESULTS/fixture")" || fail fixture-hash
+  quality_source_binding > "$RESULTS/quality-source-binding.json" || fail quality-source-binding
+fi
 stage build
-if [[ "$MODE" == measure ]]; then
+if [[ "$MODE" == measure || "$MODE" == quality ]]; then
   "$GRADLE" --offline -PtestBuildType=secureQa -PchatContextTokens="$PROFILE" -PandroidPressureMemoryTest=false \
     :androidApp:assembleSecureQa :androidApp:assembleSecureQaAndroidTest --console=plain 2>&1 | tee "$RESULTS/build.txt" ||
     fail build
@@ -443,6 +559,9 @@ verify_staged() { (cd "$STAGED" && shasum -a 256 -c "$RESULTS/apks.sha256") >> "
 git rev-parse HEAD > "$RESULTS/app-head.txt" || fail build
 # HEAD alone does not identify local changes. Record their digest, not file contents.
 git diff --binary | shasum -a 256 > "$RESULTS/tracked-diff-sha256.txt" || fail build
+if [[ "$MODE" == quality ]]; then
+  quality_source_binding | cmp - "$RESULTS/quality-source-binding.json" || fail quality-source-binding
+fi
 
 stage install-app
 verify_staged || fail apk-integrity
@@ -453,7 +572,7 @@ verify_staged || fail apk-integrity
 device install -r "$STAGED_TEST" 2>&1 | tee "$RESULTS/install-tests.txt" || fail install-tests
 grep -q '^Success' "$RESULTS/install-tests.txt" || fail install-tests
 
-if [[ "$MODE" == measure ]]; then
+if [[ "$MODE" == measure || "$MODE" == quality ]]; then
   stage memory-policy
   export MEMORY_POLICY_REPORT="$RESULTS/memory-policy.json"
   "$BASH" scripts/export-memory-policy.sh || fail memory-policy
@@ -484,6 +603,11 @@ if [[ "$MODE" == measure ]]; then
 elif [[ "$MODE" == ui ]]; then
   "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r -e class "$UI_CLASSES" \
     -e passagesCaptureRunId "$RUN_ID" "$RUNNER" > "$RESULTS/instrumentation.txt" 2>&1 &
+elif [[ "$MODE" == quality ]]; then
+  "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r -e class dev.edgecompanion.app.AnswerQualityTest \
+    -e answerQuality true -e supervisedThermal true -e supervisionRunId "$RUN_ID" \
+    -e answerQualitySet "$QUALITY_SET" -e answerQualityPasses "$QUALITY_PASSES" -e answerQualityLockSha256 "$QUALITY_LOCK" \
+    "$RUNNER" > "$RESULTS/instrumentation.txt" 2>&1 &
 else
   "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r \
     -e class dev.edgecompanion.app.PassageSqlCipherTest,dev.edgecompanion.app.GroundingSqlCipherTest \
@@ -501,7 +625,7 @@ done
 if [[ "$DEADLINE_HIT" == true ]]; then
   stage deadline
   REASON=deadline
-  if [[ "$MODE" == measure ]]; then
+  if [[ "$MODE" == measure || "$MODE" == quality ]]; then
     stop_owned "$MONITOR_PID"   # First, so no heartbeat from this script follows the stop.
     MONITOR_PID=""
     # Run-specific stop; the device watcher records the loss and stops the isolated QA process.
@@ -526,6 +650,7 @@ wait "$INSTR_PID" || INSTR_CODE=$?
 INSTR_PID=""
 stage validation
 collect_evidence
+if [[ "$MODE" == quality ]] && quality_invariant_breach; then fail quality-invariant; fi
 [[ "$INSTR_CODE" == 0 ]] || fail instrumentation
 if grep -Eq "$FAILURE_PATTERN" "$RESULTS/instrumentation.txt"; then fail instrumentation; fi
 if [[ "$MODE" == measure ]]; then
@@ -539,6 +664,14 @@ if [[ "$MODE" == measure ]]; then
 elif [[ "$MODE" == ui ]]; then
   grep -Eq "^OK \($UI_EXPECTED_TESTS tests\)$" "$RESULTS/instrumentation.txt" || fail instrumentation
   GATE_REASON="$(check_screenshots)" || fail "${GATE_REASON:-screenshots}"
+elif [[ "$MODE" == quality ]]; then
+  grep -Eq '^OK \(1 test\)$' "$RESULTS/instrumentation.txt" || fail instrumentation
+  GATE_REASON="$(check_evidence answerQuality)" || fail "${GATE_REASON:-evidence-unavailable}"
+  node scripts/verify-qa-supervision.mjs "$RESULTS/supervision.json" "$RUN_ID" || fail supervision
+  kill -0 "$MONITOR_PID" 2>/dev/null || fail thermal-monitor
+  [[ ! -f "$THERMAL_REPORT_DIR/safety-stop.json" ]] || fail thermal-monitor
+  GATE_REASON="$(check_quality_report)" || fail "${GATE_REASON:-quality-report}"
+  node scripts/answer-quality.mjs precheck "$RESULTS" || fail quality-precheck
 else
   # PassageSqlCipherTest (3) + GroundingSqlCipherTest (6); a skipped opt-in would not count as passing.
   grep -Eq '^OK \(9 tests\)$' "$RESULTS/instrumentation.txt" || fail instrumentation

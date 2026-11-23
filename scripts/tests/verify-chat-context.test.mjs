@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn, execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { chmodSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { chmodSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
@@ -150,6 +150,58 @@ if (command === 'shell' && rest[0] === 'am' && rest[1] === 'instrument') {
     if (/^-[1-4]$/.test(status)) console.log('INSTRUMENTATION_STATUS_CODE: ' + status);
     console.log('OK (9 tests)'); process.exit(status === 'exit-code' ? 1 : 0);
   }
+  if (cls === 'dev.edgecompanion.app.AnswerQualityTest') {
+    const { expectedLoads, fixturePassages, loadFixture, schedule, sha256, profile, sampler, promptVersion } =
+      require(join(process.cwd(), 'scripts/answer-quality.mjs'));
+    const fixture = loadFixture();
+    const runId = option('supervisionRunId'), set = option('answerQualitySet'), passes = Number(option('answerQualityPasses'));
+    const mode = process.env.FAKE_QUALITY;
+    const library = Object.entries(fixture.library).map(([file, text], index) =>
+      ({ file, sourceId: index + 1, revisionId: index + 100, sha256: sha256(text) }));
+    const indexedPassages = [];
+    for (const source of library) {
+      let offset = 0;
+      for (const text of fixturePassages(fixture.library[source.file])) {
+        indexedPassages.push({ passageId: indexedPassages.length + 1, sourceId: source.sourceId,
+          revisionId: source.revisionId, startUtf16: offset, endUtf16: offset + text.length, textSha256: sha256(text) });
+        offset += text.length;
+      }
+    }
+    // Consulted references point at the indexed passages that hold each item's gold quotes.
+    const consultedFor = id => fixture.items.find(item => item.id === id).answerSpans.map((span, index) => {
+      const source = library.find(entry => entry.file === span.file);
+      const { textSha256, ...ref } = indexedPassages.find(entry => entry.sourceId === source.sourceId &&
+        fixture.library[span.file].slice(entry.startUtf16, entry.endUtf16).includes(span.text));
+      return { ...ref, position: index + 1 };
+    });
+    const cases = schedule(fixture.items, set, passes).map(row => {
+      const consulted = consultedFor(row.id);
+      return { ...row, profile, sampler, promptVersion,
+        answer: 'Synthetic captured answer', typedResult: null, error: null, consulted,
+        packedPassageIds: consulted.map(ref => ref.passageId), modelCalls: 1, promptSha256: sha256(row.id),
+        outputSha256: sha256('Synthetic captured answer'), timings: { elapsedMs: 30, modelMs: 20, firstTextMs: 5 },
+        retrieval: { status: 'COMPLETE', reason: null, indexedRevisions: library.length, totalRevisions: library.length },
+        decodeTokens: 4, inputTokens: 300, possiblyAtCap: false };
+    });
+    if (mode === 'missing-item') cases.pop();
+    if (mode === 'interrupted' || mode === 'invariant') cases.splice(2);
+    write('no_backup/answer-quality-' + runId + '.json', { schema: 1, runId,
+      status: mode === 'interrupted' ? 'running' : mode === 'invariant' ? 'failed' : 'collected',
+      ...(mode === 'invariant' ? { failureType: 'HarnessInvariant', invariantBreach: 'message-count' } : {}),
+      set, passes: mode === 'wrong-passes' ? 3 : passes,
+      library, indexedPassages, cases, engineLoads: expectedLoads(set, passes), indexingComplete: true,
+      cleanupConfirmed: mode !== 'interrupted', databaseCleanupConfirmed: mode !== 'interrupted',
+      fixtureLockSha256: mode === 'wrong-lock' ? 'b'.repeat(64) : option('answerQualityLockSha256'),
+      librarySha256: fixture.lock.librarySha256, device: 'SM-S928B', buildType: 'secureQa',
+      backend: 'GPU', automaticRetries: 0, automaticFallback: false, profile, sampler, promptVersion,
+      modelSha256: process.env.FAKE_MODEL_SHA, runtimeVersion: '0.17.1' });
+    if (mode === 'interrupted') { hang(); return; }
+    if (mode === 'invariant') { console.log('FAILURES!!!'); console.log('Tests run: 1,  Failures: 1'); process.exit(0); }
+    write('no_backup/qa-supervision/' + runId + '/status.json', { schema: 2, runId, status: 'closed', reason: null,
+      cleanupConfirmed: false, elapsedMs: 100, capturedAtMs: Date.now(), leaseMs: 20000, pollMs: 500, cleanupMs: 5000 });
+    if (mode === 'skipped') console.log('INSTRUMENTATION_STATUS_CODE: -4');
+    console.log('OK (1 test)'); process.exit(0);
+  }
   if (cls === '${uiClasses}') {
     if (process.env.FAKE_INSTRUMENTATION === 'hang') { hang(); return; }
     // Synthetic captures: 40 PNGs by default; FAKE_SCREENSHOTS varies the set the device leaves behind.
@@ -194,7 +246,9 @@ function sandbox() {
   writeFileSync(join(dir, appApk), `${qaPackage}\nsynthetic app\n`);
   writeFileSync(join(dir, testApk), `${qaPackage}.test\nsynthetic tests\n`);
   writeFileSync(join(bin, 'adb'), fakeAdb);
-  writeFileSync(join(bin, 'gradlew'), '#!/bin/sh\nprintf "%s\\n" "$*" >> "$FAKE_GRADLE_LOG"\n');
+  // FAKE_GRADLE_APPEND names a file the synthetic build changes (S6Q2-F5); it is only ever a sandbox mirror path.
+  writeFileSync(join(bin, 'gradlew'), '#!/bin/sh\nprintf "%s\\n" "$*" >> "$FAKE_GRADLE_LOG"\n' +
+    'if [ -n "$FAKE_GRADLE_APPEND" ]; then printf "// changed during build\\n" >> "$FAKE_GRADLE_APPEND"; fi\n');
   writeFileSync(join(tools, 'aapt2'), fakeAapt2);
   for (const path of [join(bin, 'adb'), join(bin, 'gradlew'), join(tools, 'aapt2')]) chmodSync(path, 0o755);
   return dir;
@@ -223,15 +277,18 @@ async function withSandbox(body) {
 
 const isRunInstrument = call => call.args.includes('instrument') && !call.args.join(' ').includes('MemoryPolicyProbeTest');
 
-function run(dir, args, extra = {}, { signal } = {}) {
+function run(dir, args, extra = {}, { signal, repo = null } = {}) {
   const env = { ...process.env, PATH: `${join(dir, 'bin')}:${process.env.PATH}`, ANDROID_SERIAL: serial,
     ANDROID_HOME: join(dir, 'sdk'), ADB: join(dir, 'bin/adb'), GRADLE: join(dir, 'bin/gradlew'),
     APK_ROOT: join(dir, 'apk'), RESULTS_ROOT: join(dir, 'results'), FAKE_DEVICE_DIR: join(dir, 'device'),
     FAKE_ADB_LOG: join(dir, 'adb.jsonl'), FAKE_GRADLE_LOG: join(dir, 'gradle.txt'), FAKE_MODEL_SHA: modelSha, ...extra };
   for (const name of ['QA_SUPERVISION_RUN_ID', 'QA_SUPERVISOR_PID', 'MEMORY_POLICY_REPORT', 'THERMAL_REPORT_DIR',
-    'CHAT_CONTEXT_DEADLINE_SECONDS', 'PASSAGE_DEADLINE_SECONDS']) if (!(name in extra)) delete env[name];
+    'CHAT_CONTEXT_DEADLINE_SECONDS', 'PASSAGE_DEADLINE_SECONDS', 'ANSWER_QUALITY_DEADLINE_SECONDS',
+    'FAKE_GRADLE_APPEND', 'FAKE_QUALITY'])
+    if (!(name in extra)) delete env[name];
   return new Promise(done => {
-    const child = spawn('/bin/bash', [script, ...args], { cwd: root, env, stdio: ['ignore', 'pipe', 'pipe'] });
+    const child = spawn('/bin/bash', [repo ? join(repo, 'scripts/verify-chat-context.sh') : script, ...args],
+      { cwd: repo ?? root, env, stdio: ['ignore', 'pipe', 'pipe'] });
     let output = '';
     child.stdout.on('data', chunk => { output += chunk; });
     child.stderr.on('data', chunk => { output += chunk; });
@@ -716,4 +773,171 @@ test('a failed capture pull is recorded and its partial file removed', () => wit
   assert.deepEqual(evidence.pullFailures, ['02-synthetic-capture-2.png']);
   assert.ok(!existsSync(join(result.results, 'screenshots', '02-synthetic-capture-2.png')));
   assert.equal(evidence.screenshotCount, 39);
+}));
+
+// S6: all commands use the sandbox's fake adb and Gradle, including interruption tests.
+for (const [set, passes, items, deadline] of [['tuning', 1, 10, 1740], ['heldout', 3, 306, 38460]]) {
+  test(`quality captures ${set} with ${passes} pass(es) and binds the fixture, commit, and APKs`, () => withSandbox(async dir => {
+    const result = await run(dir, ['quality', '--set', set, ...(passes === 3 ? ['--passes', '3'] : [])]);
+    assert.equal(result.code, 0, result.output);
+    const summary = result.json('result.json');
+    assert.equal(summary.mode, 'quality');
+    assert.equal(summary.status, 'passed');
+    assert.equal(summary.deadlineSeconds, deadline);
+    assert.equal(summary.qualitySet, set);
+    assert.equal(summary.qualityPasses, passes);
+    assert.match(summary.fixtureLockSha256, /^[a-f0-9]{64}$/);
+    const report = result.json('answer-quality.json');
+    assert.equal(report.cases.length, items);
+    assert.ok(report.cases.some(row => row.consulted.length > 0), 'the fake capture consults passages');
+    const precheck = result.json('precheck.json');
+    assert.equal(precheck.references.passed, true);
+    assert.equal(precheck.references.resolved, precheck.references.total);
+    assert.ok(precheck.references.total > 0, 'references were consulted and resolved');
+    assert.equal(summary.deadlineSource, 'formula');
+    // Untracked S6 files are bound by content hash (S6Q-F9).
+    const binding = result.json('quality-source-binding.json');
+    for (const name of ['scripts/answer-quality.mjs',
+      'androidApp/src/androidTest/kotlin/dev/edgecompanion/app/AnswerQualityTest.kt',
+      'androidApp/src/androidTest/kotlin/dev/edgecompanion/app/support/AnswerQualityFixture.kt',
+      'planning/fixtures/answer-quality-v1/answer-quality-v1.lock.json'])
+      assert.equal(binding.files[name], sha256(readFileSync(join(root, name))), name);
+    assert.equal(binding.files['planning/fixtures/answer-quality-v1/answer-quality-v1.lock.json'], summary.fixtureLockSha256);
+    assert.equal(report.engineLoads.length, passes * (set === 'heldout' ? 2 : 1));
+    assert.equal(result.json('precheck.json').cases.length, items);
+    assert.equal(result.json('capture-summary.json').determinism.identical, passes === 1 ? null : true);
+    assert.equal(sha256(readFileSync(join(result.results, 'fixture/answer-quality-v1.lock.json'))), summary.fixtureLockSha256);
+    assert.equal(existsSync(join(result.results, 'app-head.txt')), true);
+    assert.equal(existsSync(join(result.results, 'apks.sha256')), true);
+    const instrument = result.calls.find(isRunInstrument).args.join(' ');
+    assert.match(instrument, / -e class dev\.edgecompanion\.app\.AnswerQualityTest -e answerQuality true -e supervisedThermal true /);
+    assert.ok(instrument.includes(` -e answerQualitySet ${set} -e answerQualityPasses ${passes} -e answerQualityLockSha256 ${summary.fixtureLockSha256} `));
+    assertOnlySecureQa(result.calls);
+    assertClientStopped(result, summary);
+    assert.ok(!alive(summary.monitorPid), 'monitor stopped');
+  }));
+}
+
+for (const [scenario, reason] of [['wrong-lock', 'fixture-hash'], ['missing-item', 'quality-items'],
+  ['skipped', 'instrumentation'], ['wrong-passes', 'quality-passes']]) {
+  test(`quality rejects a synthetic ${scenario} capture`, () => withSandbox(async dir => {
+    const result = await run(dir, ['quality', '--set', 'tuning'], { FAKE_QUALITY: scenario });
+    assert.equal(result.code, 1, result.output);
+    const summary = result.json('result.json');
+    assert.equal(summary.stage, 'validation');
+    assert.equal(summary.reason, reason);
+    assert.equal(result.json('evidence.json').answerQuality, 'present');
+    assertClientStopped(result, summary);
+    assert.ok(!alive(summary.monitorPid), 'monitor stopped');
+  }));
+}
+
+test('quality retains completed items and stops owned clients on interruption', () => withSandbox(async dir => {
+  const result = await run(dir, ['quality', '--set', 'tuning'],
+    { FAKE_QUALITY: 'interrupted', QA_STOP_GRACE_SECONDS: '2' }, { signal: 'SIGTERM' });
+  assert.equal(result.code, 143, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.status, 'failed');
+  assert.equal(result.json('answer-quality.json').cases.length, 2);
+  assert.equal(result.json('evidence.json').answerQuality, 'present');
+  assert.equal(result.json('deadline-stop.json').reason, 'interrupted');
+  assertClientStopped(result, summary);
+  assert.ok(!alive(summary.monitorPid), 'monitor stopped');
+}));
+
+test('quality validates the set and explicit pass count before contacting a device', () => withSandbox(async dir => {
+  for (const args of [['quality', '--set', 'either'], ['quality', '--set', 'heldout', '--passes', '2']]) {
+    const result = await run(dir, args);
+    assert.equal(result.code, 2, result.output);
+    assert.equal(result.calls.length, 0);
+    assert.equal(existsSync(join(dir, 'gradle.txt')), false);
+  }
+}));
+
+// S6Q2-F5: source-binding checks run against a sandbox mirror of the bound sources, so the repository is never changed.
+// The mirror has no Git metadata; a mirror-only git stub answers the two read-only calls the wrapper makes.
+const groundingSource = 'shared/src/commonMain/kotlin/dev/edgecompanion/core/conversation/session/GroundedPrompt.kt';
+const runtimeSource = 'shared/src/androidMain/kotlin/dev/edgecompanion/core/inference/litert/LiteRtLlmEngine.kt';
+const fixtureSource = 'androidApp/src/androidTest/kotlin/dev/edgecompanion/app/support/AnswerQualityFixture.kt';
+function mirror(dir) {
+  const repo = join(dir, 'repo'), stubs = join(dir, 'mirror-bin');
+  for (const path of ['scripts/verify-chat-context.sh', 'scripts/answer-quality.mjs', 'planning/fixtures/answer-quality-v1',
+    'planning/models/gemma-4-e2b-it.json', groundingSource, runtimeSource, fixtureSource,
+    'androidApp/src/androidTest/kotlin/dev/edgecompanion/app/AnswerQualityTest.kt'])
+    cpSync(join(root, path), join(repo, path), { recursive: true });
+  mkdirSync(stubs);
+  writeFileSync(join(stubs, 'git'), '#!/bin/sh\ncase "$1" in rev-parse) echo ' + 'a'.repeat(40) + ' ;; diff) ;; *) exit 1 ;; esac\n');
+  chmodSync(join(stubs, 'git'), 0o755);
+  return { repo, path: `${stubs}:${join(dir, 'bin')}:${process.env.PATH}` };
+}
+
+test('quality fails when a bound source changes during the build', () => withSandbox(async dir => {
+  const { repo, path } = mirror(dir);
+  const result = await run(dir, ['quality', '--set', 'tuning'],
+    { PATH: path, FAKE_GRADLE_APPEND: join(repo, fixtureSource) }, { repo });
+  assert.equal(result.code, 1, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.reason, 'quality-source-binding');
+  assert.equal(existsSync(join(dir, 'gradle.txt')), true, 'the pre-build binding passed and the build ran');
+  assert.equal(existsSync(join(result.results, 'apks.sha256')), true);
+  assert.equal(result.calls.filter(call => call.args.includes('install')).length, 0, 'nothing was installed');
+  assert.equal(readFileSync(join(root, fixtureSource), 'utf8').includes('changed during build'), false);
+}));
+
+for (const [name, file, from, to] of [
+  ['prompt passage limit', groundingSource, 'const val MAX_PASSAGES = 4', 'const val MAX_PASSAGES = 5'],
+  ['prompt version', groundingSource, 'const val VERSION = "grounded-prompt-v1"', 'const val VERSION = "grounded-prompt-v2"'],
+  ['sampler', runtimeSource, 'SamplerConfig(topK = 1, topP = 1.0, temperature = 0.0, seed = 0)',
+    'SamplerConfig(topK = 1, topP = 1.0, temperature = 0.0, seed = 1)'],
+]) {
+  test(`quality refuses ${name} drift before building`, () => withSandbox(async dir => {
+    const { repo, path } = mirror(dir);
+    const source = readFileSync(join(repo, file), 'utf8');
+    assert.ok(source.includes(from), `mirror source contains ${from}`);
+    // The last occurrence is the ordinary generation call the binding reads; the first sampler is another path.
+    const at = source.lastIndexOf(from);
+    writeFileSync(join(repo, file), source.slice(0, at) + to + source.slice(at + from.length));
+    const result = await run(dir, ['quality', '--set', 'tuning'], { PATH: path }, { repo });
+    assert.equal(result.code, 1, result.output);
+    assert.equal(result.json('result.json').reason, 'quality-source-binding');
+    assert.equal(existsSync(join(dir, 'gradle.txt')), false, 'no build after drift');
+    assert.equal(result.calls.filter(call => call.args.includes('install')).length, 0);
+  }));
+}
+
+test('quality fails a broken harness invariant with its own reason, not an item Error', () => withSandbox(async dir => {
+  const result = await run(dir, ['quality', '--set', 'tuning'], { FAKE_QUALITY: 'invariant' });
+  assert.equal(result.code, 1, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.stage, 'validation');
+  assert.equal(summary.reason, 'quality-invariant');
+  const report = result.json('answer-quality.json');
+  assert.equal(report.failureType, 'HarnessInvariant');
+  assert.equal(report.invariantBreach, 'message-count');
+  assert.equal(report.cases.length, 2);
+  assert.equal(existsSync(join(result.results, 'precheck.json')), false);
+  assertClientStopped(result, summary);
+  assert.ok(!alive(summary.monitorPid), 'monitor stopped');
+}));
+
+test('a quality run that outlives its deadline publishes a run stop and keeps completed items', () => withSandbox(async dir => {
+  const result = await run(dir, ['quality', '--set', 'tuning'],
+    { FAKE_QUALITY: 'interrupted', ANSWER_QUALITY_DEADLINE_SECONDS: '2', QA_STOP_GRACE_SECONDS: '2' });
+  assert.equal(result.code, 1, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.status, 'failed');
+  assert.equal(summary.stage, 'deadline');
+  assert.equal(summary.reason, 'deadline');
+  assert.equal(summary.deadlineSeconds, 2);
+  assert.equal(summary.deadlineSource, 'override');
+  const stop = result.json('deadline-stop.json');
+  assert.equal(stop.reason, 'deadline');
+  assert.equal(stop.runId, summary.runId);
+  assert.equal(stop.stopRequested, true);
+  const published = JSON.parse(readFileSync(join(dir, 'device/no_backup/qa-supervision', summary.runId, 'stop.json'), 'utf8'));
+  assert.deepEqual(published, { schema: 2, runId: summary.runId, action: 'stop' });
+  assert.equal(result.json('answer-quality.json').cases.length, 2, 'completed items retained');
+  assert.equal(result.json('evidence.json').answerQuality, 'present');
+  assertClientStopped(result, summary);
+  assert.ok(!alive(summary.monitorPid), 'monitor stopped');
 }));

@@ -43,6 +43,7 @@ android {
     }
     testBuildType = providers.gradleProperty("testBuildType").getOrElse("debug")
     sourceSets.getByName("androidTest").assets.srcDir(rootProject.file("planning/models"))
+    sourceSets.getByName("androidTest").assets.srcDir(rootProject.file("planning/fixtures/answer-quality-v1"))
     sourceSets.getByName("test").kotlin.directories.add("src/testSupport/kotlin")
     sourceSets.getByName("androidTest").kotlin.directories.add("src/testSupport/kotlin")
     buildFeatures { compose = true; buildConfig = true }
