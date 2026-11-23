@@ -368,3 +368,161 @@ uninstalled), at HEAD `52f3a10` plus the uncommitted, QA-passed test fixes
   explicit `2.0` large-font captures (item 7) are not affected.
 - The S5-F3 composer refinement (decision above) is not implemented. These
   screenshots show the layout as it was before that refinement.
+
+## 2026-11-23: S5-F3 composer refinement, host implementation (dev)
+
+Implements the 2026-11-20 user decision on the host only, at HEAD `6c1226a` plus an
+uncommitted diff. No device or emulator was run, so nothing below is runtime-verified,
+and the S24 captures listed in the sections above still show the old layout.
+
+**Layout (`Composer.kt`, `ComposerInputLayout`), the same composable in both hosts:**
+
+- **One row** (`+`, **My sources**, field, mic, Send) is kept only when the composer is
+  not expanded and the field left between the chip and mic is at least
+  `max(72 dp, the field's one-line content width)`. The content width is the field's
+  measured unwrapped width: the placeholder, or an idle draft, plus its padding. The old
+  rule used the 72 dp floor alone, which allowed the S24 chip-on idle bar to wrap
+  "Ask anything..." onto two lines (`01-full-on-idle.png` in the 2026-11-20 run).
+- **Stacked** (expanded, or a one-row bar that does not fit): attachment strip, then
+  the field on its own row across the full inner width, then a controls row with `+`
+  and **My sources** at the start and mic and Send at the end. The empty-library hint
+  stays below the composer surface. The chip is measured against the controls row only
+  (inner width minus three 48 dp buttons) and its label is a single line that
+  ellipsizes when that row is too narrow; its accessible name, state and 48 dp target are
+  unchanged.
+- The same six children are placed in both arrangements, so the text field is moved,
+  not recreated. The field now fills its slot, so the full-width row is its touch
+  target. Placement goes through `placeRelative`, so RTL mirrors it.
+
+**Estimated widths, not measured on a device.** Chip and placeholder widths come
+from pixel bounds in the 2026-11-20 S24 PNGs (density 2.625): chip about 96 dp off and
+116 dp on, and the placeholder about 113 dp including padding. The 2.0 values are those
+labels doubled. The inner width is the screen width minus 40 dp. Field width means
+what one row would leave.
+
+| Screen | Scale | Chip off: field left → result | Chip on: field left → result |
+| --- | --- | --- | --- |
+| 320 dp | 1.0 | 40 dp → stacked | 20 dp → stacked |
+| 360 dp | 1.0 | 80 dp → stacked (placeholder would wrap) | 60 dp → stacked |
+| S24, 411 dp | 1.0 | 131 dp → one row | 111 dp → stacked (placeholder would wrap) |
+| 320, 360 or 411 dp | 2.0 | negative, or below 72 dp → stacked | negative → stacked |
+
+**Carry-overs:**
+
+- **UIF-F9.** The chip applied `Modifier.toggleable` in the modifier passed to a plain
+  `Surface`, which places that modifier before its own background and shape clip. The
+  toggle's ripple and state layer were therefore drawn over the chip's square layout
+  bounds. The click that disables the chip on an empty library left such a layer in the
+  capture. The chip now uses Material 3's toggleable `Surface(checked, onCheckedChange,
+  enabled)` overload, which applies the toggle after the clip, and keeps `Role.Switch`
+  through semantics. `PassagesCaptureTest` checks that the toggle comes after the clip in
+  the chip's modifier chain. Pixels are not asserted.
+- **UIF-F6.** The chip-on empty-library step asserts that the hint text is displayed.
+- **UIF-F7.** A successful Back collapse must also land within the 1 s budget. It uses
+  the same diagnostic message as the failure path.
+- **S5R-F7.** Capture metadata records the font scale read from `LocalDensity` inside the
+  capture frame at its last composition. Item 7 also asserts that the measured value
+  equals the requested 2.0.
+
+**Expected S24 `ui` run:** unchanged, 27 tests and 40 PNGs, so the script is untouched.
+Captures expected to look different are listed in the dev handback. They are every
+typing capture, every chip-on capture at S24 width, every narrow capture, both
+large-font captures, and the chip-off hint captures, where the square should be gone.
+
+## 2026-11-23: S24 `ui` run of the round-1 refinement, and round 2 (icon-only idle chip)
+
+**S24 run** `passages-ui-20261123T030928Z-5197-SWxa3f` (planner). Source was HEAD `6c1226a`
+plus the round-1 diff `ff0b9a88…`. It **failed 1 of 27 tests** and produced all 40 PNGs.
+
+- The failure was `ComposerLayoutTest.compactMicIsInsideAndBesideSendForEmptyAndShortDrafts`
+  at `assertOneRow`. At 411 dp and a forced font scale of 1.0, the chip-off idle bar stacked
+  into two rows.
+- The phone's system font scale is **0.9**. The measured capture metadata (S5R-F7) records
+  0.9 for 38 captures and 2.0 for the two large-font captures. The round-1 width estimates
+  in the section above were taken from 0.9-scale pixels, so they are too small for 1.0.
+  At 1.0, the labelled chip-off bar leaves the field roughly 10 dp less than its one-line
+  content needs.
+- In the captures, the typing layouts look as intended in both hosts and at narrow
+  width. UIF-F9 is visually confirmed: the `02-*-empty-chip-off-hint` captures show no
+  square and no rounded tint behind the disabled chip.
+
+**User decision (2026-11-23).** While the composer is not expanded and **My sources** is
+off, enabled or disabled, the chip shows only its icon. The following stay the same: the
+accessible name and state description, `Role.Switch`, the hint rule, a target of at least
+48 dp, and the rounded surface. The label returns when the chip is on or the composer is
+expanded. The round-1 one-row rule is unchanged but now sees the icon-only chip's width.
+A chip-on idle bar may still stack.
+
+**Round-2 changes (dev, host only, not run on a device):**
+
+- `sourcesChipShowsLabel(expanded, checked) = expanded || checked`. Only the chip's own
+  content changes, so the text field is not recreated. The chip has a 48 dp minimum width
+  and centres its content, so the icon-only chip is a 48 × 48 rounded surface.
+- **Corrected estimate.** At 411 dp the icon-only chip leaves 179 dp for the field at any
+  font scale. The one-line content needs about 131–141 dp at 1.0 and about 128 dp at 0.9.
+  The estimated margin is therefore about 38–48 dp at 1.0 and about 50 dp at 0.9.
+- **Tests.**
+  - The compact test still pins one row at 411 dp and 1.0. It now also checks the
+    disabled chip on a known-empty library, and checks icon-only versus labelled by chip
+    width.
+  - The focus test checks the label while expanded and the icon after Back.
+  - S5C-F2: after Back the field keeps "Keep", and its selection is collapsed to its end
+    (3) by the framework's deselect on blur.
+  - S5C-F1: the UIF-F9 guard requires the graphics layer directly after the Surface's
+    shaped background, before the toggle.
+- **Counts.** Unchanged: 27 tests and 40 PNGs.
+
+## 2026-11-23: S24 `ui` run of round 2, and the round-3 test correction
+
+**S24 run** `passages-ui-20261123T032810Z-8699-kNzQ2O` (planner). It ran HEAD `6c1226a`
+plus the round-2 diff `2305f07a…`. It **failed 1 of 27 tests** and produced all 40 PNGs.
+
+- The failure was `ComposerLayoutTest.narrowRtlLargeTextSheetWrapsAndBackRetainsDraft`, in
+  `assertFieldRowThenControls` on the idle composer: `full 320dp 2x RTL idle: field width
+  expected:<734.0> but was:<230.0>`.
+- Everything else passed. That includes the one-row guard at 411 dp and font scale 1.0.
+  The icon-only chip looks right in `02-*-empty-chip-off-hint` and `08-*-off-idle-narrow`.
+
+**Planner ruling.** The product behaved correctly, and the test expectation was stale.
+
+- At 320 dp, with the 48 dp icon-only chip, the idle bar leaves about 88 dp for the field.
+- At 2.0, the short draft "Keep" fits in that space, so the R1 rule keeps the idle bar on
+  one row, as the phone showed.
+- The test's comment, "320 dp at 2x cannot fit the one-row bar", was only true while the
+  chip carried its label.
+
+**Round-3 changes (tests only; `Composer.kt` unchanged; host only):**
+
+- The narrow RTL test at 320 dp and 2.0 now covers both idle outcomes in both hosts:
+  - With an empty field, the placeholder (about 250 dp at 2.0) does not fit, so the idle
+    bar must stack.
+  - With the short draft "Hi" (about 52 dp at 2.0), the idle bar must stay on one row.
+    `assertOneRow` now checks all five controls, and their order follows the layout
+    direction.
+  - The editing check (stacked) and the Back/draft check are unchanged. They use "Hi"
+    because "Keep" fits 88 dp with only a couple of dp to spare.
+- S5C-F3: the 411 dp one-row guard is now skipped by assumption on screens narrower than
+  411 dp. The S24 (411.4 dp) still runs it.
+- The other narrow-width device checks were reviewed. They involve the labelled chip-on
+  case or only test tags, so they were not stale.
+- Counts are unchanged: 27 tests and 40 PNGs.
+
+## 2026-11-23: S24 `ui` run of round 3 (planner)
+
+- Run `benchmarks/results/passages-ui-20261123T033948Z-10269-iUpNp2`:
+  - S24 `R5CX22V8D6B`, `secureQa`, staged APK copies only, nothing uninstalled.
+  - Built from HEAD `6c1226a` plus the round-3 tree that QA reviewed (tracked-diff sha256
+    `58d379c95dd59a659382c397494adc677902f669b81b7b8ede11176d2fdc1885`).
+  - **Passed: `OK (27 tests)`.** No failed or skipped status codes, and 40 of 40 PNGs.
+- Independent QA passed all three rounds on the host:
+  `build/qa-s5-composer-refine-2026-11-23-r1`, `-r2` and `-r3`.
+  S5C-F1 to S5C-F3 are resolved.
+- What the planner saw in the captures:
+  - The chip-off idle bar is one row with the icon-only chip.
+  - Chat captures with the chip off keep "Ask anything..." on one line.
+  - The large-font capture (item 7) is stacked: the field row comes first, then `+`, the labelled chip, mic and send.
+  - Item 2 still shows no square behind the disabled chip.
+- Limits:
+  - This is one passing run; repeatability is not shown.
+  - The phone's system font scale is 0.9. The default scale (1.0) is covered only by the forced-density device tests, not by the captures.
+  - Composer behaviour on narrower phones is covered only by those forced-width tests.
