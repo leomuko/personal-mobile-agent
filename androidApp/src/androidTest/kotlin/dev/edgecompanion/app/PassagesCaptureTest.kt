@@ -139,8 +139,11 @@ class PassagesCaptureTest {
             compose.runOnIdle { drawer.value = floating; available.value = false; scope.value = RequestScope.SOURCES }
             chip().assertIsOn().assertIsEnabled()
             compose.onNodeWithTag("sources-empty-hint").assertIsDisplayed()
+            // UIF-F6: while the chip can still be turned off, the hint is read as its own text.
+            compose.onNodeWithText("Add a source to use this").assertIsDisplayed()
             capture(2, "$host-empty-chip-on")
             chip().performClick().assertIsOff().assertIsNotEnabled()
+            assertChipIndicationInsideItsShape()
             // S5-F4: the disabled chip announces the hint, so the still-visible hint text has no text
             // semantics of its own; find it by its tag and check the chip's state description.
             compose.onNodeWithTag("sources-empty-hint").assertIsDisplayed()
@@ -270,7 +273,7 @@ class PassagesCaptureTest {
             compose.onNodeWithTag("consulted-source").performScrollTo().assertIsDisplayed()
             chip().assertIsDisplayed().assertIsOn()
             compose.onNodeWithTag("composer-input").assertIsDisplayed()
-            capture(7, "${hostName(floating)}-large-font-passages-expanded", fontScale = LARGE_FONT)
+            capture(7, "${hostName(floating)}-large-font-passages-expanded", expectedFontScale = LARGE_FONT)
         }
     }
 
@@ -317,6 +320,21 @@ class PassagesCaptureTest {
     }
 
     private fun chip() = compose.onNodeWithContentDescription("My sources, answer from my sources only")
+
+    /**
+     * UIF-F9 guard (no pixels): the chip's toggle, which owns its press/focus indication, must come
+     * after the rounded clip in the chip's own modifier chain. Before the fix it came first, and the
+     * click that disabled the chip left a square layer over the chip's layout bounds.
+     */
+    private fun assertChipIndicationInsideItsShape() {
+        val chain = chip().fetchSemanticsNode().layoutInfo.getModifierInfo().map { it.modifier.javaClass.simpleName }
+        val toggle = chain.indexOf("ToggleableElement")
+        // S5C-F1: the clip is the graphics layer the Surface adds right after its shaped background, so an
+        // unrelated earlier graphicsLayer cannot satisfy the check.
+        val background = chain.indexOf("BackgroundElement")
+        assertTrue("Chip modifier order: $chain", background >= 0 && background + 1 < toggle &&
+            chain[background + 1] == "GraphicsLayerElement")
+    }
     private fun scopeOf(on: Boolean) = if (on) RequestScope.SOURCES else RequestScope.ORDINARY
     private fun onOff(on: Boolean) = if (on) "on" else "off"
     private fun hostName(drawer: Boolean) = if (drawer) "drawer" else "full"
@@ -343,6 +361,8 @@ class PassagesCaptureTest {
     private var focusSink: (() -> Unit)? = null
     /** Status-bar top, navigation-bar bottom and IME bottom insets (px) at the last composition. */
     private var insets = Triple(0, 0, 0)
+    /** S5R-F7: the font scale the captured content was composed with (LocalDensity inside Frame). */
+    private var renderedFontScale: Float? = null
 
     /**
      * Frames the content as MainActivity does: system-bar and IME padding on the host box, and a
@@ -354,7 +374,7 @@ class PassagesCaptureTest {
         val density = LocalDensity.current
         val bars = Triple(WindowInsets.statusBars.getTop(density), WindowInsets.navigationBars.getBottom(density),
             WindowInsets.ime.getBottom(density))
-        SideEffect { focusSink = { focus.clearFocus(force = true) }; insets = bars }
+        SideEffect { focusSink = { focus.clearFocus(force = true) }; insets = bars; renderedFontScale = density.fontScale }
         CompositionLocalProvider(LocalSoftwareKeyboardController provides null) {
             CompanionTheme {
                 Box((if (width == null) Modifier.fillMaxSize() else Modifier.width(width).fillMaxHeight())
@@ -385,10 +405,14 @@ class PassagesCaptureTest {
     /**
      * Exports only this test's synthetic Compose frame (never a real app window or the system UI) as
      * no_backup/passages-captures/<runId>/NN-name.png, and records its measured size in <runId>.json.
+     * The recorded font scale is the one the frame was composed with; [expectedFontScale], when given,
+     * must match it, so an explicit large-font capture records 2.0 only because 2.0 was rendered.
      */
-    private fun capture(item: Int, name: String, fontScale: Float = 1f) {
+    private fun capture(item: Int, name: String, expectedFontScale: Float? = null) {
         compose.waitForIdle()
         val node = compose.onNodeWithTag(FRAME).assertExists()
+        val fontScale = compose.runOnIdle { checkNotNull(renderedFontScale) { "Frame was not composed" } }
+        if (expectedFontScale != null) assertEquals("Rendered font scale for $name", expectedFontScale, fontScale, 0.001f)
         val runId = InstrumentationRegistry.getArguments().getString(RUN_ARGUMENT) ?: return
         assertTrue("Invalid capture run ID", RUN_ID.matches(runId))
         val context = InstrumentationRegistry.getInstrumentation().targetContext

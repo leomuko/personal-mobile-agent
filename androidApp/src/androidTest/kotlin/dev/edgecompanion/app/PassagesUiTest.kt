@@ -177,7 +177,8 @@ class PassagesUiTest {
         compose.runOnIdle { assertEquals(List(4) { user.id }, retries) }
     }
 
-    @Test fun largeFontKeepsTheChipBetweenAddAndInputAndPassagesExpandable() {
+    /** S5-F3: at 320 dp and 2x the field gets its own row and the chip follows `+` in the controls row. */
+    @Test fun largeFontKeepsTheChipBesideAddBelowTheInputAndPassagesExpandable() {
         val drawer = mutableStateOf(false)
         val previews = MutableStateFlow<ConsultedRead>(ConsultedRead.Loaded(listOf(SourceSpanPreview("Synthetic roster", "At noon."))))
         compose.setContent {
@@ -194,7 +195,7 @@ class PassagesUiTest {
             val add = compose.onNodeWithContentDescription("Add attachment").assertIsDisplayed().fetchSemanticsNode().boundsInRoot
             val chip = chip().assertIsDisplayed().assertIsOn().fetchSemanticsNode().boundsInRoot
             val field = compose.onNodeWithTag("composer-input").assertIsDisplayed().fetchSemanticsNode().boundsInRoot
-            assertTrue(add.right <= chip.left && chip.right <= field.left)
+            assertTrue(add.right <= chip.left && field.bottom <= chip.top && field.bottom <= add.top)
             compose.onNodeWithText("Passages consulted").performScrollTo().performClick()
             compose.onNodeWithTag("consulted-source").performScrollTo().assertIsDisplayed()
         }
