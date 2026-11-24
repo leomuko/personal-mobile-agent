@@ -5,9 +5,10 @@ import { cpSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:f
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
-  checkRun, containsFact, counts, determinism, distinctEntities, expectedLoads, fixturePassages, fixtureRoot,
+  candidateDirectory, checkRun, containsFact, counts, determinism, devFixture, developmentDisjointness, developmentNotice,
+  developmentRetrieval, distinctEntities, expectedLoads, fixtureDirectory, fixturePassages, fixtureRoot, loadCandidates,
   fixtureSummary, keywordOverlap, loadFixture, markdown, normalize, passageBoundaries, precheck, profile, promptVersion,
-  sampleSupported, sampler, schedule, score, sha256, twoPassageKinds, validateFixture,
+  sampleSupported, sampler, schedule, score, sha256, twoPassageKinds, validateFixture, validCandidateCooldowns,
 } from '../answer-quality.mjs';
 
 const fixture = loadFixture();
@@ -228,7 +229,8 @@ test('paraphrase overlap is recomputed from the indexed passage, not trusted fro
 const answered = (row, text) => Object.assign(row, { answer: text, typedResult: null, error: null, modelCalls: 1,
   promptSha256: sha256(row.id), outputSha256: sha256(text), decodeTokens: 12, inputTokens: 300, possiblyAtCap: false });
 
-function runFixture(passes = 1, set = 'heldout') {
+function runFixture(passes = 1, set = 'heldout', fixtureData = fixture, candidates = null) {
+  const fixture = fixtureData;
   const library = Object.entries(fixture.library).map(([file, text], index) =>
     ({file, sourceId: index + 1, revisionId: index + 31, sha256: sha256(text)}));
   const indexedPassages = [];
@@ -241,7 +243,8 @@ function runFixture(passes = 1, set = 'heldout') {
     }
   }
   const retrieval = { status: 'COMPLETE', reason: null, indexedRevisions: library.length, totalRevisions: library.length };
-  const cases = schedule(fixture.items, set, passes).map(entry => {
+  const cases = schedule(fixture.items, set, passes, candidates).map(entry => {
+    const candidate = candidates?.entries.find(value => value.id === entry.candidateId);
     const gold = fixture.items.find(item => item.id === entry.id);
     const consulted = gold.answerSpans.map((span, index) => {
       const source = library.find(row => row.file === span.file);
@@ -253,19 +256,21 @@ function runFixture(passes = 1, set = 'heldout') {
       gold.requiredFacts.join(' ') || 'Synthetic answer for host tests.';
     return { ...entry, answer, modelCalls: Number(answer !== null), promptSha256: answer !== null ? sha256(gold.question) : null,
       outputSha256: answer === null ? null : sha256(answer), error: null, typedResult: answer === null ? 'NO_MATCH' : null,
-      profile, sampler, promptVersion, timings: {elapsedMs: 0, firstTextMs: null, modelMs: null},
+      profile, sampler, promptVersion: candidate?.version ?? promptVersion,
+      ...(candidate ? {candidateTextSha256: candidate.textSha256} : {}), timings: {elapsedMs: 0, firstTextMs: null, modelMs: null},
       consulted, packedPassageIds: consulted.map(ref => ref.passageId), retrieval,
       decodeTokens: answer === null ? null : 20, inputTokens: answer === null ? null : 400,
       possiblyAtCap: answer === null ? null : false };
   });
   const run = { schema: 1, runId: 'synthetic', status: 'collected', set, passes, cases, library, indexedPassages,
-    indexingComplete: true, engineLoads: expectedLoads(set, passes), profile, sampler, promptVersion, backend: 'GPU',
+    indexingComplete: true, engineLoads: expectedLoads(set, passes, candidates),
+    ...(candidates ? {candidateLockSha256: candidates.lockSha256} : {}), profile, sampler, promptVersion, backend: 'GPU',
     buildType: 'secureQa', device: 'SM-S928B', modelSha256: 'a'.repeat(64), runtimeVersion: 'fixture',
     fixtureLockSha256: fixture.lockSha256, librarySha256: fixture.lock.librarySha256, automaticRetries: 0, automaticFallback: false,
     cleanupConfirmed: true, databaseCleanupConfirmed: true };
   const labelRows = cases.map(row => {
     const gold = fixture.items.find(item => item.id === row.id);
-    return { pass: row.pass, scope: row.scope, id: row.id, label: gold.expected === 'answer' ? 'Supported' :
+    return { pass: row.pass, scope: row.scope, id: row.id, ...(row.candidateId ? {candidateId: row.candidateId} : {}), label: gold.expected === 'answer' ? 'Supported' :
       gold.set === 'diagnostic-bait' ? 'Unsupported' : 'Abstained', reason: 'Synthetic calibration label',
       ...(gold.set === 'diagnostic-contradiction' ? { notedConflict: true } : {}) };
   });
@@ -515,4 +520,258 @@ test('CLI writes precheck, bound reports and one reproducible sample, and reject
     assert.equal(tampered.status, 1);
     assert.match(tampered.stderr, /not bound/);
   } finally { rmSync(dir, {recursive: true, force: true}); }
+});
+
+const devRoot = fixtureDirectory(devFixture);
+const development = loadFixture(devRoot, devFixture);
+const candidateRoot = candidateDirectory('r1');
+const candidates = loadCandidates(candidateRoot);
+
+test('the development lock pins the exact item mix, with every gold and distractor passage packed', () => {
+  assert.equal(development.items.length, 40);
+  assert.equal(Object.keys(development.library).length, 10);
+  assert.equal(development.items.filter(item => item.expected === 'answer').length, 14);
+  assert.equal(development.items.filter(item => item.expected === 'abstain').length, 20);
+  assert.equal(development.items.filter(item => item.expected === 'diagnostic').length, 6);
+  assert.ok(development.disjointness.minimumDistance > 2);
+  const probe = developmentRetrieval(development.items, development.library);
+  assert.equal(probe.filter(row => row.goldPacked).length, 17);
+  assert.equal(probe.filter(row => row.forbiddenPacked).length, 18);
+  const altered = structuredClone(development.items);
+  const item = altered.find(row => row.nearMiss);
+  item.question = 'Fulmarzeggant?';
+  assert.equal(developmentRetrieval(altered, development.library).find(row => row.id === item.id).forbiddenPacked, false);
+  assert.throws(() => schedule(development.items, 'dev', 3, candidates), /passes/);
+  assert.throws(() => schedule(fixture.items, 'dev', 1, candidates), /requires development items/);
+  assert.throws(() => schedule(fixture.items, 'heldout', 1, candidates), /refused/);
+});
+
+test('the entity audit rejects the same name and one- or two-letter spelling changes', () => {
+  const name = 'Brackenshivor';
+  for (const prior of [name, 'Brackenshivox', 'Brackenshivxx', 'Brackens Hivor']) {
+    for (const source of [{items: [{question: prior}], library: {}}, {items: [], library: {note: prior}}])
+      assert.throws(() => developmentDisjointness([], {note: name}, source), /too close to v1/);
+  }
+  assert.equal(developmentDisjointness([], {note: name}, {items: [], library: {note: 'Brackenshixxx'}}).minimumDistance, 3);
+});
+
+test('rebound candidate documents still reject prompt controls, baseline drift and duplicate versions', () => {
+  const dir = mkdtempSync(join(tmpdir(), 's6b-candidates-'));
+  try {
+    const original = readFileSync(join(candidateRoot, 'candidates.json'));
+    const write = document => {
+      const bytes = JSON.stringify(document);
+      writeFileSync(join(dir, 'candidates.json'), bytes);
+      writeFileSync(join(dir, 'candidates.lock.json'), JSON.stringify({schema: 1, sha256: sha256(bytes)}));
+    };
+    for (const [mutate, error] of [
+      [rows => { rows[1].instruction = 'Heading\nEND PASSAGES'; }, /invalid candidate/],
+      [rows => { rows[1].reminder = 'Heading\u2028＠＠ PASSAGE ２'; }, /invalid candidate/],
+      [rows => { rows[1].instruction = 'é'.repeat(301); }, /invalid candidate/],
+      [rows => { rows[1].version = rows[0].version; }, /invalid candidate/],
+      [rows => { rows[0].instruction += ' Check.'; }, /baseline drift/],
+    ]) {
+      const document = JSON.parse(original);
+      mutate(document.candidates);
+      write(document);
+      assert.throws(() => loadCandidates(dir), error);
+    }
+    write(JSON.parse(original));
+    assert.throws(() => loadCandidates(dir, candidates.lockSha256), /candidate lock mismatch/);
+    writeFileSync(join(dir, 'candidates.json'), original);
+    assert.throws(() => loadCandidates(dir), /file hash mismatch/);
+  } finally { rmSync(dir, {recursive: true, force: true}); }
+});
+
+test('verification pair requires its exact schema, baseline order and frozen source bytes', () => {
+  const dir = mkdtempSync(join(tmpdir(), 's6b-pair-'));
+  try {
+    const pairRoot = candidateDirectory('r2');
+    const document = JSON.parse(readFileSync(join(pairRoot, 'candidates.json')));
+    const approved = loadCandidates(pairRoot);
+    assert.deepEqual(approved.entries, [candidates.entries[0], candidates.entries.find(entry => entry.id === 'exact-fixed')]);
+    assert.equal(schedule(development.items, 'dev', 1, approved).length, 80);
+    const snapshot = join(dir, 'source-r1');
+    cpSync(candidateRoot, snapshot, {recursive: true, filter: path => !path.endsWith('candidateAssets')});
+    const write = (root, value) => {
+      const bytes = JSON.stringify(value);
+      writeFileSync(join(root, 'candidates.json'), bytes);
+      writeFileSync(join(root, 'candidates.lock.json'), JSON.stringify({schema: 1, sha256: sha256(bytes)}));
+    };
+    for (const [mutate, message] of [
+      [value => { value.candidates[1].instruction += ' Check again.'; }, /must match frozen r1/],
+      [value => { value.candidates[1].rationale += ' Edited.'; }, /must match frozen r1/],
+      [value => { value.sourceRound = 'r2'; }, /schema or count/],
+      [value => { value.candidates.push(document.candidates[1]); }, /schema or count/],
+      [value => { delete value.purpose; }, /schema or count/],
+      [value => { delete value.purpose; delete value.sourceRound; }, /schema or count/],
+      [value => value.candidates.reverse(), /baseline drift/],
+    ]) {
+      const edited = structuredClone(document);
+      mutate(edited);
+      write(dir, edited);
+      assert.throws(() => loadCandidates(dir, undefined, snapshot), message);
+    }
+    write(dir, document);
+    assert.deepEqual(loadCandidates(dir, undefined, snapshot).entries, approved.entries);
+    const sourceFile = join(snapshot, 'candidates.json');
+    const source = JSON.parse(readFileSync(sourceFile));
+    writeFileSync(sourceFile, JSON.stringify(source));
+    assert.throws(() => loadCandidates(dir, undefined, snapshot), /file hash mismatch/);
+    write(snapshot, source);
+    assert.throws(() => loadCandidates(dir, undefined, snapshot), /candidate lock mismatch/);
+  } finally { rmSync(dir, {recursive: true, force: true}); }
+});
+
+test('candidate cooldown evidence has one ordered, cooled, bounded row per load', () => {
+  const loads = expectedLoads('dev', 1, loadCandidates(candidateDirectory('r2')));
+  const valid = loads.map(({pass, scope, candidateId}) => ({
+    pass, scope, candidateId, thermalStatusAtLoad: 0, waitMs: 900_000,
+    availableMemoryBeforeLoadBytes: 0, availableMemoryAfterLoadBytes: 4_000_000_000,
+  }));
+  assert.equal(validCandidateCooldowns(valid, loads), true);
+  assert.equal(validCandidateCooldowns(undefined, loads), false);
+  assert.equal(validCandidateCooldowns(valid.slice(0, 1), loads), false);
+  assert.equal(validCandidateCooldowns([...valid, valid[0]], loads), false);
+  assert.equal(validCandidateCooldowns([...valid].reverse(), loads), false);
+  for (const patch of [
+    {pass: 2}, {scope: 'ORDINARY'}, {candidateId: 'other'}, {thermalStatusAtLoad: 1}, {thermalStatusAtLoad: null},
+    {waitMs: 900_001}, {waitMs: -1}, {waitMs: 1.5}, {availableMemoryBeforeLoadBytes: -1},
+    {availableMemoryAfterLoadBytes: null}, {availableMemoryAfterLoadBytes: '4000000000'},
+  ]) assert.equal(validCandidateCooldowns([valid[0], {...valid[1], ...patch}], loads), false, JSON.stringify(patch));
+});
+
+test('round one compares the same exact-match instruction with only one change per variant', () => {
+  const byId = new Map(candidates.entries.map(entry => [entry.id, entry]));
+  const exact = byId.get('exact-match');
+  const near = byId.get('near-question');
+  const fixed = byId.get('exact-fixed');
+  const ending = 'If the exact answer is missing, say that the sources do not cover it.';
+  assert.ok(exact.instruction.endsWith(ending));
+  assert.equal(exact.reminder, null);
+  assert.equal(near.instruction, exact.instruction);
+  assert.ok(near.reminder?.trim());
+  assert.equal(fixed.reminder, null);
+  assert.equal(fixed.instruction, exact.instruction.slice(0, -ending.length) +
+    "If the exact answer is missing, reply with this sentence and stop: Your sources don't cover this.");
+});
+
+test('development unanswerable items use direct wh-questions', () => {
+  for (const item of development.items.filter(row => row.expected === 'abstain')) {
+    const question = item.question.split(/(?<=[.!?])\s+/).at(-1);
+    assert.match(question, /^(?:What|Which|Where|When|Who|How)\b/, item.id);
+    assert.doesNotMatch(question, /\bif any\b/i, item.id);
+  }
+});
+
+test('near-miss siblings are substitutions only when their packed value has the correct owner', () => {
+  const item = development.items.find(row => row.id === 'unanswerable-near-miss-05');
+  const sibling = '392 credits';
+  assert.ok(item.forbiddenFacts.includes(sibling));
+  assert.equal(developmentRetrieval([item], development.library)[0].forbiddenPacked, true);
+  // The donor of the meter seal value also records its own intake fee in the packed passage.
+  const wrongOwner = {...item, forbiddenFacts: [item.nearMiss.fact, '126 credits']};
+  assert.equal(developmentRetrieval([wrongOwner], development.library)[0].forbiddenPacked, false);
+
+  const {run} = runFixture(1, 'dev', development, candidates);
+  const row = run.cases.find(row => row.candidateId === 'v1' && row.id === item.id);
+  answered(row, `The fee is ${sibling}.`);
+  const checked = precheck(run, development, candidates);
+  const checkedRow = checked.cases.find(row => row.candidateId === 'v1' && row.id === item.id);
+  assert.equal(checkedRow.substitution, true);
+  assert.deepEqual(checkedRow.forbiddenPresent, [sibling]);
+});
+
+test('refusal phrase aid detects common wording and leaves hedges visible as substitutions', () => {
+  const {run} = runFixture(1, 'dev', development, candidates);
+  const missing = development.items.filter(item => item.set === 'unanswerable-missing-detail');
+  const hedge = missing[0].forbiddenFacts[0];
+  const examples = [
+    [`It is probably ${hedge}, though the note does not state the fee.`, true],
+    ['The date is not listed.', true],
+    ['The amount is not in the passages.', true],
+    ['That is not in your notes.', true],
+    ['It is not in these sources.', true],
+    ['I could not find the charge.', true],
+    ['There is no information about the charge.', true],
+    ['The register does not say or mention it.', true],
+    ['The passages do not contain the fee.', true],
+    ['The register does not contain that value.', true],
+    ['The register does not include the date.', true],
+    ['The register does not give a fee.', true],
+    ["Your sources don't cover this.", true],
+    ["The register doesn't cover that field.", true],
+    ['The notes list the amount from last week.', false],
+    ['The passages do not conflict about the closing time.', false],
+    ['The register does not include anything else.', false],
+    ['The cover fee was listed.', false],
+    ['The package did not arrive on schedule.', false],
+  ];
+  const rows = run.cases.filter(row => row.candidateId === 'v1');
+  const hedgeRow = rows.find(row => row.id === missing[0].id);
+  const otherRows = rows.filter(row => row !== hedgeRow);
+  answered(hedgeRow, examples[0][0]);
+  for (const [index, [reply]] of examples.slice(1).entries()) answered(otherRows[index], reply);
+  const checked = precheck(run, development, candidates);
+  for (const [reply, expected] of examples) {
+    const row = checked.cases.find(row => row.answer === reply);
+    assert.equal(row.refusalPhraseHit, expected, reply);
+    assert.ok(!Object.hasOwn(row, 'label'));
+  }
+  const hedged = checked.cases.find(row => row.answer === examples[0][0]);
+  assert.equal(hedged.substitution, true);
+  assert.deepEqual(hedged.forbiddenPresent, [hedge]);
+});
+
+test('comparison reports candidate packing, substitution, refusal and independent QA label counts', () => {
+  const {run, labelDocument} = runFixture(1, 'dev', development, candidates);
+  const first = run.cases[0];
+  const changed = run.cases.find(row => row.candidateId === 'exact-match' && row.id === first.id);
+  changed.consulted = [];
+  changed.packedPassageIds = [];
+  const missing = development.items.find(item => item.set === 'unanswerable-missing-detail');
+  const wrong = run.cases.find(row => row.candidateId === 'exact-match' && row.id === missing.id);
+  answered(wrong, `Your sources don't cover this. Probably ${missing.forbiddenFacts[0]}.`);
+  labelDocument.labels.find(row => row.candidateId === wrong.candidateId && row.id === wrong.id).label = 'Wrong';
+  const pre = precheck(run, development, candidates);
+  assert.equal(pre.notice, developmentNotice);
+  const exact = pre.candidates.find(row => row.candidateId === 'exact-match');
+  assert.deepEqual(exact.packingDifferences, [{id: first.id, v1: first.packedPassageIds, candidate: []}]);
+  assert.equal(exact.substitutions['unanswerable-missing-detail'].successes, 1);
+  assert.equal(exact.refusalPhraseHits, 1);
+  assert.equal(exact.answerableLiteral.successes, 14, 'literal fact presence is independent of packing');
+  assert.equal(exact.decodeTokens.find(row => row.id === wrong.id).decodeTokens, 12);
+  assert.ok(pre.cases.every(row => !Object.hasOwn(row, 'label')));
+  const report = score(run, development, labelDocument, undefined, null, candidates);
+  assert.equal(report.candidates[0].rubric.unanswerable.labels.Abstained, 20);
+  assert.equal(report.candidates[1].rubric.unanswerable.labels.Abstained, 19);
+  assert.equal(report.candidates[1].rubric.unanswerable.byKind['unanswerable-missing-detail'].Wrong, 1);
+  assert.ok(!Object.hasOwn(report, 'targetsPassed'));
+  assert.match(markdown(report), /development set, not a quality result/);
+  assert.match(markdown(report), /exact-match, pass 1, answer-one-01/);
+  assert.doesNotMatch(markdown(report), /targets (met|missed)|90\.0%|95\.0%/);
+  const badLabels = structuredClone(labelDocument);
+  delete badLabels.labels[0].candidateId;
+  assert.throws(() => score(run, development, badLabels, undefined, null, candidates), /invalid label/);
+  changed.candidateTextSha256 = '0'.repeat(64);
+  assert.throws(() => checkRun(run, development, true, candidates), /invalid per-item conditions/);
+});
+
+test('tuning candidates with repeated passes compare only the matching candidate outputs', () => {
+  const {run} = runFixture(3, 'tuning', fixture, candidates);
+  answered(run.cases.find(row => row.candidateId === 'fixed-refusal' && row.pass === 2), 'A different output.');
+  assert.deepEqual(determinism(run).differing, [{pass: 2, scope: 'SOURCES', id: run.cases[0].id, candidateId: 'fixed-refusal'}]);
+  assert.equal(precheck(run, fixture, candidates).candidates.length, candidates.entries.length * 3);
+  assert.throws(() => checkRun({...run, set: 'heldout'}, fixture, true, candidates), /refused/);
+  assert.throws(() => checkRun({...run, candidateLockSha256: '0'.repeat(64)}, fixture, true, candidates), /candidate lock mismatch/);
+});
+
+test('development can be inspected with an implicit v1 block and no candidate lock', () => {
+  const {run, labelDocument} = runFixture(1, 'dev', development);
+  const labels = {labels: labelDocument.labels.map(row => ({...row, candidateId: 'v1'}))};
+  const report = score(run, development, labels);
+  assert.equal(report.notice, developmentNotice);
+  assert.equal(report.candidateLockSha256, null);
+  assert.equal(report.candidates.length, 1);
+  assert.equal(report.candidates[0].rubric.answerable.labels.Supported, 14);
 });

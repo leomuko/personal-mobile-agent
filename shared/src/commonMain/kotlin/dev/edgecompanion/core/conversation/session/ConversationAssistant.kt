@@ -22,6 +22,7 @@ internal typealias PassageRetriever = suspend (String, Int, PassageControl) -> P
 internal class ConversationAssistant(private val scope: CoroutineScope,
     private val controller: suspend () -> ConversationController?, private val runtime: ChatRuntime?,
     private val chatProfile: ChatContextProfile = ChatContextProfile.STANDARD,
+    private val sourcesPromptText: SourcesPromptText = SourcesPromptText.V1,
     private val retriever: PassageRetriever? = null) {
     /** Set synchronously by [cancel], so a blocking retrieval on the lane can stop at its next checkpoint. */
     private class RetrievalStop { @Volatile var requested = false }
@@ -117,7 +118,7 @@ internal class ConversationAssistant(private val scope: CoroutineScope,
                 val contextEpoch = retrieval?.contextEpoch ?: snapshot.contextEpoch
                 if (contextEpoch != snapshot.contextEpoch) { stopBeforeGeneration(TurnStatus.INTERRUPTED); return@launch }
                 val assembly = GroundedPrompt.assemble(current, complete, turnId, chatProfile, turnScope,
-                    retrieval?.passages.orEmpty())
+                    retrieval?.passages.orEmpty(), sourcesPromptText)
                 val summary = retrieval?.let {
                     RetrievalSummary(if (it.reason == null) RetrievalStatus.COMPLETE else RetrievalStatus.INCOMPLETE,
                         it.reason, it.coverage.indexedRevisions, it.coverage.totalRevisions)

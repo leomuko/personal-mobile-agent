@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "fixture": "answer-quality-dev-v1",
+  "files": {
+    "items.json": "12329830e44a0101cb6da0f931ead7d7ee31e02e620ce5f0dc2637af4c6a6887",
+    "library/brackenshivor-close.txt": "8b7b1d4fffbc79dc181336b57d120b524d6e7071f4a35d2540099680cf6a557c",
+    "library/brackenshivor-register.txt": "fcdf69a2704f842b6fd0a848152b51bc3b2dfbdc0a12927d65b50351bc9070b8",
+    "library/cinderglasten-close.txt": "bc9e5fdce94b2c220131584e0d1ee935497e4371eac03e4cea06fe33264955ba",
+    "library/cinderglasten-register.txt": "1110d8794af991275cae615b07ffb5bf86f40a03b901cf2068cbcb1acd84600d",
+    "library/drossymanthel-close.txt": "dd1120cd5c39faab745e012e7cd9867e6e6a4ac792b8bba8f54e9e68b2b6538d",
+    "library/drossymanthel-register.txt": "f0789085c88e8decb08996d7beebdfb62963535a048202781969686af85eb9e3",
+    "library/kestrelmabrun-close.txt": "ec5de29bae4cb3b2084d2e762fa7ffae9e9391cac9ac721604c364acf863aeb2",
+    "library/kestrelmabrun-register.txt": "07655ddbcbe2b3a9df02df54a06bb3fd0db5a8934d5668144192d8d7c4b8c40c",
+    "library/tallowdrisket-close.txt": "9f88f5cb4e36695b90a1a360096f986a4235d279c52deb5bed18ecd50ace6753",
+    "library/tallowdrisket-register.txt": "a01fb5041983fd7d904a705bb460679bb605c47c261af32db1d3c8476fe08414"
+  },
+  "librarySha256": "235b59651e706d7738ee4da4e08eb7a0164d674c686262f89188d1131cbe024a",
+  "passageBoundaries": {
+    "library/brackenshivor-close.txt": [
+      [
+        0,
+        377
+      ],
+      [
+        377,
+        472
+      ]
+    ],
+    "library/brackenshivor-register.txt": [
+      [
+        0,
+        372
+      ],
+      [
+        372,
+        542
+      ]
+    ],
+    "library/cinderglasten-close.txt": [
+      [
+        0,
+        358
+      ],
+      [
+        358,
+        487
+      ]
+    ],
+    "library/cinderglasten-register.txt": [
+      [
+        0,
+        356
+      ],
+      [
+        356,
+        555
+      ]
+    ],
+    "library/drossymanthel-close.txt": [
+      [
+        0,
+        376
+      ],
+      [
+        376,
+        459
+      ]
+    ],
+    "library/drossymanthel-register.txt": [
+      [
+        0,
+        358
+      ],
+      [
+        358,
+        555
+      ]
+    ],
+    "library/kestrelmabrun-close.txt": [
+      [
+        0,
+        359
+      ],
+      [
+        359,
+        464
+      ]
+    ],
+    "library/kestrelmabrun-register.txt": [
+      [
+        0,
+        384
+      ],
+      [
+        384,
+        440
+      ]
+    ],
+    "library/tallowdrisket-close.txt": [
+      [
+        0,
+        324
+      ],
+      [
+        324,
+        495
+      ]
+    ],
+    "library/tallowdrisket-register.txt": [
+      [
+        0,
+        380
+      ],
+      [
+        380,
+        428
+      ]
+    ]
+  },
+  "counts": {
+    "answer-one": 10,
+    "answer-two": 4,
+    "unanswerable-missing-detail": 10,
+    "unanswerable-near-miss": 8,
+    "unanswerable-off-topic": 2,
+    "diagnostic-bait": 3,
+    "diagnostic-contradiction": 3
+  },
+  "ordinarySubsetCount": 0,
+  "freezePolicy": {
+    "approval": "Planner QA and user authorization for the first S24 run freeze this development fixture.",
+    "noResultsDrivenChanges": true,
+    "tuningExcludedFromHeldout": true
+  }
+}

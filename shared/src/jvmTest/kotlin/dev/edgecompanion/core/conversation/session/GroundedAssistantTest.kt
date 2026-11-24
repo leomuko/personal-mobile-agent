@@ -15,7 +15,8 @@ import kotlin.test.*
 class GroundedAssistantTest {
     private val profile = ChatContextProfile.EXTENDED_4096
     private val question = "When does the greenhouse vent open?"
-    private class Lane(test: TestScope, val retriever: PassageRetriever?, chatRuntime: ((RecordingRuntime) -> ChatRuntime?)? = null) {
+    private class Lane(test: TestScope, retriever: PassageRetriever?,
+        sourcesPromptText: SourcesPromptText = SourcesPromptText.V1, chatRuntime: ((RecordingRuntime) -> ChatRuntime?)? = null) {
         val driver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY).also { CompanionDatabase.Schema.create(it) }
         val db = CompanionDatabase(driver)
         val store = SqlConversationStore(db)
@@ -23,7 +24,7 @@ class GroundedAssistantTest {
         val runtime = RecordingRuntime()
         val scope = CoroutineScope(SupervisorJob() + StandardTestDispatcher(test.testScheduler))
         val assistant = ConversationAssistant(scope, { controller }, if (chatRuntime == null) runtime else chatRuntime(runtime),
-            ChatContextProfile.EXTENDED_4096, retriever)
+            ChatContextProfile.EXTENDED_4096, sourcesPromptText = sourcesPromptText, retriever = retriever)
         suspend fun shutdown() {
             try { assistant.invalidate(); scope.coroutineContext.job.cancelAndJoin() } finally { driver.close() }
         }
@@ -39,6 +40,32 @@ class GroundedAssistantTest {
     private fun result(passages: List<RetrievedPassage> = emptyList(), reason: PassageStopReason? = null,
         coverage: PassageCoverage = PassageCoverage(1, 1), epoch: Long = 0) =
         PassageRetrieval(epoch, coverage, passages, reason, 0, passages.size, 0)
+
+    @Test fun candidateReachesSourcesRuntimeAndLeavesOrdinaryRequestIdentical() = runTest {
+        val candidate = SourcesPromptText("test-candidate", "Check the exact device and detail.", "Use the recorded opening time.")
+        val passage = retrieved(0, "The synthetic greenhouse vent opens at noon.")
+        val retrieve: PassageRetriever = { _, _, _ -> result(listOf(passage)) }
+
+        Lane(this, retrieve, candidate).use { l ->
+            ask(l, RequestScope.SOURCES)
+            val text = l.runtime.requests.single().messages.single().text
+            assertTrue(text.startsWith(GroundedPrompt.ORDINARY_INSTRUCTION + " ${candidate.instruction}\n@@@ BEGIN PASSAGES\n"))
+            assertTrue(text.endsWith("\n@@@ END PASSAGES\n${candidate.reminder}\n\n$question"))
+            assertTrue(text.contains("\n@@@ PASSAGE 1\n${passage.text}\n"))
+        }
+        val default = readOrdinary(Lane(this, retrieve))
+        val withCandidate = readOrdinary(Lane(this, retrieve, candidate))
+        assertEquals(default.copy(id = withCandidate.id), withCandidate)
+    }
+
+    private suspend fun TestScope.readOrdinary(lane: Lane): ChatRequest {
+        try {
+            ask(lane, RequestScope.ORDINARY)
+            return lane.runtime.requests.single()
+        } finally {
+            lane.shutdown()
+        }
+    }
 
     @Test fun cancellationDuringRetrievalRecordsCancelledAndNeverStartsTheModel() = runTest {
         val gate = CompletableDeferred<PassageRetrieval>()

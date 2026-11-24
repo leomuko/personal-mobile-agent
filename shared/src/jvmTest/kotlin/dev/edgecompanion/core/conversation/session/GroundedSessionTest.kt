@@ -28,14 +28,33 @@ class GroundedSessionTest {
         val runtime = RecordingRuntime()
         override fun close() = driver.close()
     }
-    private fun TestScope.session(f: Fixture, runtime: ChatRuntime? = f.runtime) = ConversationSession(
+    private fun TestScope.session(f: Fixture, runtime: ChatRuntime? = f.runtime,
+        sourcesPromptText: SourcesPromptText = SourcesPromptText.V1) = ConversationSession(
         StandardTestDispatcher(testScheduler), { ConversationController(f.store) { 1 } }, {},
-        chatRuntime = runtime, sourcesProvider = { f.repo }, chatProfile = profile).also { it.start(); runCurrent() }
+        chatRuntime = runtime, sourcesProvider = { f.repo }, chatProfile = profile,
+        sourcesPromptText = sourcesPromptText).also { it.start(); runCurrent() }
     private suspend fun TestScope.send(session: ConversationSession, text: String, scope: RequestScope = RequestScope.ORDINARY) {
         session.editDraft(text); runCurrent(); session.submit(scope); runCurrent()
     }
     private val garden = "The synthetic greenhouse vent opens at twenty degrees on weekdays."
     private val question = "When does the greenhouse vent open?"
+
+    @Test fun sessionForwardsCandidateInstructionAndReminderToSourcesRuntime() = runTest {
+        Fixture().use { f ->
+            val candidate = SourcesPromptText("session-candidate", "Use the exact recorded vent setting.",
+                "Check that the passage answers this question.")
+            val chat = session(f, sourcesPromptText = candidate)
+            try {
+                chat.addTextSource("Garden", garden)
+                send(chat, question, RequestScope.SOURCES)
+                val text = f.runtime.requests.single().messages.single().text
+                assertTrue(text.startsWith(GroundedPrompt.ORDINARY_INSTRUCTION +
+                    " ${candidate.instruction}\n@@@ BEGIN PASSAGES\n"))
+                assertTrue(text.contains("\n@@@ PASSAGE 1\n$garden\n"))
+                assertTrue(text.endsWith("\n@@@ END PASSAGES\n${candidate.reminder}\n\n$question"))
+            } finally { chat.shutdown() }
+        }
+    }
 
     @Test fun composerSendUsesRestoredScopeAndSendingDoesNotResetIt() = runTest {
         Fixture().use { f ->

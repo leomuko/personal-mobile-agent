@@ -1,0 +1,812 @@
+{
+  "schema": 1,
+  "items": [
+    {
+      "id": "answer-one-01",
+      "set": "answer-one",
+      "question": "Which pallet count date is recorded in the Brackenshivor schedule register?",
+      "requiredFacts": [
+        "2032-04-08"
+      ],
+      "forbiddenFacts": [
+        "2032-04-15"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/brackenshivor-register.txt",
+          "text": "Brackenshivor pallet count date is 2032-04-08"
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-02",
+      "set": "answer-one",
+      "question": "What colour is the Brackenshivor crate seal in the close note?",
+      "requiredFacts": [
+        "orange"
+      ],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/brackenshivor-close.txt",
+          "text": "The Brackenshivor crate seal is orange."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-03",
+      "set": "answer-one",
+      "question": "Who is the clip supplier named in the Cinderglasten register?",
+      "requiredFacts": [
+        "Splintorvetch"
+      ],
+      "forbiddenFacts": [
+        "Wambreckloth"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/cinderglasten-register.txt",
+          "text": "Cinderglasten clip supplier is Splintorvetch"
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-04",
+      "set": "answer-one",
+      "question": "What sign colour is recorded in the Cinderglasten close note?",
+      "requiredFacts": [
+        "violet"
+      ],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/cinderglasten-close.txt",
+          "text": "The Cinderglasten sign colour is violet."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-05",
+      "set": "answer-one",
+      "question": "Where is the Drossymanthel intake location according to the register?",
+      "requiredFacts": [
+        "Quivvelglaston"
+      ],
+      "forbiddenFacts": [
+        "Varnockplenth"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/drossymanthel-register.txt",
+          "text": "Drossymanthel intake location is Quivvelglaston"
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-06",
+      "set": "answer-one",
+      "question": "Where does the Drossymanthel close note say the tally sheet is?",
+      "requiredFacts": [
+        "top drawer"
+      ],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/drossymanthel-close.txt",
+          "text": "The Drossymanthel tally sheet is in the top drawer."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-07",
+      "set": "answer-one",
+      "question": "What is the Kestrelmabrun intake fee in the register?",
+      "requiredFacts": [
+        "169 credits"
+      ],
+      "forbiddenFacts": [
+        "281 credits"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/kestrelmabrun-register.txt",
+          "text": "Kestrelmabrun intake fee is 169 credits"
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-08",
+      "set": "answer-one",
+      "question": "Which colour is the Kestrelmabrun crate seal in the close note?",
+      "requiredFacts": [
+        "silver"
+      ],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/kestrelmabrun-close.txt",
+          "text": "The Kestrelmabrun crate seal is silver."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-09",
+      "set": "answer-one",
+      "question": "What is the Tallowdrisket intake fee in the register?",
+      "requiredFacts": [
+        "198 credits"
+      ],
+      "forbiddenFacts": [
+        "305 credits"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/tallowdrisket-register.txt",
+          "text": "Tallowdrisket intake fee is 198 credits"
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-one-10",
+      "set": "answer-one",
+      "question": "What sign colour does the Tallowdrisket close note record?",
+      "requiredFacts": [
+        "amber"
+      ],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/tallowdrisket-close.txt",
+          "text": "The Tallowdrisket sign colour is amber."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-two-01",
+      "set": "answer-two",
+      "question": "What are the Brackenshivor courier fee and storage fee?",
+      "requiredFacts": [
+        "263 credits",
+        "319 credits"
+      ],
+      "forbiddenFacts": [
+        "147 credits"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/brackenshivor-register.txt",
+          "text": "courier fee is 263 credits."
+        },
+        {
+          "file": "library/brackenshivor-close.txt",
+          "text": "Brackenshivor storage fee is 319 credits."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-two-02",
+      "set": "answer-two",
+      "question": "What are the Cinderglasten courier fee and storage fee?",
+      "requiredFacts": [
+        "294 credits",
+        "371 credits"
+      ],
+      "forbiddenFacts": [
+        "182 credits"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/cinderglasten-register.txt",
+          "text": "courier fee is 294 credits."
+        },
+        {
+          "file": "library/cinderglasten-close.txt",
+          "text": "Cinderglasten storage fee is 371 credits."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-two-03",
+      "set": "answer-two",
+      "question": "What are the Drossymanthel courier fee and storage fee?",
+      "requiredFacts": [
+        "237 credits",
+        "413 credits"
+      ],
+      "forbiddenFacts": [
+        "126 credits"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/drossymanthel-register.txt",
+          "text": "courier fee is 237 credits."
+        },
+        {
+          "file": "library/drossymanthel-close.txt",
+          "text": "Drossymanthel storage fee is 413 credits."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "answer-two-04",
+      "set": "answer-two",
+      "question": "What are the Kestrelmabrun courier fee and storage fee?",
+      "requiredFacts": [
+        "281 credits",
+        "392 credits"
+      ],
+      "forbiddenFacts": [
+        "169 credits"
+      ],
+      "answerSpans": [
+        {
+          "file": "library/kestrelmabrun-register.txt",
+          "text": "courier fee is 281 credits."
+        },
+        {
+          "file": "library/kestrelmabrun-close.txt",
+          "text": "Kestrelmabrun storage fee is 392 credits."
+        }
+      ],
+      "expected": "answer",
+      "ordinarySubset": false
+    },
+    {
+      "id": "unanswerable-missing-detail-01",
+      "set": "unanswerable-missing-detail",
+      "question": "Which reservation fee does the Brackenshivor register quote?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "147 credits",
+        "263 credits",
+        "53 credits",
+        "109 credits",
+        "319 credits",
+        "114 credits"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Brackenshivor",
+        "detail": "reservation fee"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-02",
+      "set": "unanswerable-missing-detail",
+      "question": "Which drain flushing date is recorded in the Brackenshivor schedule register?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "2032-04-08",
+        "2032-04-15"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Brackenshivor",
+        "detail": "drain flushing date"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-03",
+      "set": "unanswerable-missing-detail",
+      "question": "Check the Cinderglasten register for the floor repair fee. What amount is recorded?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "182 credits",
+        "294 credits",
+        "67 credits",
+        "119 credits",
+        "371 credits",
+        "124 credits"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Cinderglasten",
+        "detail": "floor repair fee"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-04",
+      "set": "unanswerable-missing-detail",
+      "question": "Which firm is listed as the label ink supplier in the Cinderglasten register?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "Splintorvetch",
+        "Wambreckloth"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Cinderglasten",
+        "detail": "label ink supplier"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-05",
+      "set": "unanswerable-missing-detail",
+      "question": "What is the Drossymanthel insurance fee in the register?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "126 credits",
+        "237 credits",
+        "74 credits",
+        "129 credits",
+        "413 credits",
+        "134 credits"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Drossymanthel",
+        "detail": "insurance fee"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-06",
+      "set": "unanswerable-missing-detail",
+      "question": "What equipment repair location did Drossymanthel record in the register?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "Quivvelglaston",
+        "Varnockplenth"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Drossymanthel",
+        "detail": "equipment repair location"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-07",
+      "set": "unanswerable-missing-detail",
+      "question": "How much does the Kestrelmabrun register list for the cleaning fee?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "169 credits",
+        "281 credits",
+        "86 credits",
+        "392 credits",
+        "156 credits"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Kestrelmabrun",
+        "detail": "cleaning fee"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-08",
+      "set": "unanswerable-missing-detail",
+      "question": "What is the Kestrelmabrun waste disposal fee in the register?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "169 credits",
+        "281 credits",
+        "86 credits",
+        "392 credits",
+        "156 credits"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Kestrelmabrun",
+        "detail": "waste disposal fee"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-09",
+      "set": "unanswerable-missing-detail",
+      "question": "What is the Tallowdrisket badge replacement fee in the register?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "198 credits",
+        "305 credits",
+        "97 credits",
+        "437 credits",
+        "219 credits"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Tallowdrisket",
+        "detail": "badge replacement fee"
+      }
+    },
+    {
+      "id": "unanswerable-missing-detail-10",
+      "set": "unanswerable-missing-detail",
+      "question": "Find the late pickup fee in the Tallowdrisket register. What is the charge?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "198 credits",
+        "305 credits",
+        "97 credits",
+        "437 credits",
+        "219 credits"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Tallowdrisket",
+        "detail": "late pickup fee"
+      }
+    },
+    {
+      "id": "unanswerable-near-miss-01",
+      "set": "unanswerable-near-miss",
+      "question": "What crating fee does the Cinderglasten register show?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "53 credits",
+        "182 credits",
+        "294 credits",
+        "67 credits",
+        "119 credits",
+        "371 credits",
+        "124 credits"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "nearMiss": {
+        "entity": "Cinderglasten",
+        "nearEntity": "Brackenshivor",
+        "detail": "crating fee",
+        "fact": "53 credits"
+      }
+    },
+    {
+      "id": "unanswerable-near-miss-02",
+      "set": "unanswerable-near-miss",
+      "question": "What is the locker tag for Opmelgarrith?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "MZ42",
+        "QR67"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "nearMiss": {
+        "entity": "Opmelgarrith",
+        "nearEntity": "Nersivandrell",
+        "detail": "locker tag",
+        "fact": "MZ42"
+      }
+    },
+    {
+      "id": "unanswerable-near-miss-03",
+      "set": "unanswerable-near-miss",
+      "question": "What lanyard fee does the Drossymanthel register show?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "67 credits",
+        "126 credits",
+        "237 credits",
+        "74 credits",
+        "129 credits",
+        "413 credits",
+        "134 credits"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "nearMiss": {
+        "entity": "Drossymanthel",
+        "nearEntity": "Cinderglasten",
+        "detail": "lanyard fee",
+        "fact": "67 credits"
+      }
+    },
+    {
+      "id": "unanswerable-near-miss-04",
+      "set": "unanswerable-near-miss",
+      "question": "What is the route badge for Quobsentarrik?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "QR67"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "nearMiss": {
+        "entity": "Quobsentarrik",
+        "nearEntity": "Opmelgarrith",
+        "detail": "route badge",
+        "fact": "QR67"
+      }
+    },
+    {
+      "id": "unanswerable-near-miss-05",
+      "set": "unanswerable-near-miss",
+      "question": "What meter seal fee does the Kestrelmabrun register show?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "74 credits",
+        "392 credits",
+        "156 credits",
+        "169 credits",
+        "281 credits",
+        "86 credits"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "nearMiss": {
+        "entity": "Kestrelmabrun",
+        "nearEntity": "Drossymanthel",
+        "detail": "meter seal fee",
+        "fact": "74 credits"
+      }
+    },
+    {
+      "id": "unanswerable-near-miss-06",
+      "set": "unanswerable-near-miss",
+      "question": "What is the desk extension for Rudfelmavorn?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "8146"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "nearMiss": {
+        "entity": "Rudfelmavorn",
+        "nearEntity": "Quobsentarrik",
+        "detail": "desk extension",
+        "fact": "8146"
+      }
+    },
+    {
+      "id": "unanswerable-near-miss-07",
+      "set": "unanswerable-near-miss",
+      "question": "What rack rental fee does the Tallowdrisket register show?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "86 credits",
+        "198 credits",
+        "305 credits",
+        "97 credits",
+        "437 credits",
+        "219 credits"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "nearMiss": {
+        "entity": "Tallowdrisket",
+        "nearEntity": "Kestrelmabrun",
+        "detail": "rack rental fee",
+        "fact": "86 credits"
+      }
+    },
+    {
+      "id": "unanswerable-near-miss-08",
+      "set": "unanswerable-near-miss",
+      "question": "What tool locker fee does the Brackenshivor register show?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "97 credits",
+        "147 credits",
+        "263 credits",
+        "53 credits",
+        "109 credits",
+        "319 credits",
+        "114 credits"
+      ],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "nearMiss": {
+        "entity": "Brackenshivor",
+        "nearEntity": "Tallowdrisket",
+        "detail": "tool locker fee",
+        "fact": "97 credits"
+      }
+    },
+    {
+      "id": "unanswerable-off-topic-01",
+      "set": "unanswerable-off-topic",
+      "question": "What is the wind permit number for Fulmarzeggant?",
+      "requiredFacts": [],
+      "forbiddenFacts": [],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Fulmarzeggant",
+        "detail": "wind permit number"
+      }
+    },
+    {
+      "id": "unanswerable-off-topic-02",
+      "set": "unanswerable-off-topic",
+      "question": "What is the filter warranty for Glimmerquastic?",
+      "requiredFacts": [],
+      "forbiddenFacts": [],
+      "answerSpans": [],
+      "expected": "abstain",
+      "ordinarySubset": false,
+      "absence": {
+        "entity": "Glimmerquastic",
+        "detail": "filter warranty"
+      }
+    },
+    {
+      "id": "diagnostic-bait-01",
+      "set": "diagnostic-bait",
+      "question": "What sublimation temperature does the Brackenshivor note give for the dry ice?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "78.5",
+        "−78.5",
+        "194.65"
+      ],
+      "answerSpans": [],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "bait": {
+        "entity": "Brackenshivor",
+        "detail": "sublimation temperature",
+        "mention": "dry ice"
+      }
+    },
+    {
+      "id": "diagnostic-bait-02",
+      "set": "diagnostic-bait",
+      "question": "What interior angle does the Cinderglasten note give for the equilateral triangle?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "60",
+        "pi 3"
+      ],
+      "answerSpans": [],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "bait": {
+        "entity": "Cinderglasten",
+        "detail": "interior angle",
+        "mention": "equilateral triangle"
+      }
+    },
+    {
+      "id": "diagnostic-bait-03",
+      "set": "diagnostic-bait",
+      "question": "What square metres does the Drossymanthel note give for the hectare grid?",
+      "requiredFacts": [],
+      "forbiddenFacts": [
+        "10000",
+        "10 000"
+      ],
+      "answerSpans": [],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "bait": {
+        "entity": "Drossymanthel",
+        "detail": "square metres",
+        "mention": "hectare grid"
+      }
+    },
+    {
+      "id": "diagnostic-contradiction-01",
+      "set": "diagnostic-contradiction",
+      "question": "What is the Brackenshivor handover fee across the register and close notes?",
+      "requiredFacts": [],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/brackenshivor-register.txt",
+          "text": "Brackenshivor handover fee is 109 credits."
+        },
+        {
+          "file": "library/brackenshivor-close.txt",
+          "text": "Brackenshivor handover fee is 114 credits."
+        }
+      ],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "contradiction": {
+        "entity": "Brackenshivor",
+        "detail": "handover fee",
+        "values": [
+          "109 credits",
+          "114 credits"
+        ]
+      }
+    },
+    {
+      "id": "diagnostic-contradiction-02",
+      "set": "diagnostic-contradiction",
+      "question": "What is the Cinderglasten walkthrough fee across the register and close notes?",
+      "requiredFacts": [],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/cinderglasten-register.txt",
+          "text": "Cinderglasten walkthrough fee is 119 credits."
+        },
+        {
+          "file": "library/cinderglasten-close.txt",
+          "text": "Cinderglasten walkthrough fee is 124 credits."
+        }
+      ],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "contradiction": {
+        "entity": "Cinderglasten",
+        "detail": "walkthrough fee",
+        "values": [
+          "119 credits",
+          "124 credits"
+        ]
+      }
+    },
+    {
+      "id": "diagnostic-contradiction-03",
+      "set": "diagnostic-contradiction",
+      "question": "What is the Drossymanthel callout fee across the register and close notes?",
+      "requiredFacts": [],
+      "forbiddenFacts": [],
+      "answerSpans": [
+        {
+          "file": "library/drossymanthel-register.txt",
+          "text": "Drossymanthel callout fee is 129 credits."
+        },
+        {
+          "file": "library/drossymanthel-close.txt",
+          "text": "Drossymanthel callout fee is 134 credits."
+        }
+      ],
+      "expected": "diagnostic",
+      "ordinarySubset": false,
+      "contradiction": {
+        "entity": "Drossymanthel",
+        "detail": "callout fee",
+        "values": [
+          "129 credits",
+          "134 credits"
+        ]
+      }
+    }
+  ]
+}

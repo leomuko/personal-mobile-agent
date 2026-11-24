@@ -32,6 +32,7 @@ class ConversationSession(
     chatProfile: ChatContextProfile = ChatContextProfile.STANDARD,
     /** Monotonic milliseconds for the backfill batch budget; injectable for tests. */
     private val monotonicMillis: () -> Long = PassageControl().monotonicMillis,
+    sourcesPromptText: SourcesPromptText = SourcesPromptText.V1,
 ) : SourceLibrary {
     private val scope = CoroutineScope(SupervisorJob() + dispatcher.limitedParallelism(1))
     private val mutable = MutableStateFlow(ConversationState())
@@ -41,7 +42,8 @@ class ConversationSession(
     private var controller: ConversationController? = null
     private val available = CompletableDeferred<ConversationController?>()
     private val assistant = ConversationAssistant(scope, { available.await() }, chatRuntime, chatProfile,
-        sourcesProvider?.let { provider -> { query, textBudget, control ->
+        sourcesPromptText = sourcesPromptText,
+        retriever = sourcesProvider?.let { provider -> { query, textBudget, control ->
             // Runs inside the assistant's coroutine on this session's serial lane.
             // D3: no retrieval while the library has no source revisions (null = skipped).
             val repository = provider()

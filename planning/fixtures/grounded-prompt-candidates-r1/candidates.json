@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "candidates": [
+    {
+      "id": "v1",
+      "version": "grounded-prompt-v1",
+      "instruction": "Answer only from these passages. If they do not contain the answer, say that the sources do not cover it.",
+      "reminder": null,
+      "rationale": "Measure the current production wording against the same items."
+    },
+    {
+      "id": "exact-match",
+      "version": "s6b-r1-exact-match",
+      "instruction": "Answer only from these passages. Check that the passage states the exact detail asked for about the exact person, project or item named. A related detail or a value for a different entity does not answer the question. If the exact answer is missing, say that the sources do not cover it.",
+      "reminder": null,
+      "rationale": "Makes both the requested field and the named entity explicit in the evidence check."
+    },
+    {
+      "id": "near-question",
+      "version": "s6b-r1-near-question",
+      "instruction": "Answer only from these passages. Check that the passage states the exact detail asked for about the exact person, project or item named. A related detail or a value for a different entity does not answer the question. If the exact answer is missing, say that the sources do not cover it.",
+      "reminder": "Answer only when the passages give the exact detail for the exact person, project or item asked about.",
+      "rationale": "Adds a brief restatement close to the question while holding the opening instruction constant."
+    },
+    {
+      "id": "fixed-refusal",
+      "version": "s6b-r1-fixed-refusal",
+      "instruction": "Answer only from these passages. If they do not contain the answer, reply with this sentence and stop: Your sources don't cover this.",
+      "reminder": null,
+      "rationale": "Tests whether a fixed refusal improves abstention with the baseline evidence rule."
+    },
+    {
+      "id": "exact-fixed",
+      "version": "s6b-r1-exact-fixed",
+      "instruction": "Answer only from these passages. Check that the passage states the exact detail asked for about the exact person, project or item named. A related detail or a value for a different entity does not answer the question. If the exact answer is missing, reply with this sentence and stop: Your sources don't cover this.",
+      "reminder": null,
+      "rationale": "Tests the exact-match rule and fixed refusal together."
+    }
+  ]
+}
