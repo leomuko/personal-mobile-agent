@@ -210,6 +210,76 @@ on a path under the folders archived on 2026-11-10.
   its ≥90% supported / ≥95% abstention targets, reported honestly if missed.
   No JSON verification is reinstated.
 - **Depends on:** S4, S2b.
+- **Status (2026-11-23):** measured on the S24 and committed (`baa8646`,
+  `eddde09`, `ac00699`). **Targets missed:** Supported 43/50 (all 7 misses were
+  retrieval: gold passage not packed), Abstention 15/20 (4 substitutions of a
+  sibling field or another entity's value, 1 non-responsive). References
+  408/408. Recorded as an honest failed measurement in
+  `docs/P2_ANSWER_QUALITY_RESULTS.md`; the held-out result is never re-scored.
+
+### S6b — Refusal fix for source-scoped answers
+
+- **Goal:** reduce sibling-field and near-miss substitution in `SOURCES`
+  answers without losing supported answers.
+- **Scope (round 1, host):** a synthetic development set
+  `answer-quality-dev-v1` (40 items, entities disjoint from v1, retrieval not
+  under test); a public prompt-text seam with today's text as the default, so
+  production is byte-identical; a candidate file run on the S24 as one block
+  per candidate, refused for held-out sets; per-candidate pre-check and
+  comparison. A selection rule fixed in advance, applied to QA labels.
+- **Round 2 (after the user picks a candidate):** adopt it as
+  `grounded-prompt-v2` for `SOURCES` only; `ORDINARY` unchanged.
+- **Out of scope:** retrieval, semantic recall, `MAX_PASSAGES`, profile,
+  sampler, memory policy, UI, scoring the dev set against 90/95.
+- **Handoff:** [agents/handoffs/S6B_REFUSAL_FIX_DEV_HANDOFF.md](agents/handoffs/S6B_REFUSAL_FIX_DEV_HANDOFF.md).
+- **Status (2026-11-23):** round 1 host work done by Codex in three dev
+  rounds; fresh Claude QA FAIL, FAIL, then **PASS** (host scope,
+  `build/qa-s6b-r3-2026-11-23/`); planner review accepted. S6b-F12 (P3, aid
+  only) deferred.
+- **Status (2026-11-24): closed. Selection made; app default unchanged.**
+  - S24 runs: r1 (5 blocks; exact-fixed lost to a thermal stop), then the
+    monitor stop-intent fix (fresh QA PASS), then the r2 verification pair.
+    r2's v1 is byte-identical to r1's, so the runs can be compared.
+  - Blind QA labels and the frozen rule select **`exact-fixed`**:
+    14/14 Supported, 11/20 Abstained against v1's 6/20 (+5).
+  - The independent decision audit
+    (`build/qa-s6b-selection-audit-2026-11-24/`) confirmed the selection.
+  - **User decision:** keep `grounded-prompt-v1` as the production default,
+    and retain `exact-fixed` as the selected QA candidate. The +5 depends on
+    counting correctly attributed explicit refusals as Wrong; counted as
+    Abstained, the gain is +2.
+  - Round 2 (adoption as `grounded-prompt-v2`) waits for S6c. There is no
+    further S6b round, and the historical labels and results are preserved.
+  - Record: `docs/P2_REFUSAL_FIX_RESULTS.md`. Uncommitted.
+
+### S6c — Qualification on a fresh held-out set (outline)
+
+- **Fixture.** A new `answer-quality-v2` held-out fixture, written by an
+  agent that has not seen S6b candidates, dev results or the v1 held-out set.
+  It carries the lessons from S6b-DA2:
+  - forbidden lists include the entity's own neighbouring values;
+  - no fact the passages support is forbidden.
+- **Prompts.** `exact-fixed` runs as an explicit QA candidate beside v1,
+  without changing the app default. Promotion to `grounded-prompt-v2`
+  (`SOURCES` only, v1 kept for rollback) needs the user's decision after
+  S6c.
+- **Rubric v2 (prospective; proposed 2026-11-24, to be frozen before any
+  S6c label).** S6 labels are never relabelled under v2.
+  - **Abstained:** explicitly declines the requested fact. Any additional
+    context is correctly attributed, and no claim is unsupported. Mentioning
+    a neighbouring value is allowed only when it is labelled as what it is
+    and the requested fact is explicitly declined.
+  - **Wrong:** assigns the wrong value or entity, or contradicts the
+    evidence. A forbidden value offered as the answer, or attributed to the
+    wrong field or entity, is Wrong.
+  - **Non-responsive (new):** repeats true information without answering or
+    explicitly declining. It counts as a task failure: not Abstained on
+    unanswerable items, and not Supported on answerable ones.
+  - Supported, Partial, Unsupported (now only for claims the passages do not
+    make) and Hedged guess are unchanged.
+- **Timing.** Supported stays capped by keyword retrieval until semantic
+  recall lands, so the user decides whether S6c runs before or after
+  semantic recall.
 
 ### M1 — Interim milestone review
 
