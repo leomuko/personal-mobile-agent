@@ -3,7 +3,7 @@
 #   scripts/verify-chat-context.sh measure 2048|4096|8192 [--repeat 1-5]   context measurement (supervised)
 #   scripts/verify-chat-context.sh sqlcipher                               SQLCipher passage + grounding gate
 #   scripts/verify-chat-context.sh ui                                      S5 Compose UI tests + S24 captures
-#   scripts/verify-chat-context.sh quality --set tuning|heldout [--passes 1|3]   S6 capture
+#   scripts/verify-chat-context.sh quality --set tuning|heldout|dev [--passes 1|3] [--candidates r1|r2] [--assets-only]   S6 capture
 # Targets only dev.edgecompanion.app.secureqa and its test package: installs with `install -r`,
 # runs `am instrument`, never uninstalls, clears or touches debug/release data.
 # Both APKs are copied into this run's private results directory right after the build; only those
@@ -12,13 +12,18 @@
 # Bash 3.2 errexit ignores a failing bare [[ ]], so every gate is written `check || fail reason`.
 set -Eeuo pipefail
 
-usage() { printf 'Usage: %s measure 2048|4096|8192 [--repeat 1-5] | %s sqlcipher | %s ui | %s quality --set tuning|heldout [--passes 1|3]\n' "$0" "$0" "$0" "$0" >&2; }
+usage() { printf 'Usage: %s measure 2048|4096|8192 [--repeat 1-5] | %s sqlcipher | %s ui | %s quality --set tuning|heldout|dev [--passes 1|3] [--candidates r1|r2] [--assets-only]\n' "$0" "$0" "$0" "$0" >&2; }
 MODE="${1:-}"
 PROFILE=""
 REPEAT=""
 QUALITY_SET=""
 QUALITY_PASSES=""
 QUALITY_LOCK=""
+QUALITY_CANDIDATE_ROUND=""
+QUALITY_CANDIDATE_LOCK=""
+QUALITY_FIXTURE="answer-quality-v1"
+QUALITY_ASSETS_ONLY=false
+QUALITY_DEV_SNAPSHOT=""
 case "$MODE" in
   measure)
     [[ $# -eq 2 || $# -eq 4 ]] || { usage; exit 2; }
@@ -33,19 +38,40 @@ case "$MODE" in
     ;;
   sqlcipher|ui) [[ $# -eq 1 ]] || { usage; exit 2; } ;;
   quality)
-    [[ ( $# -eq 3 || $# -eq 5 ) && "$2" == --set ]] || { usage; exit 2; }
+    [[ $# -ge 3 && "$2" == --set ]] || { usage; exit 2; }
     QUALITY_SET="$3"
     case "$QUALITY_SET" in
       tuning) QUALITY_ITEMS=10; QUALITY_SCOPE_BLOCKS=1 ;;
       heldout) QUALITY_ITEMS=102; QUALITY_SCOPE_BLOCKS=2 ;;
+      dev) QUALITY_ITEMS=40; QUALITY_SCOPE_BLOCKS=1; QUALITY_FIXTURE="answer-quality-dev-v1" ;;
       *) usage; exit 2 ;;
     esac
-    QUALITY_PASSES=1
-    if [[ $# -eq 5 ]]; then
-      [[ "$4" == --passes ]] || { usage; exit 2; }
-      QUALITY_PASSES="$5"
-      case "$QUALITY_PASSES" in 1|3) ;; *) usage; exit 2 ;; esac
-    fi
+    shift 3
+    while [[ $# -gt 0 ]]; do
+      case "$1" in
+        --assets-only)
+          [[ "$QUALITY_ASSETS_ONLY" == false ]] || { usage; exit 2; }
+          QUALITY_ASSETS_ONLY=true
+          shift
+          continue ;;
+        --passes)
+          [[ $# -ge 2 ]] || { usage; exit 2; }
+          [[ -z "$QUALITY_PASSES" && ( "$2" == 1 || "$2" == 3 ) ]] || { usage; exit 2; }
+          QUALITY_PASSES="$2" ;;
+        --candidates)
+          [[ $# -ge 2 ]] || { usage; exit 2; }
+          [[ -z "$QUALITY_CANDIDATE_ROUND" && ( "$2" == r1 || "$2" == r2 ) ]] || { usage; exit 2; }
+          QUALITY_CANDIDATE_ROUND="$2" ;;
+        *) usage; exit 2 ;;
+      esac
+      shift 2
+    done
+    QUALITY_PASSES="${QUALITY_PASSES:-1}"
+    [[ "$QUALITY_SET" != dev || "$QUALITY_PASSES" == 1 ]] || { usage; exit 2; }
+    [[ "$QUALITY_SET" != heldout || -z "$QUALITY_CANDIDATE_ROUND" ]] ||
+      { printf 'Candidates are refused for heldout\n' >&2; exit 2; }
+    [[ "$QUALITY_ASSETS_ONLY" == false || "$QUALITY_SET" == dev || -n "$QUALITY_CANDIDATE_ROUND" ]] ||
+      { printf 'Asset-only checks require dev or a candidate round\n' >&2; exit 2; }
     PROFILE=4096
     ;;
   *) usage; exit 2 ;;
@@ -53,9 +79,21 @@ esac
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-: "${ANDROID_SERIAL:?Set ANDROID_SERIAL to the authorized S24 serial}"
-[[ "$ANDROID_SERIAL" =~ ^[A-Za-z0-9._:-]+$ ]] || { printf 'Invalid ANDROID_SERIAL\n' >&2; exit 2; }
-export ANDROID_SERIAL
+if [[ -n "$QUALITY_CANDIDATE_ROUND" ]]; then
+  QUALITY_CANDIDATE_DIR="$ROOT/planning/fixtures/grounded-prompt-candidates-$QUALITY_CANDIDATE_ROUND"
+  candidate_info="$(node --input-type=module -e '
+    import { loadCandidates } from "./scripts/answer-quality.mjs";
+    const candidates = loadCandidates(process.argv[1]);
+    console.log(candidates.lockSha256, candidates.entries.length);
+  ' "$QUALITY_CANDIDATE_DIR")" || { printf 'Candidate files or lock are invalid\n' >&2; exit 2; }
+  read -r QUALITY_CANDIDATE_LOCK QUALITY_SCOPE_BLOCKS <<< "$candidate_info" || exit 2
+  QUALITY_ITEMS=$((QUALITY_ITEMS * QUALITY_SCOPE_BLOCKS))
+fi
+if [[ "$QUALITY_ASSETS_ONLY" == false ]]; then
+  : "${ANDROID_SERIAL:?Set ANDROID_SERIAL to the authorized S24 serial}"
+  [[ "$ANDROID_SERIAL" =~ ^[A-Za-z0-9._:-]+$ ]] || { printf 'Invalid ANDROID_SERIAL\n' >&2; exit 2; }
+  export ANDROID_SERIAL
+fi
 SDK="${ANDROID_HOME:-$HOME/Library/Android/sdk}"
 ADB="${ADB:-$SDK/platform-tools/adb}"
 export ADB
@@ -81,7 +119,12 @@ elif [[ "$MODE" == quality ]]; then
   # An explicit ANSWER_QUALITY_DEADLINE_SECONDS replaces the formula and is recorded as an override.
   DEADLINE_FORMULA="300 + passes * (240 * scopeBlocksPerPass + 120 * itemsPerPass)"
   DEADLINE_OVERRIDE="${ANSWER_QUALITY_DEADLINE_SECONDS:-}"
-  DEADLINE="${ANSWER_QUALITY_DEADLINE_SECONDS:-$((300 + QUALITY_PASSES * (240 * QUALITY_SCOPE_BLOCKS + 120 * QUALITY_ITEMS)))}"
+  cooldown=0
+  if [[ -n "$QUALITY_CANDIDATE_ROUND" ]]; then
+    cooldown=900
+    DEADLINE_FORMULA="300 + passes * ((240 + 900) * scopeBlocksPerPass + 120 * itemsPerPass)"
+  fi
+  DEADLINE="${ANSWER_QUALITY_DEADLINE_SECONDS:-$((300 + QUALITY_PASSES * ((240 + cooldown) * QUALITY_SCOPE_BLOCKS + 120 * QUALITY_ITEMS)))}"
 else DEADLINE="${PASSAGE_DEADLINE_SECONDS:-600}"; fi
 STOP_GRACE="${QA_STOP_GRACE_SECONDS:-30}"
 THERMAL_READY="${THERMAL_READY_SECONDS:-15}"
@@ -129,6 +172,8 @@ MONITOR_PID=""
 INSTR_PID=""
 STARTED_MONITOR_PID=""
 STARTED_INSTR_PID=""
+MONITOR_CLEAN=true
+FINAL_THERMAL_REASON=""
 EVIDENCE_COLLECTED=false
 EVIDENCE_LINES=""
 
@@ -157,6 +202,26 @@ stop_owned() {
   [[ -n "$pid" ]] || return 0
   if kill -0 "$pid" 2>/dev/null; then kill -TERM "$pid" 2>/dev/null || true; fi
   wait "$pid" 2>/dev/null || true
+}
+
+# Join the owned monitor before trusting its final marker. A stuck or unexpectedly exited
+# monitor cannot certify a clean run.
+stop_thermal_monitor() {
+  local pid="$MONITOR_PID" until=$((SECONDS + 15)) signalled=false status=0
+  [[ -n "$pid" ]] || return 0
+  if kill -TERM "$pid" 2>/dev/null; then signalled=true; fi
+  while kill -0 "$pid" 2>/dev/null; do
+    if (( SECONDS >= until )); then
+      kill -KILL "$pid" 2>/dev/null || true
+      wait "$pid" 2>/dev/null || true
+      MONITOR_PID=""
+      return 1
+    fi
+    sleep 1
+  done
+  wait "$pid" 2>/dev/null || status=$?
+  MONITOR_PID=""
+  [[ "$signalled" == true && ( "$status" == 0 || "$status" == 143 ) ]] || return 1
 }
 
 note_evidence() { EVIDENCE_LINES="$EVIDENCE_LINES$1=$2
@@ -193,6 +258,24 @@ pull() {
   return 1
 }
 
+# Match the monitor's status and HAL SKIN parsing against the app-exported policy.
+check_final_thermal() {
+  node --input-type=module - "$RESULTS/thermal-final.txt" <<'JS'
+import { readFileSync } from 'node:fs';
+import { readMemoryPolicy } from './scripts/memory-policy.mjs';
+try {
+  const policy = readMemoryPolicy();
+  const output = readFileSync(process.argv[2], 'utf8');
+  const status = Number(/Thermal Status:\s*(\d+)/.exec(output)?.[1]);
+  const hal = output.split('Current temperatures from HAL:')[1] || '';
+  const skin = Number(/Temperature\{mValue=([\d.]+), mType=3, mName=SKIN/.exec(hal)?.[1]);
+  if (!Number.isFinite(status) || !Number.isFinite(skin) || !hal.includes('mName=SKIN'))
+    throw new Error('thermal status or SKIN sensor unavailable');
+  if (status >= policy.severeThermalStatus || skin >= policy.maxSkinCelsius) console.log('thermal-stop');
+} catch { console.log('thermal-final-unavailable'); }
+JS
+}
+
 # Retains whatever device evidence exists; each file's state goes to evidence.json, never fatal here.
 collect_evidence() {
   [[ "$EVIDENCE_COLLECTED" == false ]] || return 0
@@ -207,11 +290,15 @@ collect_evidence() {
       pull "no_backup/answer-quality-$RUN_ID-supervision-stop.json" supervision-stop.json supervisionStop || true
     fi
     pull "no_backup/qa-supervision/$RUN_ID/status.json" supervision.json supervision || true
+    # Join before the final reading. A pending monitor stop record already counts as a stop.
+    stop_thermal_monitor || MONITOR_CLEAN=false
     if device shell dumpsys thermalservice > "$RESULTS/thermal-final.txt" 2>> "$RESULTS/pull-errors.txt"; then
       note_evidence thermalFinal present
+      FINAL_THERMAL_REASON="$(check_final_thermal)" || FINAL_THERMAL_REASON=thermal-final-unavailable
     else
       rm -f -- "${RESULTS:?}/thermal-final.txt"
       note_evidence thermalFinal unavailable
+      FINAL_THERMAL_REASON=thermal-final-unavailable
     fi
     EVIDENCE_LINES="$EVIDENCE_LINES" node -e 'const out = {};
       for (const line of process.env.EVIDENCE_LINES.split("\n").filter(Boolean)) {
@@ -333,11 +420,11 @@ check_evidence() {
 }
 
 quality_source_binding() {
-  node --input-type=module - "$ROOT" <<'JS'
+  node --input-type=module - "$ROOT" "$QUALITY_FIXTURE" "$QUALITY_CANDIDATE_ROUND" <<'JS'
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
-const root = process.argv[2];
+const [root, fixture, candidateRound] = process.argv.slice(2);
 const read = name => readFileSync(join(root, name), 'utf8');
 const grounding = read('shared/src/commonMain/kotlin/dev/edgecompanion/core/conversation/session/GroundedPrompt.kt');
 const runtime = read('shared/src/androidMain/kotlin/dev/edgecompanion/core/inference/litert/LiteRtLlmEngine.kt');
@@ -350,44 +437,125 @@ const hash = text => createHash('sha256').update(text).digest('hex');
 const bound = ['scripts/answer-quality.mjs',
   'androidApp/src/androidTest/kotlin/dev/edgecompanion/app/AnswerQualityTest.kt',
   'androidApp/src/androidTest/kotlin/dev/edgecompanion/app/support/AnswerQualityFixture.kt',
-  'planning/fixtures/answer-quality-v1/answer-quality-v1.lock.json'];
+  `planning/fixtures/${fixture}/${fixture}.lock.json`];
+if (candidateRound) {
+  if (fixture !== 'answer-quality-dev-v1')
+    bound.push('planning/fixtures/answer-quality-dev-v1/answer-quality-dev-v1.lock.json');
+  const candidateDir = `planning/fixtures/grounded-prompt-candidates-${candidateRound}`;
+  bound.push(`${candidateDir}/candidates.json`, `${candidateDir}/candidates.lock.json`);
+  if (candidateRound === 'r2') {
+    const sourceDir = 'planning/fixtures/grounded-prompt-candidates-r1';
+    bound.push(`${sourceDir}/candidates.json`, `${sourceDir}/candidates.lock.json`);
+  }
+}
 console.log(JSON.stringify({ promptVersion: 'grounded-prompt-v1', groundingSha256: hash(grounding),
   runtimeSourceSha256: hash(runtime), sampler,
   files: Object.fromEntries(bound.map(name => [name, hash(readFileSync(join(root, name)))])) }));
 JS
 }
 
-# True only when the pulled capture records a broken harness invariant (S6Q-F5).
-quality_invariant_breach() {
+# Read only the staged archive. Bound names are fixed or checked by loadFixture.
+verify_quality_assets() {
+  node --input-type=module - "$STAGED_TEST" "$QUALITY_DEV_SNAPSHOT" "$RESULTS" "$QUALITY_CANDIDATE_ROUND" "$QUALITY_CANDIDATE_LOCK" <<'JS'
+import { execFileSync } from 'node:child_process';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { devFixture, loadCandidates, loadFixture, sha256 } from './scripts/answer-quality.mjs';
+
+const [apk, dev, results, round, candidateLock] = process.argv.slice(2);
+const binding = JSON.parse(readFileSync(join(results, 'quality-source-binding.json'), 'utf8')).files;
+const devPrefix = `assets/${devFixture}/`;
+const devLockName = `${devFixture}.lock.json`;
+const archive = (...args) => execFileSync('unzip', args, { timeout: 10_000 });
+const listed = archive('-Z1', apk).toString('utf8').trimEnd().split('\n');
+const expected = new Map();
+const bind = (source, bytes) => {
+  if (sha256(bytes) !== binding[source]) throw new Error(`Asset snapshot differs from source binding: ${source}`);
+};
+
+try {
+  const fixture = loadFixture(dev, devFixture);
+  for (const name of [devLockName, ...Object.keys(fixture.lock.files)]) {
+    const bytes = readFileSync(join(dev, name));
+    if (name === devLockName) {
+      bind(`planning/fixtures/${devFixture}/${devLockName}`, bytes);
+    } else if (sha256(bytes) !== fixture.lock.files[name]) {
+      throw new Error(`Dev snapshot differs from fixture lock: ${name}`);
+    }
+    expected.set(devPrefix + name, bytes);
+  }
+  if (listed.some(name => name.startsWith(devPrefix) && !name.endsWith('/') && !expected.has(name)))
+    throw new Error('Unexpected development asset');
+  if (round) {
+    const dir = join(results, 'candidates');
+    const source = join(dir, 'source-r1');
+    loadCandidates(dir, candidateLock, source);
+    for (const name of ['candidates.json', 'candidates.lock.json']) {
+      const bytes = readFileSync(join(dir, name));
+      bind(`planning/fixtures/grounded-prompt-candidates-${round}/${name}`, bytes);
+      expected.set('assets/' + name, bytes);
+      if (round === 'r2') {
+        const original = readFileSync(join(source, name));
+        bind(`planning/fixtures/grounded-prompt-candidates-r1/${name}`, original);
+        expected.set('assets/source-r1/' + name, original);
+      }
+    }
+  }
+  for (const [name, bytes] of expected) {
+    if (listed.filter(entry => entry === name).length !== 1)
+      throw new Error(`Expected one staged APK entry: ${name}`);
+    if (!archive('-p', apk, name).equals(bytes)) throw new Error(`Staged APK asset differs: ${name}`);
+  }
+  console.log(`Verified ${expected.size} staged test APK assets against the bound source files.`);
+} catch (error) {
+  console.error(error.message);
+  process.exitCode = 1;
+}
+JS
+}
+
+quality_capture_failure() {
   node --input-type=module - "$RESULTS/answer-quality.json" <<'JS'
 import { readFileSync } from 'node:fs';
 let report;
-try { report = JSON.parse(readFileSync(process.argv[2], 'utf8')); } catch { process.exit(1); }
-process.exit(report?.failureType === 'HarnessInvariant' ? 0 : 1);
+try { report = JSON.parse(readFileSync(process.argv[2], 'utf8')); } catch { process.exit(0); }
+const cases = Array.isArray(report?.cases) ? report.cases : [];
+const loads = Array.isArray(report?.loadDiagnostics) ? report.loadDiagnostics : [];
+if (report?.runtimeError === 'THERMAL' || cases.some(row => row?.error === 'THERMAL') ||
+    loads.some(load => [load?.state?.error, load?.state?.commandError,
+      load?.engineLoad?.failureError].includes('THERMAL'))) console.log('thermal-stop');
+else if (report?.preconditionFailure === 'thermal-cooldown-timeout') console.log('thermal-cooldown-timeout');
+else if (report?.failureType === 'HarnessInvariant') console.log('quality-invariant');
 JS
 }
 
 check_quality_report() {
-  node --input-type=module - "$RESULTS" "$RUN_ID" "$QUALITY_SET" "$QUALITY_PASSES" "$QUALITY_LOCK" "$MANIFEST" <<'JS'
+  node --input-type=module - "$RESULTS" "$RUN_ID" "$QUALITY_SET" "$QUALITY_PASSES" "$QUALITY_LOCK" "$MANIFEST" "$QUALITY_CANDIDATE_LOCK" <<'JS'
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { checkRun, determinism, loadFixture, schedule, sha256 } from './scripts/answer-quality.mjs';
-const [dir, runId, set, passes, lockHash, manifest] = process.argv.slice(2);
+import { checkRun, determinism, fixtureNameForSet, loadCandidates, loadFixture, schedule, sha256, validCandidateCooldowns } from './scripts/answer-quality.mjs';
+const [dir, runId, set, passes, lockHash, manifest, candidateLock] = process.argv.slice(2);
 const fail = reason => { console.log(reason); process.exit(1); };
 try {
-  const fixture = loadFixture(join(dir, 'fixture'));
+  const fixture = loadFixture(join(dir, 'fixture'), fixtureNameForSet(set));
   const bytes = readFileSync(join(dir, 'answer-quality.json'));
   const report = JSON.parse(bytes.toString('utf8'));
   if (fixture.lockSha256 !== lockHash || report.fixtureLockSha256 !== lockHash) fail('fixture-hash');
   if (report.runId !== runId || report.set !== set) fail('quality-run');
   if (report.passes !== Number(passes)) fail('quality-passes');
-  if (report.cases?.length !== schedule(fixture.items, set, Number(passes)).length) fail('quality-items');
+  if ((report.candidateLockSha256 ?? '') !== candidateLock) fail('candidate-lock');
+  const candidateSnapshot = join(dir, 'candidates');
+  const candidates = candidateLock ? loadCandidates(candidateSnapshot, candidateLock, join(candidateSnapshot, 'source-r1')) : null;
+  if (report.cases?.length !== schedule(fixture.items, set, Number(passes), candidates).length) fail('quality-items');
   const sha = JSON.parse(readFileSync(manifest, 'utf8')).artifact.sha256;
   if (report.modelSha256 !== sha || report.automaticFallback !== false) fail('quality-model');
-  checkRun(report, fixture);
+  checkRun(report, fixture, true, candidates);
+  if (candidates && !validCandidateCooldowns(report.candidateCooldowns, report.engineLoads))
+    fail('quality-cooldown-evidence');
   writeFileSync(join(dir, 'capture-summary.json'), JSON.stringify({
     runId, set, passes: Number(passes), items: report.cases.length, determinism: determinism(report),
     reportSha256: sha256(bytes),
+    ...(candidateLock ? {candidateLockSha256: candidateLock} : {}),
   }, null, 2) + '\n');
 } catch { fail('quality-report'); }
 JS
@@ -479,8 +647,7 @@ finish() {
   trap - EXIT
   set +e
   if [[ "$MODE" == quality && -n "$INSTR_PID" ]]; then
-    stop_owned "$MONITOR_PID"
-    MONITOR_PID=""
+    stop_thermal_monitor || true
     publish_deadline_stop interrupted || true
     # Let the supervised test attempt cleanup before pulling retained items.
     for ((i=0; i<STOP_GRACE; i++)); do
@@ -489,8 +656,23 @@ finish() {
     done
   fi
   stop_owned "$INSTR_PID"
-  stop_owned "$MONITOR_PID"
-  case "$STAGE" in instrumentation|deadline|validation|complete) collect_evidence ;; esac
+  stop_thermal_monitor || true
+  case "$STAGE" in
+    instrumentation|deadline|validation|complete)
+      collect_evidence
+      local thermal_failure=""
+      if [[ "$MODE" == quality ]]; then thermal_failure="$(quality_capture_failure)"; fi
+      if [[ -e "$RESULTS/thermal/safety-stop.json" || "$thermal_failure" == thermal-stop ||
+        "$FINAL_THERMAL_REASON" == thermal-stop ]]; then
+        REASON=thermal-stop
+        STATUS=failed
+      fi
+      if [[ "$MODE" == quality && ( "$REASON" == thermal-stop || "$REASON" == thermal-final-unavailable ) &&
+        -f "$RESULTS/answer-quality.json" && ! -f "$RESULTS/precheck.json" ]]; then
+        node scripts/answer-quality.mjs precheck "$RESULTS" || true
+      fi
+      ;;
+  esac
   if [[ "$STATUS" != passed || "$code" != 0 ]]; then
     STATUS=failed
     if [[ "$code" == 0 ]]; then code=1; fi
@@ -500,6 +682,8 @@ finish() {
     RESULT_REASON="$REASON" RESULT_STAGE="$STAGE" RESULT_EXIT="$code" RESULT_DEADLINE="$DEADLINE" \
     RESULT_DEADLINE_FORMULA="$DEADLINE_FORMULA" RESULT_DEADLINE_OVERRIDE="$DEADLINE_OVERRIDE" \
     RESULT_QUALITY_SET="$QUALITY_SET" RESULT_QUALITY_PASSES="$QUALITY_PASSES" RESULT_QUALITY_LOCK="$QUALITY_LOCK" \
+    RESULT_CANDIDATE_ROUND="$QUALITY_CANDIDATE_ROUND" RESULT_CANDIDATE_LOCK="$QUALITY_CANDIDATE_LOCK" \
+    RESULT_ASSETS_ONLY="$QUALITY_ASSETS_ONLY" \
     RESULT_SUPERVISOR="$$" RESULT_MONITOR="$STARTED_MONITOR_PID" RESULT_INSTR="$STARTED_INSTR_PID" \
     node --input-type=module - "$RESULTS/result.json" <<'JS'
 import { writeFileSync } from 'node:fs';
@@ -515,9 +699,15 @@ writeFileSync(process.argv[2], JSON.stringify({ runId: e.RESULT_RUN_ID, mode: e.
   monitorPid: pid(e.RESULT_MONITOR), instrumentationPid: pid(e.RESULT_INSTR),
   ...(e.RESULT_MODE === 'quality' ? { qualitySet: e.RESULT_QUALITY_SET,
     qualityPasses: Number(e.RESULT_QUALITY_PASSES), fixtureLockSha256: e.RESULT_QUALITY_LOCK || null } : {}),
+  ...(e.RESULT_ASSETS_ONLY === 'true' ? {assetsOnly: true} : {}),
+  ...(e.RESULT_CANDIDATE_ROUND ? {candidateRound: e.RESULT_CANDIDATE_ROUND, candidateLockSha256: e.RESULT_CANDIDATE_LOCK} : {}),
   recordedAt: new Date().toISOString() }, null, 2) + '\n');
 JS
-  printf 'Device-prep %s %s at %s (exit %s). Reports: %s\n' "$MODE" "$STATUS" "$STAGE" "$code" "$RESULTS"
+  if [[ "$QUALITY_ASSETS_ONLY" == true ]]; then
+    printf 'Asset check only, no device run. %s at %s (exit %s). Reports: %s\n' "$STATUS" "$STAGE" "$code" "$RESULTS"
+  else
+    printf 'Device-prep %s %s at %s (exit %s). Reports: %s\n' "$MODE" "$STATUS" "$STAGE" "$code" "$RESULTS"
+  fi
   exit "$code"
 }
 trap finish EXIT
@@ -527,15 +717,39 @@ trap 'exit 143' TERM
 printf 'Device-prep reports: %s\n' "$RESULTS"
 if [[ "$MODE" == quality ]]; then
   stage fixture
-  cp -R "$ROOT/planning/fixtures/answer-quality-v1" "$RESULTS/fixture" || fail fixture
+  cp -R "$ROOT/planning/fixtures/$QUALITY_FIXTURE" "$RESULTS/fixture" || fail fixture
   QUALITY_LOCK="$(node --input-type=module -e \
-    'import { loadFixture } from "./scripts/answer-quality.mjs"; console.log(loadFixture(process.argv[1]).lockSha256)' \
-    "$RESULTS/fixture")" || fail fixture-hash
+    'import { loadFixture } from "./scripts/answer-quality.mjs"; console.log(loadFixture(process.argv[1], process.argv[2]).lockSha256)' \
+    "$RESULTS/fixture" "$QUALITY_FIXTURE")" || fail fixture-hash
+  if [[ "$QUALITY_SET" == dev ]]; then
+    QUALITY_DEV_SNAPSHOT="$RESULTS/fixture"
+  elif [[ -n "$QUALITY_CANDIDATE_LOCK" ]]; then
+    QUALITY_DEV_SNAPSHOT="$RESULTS/dev-fixture"
+    cp -R "$ROOT/planning/fixtures/answer-quality-dev-v1" "$QUALITY_DEV_SNAPSHOT" || fail fixture
+  fi
+  if [[ -n "$QUALITY_CANDIDATE_LOCK" ]]; then
+    mkdir -m 700 "$RESULTS/candidates" || fail candidate-lock
+    cp "$QUALITY_CANDIDATE_DIR/candidates.json" "$QUALITY_CANDIDATE_DIR/candidates.lock.json" "$RESULTS/candidates/" ||
+      fail candidate-lock
+    if [[ "$QUALITY_CANDIDATE_ROUND" == r2 ]]; then
+      source_round="$ROOT/planning/fixtures/grounded-prompt-candidates-r1"
+      mkdir -m 700 "$RESULTS/candidates/source-r1" || fail candidate-lock
+      cp "$source_round/candidates.json" "$source_round/candidates.lock.json" "$RESULTS/candidates/source-r1/" ||
+        fail candidate-lock
+    fi
+    node --input-type=module -e '
+      import { join } from "node:path";
+      import { loadCandidates } from "./scripts/answer-quality.mjs";
+      loadCandidates(process.argv[1], process.argv[2], join(process.argv[1], "source-r1"));
+    ' "$RESULTS/candidates" "$QUALITY_CANDIDATE_LOCK" || fail candidate-lock
+  fi
   quality_source_binding > "$RESULTS/quality-source-binding.json" || fail quality-source-binding
 fi
 stage build
 if [[ "$MODE" == measure || "$MODE" == quality ]]; then
-  "$GRADLE" --offline -PtestBuildType=secureQa -PchatContextTokens="$PROFILE" -PandroidPressureMemoryTest=false \
+  args=(--offline -PtestBuildType=secureQa "-PchatContextTokens=$PROFILE" -PandroidPressureMemoryTest=false)
+  if [[ -n "$QUALITY_CANDIDATE_ROUND" ]]; then args+=("-PanswerQualityCandidateRound=$QUALITY_CANDIDATE_ROUND"); fi
+  "$GRADLE" "${args[@]}" \
     :androidApp:assembleSecureQa :androidApp:assembleSecureQaAndroidTest --console=plain 2>&1 | tee "$RESULTS/build.txt" ||
     fail build
 else
@@ -561,6 +775,15 @@ git rev-parse HEAD > "$RESULTS/app-head.txt" || fail build
 git diff --binary | shasum -a 256 > "$RESULTS/tracked-diff-sha256.txt" || fail build
 if [[ "$MODE" == quality ]]; then
   quality_source_binding | cmp - "$RESULTS/quality-source-binding.json" || fail quality-source-binding
+fi
+if [[ -n "$QUALITY_DEV_SNAPSHOT" ]]; then
+  stage quality-assets
+  verify_staged || fail apk-integrity
+  verify_quality_assets > "$RESULTS/quality-assets.txt" 2>&1 || fail quality-assets
+  if [[ "$QUALITY_ASSETS_ONLY" == true ]]; then
+    STATUS=passed
+    exit 0
+  fi
 fi
 
 stage install-app
@@ -604,10 +827,17 @@ elif [[ "$MODE" == ui ]]; then
   "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r -e class "$UI_CLASSES" \
     -e passagesCaptureRunId "$RUN_ID" "$RUNNER" > "$RESULTS/instrumentation.txt" 2>&1 &
 elif [[ "$MODE" == quality ]]; then
-  "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r -e class dev.edgecompanion.app.AnswerQualityTest \
-    -e answerQuality true -e supervisedThermal true -e supervisionRunId "$RUN_ID" \
-    -e answerQualitySet "$QUALITY_SET" -e answerQualityPasses "$QUALITY_PASSES" -e answerQualityLockSha256 "$QUALITY_LOCK" \
-    "$RUNNER" > "$RESULTS/instrumentation.txt" 2>&1 &
+  quality_classes=dev.edgecompanion.app.AnswerQualityTest
+  quality_ok='OK (1 test)'
+  if [[ -n "$QUALITY_CANDIDATE_LOCK" ]]; then
+    quality_classes="dev.edgecompanion.app.support.AnswerQualityCandidateTest,$quality_classes"
+    quality_ok='OK (2 tests)'
+  fi
+  args=(-e class "$quality_classes"
+    -e answerQuality true -e supervisedThermal true -e supervisionRunId "$RUN_ID"
+    -e answerQualitySet "$QUALITY_SET" -e answerQualityPasses "$QUALITY_PASSES" -e answerQualityLockSha256 "$QUALITY_LOCK")
+  if [[ -n "$QUALITY_CANDIDATE_LOCK" ]]; then args+=(-e candidates "$QUALITY_CANDIDATE_LOCK"); fi
+  "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r "${args[@]}" "$RUNNER" > "$RESULTS/instrumentation.txt" 2>&1 &
 else
   "$ADB" -s "$ANDROID_SERIAL" shell am instrument -w -r \
     -e class dev.edgecompanion.app.PassageSqlCipherTest,dev.edgecompanion.app.GroundingSqlCipherTest \
@@ -626,8 +856,7 @@ if [[ "$DEADLINE_HIT" == true ]]; then
   stage deadline
   REASON=deadline
   if [[ "$MODE" == measure || "$MODE" == quality ]]; then
-    stop_owned "$MONITOR_PID"   # First, so no heartbeat from this script follows the stop.
-    MONITOR_PID=""
+    stop_thermal_monitor || true  # First, so no heartbeat follows the stop.
     # Run-specific stop; the device watcher records the loss and stops the isolated QA process.
     publish_deadline_stop || true
   else
@@ -650,32 +879,42 @@ wait "$INSTR_PID" || INSTR_CODE=$?
 INSTR_PID=""
 stage validation
 collect_evidence
-if [[ "$MODE" == quality ]] && quality_invariant_breach; then fail quality-invariant; fi
+if [[ "$MODE" == measure || "$MODE" == quality ]]; then
+  CAPTURE_FAILURE=""
+  if [[ "$MODE" == quality ]]; then
+    CAPTURE_FAILURE="$(quality_capture_failure)" || fail quality-report
+  fi
+  [[ ! -e "$THERMAL_REPORT_DIR/safety-stop.json" && "$CAPTURE_FAILURE" != thermal-stop &&
+    "$FINAL_THERMAL_REASON" != thermal-stop ]] || fail thermal-stop
+  [[ -z "$FINAL_THERMAL_REASON" ]] || fail "$FINAL_THERMAL_REASON"
+  [[ -z "$CAPTURE_FAILURE" ]] || fail "$CAPTURE_FAILURE"
+fi
 [[ "$INSTR_CODE" == 0 ]] || fail instrumentation
 if grep -Eq "$FAILURE_PATTERN" "$RESULTS/instrumentation.txt"; then fail instrumentation; fi
 if [[ "$MODE" == measure ]]; then
   grep -Eq '^OK \(1 test\)$' "$RESULTS/instrumentation.txt" || fail instrumentation
   GATE_REASON="$(check_evidence)" || fail "${GATE_REASON:-evidence-unavailable}"
   node scripts/verify-qa-supervision.mjs "$RESULTS/supervision.json" "$RUN_ID" || fail supervision
-  kill -0 "$MONITOR_PID" 2>/dev/null || fail thermal-monitor
-  [[ ! -f "$THERMAL_REPORT_DIR/safety-stop.json" ]] || fail thermal-monitor
+  [[ "$MONITOR_CLEAN" == true ]] || fail thermal-monitor
   GATE_REASON="$(check_report)" || fail "${GATE_REASON:-report}"
   write_summary || fail summary
 elif [[ "$MODE" == ui ]]; then
   grep -Eq "^OK \($UI_EXPECTED_TESTS tests\)$" "$RESULTS/instrumentation.txt" || fail instrumentation
   GATE_REASON="$(check_screenshots)" || fail "${GATE_REASON:-screenshots}"
 elif [[ "$MODE" == quality ]]; then
-  grep -Eq '^OK \(1 test\)$' "$RESULTS/instrumentation.txt" || fail instrumentation
+  grep -Fxq "$quality_ok" "$RESULTS/instrumentation.txt" || fail instrumentation
   GATE_REASON="$(check_evidence answerQuality)" || fail "${GATE_REASON:-evidence-unavailable}"
   node scripts/verify-qa-supervision.mjs "$RESULTS/supervision.json" "$RUN_ID" || fail supervision
-  kill -0 "$MONITOR_PID" 2>/dev/null || fail thermal-monitor
-  [[ ! -f "$THERMAL_REPORT_DIR/safety-stop.json" ]] || fail thermal-monitor
+  [[ "$MONITOR_CLEAN" == true ]] || fail thermal-monitor
   GATE_REASON="$(check_quality_report)" || fail "${GATE_REASON:-quality-report}"
   node scripts/answer-quality.mjs precheck "$RESULTS" || fail quality-precheck
 else
   # PassageSqlCipherTest (3) + GroundingSqlCipherTest (6); a skipped opt-in would not count as passing.
   grep -Eq '^OK \(9 tests\)$' "$RESULTS/instrumentation.txt" || fail instrumentation
 fi
-REASON=""
-STATUS=passed
 stage complete
+REASON=""
+if [[ "$MODE" == measure || "$MODE" == quality ]]; then
+  [[ ! -e "$THERMAL_REPORT_DIR/safety-stop.json" ]] || fail thermal-stop
+fi
+STATUS=passed

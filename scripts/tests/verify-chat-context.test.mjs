@@ -2,7 +2,7 @@
 // records every call and emulates only the secureQa app's private files in a temp directory.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { spawn, execFileSync } from 'node:child_process';
+import { spawn, execFileSync, spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { chmodSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -18,18 +18,22 @@ const uiClasses = ['PassagesUiTest', 'PassagesCaptureTest', 'ComposerLayoutTest'
 const modelSha = JSON.parse(readFileSync(join(root, 'planning/models/gemma-4-e2b-it.json'), 'utf8')).artifact.sha256;
 
 const fakeAdb = `#!/usr/bin/env node
-const { appendFileSync, chmodSync, existsSync, mkdirSync, readFileSync, writeFileSync } = require('node:fs');
+const { appendFileSync, chmodSync, existsSync, mkdirSync, readFileSync, renameSync, rmSync, writeFileSync } = require('node:fs');
 const { execFileSync, spawnSync } = require('node:child_process');
 const { createHash } = require('node:crypto');
 const { dirname, join } = require('node:path');
 const args = process.argv.slice(2);
 const device = process.env.FAKE_DEVICE_DIR;
+const thermalDir = process.env.THERMAL_REPORT_DIR;
+const intentProbe = thermalDir && process.env.FAKE_MONITOR_STOP;
+const probePath = name => join(dirname(thermalDir), name);
 // Every synthetic adb process records its own PID; the test teardown fails if any is still alive.
 const entry = { args, pid: process.pid };
 if (args.includes('/proc/uptime')) {
   // Only the thermal monitor reads the boot clock: record which process supervises it.
   entry.monitorPid = process.ppid;
-  entry.monitorParentPid = Number(execFileSync('ps', ['-o', 'ppid=', '-p', String(process.ppid)], { encoding: 'utf8' }).trim());
+  if (intentProbe) writeFileSync(probePath('probe-monitor-pid'), String(process.ppid));
+  else entry.monitorParentPid = Number(execFileSync('ps', ['-o', 'ppid=', '-p', String(process.ppid)], { encoding: 'utf8' }).trim());
   entry.supervisorPidEnv = Number(process.env.QA_SUPERVISOR_PID);
 }
 appendFileSync(process.env.FAKE_ADB_LOG, JSON.stringify(entry) + '\\n');
@@ -37,10 +41,35 @@ const write = (path, value) => { mkdirSync(dirname(join(device, path)), { recurs
 if (args[0] !== '-s' || args[1] !== '${serial}') process.exit(64);
 const [command, ...rest] = args.slice(2);
 const option = name => rest[rest.indexOf(name) + 1];
-const thermalDir = process.env.THERMAL_REPORT_DIR;
 const hang = () => { setInterval(() => {}, 1 << 30); };
 // Simulates a stalled device call, but exits once its caller is gone so it cannot outlive the test.
 const stallUntilOrphaned = () => { const parent = process.ppid; setInterval(() => { if (process.ppid !== parent) process.exit(1); }, 100); };
+if (intentProbe && rest.join(' ') === 'dumpsys thermalservice') {
+  const fromMonitor = !existsSync(probePath('probe-monitor-pid')) ||
+    Number(readFileSync(probePath('probe-monitor-pid'), 'utf8')) === process.ppid;
+  const crossing = fromMonitor && intentProbe !== 'clean' && existsSync(probePath('probe-capture-pull'));
+  const status = crossing && intentProbe !== 'skin-only' ? 3 : 2;
+  const skin = crossing ? (intentProbe === 'skin-only' ? 45 : 45.1) : 44.9;
+  if (crossing && intentProbe === 'intent-error') {
+    // Make open fail with ENOTDIR even for a privileged test runner.
+    renameSync(thermalDir, probePath('probe-thermal-saved'));
+    writeFileSync(thermalDir, 'synthetic file in place of the report directory');
+  }
+  console.log('Thermal Status: ' + status + '\\nCurrent temperatures from HAL:\\n' +
+    'Temperature{mValue=' + skin + ', mType=3, mName=SKIN, mStatus=' + status + '}');
+  process.exit(0);
+}
+if (intentProbe && command === 'shell' && rest.length === 1 && rest[0].includes('/stop.tmp')) {
+  if (intentProbe === 'intent-error') {
+    rmSync(thermalDir);
+    renameSync(probePath('probe-thermal-saved'), thermalDir);
+  }
+  const marker = join(thermalDir, 'safety-stop.json');
+  writeFileSync(probePath('probe-at-dispatch.json'), existsSync(marker) ? readFileSync(marker) : 'null');
+  if (intentProbe === 'blocked') { stallUntilOrphaned(); return; }
+  if (intentProbe === 'delivery-error') process.exit(1);
+  process.exit(0);
+}
 if (command === 'install' && rest[0] === '-r' && existsSync(rest[1])) {
   // Simulates a rebuild that replaces the Gradle outputs after the script staged its copies.
   if (process.env.FAKE_REBUILD_DURING_INSTALL === '1') for (const [path, id] of [
@@ -67,6 +96,32 @@ if (command === 'exec-out' && rest[0] === 'run-as' && rest[1] === '${qaPackage}'
   if (process.env.FAKE_PULL_FAIL && rest[3].endsWith(process.env.FAKE_PULL_FAIL)) { console.error('synthetic read error'); process.exit(1); }
   if (!existsSync(path)) { console.error('No such file'); process.exit(1); }
   const content = readFileSync(path);
+  if (intentProbe && intentProbe !== 'clean' && /^no_backup\\/(?:answer-quality|chat-context)-[^/]+[.]json$/.test(rest[3]) &&
+      !existsSync(probePath('probe-capture-pull'))) {
+    // Instrumentation has finished. Keep the first capture pull open until the real monitor starts its stop request.
+    writeFileSync(probePath('probe-capture-pull'), '');
+    const deadline = Date.now() + 12000;
+    const timer = setInterval(() => {
+      if (existsSync(probePath('probe-at-dispatch.json'))) {
+        clearInterval(timer);
+        process.stdout.write(content);
+      } else if (Date.now() >= deadline) process.exit(1);
+    }, 20);
+    return;
+  }
+  const event = { 'after-exit': 'safety-stop.json', 'killed-mid-stop': 'stop-publish-started' }[process.env.FAKE_FINALIZATION];
+  if (event && /(?:answer-quality|chat-context)-.+[.]json$/.test(rest[3])) {
+    // The wrapper has already waited for instrumentation before it pulls the capture.
+    writeFileSync(join(thermalDir, 'capture-pull'), '');
+    const deadline = Date.now() + 3000;
+    const timer = setInterval(() => {
+      if (existsSync(join(thermalDir, event))) {
+        clearInterval(timer);
+        process.stdout.write(content);
+      } else if (Date.now() >= deadline) process.exit(1);
+    }, 10);
+    return;
+  }
   if (process.env.FAKE_TRUNCATE_PULL && rest[3].endsWith(process.env.FAKE_TRUNCATE_PULL)) {
     process.stdout.write(content.subarray(0, 11)); process.exit(0);
   }
@@ -87,7 +142,24 @@ if (command === 'shell' && rest.join(' ') === 'cat /proc/uptime') { console.log(
 if (command === 'shell' && rest.join(' ') === 'dumpsys thermalservice') {
   if (process.env.FAKE_THERMAL === 'never') { stallUntilOrphaned(); return; }
   if (process.env.FAKE_THERMAL === 'safety-stop') writeFileSync(join(thermalDir, 'safety-stop.json'), '{"reason":"synthetic"}');
-  console.log('Thermal Status: 0\\nCurrent temperatures from HAL:\\n\\tTemperature{mValue=30.5, mType=3, mName=SKIN, mStatus=0}');
+  // Controlled monitor tests use the synthetic device solely for the wrapper's final read.
+  if (process.env.FAKE_FINALIZATION) {
+    const monitor = Number(readFileSync(join(thermalDir, 'monitor-pid'), 'utf8'));
+    try {
+      process.kill(monitor, 0);
+      console.error('Final reading before the monitor exited');
+      process.exit(1);
+    } catch (error) {
+      if (error.code !== 'ESRCH') throw error;
+    }
+  }
+  const final = process.env.FAKE_FINAL_THERMAL;
+  if (final === 'unavailable') process.exit(1);
+  if (final === 'malformed') { console.log('Thermal Status: 0'); process.exit(0); }
+  const status = final === 'severe-status' ? 3 : 0;
+  const skin = final === 'skin-limit' ? 45 : 30.5;
+  console.log('Thermal Status: ' + status + '\\nCurrent temperatures from HAL:\\n' +
+    'Temperature{mValue=' + skin + ', mType=3, mName=SKIN, mStatus=' + status + '}');
   process.exit(0);
 }
 if (command === 'shell' && rest[0] === 'am' && rest[1] === 'instrument') {
@@ -150,12 +222,15 @@ if (command === 'shell' && rest[0] === 'am' && rest[1] === 'instrument') {
     if (/^-[1-4]$/.test(status)) console.log('INSTRUMENTATION_STATUS_CODE: ' + status);
     console.log('OK (9 tests)'); process.exit(status === 'exit-code' ? 1 : 0);
   }
-  if (cls === 'dev.edgecompanion.app.AnswerQualityTest') {
-    const { expectedLoads, fixturePassages, loadFixture, schedule, sha256, profile, sampler, promptVersion } =
-      require(join(process.cwd(), 'scripts/answer-quality.mjs'));
-    const fixture = loadFixture();
+  if (cls.split(',').includes('dev.edgecompanion.app.AnswerQualityTest')) {
+    const { candidateDirectory, expectedLoads, fixtureDirectory, fixtureNameForSet, fixturePassages, loadCandidates,
+      loadFixture, schedule, sha256, profile, sampler, promptVersion } = require(join(process.cwd(), 'scripts/answer-quality.mjs'));
     const runId = option('supervisionRunId'), set = option('answerQualitySet'), passes = Number(option('answerQualityPasses'));
+    const name = fixtureNameForSet(set), fixture = loadFixture(fixtureDirectory(name), name);
     const mode = process.env.FAKE_QUALITY;
+    const candidateLock = rest.includes('candidates') ? option('candidates') : null;
+    const round = process.env.FAKE_CANDIDATE_ROUND;
+    const candidates = candidateLock ? loadCandidates(candidateDirectory(round), candidateLock) : null;
     const library = Object.entries(fixture.library).map(([file, text], index) =>
       ({ file, sourceId: index + 1, revisionId: index + 100, sha256: sha256(text) }));
     const indexedPassages = [];
@@ -174,9 +249,11 @@ if (command === 'shell' && rest[0] === 'am' && rest[1] === 'instrument') {
         fixture.library[span.file].slice(entry.startUtf16, entry.endUtf16).includes(span.text));
       return { ...ref, position: index + 1 };
     });
-    const cases = schedule(fixture.items, set, passes).map(row => {
-      const consulted = consultedFor(row.id);
-      return { ...row, profile, sampler, promptVersion,
+    const cases = schedule(fixture.items, set, passes, candidates).map(row => {
+      const candidate = candidates && candidates.entries.find(entry => entry.id === row.candidateId);
+      const consulted = candidate?.id === 'exact-match' && row.id === 'answer-one-01' ? [] : consultedFor(row.id);
+      return { ...row, profile, sampler, promptVersion: candidate?.version ?? promptVersion,
+        ...(candidate ? { candidateTextSha256: candidate.textSha256 } : {}),
         answer: 'Synthetic captured answer', typedResult: null, error: null, consulted,
         packedPassageIds: consulted.map(ref => ref.passageId), modelCalls: 1, promptSha256: sha256(row.id),
         outputSha256: sha256('Synthetic captured answer'), timings: { elapsedMs: 30, modelMs: 20, firstTextMs: 5 },
@@ -184,12 +261,22 @@ if (command === 'shell' && rest[0] === 'am' && rest[1] === 'instrument') {
         decodeTokens: 4, inputTokens: 300, possiblyAtCap: false };
     });
     if (mode === 'missing-item') cases.pop();
+    if (mode === 'thermal-row') Object.assign(cases.at(-1), {answer: null, error: 'THERMAL', outputSha256: null});
+    if (mode === 'cooldown-timeout') cases.splice(0);
     if (mode === 'interrupted' || mode === 'invariant') cases.splice(2);
+    const engineLoads = mode === 'cooldown-timeout' ? [] : expectedLoads(set, passes, candidates);
+    const candidateCooldowns = engineLoads.map(({pass, scope, candidateId}) => ({
+      pass, scope, candidateId, thermalStatusAtLoad: 0, waitMs: 15000,
+      availableMemoryBeforeLoadBytes: 5000000000, availableMemoryAfterLoadBytes: 4100000000,
+    }));
     write('no_backup/answer-quality-' + runId + '.json', { schema: 1, runId,
       status: mode === 'interrupted' ? 'running' : mode === 'invariant' ? 'failed' : 'collected',
       ...(mode === 'invariant' ? { failureType: 'HarnessInvariant', invariantBreach: 'message-count' } : {}),
+      ...(mode === 'cooldown-timeout' ? {status: 'failed', preconditionFailure: 'thermal-cooldown-timeout'} : {}),
       set, passes: mode === 'wrong-passes' ? 3 : passes,
-      library, indexedPassages, cases, engineLoads: expectedLoads(set, passes), indexingComplete: true,
+      library, indexedPassages, cases, engineLoads, indexingComplete: true,
+      ...(candidateLock ? {candidateLockSha256: mode === 'wrong-candidate-lock' ? '0'.repeat(64) : candidateLock} : {}),
+      ...(candidateLock && mode !== 'missing-cooldown' ? {candidateCooldowns} : {}),
       cleanupConfirmed: mode !== 'interrupted', databaseCleanupConfirmed: mode !== 'interrupted',
       fixtureLockSha256: mode === 'wrong-lock' ? 'b'.repeat(64) : option('answerQualityLockSha256'),
       librarySha256: fixture.lock.librarySha256, device: 'SM-S928B', buildType: 'secureQa',
@@ -200,7 +287,9 @@ if (command === 'shell' && rest[0] === 'am' && rest[1] === 'instrument') {
     write('no_backup/qa-supervision/' + runId + '/status.json', { schema: 2, runId, status: 'closed', reason: null,
       cleanupConfirmed: false, elapsedMs: 100, capturedAtMs: Date.now(), leaseMs: 20000, pollMs: 500, cleanupMs: 5000 });
     if (mode === 'skipped') console.log('INSTRUMENTATION_STATUS_CODE: -4');
-    console.log('OK (1 test)'); process.exit(0);
+    const ranCandidateTest = cls.split(',').includes('dev.edgecompanion.app.support.AnswerQualityCandidateTest') &&
+      mode !== 'one-test';
+    console.log(ranCandidateTest ? 'OK (2 tests)' : 'OK (1 test)'); process.exit(0);
   }
   if (cls === '${uiClasses}') {
     if (process.env.FAKE_INSTRUMENTATION === 'hang') { hang(); return; }
@@ -232,8 +321,38 @@ if (command === 'shell' && rest[0] === 'am' && rest[1] === 'instrument') {
 console.error('Unexpected synthetic adb call'); process.exit(1);
 `;
 
-// Synthetic build-tools aapt2: the first line of a synthetic APK is its application ID.
-const fakeAapt2 = '#!/bin/sh\n[ "$1" = dump ] && [ "$2" = packagename ] && [ -f "$3" ] || exit 2\nhead -n 1 "$3"\n';
+// Control when the owned monitor publishes a marker without relying on the live monitor's sample interval.
+const finalizationMonitor = `
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
+const dir = process.env.THERMAL_REPORT_DIR;
+const mode = process.env.FAKE_FINALIZATION;
+const publish = () => {
+  writeFileSync(join(dir, 'safety-stop.json'), JSON.stringify({reason: 'thermal_limit', status: 3, delivery: 'pending'}));
+  process.exit(2);
+};
+// The real monitor has no handler while the stop publish is outstanding.
+if (mode !== 'killed-mid-stop') process.on('SIGTERM', () => {
+  if (mode === 'during-join') setTimeout(publish, 250);
+  else process.exit(0);
+});
+mkdirSync(dir, {recursive: true});
+writeFileSync(join(dir, 'monitor-pid'), String(process.pid));
+writeFileSync(join(dir, 'samples.csv'), 'recorded_at,thermal_status,skin_c\\n2026-11-23,0,30\\n');
+const deadline = Date.now() + 30000;
+setInterval(() => {
+  if (existsSync(join(dir, 'capture-pull'))) {
+    if (mode === 'after-exit') publish();
+    if (mode === 'killed-mid-stop' && !existsSync(join(dir, 'stop-publish-started')))
+      writeFileSync(join(dir, 'stop-publish-started'), '');
+  }
+  if (Date.now() >= deadline || process.ppid !== Number(process.env.QA_SUPERVISOR_PID)) process.exit(3);
+}, 10);
+`;
+
+// Synthetic build-tools aapt2 reads the same package ID from a text stub or a ZIP marker.
+const fakeAapt2 = '#!/bin/sh\n[ "$1" = dump ] && [ "$2" = packagename ] && [ -f "$3" ] || exit 2\n' +
+  'unzip -p "$3" package-id.txt 2>/dev/null || head -n 1 "$3"\n';
 const appApk = 'apk/secureQa/androidApp-secureQa.apk';
 const testApk = 'apk/androidTest/secureQa/androidApp-secureQa-androidTest.apk';
 
@@ -277,14 +396,51 @@ async function withSandbox(body) {
 
 const isRunInstrument = call => call.args.includes('instrument') && !call.args.join(' ').includes('MemoryPolicyProbeTest');
 
-function run(dir, args, extra = {}, { signal, repo = null } = {}) {
+function packageQualityAssets(dir, issue, round) {
+  const contents = join(dir, 'quality-apk');
+  const assets = join(contents, 'assets');
+  mkdirSync(assets, {recursive: true});
+  writeFileSync(join(contents, 'package-id.txt'), `${qaPackage}.test\n`);
+  const fixture = 'answer-quality-dev-v1';
+  cpSync(join(root, 'planning/fixtures', fixture), join(assets, fixture), {recursive: true});
+  for (const name of ['candidates.json', 'candidates.lock.json']) {
+    if (issue === 'missing-candidate' && name === 'candidates.json') continue;
+    cpSync(join(root, `planning/fixtures/grounded-prompt-candidates-${round}`, name), join(assets, name));
+  }
+  if (round === 'r2') {
+    const source = join(assets, 'source-r1');
+    mkdirSync(source);
+    for (const name of ['candidates.json', 'candidates.lock.json']) {
+      if (issue === 'missing-source-lock' && name === 'candidates.lock.json') continue;
+      cpSync(join(root, 'planning/fixtures/grounded-prompt-candidates-r1', name), join(source, name));
+    }
+  }
+  if (issue === 'changed-dev') writeFileSync(join(assets, fixture, 'library/brackenshivor-close.txt'), 'Changed synthetic text.');
+  const apk = join(dir, testApk);
+  rmSync(apk);
+  execFileSync('zip', ['-q', '-r', apk, 'package-id.txt', 'assets'], {cwd: contents});
+}
+
+function run(dir, args, extra = {}, { signal, repo = null, assetIssue = null, finalization = null } = {}) {
+  const round = args.includes('--candidates') ? args[args.indexOf('--candidates') + 1] : 'r1';
+  if (args[0] === 'quality' && (args[2] === 'dev' || args[2] === 'tuning' && args.includes('--candidates')))
+    packageQualityAssets(dir, assetIssue, round);
+  if (finalization) {
+    const monitor = join(dir, 'finalization-monitor.mjs');
+    const shim = join(dir, 'bin/node');
+    writeFileSync(monitor, finalizationMonitor);
+    writeFileSync(shim, '#!/bin/sh\nif [ "$1" = scripts/monitor-model-thermal.mjs ]; then\n' +
+      '  exec "$FAKE_NODE" "$FAKE_MONITOR"\nfi\nexec "$FAKE_NODE" "$@"\n', {mode: 0o700});
+    extra = {...extra, FAKE_FINALIZATION: finalization, FAKE_MONITOR: monitor, FAKE_NODE: process.execPath};
+  }
   const env = { ...process.env, PATH: `${join(dir, 'bin')}:${process.env.PATH}`, ANDROID_SERIAL: serial,
     ANDROID_HOME: join(dir, 'sdk'), ADB: join(dir, 'bin/adb'), GRADLE: join(dir, 'bin/gradlew'),
     APK_ROOT: join(dir, 'apk'), RESULTS_ROOT: join(dir, 'results'), FAKE_DEVICE_DIR: join(dir, 'device'),
+    FAKE_CANDIDATE_ROUND: round,
     FAKE_ADB_LOG: join(dir, 'adb.jsonl'), FAKE_GRADLE_LOG: join(dir, 'gradle.txt'), FAKE_MODEL_SHA: modelSha, ...extra };
   for (const name of ['QA_SUPERVISION_RUN_ID', 'QA_SUPERVISOR_PID', 'MEMORY_POLICY_REPORT', 'THERMAL_REPORT_DIR',
     'CHAT_CONTEXT_DEADLINE_SECONDS', 'PASSAGE_DEADLINE_SECONDS', 'ANSWER_QUALITY_DEADLINE_SECONDS',
-    'FAKE_GRADLE_APPEND', 'FAKE_QUALITY'])
+    'FAKE_GRADLE_APPEND', 'FAKE_QUALITY', 'FAKE_FINALIZATION', 'FAKE_FINAL_THERMAL'])
     if (!(name in extra)) delete env[name];
   return new Promise(done => {
     const child = spawn('/bin/bash', [repo ? join(repo, 'scripts/verify-chat-context.sh') : script, ...args],
@@ -528,7 +684,7 @@ const gateFailures = [
   ['a thermal sample that never arrives', ['measure', '4096'], { FAKE_THERMAL: 'never', THERMAL_READY_SECONDS: '2' },
     'thermal-monitor', 'thermal-monitor'],
   ['a safety stop present at readiness', ['measure', '4096'], { FAKE_THERMAL: 'safety-stop' }, 'thermal-monitor', 'thermal-monitor'],
-  ['a safety stop written during the run', ['measure', '4096'], { FAKE_INSTRUMENTATION: 'safety-stop' }, 'thermal-monitor', 'validation'],
+  ['a safety stop written during the run', ['measure', '4096'], { FAKE_INSTRUMENTATION: 'safety-stop' }, 'thermal-stop', 'validation'],
   ['a failing app install', ['measure', '4096'], { FAKE_INSTALL: 'fail-app' }, 'install-app', 'install-app'],
   ['an app install that reports failure with exit 0', ['sqlcipher'], { FAKE_INSTALL: 'quiet-failure' }, 'install-app', 'install-app'],
   ['a non-zero measurement instrumentation exit', ['measure', '4096'], { FAKE_INSTRUMENTATION: 'exit-code' }, 'instrumentation', 'validation'],
@@ -862,6 +1018,9 @@ const fixtureSource = 'androidApp/src/androidTest/kotlin/dev/edgecompanion/app/s
 function mirror(dir) {
   const repo = join(dir, 'repo'), stubs = join(dir, 'mirror-bin');
   for (const path of ['scripts/verify-chat-context.sh', 'scripts/answer-quality.mjs', 'planning/fixtures/answer-quality-v1',
+    'planning/fixtures/answer-quality-dev-v1',
+    'planning/fixtures/grounded-prompt-candidates-r1/candidates.json',
+    'planning/fixtures/grounded-prompt-candidates-r1/candidates.lock.json',
     'planning/models/gemma-4-e2b-it.json', groundingSource, runtimeSource, fixtureSource,
     'androidApp/src/androidTest/kotlin/dev/edgecompanion/app/AnswerQualityTest.kt'])
     cpSync(join(root, path), join(repo, path), { recursive: true });
@@ -940,4 +1099,273 @@ test('a quality run that outlives its deadline publishes a run stop and keeps co
   assert.equal(result.json('evidence.json').answerQuality, 'present');
   assertClientStopped(result, summary);
   assert.ok(!alive(summary.monitorPid), 'monitor stopped');
+}));
+
+const developmentArgs = ['quality', '--set', 'dev', '--candidates', 'r1'];
+const developmentCandidateFile = 'planning/fixtures/grounded-prompt-candidates-r1/candidates.json';
+
+test('quality binds one dev block per candidate and produces a packing comparison and rubric report', () => withSandbox(async dir => {
+  const result = await run(dir, developmentArgs);
+  assert.equal(result.code, 0, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.deadlineSeconds, 300 + (240 + 900) * 5 + 120 * 200);
+  assert.match(readFileSync(join(result.results, 'quality-assets.txt'), 'utf8'), /Verified 14 staged test APK assets/);
+  const report = result.json('answer-quality.json');
+  assert.equal(report.cases.length, 200);
+  assert.equal(report.candidateLockSha256, summary.candidateLockSha256);
+  const ids = ['v1', 'exact-match', 'near-question', 'fixed-refusal', 'exact-fixed'];
+  assert.deepEqual(report.engineLoads.map(load => load.candidateId), ids);
+  assert.ok(report.engineLoads.every(load => load.scope === 'SOURCES' && load.count === 1));
+  assert.equal(result.json('capture-summary.json').candidateLockSha256, summary.candidateLockSha256);
+  const binding = result.json('quality-source-binding.json');
+  assert.equal(binding.files[developmentCandidateFile], sha256(readFileSync(join(root, developmentCandidateFile))));
+  assert.equal(binding.files['planning/fixtures/answer-quality-dev-v1/answer-quality-dev-v1.lock.json'], summary.fixtureLockSha256);
+  const instrument = result.calls.find(isRunInstrument).args.join(' ');
+  assert.ok(instrument.includes(' -e candidates ' + summary.candidateLockSha256 + ' '));
+  assert.match(readFileSync(join(dir, 'gradle.txt'), 'utf8'), /-PanswerQualityCandidateRound=r1/);
+  const execute = (...args) => spawnSync(process.execPath, [join(root, 'scripts/answer-quality.mjs'), ...args], {encoding: 'utf8'});
+  const compare = execute('compare', result.results);
+  assert.equal(compare.status, 0, compare.stderr);
+  assert.deepEqual(result.json('compare.json').candidates.map(entry => entry.candidateId), ids);
+  assert.deepEqual(result.json('compare.json').candidates[1].packingDifferences, [{
+    id: 'answer-one-01', v1: report.cases[0].packedPassageIds, candidate: [],
+  }]);
+  assert.match(readFileSync(join(result.results, 'compare.md'), 'utf8'), /development set, not a quality result/);
+
+  const labelsFile = join(dir, 'labels.json');
+  writeFileSync(labelsFile, JSON.stringify({labels: report.cases.map(({pass, scope, id, candidateId}) => ({
+    pass, scope, id, candidateId, label: 'Abstained', reason: 'Synthetic label for tool wiring',
+    ...(id.startsWith('diagnostic-contradiction-') ? {notedConflict: false} : {}),
+  }))}));
+  const scored = execute('report', result.results, '--labels', labelsFile);
+  assert.equal(scored.status, 0, scored.stderr);
+  assert.equal(result.json('report.json').candidates[0].rubric.unanswerable.labels.Abstained, 20);
+  assert.match(readFileSync(join(result.results, 'report.md'), 'utf8'), /development set, not a quality result/);
+  assertOnlySecureQa(result.calls);
+  assertClientStopped(result, summary);
+}));
+
+test('quality refuses heldout candidates and multiple dev passes before a build or device call', () => withSandbox(async dir => {
+  for (const args of [['quality', '--set', 'heldout', '--candidates', 'r1'], [...developmentArgs, '--passes', '3']]) {
+    const result = await run(dir, args);
+    assert.equal(result.code, 2, result.output);
+    assert.deepEqual(result.calls, []);
+    assert.equal(existsSync(join(dir, 'gradle.txt')), false);
+  }
+}));
+
+test('quality rejects a captured candidate lock different from the staged lock', () => withSandbox(async dir => {
+  const result = await run(dir, developmentArgs, {FAKE_QUALITY: 'wrong-candidate-lock'});
+  assert.equal(result.code, 1, result.output);
+  assert.equal(result.json('result.json').reason, 'candidate-lock');
+  assert.equal(existsSync(join(result.results, 'precheck.json')), false);
+}));
+
+test('quality rejects a candidate file changed during the build before installing an APK', () => withSandbox(async dir => {
+  const {repo, path} = mirror(dir);
+  const result = await run(dir, developmentArgs, {PATH: path, FAKE_GRADLE_APPEND: join(repo, developmentCandidateFile)}, {repo});
+  assert.equal(result.code, 1, result.output);
+  assert.equal(result.json('result.json').reason, 'quality-source-binding');
+  assert.equal(result.installs.length, 0);
+  assert.deepEqual(result.calls.filter(isRunInstrument), []);
+}));
+
+
+for (const [issue, message] of [
+  ['missing-candidate', /Expected one staged APK entry: assets\/candidates.json/],
+  ['changed-dev', /Staged APK asset differs: assets\/answer-quality-dev-v1\/library\/brackenshivor-close.txt/],
+]) {
+  test(`quality refuses ${issue} before the first device call`, () => withSandbox(async dir => {
+    const result = await run(dir, developmentArgs, {}, {assetIssue: issue});
+    assert.equal(result.code, 1, result.output);
+    const summary = result.json('result.json');
+    assert.equal(summary.stage, 'quality-assets');
+    assert.equal(summary.reason, 'quality-assets');
+    assert.match(readFileSync(join(result.results, 'quality-assets.txt'), 'utf8'), message);
+    assert.deepEqual(result.calls, []);
+  }));
+}
+
+test('quality assets-only verifies a tuning candidate APK with no device serial or device commands', () => withSandbox(async dir => {
+  const result = await run(dir, ['quality', '--set', 'tuning', '--candidates', 'r1', '--assets-only'], {ANDROID_SERIAL: ''});
+  assert.equal(result.code, 0, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.stage, 'quality-assets');
+  assert.equal(summary.assetsOnly, true);
+  assert.match(result.output, /Asset check only, no device run/);
+  assert.match(readFileSync(join(result.results, 'quality-assets.txt'), 'utf8'), /Verified 14 staged test APK assets/);
+  assert.deepEqual(result.calls, []);
+  assert.equal(existsSync(join(result.results, 'answer-quality.json')), false);
+  for (const command of ['precheck', 'compare', 'report']) {
+    const args = command === 'report' ? ['--labels', join(dir, 'labels.json')] : [];
+    const refused = spawnSync(process.execPath, [join(root, 'scripts/answer-quality.mjs'), command, result.results, ...args],
+      {encoding: 'utf8'});
+    assert.equal(refused.status, 1, refused.stderr);
+    assert.match(refused.stderr, /asset check only, no device run to analyze/);
+    assert.equal(existsSync(join(result.results, `${command}.json`)), false);
+  }
+}));
+
+const pairArgs = ['quality', '--set', 'dev', '--candidates', 'r2'];
+const stopMeasureArgs = ['measure', '4096', '--repeat', '1'];
+
+for (const [probe, args] of [
+  ['blocked', stopMeasureArgs], ['blocked', pairArgs], ['skin-only', pairArgs],
+  ['delivery-error', stopMeasureArgs], ['intent-error', stopMeasureArgs], ['clean', pairArgs],
+]) {
+  test(`real monitor stop intent handles ${probe} in ${args[0]}`, () => withSandbox(async dir => {
+    const result = await run(dir, args, { FAKE_MONITOR_STOP: probe });
+    const summary = result.json('result.json');
+    const marker = join(result.results, 'thermal/safety-stop.json');
+    const clean = probe === 'clean';
+    assert.equal(result.code, clean ? 0 : 1, result.output);
+    assert.equal(summary.status, clean ? 'passed' : 'failed');
+    assert.equal(summary.reason, clean ? null : probe === 'intent-error' ? 'thermal-monitor' : 'thermal-stop');
+    assert.ok(!alive(summary.monitorPid), 'monitor joined');
+    assert.equal(result.json('evidence.json').thermalFinal, 'present');
+    const final = readFileSync(join(result.results, 'thermal-final.txt'), 'utf8');
+    assert.match(final, /Thermal Status: 2\b/);
+    assert.match(final, /mValue=44\.9,/);
+    if (clean) {
+      assert.ok(!existsSync(marker));
+      assert.ok(!existsSync(join(result.results, 'probe-at-dispatch.json')));
+      return;
+    }
+
+    const atDispatch = result.json('probe-at-dispatch.json');
+    if (probe === 'intent-error') {
+      assert.equal(atDispatch, null, 'stop was attempted without a written intent');
+      assert.ok(!existsSync(marker));
+      assert.match(readFileSync(join(result.results, 'thermal-monitor.txt'), 'utf8'), /thermal-stop-intent-write-failed/);
+      return;
+    }
+
+    const event = { runId: summary.runId, reason: 'thermal_limit', recordedAt: atDispatch.recordedAt,
+      status: probe === 'skin-only' ? 2 : 3, skin: probe === 'skin-only' ? 45 : 45.1 };
+    assert.equal(new Date(atDispatch.recordedAt).toISOString(), atDispatch.recordedAt);
+    assert.deepEqual(atDispatch, { ...event, delivery: 'pending' });
+    const outcome = probe === 'skin-only' ? { delivery: 'requested', stopRequested: true }
+      : { delivery: 'failed', hostStopError: 'Error' };
+    assert.deepEqual(result.json('thermal/safety-stop.json'), { ...event, ...outcome });
+  }));
+}
+
+test('pair assets-only checks the frozen source and budgets 900 seconds of cooling per block', () => withSandbox(async dir => {
+  const result = await run(dir, [...pairArgs, '--assets-only'], {ANDROID_SERIAL: ''});
+  assert.equal(result.code, 0, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.deadlineSeconds, 12180);
+  assert.equal(summary.assetsOnly, true);
+  assert.match(readFileSync(join(result.results, 'quality-assets.txt'), 'utf8'), /Verified 16 staged test APK assets/);
+  assert.deepEqual(result.calls, []);
+  const path = 'planning/fixtures/grounded-prompt-candidates-r1/candidates.lock.json';
+  assert.equal(result.json('quality-source-binding.json').files[path], sha256(readFileSync(join(root, path))));
+}));
+
+test('pair assets-only refuses an APK missing the frozen source lock', () => withSandbox(async dir => {
+  const result = await run(dir, [...pairArgs, '--assets-only'], {ANDROID_SERIAL: ''}, {assetIssue: 'missing-source-lock'});
+  assert.equal(result.code, 1, result.output);
+  assert.equal(result.json('result.json').reason, 'quality-assets');
+  assert.match(readFileSync(join(result.results, 'quality-assets.txt'), 'utf8'), /assets\/source-r1\/candidates.lock.json/);
+  assert.deepEqual(result.calls, []);
+}));
+
+for (const mode of ['measure', 'quality']) for (const finalization of ['after-exit', 'during-join']) {
+  test(`thermal finalization rejects the ${mode} marker published ${finalization}`, () => withSandbox(async dir => {
+    const args = mode === 'measure' ? ['measure', '4096', '--repeat', '1'] : pairArgs;
+    const result = await run(dir, args, {}, {finalization});
+    assert.equal(result.code, 1, result.output);
+    const summary = result.json('result.json');
+    assert.equal(summary.reason, 'thermal-stop');
+    assert.equal(summary.status, 'failed');
+    assert.ok(!alive(summary.monitorPid), 'monitor joined');
+    assertClientStopped(result, summary);
+    assert.equal(result.json('thermal/safety-stop.json').status, 3);
+    assert.equal(result.json('thermal/safety-stop.json').delivery, 'pending');
+    if (mode === 'quality') {
+      assert.equal(result.json('answer-quality.json').cases.length, 80);
+      assert.equal(result.json('precheck.json').cases.length, 80);
+      assert.equal(existsSync(join(result.results, 'capture-summary.json')), false);
+    }
+  }));
+}
+
+test('thermal finalization rejects a THERMAL row without a monitor marker and keeps precheck evidence', () => withSandbox(async dir => {
+  const result = await run(dir, pairArgs, {FAKE_QUALITY: 'thermal-row'}, {finalization: 'clean'});
+  assert.equal(result.code, 1, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.reason, 'thermal-stop');
+  assert.equal(summary.status, 'failed');
+  assert.ok(!alive(summary.monitorPid), 'monitor joined');
+  assert.equal(existsSync(join(result.results, 'thermal/safety-stop.json')), false);
+  assert.equal(result.json('answer-quality.json').cases.at(-1).error, 'THERMAL');
+  assert.equal(result.json('precheck.json').cases.at(-1).error, 'THERMAL');
+}));
+
+test('thermal finalization leaves a clean verification pair eligible for capture', () => withSandbox(async dir => {
+  const result = await run(dir, pairArgs, {}, {finalization: 'clean'});
+  assert.equal(result.code, 0, result.output);
+  const summary = result.json('result.json');
+  assert.equal(summary.status, 'passed');
+  assert.ok(!alive(summary.monitorPid), 'monitor joined');
+  assert.equal(result.json('capture-summary.json').items, 80);
+  const instrument = result.calls.find(isRunInstrument).args;
+  assert.equal(instrument[instrument.indexOf('class') + 1],
+    'dev.edgecompanion.app.support.AnswerQualityCandidateTest,dev.edgecompanion.app.AnswerQualityTest');
+  assert.match(readFileSync(join(result.results, 'instrumentation.txt'), 'utf8'), /^OK \(2 tests\)$/m);
+  assert.deepEqual(result.json('precheck.json').candidates.map(candidate => candidate.candidateId), ['v1', 'exact-fixed']);
+}));
+
+test('thermal finalization reports a cooldown precondition failure before any case', () => withSandbox(async dir => {
+  const result = await run(dir, pairArgs, {FAKE_QUALITY: 'cooldown-timeout'}, {finalization: 'clean'});
+  assert.equal(result.code, 1, result.output);
+  assert.equal(result.json('result.json').reason, 'thermal-cooldown-timeout');
+  assert.deepEqual(result.json('answer-quality.json').cases, []);
+  assert.deepEqual(result.json('answer-quality.json').engineLoads, []);
+}));
+
+for (const mode of ['measure', 'quality']) for (const [sample, reason] of [
+  ['severe-status', 'thermal-stop'],
+  ['skin-limit', 'thermal-stop'],
+  ['malformed', 'thermal-final-unavailable'],
+  ['unavailable', 'thermal-final-unavailable'],
+]) {
+  test(`post-join thermal gate rejects a ${sample} final reading in ${mode} after an interrupted stop publish`, () =>
+    withSandbox(async dir => {
+      const args = mode === 'measure' ? ['measure', '4096', '--repeat', '1'] : pairArgs;
+      const result = await run(dir, args, {FAKE_FINAL_THERMAL: sample}, {finalization: 'killed-mid-stop'});
+      assert.equal(result.code, 1, result.output);
+      const summary = result.json('result.json');
+      assert.equal(summary.status, 'failed');
+      assert.equal(summary.reason, reason);
+      assert.ok(existsSync(join(result.results, 'thermal/stop-publish-started')));
+      assert.ok(!existsSync(join(result.results, 'thermal/safety-stop.json')));
+      assert.ok(!alive(summary.monitorPid), 'monitor joined before final read');
+      assert.equal(result.calls.filter(call => call.args.join(' ').endsWith('shell dumpsys thermalservice')).length, 1);
+      assert.equal(result.json('evidence.json').thermalFinal, sample === 'unavailable' ? 'unavailable' : 'present');
+      if (mode === 'quality') assert.equal(result.json('precheck.json').cases.length, 80);
+    }));
+}
+
+test('post-join thermal gate allows a clean measurement', () => withSandbox(async dir => {
+  const result = await run(dir, ['measure', '4096', '--repeat', '1'], {}, {finalization: 'clean'});
+  assert.equal(result.code, 0, result.output);
+  assert.equal(result.json('result.json').status, 'passed');
+  assert.equal(result.json('evidence.json').thermalFinal, 'present');
+}));
+
+test('candidate instrumentation rejects a capture where only one test ran', () => withSandbox(async dir => {
+  const result = await run(dir, pairArgs, {FAKE_QUALITY: 'one-test'}, {finalization: 'clean'});
+  assert.equal(result.code, 1, result.output);
+  assert.equal(result.json('result.json').reason, 'instrumentation');
+  assert.equal(result.calls.filter(isRunInstrument).length, 1);
+  assert.equal(result.json('answer-quality.json').cases.length, 80);
+}));
+
+test('candidate cooldown gate rejects a complete capture with no cooldown evidence', () => withSandbox(async dir => {
+  const result = await run(dir, pairArgs, {FAKE_QUALITY: 'missing-cooldown'}, {finalization: 'clean'});
+  assert.equal(result.code, 1, result.output);
+  assert.equal(result.json('result.json').reason, 'quality-cooldown-evidence');
+  assert.equal(result.json('answer-quality.json').cases.length, 80);
+  assert.ok(!existsSync(join(result.results, 'capture-summary.json')));
 }));

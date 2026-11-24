@@ -44,6 +44,13 @@ android {
     testBuildType = providers.gradleProperty("testBuildType").getOrElse("debug")
     sourceSets.getByName("androidTest").assets.srcDir(rootProject.file("planning/models"))
     sourceSets.getByName("androidTest").assets.srcDir(rootProject.file("planning/fixtures/answer-quality-v1"))
+    sourceSets.getByName("androidTest").assets.srcDir(rootProject.file("planning/fixtures/android-test-assets"))
+    sourceSets.getByName("androidTest").assets.srcDir(rootProject.file(
+        providers.gradleProperty("answerQualityCandidateRound").orElse("r1").get().let { round ->
+            require(round == "r1" || round == "r2")
+            "planning/fixtures/grounded-prompt-candidates-$round/candidateAssets"
+        },
+    ))
     sourceSets.getByName("test").kotlin.directories.add("src/testSupport/kotlin")
     sourceSets.getByName("androidTest").kotlin.directories.add("src/testSupport/kotlin")
     buildFeatures { compose = true; buildConfig = true }
